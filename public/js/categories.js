@@ -937,6 +937,8 @@ function modalEditCategories(element) {
     var categoria = element.find(".CATEGORIA_PRINCIPAL")
     localStorage.CAT_SUB_EDIT = categoria.text()
 
+    var active = element.find(".CHECK_PRINCIPAL")[0]?.checked
+
 
     var iconeElemento = element.find("img")
     var subCategorias = element.parent().find(".nomeSubCategoria")
@@ -1164,7 +1166,7 @@ function modalEditCategories(element) {
 
         '<div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">' +
         '<div style="margin: 18px 2%;" class="switch__container">' +
-        '<input id="switch-shadow18" class="switch switch--shadow" type="checkbox" />' +
+        '<input '+(active ? 'checked="true"' : '')+' id="switch-shadow18" class="switch switch--shadow" type="checkbox" />' +
         '<label for="switch-shadow18"></label>' +
         "</div>" +
         '<label style=" font-size: 20px;" class="label">Categoria ativa</label> ' +
