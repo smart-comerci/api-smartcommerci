@@ -2047,7 +2047,9 @@ function setAttrCategorie(element, attr, value) {
 }
 
 function fila(elemento, categorieName, funcao) {
+    
     if (funcao == "updateIconSVG") {
+        updateIconSVG(elemento, categorieName)
         $(".boxIconDefault").removeClass("boxIconeActive")
         $(".boxIconDefault").find(".iconSelectedCheck").hide()
         elemento.addClass("boxIconeActive")
@@ -2150,7 +2152,7 @@ async function SALVA_EDIT() {
                             updateCategoriaDetalhe($("#" + mudancas[k].ID_ELEMENTO), mudancas[k].NOME_CATEGORIA);
                             break;
                         case "updateIconSVG":
-                            updateIconSVG($("#" + mudancas[k].ID_ELEMENTO), mudancas[k].NOME_CATEGORIA);
+                            //updateIconSVG($("#" + mudancas[k].ID_ELEMENTO), mudancas[k].NOME_CATEGORIA);
                             break;
 
                         default:
