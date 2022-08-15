@@ -2067,7 +2067,7 @@ function aleatoryID(text) {
     var randLetter = Math.random.toString().replace(/./g,'');
     if(text){
         console.log('text',text)
-        randLetter = text.replace(/\./g,'_').replace(/:/g,'_').replace(/ /g,'_') 
+        randLetter = text.replace(/\./g,'').replace(/:/g,'').replace(/ /g,'').replace(/-/g,'') 
         let newT = ''
         let lista = randLetter.split('/')
         for(const k in lista){
