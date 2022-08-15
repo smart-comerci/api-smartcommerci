@@ -2066,7 +2066,14 @@ function fila(elemento, categorieName, funcao) {
 function aleatoryID(text) {
     var randLetter = Math.random.toString().replace(/./g,'');
     if(text){
-        randLetter = text.replace(/./g,'_').replace(/\//g,'_')
+
+        randLetter = text.replace(/./g,'_') 
+        let newT = ''
+        randLetter.split('/').map(l => {
+            newT += l.replace(/./g,'_') 
+        })
+
+        randLetter = newT
     }
     var uniqid = randLetter + Date.now();
     return uniqid
