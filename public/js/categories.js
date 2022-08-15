@@ -2073,7 +2073,7 @@ function aleatoryID(text) {
         for(const k in lista){
           
                 console.log(lista[k])
-                newT += lista[k].replace(/./g,'_') 
+                newT += lista[k] 
            
         }
 
