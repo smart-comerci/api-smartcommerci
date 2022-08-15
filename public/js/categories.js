@@ -1810,7 +1810,12 @@ function updateIconSVG(element, categorieName) {
             "categorie_name": categorieName
         },
         success: function (myIcons) {
-            ////console.log(myIcons);
+            console.log({
+                "master_id": localStorage.MASTER_ID,
+                "fieldName": "categorie_icon",
+                "fieldValue": content,
+                "categorie_name": categorieName
+            },myIcons);
             sessionStorage.SAVE_SUCCEFULLY = Number(sessionStorage.SAVE_SUCCEFULLY) + 1
             mostra()
 
