@@ -1709,14 +1709,14 @@ function iconesSmartCommerci(categorieName) {
         if (ver == ver2) {
             //console.log("Achei..........")
 
-            html += '<div dica="' + sugestao(Number(a)) + '" id="' + aleatoryID() + '_icone" onclick="fila($(this), \'' + categorieName + '\',\'updateIconSVG\')" class="boxIconDefault boxIconeActive">' +
+            html += '<div dica="' + sugestao(Number(a)) + '" id="' + aleatoryID('images/icons/Arquivo 000' + a + '.svg') + '_icone" onclick="fila($(this), \'' + categorieName + '\',\'updateIconSVG\')" class="boxIconDefault boxIconeActive">' +
                 '<i class="fas fa-check iconSelectedCheck"></i>' +
                 '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' + a + '.svg" />' +
                 '</div>';
 
         } else {
 
-            html += '<div dica="' + sugestao(Number(a)) + '" id="' + aleatoryID() + '_icone"  onclick="fila($(this), \'' + categorieName + '\',\'updateIconSVG\')" class="boxIconDefault boxIcone">' +
+            html += '<div dica="' + sugestao(Number(a)) + '" id="' + aleatoryID('images/icons/Arquivo 000' + a + '.svg') + '_icone"  onclick="fila($(this), \'' + categorieName + '\',\'updateIconSVG\')" class="boxIconDefault boxIcone">' +
                 '<i style="display:none" class="fas fa-check iconSelectedCheck"></i>' +
                 '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' + a + '.svg" />' +
                 '</div>';
@@ -1748,7 +1748,7 @@ function iconesSmartCommerci2(categorieName) {
     for (const k in LISTA_ICONES) {
 
         if (LISTA_ICONES[k].indexOf("cliente_") > -1) {
-            html += '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;"   id="' + aleatoryID() + '_icone" onclick="fila($(this), \'' + categorieName + '\',\'updateIconSVG\')" class="boxIconDefault ">' +
+            html += '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;"   id="' + aleatoryID('https://api-smartcomerci.com.br/assets/icons/' + LISTA_ICONES[k]) + '_icone" onclick="fila($(this), \'' + categorieName + '\',\'updateIconSVG\')" class="boxIconDefault ">' +
                 '<i  style="display:none" class="fas fa-check iconSelectedCheck"></i>' +
                 '<img class="imgIcone" style="width: 100%;" src="https://api-smartcomerci.com.br/assets/icons/' + LISTA_ICONES[k] + '" />' +
                 '</div>';
@@ -2063,8 +2063,11 @@ function fila(elemento, categorieName, funcao) {
     }
 
 }
-function aleatoryID() {
+function aleatoryID(text) {
     var randLetter = Math.random.toString().replace(/./g,'');
+    if(text){
+        randLetter = text.replace(/./g,'_').replace(/\//g,'_')
+    }
     var uniqid = randLetter + Date.now();
     return uniqid
 }
@@ -2421,7 +2424,7 @@ function sobeIcone(elemento) {
         contentType: false,
         type: 'POST',
         success: function (data) {
-            var html = '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;" id="'+Math.random()+'_icone" onclick="fila($(this), \'ALIMENTICIOS\',\'updateIconSVG\')" class="boxIconDefault "><svg style="display: none;" class="svg-inline--fa fa-check fa-w-16 iconSelectedCheck" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>' +
+            var html = '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;" id="'+aleatoryID('https://api-smartcomerci.com.br/assets/icons/cliente_' + elemento[0].files[0].name )+'_icone" onclick="fila($(this), \'ALIMENTICIOS\',\'updateIconSVG\')" class="boxIconDefault "><svg style="display: none;" class="svg-inline--fa fa-check fa-w-16 iconSelectedCheck" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>' +
                 '<!-- <i style="display:none" class="fas fa-check iconSelectedCheck"></i> Font Awesome fontawesome.com --><img class="imgIcone" style="width: 100%;" src="https://api-smartcomerci.com.br/assets/icons/cliente_' + elemento[0].files[0].name + '"></div>';
             $(".iconesClientes").prepend(html)
 
