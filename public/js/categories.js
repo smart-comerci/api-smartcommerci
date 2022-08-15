@@ -2064,7 +2064,7 @@ function fila(elemento, categorieName, funcao) {
 
 }
 function aleatoryID() {
-    var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    var randLetter = Math.random.toString().replace(/./g,'');
     var uniqid = randLetter + Date.now();
     return uniqid
 }
