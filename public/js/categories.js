@@ -2066,12 +2066,16 @@ function fila(elemento, categorieName, funcao) {
 function aleatoryID(text) {
     var randLetter = Math.random.toString().replace(/./g,'');
     if(text){
-
+        console.log('text',text)
         randLetter = text.replace(/./g,'_') 
         let newT = ''
-        randLetter.split('/').map(l => {
-            newT += l.replace(/./g,'_') 
-        })
+        let lista = randLetter.split('/')
+        for(const k in lista){
+          
+                console.log(lista[k])
+                newT += lista[k].replace(/./g,'_') 
+           
+        }
 
         randLetter = newT
     }
