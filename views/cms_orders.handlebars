@@ -2305,24 +2305,30 @@ $.ajax({
             },
         });
 
-
+const checkupOrders = false
 async function updateTotalPedidos()   {
       let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
-      for(const k in PEDIDOS){
-            let CONTEUDO = JSON.parse(PEDIDOS[k].order_conteudo)
-            let valorEntrega = PEDIDOS[k].order_valor_entrega
-            let totalItens = 0
-            for(const c in CONTEUDO){
-                totalItens += (CONTEUDO[c].quantidade >= CONTEUDO[c].minimo_para_desconto ? CONTEUDO[c].valor : CONTEUDO[c].product_valor )
-            }
-            PEDIDOS[k]['order_valor_total'] = Number((valorEntrega + totalItens).toFixed(2))
-            PEDIDOS[k]['order_data_entrega'] = moment(PEDIDOS[k]['order_data_entrega']).format('YYYY-MM-DD')
-            PEDIDOS[k]['updatedAt']= moment(PEDIDOS[k]['updatedAt']).format('YYYY-MM-DD')
-            PEDIDOS[k]['createdAt']= moment(PEDIDOS[k]['createdAt']).format('YYYY-MM-DD')
-            await  salvaUmUnico(PEDIDOS[k])
+
+      if(!checkupOrders){
+        for(const k in PEDIDOS){
+                let CONTEUDO = JSON.parse(PEDIDOS[k].order_conteudo)
+                let valorEntrega = PEDIDOS[k].order_valor_entrega
+                let totalItens = 0
+                for(const c in CONTEUDO){
+                    totalItens += (CONTEUDO[c].quantidade >= CONTEUDO[c].minimo_para_desconto ? CONTEUDO[c].valor : CONTEUDO[c].product_valor )
+                }
+                PEDIDOS[k]['order_valor_total'] = Number((valorEntrega + totalItens).toFixed(2))
+                PEDIDOS[k]['order_data_entrega'] = moment(PEDIDOS[k]['order_data_entrega']).format('YYYY-MM-DD')
+                PEDIDOS[k]['updatedAt']= moment(PEDIDOS[k]['updatedAt']).format('YYYY-MM-DD')
+                PEDIDOS[k]['createdAt']= moment(PEDIDOS[k]['createdAt']).format('YYYY-MM-DD')
+                
+                salvaUmUnico(PEDIDOS[k])
+        } 
+       localStorage.TODOS_OS_PEDIDOS = JSON.stringify(PEDIDOS)
+       checkupOrders = true
       }
 
-      localStorage.TODOS_OS_PEDIDOS = JSON.stringify(PEDIDOS)
+      
       
 
 
@@ -2362,7 +2368,7 @@ async function updateTotalPedidos()   {
             "fields": columns
           },
           success: function (data) {
-          console.log(data)
+         // console.log(data)
           },
           error: function (data) {
             console.log(data)
