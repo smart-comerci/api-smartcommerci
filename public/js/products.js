@@ -3762,7 +3762,7 @@ $("#novoProduto").click(function () {
 
 function acaoCheckbox(elemento, e) {
     e = window.event;
-    //console.log("status do elemento", elemento[0].checked)
+    console.log("status do elemento",elemento, elemento[0].checked)
 
     var status = 'inactive',
         add = true
@@ -3788,7 +3788,7 @@ function acaoCheckbox(elemento, e) {
         case "informacaoImportante":
             break;
         case "ativarProduto":
-            //console.log("tentando mudar ", setProductCaract(elemento.attr("product_code"), "product_status", status))
+           console.log("tentando ativar ", setProductCaract(elemento.attr("product_code"), "product_status", status))
             $.ajax({
                 type: 'POST',
                 url: mainHost + '/updateById',
