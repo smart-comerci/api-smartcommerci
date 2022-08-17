@@ -2176,6 +2176,7 @@
 
 
 async function clicaEmOrdem(elemento){
+    $("body").css("filter","blur(5px)")
     await updateTotalPedidos()
      var thisOrder = Number(elemento.find(".modalCount").text())
      $(".order").removeClass("orderActive");
@@ -2256,17 +2257,20 @@ async function clicaEmOrdem(elemento){
 
                                 $("#panelOrder2").removeClass("animated-background")
                                 $(".radius20").removeClass("animated-background")
+                                    $("body").css("filter","none")
 
 
                             },
                             error: function (html2) {
-                                console.log(html2); 
+                                console.log(html2);
+                                    $("body").css("filter","none") 
                             },
                             complete: function () { },
                         });
 
 
-                    }, 2000)
+
+                    }, 200)
 
 
      
