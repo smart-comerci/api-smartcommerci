@@ -251,14 +251,14 @@ clientRequest({"affiliate_id":localStorage.AFFILIATE_ID},'/getClientsUsersFromAf
                 'x-access-token': localStorage.token,
             },
             success: function (data) {
-                console.log(data)
+                //console.log(data)
                 
                 if(cache)            {
                     sessionStorage[chaveCache] = JSON.stringify(data)
                 }
             },
             error: function (data) {
-                console.log(data)
+                //console.log(data)
             },
             complete: function () { },
         });
@@ -276,7 +276,7 @@ clientRequest({"affiliate_id":localStorage.AFFILIATE_ID},'/getClientsUsersFromAf
         try{
            lista =  JSON.parse(sessionStorage['USERS_CLIENTS_'+localStorage.AFFILIATE_ID])
         }catch(err){
-            console.log(err)
+            //console.log(err)
         }
         let pedidos = 0, assinaturas = 0 
 
@@ -379,7 +379,7 @@ clientRequest({"affiliate_id":localStorage.AFFILIATE_ID},'/getClientsUsersFromAf
                             'x-access-token': localStorage.token,
                         },
                         success: function (data) {
-                            console.log(data)
+                            //console.log(data)
                             ajaxInner('/deleteUserAffiliate', paramsToCrud, 'POST')
                             informar("alert-success", "Usuário deletado com sucesso!", 3000)
                             sessionStorage.clear()
@@ -393,7 +393,7 @@ clientRequest({"affiliate_id":localStorage.AFFILIATE_ID},'/getClientsUsersFromAf
                             }, 1500)
                         },
                         error: function (data) {
-                            console.log(data)
+                            //console.log(data)
                             informar("alert-primary", "Credenciais informadas são incorretas!", 3000)
                         },
                         complete: function () {

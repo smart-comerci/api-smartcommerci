@@ -104,7 +104,7 @@
                  $(".frame1").css("opacity","1")
 
              $(".conti").show()
-             console.log('frame1')
+             //console.log('frame1')
              localStorage.cor1 = $(".frame1").attr("cor1")
              localStorage.cor2 = $(".frame1").attr("cor2")
              localStorage.cor3 = $(".frame1").attr("cor3")
@@ -121,7 +121,7 @@
                  $(".frame2").css("opacity","1")
 
              $(".conti").show()
-             console.log('frame2')
+             //console.log('frame2')
              localStorage.cor1 = $(".frame2").attr("cor1")
              localStorage.cor2 = $(".frame2").attr("cor2")
              localStorage.cor3 = $(".frame2").attr("cor3")
@@ -138,7 +138,7 @@
                  $(".frame3").css("opacity","1")
 
              $(".conti").show()
-             console.log('frame3')
+             //console.log('frame3')
              localStorage.cor1 = $(".frame3").attr("cor1")
              localStorage.cor2 = $(".frame3").attr("cor2")
              localStorage.cor3 = $(".frame3").attr("cor3")
@@ -155,7 +155,7 @@
                  $(".frame4").css("opacity","1")
 
              $(".conti").show()
-             console.log('frame4')
+             //console.log('frame4')
 
              localStorage.cor1 = $(".frame4").attr("cor1")
              localStorage.cor2 = $(".frame4").attr("cor2")
@@ -171,7 +171,7 @@
     localStorage.stage = 10
 
     var colors = JSON.parse(localStorage.colors)
-    console.log(colors)
+    //console.log(colors)
     var cor1 = "rgba(", cor2 = "rgba(", cor3 = "rgba(", cor4 = "rgba("
     for(const k in colors){
         if(k == 0){
@@ -208,7 +208,7 @@
         }
     
     }
-    console.log(cor1, cor2, cor3, cor4)
+    //console.log(cor1, cor2, cor3, cor4)
 
     $(".frame1").attr("src","/layout/layout1.html?"+cor1+"?"+cor2+"?"+cor3+"?"+cor4)
     $(".frame1").attr("cor1",cor1)

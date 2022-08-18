@@ -1247,11 +1247,11 @@
 
     }
 
-    console.log("this is the profile => ", thisProfile, fullProfile)
+    //console.log("this is the profile => ", thisProfile, fullProfile)
     localStorage.PROFILE_IN_CHANGE = JSON.stringify(fullProfile)
 
     $(".preencher").each(function () {
-      console.log("type", $(this).attr("type"))
+      //console.log("type", $(this).attr("type"))
       if ($(this).attr("type") == "checkbox") {
         let active = false
         if (fullProfile[$(this).attr("fieldName")] == 1) {
@@ -1268,11 +1268,11 @@
         let active = 0
         if ($(this)[0].checked) { active = 1 }
         fullProfile[$(this).attr("fieldName")] = active
-        console.log("changing the profile => ", thisProfile, fullProfile)
+        //console.log("changing the profile => ", thisProfile, fullProfile)
         localStorage.PROFILE_IN_CHANGE = JSON.stringify(fullProfile)
       } else {
         fullProfile[$(this).attr("fieldName")] = $(this).val()
-        console.log("changing the profile => ", thisProfile, fullProfile)
+        //console.log("changing the profile => ", thisProfile, fullProfile)
         localStorage.PROFILE_IN_CHANGE = JSON.stringify(fullProfile)
       }
     })

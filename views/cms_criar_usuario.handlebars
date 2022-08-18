@@ -322,11 +322,11 @@
         e = window.event;
         var senderElement = e.target;
         elementum = senderElement
-        console.log("senderElement", senderElement)
-        ////////console.log(senderElement)
-        ////////console.log(senderElement.className)
+        //console.log("senderElement", senderElement)
+        //////////console.log(senderElement)
+        //////////console.log(senderElement.className)
         if (senderElement.className == "switch switch--shadow" || senderElement.className == "checka form-control checkControl" || senderElement.className == "naoAbreModal" || senderElement.className == "checkmark") {
-            console.log("não devia abrir modal")
+            //console.log("não devia abrir modal")
         } else {
             let isActive = element.attr("isActive") ? element.attr("isActive") : 0, activeChecked = ''
             let myName = element.attr("myName") ? element.attr("myName") : element.attr("username")?.split("@")[0]
@@ -541,7 +541,7 @@
 
 
     function returnMyUnitys(username) {
-        console.log("pesquisando ... ", username)
+        //console.log("pesquisando ... ", username)
         let html = ''
         let lista = JSON.parse(localStorage.LOJAS_CADASTRADAS)
 
@@ -599,7 +599,7 @@
     }
 
     function alteraFuncao(elemento) {
-        console.log("mudando funcao ...")
+        //console.log("mudando funcao ...")
         let essaFuncao = elemento.parent().text()
         $(".soFuncoes").each(function () {
             $(this)[0].checked = false
@@ -628,7 +628,7 @@
 
         lista = OrdenaJson(lista4, 'users_affiliate_name', 'DESC')
 
-        console.log('users', lista)
+        //console.log('users', lista)
 
         let html = ''
         let listaUnica = [], currL = null, fullList = []
@@ -749,9 +749,9 @@
                     'userName': userName,
                     'myToken': myToken,
                 }
-                console.log(params)
+                //console.log(params)
                 let result = await ajaxInner('/updateAffiliateUsersDetails', params, 'POST')
-                console.log("detalhes", result)
+                //console.log("detalhes", result)
 
             } else {
                 let newValue = null
@@ -775,9 +775,9 @@
                     'userName': userName,
                     'myToken': myToken,
                 }
-                console.log(params)
+                //console.log(params)
                 let result = await ajaxInner('/updateAffiliateUsersDetails', params, 'POST')
-                console.log("detalhes", result)
+                //console.log("detalhes", result)
             }
         })
 
@@ -793,9 +793,9 @@
                 'userName': userName,
                 'myToken': myToken
             }
-            console.log("affiliadas parametros", params)
+            //console.log("affiliadas parametros", params)
             let result3 = await ajaxInner('/updateAffiliateUsers', params, 'POST')
-            console.log(result3)
+            //console.log(result3)
 
         })
         sessionStorage.clear()
@@ -929,7 +929,7 @@
                                 'x-access-token': localStorage.token,
                             },
                             success: function (data) {
-                                console.log(data)
+                                //console.log(data)
                                 ajaxInner('/updateAffiliateUsersDetails', paramsToCrud, 'POST')
                                 informar("alert-success", "Senha alterada com sucesso!", 3000)
                                 sessionStorage.clear()
@@ -943,7 +943,7 @@
                                 }, 1500)
                             },
                             error: function (data) {
-                                console.log(data)
+                                //console.log(data)
                                 informar("alert-primary", "Credenciais informadas são incorretas!", 3000)
                             },
                             complete: function () { },
@@ -1047,7 +1047,7 @@
                             'x-access-token': localStorage.token,
                         },
                         success: function (data) {
-                            console.log(data)
+                            //console.log(data)
                             ajaxInner('/deleteUserAffiliate', paramsToCrud, 'POST')
                             informar("alert-success", "Usuário deletado com sucesso!", 3000)
                             sessionStorage.clear()
@@ -1061,7 +1061,7 @@
                             }, 1500)
                         },
                         error: function (data) {
-                            console.log(data)
+                            //console.log(data)
                             informar("alert-primary", "Credenciais informadas são incorretas!", 3000)
                         },
                         complete: function () {
@@ -1199,7 +1199,7 @@
                                 'x-access-token': localStorage.token,
                             },
                             success: function (data) {
-                                console.log(data)
+                                //console.log(data)
                                 ajaxInner('/updateAffiliateUsersDetails', paramsToCrud, 'POST')
                                 informar("alert-success", "E-mail alterado com sucesso!", 3000)
                                 sessionStorage.clear()
@@ -1213,7 +1213,7 @@
                                 }, 1500)
                             },
                             error: function (data) {
-                                console.log(data)
+                                //console.log(data)
                                 informar("alert-primary", "Credenciais informadas são incorretas!", 3000)
                             },
                             complete: function () {
@@ -1238,7 +1238,7 @@
 
 
     async function ajaxInner(url, params, type) {
-        console.log("requeste para ", url, params)
+        //console.log("requeste para ", url, params)
         return $.ajax({
             type: type,
             url: 'https://api-smartcomerci.com.br:9090' + url,
@@ -1247,11 +1247,11 @@
                 'x-access-token': localStorage.token,
             },
             success: function (data) {
-                console.log(data)
+                //console.log(data)
                 informar("alert-success", "Alteração realizada com sucesso!", 3000)
             },
             error: function (data) {
-                console.log(data)
+                //console.log(data)
             },
             complete: function () { },
         });

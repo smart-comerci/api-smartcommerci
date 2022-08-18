@@ -1,7 +1,7 @@
-console.log("teste")
+////console.log("teste")
 
 var AFFILIATE_ID = Number(localStorage.AFFILIATE_ID)
-console.log("AFFILIATE ID",AFFILIATE_ID)
+////console.log("AFFILIATE ID",AFFILIATE_ID)
 var pedidos = [] , clientes = []
  getPedidos(pedidos)
  getClients(clientes)
@@ -29,7 +29,7 @@ adjust()
 
 function FULL_PRICES(produto) {
     try {
-        //console.log("PREPRANDO O PRODUTO ",produto)
+        ////console.log("PREPRANDO O PRODUTO ",produto)
         let PRODUDO_FINAL
         let COMPRA_PESO = {}, COMPRA_POR_PESO = false
 
@@ -47,8 +47,8 @@ function FULL_PRICES(produto) {
         let MINIMO_PARA_DESCONTO = 0
         let VALOR_DESCONTO = 0, descontoExiste = false, valorDescontado = 0, tipoDesconto = 'nenhum'
 
-        //console.log('o desconto',produto['product_site_discount_type'].indexOf('preço total'))
-        //console.log('DESCONTOS',DESCONTOS)
+        ////console.log('o desconto',produto['product_site_discount_type'].indexOf('preço total'))
+        ////console.log('DESCONTOS',DESCONTOS)
         if (produto['product_site_discount_type'].indexOf('compre X pague Y') > -1) {
 
             VALOR_DESCONTO = DESCONTOS['levePague'].precoFinal
@@ -58,7 +58,7 @@ function FULL_PRICES(produto) {
             descontoExiste = true
         } else if (produto['product_site_discount_type'].indexOf('no carrinho') > -1) {
             if (DESCONTOS['porcentagemProduto'].active) {
-                //console.log(DESCONTOS)
+                ////console.log(DESCONTOS)
                 VALOR_DESCONTO = DESCONTOS['porcentagemProduto'].precoFinal
                 descontoExiste = true
                 valorDescontado = Number(DESCONTOS['porcentagemProduto'].percentualDescontado)
@@ -66,7 +66,7 @@ function FULL_PRICES(produto) {
             }
 
             if (DESCONTOS['subtracaoProduto'].active) {
-                //console.log(DESCONTOS)
+                ////console.log(DESCONTOS)
                 VALOR_DESCONTO = DESCONTOS['subtracaoProduto'].precoFinal
                 descontoExiste = true
                 valorDescontado = Number(DESCONTOS['subtracaoProduto'].valorDescontado)
@@ -75,9 +75,9 @@ function FULL_PRICES(produto) {
 
 
         } else if (produto['product_site_discount_type'].indexOf('preço total') > -1) {
-            //console.log('tebgo descobto')
+            ////console.log('tebgo descobto')
             if (DESCONTOS['porcentagem'].active) {
-                //console.log(DESCONTOS)
+                ////console.log(DESCONTOS)
                 VALOR_DESCONTO = DESCONTOS['porcentagem'].precoFinal
                 descontoExiste = true
                 valorDescontado = Number(DESCONTOS['porcentagem'].percentualDescontado)
@@ -85,14 +85,14 @@ function FULL_PRICES(produto) {
             }
 
             if (DESCONTOS['subtracao'].active) {
-                //console.log(DESCONTOS)
+                ////console.log(DESCONTOS)
                 VALOR_DESCONTO = DESCONTOS['subtracao'].precoFinal
                 descontoExiste = true
                 valorDescontado = Number(DESCONTOS['subtracao'].valorDescontado)
                 tipoDesconto = "subtracao"
             }
         } else {
-            //console.log('desconto inexistente!', descontoExiste)
+            ////console.log('desconto inexistente!', descontoExiste)
         }
 
 
@@ -105,7 +105,7 @@ function FULL_PRICES(produto) {
         }
 
         if (descontoExiste) {
-            //console.log(" O DESCONTO ",VALOR_DESCONTO)
+            ////console.log(" O DESCONTO ",VALOR_DESCONTO)
             PRECO_VENDA = VALOR_DESCONTO
         }
 
@@ -113,7 +113,7 @@ function FULL_PRICES(produto) {
             let percentual = produto['product_site_value'] * 100 / produto['product_valor']
             let AJUSTAR = 100 - percentual
 
-            //console.log("ajustando",percentual,AJUSTAR, PRECO_VENDA)
+            ////console.log("ajustando",percentual,AJUSTAR, PRECO_VENDA)
 
             PRECO_VENDA = PRECO_VENDA * (AJUSTAR / 100)
             VALOR_DESCONTO = VALOR_DESCONTO * (AJUSTAR / 100)
@@ -211,7 +211,7 @@ function colunaMenu(elemento){
     var alvo = elemento.attr("alvo")
     $(".cardPedido").hide()
     $("."+alvo).show()
-    console.log(alvo)
+    //console.log(alvo)
     $(".infoAguardando").hide()
     $(".infoAguardando").each(function(){
         if($(this).attr("alvo") == alvo){
@@ -220,7 +220,7 @@ function colunaMenu(elemento){
     })
 }
 function  separarPedido(elemento) {
-    console.log("separar pedido 1 .. ")
+    //console.log("separar pedido 1 .. ")
     if(elemento.find('p').text() == 'Começar a separar'){       
         $(".edicao-produto").css('display','inline-flex')
         $(".areaBtnNovoProduto").css('display','block')
@@ -237,7 +237,7 @@ function  separarPedido(elemento) {
     adjust();
 }
 function  separarPedido2(elemento) {
-    console.log("separar pedido 2 .. ")
+    //console.log("separar pedido 2 .. ")
     if(elemento.text() == 'Começar a separar'){       
         $(".edicao-produto").css('display','inline-flex')
         $(".areaBtnNovoProduto").css('display','block')
@@ -256,10 +256,10 @@ function closeModal(element) {
 }
 function getProductInfo(id){
     var dadosPedido = JSON.parse(localStorage.PEDIDO_FULL.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
-    console.log(dadosPedido)
-    console.log(id)
+    //console.log(dadosPedido)
+    //console.log(id)
     for(const k in dadosPedido){
-        console.log(dadosPedido[k].product_code,id )
+        //console.log(dadosPedido[k].product_code,id )
         if(dadosPedido[k].product_code === id ){
             return dadosPedido[k]
         }
@@ -268,10 +268,10 @@ function getProductInfo(id){
 }
 function getProductSearchInfo(id){
     var dadosPedido = JSON.parse(localStorage.DADOS_SEARCH.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
-    console.log(dadosPedido)
-    console.log(id)
+    //console.log(dadosPedido)
+    //console.log(id)
     for(const k in dadosPedido){
-        console.log(dadosPedido[k].product_code,id )
+        //console.log(dadosPedido[k].product_code,id )
         if(dadosPedido[k].product_code === id ){
             return dadosPedido[k]
         }
@@ -282,7 +282,7 @@ function editarProduto(elemento){
     localStorage.produtoEditando = elemento.attr("product_code")
     var prd_code = Number(elemento.attr("product_code"))
     var dadosProduto = getProductInfo(prd_code)
-    console.log(elemento)
+    //console.log(elemento)
     
     $(".editarProdutoModal").find(".nomeProduto").html(dadosProduto.product_site_name)
     if(dadosProduto.product_average_weight_value > 0){
@@ -307,9 +307,9 @@ function editarProduto(elemento){
    
 }
 function  voltarPagina(elemento) {
-    console.log("clicou voltar..")
+    //console.log("clicou voltar..")
     $("."+elemento.attr("paginaClose")).hide()
-    console.log("precisa implementar...")   
+    //console.log("precisa implementar...")   
     location.reload()
 }
 function novoProdutoModal(elemento) {
@@ -319,8 +319,8 @@ function  modalAdicionarProduto(elemento) {
     localStorage.produtoEditando = elemento.attr("product_code")
     var prd_code = Number(elemento.attr("product_code"))
     var dadosProduto = getProductSearchInfo(prd_code)
-    console.log('dadosProduto '+elemento.attr("product_code"))
-    console.log(dadosProduto)
+    //console.log('dadosProduto '+elemento.attr("product_code"))
+    //console.log(dadosProduto)
     
     $(".adicionarProdutoModal").find(".nomeProduto").html(dadosProduto.product_site_name)
     $(".adicionarProdutoModal").find(".btnAplicarModal").attr('product_code',dadosProduto.product_code)
@@ -345,7 +345,7 @@ function  modalAdicionarProduto(elemento) {
     $(".adicionarProdutoModal").show()
 }
 function  redirect(destino, numeroPedido) {
-    console.log(numeroPedido)
+    //console.log(numeroPedido)
     localStorage.numeroPedido = numeroPedido
     location.replace("/"+destino) 
 }
@@ -355,7 +355,7 @@ function buscaPorPedido(elemento) {
 }
 async function cancelaProduto(elemento) {
         var vSubTotal =     Number(elemento.parent().parent().parent().find(".cardProduto").addClass("removido").find('.vSubTotal').text().replace("R$","").replace(",","."))
-        console.log(vSubTotal)
+        //console.log(vSubTotal)
         let PRD_CODE = Number(elemento.attr("product_code"))
         atualPedido = JSON.parse(localStorage.ORDER_EDIT)
 
@@ -385,28 +385,28 @@ async function cancelaProduto(elemento) {
 }
 async function reativaColetaProduto(elemento) {
 
-    console.log('coleta ou reativa...')
+    //console.log('coleta ou reativa...')
     var vSubTotal =     Number(elemento.parent().parent().parent().parent().find(".cardProduto").addClass("removido").find('.vSubTotal').text().replace("R$","").replace(",","."))
-        console.log(vSubTotal)
+        //console.log(vSubTotal)
         var valorTotal = Number($("#totalPedido").text().replace("R$","").replace(",",".")) +vSubTotal
         $("#totalPedido").text(valorTotal.toFixed(2).replace(".",","))
 
 
     if(elemento.attr("status") == undefined){
-        console.log('coleta...')
-        console.log("separar item pedido "+elemento.attr('product_code'))
+        //console.log('coleta...')
+        //console.log("separar item pedido "+elemento.attr('product_code'))
         var listaSeparados = [], prd_code  = Number(elemento.attr('product_code'))
         if(localStorage.listaSeparados != null && localStorage.listaSeparados != undefined && localStorage.listaSeparados != ''){
          listaSeparados = JSON.parse(localStorage.listaSeparados.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
-         console.log(listaSeparados.length)
+         //console.log(listaSeparados.length)
          if(listaSeparados.length > 0){
             var separado = false
              for(const k in listaSeparados){
                  
-                 console.log('listaSeparados[k].produto,prd_code')
-                 console.log(listaSeparados[k].produto,prd_code)
+                 //console.log('listaSeparados[k].produto,prd_code')
+                 //console.log(listaSeparados[k].produto,prd_code)
                  if(Number(listaSeparados[k].produto) === Number(prd_code)){
-                    console.log("produto ja separado antes!")
+                    //console.log("produto ja separado antes!")
                     separado = true
                  } 
              }
@@ -438,15 +438,15 @@ async function reativaColetaProduto(elemento) {
         else{
             listaSeparados.push({"produto": prd_code, "comentario": "Tudo separado"})
         }
-        console.log('listaSeparados')
-        console.log(listaSeparados)
+        //console.log('listaSeparados')
+        //console.log(listaSeparados)
         localStorage.listaSeparados = JSON.stringify(listaSeparados)
 
        var toDo = await insertTracing('separacao', localStorage.numeroPedido,localStorage.listaSeparados)
-       console.log(toDo)
+       //console.log(toDo)
         
     }else{
-        console.log("reativa item pedido")
+        //console.log("reativa item pedido")
         elemento.parent().parent().parent().parent().find(".removeTodoProduto").css('display','block')
         elemento.parent().parent().parent().parent().find(".areaProdutoPedido").removeClass("removido")
         elemento.parent().parent().parent().parent().find(".cardProduto").removeClass("removido")
@@ -512,14 +512,14 @@ async function adicionarProdutoAoPedido(elemento){
     try{
         atualPedido = JSON.parse(localStorage.ORDER_EDIT.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
     }catch(e){
-        console.log(e)
+        //console.log(e)
     }
     
     atualPedido.push(detalhes)
     localStorage.ORDER_EDIT = JSON.stringify(atualPedido)
     var valorT =  Number($("#totalPedido").text().replace(",",".")) + (detalhes.quantidade * detalhes.valor)
     var atualiza = await updateOrderDetails(atualPedido, Number(localStorage.numeroPedido),valorT)
-    console.log(atualiza)
+    //console.log(atualiza)
     startAll();
     
   
@@ -537,7 +537,7 @@ async function removerProdutoAoPedido(elemento){
     try{
         atualPedido = JSON.parse(localStorage.ORDER_EDIT.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
     }catch(e){
-        console.log(e)
+        //console.log(e)
     }
     
    
@@ -557,21 +557,21 @@ async function removerProdutoAoPedido(elemento){
         let total = Number(novoPedido2[k].quantidade) >= produtoFinal.venda.minimo_para_desconto ? produtoFinal.venda.preco_venda :produtoFinal.venda.valor_bruto
         outroValor += (Number(novoPedido2[k].quantidade) * total)
     }
-    console.log('novoPedido2')
-    console.log(novoPedido2)
-     console.log('outroValor')
-    console.log(outroValor)
+    //console.log('novoPedido2')
+    //console.log(novoPedido2)
+     //console.log('outroValor')
+    //console.log(outroValor)
    
      localStorage.ORDER_EDIT = JSON.stringify(novoPedido2)
  
    
     var entrega = $("#valEntrega").text()
     entrega =  entrega.replace(",",".") 
-    console.log('outroValor + '+entrega)
-    console.log(outroValor)
+    //console.log('outroValor + '+entrega)
+    //console.log(outroValor)
     outroValor+= Number(entrega)
     var atualiza = await updateOrderDetails(novoPedido2, Number(localStorage.numeroPedido),outroValor)
-    console.log(atualiza)
+    //console.log(atualiza)
     startAll(); 
     $(".editarProdutoModal").hide() 
     location.reload()
@@ -600,7 +600,7 @@ async function editarProdutoDoPedido(elemento){
     try{
         atualPedido = JSON.parse(localStorage.ORDER_EDIT.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
     }catch(e){
-        console.log(e)
+        //console.log(e)
     }
     var novoPedido = []
     for(const k in atualPedido){
@@ -608,10 +608,10 @@ async function editarProdutoDoPedido(elemento){
             novoPedido.push(atualPedido[k])
         }
     } 
-    console.log("comentario")
-    console.log(comentario)
-    console.log("quantidade")
-    console.log(quantidade)
+    //console.log("comentario")
+    //console.log(comentario)
+    //console.log("quantidade")
+    //console.log(quantidade)
     if(comentario == "" || comentario == undefined){
         comentario = "Sem comentários"
     }
@@ -626,15 +626,15 @@ async function editarProdutoDoPedido(elemento){
         let total = Number(novoPedido[k].quantidade) >= produtoFinal.venda.minimo_para_desconto ? produtoFinal.venda.preco_venda :produtoFinal.venda.valor_bruto
         outroValor += (Number(novoPedido[k].quantidade) * total)
     }
-    console.log('outroValor')
-    console.log(outroValor)
+    //console.log('outroValor')
+    //console.log(outroValor)
      var entrega = $("#valEntrega").text()
     entrega =  entrega.replace(",",".") 
-    console.log('outroValor + '+entrega)
-    console.log(outroValor)
+    //console.log('outroValor + '+entrega)
+    //console.log(outroValor)
     outroValor+= Number(entrega)
     var atualiza = await updateOrderDetails(novoPedido, Number(localStorage.numeroPedido),outroValor)
-    console.log(atualiza)
+    //console.log(atualiza)
     startAll();
     
   
@@ -656,7 +656,7 @@ function parouDigitar(element){
     element.parent().parent().parent().parent().css("height","75vh")
 }
 function adjust(){
-    console.log("ajustando...")
+    //console.log("ajustando...")
     $(".removeTodoProduto").each(function(){
         $(this).css("height",$(".cardProduto").css("height"))
     })
@@ -673,15 +673,15 @@ async function startAll(){
     var loader = setInterval(()=>{
         if(pedidos.length > 0 && clientes.length > 0){
             
-            console.log('pedidos')
-            console.log(pedidos)
-            console.log('tracing')
-            console.log(tracing)
+            //console.log('pedidos')
+            //console.log(pedidos)
+            //console.log('tracing')
+            //console.log(tracing)
         
             clearInterval(loader)        
             pedidos = pedidos[0]
             clientes = clientes[0]
-            console.log(pedidos)
+            //console.log(pedidos)
             localStorage.pedidos = JSON.stringify(pedidos)
             localStorage.clientes = JSON.stringify(clientes)
             $(".listaDePedidos").html('')
@@ -722,7 +722,7 @@ async function startAll(){
             $("#finalizado").html($(".finalizado").length)
     
         }else{
-            console.log("aguardando pedidos...")
+            //console.log("aguardando pedidos...")
         }
 
 
@@ -730,10 +730,10 @@ async function startAll(){
 }
 function getClientInfo(id){
     var clientes = JSON.parse(localStorage.clientes.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
-    console.log(clientes)
-    console.log(id)
+    //console.log(clientes)
+    //console.log(id)
     for(const k in clientes){
-        console.log(clientes[k].id,id )
+        //console.log(clientes[k].id,id )
         if(clientes[k].id === id ){
             return clientes[k]
         }
@@ -743,18 +743,18 @@ function getClientInfo(id){
 function getOrderInfo(id){
      
         var pedidos2 = JSON.parse(localStorage.pedidos.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
-        console.log(pedidos2)
-        console.log(id)
+        //console.log(pedidos2)
+        //console.log(id)
         for(const k in pedidos2){
-            console.log(pedidos2[k].id,id )
+            //console.log(pedidos2[k].id,id )
             if(pedidos2[k].id === id ){
                 return pedidos2[k]
             }
         }
-        console.log(pedidos)
+        //console.log(pedidos)
         localStorage.pedidos = JSON.stringify(pedidos)
         for(const k in pedidos){
-            console.log(pedidos[k].id,id )
+            //console.log(pedidos[k].id,id )
             if(pedidos[k].id === id ){
                 return pedidos[k]
             }
@@ -776,7 +776,7 @@ async function request(urlEnd, params){
                                     headers:{"x-access-token": localStorage.token},
                                     data: params,
                                     success: function (data) {  
-                                        console.log("dt",data)
+                                        //console.log("dt",data)
                                         if(urlEnd == 'login'){
                                             localStorage.token = data.token
                                             localStorage.token_me = data.token_me
@@ -785,7 +785,7 @@ async function request(urlEnd, params){
                                         } 
                                     },
                                     error: function (data) {
-                                        console.log(data)
+                                        //console.log(data)
                                         localStorage.lastError = data
                                        // alert("Login incorreto!")
                                         //location.replace('/picking-login')
@@ -797,7 +797,7 @@ async function request(urlEnd, params){
 } 
 async function getPedidos(pedidos){
 AFFILIATE_ID = Number(localStorage.AFFILIATE_ID)
-console.log("AFFILIATE ID",AFFILIATE_ID)
+//console.log("AFFILIATE ID",AFFILIATE_ID)
     var dados = await  request('getById', {"table": "orders", "id_name":"order_affiliate_id", "id_value": AFFILIATE_ID})   
     pedidos.push(dados)
 }
@@ -813,14 +813,14 @@ async function login(user, key){
     return await request('login', {"user": user, "table":"users_affiliates", "prefix": "users_affiliate", "password":key} )
 }
 async function updateOrderDetails(newList, numeroPedido, valorPedido){
-    console.log(newList, numeroPedido, valorPedido)
+    //console.log(newList, numeroPedido, valorPedido)
     return await request('updateOrderDetails', {"NUM_PEDIDO": numeroPedido, "VALOR_PEDIDO":valorPedido, "ITENS_PEDIDO": JSON.stringify(newList) } )
 }
 async function insertTracing(status, numeroPedido, detalhes){
-    console.log(status, numeroPedido, detalhes)
+    //console.log(status, numeroPedido, detalhes)
     var tracingAtual = await getTracing();
-   console.log('tracingAtual')
-   console.log(tracingAtual)
+   //console.log('tracingAtual')
+   //console.log(tracingAtual)
   
     return await request('insertNew', 
     {
@@ -838,8 +838,8 @@ async function search(element){
     var container = element.parent().parent().parent().find('.areaBuscaModalContainer')
     container.html('')
     var dados = await  request('productSearch', {"product_affiliate_id": AFFILIATE_ID, "product_site_name": element.val(),"product_code": element.val(), "totalItems": 50, "lastID":0 })   
-    console.log('dados search')
-    console.log(dados)
+    //console.log('dados search')
+    //console.log(dados)
     if(localStorage.DADOS_SEARCH != undefined){
         var newDados = JSON.parse(localStorage.DADOS_SEARCH.trim().replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""))
         if(newDados.length > 4000){

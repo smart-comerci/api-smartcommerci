@@ -550,7 +550,7 @@
             is_product_image: true,
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             localStorage.LOJAS_CADASTRADAS = JSON.stringify(data);
             for(const k in data){
                 $("#lojes").append("<option>"+data[k].affiliates_business_name+"</option>")
@@ -563,7 +563,7 @@
             }
         },
         error: function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.responseJSON.message.indexOf("token") > -1) {
                 alert("Necessário fazer login!<br>" + data.responseJSON.message);
                 setTimeout(() => {
@@ -593,7 +593,7 @@
     })
 var horariosFull = {"segundaSexta":"Sem expediente","sabados":"Sem expediente", "domingos":"Sem expediente"}
     $(".continuarStep").click(function(){
-        console.log("....")
+        //console.log("....")
         switch(localStorage.subStage){
             case "0":
                 if($("#cnpj").val() != "" && $("#razaoSocial").val() != ""){

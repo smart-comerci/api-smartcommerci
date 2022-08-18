@@ -282,7 +282,7 @@
         }
         else {
             field.css("border", "1px solid red");
-            //console.log("mostrar")
+            ////console.log("mostrar")
             informar('alert-danger', "E-mail inválido", 3000)
             $(".btnStart").css("opacity", "0.2")
             return false
@@ -305,7 +305,7 @@
                 url: mainHost + '/login',
                 data: { user: $("#emailMasterLogin").val(), table: "users_affiliates", prefix: "users_affiliate", password: $("#senhaMasterLogin").val() },
                 success: function (data) {
-                     console.log("mostro aqui",data.data);
+                     //console.log("mostro aqui",data.data);
                     localStorage.AFFILIATE_ID = data.data.users_affiliate_id
                     //  
                      localStorage.MASTER_ID = data.data.users_affiliate_master_id
@@ -317,7 +317,7 @@
 
                 },
                 error: function (data) {
-                   console.log(data);
+                   //console.log(data);
                     //   alertar("O login falhou!")
                 },
                 complete: function () {
@@ -344,8 +344,8 @@
                 "x-access-token": token
             },
             success: function (data) {
-                console.log('data 1');
-                console.log(data);
+                //console.log('data 1');
+                //console.log(data);
                /*
 
  DATA = data
@@ -374,7 +374,7 @@
 
             },
             error: function (data) {
-                //console.log(data);
+                ////console.log(data);
             },
             complete: function () {
                 // ao final da requisição... 
@@ -384,7 +384,7 @@
     }
     
     function startOk(master_id) {
-        console.log("master ID", master_id) 
+        //console.log("master ID", master_id) 
         localStorage.NAME_SHOP = locals(master_id - 1)
         $.ajax({
             type: "POST",
@@ -395,8 +395,8 @@
                 "is_product_image": true,
             },
             success: function (data) {
-                console.log('data 2'); 
-                console.log(data); 
+                //console.log('data 2'); 
+                //console.log(data); 
                 localStorage.LOJAS_CADASTRADAS = JSON.stringify(data)
                 localStorage.NOME_LOJA = data[0].affiliates_business_name
                 localStorage.NAME_SHOP = data[0].affiliates_business_name
@@ -409,8 +409,8 @@
                         "is_product_image": true,
                     },
                     success: function (data) {
-                        console.log('data 0');
-                        //console.log(data);
+                        //console.log('data 0');
+                        ////console.log(data);
                         localStorage.MASTER_ID = master_id
                         localStorage.MAIL_MASTER_CLIENTE = $("#emailMasterLogin").val()
                         location.replace('/produtos')
@@ -419,8 +419,8 @@
 
                     },
                     error: function (data) {
-                        console.log('erro');
-                        //console.log(data);
+                        //console.log('erro');
+                        ////console.log(data);
 
                     },
                     complete: function () {
@@ -436,7 +436,7 @@
 
             },
             error: function (data) {
-                console.log(data);
+                //console.log(data);
 
             },
             complete: function () {
@@ -480,7 +480,7 @@
                 "is_product_image": true,
             },
             success: function (data) {
-               console.log(data);
+               //console.log(data);
                 if (data.length > 0) {
 
                     $(".form3").fadeOut()
@@ -493,8 +493,8 @@
 
             },
             error: function (data) {
-                //console.log('erro');
-                //console.log(data);
+                ////console.log('erro');
+                ////console.log(data);
 
             },
             complete: function () {
@@ -506,7 +506,7 @@
     function enviaCodigo() {
         var email = $("#emailMasterLogin").val()
         $(".emailUm").text($("#emailMasterLogin").val())
-        //console.log(email)
+        ////console.log(email)
         $.ajax({
             type: "POST",
             url: mainHost + '/startup',
@@ -516,12 +516,12 @@
                 "is_product_image": true,
             },
             success: function (data) {
-                //console.log(data);
+                ////console.log(data);
 
             },
             error: function (data) {
-                //console.log('erro');
-                //console.log(data);
+                ////console.log('erro');
+                ////console.log(data);
 
             },
             complete: function () {
@@ -543,7 +543,7 @@
                 "is_product_image": true,
             },
             success: function (data) {
-                 console.log("validacao", data);
+                 //console.log("validacao", data);
                  localStorage.FULL_DATA_USER_LOGGED = JSON.stringify(data)
                  localStorage.AFF_ID = data.data.users_affiliate_id
                  localStorage.MASTER_ID = data.data.users_affiliate_master_id
@@ -553,9 +553,9 @@
 
             },
             error: function (data) {
-                console.log('erro');
+                //console.log('erro');
                 $(".digito").css("border", "1px solid red")
-                console.log(data);
+                //console.log(data);
                 informar('alert-danger', "Código invalido!", 3000)
 
             },

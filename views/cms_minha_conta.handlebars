@@ -836,7 +836,7 @@
   })
 
 $("#senhaNova2").change(function () {
- console.log("editando nova senha...",$(this).val(),$("#password1").val())
+ //console.log("editando nova senha...",$(this).val(),$("#password1").val())
     if ($(this).val() != $("#senhaNova").val()) {
       $(this).css("border", "2px solid red")
       $("#senhaNova").css("border", "2px solid red")
@@ -851,10 +851,10 @@ $("#senhaNova2").change(function () {
   
  
   function confereSenha(elemento2) {
-    console.log("texto", elemento2.text())
+    //console.log("texto", elemento2.text())
     if (elemento2.text().indexOf("Salvar") > -1) {
 
-      console.log("...", $("#email-password").val())
+      //console.log("...", $("#email-password").val())
       let senha = $("#email-password").val()
       if (senha != "") {
         $.ajax({
@@ -867,7 +867,7 @@ $("#senhaNova2").change(function () {
             "pass": senha, "mail": localStorage.MAIL_MASTER_CLIENTE, "master_id": localStorage.MASTER_ID
           },
           success: function (data1) {
-            console.log("resultado auten", data1)
+            //console.log("resultado auten", data1)
             $.ajax({
               type: 'POST',
               url: mainHost + '/alterMail',
@@ -879,7 +879,7 @@ $("#senhaNova2").change(function () {
               },
               success: function (data) {
                 $("#mail2").attr("idValue", localStorage.MAIL_MASTER_CLIENTE)
-                console.log(data)
+                //console.log(data)
 
               },
               error: function (data) {
@@ -906,7 +906,7 @@ $("#senhaNova2").change(function () {
       }
 
     } else {
-      console.log("não é salvar")
+      //console.log("não é salvar")
       let index = 1, code = ""
       $(".digito3").each(function () {
         if ($(this).attr("tabindex") == index) {
@@ -914,7 +914,7 @@ $("#senhaNova2").change(function () {
           index++
         }
       })
-      console.log("my code", code)
+      //console.log("my code", code)
       if (code.length == 5) {
         $.ajax({
           type: 'POST',
@@ -927,7 +927,7 @@ $("#senhaNova2").change(function () {
           },
           success: function (data) {
            
-            console.log(data)
+            //console.log(data)
            
             window.parent.atualizaUser($("#mail2"),1)
             localStorage.clear();
@@ -938,7 +938,7 @@ $("#senhaNova2").change(function () {
 
           },
           error: function (data) {
-            console.log(data)
+            //console.log(data)
            
             informar("alert-primary", "Codigo invalido tente novamente!", 3000)
           },
@@ -962,10 +962,10 @@ $("#senhaNova2").change(function () {
 
 
  function confereNovaSenha(elemento2) {
-    console.log("texto", elemento2.text())
+    //console.log("texto", elemento2.text())
     if (elemento2.text().indexOf("Salvar") > -1) {
 
-      console.log("...", $("#password-toSenha").val())
+      //console.log("...", $("#password-toSenha").val())
       let senha = $("#password-toSenha").val()
       if (senha != "") {
         $.ajax({
@@ -978,7 +978,7 @@ $("#senhaNova2").change(function () {
             "pass": senha, "mail": localStorage.MAIL_MASTER_CLIENTE, "master_id": localStorage.MASTER_ID
           },
           success: function (data1) {
-            console.log("resultado auten", data1)
+            //console.log("resultado auten", data1)
             $.ajax({
               type: 'POST',
               url: mainHost + '/alterMail',
@@ -990,7 +990,7 @@ $("#senhaNova2").change(function () {
               },
               success: function (data) {
                 $("#confirmPassword1").attr("idValue", localStorage.MAIL_MASTER_CLIENTE)
-                console.log(data)
+                //console.log(data)
 
               },
               error: function (data) {
@@ -1017,7 +1017,7 @@ $("#senhaNova2").change(function () {
       }
 
     } else {
-      console.log("não é salvar")
+      //console.log("não é salvar")
       let index = 1, code = ""
       $(".digito4").each(function () {
         if ($(this).attr("tabindex") == index) {
@@ -1025,7 +1025,7 @@ $("#senhaNova2").change(function () {
           index++
         }
       })
-      console.log("my code", code)
+      //console.log("my code", code)
       if (code.length == 5) {
         $.ajax({
           type: 'POST',
@@ -1038,8 +1038,8 @@ $("#senhaNova2").change(function () {
           },
           success: function (data) {
            
-            console.log(data)
-           console.log("vejamos",$("#senhaNova2"))
+            //console.log(data)
+           //console.log("vejamos",$("#senhaNova2"))
            $("#senhaNova2").attr("idValue",localStorage.MAIL_MASTER_CLIENTE)
             window.parent.atualizaUser($("#senhaNova2"),0)
            localStorage.clear();
@@ -1050,7 +1050,7 @@ $("#senhaNova2").change(function () {
 
           },
           error: function (data) {
-            console.log(data)
+            //console.log(data)
  
              informar("alert-primary", "Codigo invalido tente novamente!", 3000)
           },

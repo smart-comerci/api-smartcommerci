@@ -85,8 +85,8 @@ function continua() {
             },
             success: function (categories) {
                 try {
-                    console.log("Categories")
-                    console.log(categories.results)
+                   // console.log("Categories")
+                   // console.log(categories.results)
 
                     CATEGORIES = categories.results;
                     var CATEGORIES_SHOW = [];
@@ -202,7 +202,7 @@ function continua() {
                     })
 
                 } catch (err) {
-                   console.log("err internal categories get", err)
+                  // console.log("err internal categories get", err)
                 }
 
             },
@@ -487,7 +487,7 @@ async function updateSequencia(mostra1) {
     $(".categorie").each(function () {
 
         var status8 = 0, status4 = $(this).find(".CHECK_PRINCIPAL")[0]?.checked
-        console.log()
+       // console.log()
         if (status4 == false) { status8 = 0 } else { status8 = 1 }
 
         var principal = $(this).find(".CATEGORIA_PRINCIPAL").text(),
@@ -496,7 +496,7 @@ async function updateSequencia(mostra1) {
             description = $(this).attr("description"),
             subs = ''
         var listaSubCategorias = []
-        console.log("estou ativo", status8,$(this).find(".CHECK_PRINCIPAL"))
+       // console.log("estou ativo", status8,$(this).find(".CHECK_PRINCIPAL"))
 
 
         let getMyData = null
@@ -520,7 +520,7 @@ async function updateSequencia(mostra1) {
         } catch (e) {
 
         }
-        console.log("getMYdata", getMyData)
+       // console.log("getMYdata", getMyData)
 
         if (getMyData != null) {
 
@@ -534,7 +534,7 @@ async function updateSequencia(mostra1) {
             });
             getMyData['sub_status'] = JSON.stringify(listaSubCategorias)
             lista.push(getMyData)
-            console.log('vou usar getMyData',getMyData)
+          //  console.log('vou usar getMyData',getMyData)
         } else {
             $(this).find(".SUB_CATEGORIA").each(function () {
                 ////console.log($(this).parent().parent().find(".ativa-me2"))
@@ -547,14 +547,14 @@ async function updateSequencia(mostra1) {
             });
             var catStatus = 0, catStatus2 = $(this).parent().find(".ativa-me")[0]?.checked
             var status1 = infoCategoria_status(principal)
-            console.log(principal, status1)
+          //  console.log(principal, status1)
             if (status1 != undefined) {
                 status1 = JSON.stringify(infoCategoria_status(principal))
             } else {
                 status1 = JSON.stringify(listaSubCategorias)
             }
 
-            console.log("minhas subs", listaSubCategorias)
+           // console.log("minhas subs", listaSubCategorias)
 
 
             if (catStatus2 == true) { catStatus = 1 } else { catStatus = 0 }
@@ -571,7 +571,7 @@ async function updateSequencia(mostra1) {
 
 
     })
-    console.log("nova lsita", lista)
+   // console.log("nova lsita", lista)
     $(".cabecalho").addClass("animated-background")
 
 
@@ -589,7 +589,7 @@ async function updateSequencia(mostra1) {
         lista[k]['subCategorias'] = myCats
     }
 
-    console.log('as categorias', lista)
+   // console.log('as categorias', lista)
     $.ajax({
         type: "POST",
         url: "https://api-smartcomerci.com.br:9090/updateCategoryList",
@@ -603,7 +603,7 @@ async function updateSequencia(mostra1) {
 
         },
         success: function (resultado) {
-            console.log(resultado)
+           // console.log(resultado)
             ////console.log("Alterações salvas com sucesso!")
             $(".cabecalho").removeClass("animated-background")
 
@@ -783,11 +783,11 @@ function getCategorieShow(dataCategorie, ID) {
 
 function outraSubCategoria(elemento) {
     let categories = JSON.parse(localStorage.MINHAS_CATEGORIAS)
-    console.log("categories 1",categories)
+   // console.log("categories 1",categories)
     for (const k in categories) {
         if (categories[k].categoria == elemento.attr("myCat")) {
             let mySubs = JSON.parse(ajustStrigfy(categories[k].affiliate_categorie_status))
-            console.log("mySubs",mySubs)
+          //  console.log("mySubs",mySubs)
             mySubs.push({
                 "subCategoria": "NOVA-CATEGORIA", "status": 0
             
@@ -798,7 +798,7 @@ function outraSubCategoria(elemento) {
 
         }
     }
-    console.log("categories",categories)
+   // console.log("categories",categories)
 
     localStorage.MINHAS_CATEGORIAS = JSON.stringify(categories)
 
@@ -975,7 +975,7 @@ function modalEditCategories(element) {
         BANNERS = dadosCategoria?.subcategorie_banners
     }
 
-    console.log('BANNERS',BANNERS)
+   // console.log('BANNERS',BANNERS)
 
     var html =
         '<div style="max-width:100% " class="container">' +
@@ -1317,7 +1317,7 @@ function modalEditSubCategories(subCategoria, categoria, element) {
         }
     }
     ////
-   console.log("data sub",dataSubCategoria)
+   //console.log("data sub",dataSubCategoria)
 
 
     var status = [], essaSubCat = []
@@ -1812,7 +1812,7 @@ function updateIconSVG(element, categorieName) {
             "categorie_name": categorieName
         },
         success: function (myIcons) {
-            console.log({
+          //  console.log({
                 "master_id": localStorage.MASTER_ID,
                 "fieldName": "categorie_icon",
                 "fieldValue": content,
@@ -1893,13 +1893,13 @@ function mudaDetalhe(fieldName, content, categorieName){
                 "categorie_name": categorieName
             },
             success: function (myIcons) {
-               console.log(myIcons);
+            //   console.log(myIcons);
               
 
 
             },
             error: function (myIcons) {
-                 console.log(myIcons);
+              //   console.log(myIcons);
 
             },
             complete: function () { },
@@ -2075,13 +2075,13 @@ function fila(elemento, categorieName, funcao) {
 function aleatoryID(text) {
     var randLetter = Math.random.toString().replace(/./g,'');
     if(text){
-        console.log('text',text)
+       // console.log('text',text)
         randLetter = text.replace(/\./g,'').replace(/:/g,'').replace(/ /g,'').replace(/-/g,'') 
         let newT = ''
         let lista = randLetter.split('/')
         for(const k in lista){
           
-                console.log(lista[k])
+              //  console.log(lista[k])
                 newT += lista[k]
            
         }
@@ -2187,7 +2187,7 @@ async function SALVA_EDIT() {
                     thisCategoryData = subs[k]
                 }
             }
-    console.log('detectando',subs,thisCategoryData)
+   // console.log('detectando',subs,thisCategoryData)
     mudaDetalhe('subcategorie_banners',JSON.stringify(thisCategoryData.subcategorie_banners),thisCategory)
     
 
@@ -2196,7 +2196,7 @@ async function SALVA_EDIT() {
 }
 
 
-console.log('mostre as cats',JSON.parse(localStorage.MINHAS_CATEGORIAS))
+//console.log('mostre as cats',JSON.parse(localStorage.MINHAS_CATEGORIAS))
 setTimeout(() => {
     $(".totalCategoriasCadastradas").text($(".categorie").length)
 }, 5000);
@@ -2298,27 +2298,27 @@ function setSubCatAtt(elemento) {
         default:
             break;
     }
-    console.log("Minha lista sub" ,listaSub)
+   // console.log("Minha lista sub" ,listaSub)
 
 
     for (const k in listaSub2) {
-        console.log(listaSub2[k].subCategoria,subCategorieName)
+       // console.log(listaSub2[k].subCategoria,subCategorieName)
         if (changeName == true) {
              if (listaSub2[k].subCategoria == lastName) {
-            console.log("achei 2... ")
-            console.log(listaSub2[k])
+         //   console.log("achei 2... ")
+           // console.log(listaSub2[k])
                  listaSub2[k] = listaSub
                   }
         } else {
              if (listaSub2[k].subCategoria == subCategorieName) {
-                    console.log("achei ... ")
-                     console.log(listaSub2[k])
+                  //  console.log("achei ... ")
+                  //   console.log(listaSub2[k])
                     listaSub2[k] = listaSub
                 }
         }
        
     }
-  console.log("Minha lista sub salva" ,listaSub2)
+  //console.log("Minha lista sub salva" ,listaSub2)
     localStorage.SUB_EDIT = JSON.stringify(listaSub2)
 
 }
@@ -2334,8 +2334,8 @@ function salvaModalSubCategoria() {
 
     if (faz) {
         var editados = JSON.parse(localStorage.SUB_EDIT)
-         console.log("editados")
-         console.log(editados)
+       //  console.log("editados")
+       //  console.log(editados)
         $.ajax({
             type: "POST",
             url: "https://api-smartcomerci.com.br:9090/updateCategorieDetail",
@@ -2349,12 +2349,12 @@ function salvaModalSubCategoria() {
                 "categorie_name": localStorage.CAT_SUB_EDIT
             },
             success: function (myIcons) {
-                console.log(myIcons); 
+               // console.log(myIcons); 
                 mostra()
                 $(".close").click()
             },
             error: function (myIcons) {
-               console.log(myIcons);            
+              // console.log(myIcons);            
             },
             complete: function () { },
         });
@@ -2596,11 +2596,11 @@ function getBannerInnerMain(imgURLs, actives) {
             } 
 
         }   
-        console.log('dado ',{html :html, total: counter})
+        //console.log('dado ',{html :html, total: counter})
         return {html :html, total: counter}
 
     }else{
-        console.log('dado ',{html :'', total: counter})
+       // console.log('dado ',{html :'', total: counter})
         return {html :'', total: counter}  
     }
     
@@ -2776,8 +2776,8 @@ function uploadBannerCat(element) {
         contentType: false,
         type: 'POST',
         success: function (data) {
-            console.log(data)
-            console.log('o alvo -> ',$("#"+element.attr("target")).attr("alvo"))
+          //  console.log(data)
+           // console.log('o alvo -> ',$("#"+element.attr("target")).attr("alvo"))
 
             if($("#"+element.attr("target")).attr("alvo") == 'novo'){
                 let elementoNew = $("#listaBannersCatInactive")
@@ -2795,8 +2795,8 @@ function uploadBannerCat(element) {
             }
      
 
-            console.log(element.parent().parent().find('input'))
-            console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
+           // console.log(element.parent().parent().find('input'))
+           // console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
 
             let thisCategory = localStorage.SUB_CAT_ATUAL
             let subs = JSON.parse(localStorage.SUB_EDIT)
@@ -2822,7 +2822,7 @@ function uploadBannerCat(element) {
 
         },
         error: function (data) {
-          console.log(data) 
+         // console.log(data) 
         }
       });
 }
@@ -2843,8 +2843,8 @@ function uploadBannerCatMain(element) {
         contentType: false,
         type: 'POST',
         success: function (data) {
-            console.log(data)
-            console.log('o alvo principal -> ',$("#"+element.attr("target")).attr("alvo"))
+         //   console.log(data)
+          //  console.log('o alvo principal -> ',$("#"+element.attr("target")).attr("alvo"))
 
             if($("#"+element.attr("target")).attr("alvo") == 'novo'){
                 let elementoNew = $("#listaBannersCatInactive")
@@ -2862,8 +2862,8 @@ function uploadBannerCatMain(element) {
             }
      
 
-            console.log(element.parent().parent().find('input'))
-            console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
+        //    console.log(element.parent().parent().find('input'))
+        //    console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
 
             let thisCategory = localStorage.CAT_SUB_EDIT
             let subs = JSON.parse(localStorage.MINHAS_CATEGORIAS)
@@ -2886,18 +2886,18 @@ function uploadBannerCatMain(element) {
                     let bnn = subs[k]['subcategorie_banners']['banners']
                     try{
                         if(bnn[0].url == undefined){
-                            console.log("undefined sim")
+                        //    console.log("undefined sim")
                             subs[k]['subcategorie_banners']['banners'] = [{active:element.parent().parent().find('input')[0].checked, url: `${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`}]
                             subs[k]['subcategorie_banners'] = JSON.stringify(subs[k]['subcategorie_banners'] )
                         }else{
-                            console.log("undefined não")
+                          //  console.log("undefined não")
                             bnn.push({active:element.parent().parent().find('input')[0].checked, url: `${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`})
                             subs[k]['subcategorie_banners']['banners'] = bnn
                             subs[k]['subcategorie_banners'] = JSON.stringify(subs[k]['subcategorie_banners'] )
                         }
 
                     }catch(e){
-                        console.log("catch sim")
+                       // console.log("catch sim")
                         subs[k]['subcategorie_banners'] = {}
                        
                         subs[k]['subcategorie_banners']['banners'] =  [{active:element.parent().parent().find('input')[0].checked, url: `${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`}]
@@ -2911,7 +2911,7 @@ function uploadBannerCatMain(element) {
 
         },
         error: function (data) {
-          console.log(data) 
+          //console.log(data) 
         }
       });
 }
@@ -2932,8 +2932,8 @@ function uploadBannerCatVertical(element) {
         contentType: false,
         type: 'POST',
         success: function (data) {
-            console.log(data)
-            console.log('o alvo -> ',$("#"+element.attr("target")).attr("alvo"))
+            //console.log(data)
+           // console.log('o alvo -> ',$("#"+element.attr("target")).attr("alvo"))
 
             if($("#"+element.attr("target")).attr("alvo") == 'novo'){
                 let elementoNew = $("#bannersVerticais")
@@ -2951,8 +2951,8 @@ function uploadBannerCatVertical(element) {
             }
      
 
-            console.log(element.parent().parent().find('input'))
-            console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
+          //  console.log(element.parent().parent().find('input'))
+          //  console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
 
             let thisCategory = localStorage.SUB_CAT_ATUAL
             let subs = JSON.parse(localStorage.SUB_EDIT)
@@ -2978,7 +2978,7 @@ function uploadBannerCatVertical(element) {
 
         },
         error: function (data) {
-          console.log(data) 
+         // console.log(data) 
         }
       });
 }
@@ -2999,8 +2999,8 @@ function uploadBannerCatVerticalMain(element) {
         contentType: false,
         type: 'POST',
         success: function (data) {
-            console.log(data)
-            console.log('o alvo pricipal -> ',$("#"+element.attr("target")).attr("alvo"))
+           // console.log(data)
+           // console.log('o alvo pricipal -> ',$("#"+element.attr("target")).attr("alvo"))
 
             if($("#"+element.attr("target")).attr("alvo") == 'novo'){
                 let elementoNew = $("#bannersVerticais")
@@ -3018,12 +3018,12 @@ function uploadBannerCatVerticalMain(element) {
             }
      
 
-            console.log(element.parent().parent().find('input'))
-            console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
+           // console.log(element.parent().parent().find('input'))
+           // console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
 
             let thisCategory = localStorage.CAT_SUB_EDIT
             let subs = JSON.parse(localStorage.MINHAS_CATEGORIAS)
-            console.log('subs',thisCategory,subs)
+           // console.log('subs',thisCategory,subs)
             for(const k in subs){
                 if(subs[k]['categoria'].trim() == thisCategory.trim()){
                     if(subs[k]['subcategorie_banners'] == null){
@@ -3042,9 +3042,9 @@ function uploadBannerCatVerticalMain(element) {
                     }
                    
                     try{
-                        console.log('achei',subs[k])
+                     //  console.log('achei',subs[k])
                         let bnn = subs[k]['subcategorie_banners']['bannersVertical']
-                        console.log('achei',subs[k]['subcategorie_banners'])
+                       // console.log('achei',subs[k]['subcategorie_banners'])
                         if(bnn[0].url == undefined){
                             subs[k]['subcategorie_banners']['bannersVertical'] = [{active:element.parent().parent().find('input')[0].checked, url: `${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`}]
                             subs[k]['subcategorie_banners'] = JSON.stringify(subs[k]['subcategorie_banners'] )
@@ -3055,7 +3055,7 @@ function uploadBannerCatVerticalMain(element) {
                         }
 
                     }catch(e){
-                        console.log(e)
+                      //  console.log(e)
                         subs[k]['subcategorie_banners']['bannersVertical'] = [{active:element.parent().parent().find('input')[0].checked, url: `${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`}]
                         subs[k]['subcategorie_banners'] = JSON.stringify(subs[k]['subcategorie_banners'] )
                     }
@@ -3067,7 +3067,7 @@ function uploadBannerCatVerticalMain(element) {
 
         },
         error: function (data) {
-          console.log(data) 
+         // console.log(data) 
         }
       });
 }
@@ -3109,7 +3109,7 @@ function changeMyActive(element){
                         }
                     } 
                 }catch(e){
-                   console.log(e)
+                //   console.log(e)
                 } 
             }
         }
@@ -3118,7 +3118,7 @@ function changeMyActive(element){
 }
 
 function changeMyActiveVertical(element){
-    console.log("editando-me ...",element)
+    //console.log("editando-me ...",element)
 
    
         let thisCategory = localStorage.SUB_CAT_ATUAL
@@ -3133,7 +3133,7 @@ function changeMyActiveVertical(element){
                         }
                     } 
                 }catch(e){
-                   console.log(e)
+                  // console.log(e)
                 } 
             }
         }
@@ -3192,7 +3192,7 @@ function changeMyActiveMain(element){
                         }
                     } 
                 }catch(e){
-                   console.log(e)
+               //    console.log(e)
                 } 
                 subs[k]['subcategorie_banners'] = JSON.stringify(subs[k]['subcategorie_banners'] )
             }
@@ -3204,7 +3204,7 @@ function changeMyActiveMain(element){
 }
 
 function changeMyActiveVerticalMain(element){
-    console.log("editando-me ...",element)
+   // console.log("editando-me ...",element)
 
    
         let thisCategory = localStorage.CAT_SUB_EDIT
@@ -3233,7 +3233,7 @@ function changeMyActiveVerticalMain(element){
                         }
                     } 
                 }catch(e){
-                   console.log(e)
+                //   console.log(e)
                 } 
                 subs[k]['subcategorie_banners'] = JSON.stringify(subs[k]['subcategorie_banners'] )
             }
@@ -3245,7 +3245,7 @@ function changeMyActiveVerticalMain(element){
 }
 
 function removeBanner(URL, table,element){
-    console.log("editando-me ...",element)
+  //  console.log("editando-me ...",element)
 
    
     let thisCategory = localStorage.SUB_CAT_ATUAL
@@ -3253,11 +3253,11 @@ function removeBanner(URL, table,element){
     try{
         subs = JSON.parse(localStorage.SUB_EDIT)
     } catch(e){
-        console.log(e)
+     //   console.log(e)
         try{
             subs = localStorage.SUB_EDIT 
         }catch(ee){
-            console.log(ee)
+          //  console.log(ee)
         }
         
     }
@@ -3274,7 +3274,7 @@ function removeBanner(URL, table,element){
                 } 
                 subs[k][table] = newSubs
             }catch(e){
-               console.log(e)
+             //  console.log(e)
             } 
         }
     }
@@ -3284,7 +3284,7 @@ function removeBanner(URL, table,element){
 }
 
 function removeBannerMain(URL, table,element){
-    console.log("editando-me ...",element)
+  //  console.log("editando-me ...",element)
 
    
     let thisCategory = localStorage.CAT_SUB_EDIT
@@ -3301,7 +3301,7 @@ function removeBannerMain(URL, table,element){
                     }
 
                 }catch(e){            
-                    console.log(e)        
+                    //console.log(e)        
                     subs[k]['subcategorie_banners'] = JSON.parse(ajustStrigfy(subs[k]['subcategorie_banners']))
                 }
                 
@@ -3317,7 +3317,7 @@ function removeBannerMain(URL, table,element){
                 subs[k]['subcategorie_banners'][table] = newSubs
                 subs[k]['subcategorie_banners'] = JSON.stringify(subs[k]['subcategorie_banners'] )
             }catch(e){
-               console.log(e)
+              // console.log(e)
             } 
         }
     }

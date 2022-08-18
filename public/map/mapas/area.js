@@ -127,8 +127,8 @@
                         T = !0;
                     }),
                     C.on("drawend", function (event) {
-                        console.log(event);  
-                        console.log(event.feature.getGeometry().getCoordinates())  
+                      //  console.log(event);  
+                        //console.log(event.feature.getGeometry().getCoordinates())  
                         localStorage.my_lat_lon = JSON.stringify(event.feature.getGeometry().getCoordinates());
                      
                         (T = !1), F.getGeometry().setCoordinates([]), (P = null);

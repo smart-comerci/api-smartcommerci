@@ -73,13 +73,13 @@ $(".continuar").click(function(){
                         "x-access-token": localStorage.token
                     },
                     success: function (data) {
-                       console.log(' getValidCode')
-                       console.log(data)
+                      // //console.log(' getValidCode')
+                     //  //console.log(data)
                        window.location.replace("/startup2")                        
                     },
                     error: function (data) {
-                        console.log(codeVerify)
-                        console.log(data)
+                        //console.log(codeVerify)
+                        //console.log(data)
                        //alert("Código inválido!");
                         $(".digito").css("border","2px solid red")
                     },
@@ -88,7 +88,7 @@ $(".continuar").click(function(){
                     }
                 });
             }else{
-                //console.log(anomaly)
+                ////console.log(anomaly)
                //alert("Preencha todos os dígitos!")
                 for(const k in anomaly){
                     anomaly[k].element.css("border","2px solid red")
@@ -133,7 +133,7 @@ $(".continuar").click(function(){
                 })
                 LISTA_LOJAS.push({"categoria": categoria, "dados":LOJA})
             });
-            //console.log(LISTA_LOJAS)
+            ////console.log(LISTA_LOJAS)
             if(LISTA_LOJAS.length>0){
                 localStorage.LISTA_LOJAS = JSON.stringify(LISTA_LOJAS)
             } 
@@ -151,7 +151,7 @@ $(".continuar").click(function(){
             $(".tagActive").each(function() {
                 cat.push($(this).find(".txtCatSele").text())
             })
-            //console.log(cat)
+            ////console.log(cat)
             localStorage.categorias = JSON.stringify(cat)
             if(cat.length == 0){
                //alert("Selecione pelo menos uma categoria!")
@@ -165,7 +165,7 @@ $(".continuar").click(function(){
             $(".featureActive").each(function() {
                 ferr.push($(this).find(".superTextoUpper2").text())
             })
-            //console.log(ferr)
+            ////console.log(ferr)
             localStorage.ferramentas = JSON.stringify(ferr)
             if(ferr.length == 0){
                //alert("Selecione pelo menos uma opção!")
@@ -398,7 +398,7 @@ $(".enviaCodigo").click(function() {
             url: mainHost+'/startup',
             data: {"mail":$("#emailMaster").val()},
             success: function (data) {
-               console.log(data)
+               //console.log(data)
                $("#emailUm").html($("#emailMaster").val())
                 $(".form").hide();
                 $(".form2").show();
@@ -407,8 +407,8 @@ $(".enviaCodigo").click(function() {
                 localStorage.mailMaster = $("#emailMaster").val()
             },
             error: function (data) {
-                console.log('startup')
-                console.log(data)
+                //console.log('startup')
+                //console.log(data)
                 location.replace("/startup?login")
             
                //alert("Algo saiu errado<br>"+data)
@@ -431,7 +431,7 @@ $(".reenviar").click(function() {
             url: mainHost+'/startup',
             data: {"mail":$("#emailMaster").val()},
             success: function (data) {
-               console.log(data)
+               //console.log(data)
                $("#emailUm").html($("#emailMaster").val())
                 $(".form").hide();
                 $(".form2").show();
@@ -440,7 +440,7 @@ $(".reenviar").click(function() {
                 localStorage.mailMaster = $("#emailMaster").val()
             },
             error: function (data) {
-               console.log(data)
+               //console.log(data)
                //alert("Algo saiu errado<br>"+data)
             },
             complete: function(){
@@ -485,7 +485,7 @@ $("#continuarLogin").click(function() {
             url: mainHost+'/login',  
             data: { user: $("#emailMasterLogin").val(), table: "users_affiliates", prefix: "users_affiliate", password: $("#senhaMasterLogin").val()},
             success: function (data) {
-                console.log(data);
+                //console.log(data);
                 localStorage.token = data.token;
                 localStorage.token_me = data.token_me;
                 localStorage.MASTER_ID = data.data.users_affiliate_master_id
@@ -496,7 +496,7 @@ $("#continuarLogin").click(function() {
                 
             },
             error: function (data) {
-             console.log(data);
+             //console.log(data);
                //alert("O login falhou!")
             },
             complete: function () {
@@ -568,8 +568,8 @@ function editaContato1(element,contato) {
        var elemento = listaPessoal;
        element.parent().parent().remove()
         var onde =  fieldText[0].innerText
-        console.log("onde")
-        console.log(onde)
+        //console.log("onde")
+        //console.log(onde)
         var html = '<h1 class="textoModal">Adicionar pessoas<br> à '+onde+'</h1><br>'+
         '<h3 class="subTextoModal">Selecione uma função (você poderá criar e gerenciar funções depois):</h3>'+
         '<div class="row" style="max-width: 80%;margin: auto;">'+
@@ -613,7 +613,7 @@ function editaContato1(element,contato) {
         bootbox.alert({
             message: html,
             onShow:function () {
-                console.log("$('#"+opcao+"').click()")
+                //console.log("$('#"+opcao+"').click()")
                 setTimeout(() => {
                     $("#"+opcao).click()
                 }, 1000);
@@ -685,7 +685,7 @@ function editaContato1(element,contato) {
 
 function enviaUsuarios(){
 
-    console.log(localStorage.ACESSOS)
+    //console.log(localStorage.ACESSOS)
     var ACESSOS = JSON.parse(localStorage.ACESSOS)
     var LOJAS_CADASTRADAS = JSON.parse(localStorage.LOJAS_CADASTRADAS)
 
@@ -700,7 +700,7 @@ function enviaUsuarios(){
             ACESSOS[k].AFFILIATE_ID = 0
         }
     }
-    console.log("ACESSOS", ACESSOS)
+    //console.log("ACESSOS", ACESSOS)
 
     $.ajax({
         type: 'POST',
@@ -710,7 +710,7 @@ function enviaUsuarios(){
             "x-access-token": localStorage.token
         },
         success: function (data) {
-           console.log(' inserindo dados ', data)
+           //console.log(' inserindo dados ', data)
             for(const k in ACESSOS){
                 var mails  = ACESSOS[k].mails
                 for(const a in mails){
@@ -733,7 +733,7 @@ function enviaUsuarios(){
         },
         error: function (data) {
 
-            console.log(data)
+            //console.log(data)
           
         },
         complete: function(){

@@ -1053,7 +1053,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
         }]
     }
     //////////console.log("ta aaii")
-    console.log("ta aaii",product_data[0]);
+    //console.log("ta aaii",product_data[0]);
     
 
     var DESCONTOS_FULL = {
@@ -1093,22 +1093,22 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
         if(DESCONTOS_FULL['porcentagem'].active == undefined){ DESCONTOS_FULL['porcentagem'].active = false }
  
     }catch(e){
-        console.log('não foi o parse',e)
+       // console.log('não foi o parse',e)
     }
 
     try{
         if(!DESCONTOS_FULL['levePague']['valorDescontado']){
-            console.log("não existo", DESCONTOS_FULL['levePague']['valorDescontado'])
+         //   console.log("não existo", DESCONTOS_FULL['levePague']['valorDescontado'])
             DESCONTOS_FULL['levePague'] = {
                 valorDescontado: "leve 0 pague 0",
                 precoFinal: product_data[0].product_valor
             }
-            console.log("agora existo", DESCONTOS_FULL['levePague']['valorDescontado'])
+           // console.log("agora existo", DESCONTOS_FULL['levePague']['valorDescontado'])
         }else{
-            console.log("existo de boa", DESCONTOS_FULL['levePague']['valorDescontado'])
+           // console.log("existo de boa", DESCONTOS_FULL['levePague']['valorDescontado'])
         }
     }catch(e){
-        console.log("deu errado o ajuste, seguindo normal")
+       // console.log("deu errado o ajuste, seguindo normal")
         DESCONTOS_FULL = {
             produtos: [],
             subtracaoProduto: {
@@ -1217,7 +1217,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
     // } else {
     //     listandoDescontos = JSON.parse(product_data[0].product_site_discount_value)
     // }
-    console.log('DESCONTOS_FULL',DESCONTOS_FULL)
+   // console.log('DESCONTOS_FULL',DESCONTOS_FULL)
 
     var informacaoNutritiva = [{ quantidade: 0, titulo: "" }, { quantidade: 0, titulo: "" }]
 
@@ -2615,8 +2615,8 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
 
 
                 var detalhe = getProductCaract(product_data[0].product_code)
-                console.log('detalhe para salvar')
-                console.log(detalhe)
+              //  console.log('detalhe para salvar')
+              //  console.log(detalhe)
 
                 $.ajax({
                     type: 'POST',
@@ -2708,12 +2708,12 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
                         ]
                     },
                     success: function (data) {
-                        console.log(data)
+                      //  console.log(data)
                         atualizaListaProdutos()
 
                     },
                     error: function (data) {
-                        console.log(data)
+                      //  console.log(data)
                         if (data.responseJSON.message.indexOf("token") > -1) {
                             //alert("Necessário fazer login!<br>"+data.responseJSON.message)
                             setTimeout(() => {
@@ -2885,7 +2885,7 @@ function calculaDesconto(tipo, elemento, precoProduto, origem) {
 
     }
     if (tipo == "porcentagem") {
-        console.log('calculando aqui ... ')
+      //  console.log('calculando aqui ... ')
         var res = Number((precoProduto - (Number(elemento.val().replace(',', '.')) * precoProduto) / 100).toFixed(2).replace(",", "."));
         elemento.parent().parent().parent().find(".valorDescontadoF").val(res);
         elemento.parent().parent().parent().find(".valorDescontadoF").addClass("selecionado2");
@@ -2959,9 +2959,9 @@ function calculaDesconto(tipo, elemento, precoProduto, origem) {
         }
 
     }
-    console.log("calculei..." + tipo);
-     console.log(precoProduto);
-    console.log(listaDescontos)
+    //console.log("calculei..." + tipo);
+    // console.log(precoProduto);
+   // console.log(listaDescontos)
     localStorage.listaDescontos = JSON.stringify(listaDescontos)
 }
 
@@ -3375,7 +3375,7 @@ function produtoURL(EAN, PRODUCTS_IMAGES) {
 
 function imageButtons(affiliate_id, product_code, URLS) {
     var html = '';
-    console.log(URLS)
+   // console.log(URLS)
 
 
     if (URLS.length > 0) {
@@ -3395,7 +3395,7 @@ function imageButtons(affiliate_id, product_code, URLS) {
                     if (pictureName != null) {
                         del = ''
                     }
-                    console.log('this url', urlCurrent)
+                  //  console.log('this url', urlCurrent)
                     html += `<li  draggable="true" picture_name="${URLS[k]}"  class=" thumbProduct "><figure class="figurefx pushup"><img   id="${affiliate_id}_${product_code}_${k}" class="imageThumb notCrash firstImage droptarget" src="${urlCurrent}"><figcaption  onmouseleave="mLeave($(this))"  onmouseover="mOver($(this))" class="miuda figcaption2">${del}<br>${moveButton2}</figcaption></figure></li>`;
 
 
@@ -3762,7 +3762,7 @@ $("#novoProduto").click(function () {
 
 function acaoCheckbox(elemento, e) {
     e = window.event;
-    console.log("status do elemento",elemento, elemento[0].checked)
+    //console.log("status do elemento",elemento, elemento[0].checked)
 
     var status = 'inactive',
         add = true
@@ -3788,7 +3788,8 @@ function acaoCheckbox(elemento, e) {
         case "informacaoImportante":
             break;
         case "ativarProduto":
-           console.log("tentando ativar ", setProductCaract(elemento.attr("product_code"), "product_status", status))
+          //console.log("tentando ativar " )
+          setProductCaract(elemento.attr("product_code"), "product_status", status)
             $.ajax({
                 type: 'POST',
                 url: mainHost + '/updateById',
@@ -4350,7 +4351,7 @@ function updateField(elemento) {
     var valor = elemento.val()
     var detalhe = getProductCaract(product_code);
     //console.log('detalhe')
-    console.log(detalhe)
+    ///console.log(detalhe)
 
     let VALOR_FINAL_PRODUTO = Number(detalhe.product_site_value)
     if (acao == 'product_average_weight_value') {
@@ -4468,7 +4469,7 @@ function updateField(elemento) {
         }
     }
     var txt = JSON.stringify(lista)
-    console.log(lista)
+   // console.log(lista)
     $.ajax({
         type: 'POST',
         url: mainHost + '/updateById',
@@ -4482,7 +4483,7 @@ function updateField(elemento) {
             "fields": JSON.parse(txt)
         },
         success: function (data) {
-            console.log(data)
+          //  console.log(data)
             elemento.css("color", "#f6b504")
 
             atualizaListaProdutos();
@@ -5261,7 +5262,7 @@ function removeProdutoDesconto(element) {
     let DESCONTOS = JSON.parse(localStorage.listaDescontos)
 
     let PRDs = DESCONTOS['produtos']
-    console.log(esseID,DESCONTOS )
+   // console.log(esseID,DESCONTOS )
     let thisPRDs = []
     for(const k in PRDs){
         if(Number(PRDs[k]) != Number(esseID)){
@@ -5270,7 +5271,7 @@ function removeProdutoDesconto(element) {
     }
     DESCONTOS['produtos'] = thisPRDs
 
-    console.log(DESCONTOS )
+   // console.log(DESCONTOS )
     localStorage.listaDescontos = JSON.stringify(DESCONTOS)
  
 }
@@ -5809,9 +5810,9 @@ function mLeave(element) {
 }
 
 function alteraPeso(elemento) {
-    console.log("tentando...")
-    console.log(elemento[0].checked)
-    console.log(elemento.attr("objetivo"))
+   // console.log("tentando...")
+   // console.log(elemento[0].checked)
+   // console.log(elemento.attr("objetivo"))
 
     var INFO_PESO = { "compraPorPeso": false, "mostrarPeso": false }, novoPeso = []
     if (localStorage.INFO_PESO != null && localStorage.INFO_PESO != undefined && localStorage.INFO_PESO != '') {
@@ -5842,12 +5843,12 @@ function alteraPeso(elemento) {
             INFO_PESO = null
             localStorage.INFO_PESO = null
         }
-        console.log('monstrar o infopeso')
-        console.log(INFO_PESO)
+      //  console.log('monstrar o infopeso')
+      //  console.log(INFO_PESO)
         //////console.log('pareidemostrar')
-        console.log('if', JSON.stringify(INFO_PESO))
+      //  console.log('if', JSON.stringify(INFO_PESO))
         novoPeso = INFO_PESO
-        console.log('if', JSON.stringify(novoPeso))
+       // console.log('if', JSON.stringify(novoPeso))
         localStorage.INFO_PESO = JSON.stringify(novoPeso)
     } else {
 
@@ -5855,12 +5856,12 @@ function alteraPeso(elemento) {
 
             INFO_PESO = { "compraPorPeso": false, "mostrarPeso": elemento[0].checked }
             if (elemento[0].checked === true) {
-                console.log("mostra")
+             //   console.log("mostra")
                 document.getElementsByClassName("areaMostraPeso")[0].style.display = "inline-flex"
                 $(".areaMostraPeso").css("display", "inline-flex")
                 $(".precoFinalProduto").css("display", "flex")
             } else {
-                console.log("esconde")
+             //   console.log("esconde")
                 document.getElementsByClassName("areaMostraPeso")[0].style.display = "none"
                 $(".areaMostraPeso").css("display", "none")
                 $(".precoFinalProduto").css("display", "none")
@@ -5870,7 +5871,7 @@ function alteraPeso(elemento) {
             INFO_PESO = { "compraPorPeso": elemento[0].checked, "mostrarPeso": false }
         }
 
-        console.log('else', JSON.stringify(INFO_PESO))
+       // console.log('else', JSON.stringify(INFO_PESO))
 
     }
     novoPeso = INFO_PESO

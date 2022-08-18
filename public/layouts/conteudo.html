@@ -647,14 +647,14 @@ $.ajax({
       },
       success: function (data) {
         $("#totalPaginas").text(data.length)
-        console.log("coletando paginas institucionais..")
+        //console.log("coletando paginas institucionais..")
         localStorage.INSTITUCIONAL_PAGES = JSON.stringify(data)
         addPage()
  
 
       },
       error: function (data) {
-        console.log("erro institucional", data)
+        //console.log("erro institucional", data)
       },
       complete: function () { },
     });
@@ -702,18 +702,18 @@ $.ajax({
             "x-access-token": localStorage.token,
           },
           success: function (data2) {
-            console.log('revenuess',data2)
+            //console.log('revenuess',data2)
             let html = ''
             for(const k in data2){
               html += getRevenueCard(data2[k])
             }
-            console.log(html)
+            //console.log(html)
 
             $("#minhasReceitas").prepend(html)
             
           },
           error: function (data) {
-            console.log("erro get", data)
+            //console.log("erro get", data)
 
             window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
           },

@@ -168,7 +168,7 @@ async function atualizaCampo(elemento, reload) {
     columnId: columnId,
     idValue: idValue,
   };
-   console.log('params', params);
+   //console.log('params', params);
   let result = await ajax(mainHost + '/singleUpdate', params, 'POST');
   //console.log(result);
   if(reload){

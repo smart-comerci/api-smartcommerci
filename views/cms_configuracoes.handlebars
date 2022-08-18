@@ -1636,7 +1636,7 @@
     }
 
     function insertPage(element) {
-        console.log(element)
+       // console.log(element)
         let name = element.parent().find(".itemListaPagina").text()
         if (element[0].checked) {
 
@@ -1647,7 +1647,7 @@
             $(".paginasSelecionadas").append(html)
         } else {
             let lis = $(".paginasSelecionadas").find(".paginaInsert")
-            console.log("lista de elementos", lis)
+           // console.log("lista de elementos", lis)
             lis.each(function () {
                 if ($(this).text().replace(/x/g, "") == name.text().replace(/x/g, "")) {
                     $(this).remove()

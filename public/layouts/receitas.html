@@ -1026,7 +1026,7 @@
     iniciaEditorHtml("#editorFullCode")
 
     function showMeContent(elemento) {
-      console.log(elemento)
+      //console.log(elemento)
       if (elemento.attr("mostrei") == 1) {
         elemento.parent().parent().find(".conteudo").fadeOut()
 
@@ -1060,9 +1060,9 @@
             "x-access-token": localStorage.token,
           },
           success: function (data2) {
-            console.log(data2)
+            //console.log(data2)
             RECEITAS = data2
-            console.log(data)
+            //console.log(data)
             localStorage.MY_REVENUES_CATEGORIES = JSON.stringify(data)
             try {
               let MATRIZ = JSON.parse(localStorage.DADOS_MATRIZ)
@@ -1078,7 +1078,7 @@
             try{
               localStorage.MY_REVENUES = JSON.stringify(data2)
             }catch(er){
-              console.log(er)
+              //console.log(er)
             }
 
 
@@ -1089,7 +1089,7 @@
 
           },
           error: function (data) {
-            console.log("erro get", data)
+            //console.log("erro get", data)
 
             window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
           },
@@ -1101,7 +1101,7 @@
 
       },
       error: function (data) {
-        console.log("erro get", data)
+        //console.log("erro get", data)
 
         window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
       },
@@ -1293,7 +1293,7 @@
    
 
     function getRevenues(data) {
-      console.log('os dados',data)
+      //console.log('os dados',data)
       let INDEX = Math.random().toFixed(2).replace('.','')
       let html = `
         <div class="row">
@@ -1419,7 +1419,7 @@
           }
 
         }
-        console.log(
+        //console.log(
           {
             "table": "revenues_categories",
             "name_id": "id",
@@ -1464,7 +1464,7 @@
           }
 
         }
-        console.log(
+        //console.log(
           {
             "table": "revenues_categories",
             "name_id": "id",
@@ -1547,7 +1547,7 @@
         contentType: false,
         type: 'POST',
         success: function (data) {
-          console.log(data)
+          //console.log(data)
           $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')})`)
           $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
           $("#" + element.attr("target")).css("background-size", "cover !important")
@@ -1556,14 +1556,14 @@
 
 
 
-          console.log(element.parent().parent().find('input'))
-          console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
+          //console.log(element.parent().parent().find('input'))
+          //console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
 
 
 
         },
         error: function (data) {
-          console.log(data)
+          //console.log(data)
         }
       });
 
@@ -1670,7 +1670,7 @@
     }
 
     async function novaCategoriaRevenue(data) {
-      console.log('data', data, {
+      //console.log('data', data, {
         "table": "revenues_categories",
         "fields": [
           { "column": "master_id", "value": Number(localStorage.MASTER_ID) },

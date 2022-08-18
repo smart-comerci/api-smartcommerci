@@ -1,11 +1,11 @@
 //Coordinates of Pinggu District, Beijing
 var coordinates = []
-console.log('localStorage.my_lat_lon')
-console.log(localStorage.my_lat_lon)
+//console.log('localStorage.my_lat_lon')
+//console.log(localStorage.my_lat_lon)
 try{
     var cd = JSON.parse(localStorage.my_lat_lon)[0]
 }catch(erro){
-console.log(erro)
+//console.log(erro)
 }
 
 

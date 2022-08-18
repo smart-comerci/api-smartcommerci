@@ -17,7 +17,7 @@ const fs_Promises = require("fs").promises;
 
 // Importando as variaveis de ambiente
 require("dotenv").config();
-console.log(process.env)
+//console.log(process.env)
 
 // If necessary also
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
@@ -45,7 +45,7 @@ app.use(express.static('public'));
 
 /*
 app.listen(3001)
-console.log("app listen in 3000")
+//console.log("app listen in 3000")
 */
 
 var options = {
@@ -58,7 +58,7 @@ const https = require('https')
 
 var server = https.createServer(options, app);
 server.listen(443, function() {
-    console.log("Port "+443);
+    //console.log("Port "+443);
 });
   
   

@@ -232,7 +232,7 @@ opacity: 1;
 
         }else{
             var lojas = JSON.parse(localStorage.LOJAS_CADASTRADAS)
-            console.log(lojas)
+            //console.log(lojas)
             if(lojas.length == 1){
                 $(".continuar").text("Continuar")
             }
@@ -243,7 +243,7 @@ opacity: 1;
 
     }else{
         var lojas = JSON.parse(localStorage.LISTA_LOJAS)
-        console.log(lojas)
+        //console.log(lojas)
         for(const k in lojas){
             addLoja(lojas[k])
         }
@@ -251,7 +251,7 @@ opacity: 1;
 
 
 function addLoja(loja) {
-    console.log(loja)
+    //console.log(loja)
     var razaoSocial, cnpj, telefone, email, horarios, endereco
     var loja2 = loja.dados
     for(const k in loja2){
@@ -314,7 +314,7 @@ function addLoja(loja) {
 
 
 function addLoja2(loja) {
-    console.log(loja)
+    //console.log(loja)
     var razaoSocial, cnpj, telefone, email, horarios, endereco
         
        cnpj = loja.affiliates_business_cnpj

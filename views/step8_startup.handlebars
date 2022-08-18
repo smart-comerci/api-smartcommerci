@@ -139,14 +139,14 @@ localStorage.stage = 8
            e.preventDefault();
            e.stopPropagation();
           
-            console.log(e.originalEvent.dataTransfer.files)
+            //console.log(e.originalEvent.dataTransfer.files)
             var data = new FormData();
                //data.append('fileimagem', $('#fileimagem')[0].files[0]);   
             var fileName = e.originalEvent.dataTransfer.files[0].name  
             localStorage.nameLogo = fileName         
             var contador = 1; 
             data.append('fileimagem', e.originalEvent.dataTransfer.files[0]);
-            console.log("partindo..")
+            //console.log("partindo..")
                try{
                   
                    $.ajax({
@@ -162,7 +162,7 @@ localStorage.stage = 8
                        contentType: false,
                        type: 'POST',
                        success: function(data) {
-                          // console.log(data)
+                          // //console.log(data)
                           $(".sumiu").hide()
                            
    
@@ -182,7 +182,7 @@ localStorage.stage = 8
                            
                        },
                        error: function (data) {
-                           console.log(data)
+                           //console.log(data)
                            /*
                            if(data.responseJSON.message.indexOf("token")>-1){
                                alertar("Necessário fazer login!<br>"+data.responseJSON.message)
@@ -220,14 +220,14 @@ localStorage.stage = 8
     uploadF($(this)[0])
   })
   function uploadF(element){
-    console.log(element)
+    //console.log(element)
     var data = new FormData();
                //data.append('fileimagem', $('#fileimagem')[0].files[0]);   
             var fileName = element.files[0].name  
             localStorage.nameLogo = fileName         
             var contador = 1; 
             data.append('fileimagem', element.files[0]);
-            console.log("partindo..")
+            //console.log("partindo..")
                try{
                    $.ajax({
                        url: '/uploadLogo',
@@ -242,7 +242,7 @@ localStorage.stage = 8
                        contentType: false,
                        type: 'POST',
                        success: function(data) {
-                          // console.log(data)
+                          // //console.log(data)
                           $(".sumiu").hide()
                            
    
@@ -262,7 +262,7 @@ localStorage.stage = 8
                            
                        },
                        error: function (data) {
-                           console.log(data)
+                           //console.log(data)
                            /*
                            if(data.responseJSON.message.indexOf("token")>-1){
                                alertar("Necessário fazer login!<br>"+data.responseJSON.message)

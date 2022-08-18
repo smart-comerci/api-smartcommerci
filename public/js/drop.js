@@ -59,7 +59,7 @@ function modalDrop() {
 
                 try {
                     var data = new FormData();
-                    console.log($(this))
+                  //  console.log($(this))
                     var fileName = $(this)[0].files[0].name
                     localStorage.nameLogo = fileName
                     var contador = 1;
@@ -78,7 +78,7 @@ function modalDrop() {
                         contentType: false,
                         type: 'POST',
                         success: function (data) {
-                            console.log(data)
+                           // console.log(data)
                             let fileName4 = data.filename
 
                             $.ajax({
@@ -94,7 +94,7 @@ function modalDrop() {
                                 contentType: false,
                                 type: 'POST',
                                 success: function (retorno) {
-                                    console.log("retorno",retorno)
+                                  //  console.log("retorno",retorno)
                                     let totalMudancas = retorno.dados.length
 
                                     function verifyTypes(){
@@ -135,7 +135,7 @@ function modalDrop() {
                                     }
 
 
-                                    console.log("verificando",verifyTypes())
+                                  //  console.log("verificando",verifyTypes())
                                     
                                     if(verifyTypes().status){
                                         let listData = retorno.dados
@@ -161,13 +161,13 @@ function modalDrop() {
                                          
                                         }
 
-                                        console.log('listOffQuerys',listOffQuerys)
-                                        console.log(JSON.stringify(listOffQuerys))
+                                      //  console.log('listOffQuerys',listOffQuerys)
+                                      //  console.log(JSON.stringify(listOffQuerys))
 
                                         modalDropConfirma(fileName4, totalMudancas,listOffQuerys)
 
                                     }else{
-                                        console.log("planilha incorreta")
+                                       // console.log("planilha incorreta")
                          
                                         informar("alert-danger", "Layout interno da planilha está incorreto!", 3000)
                                     }
@@ -178,13 +178,13 @@ function modalDrop() {
 
                                 },
                                 error: function (data2) {
-                                    console.log(data2)
+                                   // console.log(data2)
         
                                 }
                             });
                         },
                         error: function (data) {
-                            console.log(data)
+                           // console.log(data)
 
                         }
                     });
@@ -305,7 +305,7 @@ function finalizaAjustes(listOffQuerys){
             }, 1500);
         },
         error: function (data) {
-            console.log(data)
+           // console.log(data)
             informar("alert-danger", "Erro interno!", 3000)
         },
         complete: function(){

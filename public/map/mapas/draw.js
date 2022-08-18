@@ -74,10 +74,10 @@
             }, z() 
             MEU = k
             k.on('drawend', function(event) {
-                console.log(event)
+               // console.log(event)
                 var geoJsonGeom = new ol.format.GeoJSON();    
                 var pp = geoJsonGeom.writeGeometry(event.feature.getGeometry());
-                console.log(pp);
+              //  console.log(pp);
             });
        
         }

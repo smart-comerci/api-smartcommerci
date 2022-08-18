@@ -38,7 +38,7 @@
             "is_product_image": true,
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
         
             $.ajax({
                 type: "POST",
@@ -49,22 +49,22 @@
                     "is_product_image": true,
                 },
                 success: function (data) {
-                    console.log('data',data); 
-                    console.log(data); 
+                    //console.log('data',data); 
+                    //console.log(data); 
                     localStorage.AFFILIATE_ID = data[0].id          
                     localStorage.LOJAS_CADASTRADAS = JSON.stringify(data)    
                     
                 },
                 error: function (data) {
-                    console.log(data);
+                    //console.log(data);
                                     if(data.responseJSON.message.indexOf("token")>-1){
-                                        console.log("Necessário fazer login!<br>"+data.responseJSON.message)
+                                        //console.log("Necessário fazer login!<br>"+data.responseJSON.message)
                                         setTimeout(() =>{
                                            location.replace("/startup?login")
                                         },2000)
                                         
                                     }else{
-                                        console.log("Algo saiu errado!<br>"+data.responseJSON.message)
+                                        //console.log("Algo saiu errado!<br>"+data.responseJSON.message)
                                     }
                 },
                 complete: function () {
@@ -74,15 +74,15 @@
         
         },
         error: function (data) {
-            console.log(data);
+            //console.log(data);
                             if(data.responseJSON.message.indexOf("token")>-1){
-                                console.log("Necessário fazer login!<br>"+data.responseJSON.message)
+                                //console.log("Necessário fazer login!<br>"+data.responseJSON.message)
                                 setTimeout(() =>{
                                   location.replace("/startup?login")
                                 },2000)
                                 
                             }else{
-                                console.log("Algo saiu errado!<br>"+data.responseJSON.message)
+                                //console.log("Algo saiu errado!<br>"+data.responseJSON.message)
                             }
         },
         complete: function () {

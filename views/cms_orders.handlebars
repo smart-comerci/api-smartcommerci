@@ -324,7 +324,7 @@
                 "template": 1
             },
             success: function (resultado) {
-                console.log('resultado', resultado)
+                //console.log('resultado', resultado)
 
                 $("#listaPedidosLeft").html(resultado)
 
@@ -378,7 +378,7 @@
 
                         $(".order").removeClass("orderActive")
                         $(".order").each(function () {
-                            console.log($(this).attr("alvo"), localStorage.setStatusOrder)
+                            //console.log($(this).attr("alvo"), localStorage.setStatusOrder)
                             if ($(this).attr("alvo") == localStorage.setStatusOrder) {
                                 $(this).addClass("orderActive")
                                 $(".orderActive").click()
@@ -438,7 +438,7 @@
                     },
                     success: function (resultado) {
 
-                        console.log(resultado)
+                        //console.log(resultado)
                         $(".listaDePedidos").html(resultado)
 
 
@@ -486,7 +486,7 @@
                                         $(".orderBody2").addClass("orderBody")
                                         $(".orderBody2").removeClass("orderBody2")
                                         $(".rastreio").removeClass("rastreio2")
-                                        //console.log('The styles was removed!');
+                                        ////console.log('The styles was removed!');
                                         $("#nPedido").removeClass("nPedido")
                                     }
                                 })
@@ -511,9 +511,9 @@
 
                     },
                     error: function (resultado) {
-                        console.log("aqui esta o erro", resultado);
+                        //console.log("aqui esta o erro", resultado);
                         if (resultado.responseJSON.message.indexOf("token") > -1) {
-                            console.log("Necessário fazer login!<br>" + resultado.responseJSON.message)
+                            //console.log("Necessário fazer login!<br>" + resultado.responseJSON.message)
                             setTimeout(() => {
                                 location.replace("/cms-login")
                             }, 2000)
@@ -531,9 +531,9 @@
             },
             error: function (resultado) {
 
-                console.log("aqui esta o erro", resultado);
+                //console.log("aqui esta o erro", resultado);
                 if (resultado.responseJSON.message.indexOf("token") > -1) {
-                    console.log("Necessário fazer login!<br>" + resultado.responseJSON.message)
+                    //console.log("Necessário fazer login!<br>" + resultado.responseJSON.message)
                     setTimeout(() => {
                         location.replace("/cms-login")
                     }, 2000)
@@ -558,7 +558,7 @@
 
     function FULL_PRICES(produto) {
         try {
-            //console.log("PREPRANDO O PRODUTO ",produto)
+            ////console.log("PREPRANDO O PRODUTO ",produto)
             let PRODUDO_FINAL
             let COMPRA_PESO = {}, COMPRA_POR_PESO = false
 
@@ -576,8 +576,8 @@
             let MINIMO_PARA_DESCONTO = 0
             let VALOR_DESCONTO = 0, descontoExiste = false, valorDescontado = 0, tipoDesconto = 'nenhum'
 
-            //console.log('o desconto',produto['product_site_discount_type'].indexOf('preço total'))
-            //console.log('DESCONTOS',DESCONTOS)
+            ////console.log('o desconto',produto['product_site_discount_type'].indexOf('preço total'))
+            ////console.log('DESCONTOS',DESCONTOS)
             if (produto['product_site_discount_type'].indexOf('compre X pague Y') > -1) {
 
                 VALOR_DESCONTO = DESCONTOS['levePague'].precoFinal
@@ -587,7 +587,7 @@
                 descontoExiste = true
             } else if (produto['product_site_discount_type'].indexOf('no carrinho') > -1) {
                 if (DESCONTOS['porcentagemProduto'].active) {
-                    //console.log(DESCONTOS)
+                    ////console.log(DESCONTOS)
                     VALOR_DESCONTO = DESCONTOS['porcentagemProduto'].precoFinal
                     descontoExiste = true
                     valorDescontado = Number(DESCONTOS['porcentagemProduto'].percentualDescontado)
@@ -595,7 +595,7 @@
                 }
 
                 if (DESCONTOS['subtracaoProduto'].active) {
-                    //console.log(DESCONTOS)
+                    ////console.log(DESCONTOS)
                     VALOR_DESCONTO = DESCONTOS['subtracaoProduto'].precoFinal
                     descontoExiste = true
                     valorDescontado = Number(DESCONTOS['subtracaoProduto'].valorDescontado)
@@ -604,9 +604,9 @@
 
 
             } else if (produto['product_site_discount_type'].indexOf('preço total') > -1) {
-                //console.log('tebgo descobto')
+                ////console.log('tebgo descobto')
                 if (DESCONTOS['porcentagem'].active) {
-                    //console.log(DESCONTOS)
+                    ////console.log(DESCONTOS)
                     VALOR_DESCONTO = DESCONTOS['porcentagem'].precoFinal
                     descontoExiste = true
                     valorDescontado = Number(DESCONTOS['porcentagem'].percentualDescontado)
@@ -614,14 +614,14 @@
                 }
 
                 if (DESCONTOS['subtracao'].active) {
-                    //console.log(DESCONTOS)
+                    ////console.log(DESCONTOS)
                     VALOR_DESCONTO = DESCONTOS['subtracao'].precoFinal
                     descontoExiste = true
                     valorDescontado = Number(DESCONTOS['subtracao'].valorDescontado)
                     tipoDesconto = "subtracao"
                 }
             } else {
-                //console.log('desconto inexistente!', descontoExiste)
+                ////console.log('desconto inexistente!', descontoExiste)
             }
 
 
@@ -634,7 +634,7 @@
             }
 
             if (descontoExiste) {
-                //console.log(" O DESCONTO ",VALOR_DESCONTO)
+                ////console.log(" O DESCONTO ",VALOR_DESCONTO)
                 PRECO_VENDA = VALOR_DESCONTO
             }
 
@@ -642,7 +642,7 @@
                 let percentual = produto['product_site_value'] * 100 / produto['product_valor']
                 let AJUSTAR = 100 - percentual
 
-                //console.log("ajustando",percentual,AJUSTAR, PRECO_VENDA)
+                ////console.log("ajustando",percentual,AJUSTAR, PRECO_VENDA)
 
                 PRECO_VENDA = PRECO_VENDA * (AJUSTAR / 100)
                 VALOR_DESCONTO = VALOR_DESCONTO * (AJUSTAR / 100)
@@ -741,7 +741,7 @@
 
 
             let produtoFinal = FULL_PRICES(dat[d])
-            console.log('produtoFinal', produtoFinal)
+            //console.log('produtoFinal', produtoFinal)
             let precoVenda = produtoFinal.venda.valor_bruto
 
             if (produtoFinal.venda.existe_desconto === true && dat[d].quantidade >= produtoFinal.venda.minimo_para_desconto) {
@@ -916,14 +916,14 @@
     }
 
     function meRemove(elemento) {
-        console.log("dsaa")
+        //console.log("dsaa")
         bootbox.confirm({
 
             message: "Deseja remover o produto selecionado?",
             onShow: function () {
 
                 console.clear()
-                console.log("mostrando a modal  correta")
+                //console.log("mostrando a modal  correta")
                 $(".bootbox-accept").text("REMOVER")
                 $(".bootbox-cancel").text("CANCELAR")
 
@@ -936,7 +936,7 @@
 
 
                 $(this)[0].id = "modalInner3"
-                console.log($(this)[0])
+                //console.log($(this)[0])
                 $("#modalInner3").find(".modal-dialog").addClass("modalCentral")
                 $("#modalInner3").find(".modal-dialog").css("height", "350px")
                 $("#modalInner3").find(".modal-body").addClass("modalCentralInner")
@@ -945,7 +945,7 @@
 
             },
             callback: function (result) {
-                console.log(result)
+                //console.log(result)
                 if (result) {
                     elemento.parent().parent().parent().remove()
                     atualizaPedido2();
@@ -961,7 +961,7 @@
                         }
                     }
                     localStorage.PEDIDO_SENDO_EDITADO = JSON.stringify(newItens)
-                    console.log("NOVOS ITENS", newItens)
+                    //console.log("NOVOS ITENS", newItens)
 
 
 
@@ -1020,8 +1020,8 @@
 
         $(".valor").each(function () {
             valorCheio += ($(this).parent().parent().find(".quantidade").find(".inValue").val().replace(",", "") * $(this).find(".inValue").val().replace(",", ""))
-            //console.log($(this).parent().parent().find(".quantidade").find(".inValue").val().replace(",",""))
-            //console.log($(this).find(".inValue").val().replace(",",""))
+            ////console.log($(this).parent().parent().find(".quantidade").find(".inValue").val().replace(",",""))
+            ////console.log($(this).find(".inValue").val().replace(",",""))
         })
         $(".desconto").each(function () {
             descontos += $(this).find(".inValue").val().replace(",", "")
@@ -1142,7 +1142,7 @@
 
 
                     
-                    console.log(
+                    //console.log(
                         {
                             "ORDER_ID": numberOrder,
                             "ORDER_STATUS": newsTATUS,
@@ -1162,13 +1162,13 @@
                             "DESCRIPTION_STATUS": "Status alterado de " + status + " para " + newsTATUS
                         },
                         success: function (data) {
-                            console.log(data);
+                            //console.log(data);
 
                             reloadThis()
 
                         },
                         error: function (data) {
-                            console.log(data);
+                            //console.log(data);
                         },
                         complete: function () {
 
@@ -1187,7 +1187,7 @@
         butao.addClass("animated-background")
         var alvo = elemento.attr("alvo")
         let NUMERO_PEDIDO = Number(alvo.split("_")[1])
-        console.log(alvo)
+        //console.log(alvo)
          let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
          let ESTE_PEDIDO;
             for(const k in PEDIDOS){
@@ -1198,7 +1198,7 @@
 
         var listaProdutos = JSON.parse(ESTE_PEDIDO.order_conteudo)
        
-        console.log("vou tentar")
+        //console.log("vou tentar")
         $.ajax({
             url: mainHost + '/getProductsFromOrder',
             headers: {
@@ -1211,7 +1211,7 @@
             },
             type: 'POST',
             success: async function (dat) {
-                console.log(dat)
+                //console.log(dat)
                 let orders = []
 
                 for (const k in dat) {
@@ -1373,13 +1373,13 @@
 
                             })
                             localStorage.PEDIDO_SENDO_EDITADO = JSON.stringify(pedido2)
-                            console.log(pedido2)
+                            //console.log(pedido2)
 
                             let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
                            
                             for(const k in PEDIDOS){
                                if(PEDIDOS[k].id == NUMERO_PEDIDO){
-                                console.log("achei o pedido", PEDIDOS[k])                               
+                                //console.log("achei o pedido", PEDIDOS[k])                               
                                 PEDIDOS[k]['order_conteudo'] = JSON.stringify(pedido2)  
                                }
                             }
@@ -1390,7 +1390,7 @@
                             let qualPedido;
                             for(const k in PEDIDOS2){
                                if(PEDIDOS2[k].id == NUMERO_PEDIDO){
-                                console.log("achei o pedido2", PEDIDOS2[k]) 
+                                //console.log("achei o pedido2", PEDIDOS2[k]) 
                                 qualPedido = PEDIDOS2[k] 
                                }
                             }
@@ -1416,14 +1416,14 @@
                                             "VALOR_PEDIDO": $("#totalPedido").val().replace(",", "")
                                         },
                                         success: function (dt) {
-                                            console.log(dt)
+                                            //console.log(dt)
 
                                             localStorage.setStatusOrder = 'pedido_' + $(".numeroPedido").text()
                                             reloadThis()
                                             $(".close").click()
                                         },
                                         error: function (dt) {
-                                            console.log(dt)
+                                            //console.log(dt)
 
                                             informar("alert-primary", "Algo saiu errado!<br>", 3000)
                                         },
@@ -1486,7 +1486,7 @@
                         $("#addProduto").click(function (e) {
                             e.stopPropagation()
                             e.preventDefault()
-                            console.log("tentei")
+                            //console.log("tentei")
                             var html = '<div style="max-width:100% " class="container">' +
 
                                 '<h4 style="font-size: 24px !important; text-align: center !important" class="infoLabel">Adicionar Produto</h4>' +
@@ -1521,7 +1521,7 @@
                             bootbox.confirm({
                                 message: html,
                                 onShow: function () {
-                                    console.log("linha 1027")
+                                    //console.log("linha 1027")
 
 
                                     $(".bootbox-accept").text("FINALIZAR")
@@ -1562,7 +1562,7 @@
                                                 "product_site_name": texto
                                             },
                                             success: function (data) {
-                                                console.log(data)
+                                                //console.log(data)
                                                 localStorage.resultSearch = JSON.stringify(data)
 
                                                 $(".listaSuspensa").html("")
@@ -1618,7 +1618,7 @@
 
                                             },
                                             error: function (data) {
-                                                //console.log(data)
+                                                ////console.log(data)
                                             },
                                             complete: function () {
                                                 // ao final da requisição...
@@ -1646,7 +1646,7 @@
                         $(".orderBody2").addClass("orderBody")
                         $(".orderBody2").removeClass("orderBody2")
 
-                        //console.log('The styles was removed!');
+                        ////console.log('The styles was removed!');
 
                     }
                 })
@@ -1658,15 +1658,15 @@
 
             },
             error: function (dat) {
-                console.log(dat)
+                //console.log(dat)
                 if (dat.responseJSON.message.indexOf("token") > -1) {
-                    console.log("Necessário fazer login!<br>" + dat.responseJSON.message)
+                    //console.log("Necessário fazer login!<br>" + dat.responseJSON.message)
                     setTimeout(() => {
                         location.replace("/cms-login")
                     }, 2000)
 
                 } else {
-                    console.log("Algo saiu errado!<br>" + dat.responseJSON.message)
+                    //console.log("Algo saiu errado!<br>" + dat.responseJSON.message)
                 }
 
             }
@@ -1679,10 +1679,10 @@
     var conti = 0
 
     function copyToClipboard(text, elemento) {
-        console.log(text)
+        //console.log(text)
         var sampleTextarea = '<input type="text" id="txt' + conti + '" value="' + text + '" />';
         elemento.append(sampleTextarea);
-        console.log('#txt' + conti)
+        //console.log('#txt' + conti)
         $('#txt' + conti).select();
         document.execCommand("copy");
         $('#txt' + conti).remove();
@@ -1848,7 +1848,7 @@
             },
             callback: function (result) {
                 if (result) {
-                    console.log("deletando pedido...")
+                    //console.log("deletando pedido...")
 
                     mudaStatusPedido(numberOrder, 0, 'ativo')
                     elemento.hide()
@@ -1886,7 +1886,7 @@
             },
             callback: function (result) {
                 if (result) {
-                    console.log("deletando pedido...")
+                    //console.log("deletando pedido...")
 
                     mudaStatusPedido(numberOrder, 1, 'cancelado')
                     elemento.hide()
@@ -1914,14 +1914,14 @@
                     "id_value": pedidoN
                 },
                 success: function (data) {
-                    console.log('dados pedido');
-                    console.log(data);
+                    //console.log('dados pedido');
+                    //console.log(data);
                     localStorage.PEDIDO_PDF = JSON.stringify(data)
 
                     var listaItens = JSON.parse(data[0].order_conteudo)
                     localStorage.CLIENTE_PDF = JSON.stringify(listaItens)
-                    console.log('dados itens');
-                    console.log(listaItens);
+                    //console.log('dados itens');
+                    //console.log(listaItens);
                     window.scrollTo(0, 0);
                     setTimeout(() => {
                         $(".modalPDF").show()
@@ -1943,7 +1943,7 @@
                             CriaPDF(data, $("#nomeTotalLoja").text())
                         },
                         error: function(data) {
-                            console.log(data);
+                            //console.log(data);
                         },
                         complete: function() {
     
@@ -1954,7 +1954,7 @@
 
                 },
                 error: function (data) {
-                    console.log(data);
+                    //console.log(data);
                 },
                 complete: function () {
 
@@ -2004,8 +2004,8 @@
 
         $(".valor").each(function () {
             valorCheio += ($(this).parent().parent().find(".quantidade").find(".inValue").val().replace(",", "") * $(this).find(".inValue").val().replace(",", ""))
-            //console.log($(this).parent().parent().find(".quantidade").find(".inValue").val().replace(",",""))
-            //console.log($(this).find(".inValue").val().replace(",",""))
+            ////console.log($(this).parent().parent().find(".quantidade").find(".inValue").val().replace(",",""))
+            ////console.log($(this).find(".inValue").val().replace(",",""))
         })
         $(".desconto").each(function () {
             descontos += Number($(this).find(".inValue").val().replace(",", ""))
@@ -2042,7 +2042,7 @@
 
     //$(".PRDseleciona2").click(function(e) {
     function addPrdIn(elemento) {
-        console.log("sdfdsfdf cliequei")
+        //console.log("sdfdsfdf cliequei")
         var dados = JSON.parse(localStorage.resultSearch)
         var prd_code = elemento.attr("product_code")
         var codigo_produto = Number(elemento.attr("product_code"))
@@ -2115,13 +2115,13 @@
                 "DESCRIPTION_STATUS": "Status alterado de " + status + " para " + newsTATUS
             },
             success: function (data) {
-                console.log(data);
+                //console.log(data);
 
                 reloadThis()
 
             },
             error: function (data) {
-                console.log(data);
+                //console.log(data);
             },
             complete: function () {
 
@@ -2130,7 +2130,7 @@
     }
 
     function marka(element) {
-        console.log(element)
+        //console.log(element)
         $(".checka").each(function () {
             $(this)[0].checked = element[0].checked
         })
@@ -2160,7 +2160,7 @@
                 listCheckados.push($(this))
             }
         })
-        console.log("pdf/imprimir", listCheckados)
+        //console.log("pdf/imprimir", listCheckados)
     }
 
     function allCancel(element) {
@@ -2170,7 +2170,7 @@
                 listCheckados.push($(this))
             }
         })
-        console.log("cancelar", listCheckados)
+        //console.log("cancelar", listCheckados)
     }
 
 
@@ -2190,7 +2190,7 @@ async function clicaEmOrdem(elemento){
           ESTE_PEDIDO = PEDIDOS[k]
         }
      }
-     console.log('ESTE_PEDIDO', ESTE_PEDIDO)
+     //console.log('ESTE_PEDIDO', ESTE_PEDIDO)
       var listaProdutos = JSON.parse(ESTE_PEDIDO.order_conteudo)
       $("#framePDF").attr("src", "")
 
@@ -2218,16 +2218,16 @@ async function clicaEmOrdem(elemento){
 
                                 var onde = "#listagem_" + alvo
                                 onde = onde.replace("_pedido", "")
-                                console.log("onde ++++++++++++++")
-                                console.log(html2)
-                                console.log(onde)
+                                //console.log("onde ++++++++++++++")
+                                //console.log(html2)
+                                //console.log(onde)
                                 $(onde).html(html2)
-                                console.log("onde ...........")
-                                console.log(onde)
+                                //console.log("onde ...........")
+                                //console.log(onde)
                                 $("#panelOrder2").html($("#" + alvo).html())
 
                                 $(".statusBar").each(function () {
-                                    console.log($(this).attr("class"))
+                                    //console.log($(this).attr("class"))
                                     var status = Number($(this).attr("status"))
                                     var statusName = Number($(this).attr("statusName"))
 
@@ -2237,7 +2237,7 @@ async function clicaEmOrdem(elemento){
                                         color = 'rgb(80, 198, 130);'
                                     }
 
-                                    console.log(".status" + status + "_" + alvo.replace("pedido_", ""))
+                                    //console.log(".status" + status + "_" + alvo.replace("pedido_", ""))
                                     if (Number(status) == 4 && Number(statusName) == 4) {
                                         color = '#50C682'
                                         bkColor = '#99D4AE33;'
@@ -2262,7 +2262,7 @@ async function clicaEmOrdem(elemento){
 
                             },
                             error: function (html2) {
-                                console.log(html2);
+                                //console.log(html2);
                                     $("body").css("filter","none") 
                             },
                             complete: function () { },
@@ -2292,7 +2292,7 @@ $.ajax({
                 "master_id": localStorage.MASTER_ID
                 },
             success: function (data) {
-                console.log("os pedidos", data);
+                //console.log("os pedidos", data);
 
                 localStorage.TODOS_OS_PEDIDOS = JSON.stringify(data) 
 
@@ -2302,7 +2302,7 @@ $.ajax({
 
             },
             error: function (data) {
-                console.log(data);
+                //console.log(data);
             },
             complete: function () {
 
@@ -2350,7 +2350,7 @@ async function updateTotalPedidos()   {
           }
 
         }
-        console.log(
+        //console.log(
           {
             "table": "orders",
             "name_id": "id",
@@ -2372,10 +2372,10 @@ async function updateTotalPedidos()   {
             "fields": columns
           },
           success: function (data) {
-         // console.log(data)
+         // //console.log(data)
           },
           error: function (data) {
-            console.log(data)
+            //console.log(data)
           },
           complete: function () {
             // ao final da requisição...

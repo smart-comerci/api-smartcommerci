@@ -147,7 +147,7 @@ if (window.ol && !ol.ext) {
           return;
         }
         // Success
-        //console.log('response',response)
+        ////console.log('response',response)
         self.dispatchEvent ({ 
           type: 'success',
           response: response,
@@ -708,7 +708,7 @@ if (window.ol && !ol.ext) {
       on: options.on,
       parent: options.parent
     });
-    console.log(input)
+   // //console.log(input)
     var opt = Object.assign ({ input: input }, options || {});
     if (options.type === 'radio') {
       new ol.ext.input.Radio(opt);
@@ -2456,7 +2456,7 @@ if (window.ol && !ol.ext) {
     var id = this.getColorID(color);
     // Add new one
     if (!this._paletteColor[id] && color[3]) {
-      console.log(color[3]<1)
+    //  //console.log(color[3]<1)
       this._paletteColor[id] = {
         color: color,
         element: ol.ext.element.create('DIV', {
@@ -3891,7 +3891,7 @@ if (window.ol && !ol.ext) {
       self.dispatchEvent({ type:"change:input", input:e, value:input.value });
     });
     var doSearch = function(e) {
-      // console.log(e.type+" "+e.key)'
+      // //console.log(e.type+" "+e.key)'
       var li  = element.querySelector("ul.autocomplete li.select");
       var	val = input.value;
       // move up/down
@@ -4321,12 +4321,12 @@ if (window.ol && !ol.ext) {
         if (typeof(this._callback) === 'function') this._callback(resp.response);
       } else {
         if (typeof(this._callback) === 'function') this._callback(false, 'error');
-        console.log('AJAX ERROR', arguments);
+        ////console.log('AJAX ERROR', arguments);
       }
     }.bind(this));
     this._ajax.on('error', function() {
       if (typeof(this._callback) === 'function') this._callback(false, 'error');
-      console.log('AJAX ERROR', arguments);
+     // //console.log('AJAX ERROR', arguments);
     }.bind(this));
     // Handle searchin
     this._ajax.on('loadstart', function() {
@@ -7401,7 +7401,7 @@ if (window.ol && !ol.ext) {
           element.className += " ol-editable";
         }
       }
-      // console.log(e);
+      // //console.log(e);
     }.bind(this));
     this.set("namespace", options.namespace || 'ol');
     this.set("editable", options.editable !== false);
@@ -8194,7 +8194,7 @@ if (window.ol && !ol.ext) {
     search.setAttribute('placeholder', this.get('filterLabel') || 'filter');
     var searchKeyupFunction = function() {
       var v = this.value.replace(/^\*/,'');
-      // console.log(v)
+      // //console.log(v)
       var r = new RegExp (v, 'i');
       var list = ul.querySelectorAll('li');
       Array.prototype.forEach.call(list, function(li) {
@@ -9441,7 +9441,7 @@ if (window.ol && !ol.ext) {
     } else {
       extent = ol.proj.transformExtent(z.extent, 'EPSG:4326', view.getProjection());
     }
-    // console.log(extent, z.extent)
+    // //console.log(extent, z.extent)
     var div = ol.ext.element.create('DIV', {
       className: 'ol-mapzonezone',
       parent: this.element,
@@ -10087,7 +10087,7 @@ if (window.ol && !ol.ext) {
     this.search_ = {};
     var init = {};
     var hash = document.location.hash || document.location.search || '';
-  //  console.log('hash', hash)
+  //  //console.log('hash', hash)
     if (this.replaceState_ && !hash && this._localStorage) {
       try {
         hash = localStorage['ol@permalink'];
@@ -10211,7 +10211,7 @@ if (window.ol && !ol.ext) {
       for (var i=0; i<layers.length; i++){
         if (layers[i].get('permalink')) {
           layers[i].setVisible(false);
-          // console.log("hide "+layers[i].get('permalink'));
+          // //console.log("hide "+layers[i].get('permalink'));
         }
         if (layers[i].getLayers) {
           resetLayers (layers[i].getLayers().getArray());
@@ -12534,7 +12534,7 @@ if (window.ol && !ol.ext) {
           distance: parseFloat(s.distanceMeters),
           duration: parseFloat(s.durationSeconds)
         }
-        //console.log(duration, options.duration, s)
+        ////console.log(duration, options.duration, s)
         distance += options.distance;
         duration += options.duration;
         options.distanceT = distance;
@@ -12554,10 +12554,10 @@ if (window.ol && !ol.ext) {
       distance: routing.distance,
       duration: routing.duration
     });
-    // console.log(data, routing);
+    // //console.log(data, routing);
     this.dispatchEvent(routing);
     this.path = routing;
-    console.log(routing)
+   // //console.log(routing)
     return routing;
   };
   /** Calculate route
@@ -12594,12 +12594,12 @@ if (window.ol && !ol.ext) {
         if (resp.status >= 200 && resp.status < 400) {
           self.listRouting(self.handleResponse (JSON.parse(resp.response), start, end));
         } else {
-          //console.log(url + parameters, arguments);
+          ////console.log(url + parameters, arguments);
           this.dispatchEvent({ type: 'error', status: resp.status, statusText: resp.statusText});
         }
       }.bind(this), 
       function(resp){
-        console.log('ERROR', resp)
+       // //console.log('ERROR', resp)
         this.dispatchEvent({ type: 'error', status: resp.status, statusText: resp.statusText});
       }.bind(this)
     );
@@ -12838,7 +12838,7 @@ if (window.ol && !ol.ext) {
     dfci = dfci.replace(/[^0-9,^A-H,^K-N]/g,'');
     // Valid DFCI ?
     if (!/NaN/.test(dfci) && dfci) {
-      console.log('ok', dfci)
+      //console.log('ok', dfci)
       this.setInput(dfci + s.substring(dfci.length, s.length));
       result.push({ coordinate: ol.coordinate.fromDFCI(dfci, proj), name: dfci });
       if (s.length===5) {
@@ -13298,7 +13298,7 @@ if (window.ol && !ol.ext) {
         this._listParcelle(jsonResp);
       }.bind(this),
       function() {
-        console.log('oops')
+        //console.log('oops')
       })
   };
   /** Send search request for a parcelle number
@@ -13637,7 +13637,7 @@ if (window.ol && !ol.ext) {
       },
       success: function (e) {
         var page = e.query.pages[Object.keys(e.query.pages).pop()];
-        console.log(page);
+        //console.log(page);
         var feature = {
           title: f.title,
           desc: page.extract || f.desc,
@@ -13970,7 +13970,7 @@ if (window.ol && !ol.ext) {
   /** Select features by attributes
    */
   ol.control.SelectCheck.prototype.doSelect = function(options) {
-    console.log('select')
+    //console.log('select')
     options = options || {};
     var conditions = [];
     this._checks.forEach(function(c) {
@@ -16379,9 +16379,9 @@ if (window.ol && !ol.ext) {
    * @param {*} caps JSON capabilities
    */
   ol.control.WMSCapabilities.prototype.showCapabilities = function(caps) {
-    console.log(caps)
+    //console.log(caps)
     this._elements.result.classList.add('ol-visible')
-  //  console.log(caps)
+  //  //console.log(caps)
     var list = [];
     var addLayers = function(parent, level) {
       level = level || 0;
@@ -16522,7 +16522,8 @@ if (window.ol && !ol.ext) {
     }
     if (!crs) {
       this.showError({ type:'srs' });
-      if (this.get('trace')) console.log('BAD srs: ', caps.CRS);
+      if (this.get('trace')) 
+      console.log('BAD srs: ', caps.CRS);
     }
     var bbox = caps.EX_GeographicBoundingBox;
     //bbox = ol.proj.transformExtent(bbox, 'EPSG:4326', srs);
@@ -16580,7 +16581,7 @@ if (window.ol && !ol.ext) {
         .replace(/\\t/g,"\t").replace(/\\n/g,"\n")
         .replace("([\n\t","(")
         .replace("}\n])","})");
-      console.log(t);
+      //console.log(t);
       delete layer_opt.source;
     }
     // Legend ?
@@ -16873,7 +16874,7 @@ if (window.ol && !ol.ext) {
         .replace(/},\n(\t*)"style"/g, '}),\n$1"style"')
         .replace("([\n\t","(")
         .replace("}\n])","})");
-      console.log(t);
+      //console.log(t);
       delete layer_opt.source;
     }
     return ({ 
@@ -17684,7 +17685,7 @@ if (window.ol && !ol.ext) {
     var sc = this.easing_(e.elapsed);
     if (sc)
     {	e.context.save()
-      console.log(e)
+      //console.log(e)
         var ratio = e.frameState.pixelRatio;
         var m = e.frameState.coordinateToPixelTransform;
         var dx = (1/(sc)-1)* ratio * (m[0]*e.coord[0] + m[1]*e.coord[1] +m[4]);
@@ -18352,7 +18353,7 @@ if (window.ol && !ol.ext) {
             ctx2 = c2.getContext('2d');
             ctx2.drawImage (canvas, 0, 0, w, h);
             ctx2.globalCompositeOperation = 'color-burn';
-            console.log(v)
+            //console.log(v)
             ctx2.globalAlpha = v;
             ctx2.drawImage (c2, 0, 0, w, h);
             ctx2.drawImage (c2, 0, 0, w, h);
@@ -21380,7 +21381,7 @@ if (window.ol && !ol.ext) {
       if (active) {
         this._previousCursor = this.getMap().getTargetElement().style.cursor;
         this.getMap().getTargetElement().style.cursor = this._cursor;
-  //      console.log('setCursor',this._cursor)
+  //      //console.log('setCursor',this._cursor)
       } else {
         this.getMap().getTargetElement().style.cursor = this._previousCursor;
         this._previousCursor = undefined;
@@ -21924,7 +21925,7 @@ if (window.ol && !ol.ext) {
       heading = loc.getHeading();
     }
     // Center on point
-    // console.log(this.get('followTrack'))
+    // //console.log(this.get('followTrack'))
     switch (this.get('followTrack')) {
       // Follow center + zoom
       case true: {
@@ -21954,7 +21955,7 @@ if (window.ol && !ol.ext) {
       case 'auto': {
         if (this.lastPosition_) {
           var center = map.getView().getCenter();
-          // console.log(center,this.lastPosition_)
+          // //console.log(center,this.lastPosition_)
           if (center[0]!=this.lastPosition_[0] || center[1]!=this.lastPosition_[1]) {
             //this.dispatchEvent({ type:'follow', following: false });
             this.setFollowTrack (false);
@@ -24523,12 +24524,12 @@ if (window.ol && !ol.ext) {
           var p = [(a * x34 - b * x12) / det, (a * y34 - b * y12) / det];
           // Test start / end
   /*
-  console.log("r1: "+r1)
-  console.log("r2: "+r2)
-  console.log ("s10: "+(_ol_coordinate_.dist2d(p,s1[0])<tol)) ;
-  console.log ("s11: "+(_ol_coordinate_.dist2d(p,s1[1])<tol)) ;
-  console.log ("s20: "+(_ol_coordinate_.dist2d(p,s2[0])<tol)) ;
-  console.log ("s21: "+(_ol_coordinate_.dist2d(p,s2[1])<tol)) ;
+  //console.log("r1: "+r1)
+  //console.log("r2: "+r2)
+  //console.log ("s10: "+(_ol_coordinate_.dist2d(p,s1[0])<tol)) ;
+  //console.log ("s11: "+(_ol_coordinate_.dist2d(p,s1[1])<tol)) ;
+  //console.log ("s20: "+(_ol_coordinate_.dist2d(p,s2[0])<tol)) ;
+  //console.log ("s21: "+(_ol_coordinate_.dist2d(p,s2[1])<tol)) ;
   */
           return p;
       }
@@ -26435,7 +26436,7 @@ if (window.ol && !ol.ext) {
    */
   ol.interaction.Transform.prototype.handleMoveEvent_ = function(evt) {
     if (!this._handleEvent(evt, this.features_)) return;
-    // console.log("handleMoveEvent");
+    // //console.log("handleMoveEvent");
     if (!this.mode_) {
       var sel = this.getFeatureAtPixel_(evt.pixel);
       var element = evt.map.getTargetElement();
@@ -27019,7 +27020,7 @@ if (window.ol && !ol.ext) {
         this.removeFeature(bin);
       }
     } else {
-      // console.log("[ERROR:Bin] remove feature: feature doesn't exists anymore.");
+      // //console.log("[ERROR:Bin] remove feature: feature doesn't exists anymore.");
     }
     if (this._listen && listen!==false) f.un('change', this._bindModify);
   };
@@ -27677,12 +27678,12 @@ if (window.ol && !ol.ext) {
    * @param {ol/source/Vector.Event} evt 
    */
   ol.source.Delaunay.prototype._onRemoveNode = function(evt) {
-    // console.log(evt)
+    // //console.log(evt)
     var pt = evt.feature.getGeometry().getCoordinates();
     if (!pt) return;
     // Still there (when removing duplicated points)
     if (this.getNodesAt(pt).length) return;
-    // console.log('removenode', evt.feature)
+    // //console.log('removenode', evt.feature)
     // Get associated triangles
     var triangles = this.getTrianglesAt(pt);
     this.flip=[];
@@ -27708,7 +27709,7 @@ if (window.ol && !ol.ext) {
   edges.forEach(function(e){
     se += ' - '+this.listpt(e);
   }.bind(this));
-  console.log('EDGES', se);
+  //console.log('EDGES', se);
   */
     i = 0;
     function testEdge(p0, p1, index) {
@@ -27733,12 +27734,12 @@ if (window.ol && !ol.ext) {
       }
       if (!edges.length) break;
       if (i>=edges.length) {
-  //      console.log(this.listpt(pts), this.listpt(edges));
+  //      //console.log(this.listpt(pts), this.listpt(edges));
         throw '[DELAUNAY:removePoint] No edge found';
       }
     }
     // Closed = interior
-  // console.log('PTS', this.listpt(pts))
+  // //console.log('PTS', this.listpt(pts))
     var closed = ol.coordinate.equal(pts[0], pts[pts.length-1]);
     if (closed) pts.pop();
     // Update convex hull: remove pt + add new ones
@@ -27758,7 +27759,7 @@ if (window.ol && !ol.ext) {
         i1 = (i+1) % t.length;
         s += (t[i1][0] - t[i][0]) * (t[i1][1] + t[i][1]);
       }
-  //    console.log(s)
+  //    //console.log(s)
       return (s>=0 ? 1:-1)
     };
     // Add ears
@@ -27769,12 +27770,12 @@ if (window.ol && !ol.ext) {
     if (closed) {
       clock = clockwise(pts);
     } else {
-  //    console.log('ouvert', pts, pts.slice().push(pt))
+  //    //console.log('ouvert', pts, pts.slice().push(pt))
       enveloppe.push(pt);
       clock = clockwise(enveloppe);
     }
-  // console.log('S=',clock,'CLOSED',closed)
-  // console.log('E=',this.listpt(enveloppe))
+  // //console.log('S=',clock,'CLOSED',closed)
+  // //console.log('E=',this.listpt(enveloppe))
     for (i=0; i<=pts.length+1; i++) {
       if (pts.length<3) break;
       var t = [
@@ -27785,14 +27786,14 @@ if (window.ol && !ol.ext) {
       if (clockwise(t)===clock) {
         var ok = true;
         for (var k=i+3; k<i+pts.length; k++) {
-  //        console.log('test '+k, this.listpt([pts[k % pts.length]]))
+  //        //console.log('test '+k, this.listpt([pts[k % pts.length]]))
           if (this.inCircle(pts[k % pts.length], t)) {
             ok = false;
             break;
           }
         }
         if (ok) {
-  // console.log(this.listpt(t),'ok');
+  // //console.log(this.listpt(t),'ok');
           this._addTriangle(t);
           // remove
           pts.splice((i+1) % pts.length, 1);
@@ -27800,11 +27801,12 @@ if (window.ol && !ol.ext) {
           i = -1;
         }
       }
-  // else console.log(this.listpt(t),'nok');
+   //else
+    //console.log(this.listpt(t),'nok');
     }
   /* DEBUG * /
-  if (pts.length>3) console.log('oops');
-  console.log('LEAV',this.listpt(pts));
+  if (pts.length>3) //console.log('oops');
+  //console.log('LEAV',this.listpt(pts));
   var ul = $('ul.triangles').html('');
   $('<li>')
   .text('E:'+this.listpt(enveloppe)+' - '+clock+' - '+closed)
@@ -27850,7 +27852,7 @@ if (window.ol && !ol.ext) {
     var pt = finserted.getGeometry().getCoordinates();
     // Test existing point
     if (this.getNodesAt(pt).length > 1) {
-      // console.log('remove duplicated points')
+      // //console.log('remove duplicated points')
       this._nodes.removeFeature(finserted);
       return;
     }
@@ -28436,7 +28438,8 @@ if (window.ol && !ol.ext) {
     ol.ext.Ajax.get({
       url: this.getUrl(),
       dataType: 'XML',
-      error: function(){ console.log('oops'); },
+      error: function(){ //console.log('oops'); 
+      },
       success: function(xml) {
         var features = (new ol.format.GeoRSS()).readFeatures(xml, { featureProjection: projection });
         this.addFeatures(features);
@@ -29021,7 +29024,7 @@ if (window.ol && !ol.ext) {
       {	url: url,
           dataType: 'jsonp', 
           success: function(data) 
-          {	console.log(data);
+          {	//console.log(data);
               /*
               var features = [];
               var att, pt, feature, lastfeature = null;
@@ -29034,7 +29037,7 @@ if (window.ol && !ol.ext) {
                   else
                   {	var meta = att.imageinfo[0].metadata;
                       if (!meta)
-                      {	//console.log(att);
+                      {	////console.log(att);
                           continue;
                       }
                       pt = [];
@@ -29043,7 +29046,7 @@ if (window.ol && !ol.ext) {
                           if (meta[k].name=="GPSLatitude") pt[1] = meta[k].value;
                       }
                       if (!pt.length) 
-                      {	//console.log(att);
+                      {	////console.log(att);
                           continue;
                       }
                   }
@@ -29246,7 +29249,7 @@ if (window.ol && !ol.ext) {
       self.addFeatures(result);
       };
       ajax.onerror = function () {
-          console.log(arguments);
+          //console.log(arguments);
       };
     ajax.send('data='+query);
   };
@@ -29775,7 +29778,7 @@ if (window.ol && !ol.ext) {
     ol.ext.Ajax.get({
       url: url,
       success: function(data) {
-        //console.log(data);
+        ////console.log(data);
         var features = [];
         var att, pt, feature;
         if (!data.query || !data.query.pages) return;
@@ -29786,7 +29789,7 @@ if (window.ol && !ol.ext) {
           } else {
             var meta = att.imageinfo[0].metadata;
             if (!meta) {
-              //console.log(att);
+              ////console.log(att);
               continue;
             }
             pt = [];
@@ -29802,7 +29805,7 @@ if (window.ol && !ol.ext) {
               }
             }
             if (found!=2) {
-              //console.log(att);
+              ////console.log(att);
               continue;
             }
           }
@@ -30170,7 +30173,7 @@ if (window.ol && !ol.ext) {
       counter--;
       if (!counter) {
         var z = e.frameState.viewState.zoom;
-        console.log(e)
+        //console.log(e)
         if (z===currentZ 
           && e.frameState.viewState.center[0]===currentCenter[0]
           && e.frameState.viewState.center[1]===currentCenter[1]){
@@ -30948,7 +30951,7 @@ if (window.ol && !ol.ext) {
             ctx.fillRect (p[0]-m.width/2 -5, p[1]-h -5, m.width +10, h +10)
             ctx.strokeRect (p[0]-m.width/2 -5, p[1]-h -5, m.width +10, h +10)
             ctx.fillStyle = f;
-            //console.log(build[i].feature.getProperties())
+            ////console.log(build[i].feature.getProperties())
           }
           break;
         }
@@ -33832,7 +33835,7 @@ if (window.ol && !ol.ext) {
         if (node.get('from')!==e) {
           var dist = this.getLength (e);
           if (dist < 0) {
-            console.log ('distance < 0!');
+            //console.log ('distance < 0!');
             // continue;
           }
           var wdist = node.get('wdist') + dist * this.weight(e);
@@ -35535,7 +35538,7 @@ if (window.ol && !ol.ext) {
       var minRadius = maxRadius - (options.amplitude || maxRadius); //options.minRadius || 0;
       var width = options.lineWidth || 2;
       var color = options.color || 'red';
-      console.log("pulse")
+      //console.log("pulse")
       */
       // Animate function
       function animate(event) 
@@ -35550,7 +35553,7 @@ if (window.ol && !ol.ext) {
               context.beginPath();
               var e = easing(elapsedRatio)
               context.globalAlpha = easing(1 - elapsedRatio);
-              console.log("anim")
+              //console.log("anim")
               for (var i=0; i<style.length; i++)
               {	var imgs = style[i].getImage();
                   var sc = imgs.getScale(); 
@@ -35735,7 +35738,7 @@ if (window.ol && !ol.ext) {
     // then move to (x, y)
     context.translate(0,0);
     var step = this._animation.animate ? this._animation.step : 1;
-    //console.log(this._animation.step)
+    ////console.log(this._animation.step)
     // Draw pie
     switch (this._type) {
       case "donut":
@@ -35806,7 +35809,7 @@ if (window.ol && !ol.ext) {
           x = x0 + s;
           var h = this._data[i]/max*2*this._radius *step;
           context.rect ( x0, b-h, s, h);
-          //console.log ( x0+", "+(b-this._data[i]/max*2*this._radius)+", "+x+", "+b);
+          ////console.log ( x0+", "+(b-this._data[i]/max*2*this._radius)+", "+x+", "+b);
           context.closePath();
           context.fill();
           context.stroke();
@@ -36860,7 +36863,7 @@ if (window.ol && !ol.ext) {
     var thefont = font;
     if (typeof(font) == 'string') thefont = { font:font, name:font, copyright:'' };
     if (!thefont.font || typeof(thefont.font) !== 'string') {
-      console.log('bad font def');
+      //console.log('bad font def');
       return;
     }
     var fontname = thefont.font;
@@ -36974,7 +36977,7 @@ if (window.ol && !ol.ext) {
     }
     // get canvas
     var canvas = this.getImage(pixelratio);
-    //console.log(this.getImage().width+" / "+(2 * (this.radius_ + strokeWidth) + 1));
+    ////console.log(this.getImage().width+" / "+(2 * (this.radius_ + strokeWidth) + 1));
     /** @type {ol.style.FontSymbol.RenderOptions} */
     var renderOptions = {
       strokeStyle: strokeStyle,

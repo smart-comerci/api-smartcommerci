@@ -249,7 +249,7 @@
     
     function modalEditFunction(element) {
         var isAutentic = localStorage.isAutentic ? true : false
-        console.log("my isAutentic",isAutentic)
+        //console.log("my isAutentic",isAutentic)
         let title = 'Editar Função'
         let thisURL =  $("#autenticar").attr("src").split("?")[0]
         let newURL = thisURL +'?'+element.attr("profileType")
@@ -390,7 +390,7 @@
         let lista = JSON.parse(localStorage.DT_PF)
         
         for(const k in lista){
-            console.log("byType",totalByType(lista[k].profile_type))
+            //console.log("byType",totalByType(lista[k].profile_type))
             html+=' <div affiliate_id="96" class="row radius20 userCms">'+
                         '<div class="col-sm" style="opacity: 1;"><label class="labelFuncao">'+lista[k].profile_type+'</label></div>'+
                         '<div class="col-sm" style="opacity: 1;">'+
@@ -443,11 +443,11 @@
                     'x-access-token': localStorage.token,
                 },
                 success: function (data) {
-                    console.log(data)
+                    //console.log(data)
                     informar("alert-success", "Alteração realizada com sucesso!", 3000)
                 },
                 error: function (data) {
-                    console.log(data)
+                    //console.log(data)
                 },
                 complete: function () {
                     sessionStorage.clear()

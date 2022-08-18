@@ -579,8 +579,8 @@
                         style="padding-bottom: 0;max-height: 60px;border-bottom: 1px solid #efefef;margin-top: 5%;">
                         <div style="max-width: 50px !important; opacity: 1;" class="col-sm orderInner">
                             <p class="checkSmart" style="margin: -45% 25% !important;"><input onchange="marka($(this))"
-                                    lista="listaDeProdutos" id="checkFull" class="checka form-control" type="checkbox"
-                                     ><span class="checkmark"></span></p>
+                                    lista="listaDeProdutos" id="checkFull" class="checka form-control"
+                                    type="checkbox"><span class="checkmark"></span></p>
                         </div>
 
                         <div style="max-width: 150px !important; opacity: 1;" class="col-sm orderInner">
@@ -773,19 +773,19 @@
         $(this).parent().css("color", cores[status].cor)
 
     })
-     $(".loja").each(function () {
-         
-       let id = Number($(this).text())
-       let lista = JSON.parse(localStorage.LOJAS_CADASTRADAS)
-       for(const k in lista){
-           if(id == lista[k].id){
+    $(".loja").each(function () {
+
+        let id = Number($(this).text())
+        let lista = JSON.parse(localStorage.LOJAS_CADASTRADAS)
+        for (const k in lista) {
+            if (id == lista[k].id) {
                 $(this).text(lista[k].affiliates_business_name)
-           }
-       } 
+            }
+        }
 
     })
 
-    
+
 
 
 
@@ -801,14 +801,14 @@
                 'x-access-token': localStorage.token,
             },
             success: function (data) {
-                console.log(data)
+                //console.log(data)
 
                 if (cache) {
                     sessionStorage[chaveCache] = JSON.stringify(data)
                 }
             },
             error: function (data) {
-                console.log(data)
+                //console.log(data)
             },
             complete: function () { },
         });
@@ -823,7 +823,7 @@
         try {
             lista = JSON.parse(sessionStorage['USERS_CLIENTS_' + localStorage.AFFILIATE_ID])
         } catch (err) {
-            console.log(err)
+            //console.log(err)
         }
         let pedidos = 0, assinaturas = 0
 
@@ -925,7 +925,7 @@
                             'x-access-token': localStorage.token,
                         },
                         success: function (data) {
-                            console.log(data)
+                            //console.log(data)
                             ajaxInner('/deleteUserAffiliate', paramsToCrud, 'POST')
                             informar("alert-success", "Usuário deletado com sucesso!", 3000)
                             sessionStorage.clear()
@@ -939,7 +939,7 @@
                             }, 1500)
                         },
                         error: function (data) {
-                            console.log(data)
+                            //console.log(data)
                             informar("alert-primary", "Credenciais informadas são incorretas!", 3000)
                         },
                         complete: function () {

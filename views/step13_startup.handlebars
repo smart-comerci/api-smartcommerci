@@ -51,7 +51,7 @@ var ferramentas = JSON.parse(localStorage.ferramentas)
 var acessos = JSON.parse(localStorage.ACESSOS)
 var categorias = JSON.parse(localStorage.categorias)
 
-console.log(lojas, ferramentas, cores, acessos, categorias)
+//console.log(lojas, ferramentas, cores, acessos, categorias)
 var etapa = 0
 if(lojas.length > 0){
     $.ajax({
@@ -66,8 +66,8 @@ if(lojas.length > 0){
             "master_id":localStorage.MASTER_ID        
         },
         success: function (data) {
-            console.log("deleta")
-            console.log(data)
+            //console.log("deleta")
+            //console.log(data)
             etapa = 20
             for(const k in lojas){
                 var tipo = lojas[k].categoria
@@ -80,7 +80,7 @@ if(lojas.length > 0){
                     if(dados[d].tag == "horarios"){horarios = dados[d].value}
                     if(dados[d].tag == "endereco"){endereco = dados[d].value}
                 }
-                console.log(tipo, razaoSocial, cnpj, telefone, email, horarios, endereco)
+                //console.log(tipo, razaoSocial, cnpj, telefone, email, horarios, endereco)
                 var fields2 = [
                                 {"column": "affiliates_master_id", "value":localStorage.MASTER_ID },
                                 {"column": "affiliates_business_name", "value":razaoSocial },
@@ -123,12 +123,12 @@ if(lojas.length > 0){
                          ]
                     },
                     success: function (data) {
-                        console.log("insere")
-                        console.log(data)
+                        //console.log("insere")
+                        //console.log(data)
                         etapa = etapa+20
                     },
                     error: function (data) {
-                        console.log(data)
+                        //console.log(data)
                     },
                     complete: function(){
                         // ao final da requisição...
@@ -138,7 +138,7 @@ if(lojas.length > 0){
 
         },
         error: function (data) {
-            console.log(data)
+            //console.log(data)
         },
         complete: function(){
             // ao final da requisição...
@@ -146,7 +146,7 @@ if(lojas.length > 0){
     });
 
 }else{
-    console.log("Sem lojas para inserir")
+    //console.log("Sem lojas para inserir")
 }
 
 
@@ -184,11 +184,11 @@ $.ajax({
         ]
     },
 	success: function (data) {
-		console.log(data)
+		//console.log(data)
         etapa = 10
 	},
 	error: function (data) {
-		console.log(data)
+		//console.log(data)
 	},
 	complete: function(){
 		// ao final da requisição...

@@ -2371,7 +2371,7 @@
       let txt = ""
       let banners = []
       $(".conteudoInterno").each(function () {
-        //console.log($(this))
+        ////console.log($(this))
         if ($(this).attr("id").indexOf("ban") > -1) {
 
           if (banners.length == 2) {
@@ -2385,7 +2385,7 @@
             } catch (e) {
               banners.push($(this).find("img").attr("src"))
             }
-            //console.log("insere banner", banners)
+            ////console.log("insere banner", banners)
           } else {
 
             try {
@@ -2394,7 +2394,7 @@
             } catch (e) {
               banners.push($(this).find("img").attr("src"))
             }
-            //console.log("insere banner", banners)
+            ////console.log("insere banner", banners)
           }
 
           if (banners.length == 2) {
@@ -2453,7 +2453,7 @@
         }
       })
 
-      //console.log(listaFinal)
+      ////console.log(listaFinal)
 
       $.ajax({
         url: mainHost + '/setHomePage',
@@ -2466,14 +2466,14 @@
         },
         type: 'POST',
         success: function (data) {
-          //console.log("home page", data)
+          ////console.log("home page", data)
 
 
           localStorage.HOME_PAGE = JSON.stringify(data)
           addContent(data)
         },
         error: function (data) {
-          //console.log("erro busca home", data)
+          ////console.log("erro busca home", data)
         }
       });
 
@@ -2499,7 +2499,7 @@
 
     function showModalSearch(elemento) {
       //window.scrollTo(0, 0)
-      //console.log("ai vai o elemento", elemento.parent())
+      ////console.log("ai vai o elemento", elemento.parent())
       elementInEdit = elemento.parent()
 
       $("modalProductSelect").show()
@@ -2508,7 +2508,7 @@
     }
 
     function setElementEdit(url, nome, code) {
-      //console.log("data is ", url, nome)
+      ////console.log("data is ", url, nome)
       if (elementInEdit != null) {
         elementInEdit.find("img").attr("src", url)
         elementInEdit.find("p").html(nome)
@@ -2535,7 +2535,7 @@
     }
 
     async function searchProducts(text, container) {
-      //console.log("pesquisei", text)
+      ////console.log("pesquisei", text)
       container.html("")
       let dados = await $.ajax({
         url: mainHost + '/productSearchSite',
@@ -2549,11 +2549,11 @@
         },
         type: 'POST',
         success: function (data) {
-          //console.log("produtos", data)
+          ////console.log("produtos", data)
 
         },
         error: function (data) {
-          //console.log("erro busca produto", data)
+          ////console.log("erro busca produto", data)
         }
       });
 
@@ -2580,13 +2580,13 @@
       }
     }
     async function searchProductsList(text) {
-      //console.log("pesquisando", text)
+      ////console.log("pesquisando", text)
 
       let lista = text.split(","), listaEnvia = []
       for (const k in lista) {
         listaEnvia.push(Number(lista[k]))
       }
-      //console.log("lista envia", listaEnvia)
+      ////console.log("lista envia", listaEnvia)
       let dados = await $.ajax({
         url: mainHost + '/listaIds',
         data: {
@@ -2598,7 +2598,7 @@
         },
         type: 'POST',
         success: function (data) {
-          //console.log("produtos", data)
+          ////console.log("produtos", data)
           $(".productImage").each(function () {
             let thisCode = $(this).parent().find("a").text().trim()
             let myCode = Number(thisCode)
@@ -2622,7 +2622,7 @@
 
         },
         error: function (data) {
-          //console.log("erro busca produto", data)
+          ////console.log("erro busca produto", data)
         }
       });
 
@@ -2643,14 +2643,14 @@
       },
       type: 'POST',
       success: function (data) {
-        //console.log("home page", data)
+        ////console.log("home page", data)
 
 
         localStorage.HOME_PAGE = JSON.stringify(data)
         addContent(data)
       },
       error: function (data) {
-        //console.log("erro busca home", data)
+        ////console.log("erro busca home", data)
       }
     });
 
@@ -2737,10 +2737,10 @@
         try {
           esseID = alteracoes.attr("id")
         } catch (err) {
-          //console.log(err)
+          ////console.log(err)
         }
       }
-      //console.log("o id ", esseID)
+      ////console.log("o id ", esseID)
       for (const k in alteracoes) {
         if (esseID == alteracoes[k].id) {
           faz = false
@@ -2751,7 +2751,7 @@
       }
 
 
-      //console.log("faz ", faz)
+      ////console.log("faz ", faz)
       if (faz) {
         alteracoes.push({
           id: dropzone.id,
@@ -2759,7 +2759,7 @@
           files: files
         })
       }
-      //console.log(alteracoes)
+      ////console.log(alteracoes)
     }
 
     dropzones.forEach((dropzone) => {
@@ -3023,7 +3023,7 @@
 
     }
     function sobeBannerDynamic(elemento, files) {
-      //console.log("id do elemento", elemento.id, elemento)
+      ////console.log("id do elemento", elemento.id, elemento)
       if (elemento.id == undefined) {
         try {
           if (elemento.attr("id") == undefined) {
@@ -3048,11 +3048,11 @@
         contentType: false,
         type: 'POST',
         success: function (data) {
-          //console.log(data)
+          ////console.log(data)
 
         },
         error: function (data) {
-          ////console.log(data) 
+          //////console.log(data) 
         }
       });
 
@@ -3061,7 +3061,7 @@
 
 
     function sobeBanner(elemento, files) {
-      //console.log("id do elemento", elemento.id, elemento)
+      ////console.log("id do elemento", elemento.id, elemento)
       if (elemento.id == undefined) {
         try {
           if (elemento.attr("id") == undefined) {
@@ -3080,7 +3080,7 @@
       var contador = 1;
       data.append('fileimagem', files[0]);
 
-      ////console.log(elemento[0].files[0])
+      //////console.log(elemento[0].files[0])
 
       $.ajax({
         url: mainHost + '/uploadBanners',
@@ -3093,8 +3093,8 @@
         contentType: false,
         type: 'POST',
         success: function (data) {
-          //console.log(data)
-          //console.log($("#" + elemento.id))
+          ////console.log(data)
+          ////console.log($("#" + elemento.id))
           $("#" + elemento.id).attr("newValue", mainHost + '/images/' + localStorage.MASTER_ID + '/' + data.fileNameIn)
 
           window.parent.atualizaCampo($("#" + elemento.id), 0)
@@ -3103,14 +3103,14 @@
 
         },
         error: function (data) {
-          ////console.log(data) 
+          //////console.log(data) 
         }
       });
 
 
     }
     function uploadBannerCOMUN(element) {
-        console.log("entrando no comum")
+        //console.log("entrando no comum")
         
         var data = new FormData();
         var contador = 1;
@@ -3126,11 +3126,11 @@
           contentType: false,
           type: 'POST',
           success: function (data) {
-             console.log(data)
+             //console.log(data)
             let elemento2 = $("#"+element.attr("dinamicId"))
-             console.log('o elemento 2',elemento2)
+             //console.log('o elemento 2',elemento2)
  
-             console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
+             //console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
 
 
             elemento2.attr("src", `${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
@@ -3146,14 +3146,14 @@
 
           },
           error: function (data) {
-            //console.log("erro no comum")
-            //console.log(data)
+            ////console.log("erro no comum")
+            ////console.log(data)
           }
         });
       }
 
     function uploadBannerPRINCIPAL(element) {
-      console.log("chamando o principal")
+      //console.log("chamando o principal")
       var data = new FormData();
       var contador = 1;
       data.append('fileimagem', element[0].files[0]);
@@ -3168,12 +3168,12 @@
         contentType: false,
         type: 'POST',
         success: function (data) {
-          //console.log(data)
+          ////console.log(data)
 
-          //// console.log('o alvo pricipal -> ',$("#"+element.attr("target"))) 
+          //// //console.log('o alvo pricipal -> ',$("#"+element.attr("target"))) 
 
           // $("#input-file").css("background","url("+data.path?.replace('./public','https://api-smartcomerci.com.br:9090')+")")
-          //console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
+          ////console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
 
 
           $(".LOGO_PRINCIPAL").attr("src", `${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
@@ -3191,21 +3191,21 @@
 
         },
         error: function (data) {
-          //console.log(data)
+          ////console.log(data)
         }
       });
     }
 
 
     function recebendoFoto(elemento) {
-      //console.log(elemento)
+      ////console.log(elemento)
       uploadBannerPRINCIPAL(elemento)
       document.getElementById('picture-preview-content').src = window.URL.createObjectURL(elemento[0].files[0])
     }
 
     function recebendoFotoEspecifica(elemento) {
-      //console.log(elemento)
-      console.log("chamando o comum")
+      ////console.log(elemento)
+      //console.log("chamando o comum")
       uploadBannerCOMUN(elemento)
       $("#"+elemento.attr("dinamicId")).find("img").attr("src", window.URL.createObjectURL(elemento[0].files[0]))
       document.getElementById('picture-preview-content2').src = window.URL.createObjectURL(elemento[0].files[0])
@@ -3227,9 +3227,9 @@
     }
     $(".dropzone").each(function () {
       let column = $(this).attr("column")
-      //console.log("this column", column)
+      ////console.log("this column", column)
       let img = $(this).find("img")
-      //console.log("this img", getImg(column))
+      ////console.log("this img", getImg(column))
       if (getImg(column) != undefined) {
         img.attr("src", getImg(column))
         img.show()
@@ -3253,7 +3253,7 @@
     $("#previewLogo").show()
 
     function getButton(objeto, elementId) {
-      //console.log(objeto)
+      ////console.log(objeto)
       let html = `
  
       <div class="row containerButtons superBorder"  >
@@ -3266,13 +3266,13 @@
     async function chamaLinkAltera(elemento, id){
 
      const result = await window.parent.modalAlteraLinks(elemento, id)
-     console.log("o result",result)
+     //console.log("o result",result)
     }
 
     function destaqueMe(element, e) {
      
      const label  =element.find('label')
-     console.log(element,label)
+     //console.log(element,label)
       e = window.event
       e.stopPropagation();
       e.preventDefault();
@@ -3289,7 +3289,7 @@
         }
         
         element.attr("destacado", "1")
-        //console.log("aqui")
+        ////console.log("aqui")
         element.find("input").removeAttr("disabled")
 
         element.addClass("superBorder")
@@ -3311,7 +3311,7 @@
         $(".backOverlay").hide()
         element.css("z-index", "0")
         element.attr("destacado", "0")
-        //console.log("acolá")
+        ////console.log("acolá")
         element.find("input").attr("disabled")
         element.find(".containerButtons").remove()
         $(".preview-home_aside").css("z-index", "0")
@@ -3343,7 +3343,7 @@
     function ajustaModalDinamica(elemento){
       // let newID = Math.random()
       let dropzone = elemento.parent().parent().find(".dropzone")
-      //console.log('a dropzone',dropzone.attr("column"),dropzone.attr("table"),dropzone)
+      ////console.log('a dropzone',dropzone.attr("column"),dropzone.attr("table"),dropzone)
       // dropzone.attr("dinamicId",newID)
       $(".inputDinamico").attr("column",dropzone.attr("column"))
       $(".inputDinamico").attr("dinamicId",dropzone.attr("id"))
@@ -3364,7 +3364,7 @@
         "column_name": "master_id" 
       },
       success: function (data) {
-        console.log('getByClientId',data)
+        //console.log('getByClientId',data)
           
       },
       error: function (data) {

@@ -1117,7 +1117,7 @@
     });
 
     function addStep(id,value) {
-      console.log(id,value) 
+      //console.log(id,value) 
       if (value != "") {
         
         if(Number(id)){
@@ -1205,7 +1205,7 @@
         "x-access-token": localStorage.token,
       },
       success:async function (data2) {
-        console.log(data2)
+        //console.log(data2)
         let myRevenue
         for (const j in data2) {
           if (data2[j].id == THIS_REVENUE) {
@@ -1213,7 +1213,7 @@
           }
         }
 
-        console.log(myRevenue)
+        //console.log(myRevenue)
         localStorage.THIS_REVENUE = JSON.stringify(myRevenue)
 
         $("#title").val(myRevenue.title)
@@ -1243,7 +1243,7 @@
           modoPreparo = JSON.parse(myRevenue.modo_preparo)
         }catch(e){}
 
-        console.log("modo preparo",modoPreparo)
+        //console.log("modo preparo",modoPreparo)
 
         for(const k in modoPreparo){
           addStep(modoPreparo[k].id,modoPreparo[k].instucao)
@@ -1263,7 +1263,7 @@
 
       },
       error: function (data) {
-        console.log("erro get", data)
+        //console.log("erro get", data)
 
         window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
       },
@@ -1285,7 +1285,7 @@
         contentType: false,
         type: 'POST',
         success: function (data) {
-          console.log(data)
+          //console.log(data)
           $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')})`)
           $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
           $("#" + element.attr("target")).css("background-size", "cover !important")
@@ -1294,8 +1294,8 @@
 
 
 
-          console.log(element.parent().parent().find('input'))
-          console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
+          //console.log(element.parent().parent().find('input'))
+          //console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
 
           editRevenue('banner_topo',data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090'))
 
@@ -1304,7 +1304,7 @@
 
         },
         error: function (data) {
-          console.log(data)
+          //console.log(data)
         }
       });
 
@@ -1323,7 +1323,7 @@
  
     }
     async function searchProducts(text, container) {
-      console.log("pesquisei", text)
+      //console.log("pesquisei", text)
       container.html("")
       let dados = await $.ajax({
         url: mainHost + '/productSearchSite',
@@ -1337,14 +1337,14 @@
         },
         type: 'POST',
         success: function (data) {
-          console.log("produtos", data)
+          //console.log("produtos", data)
 
 
           localStorage.SEARCH_REVENUES = JSON.stringify(data)
 
         },
         error: function (data) {
-          console.log("erro busca produto", data)
+          //console.log("erro busca produto", data)
         }
       });
       if(dados.length > 0){
@@ -1390,7 +1390,7 @@
           },
           success: function (data) {
             let PRD = data
-            console.log(PRD)
+            //console.log(PRD)
             let thisPRD = null
             for(const k in PRD){
               if(PRD[k].product_code == ID){
@@ -1401,11 +1401,11 @@
             if(thisPRD){
               getProduct(thisPRD, dados)
             }else{
-              console.log("nçao achei produto")
+              //console.log("nçao achei produto")
             }
           },
           error: function (data) {
-            console.log(data)
+            //console.log(data)
             window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
           },
           complete: function () {
@@ -1563,7 +1563,7 @@
     }
 
     function editaIngrediente(element, coluna){
-      console.log(element, coluna)
+      //console.log(element, coluna)
 
         let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
         let ING = []
@@ -1634,7 +1634,7 @@
           }
 
         }
-        console.log(
+        //console.log(
           {
             "table": "revenues",
             "name_id": "id",

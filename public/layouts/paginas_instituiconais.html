@@ -1126,10 +1126,10 @@
 
           setTimeout(() => {
             var myContent = tinymce.get("editorFullCode").getContent();
-            console.log(myContent)
+            //console.log(myContent)
           }, 10000);
 
-          console.log('pag nova', NEW)
+          //console.log('pag nova', NEW)
 
 
 
@@ -1144,13 +1144,13 @@
 
 
         }, 5000);
-        console.log(data)
+        //console.log(data)
 
 
       },
       error: function (data) {
         $('.page-institucional').css("filter","none")
-        console.log("erro institucional", data)
+        //console.log("erro institucional", data)
         window.parent.informar("alert-danger", "Algo saiu errado ao carregar a página!", 3000)
       },
       complete: function () { 
@@ -1171,12 +1171,12 @@
     }, 1000)
 
     function publish() {
-      console.log('PAGINA NOVA',NEW)
+      //console.log('PAGINA NOVA',NEW)
 
       var myContent = tinymce.get("editorFullCode").getContent();
       let ATIVO = 0
       if ($("#ativar-pagina")[0].checked) { ATIVO = 1 }
-      console.log('ATIVO?', ATIVO)
+      //console.log('ATIVO?', ATIVO)
       $.ajax({
         type: "POST",
         url: mainHost + '/setContentPage',
@@ -1185,13 +1185,13 @@
           "x-access-token": localStorage.token,
         },
         success: function (data) {
-          console.log(data)
+          //console.log(data)
 
 
           window.parent.informar("alert-success", "As alterações foram aplicadas com sucesso!", 3000)
         },
         error: function (data) {
-          console.log("erro publish", data)
+          //console.log("erro publish", data)
 
           window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
         },

@@ -952,7 +952,7 @@
 
 
     var loja = Number(localStorage.EDITANDO_LOJA_CONFIG)
-    //console.log("a loja é", loja)
+    ////console.log("a loja é", loja)
 
     let lojas3 = JSON.parse(localStorage.LOJAS_CADASTRADAS)
     let dadoLoja = []
@@ -961,7 +961,7 @@
         dadoLoja = lojas3[k]
       }
     }
-    //console.log(lojas3, dadoLoja)
+    ////console.log(lojas3, dadoLoja)
     $("#nome").val(dadoLoja.affiliates_business_name)
     $("#telefone").val(dadoLoja.affiliates_business_telefone)
     $("#cnpj").val(dadoLoja.affiliates_business_cnpj)
@@ -1031,12 +1031,12 @@
         contentType: false,
         type: 'POST',
         success: function (data) {
-            console.log(data)
+            //console.log(data)
 
-            console.log('o alvo pricipal -> ',$("#"+element.attr("target"))) 
+            //console.log('o alvo pricipal -> ',$("#"+element.attr("target"))) 
 
             $("#input-file").css("background","url("+data.path?.replace('./public','https://api-smartcomerci.com.br:9090')+")")
-            console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
+            //console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
 
             let dataL = JSON.parse(localStorage.IN_EDIT_LOJA)
             dataL['affiliates_business_photo'] = data.path?.replace('./public','https://api-smartcomerci.com.br:9090')
@@ -1046,7 +1046,7 @@
 
         },
         error: function (data) {
-          console.log(data) 
+          //console.log(data) 
         }
       });
 }
