@@ -270,7 +270,7 @@
                 </div>
                 <div class="listaDePromocoes">
 
-                    <div onclick="modalEditDesconto($(this),'Desconto')" class="row radius20 product bg-gray-400"
+                    {{!-- <div onclick="modalEditDesconto($(this),'Desconto')" class="row radius20 product bg-gray-400"
                         style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
                         <div style="max-width: 80px;" class="col-sm">
                             <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
@@ -306,7 +306,7 @@
                                     product_code="998503" id="switch-shadow030" class="switch switch--shadow"
                                     type="checkbox"><label class="naoAbreModal" for="switch-shadow030"></label></div>
                         </div>
-                    </div>
+                    </div> --}}
 
 
 
@@ -417,7 +417,7 @@
                 </div>
                 <div class="listaDePromocoes">
 
-                    <div onclick="modalEditDesconto($(this),'Frete Grátis')" class="row radius20 product bg-gray-400"
+                    {{!-- <div onclick="modalEditDesconto($(this),'Frete Grátis')" class="row radius20 product bg-gray-400"
                         style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
                         <div style="max-width: 80px;" class="col-sm">
                             <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
@@ -453,7 +453,7 @@
                                     product_code="998503" id="switch-shadow030" class="switch switch--shadow"
                                     type="checkbox"><label class="naoAbreModal" for="switch-shadow030"></label></div>
                         </div>
-                    </div>
+                    </div> --}}
 
 
 
@@ -469,6 +469,59 @@
 </div>
 
 <script>
+    function getCupom(cupomData){
+        let html = `
+            <div  target="${cupomData.main.name}" onclick="modalEditDesconto($(this),'Cupom')" class="row radius20 product bg-gray-400"
+                        style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
+                        <div style="max-width: 80px;" class="col-sm">
+                            <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
+                                    class="checkmark"></span></label>
+                        </div>
+                        <div style="max-width: 90px; min-width: 90px; " class="col-sm paddingTop20">
+                            <span class="codigoItem">01</span>
+                        </div>
+                        <div style="min-width: 200px !important; max-width: 200px !important;"
+                            class="col-sm  col-text paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${cupomData.main.name}</label>
+                        </div>
+
+                        <div style="min-width: 150px !important; max-width: 150px !important;"
+                            class="col-sm paddingTop20">
+                            <label style="font-size:10px !important; padding: 10px" class="infoLabel infoValor">${
+                                cupomData.main.affiliates === 'all' || cupomData.main.allAffiliates  ? 'Todas' : cupomData.main.affiliates
+                                }</label>
+                        </div>
+                        <div style="min-width: 150px !important; max-width: 150px !important;"
+                            class="col-sm paddingTop20">
+                            <label style="font-size:10px !important; padding: 10px"
+                                class="infoLabel infoValor">${00}</label>
+                        </div>
+                        <div class="col-sm paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${
+                               cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' : 
+                               cupomData.validate.especificDate ? cupomData.validate.dateStart : 'Não especificado'
+                                }</label>
+                        </div>
+                        <div class="col-sm paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${
+                               cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' : 
+                               cupomData.validate.especificDate ? cupomData.validate.dateEnd : 'Não especificado'
+                                }</label>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="switch__container  checkaLiga"><input
+                            ${cupomData.main.active ? 'checked="true"':''}
+                             acao="ativarProduto" checked="true"
+                                    product_code="998503" id="switch-shadow030" class="switch switch--shadow"
+                                    type="checkbox"><label class="naoAbreModal" for="switch-shadow030"></label></div>
+                        </div>
+                    </div>
+         `
+
+         return html
+    }
+    
     function modalEditDesconto(element, name) {
         let cupomData
         if (name === 'novoDesconto') {
