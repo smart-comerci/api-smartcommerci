@@ -952,12 +952,39 @@
                             </div>
                             <div style="padding:0 2%" class="row">
                                 <div class="col-md-12">
-                                <div class="group-input2"
-                                    style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
-                                    <input readonly  area="applicability" detalhe="especificTagsValue" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="Tags, tags"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  value="${cupomData.applicability.especificTagsValue}">
-                                </div>
-                                <br>
+                                 
+                                    <div class="col-md-12 grupoCinza">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div style="padding:0 2%" class="row listaCategoriasFilter">
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div onclick="dropaCategorias($(this).parent().parent().parent())"   class="input-group  ico dropItems"> 
+                                                ${arrowDown}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="display:none; margin-top: 3%" class="row grupoCategorias drop">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                <input id="buscaCategorias" type="text" style="min-width: 300px;font-size: 1.3rem" value="" class="form-control" placeholder="Busque por categorias" /> 
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text"> 
+                                                        <i style="color: #f6b504; font-weight: bold;" class="fas fa-search"></i> 
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div style="max-height: 30vh" class="col-md-12 verticalScroll">
+                                                <ul style="    margin-top: 5%;" class="list animate__animated "> 
+                                                ${getTags(TAGS)}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
                                 </div>
                             </div>
                              

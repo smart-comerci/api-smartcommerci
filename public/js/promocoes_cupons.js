@@ -425,6 +425,24 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
     return html3
 }
 
+function getTags(MY_TAGS) {
+    var html3 = '',
+        nova = '<li class="novaLI"></li>';
+
+
+    for (const k in MY_TAGS) {
+        var content = '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
+        html3 += '<li    class="list-item sub-list-item animate__animated ">' + arrowDown4 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__">  ';
+    
+        html3 += MY_TAGS[k] + ' <input class="marcar"  onchange="subTagInputTAG($(this),\'listaCategoriasFilter\',\'' + MY_TAGS[k]+ '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+        html3 += '</li> ';
+    }
+
+    return html3
+}
+
+
+
 var arrowDown4 = '<div onclick="dropaCategoriasInner($(this).parent()) " class=" deleteThis3 dropCategoriaButton ">' +
     '<svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36">' +
     '<g transform="translate(36 36) rotate(180)">' +
@@ -481,6 +499,24 @@ function removePROMOCAOTXT(texto) {
     console.log('depois ->', OBJETO_MODEL)
 }
 
+function removePROMOCAOTXTTAG(texto) {
+    console.log('removendo  ->', texto)
+    var txt = texto
+    console.log('antes ->', OBJETO_MODEL)
+    let MEU_ARRAY = OBJETO_MODEL.applicability.especificTagsValue
+  
+            const findIndex = MEU_ARRAY.findIndex(object => {
+                return object === txt;
+              });  
+              let lista = MEU_ARRAY.splice(findIndex, 1);
+              console.log('lista e idnex',findIndex,lista, MEU_ARRAY )
+            OBJETO_MODEL.applicability.especificTagsValue = MEU_ARRAY
+        
+
+
+    console.log('depois ->', OBJETO_MODEL)
+}
+
 function subTagInput(ele, elemento, texto) {
     console.log('antes ->', OBJETO_MODEL)
 
@@ -520,6 +556,47 @@ function subTagInput(ele, elemento, texto) {
 
 
 }
+
+function subTagInputTAG(ele, elemento, texto) {
+    console.log('antes ->', OBJETO_MODEL)
+
+    if (texto) {
+        if (Array.isArray(OBJETO_MODEL.applicability.especificTagsValue)) {
+            OBJETO_MODEL.applicability.especificCategoriesValue.push(texto)
+            let lista = [...new Set(OBJETO_MODEL.applicability.especificTagsValue)]
+            OBJETO_MODEL.applicability.especificTagsValue = lista
+        }
+    }
+
+    var listaTags = '', listaMarcas = ''
+
+    console.log('depois ->', OBJETO_MODEL)
+
+
+    //////console.log(elemento,texto)
+    var html = '<div  class="input-group categoriaLabel  "><label  >' + texto + '</label><label action="' + elemento + '" onclick="removePROMOCAO($(this))"  style="max-width: 20%"  class="iconClose"><i class="far fa-times-circle"></i></label></div>';
+    //////console.log("vou mostrar " ,ele[0].checked )
+    if (ele[0].checked == true) {
+        // $("."+elemento).append(html)
+        //////console.log("elemento tal",$("."+elemento))
+        insereCategoria($("." + elemento), ele, texto)
+
+    } else {
+        $("." + elemento).find(".categoriaLabel").each(function () {
+            if ($(this).text() == texto) { $(this).remove() }
+        })
+
+        removePROMOCAOTXT(texto)
+
+    }
+  
+
+
+
+
+
+}
+
 
 
 function dropaCategorias(element) {
