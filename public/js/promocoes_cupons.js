@@ -396,9 +396,18 @@ getObjects()
 
 //===================================
 
-function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
+function getCategoriesAndSubPromocoes(MY_CATEGORIES, listaSelecionada) {
     var html3 = '',
         nova = '<li class="novaLI"></li>';
+
+        function getActive(text){
+            let eu = listaSelecionada.fin((l) => l === text)
+            if(eu){
+                return 'checked="true"'
+            }else{
+                ''
+            }
+        } 
 
 
     for (const k in MY_CATEGORIES) {
@@ -411,31 +420,39 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
             for (let a = 0; a < txtCategories.length; a++) {
                 if (txtCategories[a].length > 0 && txtCategories[a] != '' && txtCategories[a] != 'null' && txtCategories[a] != 'undefined' && txtCategories[a] != null && txtCategories[a] != undefined) {
 
-                    content += '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar catPromocao"  myValue="'+txtCategories[a]+'"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + txtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
+                    content += '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input '+getActive(txtCategories[a])+' class="marcar catPromocao"  myValue="'+txtCategories[a]+'"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + txtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
                 }
 
                 ////////////console.log(content)
             }
         }
         content += '</ul>';
-        html3 += MY_CATEGORIES[k].categoria + ' <input class="marcar catPromocao"  myValue="'+MY_CATEGORIES[k].categoria+'" onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+        html3 += MY_CATEGORIES[k].categoria + ' <input '+getActive(MY_CATEGORIES[k].categoria)+' class="marcar catPromocao"  myValue="'+MY_CATEGORIES[k].categoria+'" onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
         html3 += content + '</li> ';
     }
 
     return html3
 }
 
-function getTags(MY_TAGS) {
+function getTags(MY_TAGS, listaSelecionada) {
     var html3 = '',
         nova = '<li class="novaLI"></li>';
 
+        function getActive(text){
+            let eu = listaSelecionada.fin((l) => l === text)
+            if(eu){
+                return 'checked="true"'
+            }else{
+                ''
+            }
+        }   
 
     for (const k in MY_TAGS) {
         if (MY_TAGS[k] !== "") {
             var content = '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
             html3 += '<li    class="list-item sub-list-item animate__animated ">' + arrowDown4 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__">  ';
 
-            html3 += MY_TAGS[k] + ' <input class="marcar tagPromocao" myValue="'+MY_TAGS[k]+'"  onchange="subTagInputTAG($(this),\'listaTagsFilter\',\'' + MY_TAGS[k] + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+            html3 += MY_TAGS[k] + ' <input '+getActive(MY_TAGS[k])+' class="marcar tagPromocao" myValue="'+MY_TAGS[k]+'"  onchange="subTagInputTAG($(this),\'listaTagsFilter\',\'' + MY_TAGS[k] + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
             html3 += '</li> ';
         }
 
