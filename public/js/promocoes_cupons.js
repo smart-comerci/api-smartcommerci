@@ -34,7 +34,9 @@ let OBJETO_MODEL = {
     applicability: {
         allProducts: false,
         especificCategories: false,
-        especificTags: false
+        especificCategoriesValue: "",
+        especificTags: false,
+        especificTagsValue: ""
     },
     validate: {
         withoutTimeLimits: false,
@@ -90,7 +92,9 @@ let OBJETO_DEFAULT = {
     applicability: {
         allProducts: false,
         especificCategories: false,
-        especificTags: false
+        especificCategoriesValue: "",
+        especificTags: false,
+        especificTagsValue: ""
     },
     validate: {
         withoutTimeLimits: false,
