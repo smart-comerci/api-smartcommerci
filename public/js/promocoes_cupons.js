@@ -397,16 +397,21 @@ getObjects()
 //===================================
 
 function getCategoriesAndSubPromocoes(MY_CATEGORIES, listaSelecionada) {
+    
     var html3 = '',
         nova = '<li class="novaLI"></li>';
 
         function getActive(text,listaSelecionada){
-            let eu = listaSelecionada.find((l) => l === text)
-            if(eu){
-                return 'checked="true"'
-            }else{
-                ''
-            }
+            console.log(text,listaSelecionada)
+            
+                let eu = listaSelecionada.find((l) => l === text)
+                if(eu){
+                    return 'checked="true"'
+                }else{
+                    ''
+                }
+            
+            
         } 
 
 
@@ -439,6 +444,7 @@ function getTags(MY_TAGS, listaSelecionada) {
         nova = '<li class="novaLI"></li>';
 
         function getActive(text,listaSelecionada){
+            console.log(text,listaSelecionada)
             let eu = listaSelecionada.find((l) => l === text)
             if(eu){
                 return 'checked="true"'
