@@ -3230,7 +3230,7 @@ function getCatIconFromStorage(catName) {
 }
 
 function getCategoriesAndSub(MY_CATEGORIES, escolhidas) {
-    //////console.log(MY_CATEGORIES, escolhidas)
+    console.log(MY_CATEGORIES, escolhidas)
     var html3 = '',
         nova = '<li class="novaLI"></li>';
 
