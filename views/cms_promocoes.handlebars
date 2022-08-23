@@ -903,10 +903,15 @@
                                 <div class="col-md-12">
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
-                                    <input  area="applicability" detalhe="especificCategoriesValue" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
+                                    <input readonly  area="applicability" detalhe="especificCategoriesValue" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="Categoria, subcategoria"
                                     id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  value="${cupomData.applicability.especificCategoriesValue}">
                                 </div>
                                 <br>
+                                 <div style="max-height: 30vh" class="col-md-12 verticalScroll">
+                                    <ul style="    margin-top: 5%;" class="list animate__animated "> 
+                                    ${getCategoriesAndSubToFilterLinks(MY_CATEGORIES)}
+                                    </ul>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -928,7 +933,7 @@
                                 <div class="col-md-12">
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
-                                    <input  area="applicability" detalhe="especificTagsValue" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
+                                    <input readonly  area="applicability" detalhe="especificTagsValue" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="Tags, tags"
                                     id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  value="${cupomData.applicability.especificTagsValue}">
                                 </div>
                                 <br>
