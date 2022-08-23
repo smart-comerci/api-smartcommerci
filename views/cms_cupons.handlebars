@@ -98,7 +98,7 @@
         <div class="col-lg-2"></div>
 
 
-        <div style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 180px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;"
+        <div target="novoDesconto" onclick="modalEditCupom($(this), 'Cupom')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 180px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;"
             class="input-group">
             <div style="border: none; margin: auto;" class="input-group-append">
                 <div style="border: none; margin: auto; padding: 2%;" class="input-group-text">
@@ -111,7 +111,8 @@
                     </svg>
                 </div>
             </div>
-            <label style="margin: -1% auto; min-width: 60%; color: white !important; cursor: pointer"
+            <label style="margin: -1% auto; min-width: 60%; color: white !important; cursor: pointer;     padding: 7px;
+    font-weight: normal !important;"
                 class="label label23">Novo
                 cupom</label>
         </div>
@@ -207,43 +208,7 @@
                 </div>
                 <div class="listaDeCupons">
 
-                    <div onclick="modalEditCupom($(this),'Cupom')" class="row radius20 product bg-gray-400"
-                        style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
-                        <div style="max-width: 80px;" class="col-sm">
-                            <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
-                                    class="checkmark"></span></label>
-                        </div>
-                        <div style="max-width: 90px; min-width: 90px; " class="col-sm paddingTop20">
-                            <span class="codigoItem">01</span>
-                        </div>
-                        <div style="min-width: 200px !important; max-width: 200px !important;"
-                            class="col-sm  col-text paddingTop20">
-                            <label class="label" style="line-height: 1.5 !important;">Regra de preço lorem</label>
-                        </div>
-
-                        <div style="min-width: 150px !important; max-width: 150px !important;"
-                            class="col-sm paddingTop20">
-                            <label style="font-size:10px !important; padding: 10px" class="infoLabel infoValor">0 MUNDO
-                                DAS EMB.LJ1</label>
-                        </div>
-                        <div style="min-width: 150px !important; max-width: 150px !important;"
-                            class="col-sm paddingTop20">
-                            <label style="font-size:10px !important; padding: 10px"
-                                class="infoLabel infoValor">25</label>
-                        </div>
-                        <div class="col-sm paddingTop20">
-                            <label class="label" style="line-height: 1.5 !important;">27 de jul. de 2021</label>
-                        </div>
-                        <div class="col-sm paddingTop20">
-                            <label class="label" style="line-height: 1.5 !important;">27 de jul. de 2021</label>
-                        </div>
-
-                        <div class="col-sm">
-                            <div class="switch__container  checkaLiga"><input acao="ativarProduto" checked="true"
-                                    product_code="998503" id="switch-shadow030" class="switch switch--shadow"
-                                    type="checkbox"><label class="naoAbreModal" for="switch-shadow030"></label></div>
-                        </div>
-                    </div>
+                    
 
 
 
@@ -258,7 +223,62 @@
     </div>
 </div>
 <script>
+
+    function getCupom(cupomData){
+        let html = `
+            <div  target="${cupomData.main.name}" onclick="modalEditCupom($(this),'Cupom')" class="row radius20 product bg-gray-400"
+                        style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
+                        <div style="max-width: 80px;" class="col-sm">
+                            <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
+                                    class="checkmark"></span></label>
+                        </div>
+                        <div style="max-width: 90px; min-width: 90px; " class="col-sm paddingTop20">
+                            <span class="codigoItem">01</span>
+                        </div>
+                        <div style="min-width: 200px !important; max-width: 200px !important;"
+                            class="col-sm  col-text paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${cupomData.main.name}</label>
+                        </div>
+
+                        <div style="min-width: 150px !important; max-width: 150px !important;"
+                            class="col-sm paddingTop20">
+                            <label style="font-size:10px !important; padding: 10px" class="infoLabel infoValor">${
+                                cupomData.main.affiliates === 'all' || cupomData.main.allAffiliates  ? 'Todas' : cupomData.main.affiliates
+                                }</label>
+                        </div>
+                        <div style="min-width: 150px !important; max-width: 150px !important;"
+                            class="col-sm paddingTop20">
+                            <label style="font-size:10px !important; padding: 10px"
+                                class="infoLabel infoValor">${00}</label>
+                        </div>
+                        <div class="col-sm paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${
+                               cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' : 
+                               cupomData.validate.especificDate ? cupomData.validate.dateStart : 'Não especificado'
+                                }</label>
+                        </div>
+                        <div class="col-sm paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${
+                               cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' : 
+                               cupomData.validate.especificDate ? cupomData.validate.dateEnd : 'Não especificado'
+                                }</label>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="switch__container  checkaLiga"><input
+                            ${cupomData.main.active ? 'checked="true"':''}
+                             acao="ativarProduto" checked="true"
+                                    product_code="998503" id="switch-shadow030" class="switch switch--shadow"
+                                    type="checkbox"><label class="naoAbreModal" for="switch-shadow030"></label></div>
+                        </div>
+                    </div>
+         `
+
+         return html
+    }
     function modalEditCupom(element, name) {
+        let cupomData = OBJECT_LIST.find((cp) => cp.main.name === name)
+
         var html = `  
         <div style="max-width:100% " class="container">
                 <div class="row" style="max-width: 90%;margin: -11px auto;border-bottom: 2px solid #EDF2F6;margin-bottom: 10px; ">
@@ -365,7 +385,7 @@
                     <div class="col-md-12 " style="margin-top: 3% !important; background: white !important">
                     <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                         <div style="margin: 1% 2%;" class="switch__container">
-                        <input area="main" detalhe="active" onchange="setObject($(this))" checked="true" fieldname="status" table="users_affiliates" id="switch-shadow189"
+                        <input ${cupomData.main.active ? 'checked="true"' : ''} area="main" detalhe="active" onchange="setObject($(this))" checked="true" fieldname="status" table="users_affiliates" id="switch-shadow189"
                             class="switch switch--shadow filaDeMudancas" type="checkbox">
                         <label for="switch-shadow189"></label>
                         </div>
@@ -378,9 +398,9 @@
                         <div class="col-md-12">
                         <div class="group-input2"
                             style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
-                            <input  area="main" detalhe="name" onchange="setObject($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
+                            <input  value="${cupomData.main.name}"  area="main" detalhe="name" onchange="setObject($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
                             placeholder="Nome do desconto" id="nomeCategoria" fieldname="users_affiliate_slug"
-                            table="users_affiliates" value="...">
+                            table="users_affiliates" >
                         </div>
                         <br>
                         </div>
@@ -395,7 +415,7 @@
                             style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px; padding: 10px">
                             <textarea  area="main" detalhe="description" onchange="setObject($(this))" rows="5" style="background: none" class="form-control inputProduct filaDeMudancas"
                             placeholder="Descrição do desconto" id="nomeCategoria" fieldname="users_affiliate_slug"
-                            table="users_affiliates" value="..."></textarea>
+                            table="users_affiliates" value="${cupomData.main.description}"></textarea>
                         </div>
                         <br>
                         </div>
@@ -413,7 +433,7 @@
                             style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
                             <input area="cupom" detalhe="cupomCode" onchange="setObject($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
                             placeholder="Nome do desconto" id="nomeCategoria" fieldname="users_affiliate_slug"
-                            table="users_affiliates" value="...">
+                            table="users_affiliates" value="${cupomData.cupom.cupomCode}">
                         </div>
                         <br>
                         </div>
@@ -432,7 +452,7 @@
                         <div class="col-md-10">
                             <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                             <div style="margin: 2% 2%;" class="switch__container">
-                                <input area="main" detalhe="allAffiliates" onchange="setObject($(this))" fieldname="status" ${saoTodas(element.attr("username"))} id="switch-shadow18009"
+                                <input ${cupomData.main.allAffiliates ? 'checked="true"' : ''} area="main" detalhe="allAffiliates" onchange="setObject($(this))" fieldname="status" ${saoTodas(element.attr("username"))} id="switch-shadow18009"
                                  class="switch switch--shadow" type="checkbox"><label
                                 for="switch-shadow18009"></label>
                             </div>
@@ -468,7 +488,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="type" detalhe="valueActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808019"
+                                        <input ${cupomData.type.valueActive ? 'checked="true"' : ''}  area="type" detalhe="valueActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808019"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808019"></label></div><label style=" font-size: 20px;" class="label">Valor
                                     </label>
@@ -479,8 +499,8 @@
                                 <div class="col-md-12">
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
-                                    <input type="number"  area="type" detalhe="value" onchange="setObject($(this))" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  >
+                                    <input  value="${cupomData.type.value }" type="number"  area="type" detalhe="value" onchange="setObject($(this))" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
+                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  />
                                 </div>
                                 <br>
                                 </div>
@@ -493,7 +513,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="type" detalhe="percentActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808018"
+                                        <input ${cupomData.type.percentActive ? 'checked="true"' : ''} area="type" detalhe="percentActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808018"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808018"></label></div><label style=" font-size: 20px;" class="label">Porcentágem
                                     </label>
@@ -505,7 +525,7 @@
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
                                     <input  area="type" detalhe="percent" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="...">
+                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"   value="${cupomData.type.percent }">
                                 </div>
                                 <br>
                                 </div>
@@ -525,7 +545,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="requires" detalhe="withoutRequires" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808017"
+                                        <input  ${cupomData.type.withoutRequires ? 'checked="true"' : ''}  area="requires" detalhe="withoutRequires" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808017"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808017"></label></div><label style=" font-size: 20px;" class="label">Sem requisitos mínimos
                                     </label>
@@ -541,7 +561,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input   area="requires" detalhe="totalFromCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808016"
+                                        <input  ${cupomData.type.totalFromCartActive ? 'checked="true"' : ''} area="requires" detalhe="totalFromCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808016"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808016"></label></div><label style=" font-size: 20px;" class="label">Total do carrinho
                                     </label>
@@ -552,8 +572,8 @@
                                 <div class="col-md-12">
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
-                                    <input  area="requires" detalhe="totalFromCart" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="...">
+                                    <input value="${cupomData.type.totalFromCart}" area="requires" detalhe="totalFromCart" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
+                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" />
                                 </div>
                                 <br>
                                 </div>
@@ -566,7 +586,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="requires" detalhe="totalInCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808015"
+                                        <input  ${cupomData.type.totalInCartActive ? 'checked="true"' : ''} area="requires" detalhe="totalInCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808015"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808015"></label></div><label style=" font-size: 20px;" class="label">Quantidade de itens no carrinho
                                     </label>
@@ -578,7 +598,7 @@
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
                                     <input  area="requires" detalhe="totalInCart" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="...">
+                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  value="${cupomData.type.totalInCart}">
                                 </div>
                                 <br>
                                 </div>
@@ -599,7 +619,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="applicability" detalhe="allProducts" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808014"
+                                        <input ${cupomData.applicability.allProducts ? 'checked="true"' : ''} area="applicability" detalhe="allProducts" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808014"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808014"></label></div><label style=" font-size: 20px;" class="label">Todos os produtos
                                     </label>
@@ -615,7 +635,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="applicability" detalhe="especificCategories" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808013"
+                                        <input  ${cupomData.applicability.especificCategories ? 'checked="true"' : ''} area="applicability" detalhe="especificCategories" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808013"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808013"></label></div><label style=" font-size: 20px;" class="label">Categorias específicas
                                     </label>
@@ -635,7 +655,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="applicability" detalhe="especificTags" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808012"
+                                        <input  ${cupomData.applicability.especificTags ? 'checked="true"' : ''} area="applicability" detalhe="especificTags" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808012"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808012"></label></div><label style=" font-size: 20px;" class="label">Tags específicas
                                     </label>
@@ -663,7 +683,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input area="validate" detalhe="withoutTimeLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808011"
+                                        <input  ${cupomData.validate.withoutTimeLimits ? 'checked="true"' : ''} area="validate" detalhe="withoutTimeLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808011"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808011"></label></div><label style=" font-size: 20px;" class="label">Sem limite de tempo
                                     </label>
@@ -679,7 +699,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="validate" detalhe="especificDate" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808010"
+                                        <input  ${cupomData.validate.especificDate ? 'checked="true"' : ''} area="validate" detalhe="especificDate" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808010"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808010"></label></div><label style=" font-size: 20px;" class="label">Data específica
                                     </label>
@@ -688,10 +708,10 @@
                             </div>
                             <div style="padding:0 2%" class="row">
                                 <div class="col-md-6">
-                                    <input  area="validate" detalhe="dateStart" onchange="setObject($(this))" style="max-width: 200px" fieldname="status" class="form-control" type="date">
+                                    <input value="${cupomData.validate.dateStart}" area="validate" detalhe="dateStart" onchange="setObject($(this))" style="max-width: 200px" fieldname="status" class="form-control" type="date">
                                 </div>
                                 <div class="col-md-6">
-                                    <input   area="validate" detalhe="dateEnd" onchange="setObject($(this))" style="max-width: 200px" fieldname="status" class="form-control"  type="date">
+                                    <input  value="${cupomData.validate.dateEnd}"  area="validate" detalhe="dateEnd" onchange="setObject($(this))" style="max-width: 200px" fieldname="status" class="form-control"  type="date">
                                 </div>
                             </div>
                         </div>
@@ -711,7 +731,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="marketLimits" detalhe="withoutLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080112"
+                                        <input  ${cupomData.marketLimits.withoutLimits ? 'checked="true"' : ''} area="marketLimits" detalhe="withoutLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080112"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080112"></label></div><label style=" font-size: 20px;" class="label">Sem limite de uso
                                     </label>
@@ -727,7 +747,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="marketLimits" detalhe="byTotalsActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080113"
+                                        <input ${cupomData.marketLimits.byTotalsActive ? 'checked="true"' : ''} area="marketLimits" detalhe="byTotalsActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080113"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080113"></label></div><label style=" font-size: 20px;" class="label">Limitar o número de utilizações totais
                                     </label>
@@ -739,7 +759,7 @@
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
                                     <input  area="marketLimits" detalhe="byTotals" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="...">
+                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="${cupomData.marketLimits.byTotals}">
                                 </div>
                                 <br>
                                 </div>
@@ -761,7 +781,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="clientLimits" detalhe="withoutLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080123"
+                                        <input ${cupomData.clientLimits.withoutLimits ? 'checked="true"' : ''} area="clientLimits" detalhe="withoutLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080123"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080123"></label></div><label style=" font-size: 20px;" class="label">Sem limite de uso
                                     </label>
@@ -777,7 +797,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input area="clientLimits" detalhe="byTotalsActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080132"
+                                        <input ${cupomData.clientLimits.byTotalsActive ? 'checked="true"' : ''} area="clientLimits" detalhe="byTotalsActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080132"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080132"></label></div><label style=" font-size: 20px;" class="label">Limitar o número de utilizações totais por cliente
                                     </label>
@@ -789,7 +809,7 @@
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
                                     <input area="clientLimits" detalhe="byTotals" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="...">
+                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="${cupomData.clientLimits.byTotals}">
                                 </div>
                                 <br>
                                 </div>
@@ -802,7 +822,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="clientLimits" detalhe="onFirstPurchase" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080143"
+                                        <input ${cupomData.clientLimits.onFirstPurchase ? 'checked="true"' : ''} area="clientLimits" detalhe="onFirstPurchase" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080143"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080143"></label></div><label style=" font-size: 20px;" class="label">Apenas na primeira compra do cliente
                                     </label>
@@ -829,7 +849,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="accumulation" detalhe="denyAccumulation" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080154"
+                                        <input ${cupomData.accumulation.denyAccumulation ? 'checked="true"' : ''} area="accumulation" detalhe="denyAccumulation" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080154"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080154"></label></div><label style=" font-size: 20px;" class="label">Não permitir acumulação
                                     </label>
@@ -848,7 +868,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  area="accumulation" detalhe="grantAccumulation" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080156"
+                                        <input ${cupomData.accumulation.grantAccumulation ? 'checked="true"' : ''} area="accumulation" detalhe="grantAccumulation" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080156"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080156"></label></div><label style=" font-size: 20px;" class="label">Permitir a utilização
                                     </label> 
@@ -876,7 +896,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input area="cupom" detalhe="fromCPF" onchange="setObject($(this))" fieldname="status" id="switch-shadow180801"
+                                        <input  ${cupomData.cupom.fromCPF ? 'checked="true"' : ''} area="cupom" detalhe="fromCPF" onchange="setObject($(this))" fieldname="status" id="switch-shadow180801"
                                           class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow180801"></label></div><label style=" font-size: 20px;" class="label">Cupom para um CPF
                                     </label> 
@@ -889,7 +909,7 @@
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
                                     <input area="cupom" detalhe="toCPF" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="...">
+                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" value="${cupomData.cupom.toCPF}">
                                 </div>
                                 <br>
                                 </div>
