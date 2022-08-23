@@ -419,8 +419,7 @@
                 </div>
                 <div class="listaDeFretes">
 
-                    {{!-- <div onclick="modalEditDesconto($(this),'Frete Grátis')"
-                        class="row radius20 product "
+                    {{!-- <div onclick="modalEditDesconto($(this),'Frete Grátis')" class="row radius20 product "
                         style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
                         <div style="max-width: 80px;" class="col-sm">
                             <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
@@ -907,11 +906,38 @@
                                     id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  value="${cupomData.applicability.especificCategoriesValue}">
                                 </div>
                                 <br>
-                                 <div style="max-height: 30vh" class="col-md-12 verticalScroll">
-                                    <ul style="    margin-top: 5%;" class="list animate__animated "> 
-                                    ${getCategoriesAndSubToFilterLinks(MY_CATEGORIES)}
-                                    </ul>
-                                </div>
+                                    <div class="col-md-12 grupoCinza">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div style="padding:0 2%" class="row listaCategoriasFilter">
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div  class="input-group  ico dropItems"> 
+                                                ${arrowDown}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="display:none; margin-top: 3%" class="row grupoCategorias drop">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                <input id="buscaCategorias" type="text" style="min-width: 300px;font-size: 1.3rem" value="" class="form-control" placeholder="Busque por categorias" /> 
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text"> 
+                                                        <i style="color: #f6b504; font-weight: bold;" class="fas fa-search"></i> 
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div style="max-height: 30vh" class="col-md-12 verticalScroll">
+                                                <ul style="    margin-top: 5%;" class="list animate__animated "> 
+                                                ${getCategoriesAndSubToFilterLinks(MY_CATEGORIES)}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -1227,6 +1253,37 @@
         $(".affiliatesAccess").each(function () {
             $(this)[0].checked = active
         })
+    }
+
+    function getCategoriesPromocoes(MY_CATEGORIES) {
+
+        console.log('categorias', MY_CATEGORIES)
+        var html3 = '',
+            nova = '<li class="novaLI"></li>';
+
+
+        for (const k in MY_CATEGORIES) {
+            var content = '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
+            html3 += '<li    class="list-item sub-list-item animate__animated targetBusca">' + arrowDown3 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="' + MY_CATEGORIES[k].categorie_icon + '" style="width: 30px; height: 30px; margin-top -10%"/> ';
+            content += nova
+            if (MY_CATEGORIES[k].subCategorias != "?") {
+
+                var txtCategories = MY_CATEGORIES[k].subCategorias.split(",");
+                for (let a = 0; a < txtCategories.length; a++) {
+                    if (txtCategories[a].length > 0 && txtCategories[a] != '' && txtCategories[a] != 'null' && txtCategories[a] != 'undefined' && txtCategories[a] != null && txtCategories[a] != undefined) {
+
+                        content += '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar"  onchange="setaLink($(this),\'subcategoria\',\'' + txtCategories[a] + '\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
+                    }
+
+                    ////////////console.log(content)
+                }
+            }
+            content += '</ul>';
+            html3 += MY_CATEGORIES[k].categoria + ' <input class="marcar mcInterna"  onchange="setaLink($(this),\'categoria\',\'null\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+            html3 += content + '</li> ';
+        }
+
+        return html3
     }
 
 </script>
