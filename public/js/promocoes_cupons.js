@@ -2,6 +2,30 @@ var AFFILIATE_ID = localStorage.AFFILIATE_ID
 var MASTER_ID = localStorage.MASTER_ID
 var mainHost = 'https://api-smartcomerci.com.br:9090'
 
+$.ajax({
+    type: "POST",
+    url: "https://api-smartcomerci.com.br:9090/getCategories",
+    headers: {
+        "x-access-token": localStorage.token,
+    },
+    data: {
+        "affiliate_id": localStorage.AFFILIATE_ID,
+        "master_id": localStorage.MASTER_ID,
+    },
+    success: function (categories) { 
+            CATEGORIES = categories.results;
+            var CATEGORIES_SHOW = [];
+            var breakPoint = 100,
+                count = 0; 
+            var myCategories = getCategorias(CATEGORIES)
+            MY_CATEGORIES = myCategories 
+    },
+    error: function (data2) {
+     console.log('data2 catgosss'); 
+    },
+    complete: function () { },
+});
+
 
 let OBJETO_MODEL = {
     main: {
