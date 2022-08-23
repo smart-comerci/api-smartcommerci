@@ -541,7 +541,7 @@
         }
 
          
-        cupomData.main.type = element.attr("type")
+        cupomData.main.type = element.attr("type") ? element.attr("type") : element.attr("target")
       
  
 
