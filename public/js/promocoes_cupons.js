@@ -6,7 +6,7 @@ var mainHost = 'https://api-smartcomerci.com.br:9090'
 let OBJETO_MODEL = {
     main: {
         active: false,
-        isCupom: false,
+        type: "",
         name: "",
         description: "",
         allAffiliates: false,
@@ -62,7 +62,7 @@ let OBJETO_MODEL = {
 let OBJETO_DEFAULT = {
     main: {
         active: false,
-        isCupom: false,
+        type: "",
         name: "",
         description: "",
         allAffiliates: false,
