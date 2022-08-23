@@ -328,3 +328,4 @@ async function CLOSE_AND_CANCEL(type, ID){
     $(".close").click()
 }
 
+getObjects()
