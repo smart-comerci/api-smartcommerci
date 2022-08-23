@@ -914,7 +914,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div onclick="dropaCategorias($(this).parent().parent().parent())"  class="input-group  ico dropItems"> 
+                                                <div   class="input-group  ico dropItems"> 
                                                 ${arrowDown}
                                                 </div>
                                             </div>
@@ -932,7 +932,7 @@
                                             </div>
                                             <div style="max-height: 30vh" class="col-md-12 verticalScroll">
                                                 <ul style="    margin-top: 5%;" class="list animate__animated "> 
-                                                ${getCategoriesAndSubToFilterLinks(MY_CATEGORIES)}
+                                                ${getCategoriesAndSub(MY_CATEGORIES)}
                                                 </ul>
                                             </div>
                                         </div>
@@ -1255,6 +1255,9 @@
         })
     }
 
+/*
+
+
     function getCategoriesPromocoes(MY_CATEGORIES) {
 
         console.log('categorias', MY_CATEGORIES)
@@ -1297,5 +1300,21 @@ element.find(".drop").show()
         }
         
     }
+
+    function dropaCategoriasInner(element){
+        console.log('Dropando')
+        if(element.find(".listInner2 ").attr("dropei") === '1'){
+            element.find(".listInner2 ").attr("dropei","0")
+element.find(".listInner2 ").hide()
+        }else{
+             element.find(".listInner2 ").attr("dropei","1")
+element.find(".listInner2 ").show()
+        }
+        
+    }
+
+
+
+*/
 
 </script>
