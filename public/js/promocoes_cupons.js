@@ -306,6 +306,7 @@ async function updateObject(myObject, ID) {
 }
 
 async function CLOSE_AND_SAVE(type, ID){
+    console.log(type,ID)
 
     if(type === 'insert'){
         await insertNew(OBJETO_MODEL)
