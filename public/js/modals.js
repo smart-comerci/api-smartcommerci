@@ -264,6 +264,7 @@ function getCategoriesAndSubToFilterLinks(MY_CATEGORIES) {
 
   return html3
 }
+ 
 
 function setaLink(elemento,tipo, sub, cat , pag) {
  
