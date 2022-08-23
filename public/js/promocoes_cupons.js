@@ -452,7 +452,7 @@ function removePROMOCAOTXT(texto) {
                 return object === txt;
               });  
               let lista = MEU_ARRAY.splice(findIndex, 1);
-              console.log('lista e idnex',index,lista, MEU_ARRAY )
+              console.log('lista e idnex',findIndex,lista, MEU_ARRAY )
             OBJETO_MODEL.applicability.especificCategoriesValue = lista
         
 
