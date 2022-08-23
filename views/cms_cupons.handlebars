@@ -278,13 +278,15 @@
     }
     
     function modalEditCupom(element, name) {
-           let cupomData
+         let cupomData, type = 'update'
         if (element.attr("target") === 'novoDesconto') {
             console.log('novo, pegando model')
             cupomData = OBJETO_MODEL
+            type = 'insert'
         } else {
             console.log('normal buscando pelo nome')
             cupomData = OBJECT_LIST.find((cp) => cp.main.name === name)
+            OBJETO_MODEL = cupomData
         }
 
         console.log("dado usado",cupomData)
@@ -306,6 +308,7 @@
 
                     <div class="col-md">
                     <div
+                    onclick="CLOSE_AND_CANCEL(${type},${cupomData.id})"
                         style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto"
                         class="input-group">
                         <label
@@ -315,6 +318,7 @@
                     </div>
                     <div class="col-md">
                     <div
+                    onclick="CLOSE_AND_DELETE(${cupomData.id})"
                         style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto"
                         class="input-group">
                         <label
@@ -325,6 +329,7 @@
 
                     <div class="col-md ">
                     <div
+                    onclick="CLOSE_AND_SAVE(${type},${cupomData.id})"
                         style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto"
                         class="input-group">
                         <label

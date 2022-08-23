@@ -59,6 +59,62 @@ let OBJETO_MODEL = {
     }
 }
 
+let OBJETO_DEFAULT = {
+    main: {
+        active: false,
+        isCupom: false,
+        name: "",
+        description: "",
+        allAffiliates: false,
+        affiliates: "all"
+    },
+    cupom: {
+        cupomCode: "",
+        fromCPF: false,
+        toCPF: "",
+    },
+    type: {
+        valueActive: false,
+        value: 0,
+        percentActive: false,
+        percent: 0
+    },
+    requires: {
+        withoutRequires: false,
+        totalFromCartActive: false,
+        totalFromCart: 0,
+        totalInCartActive: false,
+        totalInCart: 0
+  
+    },
+    applicability: {
+        allProducts: false,
+        especificCategories: false,
+        especificTags: false
+    },
+    validate: {
+        withoutTimeLimits: false,
+        especificDate: false,
+        dateStart: '',
+        dateEnd: ''
+    },
+    marketLimits: {
+        withoutLimits: false,
+        byTotalsActive: false,
+        byTotals: 0
+    },
+    clientLimits: {
+        withoutLimits: false,
+        onFirstPurchase: false,
+        byTotalsActive: false,
+        byTotals: 0
+    },
+    accumulation: {
+        grantAccumulation: false,
+        denyAccumulation: false
+    }
+}
+
 
 let OBJECT_LIST = []
 
@@ -141,6 +197,30 @@ async function insertNew(myObject) {
     });
 }
 
+async function deleteObject(ID) {
+    $.ajax({
+        type: "POST",
+        url: mainHost + '/deleteById',
+        data: {
+            table: "promocoes_cupons",
+            item_id: ID
+
+        },
+        headers: {
+            "x-access-token": localStorage.token,
+        },
+        success: function (data) {
+            console.log('deleteObject', data)
+
+        },
+        error: function (data) {
+            console.log('deleteObject', data)
+        },
+        complete: function () { },
+    });
+}
+ 
+
 async function updateObject(myObject, ID) {
 
     $.ajax({
@@ -168,5 +248,37 @@ async function updateObject(myObject, ID) {
         },
         complete: function () { },
     });
+}
+
+async function CLOSE_AND_SAVE(type, ID){
+
+    if(type === 'insert'){
+        await insertNew(OBJETO_MODEL)
+        OBJETO_MODEL = OBJETO_DEFAULT
+    }
+    if(type === 'update'){
+        if(ID){
+            await updateObject(OBJETO_MODEL, ID)
+            OBJETO_MODEL = OBJETO_DEFAULT
+        }else{
+            console.log("ID not provided", ID)
+        }
+        
+    }
+
+    $(".close").click()
+
+}
+
+async function CLOSE_AND_DELETE(ID){
+    if(ID){
+        await deleteObject(ID)
+    }
+    $(".close").click()
+}
+
+async function CLOSE_AND_CANCEL(type, ID){
+    OBJETO_MODEL = OBJETO_DEFAULT
+    $(".close").click()
 }
 
