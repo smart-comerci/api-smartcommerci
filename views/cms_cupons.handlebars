@@ -225,6 +225,7 @@
 <script>
 
     function getCupom(cupomData){
+        console.log("cupom data get",cupomData)
         let html = `
             <div  target="${cupomData.main.name}" onclick="modalEditCupom($(this),'Cupom')" class="row radius20 product bg-gray-400"
                         style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
