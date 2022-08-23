@@ -453,7 +453,7 @@ function removePROMOCAOTXT(texto) {
               });  
               let lista = MEU_ARRAY.splice(findIndex, 1);
               console.log('lista e idnex',findIndex,lista, MEU_ARRAY )
-            OBJETO_MODEL.applicability.especificCategoriesValue = lista
+            OBJETO_MODEL.applicability.especificCategoriesValue = MEU_ARRAY
         
 
 
