@@ -146,9 +146,9 @@ async function getObjects(element) {
 
             console.log('OBJECT_LIST', OBJECT_LIST)
 
-            const cupons = OBJECT_LIST.find( (obj) => obj.main.type === 'Cupom')
-            const fretes = OBJECT_LIST.find( (obj) => obj.main.type === 'Frete Grátis')
-            const descontos = OBJECT_LIST.find( (obj) => obj.main.type === 'Desconto')
+            const cupons = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Cupom')
+            const fretes = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Frete Grátis')
+            const descontos = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Desconto')
 
             if(Array.isArray(cupons)){
                 for(const k in cupons){
