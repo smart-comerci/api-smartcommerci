@@ -123,7 +123,7 @@ async function getObjects(element) {
         type: "POST",
         url: mainHost + '/getById',
         data: {
-            tableName: "promocoes_cupons",
+            table: "promocoes_cupons",
             id_name: 'master_id',  
             id_value: MASTER_ID
 
