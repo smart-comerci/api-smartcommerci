@@ -524,7 +524,7 @@
     
     function modalEditDesconto(element, name) {
         let cupomData
-        if (name === 'novoDesconto') {
+        if (element.attr("target") === 'novoDesconto') {
             console.log('novo, pegando model')
             cupomData = OBJECT_MODEL
         } else {
