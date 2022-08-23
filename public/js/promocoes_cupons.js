@@ -194,6 +194,8 @@ async function getObjects(element) {
                 } 
             }
 
+  
+
 
         },
         error: function (data) {
@@ -216,6 +218,7 @@ async function setObject(element) {
     )
     OBJETO_MODEL[area][detalhe] = valor
     console.log('alterado =>', OBJETO_MODEL)
+
 }
 
 async function insertNew(myObject) {
@@ -236,6 +239,7 @@ async function insertNew(myObject) {
         },
         success: function (data) {
             console.log('insertNew', data)
+            getObjects()
 
         },
         error: function (data) {
@@ -259,6 +263,7 @@ async function deleteObject(ID) {
         },
         success: function (data) {
             console.log('deleteObject', data)
+            getObjects()
 
         },
         error: function (data) {
@@ -289,6 +294,7 @@ async function updateObject(myObject, ID) {
         },
         success: function (data) {
             console.log('updateById', data)
+            getObjects()
 
         },
         error: function (data) {
@@ -313,7 +319,7 @@ async function CLOSE_AND_SAVE(type, ID){
         }
         
     }
-    getObjects()
+  
     $(".close").click()
 
 }
@@ -322,13 +328,13 @@ async function CLOSE_AND_DELETE(ID){
     if(ID){
         await deleteObject(ID)
     }
-    getObjects()
+    
     $(".close").click()
 }
 
 async function CLOSE_AND_CANCEL(type, ID){
     OBJETO_MODEL = OBJETO_DEFAULT
-    getObjects()
+    
     $(".close").click()
 }
 
