@@ -401,7 +401,7 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES, listaSelecionada) {
         nova = '<li class="novaLI"></li>';
 
         function getActive(text){
-            let eu = listaSelecionada.fin((l) => l === text)
+            let eu = listaSelecionada.find((l) => l === text)
             if(eu){
                 return 'checked="true"'
             }else{
@@ -439,7 +439,7 @@ function getTags(MY_TAGS, listaSelecionada) {
         nova = '<li class="novaLI"></li>';
 
         function getActive(text){
-            let eu = listaSelecionada.fin((l) => l === text)
+            let eu = listaSelecionada.find((l) => l === text)
             if(eu){
                 return 'checked="true"'
             }else{
