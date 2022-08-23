@@ -28,9 +28,8 @@ let OBJETO_MODEL = {
         totalFromCartActive: false,
         totalFromCart: 0,
         totalInCartActive: false,
-        totalInCart: 0,
-        lengthInCartActive: false,
-        lengthInCart: 0
+        totalInCart: 0
+  
     },
     applicability: {
         allProducts: false,
@@ -55,7 +54,8 @@ let OBJETO_MODEL = {
         byTotals: 0
     },
     accumulation: {
-        grantAccumulation: false
+        grantAccumulation: false,
+        denyAccumulation: false
     }
 }
 
@@ -101,6 +101,9 @@ async function getObjects(element) {
 
 async function setObject(element) {
     console.log('antes de alterar =>', OBJETO_MODEL)
+    console.log(
+        `OBJETO_MODEL[${area}][${detalhe}]`
+    )
     let area = element.attr("are")
     let detalhe = element.attr("detalhe")
     let valor = element.attr("type") === "checkbox" ? element[0].checked : element.val()
