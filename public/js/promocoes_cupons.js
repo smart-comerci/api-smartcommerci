@@ -149,7 +149,9 @@ async function getObjects(element) {
             const cupons = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Cupom')
             const fretes = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Frete Grátis')
             const descontos = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Desconto')
-
+            $(".listaDePromocoes").html("")
+            $(".listaDeCupons").html("")
+            $(".listaDeFretes").html("")
             if(Array.isArray(cupons)){
                 for(const k in cupons){
                     $(".listaDeCupons").append(
@@ -327,5 +329,7 @@ async function CLOSE_AND_CANCEL(type, ID){
     OBJETO_MODEL = OBJETO_DEFAULT
     $(".close").click()
 }
+
+
 
 getObjects()
