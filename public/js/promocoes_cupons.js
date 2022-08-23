@@ -382,7 +382,7 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
 
     for (const k in MY_CATEGORIES) {
         var content = '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
-        html3 += '<li    class="list-item sub-list-item animate__animated targetBusca">' + arrowDown4 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="' + MY_CATEGORIES[k].categorie_icon + '" style="width: 30px; height: 30px; margin-top -10%"/> ';
+        html3 += '<li    class="list-item sub-list-item animate__animated ">' + arrowDown4 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="' + MY_CATEGORIES[k].categorie_icon + '" style="width: 30px; height: 30px; margin-top -10%"/> ';
         content += nova
         if (MY_CATEGORIES[k].subCategorias != "?") {
 
@@ -390,7 +390,7 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
             for (let a = 0; a < txtCategories.length; a++) {
                 if (txtCategories[a].length > 0 && txtCategories[a] != '' && txtCategories[a] != 'null' && txtCategories[a] != 'undefined' && txtCategories[a] != null && txtCategories[a] != undefined) {
 
-                    content += '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + txtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
+                    content += '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + txtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
                 }
 
                 ////////////console.log(content)
