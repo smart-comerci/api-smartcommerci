@@ -431,11 +431,14 @@ function getTags(MY_TAGS) {
 
 
     for (const k in MY_TAGS) {
-        var content = '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
-        html3 += '<li    class="list-item sub-list-item animate__animated ">' + arrowDown4 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__">  ';
-    
-        html3 += MY_TAGS[k] + ' <input class="marcar"  onchange="subTagInputTAG($(this),\'listaTagsFilter\',\'' + MY_TAGS[k]+ '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
-        html3 += '</li> ';
+        if(MY_TAGS[k] !== ""){
+            var content = '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
+            html3 += '<li    class="list-item sub-list-item animate__animated ">' + arrowDown4 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__">  ';
+        
+            html3 += MY_TAGS[k] + ' <input class="marcar"  onchange="subTagInputTAG($(this),\'listaTagsFilter\',\'' + MY_TAGS[k]+ '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+            html3 += '</li> ';
+        }
+        
     }
 
     return html3
