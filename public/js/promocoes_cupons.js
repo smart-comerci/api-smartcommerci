@@ -134,6 +134,7 @@ async function getObjects(element) {
         success: function (data) {
             console.log('getByTableName', data)
             OBJECT_LIST = []
+            OBJETO_MODEL = OBJETO_DEFAULT
             for(const k in data){
                 const { id, createdAt, updatedAt, content } = data[k]
                 OBJECT_LIST.push({
