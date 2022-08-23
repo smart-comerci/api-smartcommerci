@@ -58,9 +58,9 @@ let OBJETO_MODEL = {
     applicability: {
         allProducts: false,
         especificCategories: false,
-        especificCategoriesValue: "",
+        especificCategoriesValue: [],
         especificTags: false,
-        especificTagsValue: ""
+        especificTagsValue: []
     },
     validate: {
         withoutTimeLimits: false,
@@ -116,9 +116,9 @@ let OBJETO_DEFAULT = {
     applicability: {
         allProducts: false,
         especificCategories: false,
-        especificCategoriesValue: "",
+        especificCategoriesValue: [],
         especificTags: false,
-        especificTagsValue: ""
+        especificTagsValue: []
     },
     validate: {
         withoutTimeLimits: false,
@@ -426,6 +426,14 @@ var arrowDown4  = '<div onclick="dropaCategoriasInner($(this).parent()) " class=
 
 function subTagInput(ele, elemento, texto) {
     //////console.log(ele,elemento,texto)
+    
+    if(texto){
+        if(Array.isArray(OBJETO_MODEL.applicability.especificCategoriesValue)){
+            OBJETO_MODEL.applicability.especificCategoriesValue.push(texto)
+            let lista = [ ...new Set(OBJETO_MODEL.applicability.especificCategoriesValue)]
+            OBJETO_MODEL.applicability.especificCategoriesValue = lista
+        } 
+    } 
 
     var listaTags = '', listaMarcas = ''
 
