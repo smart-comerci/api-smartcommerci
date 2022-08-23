@@ -281,6 +281,7 @@
     }
     
     function modalEditCupom(element, name) {
+        OBJETO_MODEL = OBJETO_DEFAULT
         let cupomData, type = 'update', originalData
         if (element.attr("target") === 'novoDesconto') {
             console.log('novo, pegando model')
