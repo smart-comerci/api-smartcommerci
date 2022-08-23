@@ -397,7 +397,7 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
             }
         }
         content += '</ul>';
-        html3 += MY_CATEGORIES[k].categoria + ' <input class="marcar mcInterna"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+        html3 += MY_CATEGORIES[k].categoria + ' <input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
         html3 += content + '</li> ';
     }
 
@@ -492,7 +492,7 @@ function subTagInput(ele, elemento, texto) {
         removePROMOCAOTXT(texto)
 
     }
-    verFeedback()
+  
 
 
 
