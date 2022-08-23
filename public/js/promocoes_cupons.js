@@ -585,7 +585,7 @@ function subTagInputTAG(ele, elemento, texto) {
 
     if (texto) {
         if (Array.isArray(OBJETO_MODEL.applicability.especificTagsValue)) {
-            OBJETO_MODEL.applicability.especificCategoriesValue.push(texto)
+            OBJETO_MODEL.applicability.especificTagsValue.push(texto)
             let lista = [...new Set(OBJETO_MODEL.applicability.especificTagsValue)]
             OBJETO_MODEL.applicability.especificTagsValue = lista
         }
@@ -647,7 +647,7 @@ function dropaCategoriasInner(element) {
 }
 
 
-function insereCategoriaPromocaoPromocao(elemento, outroElemento, texto) {
+function insereCategoriaPromocao(elemento, outroElemento, texto) {
  
     outroElemento.attr("id", "desmarcaInput" + contadorIds)
     var newID = "desmarcaInput" + contadorIds
