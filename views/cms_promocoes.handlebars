@@ -470,6 +470,8 @@
 
 <script>
     function getCupom(cupomData){
+        let originalData = cupomData
+        cupomData = cupomData.content
         console.log("cupom data get",cupomData)
         let html = `
             <div  target="${cupomData.main.name}" onclick="modalEditDesconto($(this),'Cupom')" class="row radius20 product bg-gray-400"
@@ -479,7 +481,7 @@
                                     class="checkmark"></span></label>
                         </div>
                         <div style="max-width: 90px; min-width: 90px; " class="col-sm paddingTop20">
-                            <span class="codigoItem">01</span>
+                            <span class="codigoItem">${originalData.id}</span>
                         </div>
                         <div style="min-width: 200px !important; max-width: 200px !important;"
                             class="col-sm  col-text paddingTop20">
