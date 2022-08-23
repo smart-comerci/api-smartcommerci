@@ -98,7 +98,7 @@
         <div class="col-lg-2"></div>
 
 
-        <div target="novoDesconto" onclick="modalEditCupom($(this), 'Cupom')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 180px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;"
+        <div target="novoDesconto" type="Cupom" onclick="modalEditCupom($(this), 'Cupom')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 180px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;"
             class="input-group">
             <div style="border: none; margin: auto;" class="input-group-append">
                 <div style="border: none; margin: auto; padding: 2%;" class="input-group-text">
@@ -295,7 +295,7 @@
             OBJETO_MODEL = cupomData
         }
  
-         cupomData.main.type = element.attr("type") ? element.attr("type") : element.attr("target")
+         cupomData.main.type =   element.attr("type") 
       
  
 

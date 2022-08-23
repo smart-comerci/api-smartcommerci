@@ -180,7 +180,8 @@
 
                 <div style="padding-bottom: 35px;display: inline-flex;" class="row col-md-12">
                     <p class="subTexto col-md-10" style="opacity: 1;">Desconto</p>
-                    <div target="novoDesconto" onclick="modalEditDesconto($(this), 'Desconto')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 180px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;"
+                    <div target="novoDesconto" type="Desconto" onclick="modalEditDesconto($(this), 'Desconto')"
+                        style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 180px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;"
                         class="input-group col-md-2">
                         <div style="border: none; margin: auto;" class="input-group-append">
                             <div style="border: none; margin: auto; padding: 2%;" class="input-group-text">
@@ -327,7 +328,8 @@
 
                 <div style="padding-bottom: 35px;display: inline-flex;" class="row col-md-12">
                     <p class="subTexto col-md-10" style="opacity: 1;max-width: calc(100% - 230px);">Frete</p>
-                    <div  target="novoDesconto" onclick="modalEditDesconto($(this), 'Frete Grátis')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 230px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;gap: 3px;"
+                    <div target="novoDesconto" type="Frete Grátis" onclick="modalEditDesconto($(this), 'Frete Grátis')"
+                        style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 230px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;gap: 3px;"
                         class="input-group col-md-2">
                         <div style="border: none; margin: auto;" class="input-group-append">
                             <div style="border: none; margin: auto; padding: 2%;" class="input-group-text">
@@ -417,7 +419,8 @@
                 </div>
                 <div class="listaDeFretes">
 
-                    {{!-- <div onclick="modalEditDesconto($(this),'Frete Grátis')" class="row radius20 product bg-gray-400"
+                    {{!-- <div onclick="modalEditDesconto($(this),'Frete Grátis')"
+                        class="row radius20 product bg-gray-400"
                         style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
                         <div style="max-width: 80px;" class="col-sm">
                             <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
@@ -469,10 +472,10 @@
 </div>
 
 <script>
-    function getCupom(cupomData, type){
+    function getCupom(cupomData, type) {
         let originalData = cupomData
         cupomData = cupomData.content
-        console.log("cupom data get",cupomData)
+        console.log("cupom data get", cupomData)
         let html = `
             <div  type="${type}"  target="${cupomData.main.name}" onclick="modalEditDesconto($(this),'${cupomData.main.name}')" class="row radius20 product bg-gray-400"
                         style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
@@ -490,9 +493,8 @@
 
                         <div style="min-width: 150px !important; max-width: 150px !important;"
                             class="col-sm paddingTop20">
-                            <label style="font-size:10px !important; padding: 10px" class="infoLabel infoValor">${
-                                cupomData.main.affiliates === 'all' || cupomData.main.allAffiliates  ? 'Todas' : cupomData.main.affiliates
-                                }</label>
+                            <label style="font-size:10px !important; padding: 10px" class="infoLabel infoValor">${cupomData.main.affiliates === 'all' || cupomData.main.allAffiliates ? 'Todas' : cupomData.main.affiliates
+            }</label>
                         </div>
                         <div style="min-width: 150px !important; max-width: 150px !important;"
                             class="col-sm paddingTop20">
@@ -500,21 +502,19 @@
                                 class="infoLabel infoValor">${00}</label>
                         </div>
                         <div class="col-sm paddingTop20">
-                            <label class="label" style="line-height: 1.5 !important;">${
-                               cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' : 
-                               cupomData.validate.especificDate ? cupomData.validate.dateStart : 'Não especificado'
-                                }</label>
+                            <label class="label" style="line-height: 1.5 !important;">${cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' :
+                cupomData.validate.especificDate ? cupomData.validate.dateStart : 'Não especificado'
+            }</label>
                         </div>
                         <div class="col-sm paddingTop20">
-                            <label class="label" style="line-height: 1.5 !important;">${
-                               cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' : 
-                               cupomData.validate.especificDate ? cupomData.validate.dateEnd : 'Não especificado'
-                                }</label>
+                            <label class="label" style="line-height: 1.5 !important;">${cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' :
+                cupomData.validate.especificDate ? cupomData.validate.dateEnd : 'Não especificado'
+            }</label>
                         </div>
 
                         <div class="col-sm">
                             <div class="switch__container  checkaLiga"><input
-                            ${cupomData.main.active  === true ? 'checked="true"':''}
+                            ${cupomData.main.active === true ? 'checked="true"' : ''}
                              acao="ativarProduto" checked="true"
                                     product_code="998503" id="switch-shadow030" class="switch switch--shadow"
                                     type="checkbox"><label class="naoAbreModal" for="switch-shadow030"></label></div>
@@ -522,9 +522,9 @@
                     </div>
          `
 
-         return html
+        return html
     }
-    
+
     function modalEditDesconto(element, name) {
         let cupomData, type = 'update', originalData
         if (element.attr("target") === 'novoDesconto') {
@@ -532,7 +532,7 @@
             cupomData = OBJETO_MODEL
             type = 'insert'
         } else {
-            console.log('normal buscando pelo nome',name)
+            console.log('normal buscando pelo nome', name)
             cupomData = OBJECT_LIST.find((cp) => cp.content.main.name === name)
             originalData = cupomData
             console.log('cupon data', cupomData)
@@ -540,13 +540,13 @@
             OBJETO_MODEL = cupomData
         }
 
-         
-        cupomData.main.type = element.attr("type") ? element.attr("type") : element.attr("target")
-      
- 
+
+        cupomData.main.type = element.attr("type")
 
 
-        console.log("dado usado",cupomData)
+
+
+        console.log("dado usado", cupomData)
 
         var html = `  
         <div style="max-width:100% " class="container">
@@ -656,7 +656,7 @@
                     <div class="col-md-12 " style="margin-top: 3% !important; background: white !important">
                     <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                         <div style="margin: 1% 2%;" class="switch__container">
-                        <input ${cupomData.main.active  === true ? 'checked="true"' : ''} area="main" detalhe="active" onchange="setObject($(this))"  fieldname="status" table="users_affiliates" id="switch-shadow189"
+                        <input ${cupomData.main.active === true ? 'checked="true"' : ''} area="main" detalhe="active" onchange="setObject($(this))"  fieldname="status" table="users_affiliates" id="switch-shadow189"
                             class="switch switch--shadow filaDeMudancas" type="checkbox">
                         <label for="switch-shadow189"></label>
                         </div>
@@ -708,7 +708,7 @@
                         <div class="col-md-10">
                             <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                             <div style="margin: 2% 2%;" class="switch__container">
-                                <input ${cupomData.main.allAffiliates  === true ? 'checked="true"' : ''} area="main" detalhe="allAffiliates" onchange="setObject($(this))" fieldname="status"   id="switch-shadow18009"
+                                <input ${cupomData.main.allAffiliates === true ? 'checked="true"' : ''} area="main" detalhe="allAffiliates" onchange="setObject($(this))" fieldname="status"   id="switch-shadow18009"
                                  class="switch switch--shadow" type="checkbox"><label
                                 for="switch-shadow18009"></label>
                             </div>
@@ -744,7 +744,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.type.valueActive  === true ? 'checked="true"' : ''}  area="type" detalhe="valueActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808019"
+                                        <input ${cupomData.type.valueActive === true ? 'checked="true"' : ''}  area="type" detalhe="valueActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808019"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808019"></label></div><label style=" font-size: 20px;" class="label">Valor
                                     </label>
@@ -769,7 +769,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.type.percentActive  === true ? 'checked="true"' : ''} area="type" detalhe="percentActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808018"
+                                        <input ${cupomData.type.percentActive === true ? 'checked="true"' : ''} area="type" detalhe="percentActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808018"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808018"></label></div><label style=" font-size: 20px;" class="label">Porcentágem
                                     </label>
@@ -801,7 +801,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.type.withoutRequires  === true ? 'checked="true"' : ''}  area="requires" detalhe="withoutRequires" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808017"
+                                        <input  ${cupomData.type.withoutRequires === true ? 'checked="true"' : ''}  area="requires" detalhe="withoutRequires" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808017"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808017"></label></div><label style=" font-size: 20px;" class="label">Sem requisitos mínimos
                                     </label>
@@ -817,7 +817,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.type.totalFromCartActive  === true ? 'checked="true"' : ''} area="requires" detalhe="totalFromCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808016"
+                                        <input  ${cupomData.type.totalFromCartActive === true ? 'checked="true"' : ''} area="requires" detalhe="totalFromCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808016"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808016"></label></div><label style=" font-size: 20px;" class="label">Total do carrinho
                                     </label>
@@ -842,7 +842,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.type.totalInCartActive  === true ? 'checked="true"' : ''} area="requires" detalhe="totalInCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808015"
+                                        <input  ${cupomData.type.totalInCartActive === true ? 'checked="true"' : ''} area="requires" detalhe="totalInCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808015"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808015"></label></div><label style=" font-size: 20px;" class="label">Quantidade de itens no carrinho
                                     </label>
@@ -875,7 +875,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.applicability.allProducts  === true ? 'checked="true"' : ''} area="applicability" detalhe="allProducts" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808014"
+                                        <input ${cupomData.applicability.allProducts === true ? 'checked="true"' : ''} area="applicability" detalhe="allProducts" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808014"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808014"></label></div><label style=" font-size: 20px;" class="label">Todos os produtos
                                     </label>
@@ -891,7 +891,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.applicability.especificCategories  === true ? 'checked="true"' : ''} area="applicability" detalhe="especificCategories" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808013"
+                                        <input  ${cupomData.applicability.especificCategories === true ? 'checked="true"' : ''} area="applicability" detalhe="especificCategories" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808013"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808013"></label></div><label style=" font-size: 20px;" class="label">Categorias específicas
                                     </label>
@@ -911,7 +911,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.applicability.especificTags  === true ? 'checked="true"' : ''} area="applicability" detalhe="especificTags" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808012"
+                                        <input  ${cupomData.applicability.especificTags === true ? 'checked="true"' : ''} area="applicability" detalhe="especificTags" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808012"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808012"></label></div><label style=" font-size: 20px;" class="label">Tags específicas
                                     </label>
@@ -939,7 +939,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.validate.withoutTimeLimits  === true ? 'checked="true"' : ''} area="validate" detalhe="withoutTimeLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808011"
+                                        <input  ${cupomData.validate.withoutTimeLimits === true ? 'checked="true"' : ''} area="validate" detalhe="withoutTimeLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808011"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808011"></label></div><label style=" font-size: 20px;" class="label">Sem limite de tempo
                                     </label>
@@ -955,7 +955,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.validate.especificDate  === true ? 'checked="true"' : ''} area="validate" detalhe="especificDate" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808010"
+                                        <input  ${cupomData.validate.especificDate === true ? 'checked="true"' : ''} area="validate" detalhe="especificDate" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808010"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808010"></label></div><label style=" font-size: 20px;" class="label">Data específica
                                     </label>
@@ -987,7 +987,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.marketLimits.withoutLimits  === true ? 'checked="true"' : ''} area="marketLimits" detalhe="withoutLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080112"
+                                        <input  ${cupomData.marketLimits.withoutLimits === true ? 'checked="true"' : ''} area="marketLimits" detalhe="withoutLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080112"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080112"></label></div><label style=" font-size: 20px;" class="label">Sem limite de uso
                                     </label>
@@ -1003,7 +1003,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.marketLimits.byTotalsActive  === true ? 'checked="true"' : ''} area="marketLimits" detalhe="byTotalsActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080113"
+                                        <input ${cupomData.marketLimits.byTotalsActive === true ? 'checked="true"' : ''} area="marketLimits" detalhe="byTotalsActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080113"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080113"></label></div><label style=" font-size: 20px;" class="label">Limitar o número de utilizações totais
                                     </label>
@@ -1037,7 +1037,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.clientLimits.withoutLimits  === true ? 'checked="true"' : ''} area="clientLimits" detalhe="withoutLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080123"
+                                        <input ${cupomData.clientLimits.withoutLimits === true ? 'checked="true"' : ''} area="clientLimits" detalhe="withoutLimits" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080123"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080123"></label></div><label style=" font-size: 20px;" class="label">Sem limite de uso
                                     </label>
@@ -1053,7 +1053,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.clientLimits.byTotalsActive  === true ? 'checked="true"' : ''} area="clientLimits" detalhe="byTotalsActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080132"
+                                        <input ${cupomData.clientLimits.byTotalsActive === true ? 'checked="true"' : ''} area="clientLimits" detalhe="byTotalsActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080132"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080132"></label></div><label style=" font-size: 20px;" class="label">Limitar o número de utilizações totais por cliente
                                     </label>
@@ -1078,7 +1078,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.clientLimits.onFirstPurchase  === true ? 'checked="true"' : ''} area="clientLimits" detalhe="onFirstPurchase" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080143"
+                                        <input ${cupomData.clientLimits.onFirstPurchase === true ? 'checked="true"' : ''} area="clientLimits" detalhe="onFirstPurchase" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080143"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080143"></label></div><label style=" font-size: 20px;" class="label">Apenas na primeira compra do cliente
                                     </label>
@@ -1105,7 +1105,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.accumulation.denyAccumulation  === true ? 'checked="true"' : ''} area="accumulation" detalhe="denyAccumulation" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080154"
+                                        <input ${cupomData.accumulation.denyAccumulation === true ? 'checked="true"' : ''} area="accumulation" detalhe="denyAccumulation" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080154"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080154"></label></div><label style=" font-size: 20px;" class="label">Não permitir acumulação
                                     </label>
@@ -1124,7 +1124,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input ${cupomData.accumulation.grantAccumulation  === true ? 'checked="true"' : ''} area="accumulation" detalhe="grantAccumulation" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080156"
+                                        <input ${cupomData.accumulation.grantAccumulation === true ? 'checked="true"' : ''} area="accumulation" detalhe="grantAccumulation" onchange="setObject($(this))" fieldname="status" id="switch-shadow18080156"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow18080156"></label></div><label style=" font-size: 20px;" class="label">Permitir a utilização
                                     </label> 
