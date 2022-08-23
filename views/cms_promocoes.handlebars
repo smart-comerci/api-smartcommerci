@@ -1271,7 +1271,7 @@
                 for (let a = 0; a < txtCategories.length; a++) {
                     if (txtCategories[a].length > 0 && txtCategories[a] != '' && txtCategories[a] != 'null' && txtCategories[a] != 'undefined' && txtCategories[a] != null && txtCategories[a] != undefined) {
 
-                        content += '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + MtxtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
+                        content += '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + txtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
                     }
 
                     ////////////console.log(content)
