@@ -100,9 +100,10 @@ async function getObjects(element) {
 }
 
 async function setObject(element) {
+    console.log(element)
     console.log('antes de alterar =>', OBJETO_MODEL)
    
-    let area = element.attr("are")
+    let area = element.attr("area")
     let detalhe = element.attr("detalhe")
     let valor = element.attr("type") === "checkbox" ? element[0].checked : element.val()
 
