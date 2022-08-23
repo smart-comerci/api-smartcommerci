@@ -602,7 +602,7 @@ function subTagInputTAG(ele, elemento, texto) {
     if (ele[0].checked == true) {
         // $("."+elemento).append(html)
         //////console.log("elemento tal",$("."+elemento))
-        insereCategoriaPromocao($("." + elemento), ele, texto)
+        insereTagPromocao($("." + elemento), ele, texto)
 
     } else {
         $("." + elemento).find(".categoriaLabel").each(function () {
@@ -652,17 +652,36 @@ function insereCategoriaPromocao(elemento, outroElemento, texto) {
     outroElemento.attr("id", "desmarcaInput" + contadorIds)
     var newID = "desmarcaInput" + contadorIds
     if (texto.split(",").length == 0) {
-        var html = '<div  class="input-group categoriaLabel">' + "<label  >" + texto + "</label>" + '<label onclick="removerei($(this),\'' + newID + '\')"  class="iconClose  "><i class="far fa-times-circle"></i></label>' + "</div>";
+        var html = '<div  class="input-group categoriaLabel">' + "<label  >" + texto + "</label>" + '<label onclick="removereiPromocao($(this),\'' + texto + '\',\'categoria\')"  class="iconClose  "><i class="far fa-times-circle"></i></label>' + "</div>";
         elemento.append(html);
     } else {
         var lista = texto.split(",");
         for (const k in lista) {
-            var html = '<div  class="input-group categoriaLabel">' + "<label  >" + lista[k] + "</label>" + '<label  onclick="removerei($(this),\'' + newID + '\')"  class="iconClose  "><i class="far fa-times-circle"></i></label>' + "</div>";
+            var html = '<div  class="input-group categoriaLabel">' + "<label  >" + lista[k] + "</label>" + '<label  onclick="removereiPromocao($(this),\'' + lista[k] + '\',\'categoria\')"  class="iconClose  "><i class="far fa-times-circle"></i></label>' + "</div>";
             elemento.append(html);
         }
     }
     contadorIds++
 }
+
+
+function insereTagPromocao(elemento, outroElemento, texto) {
+
+    outroElemento.attr("id", "desmarcaInput" + contadorIds)
+    var newID = "desmarcaInput" + contadorIds
+    if (texto.split(",").length == 0) {
+        var html = '<div  class="input-group categoriaLabel">' + "<label  >" + texto + "</label>" + '<label onclick="removereiPromocao($(this),\'' + texto + '\',\'tag\')"  class="iconClose  "><i class="far fa-times-circle"></i></label>' + "</div>";
+        elemento.append(html);
+    } else {
+        var lista = texto.split(",");
+        for (const k in lista) {
+            var html = '<div  class="input-group categoriaLabel">' + "<label  >" + lista[k] + "</label>" + '<label  onclick="removereiPromocao($(this),\'' + lista[k] + '\',\'tag\')"  class="iconClose  "><i class="far fa-times-circle"></i></label>' + "</div>";
+            elemento.append(html);
+        }
+    }
+    contadorIds++
+}
+
 
 
 
@@ -673,7 +692,7 @@ function getLabelTag(dado) {
          <div class="input-group categoriaLabel"><label>${dado[k]}</label><label onclick="removereiPromocao($(this),'${dado[k]}','tag')" class="iconClose  "><i class="far fa-times-circle"></i></label></div>
         `
     }
-
+    
     return fullHtml
 
 }
@@ -695,6 +714,7 @@ function removereiPromocao(elemento,texto, tipo){
         $(".tagPromocao").each(function(){
             if($(this).attr("myValue").trim() === texto.trim()){
                 $(this).click()
+                removePROMOCAOTXTTAG(texto)
             }
         })
     }
@@ -703,6 +723,7 @@ function removereiPromocao(elemento,texto, tipo){
         $(".catPromocao").each(function(){
             if($(this).attr("myValue").trim() === texto.trim()){
                 $(this).click()
+                removePROMOCAOTXT(texto)
             }
         })
     }
