@@ -146,6 +146,52 @@ async function getObjects(element) {
 
             console.log('OBJECT_LIST', OBJECT_LIST)
 
+            const cupons = OBJECT_LIST.find( (obj) => obj.main.type === 'Cupom')
+            const fretes = OBJECT_LIST.find( (obj) => obj.main.type === 'Frete Grátis')
+            const descontos = OBJECT_LIST.find( (obj) => obj.main.type === 'Desconto')
+
+            if(Array.isArray(cupons)){
+                for(const k in cupons){
+                    $(".listaDeCupons").append(
+                        getCupom(cupons[k])
+                    )
+                }
+            }else{
+                if(cupons){
+                    $(".listaDeCupons").append(
+                        getCupom(cupons)
+                    )
+                } 
+            }
+
+            if(Array.isArray(fretes)){
+                for(const k in fretes){
+                    $(".listaDeFretes").append(
+                        getCupom(fretes[k])
+                    )
+                }
+            }else{
+                if(fretes){
+                    $(".listaDeFretes").append(
+                        getCupom(fretes)
+                    )
+                } 
+            }
+
+            if(Array.isArray(descontos)){
+                for(const k in descontos){
+                    $(".listaDePromocoes").append(
+                        getCupom(descontos[k])
+                    )
+                }
+            }else{
+                if(descontos){
+                    $(".listaDePromocoes").append(
+                        getCupom(descontos)
+                    )
+                } 
+            }
+
 
         },
         error: function (data) {
