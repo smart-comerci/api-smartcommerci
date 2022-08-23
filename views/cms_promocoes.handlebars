@@ -914,7 +914,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div  class="input-group  ico dropItems"> 
+                                                <div onclick="dropaCategorias($(this).parent().parent().parent())"  class="input-group  ico dropItems"> 
                                                 ${arrowDown}
                                                 </div>
                                             </div>
@@ -1284,6 +1284,18 @@
         }
 
         return html3
+    }
+
+    function dropaCategorias(element){
+        console.log('Dropando')
+        if(element.find(".drop").attr("dropei") === '1'){
+            element.find(".drop").attr("dropei","0")
+element.find(".drop").hide()
+        }else{
+             element.find(".drop").attr("dropei","1")
+element.find(".drop").show()
+        }
+        
     }
 
 </script>
