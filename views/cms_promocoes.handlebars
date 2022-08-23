@@ -526,7 +526,7 @@
     }
     
     function modalEditDesconto(element, name) {
-        let cupomData, type = 'update'
+        let cupomData, type = 'update', originalData
         if (element.attr("target") === 'novoDesconto') {
             console.log('novo, pegando model')
             cupomData = OBJETO_MODEL
@@ -534,6 +534,8 @@
         } else {
             console.log('normal buscando pelo nome')
             cupomData = OBJECT_LIST.find((cp) => cp.main.name === name)
+            originalData = cupomData
+            cupomData = cupomData.content
             OBJETO_MODEL = cupomData
         }
 
@@ -563,7 +565,7 @@
 
                     <div class="col-md">
                     <div
-                        onclick="CLOSE_AND_CANCEL('${type}',${cupomData.id})"
+                        onclick="CLOSE_AND_CANCEL('${type}',${originalData.id})"
                         style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto"
                         class="input-group">
                         <label
@@ -573,7 +575,7 @@
                     </div>
                     <div class="col-md">
                     <div
-                        onclick="CLOSE_AND_DELETE(${cupomData.id})"
+                        onclick="CLOSE_AND_DELETE(${cupomData?.id})"
                         style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto"
                         class="input-group">
                         <label

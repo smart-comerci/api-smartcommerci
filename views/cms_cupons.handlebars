@@ -281,7 +281,7 @@
     }
     
     function modalEditCupom(element, name) {
-         let cupomData, type = 'update'
+        let cupomData, type = 'update', originalData
         if (element.attr("target") === 'novoDesconto') {
             console.log('novo, pegando model')
             cupomData = OBJETO_MODEL
@@ -289,10 +289,19 @@
         } else {
             console.log('normal buscando pelo nome')
             cupomData = OBJECT_LIST.find((cp) => cp.main.name === name)
+            originalData = cupomData
+            cupomData = cupomData.content
             OBJETO_MODEL = cupomData
         }
 
+         
+        cupomData.main.type = name
+      
+ 
+
+
         console.log("dado usado",cupomData)
+
         var html = `  
         <div style="max-width:100% " class="container">
                 <div class="row" style="max-width: 90%;margin: -11px auto;border-bottom: 2px solid #EDF2F6;margin-bottom: 10px; ">
