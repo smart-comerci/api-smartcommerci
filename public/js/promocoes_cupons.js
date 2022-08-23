@@ -429,7 +429,24 @@ function removePROMOCAO(element) {
 
     console.log('antes ->', OBJETO_MODEL)
 
-    if (texto) {
+    if (txt) {
+        if (Array.isArray(OBJETO_MODEL.applicability.especificCategoriesValue)) {
+            const findIndex = OBJETO_MODEL.applicability.especificCategoriesValue.findIndex(object => {
+                return object === txt;
+              });  
+            OBJETO_MODEL.applicability.especificCategoriesValue = OBJETO_MODEL.applicability.especificCategoriesValue.splice(findIndex, 1);
+        }
+    }
+
+
+    console.log('depois ->', OBJETO_MODEL)
+}
+
+function removePROMOCAOTXT(texto) {
+
+    var txt = texto
+    console.log('antes ->', OBJETO_MODEL)
+    if (txt) {
         if (Array.isArray(OBJETO_MODEL.applicability.especificCategoriesValue)) {
             const findIndex = OBJETO_MODEL.applicability.especificCategoriesValue.findIndex(object => {
                 return object === txt;
@@ -470,6 +487,8 @@ function subTagInput(ele, elemento, texto) {
         $("." + elemento).find(".categoriaLabel").each(function () {
             if ($(this).text() == texto) { $(this).remove() }
         })
+
+        removePROMOCAOTXT(texto)
 
     }
     verFeedback()
