@@ -121,11 +121,11 @@ let OBJECT_LIST = []
 async function getObjects(element) {
     $.ajax({
         type: "POST",
-        url: mainHost + '/insertNew',
+        url: mainHost + '/getById',
         data: {
             tableName: "promocoes_cupons",
-            masterId: MASTER_ID,  
-            idName: 'master_id'
+            id_name: 'master_id',  
+            id_value: MASTER_ID
 
         },
         headers: {
