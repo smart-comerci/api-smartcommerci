@@ -285,7 +285,7 @@
         let cupomData, type = 'update', originalData
         if (element.attr("target") === 'novoDesconto') {
             console.log('novo, pegando model')
-            cupomData = OBJETO_MODEL
+            cupomData = OBJETO_DEFAULT
             type = 'insert'
         } else {
             console.log('normal buscando pelo nome',name)
