@@ -180,7 +180,7 @@
 
                 <div style="padding-bottom: 35px;display: inline-flex;" class="row col-md-12">
                     <p class="subTexto col-md-10" style="opacity: 1;">Desconto</p>
-                    <div target="novoDesconto" onclick="modalEditCupom($(this), 'Desconto')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 180px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;"
+                    <div target="novoDesconto" onclick="modalEditDesconto($(this), 'Desconto')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 180px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;"
                         class="input-group col-md-2">
                         <div style="border: none; margin: auto;" class="input-group-append">
                             <div style="border: none; margin: auto; padding: 2%;" class="input-group-text">
@@ -327,7 +327,7 @@
 
                 <div style="padding-bottom: 35px;display: inline-flex;" class="row col-md-12">
                     <p class="subTexto col-md-10" style="opacity: 1;max-width: calc(100% - 230px);">Frete</p>
-                    <div  target="novoDesconto" onclick="modalEditCupom($(this), 'Frete')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 230px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;gap: 3px;"
+                    <div  target="novoDesconto" onclick="modalEditDesconto($(this), 'Frete Grátis')" style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(246, 181, 4);max-width: 230px;height: 40px;border: 2px solid rgb(246, 181, 4);float: right;margin-right: 15px;opacity: 1;gap: 3px;"
                         class="input-group col-md-2">
                         <div style="border: none; margin: auto;" class="input-group-append">
                             <div style="border: none; margin: auto; padding: 2%;" class="input-group-text">
@@ -526,7 +526,7 @@
         let cupomData
         if (name === 'novoDesconto') {
             console.log('novo, pegando model')
-            cupomData = OBJECT_MODEL)
+            cupomData = OBJECT_MODEL
         } else {
             console.log('normal buscando pelo nome')
             cupomData = OBJECT_LIST.find((cp) => cp.main.name === name)
