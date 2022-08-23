@@ -371,3 +371,108 @@ async function CLOSE_AND_CANCEL(type, ID){
 
 
 getObjects()
+
+
+//===================================
+
+function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
+    var html3 = '',
+        nova = '<li class="novaLI"></li>';
+
+
+    for (const k in MY_CATEGORIES) {
+        var content = '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
+        html3 += '<li    class="list-item sub-list-item animate__animated targetBusca">' + arrowDown4 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="' + MY_CATEGORIES[k].categorie_icon + '" style="width: 30px; height: 30px; margin-top -10%"/> ';
+        content += nova
+        if (MY_CATEGORIES[k].subCategorias != "?") {
+
+            var txtCategories = MY_CATEGORIES[k].subCategorias.split(",");
+            for (let a = 0; a < txtCategories.length; a++) {
+                if (txtCategories[a].length > 0 && txtCategories[a] != '' && txtCategories[a] != 'null' && txtCategories[a] != 'undefined' && txtCategories[a] != null && txtCategories[a] != undefined) {
+
+                    content += '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + txtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
+                }
+
+                ////////////console.log(content)
+            }
+        }
+        content += '</ul>';
+        html3 += MY_CATEGORIES[k].categoria + ' <input class="marcar mcInterna"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+        html3 += content + '</li> ';
+    }
+
+    return html3
+}
+
+var arrowDown4  = '<div onclick="dropaCategoriasInner($(this).parent()) " class=" deleteThis3 dropCategoriaButton ">'+
+                '<svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36">'+
+                    '<g transform="translate(36 36) rotate(180)">'+
+                    
+                        '<g transform="translate(28 28) rotate(180)">'+
+                            '<g class="b">'+
+                            '<g class="c">'+
+                                '<circle class="e" cx="10" cy="10" r="10" />'+
+                                '<circle class="f" cx="10" cy="10" r="9.5" />'+
+                            '</g>'+
+                            '<path class="d" d="M581.273,789.774a.82.82,0,0,1-.081-1.079l.081-.092,3.685-3.593-3.685-3.593a.82.82,0,0,1-.081-1.079l.081-.093a.849.849,0,0,1,1.094-.081l.094.081,4.279,4.179a.82.82,0,0,1,.081,1.079l-.081.093-4.279,4.179A.849.849,0,0,1,581.273,789.774Z"'+
+                                ' transform="translate(795.009 -573.615) rotate(90)"/>'+
+                            '</g>'+
+                        '</g>'+
+                    '</g>'+
+                '</svg>'+
+            '</div>';
+
+
+
+function subTagInput(ele, elemento, texto) {
+    //////console.log(ele,elemento,texto)
+
+    var listaTags = '', listaMarcas = ''
+
+
+    //////console.log(elemento,texto)
+    var html = '<div  class="input-group categoriaLabel  "><label  >' + texto + '</label><label action="' + elemento + '" onclick="removeTAGMARCA($(this))"  style="max-width: 20%"  class="iconClose"><i class="far fa-times-circle"></i></label></div>';
+    //////console.log("vou mostrar " ,ele[0].checked )
+    if (ele[0].checked == true) {
+        // $("."+elemento).append(html)
+        //////console.log("elemento tal",$("."+elemento))
+        insereCategoria($("." + elemento), ele, texto)
+
+    } else {
+        $("." + elemento).find(".categoriaLabel").each(function () {
+            if ($(this).text() == texto) { $(this).remove() }
+        })
+
+    }
+    verFeedback()
+
+
+
+
+
+}
+
+
+function dropaCategorias(element) {
+    console.log('Dropando')
+    if (element.find(".drop").attr("dropei") === '1') {
+        element.find(".drop").attr("dropei", "0")
+        element.find(".drop").hide()
+    } else {
+        element.find(".drop").attr("dropei", "1")
+        element.find(".drop").show()
+    }
+
+}
+
+function dropaCategoriasInner(element) {
+    console.log('Dropando')
+    if (element.find(".listInner2 ").attr("dropei") === '1') {
+        element.find(".listInner2 ").attr("dropei", "0")
+        element.find(".listInner2 ").hide()
+    } else {
+        element.find(".listInner2 ").attr("dropei", "1")
+        element.find(".listInner2 ").show()
+    }
+
+}
