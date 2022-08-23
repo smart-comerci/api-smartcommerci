@@ -484,6 +484,26 @@ function removePROMOCAO(element) {
     console.log('depois ->', OBJETO_MODEL)
 }
 
+function removePROMOCAOTAG(element) {
+
+    var txt = element.parent().text()
+    element.parent().remove()
+
+    console.log('antes ->', OBJETO_MODEL)
+
+    if (txt) {
+        if (Array.isArray(OBJETO_MODEL.applicability.especificTagsValue)) {
+            const findIndex = OBJETO_MODEL.applicability.especificTagsValue.findIndex(object => {
+                return object === txt;
+              });  
+            OBJETO_MODEL.applicability.especificTagsValue = OBJETO_MODEL.applicability.especificTagsValue.splice(findIndex, 1);
+        }
+    }
+
+
+    console.log('depois ->', OBJETO_MODEL)
+}
+
 function removePROMOCAOTXT(texto) {
     console.log('removendo  ->', texto)
     var txt = texto
@@ -577,7 +597,7 @@ function subTagInputTAG(ele, elemento, texto) {
 
 
     //////console.log(elemento,texto)
-    var html = '<div  class="input-group categoriaLabel  "><label  >' + texto + '</label><label action="' + elemento + '" onclick="removePROMOCAO($(this))"  style="max-width: 20%"  class="iconClose"><i class="far fa-times-circle"></i></label></div>';
+    var html = '<div  class="input-group categoriaLabel  "><label  >' + texto + '</label><label action="' + elemento + '" onclick="removePROMOCAOTAG($(this))"  style="max-width: 20%"  class="iconClose"><i class="far fa-times-circle"></i></label></div>';
     //////console.log("vou mostrar " ,ele[0].checked )
     if (ele[0].checked == true) {
         // $("."+elemento).append(html)
@@ -589,7 +609,7 @@ function subTagInputTAG(ele, elemento, texto) {
             if ($(this).text() == texto) { $(this).remove() }
         })
 
-        removePROMOCAOTXT(texto)
+        removePROMOCAOTXTTAG(texto)
 
     }
   
