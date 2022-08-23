@@ -443,7 +443,7 @@ function removePROMOCAO(element) {
 }
 
 function removePROMOCAOTXT(texto) {
-
+    console.log('removendo  ->', texto)
     var txt = texto
     console.log('antes ->', OBJETO_MODEL)
     if (txt) {
