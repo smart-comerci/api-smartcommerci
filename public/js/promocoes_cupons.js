@@ -12,16 +12,16 @@ $.ajax({
         "affiliate_id": localStorage.AFFILIATE_ID,
         "master_id": localStorage.MASTER_ID,
     },
-    success: function (categories) { 
-            CATEGORIES = categories.results;
-            var CATEGORIES_SHOW = [];
-            var breakPoint = 100,
-                count = 0; 
-            var myCategories = getCategorias(CATEGORIES)
-            MY_CATEGORIES = myCategories 
+    success: function (categories) {
+        CATEGORIES = categories.results;
+        var CATEGORIES_SHOW = [];
+        var breakPoint = 100,
+            count = 0;
+        var myCategories = getCategorias(CATEGORIES)
+        MY_CATEGORIES = myCategories
     },
     error: function (data2) {
-     console.log('data2 catgosss'); 
+        console.log('data2 catgosss');
     },
     complete: function () { },
 });
@@ -53,7 +53,7 @@ let OBJETO_MODEL = {
         totalFromCart: 0,
         totalInCartActive: false,
         totalInCart: 0
-  
+
     },
     applicability: {
         allProducts: false,
@@ -111,7 +111,7 @@ let OBJETO_DEFAULT = {
         totalFromCart: 0,
         totalInCartActive: false,
         totalInCart: 0
-  
+
     },
     applicability: {
         allProducts: false,
@@ -152,7 +152,7 @@ async function getObjects(element) {
         url: mainHost + '/getById',
         data: {
             table: "promocoes_cupons",
-            id_name: 'master_id',  
+            id_name: 'master_id',
             id_value: MASTER_ID
 
         },
@@ -163,7 +163,7 @@ async function getObjects(element) {
             console.log('getByTableName', data)
             OBJECT_LIST = []
             OBJETO_MODEL = OBJETO_DEFAULT
-            for(const k in data){
+            for (const k in data) {
                 const { id, createdAt, updatedAt, content } = data[k]
                 OBJECT_LIST.push({
                     id: id,
@@ -175,55 +175,55 @@ async function getObjects(element) {
 
             console.log('OBJECT_LIST', OBJECT_LIST)
 
-            const cupons = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Cupom')
-            const fretes = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Frete Grátis')
-            const descontos = OBJECT_LIST.find( (obj) => obj.content.main.type === 'Desconto')
+            const cupons = OBJECT_LIST.find((obj) => obj.content.main.type === 'Cupom')
+            const fretes = OBJECT_LIST.find((obj) => obj.content.main.type === 'Frete Grátis')
+            const descontos = OBJECT_LIST.find((obj) => obj.content.main.type === 'Desconto')
             $(".listaDePromocoes").html("")
             $(".listaDeCupons").html("")
             $(".listaDeFretes").html("")
-            if(Array.isArray(cupons)){
-                for(const k in cupons){
+            if (Array.isArray(cupons)) {
+                for (const k in cupons) {
                     $(".listaDeCupons").append(
                         getCupom(cupons[k], 'Cupom')
                     )
                 }
-            }else{
-                if(cupons){
+            } else {
+                if (cupons) {
                     $(".listaDeCupons").append(
                         getCupom(cupons, 'Cupom')
                     )
-                } 
+                }
             }
 
-            if(Array.isArray(fretes)){
-                for(const k in fretes){
+            if (Array.isArray(fretes)) {
+                for (const k in fretes) {
                     $(".listaDeFretes").append(
                         getCupom(fretes[k], 'Frete Grátis')
                     )
                 }
-            }else{
-                if(fretes){
+            } else {
+                if (fretes) {
                     $(".listaDeFretes").append(
                         getCupom(fretes, 'Frete Grátis')
                     )
-                } 
+                }
             }
 
-            if(Array.isArray(descontos)){
-                for(const k in descontos){
+            if (Array.isArray(descontos)) {
+                for (const k in descontos) {
                     $(".listaDePromocoes").append(
-                        getCupom(descontos[k],'Desconto')
+                        getCupom(descontos[k], 'Desconto')
                     )
                 }
-            }else{
-                if(descontos){
+            } else {
+                if (descontos) {
                     $(".listaDePromocoes").append(
-                        getCupom(descontos,'Desconto')
+                        getCupom(descontos, 'Desconto')
                     )
-                } 
+                }
             }
 
-  
+
 
 
         },
@@ -237,7 +237,7 @@ async function getObjects(element) {
 async function setObject(element) {
     console.log(element)
     console.log('antes de alterar =>', OBJETO_MODEL)
-   
+
     let area = element.attr("area")
     let detalhe = element.attr("detalhe")
     let valor = element.attr("type") === "checkbox" ? element[0].checked : element.val()
@@ -301,7 +301,7 @@ async function deleteObject(ID) {
         complete: function () { },
     });
 }
- 
+
 
 async function updateObject(myObject, ID) {
 
@@ -333,38 +333,38 @@ async function updateObject(myObject, ID) {
     });
 }
 
-async function CLOSE_AND_SAVE(type, ID){
-    console.log(type,ID)
+async function CLOSE_AND_SAVE(type, ID) {
+    console.log(type, ID)
 
-    if(type === 'insert'){
+    if (type === 'insert') {
         await insertNew(OBJETO_MODEL)
         OBJETO_MODEL = OBJETO_DEFAULT
     }
-    if(type === 'update'){
-        if(ID){
+    if (type === 'update') {
+        if (ID) {
             await updateObject(OBJETO_MODEL, ID)
             OBJETO_MODEL = OBJETO_DEFAULT
-        }else{
+        } else {
             console.log("ID not provided", ID)
         }
-        
+
     }
-  
+
     $(".close").click()
 
 }
 
-async function CLOSE_AND_DELETE(ID){
-    if(ID){
+async function CLOSE_AND_DELETE(ID) {
+    if (ID) {
         await deleteObject(ID)
     }
-    
+
     $(".close").click()
 }
 
-async function CLOSE_AND_CANCEL(type, ID){
+async function CLOSE_AND_CANCEL(type, ID) {
     OBJETO_MODEL = OBJETO_DEFAULT
-    
+
     $(".close").click()
 }
 
@@ -404,42 +404,62 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
     return html3
 }
 
-var arrowDown4  = '<div onclick="dropaCategoriasInner($(this).parent()) " class=" deleteThis3 dropCategoriaButton ">'+
-                '<svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36">'+
-                    '<g transform="translate(36 36) rotate(180)">'+
-                    
-                        '<g transform="translate(28 28) rotate(180)">'+
-                            '<g class="b">'+
-                            '<g class="c">'+
-                                '<circle class="e" cx="10" cy="10" r="10" />'+
-                                '<circle class="f" cx="10" cy="10" r="9.5" />'+
-                            '</g>'+
-                            '<path class="d" d="M581.273,789.774a.82.82,0,0,1-.081-1.079l.081-.092,3.685-3.593-3.685-3.593a.82.82,0,0,1-.081-1.079l.081-.093a.849.849,0,0,1,1.094-.081l.094.081,4.279,4.179a.82.82,0,0,1,.081,1.079l-.081.093-4.279,4.179A.849.849,0,0,1,581.273,789.774Z"'+
-                                ' transform="translate(795.009 -573.615) rotate(90)"/>'+
-                            '</g>'+
-                        '</g>'+
-                    '</g>'+
-                '</svg>'+
-            '</div>';
+var arrowDown4 = '<div onclick="dropaCategoriasInner($(this).parent()) " class=" deleteThis3 dropCategoriaButton ">' +
+    '<svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36">' +
+    '<g transform="translate(36 36) rotate(180)">' +
+
+    '<g transform="translate(28 28) rotate(180)">' +
+    '<g class="b">' +
+    '<g class="c">' +
+    '<circle class="e" cx="10" cy="10" r="10" />' +
+    '<circle class="f" cx="10" cy="10" r="9.5" />' +
+    '</g>' +
+    '<path class="d" d="M581.273,789.774a.82.82,0,0,1-.081-1.079l.081-.092,3.685-3.593-3.685-3.593a.82.82,0,0,1-.081-1.079l.081-.093a.849.849,0,0,1,1.094-.081l.094.081,4.279,4.179a.82.82,0,0,1,.081,1.079l-.081.093-4.279,4.179A.849.849,0,0,1,581.273,789.774Z"' +
+    ' transform="translate(795.009 -573.615) rotate(90)"/>' +
+    '</g>' +
+    '</g>' +
+    '</g>' +
+    '</svg>' +
+    '</div>';
+
+function removePROMOCAO(element) {
+
+    var txt = element.parent().text()
+    element.parent().remove()
+
+    console.log('antes ->', OBJETO_MODEL)
+
+    if (texto) {
+        if (Array.isArray(OBJETO_MODEL.applicability.especificCategoriesValue)) {
+            const findIndex = OBJETO_MODEL.applicability.especificCategoriesValue.findIndex(object => {
+                return object === txt;
+              });  
+            OBJETO_MODEL.applicability.especificCategoriesValue = OBJETO_MODEL.applicability.especificCategoriesValue.splice(findIndex, 1);
+        }
+    }
 
 
+    console.log('depois ->', OBJETO_MODEL)
+}
 
 function subTagInput(ele, elemento, texto) {
-    //////console.log(ele,elemento,texto)
-    
-    if(texto){
-        if(Array.isArray(OBJETO_MODEL.applicability.especificCategoriesValue)){
+    console.log('antes ->', OBJETO_MODEL)
+
+    if (texto) {
+        if (Array.isArray(OBJETO_MODEL.applicability.especificCategoriesValue)) {
             OBJETO_MODEL.applicability.especificCategoriesValue.push(texto)
-            let lista = [ ...new Set(OBJETO_MODEL.applicability.especificCategoriesValue)]
+            let lista = [...new Set(OBJETO_MODEL.applicability.especificCategoriesValue)]
             OBJETO_MODEL.applicability.especificCategoriesValue = lista
-        } 
-    } 
+        }
+    }
 
     var listaTags = '', listaMarcas = ''
 
+    console.log('depois ->', OBJETO_MODEL)
+
 
     //////console.log(elemento,texto)
-    var html = '<div  class="input-group categoriaLabel  "><label  >' + texto + '</label><label action="' + elemento + '" onclick="removeTAGMARCA($(this))"  style="max-width: 20%"  class="iconClose"><i class="far fa-times-circle"></i></label></div>';
+    var html = '<div  class="input-group categoriaLabel  "><label  >' + texto + '</label><label action="' + elemento + '" onclick="removePROMOCAO($(this))"  style="max-width: 20%"  class="iconClose"><i class="far fa-times-circle"></i></label></div>';
     //////console.log("vou mostrar " ,ele[0].checked )
     if (ele[0].checked == true) {
         // $("."+elemento).append(html)
