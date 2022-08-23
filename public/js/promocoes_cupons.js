@@ -153,13 +153,13 @@ async function getObjects(element) {
             if(Array.isArray(cupons)){
                 for(const k in cupons){
                     $(".listaDeCupons").append(
-                        getCupom(cupons[k])
+                        getCupom(cupons[k], 'Cupom')
                     )
                 }
             }else{
                 if(cupons){
                     $(".listaDeCupons").append(
-                        getCupom(cupons)
+                        getCupom(cupons, 'Cupom')
                     )
                 } 
             }
@@ -167,13 +167,13 @@ async function getObjects(element) {
             if(Array.isArray(fretes)){
                 for(const k in fretes){
                     $(".listaDeFretes").append(
-                        getCupom(fretes[k])
+                        getCupom(fretes[k], 'Frete Grátis')
                     )
                 }
             }else{
                 if(fretes){
                     $(".listaDeFretes").append(
-                        getCupom(fretes)
+                        getCupom(fretes, 'Frete Grátis')
                     )
                 } 
             }
@@ -181,13 +181,13 @@ async function getObjects(element) {
             if(Array.isArray(descontos)){
                 for(const k in descontos){
                     $(".listaDePromocoes").append(
-                        getCupom(descontos[k])
+                        getCupom(descontos[k],'Desconto')
                     )
                 }
             }else{
                 if(descontos){
                     $(".listaDePromocoes").append(
-                        getCupom(descontos)
+                        getCupom(descontos,'Desconto')
                     )
                 } 
             }

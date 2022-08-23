@@ -469,12 +469,12 @@
 </div>
 
 <script>
-    function getCupom(cupomData){
+    function getCupom(cupomData, type){
         let originalData = cupomData
         cupomData = cupomData.content
         console.log("cupom data get",cupomData)
         let html = `
-            <div  target="${cupomData.main.name}" onclick="modalEditDesconto($(this),'Cupom')" class="row radius20 product bg-gray-400"
+            <div  type="${type}"  target="${cupomData.main.name}" onclick="modalEditDesconto($(this),'${cupomData.main.name}')" class="row radius20 product bg-gray-400"
                         style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
                         <div style="max-width: 80px;" class="col-sm">
                             <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
@@ -532,7 +532,7 @@
             cupomData = OBJETO_MODEL
             type = 'insert'
         } else {
-            console.log('normal buscando pelo nome')
+            console.log('normal buscando pelo nome',name)
             cupomData = OBJECT_LIST.find((cp) => cp.content.main.name === name)
             originalData = cupomData
             console.log('cupon data', cupomData)
