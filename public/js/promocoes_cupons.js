@@ -35,11 +35,11 @@ $.ajax({
         "x-access-token": localStorage.token,
     },
     data: {
-        "affiliate_id": localStorage.AFFILIATE_ID 
+        "affiliate_id": localStorage.AFFILIATE_ID
     },
     success: function (categories) {
-        console.log("tags",categories)
-        TAGS = categories.tags; 
+        console.log("tags", categories)
+        TAGS = categories.tags;
     },
     error: function (data2) {
         console.log('data2 catgosss');
@@ -411,14 +411,14 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES) {
             for (let a = 0; a < txtCategories.length; a++) {
                 if (txtCategories[a].length > 0 && txtCategories[a] != '' && txtCategories[a] != 'null' && txtCategories[a] != 'undefined' && txtCategories[a] != null && txtCategories[a] != undefined) {
 
-                    content += '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + txtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
+                    content += '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar catPromocao"  myValue="'+txtCategories[a]+'"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + txtCategories[a] + '\')" type="checkbox"><span class="checkmark"></span>' + txtCategories[a] + '</label></div></li> ';
                 }
 
                 ////////////console.log(content)
             }
         }
         content += '</ul>';
-        html3 += MY_CATEGORIES[k].categoria + ' <input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+        html3 += MY_CATEGORIES[k].categoria + ' <input class="marcar catPromocao"  myValue="'+MY_CATEGORIES[k].categoria+'" onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' + MY_CATEGORIES[k].categoria + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
         html3 += content + '</li> ';
     }
 
@@ -431,14 +431,14 @@ function getTags(MY_TAGS) {
 
 
     for (const k in MY_TAGS) {
-        if(MY_TAGS[k] !== ""){
+        if (MY_TAGS[k] !== "") {
             var content = '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
             html3 += '<li    class="list-item sub-list-item animate__animated ">' + arrowDown4 + '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__">  ';
-        
-            html3 += MY_TAGS[k] + ' <input class="marcar"  onchange="subTagInputTAG($(this),\'listaTagsFilter\',\'' + MY_TAGS[k]+ '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+
+            html3 += MY_TAGS[k] + ' <input class="marcar tagPromocao" myValue="'+MY_TAGS[k]+'"  onchange="subTagInputTAG($(this),\'listaTagsFilter\',\'' + MY_TAGS[k] + '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
             html3 += '</li> ';
         }
-        
+
     }
 
     return html3
@@ -475,7 +475,7 @@ function removePROMOCAO(element) {
         if (Array.isArray(OBJETO_MODEL.applicability.especificCategoriesValue)) {
             const findIndex = OBJETO_MODEL.applicability.especificCategoriesValue.findIndex(object => {
                 return object === txt;
-              });  
+            });
             OBJETO_MODEL.applicability.especificCategoriesValue = OBJETO_MODEL.applicability.especificCategoriesValue.splice(findIndex, 1);
         }
     }
@@ -495,7 +495,7 @@ function removePROMOCAOTAG(element) {
         if (Array.isArray(OBJETO_MODEL.applicability.especificTagsValue)) {
             const findIndex = OBJETO_MODEL.applicability.especificTagsValue.findIndex(object => {
                 return object === txt;
-              });  
+            });
             OBJETO_MODEL.applicability.especificTagsValue = OBJETO_MODEL.applicability.especificTagsValue.splice(findIndex, 1);
         }
     }
@@ -509,14 +509,14 @@ function removePROMOCAOTXT(texto) {
     var txt = texto
     console.log('antes ->', OBJETO_MODEL)
     let MEU_ARRAY = OBJETO_MODEL.applicability.especificCategoriesValue
-  
-            const findIndex = MEU_ARRAY.findIndex(object => {
-                return object === txt;
-              });  
-              let lista = MEU_ARRAY.splice(findIndex, 1);
-              console.log('lista e idnex',findIndex,lista, MEU_ARRAY )
-            OBJETO_MODEL.applicability.especificCategoriesValue = MEU_ARRAY
-        
+
+    const findIndex = MEU_ARRAY.findIndex(object => {
+        return object === txt;
+    });
+    let lista = MEU_ARRAY.splice(findIndex, 1);
+    console.log('lista e idnex', findIndex, lista, MEU_ARRAY)
+    OBJETO_MODEL.applicability.especificCategoriesValue = MEU_ARRAY
+
 
 
     console.log('depois ->', OBJETO_MODEL)
@@ -527,14 +527,14 @@ function removePROMOCAOTXTTAG(texto) {
     var txt = texto
     console.log('antes ->', OBJETO_MODEL)
     let MEU_ARRAY = OBJETO_MODEL.applicability.especificTagsValue
-  
-            const findIndex = MEU_ARRAY.findIndex(object => {
-                return object === txt;
-              });  
-              let lista = MEU_ARRAY.splice(findIndex, 1);
-              console.log('lista e idnex',findIndex,lista, MEU_ARRAY )
-            OBJETO_MODEL.applicability.especificTagsValue = MEU_ARRAY
-        
+
+    const findIndex = MEU_ARRAY.findIndex(object => {
+        return object === txt;
+    });
+    let lista = MEU_ARRAY.splice(findIndex, 1);
+    console.log('lista e idnex', findIndex, lista, MEU_ARRAY)
+    OBJETO_MODEL.applicability.especificTagsValue = MEU_ARRAY
+
 
 
     console.log('depois ->', OBJETO_MODEL)
@@ -572,7 +572,7 @@ function subTagInput(ele, elemento, texto) {
         removePROMOCAOTXT(texto)
 
     }
-  
+
 
 
 
@@ -612,7 +612,7 @@ function subTagInputTAG(ele, elemento, texto) {
         removePROMOCAOTXTTAG(texto)
 
     }
-  
+
 
 
 
@@ -648,7 +648,7 @@ function dropaCategoriasInner(element) {
 
 
 function insereCategoriaPromocao(elemento, outroElemento, texto) {
- 
+
     outroElemento.attr("id", "desmarcaInput" + contadorIds)
     var newID = "desmarcaInput" + contadorIds
     if (texto.split(",").length == 0) {
@@ -661,5 +661,51 @@ function insereCategoriaPromocao(elemento, outroElemento, texto) {
             elemento.append(html);
         }
     }
-    contadorIds++ 
+    contadorIds++
 }
+
+
+
+function getLabelTag(dado) {
+    let fullHtml = ''
+    for (const k in dado) {
+        fullHtml += `
+         <div class="input-group categoriaLabel"><label>${dado[k]}</label><label onclick="removereiPromocao($(this),'${dado[k]}','tag')" class="iconClose  "><i class="far fa-times-circle"></i></label></div>
+        `
+    }
+
+    return fullHtml
+
+}
+
+function getLabelCategoria(dado) {
+    let fullHtml = ''
+    for (const k in dado) {
+        fullHtml += `
+         <div class="input-group categoriaLabel"><label>${dado[k]}</label><label onclick="removereiPromocao($(this),'${dado[k]}','categoria')" class="iconClose  "><i class="far fa-times-circle"></i></label></div>
+        `
+    }
+
+    return fullHtml
+
+}
+
+function removereiPromocao(elemento,texto, tipo){
+    if(tipo === 'tag'){
+        $(".tagPromocao").each(function(){
+            if($(this).attr("myValue").trim() === texto.trim()){
+                $(this).click()
+            }
+        })
+    }
+
+    if(tipo === 'categoria'){
+        $(".catPromocao").each(function(){
+            if($(this).attr("myValue").trim() === texto.trim()){
+                $(this).click()
+            }
+        })
+    }
+}
+
+ 

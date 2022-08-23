@@ -905,7 +905,7 @@
                                         <div class="row">
                                             <div class="col-md-10">
                                                 <div style="padding:0 2%" class="row listaCategoriasFilter">
-                                                 ${getLabelTag(cupomData.applicability.especificCategoriesValue)}
+                                                 ${getLabelCategoria(cupomData.applicability.especificCategoriesValue)}
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -1279,17 +1279,6 @@
 
 
 
-    function getLabelTag(dado){
-        let fullHtml = ''
-        for(const k in dado){
-            fullHtml += `
-             <div class="input-group categoriaLabel"><label>${dado[k]}</label><label onclick="removerei($(this),'desmarcaInput3')" class="iconClose  "><i class="far fa-times-circle"></i></label></div>
-            `
-        }
-
-        return fullHtml
-        
-    }
 
 
 
