@@ -446,11 +446,14 @@ function removePROMOCAOTXT(texto) {
     console.log('removendo  ->', texto)
     var txt = texto
     console.log('antes ->', OBJETO_MODEL)
+    let MEU_ARRAY = OBJETO_MODEL.applicability.especificCategoriesValue
   
-            const findIndex = OBJETO_MODEL.applicability.especificCategoriesValue.findIndex(object => {
+            const findIndex = MEU_ARRAY.findIndex(object => {
                 return object === txt;
               });  
-            OBJETO_MODEL.applicability.especificCategoriesValue = OBJETO_MODEL.applicability.especificCategoriesValue.splice(findIndex, 1);
+              let lista = MEU_ARRAY.splice(findIndex, 1);
+              console.log('lista e idnex',index,lista, MEU_ARRAY )
+            OBJETO_MODEL.applicability.especificCategoriesValue = lista
         
 
 
