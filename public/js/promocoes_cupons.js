@@ -736,8 +736,8 @@ function removereiPromocao(elemento,texto, tipo){
     if(tipo === 'tag'){
         $(".tagPromocao").each(function(){
             if($(this).attr("myValue").trim() === texto.trim()){
-                $(this).checked = false
-                removePROMOCAOTXTTAG(texto)
+                $(this).click()
+                
             }
         })
     }
@@ -745,8 +745,8 @@ function removereiPromocao(elemento,texto, tipo){
     if(tipo === 'categoria'){
         $(".catPromocao").each(function(){
             if($(this).attr("myValue").trim() === texto.trim()){
-                $(this).checked = false
-                removePROMOCAOTXT(texto)
+                $(this).click()
+             
             }
         })
     }
