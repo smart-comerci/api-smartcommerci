@@ -313,7 +313,7 @@ async function CLOSE_AND_SAVE(type, ID){
         }
         
     }
-
+    getObjects()
     $(".close").click()
 
 }
@@ -322,11 +322,13 @@ async function CLOSE_AND_DELETE(ID){
     if(ID){
         await deleteObject(ID)
     }
+    getObjects()
     $(".close").click()
 }
 
 async function CLOSE_AND_CANCEL(type, ID){
     OBJETO_MODEL = OBJETO_DEFAULT
+    getObjects()
     $(".close").click()
 }
 
