@@ -5554,7 +5554,7 @@ function filter() {
     localStorage.TAGS_FILTRAR = TAGS
     localStorage.MARCAS_FILTRAR = MARCAS
 
-    var html = '<h4 style="font-size: 24px !important" class="infoLabel">Filtros</h4><div style="max-width: 100%;            max-height: 60vh;            margin-top: 80px;" class="container verticalScroll ">' +
+    var html = '<h4 style="font-size: 24px !important" class="infoLabel">Filtros</h4><div style="max-width: 100%;            max-height: 60vh;            margin-top: 40px;" class="container verticalScroll ">' +
 
 
 
