@@ -312,9 +312,9 @@ async function insertNew(myObject) {
         headers: {
             "x-access-token": localStorage.token,
         },
-        success: function (data) {
+        success: async function (data) {
             console.log('insertNew', data)
-            updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Criou este registro: <b>'+myObject.main.name+'</b>.',data.insertId)
+           await updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Criou este registro: <b>'+myObject.main.name+'</b>.',data.insertId)
             getObjects()
 
         },
@@ -337,9 +337,9 @@ async function deleteObject(ID) {
         headers: {
             "x-access-token": localStorage.token,
         },
-        success: function (data) {
+        success: async function (data) {
             console.log('deleteObject', data)
-            updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Apagou este registro',ID)
+            await updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Apagou este registro',ID)
             getObjects()
 
         },
@@ -369,9 +369,9 @@ async function updateObject(myObject, ID) {
         headers: {
             "x-access-token": localStorage.token,
         },
-        success: function (data) {
+        success: async function (data) {
             console.log('updateById', data)
-            updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Alterou este registro',ID)
+            await updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Alterou este registro:\n\n'+getChanges(myObject, ID),ID)
             getObjects()
 
         },
