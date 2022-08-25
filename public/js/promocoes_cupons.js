@@ -801,9 +801,16 @@ function getChanges(OBJ,ID){
                         console.log('colunas', b,d)
                         if( b === d){
                             console.log('valores', myObj[a][b],OBJ[c][d])
-                            if(myObj[a][b]?.trim() !== OBJ[c][d]?.trim()){ 
-                                result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"</s> para: "${OBJ[c][d]}"<br>`
+                            if(Array.isArray(myObj[a][b]) && Array.isArray(OBJ[c][d])){
+                                if(myObj[a][b][0].length !== OBJ[c][d].length){ 
+                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"</s> para: "${OBJ[c][d]}"<br>`
+                                }
+                            }else{
+                                if(myObj[a][b] !== OBJ[c][d]){ 
+                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"</s> para: "${OBJ[c][d]}"<br>`
+                                }
                             }
+                            
                         }        
                     }
                 }
