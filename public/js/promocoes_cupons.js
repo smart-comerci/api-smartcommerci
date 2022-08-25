@@ -195,6 +195,7 @@ async function getObjects(element) {
             }
 
             console.log('OBJECT_LIST', OBJECT_LIST)
+            localStorage.ONBJECT_LIST = JSON.stringify(OBJECT_LIST)
 
             const cupons = OBJECT_LIST.find((obj) => obj.content.main.type === 'Cupom')
             const fretes = OBJECT_LIST.find((obj) => obj.content.main.type === 'Frete Grátis')
@@ -271,6 +272,30 @@ async function setObject(element) {
 
 }
 
+async function updateLog(alterador, alteracao, desconto_id){
+  await  $.ajax({
+        type: "POST",
+        url: mainHost + '/insertLogsPromotional',
+        data: {
+            alterador: alterador,
+            desconto_id: desconto_id,
+            affiliate_id: localStorage.AFFILIATE_ID,
+            alteracao: alteracao
+        },
+        headers: {
+            "x-access-token": localStorage.token,
+        },
+        success: function (data) {
+            console.log('insertLogsPromotional', data)  
+        },
+        error: function (data) {
+            console.log('insertLogsPromotional', data)
+        },
+        complete: function () { },
+    });
+
+}
+
 async function insertNew(myObject) {
     $.ajax({
         type: "POST",
@@ -289,6 +314,7 @@ async function insertNew(myObject) {
         },
         success: function (data) {
             console.log('insertNew', data)
+            updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Criou este registro: <b>'+myObject.main.name+'</b>.',data.insertId)
             getObjects()
 
         },
@@ -313,6 +339,7 @@ async function deleteObject(ID) {
         },
         success: function (data) {
             console.log('deleteObject', data)
+            updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Apagou este registro',ID)
             getObjects()
 
         },
@@ -344,6 +371,7 @@ async function updateObject(myObject, ID) {
         },
         success: function (data) {
             console.log('updateById', data)
+            updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Alterou este registro',ID)
             getObjects()
 
         },
@@ -752,4 +780,35 @@ function removereiPromocao(elemento,texto, tipo){
     }
 }
 
+
+function getChanges(OBJ,ID){
+    let result = ""
+    try{
+        let LISTA = JSON.parse(localStorage.OBJECT_LIST)
+        let myObj = LISTA.find((o) => o.id === ID)
+        console.lof('myObj', myObj)
+
+        for(const a in myObj){ 
+            for(const b in myObj[myObj[a]]){
+                for(const c in OBJ){ 
+                    for(const d in OBJ[OBJ[c]]){
+                        if( b === d){
+                            if(myObj[myObj[a]][b] !== OBJ[OBJ[c]][d]){
+                                result+= `"${myObj[myObj[a]][b]}" mudou para: "${OBJ[OBJ[c]][d]}"`
+                            }
+                        }        
+                    }
+                }
+
+            }
+        }
+
+
+
+
+    }catch(e){
+        console.log(e)
+    }
+    return result
+}
  
