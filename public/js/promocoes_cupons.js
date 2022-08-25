@@ -806,11 +806,11 @@ function getChanges(OBJ,ID){
                             console.log('valores', myObj[a][b],OBJ[c][d])
                             if(Array.isArray(myObj[a][b]) && Array.isArray(OBJ[c][d])){
                                 if(myObj[a][b].length !== OBJ[c][d].length){ 
-                                    result+= `<br><b>${b}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
+                                    result+= `<b>${b}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span>`
                                 }
                             }else{
                                 if(myObj[a][b] !== OBJ[c][d]){ 
-                                    result+= `<br><b>${b}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
+                                    result+= `<b>${b}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span>`
                                 }
                             }
                             
