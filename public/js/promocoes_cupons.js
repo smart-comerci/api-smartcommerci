@@ -793,12 +793,16 @@ function getChanges(OBJ,ID){
         console.log('myObj', myObj)
 
         for(const a in myObj){ 
-            for(const b in myObj[myObj[a]]){
+            console.log(a)
+            for(const b in myObj[a]){
+                console.log(b)
                 for(const c in OBJ){ 
-                    for(const d in OBJ[OBJ[c]]){
+                    for(const d in OBJ[c]){
+                        console.log('colunas', b,d)
                         if( b === d){
-                            if(myObj[myObj[a]][b] !== OBJ[OBJ[c]][d]){
-                                result+= `"${myObj[myObj[a]][b]}" mudou para: "${OBJ[OBJ[c]][d]}"`
+                            console.log('valores', myObj[a][b],OBJ[c][d])
+                            if(myObj[a][b] !== OBJ[c][d]){
+                                result+= `"${myObj[a][b]}" mudou para: "${OBJ[c][d]}"`
                             }
                         }        
                     }
