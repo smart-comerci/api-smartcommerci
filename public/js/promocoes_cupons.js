@@ -195,7 +195,7 @@ async function getObjects(element) {
             }
 
             console.log('OBJECT_LIST', OBJECT_LIST)
-            localStorage.ONBJECT_LIST = JSON.stringify(OBJECT_LIST)
+            localStorage.OBJECT_LIST = JSON.stringify(OBJECT_LIST)
 
             const cupons = OBJECT_LIST.find((obj) => obj.content.main.type === 'Cupom')
             const fretes = OBJECT_LIST.find((obj) => obj.content.main.type === 'Frete Grátis')
@@ -782,10 +782,12 @@ function removereiPromocao(elemento,texto, tipo){
 
 
 function getChanges(OBJ,ID){
-    console.log(OBJ,ID)
+    console.log('recebido',OBJ,ID)
     let result = ""
     try{
-        let LISTA = JSON.parse(localStorage.OBJECT_LIST)
+        let STRING = localStorage.OBJECT_LIST
+        console.log(STRING)
+        let LISTA = JSON.parse(STRING)
         let myObj = LISTA.find((o) => o.id === Number(ID))
         console.lof('myObj', myObj)
 
