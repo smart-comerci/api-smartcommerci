@@ -789,6 +789,7 @@ function getChanges(OBJ,ID){
         console.log(STRING)
         let LISTA = JSON.parse(STRING)
         let myObj = LISTA.find((o) => o.id === Number(ID))
+        myObj = myObj.content
         console.log('myObj', myObj)
 
         for(const a in myObj){ 
