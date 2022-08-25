@@ -817,7 +817,7 @@ function getChanges(OBJ,ID){
     }catch(e){
         console.log(e)
     }
-    result = result.replace(/"" mudou para: ""/g,"")
+    result = result.replace(/"" mudou para: ""/g,"").replace('"" mudou para: ""',"")
     return result
 }
  
