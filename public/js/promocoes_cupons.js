@@ -317,14 +317,14 @@ async function insertNew(myObject) {
         },
         success: async function (data) {
             console.log('insertNew', data)
-           await updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Criou este registro: <b>'+myObject.main.name+'</b>.',data.insertId)
+            await updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Criou este registro: <b>'+myObject.main.name+'</b>.',data.insertId)
             getObjects()
 
         },
         error: function (data) {
             console.log('insertNew', data)
         },
-        complete: function () { },
+        complete: function () { console.log('finalizei')},
     });
 }
 
