@@ -300,7 +300,8 @@ async function updateLog(alterador, alteracao, desconto_id){
 }
 
 async function insertNew(myObject) {
-    $.ajax({
+    console.log('disparando...')
+   await  $.ajax({
         type: "POST",
         url: mainHost + '/insertNew',
         data: {
@@ -315,9 +316,9 @@ async function insertNew(myObject) {
         headers: {
             "x-access-token": localStorage.token,
         },
-        success: async function (data) {
+        success:  function (data) {
             console.log('insertNew', data)
-            await updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Criou este registro: <b>'+myObject.main.name+'</b>.',data.insertId)
+             updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Criou este registro: <b>'+myObject.main.name+'</b>.',data.insertId)
             getObjects()
 
         },
@@ -390,7 +391,7 @@ async function CLOSE_AND_SAVE(type, ID) {
 
     if (type === 'insert') {
         console.log("inserindo novo",OBJETO_MODEL)
-        await insertNew(OBJETO_MODEL)
+        insertNew(OBJETO_MODEL)
         OBJETO_MODEL = OBJETO_DEFAULT
     }
     if (type === 'update') {
