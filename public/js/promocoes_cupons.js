@@ -806,11 +806,11 @@ function getChanges(OBJ,ID){
                             console.log('valores', myObj[a][b],OBJ[c][d])
                             if(Array.isArray(myObj[a][b]) && Array.isArray(OBJ[c][d])){
                                 if(myObj[a][b].length !== OBJ[c][d].length){ 
-                                    result+= `<b>${b}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span>`
+                                    result+= `<b>${b}  </b>mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br><hr><br>`
                                 }
                             }else{
                                 if(myObj[a][b] !== OBJ[c][d]){ 
-                                    result+= `<b>${b}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span>`
+                                    result+= `<b>${b.replace(/\//g,"")}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br><hr><br>`
                                 }
                             }
                             
@@ -827,7 +827,7 @@ function getChanges(OBJ,ID){
     }catch(e){
         console.log(e)
     }
-    result = result.replace(/"" mudou para: ""/g,"").replace('"" mudou para: ""',"").replace(/\//g,"")
+    result = result.replace(/"" mudou para: ""/g,"").replace('"" mudou para: ""',"")
     return result
 }
  
