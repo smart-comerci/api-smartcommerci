@@ -609,15 +609,8 @@
                         <div class="col-md-4">Ação</div> 
                     </div>
 
-                    <div class="col-md-8 uti_box">
-                        <div class="row">
-                            <div class="col-md-4 log_data">18/03/2022 às 07:20</div>
-                            <div class="col-md-4 uti_text">Ronan Rodrigues</div>
-                            <div class="col-md-4 uti_text">
-                                Alterou tipo de desconto: valor<br>
-                                Para: <span class="log_bold">Porcentagem</span>
-                            </div> 
-                        </div>
+                    <div id="logAlteracoes" class="col-md-8 uti_box">
+                        
                     </div>
                     <br>
                    <div class="col-md-8 uti_box">
@@ -1222,6 +1215,30 @@
                     $(".tabContent").hide();
                     //////connsole.log("#" + $(this).attr("content"));
                     $("#" + $(this).attr("content")).fadeIn();
+                });
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "https://api-smartcomerci.com.br:9090/getLogsPromotional",
+                    headers: {
+                        "x-access-token": localStorage.token,
+                    },
+                    data: {
+                        "affiliate_id": localStorage.AFFILIATE_ID,
+                        "discount_id": originalData?.id,
+                    },
+                    success: function (alteracoes) {
+                        let LISTA_ALTERACOES = alteracoes
+                        $("#logAlteracoes").html(
+                            getAlteracoes(LISTA_ALTERACOES)
+                        )
+                        
+                    },
+                    error: function (data2) {
+                        console.log('data2 catgosss');
+                    },
+                    complete: function () { },
                 });
 
 

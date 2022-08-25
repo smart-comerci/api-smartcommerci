@@ -28,6 +28,9 @@ $.ajax({
     complete: function () { },
 });
 
+
+ 
+
 $.ajax({
     type: "POST",
     url: "https://api-smartcomerci.com.br:9090/getTagsLists",
@@ -807,7 +810,7 @@ function getChanges(OBJ,ID){
                                 }
                             }else{
                                 if(myObj[a][b] !== OBJ[c][d]){ 
-                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"</s> para: "${OBJ[c][d]}"<br>`
+                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
                                 }
                             }
                             
@@ -828,3 +831,21 @@ function getChanges(OBJ,ID){
     return result
 }
  
+function getAlteracoes(LISTA_ALTERACOES){
+
+    let html = ""
+
+    for(const k in LISTA_ALTERACOES){
+        html += `
+                        <div class="row">
+                            <div class="col-md-4 log_data">${LISTA_ALTERACOES[k].createdAt}</div>
+                            <div class="col-md-4 uti_text">${LISTA_ALTERACOES[k].alterador}</div>
+                            <div class="col-md-4 uti_text">
+                               ${LISTA_ALTERACOES[k].alteracao} 
+                            </div> 
+                        </div>
+        `
+    }
+
+    return html
+}
