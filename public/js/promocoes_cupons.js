@@ -278,8 +278,8 @@ async function updateLog(alterador, alteracao, desconto_id){
         url: mainHost + '/insertLogsPromotional',
         data: {
             alterador: alterador,
-            desconto_id: desconto_id,
-            affiliate_id: localStorage.AFFILIATE_ID,
+            desconto_id: Number(desconto_id),
+            affiliate_id: Number(localStorage.AFFILIATE_ID),
             alteracao: alteracao
         },
         headers: {
