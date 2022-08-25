@@ -802,7 +802,7 @@ function getChanges(OBJ,ID){
                         if( b === d){
                             console.log('valores', myObj[a][b],OBJ[c][d])
                             if(myObj[a][b] !== OBJ[c][d]){
-                                result+= `"${myObj[a][b]}" mudou para: "${OBJ[c][d]}"`
+                                result+= `"${myObj[a][b]}" mudou para: "${OBJ[c][d]}", `
                             }
                         }        
                     }
@@ -817,6 +817,7 @@ function getChanges(OBJ,ID){
     }catch(e){
         console.log(e)
     }
+    result = result.replace(/"" mudou para: ""/g,"")
     return result
 }
  
