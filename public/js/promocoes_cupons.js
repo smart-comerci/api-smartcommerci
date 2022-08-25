@@ -278,7 +278,7 @@ async function updateLog(alterador, alteracao, desconto_id){
         url: mainHost + '/insertLogsPromotional',
         data: {
             alterador: alterador,
-            desconto_id: Number(desconto_id),
+            discount_id: Number(desconto_id),
             affiliate_id: Number(localStorage.AFFILIATE_ID),
             alteracao: alteracao
         },
@@ -802,7 +802,8 @@ function getChanges(OBJ,ID){
                         if( b === d){
                             console.log('valores', myObj[a][b],OBJ[c][d])
                             if(myObj[a][b] !== OBJ[c][d]){
-                                result+= `"${myObj[a][b]}" mudou para: "${OBJ[c][d]}", `
+                                
+                                result+= `${a} mudou de :"${myObj[a][b]}"para: "${OBJ[c][d]}", `
                             }
                         }        
                     }
@@ -817,7 +818,7 @@ function getChanges(OBJ,ID){
     }catch(e){
         console.log(e)
     }
-    result = result.replace(/"" mudou para: ""/g,"").replace('"" mudou para: ""',"")
+    result = result.replace(/"" mudou para: ""/g,"").replace('"" mudou para: ""',"").replace(/\//g,"")
     return result
 }
  
