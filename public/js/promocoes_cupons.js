@@ -374,7 +374,7 @@ async function updateObject(myObject, ID) {
         },
         success: async function (data) {
             console.log('updateById', data)
-            await updateLog(localStorage.MAIL_MASTER_CLIENTE, 'Alterou este registro:\n\n'+getChanges(myObject, ID),ID)
+            await updateLog(localStorage.MAIL_MASTER_CLIENTE,  getChanges(myObject, ID),ID)
             getObjects()
 
         },
@@ -806,11 +806,11 @@ function getChanges(OBJ,ID){
                             console.log('valores', myObj[a][b],OBJ[c][d])
                             if(Array.isArray(myObj[a][b]) && Array.isArray(OBJ[c][d])){
                                 if(myObj[a][b].length !== OBJ[c][d].length){ 
-                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"<s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
+                                    result+= `<br><b>${b}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
                                 }
                             }else{
                                 if(myObj[a][b] !== OBJ[c][d]){ 
-                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"<s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
+                                    result+= `<br><b>${b}</b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
                                 }
                             }
                             
