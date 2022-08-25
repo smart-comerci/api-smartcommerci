@@ -806,11 +806,11 @@ function getChanges(OBJ,ID){
                             console.log('valores', myObj[a][b],OBJ[c][d])
                             if(Array.isArray(myObj[a][b]) && Array.isArray(OBJ[c][d])){
                                 if(myObj[a][b].length !== OBJ[c][d].length){ 
-                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"</s> para: "${OBJ[c][d]}"<br>`
+                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"<s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
                                 }
                             }else{
                                 if(myObj[a][b] !== OBJ[c][d]){ 
-                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"</s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
+                                    result+= `<br><b>${b}<b> mudou de: <s>"${myObj[a][b]}"<s> para: <span class="log_bold">"${OBJ[c][d]}"</span><br>`
                                 }
                             }
                             
@@ -836,7 +836,7 @@ function getAlteracoes(LISTA_ALTERACOES){
     let html = ""
 
     for(const k in LISTA_ALTERACOES){
-        html += `
+        html += `<div class="col-md-8 uti_box">
                         <div class="row">
                             <div class="col-md-4 log_data">${LISTA_ALTERACOES[k].createdAt}</div>
                             <div class="col-md-4 uti_text">${LISTA_ALTERACOES[k].alterador}</div>
@@ -844,6 +844,7 @@ function getAlteracoes(LISTA_ALTERACOES){
                                ${LISTA_ALTERACOES[k].alteracao} 
                             </div> 
                         </div>
+                        </div><br>
         `
     }
 
