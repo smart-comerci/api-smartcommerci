@@ -389,6 +389,7 @@ async function CLOSE_AND_SAVE(type, ID) {
     console.log(type, ID)
 
     if (type === 'insert') {
+        console.log("inserindo novo",OBJETO_MODEL)
         await insertNew(OBJETO_MODEL)
         OBJETO_MODEL = OBJETO_DEFAULT
     }
