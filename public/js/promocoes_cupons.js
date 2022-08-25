@@ -782,10 +782,11 @@ function removereiPromocao(elemento,texto, tipo){
 
 
 function getChanges(OBJ,ID){
+    console.log(OBJ,ID)
     let result = ""
     try{
         let LISTA = JSON.parse(localStorage.OBJECT_LIST)
-        let myObj = LISTA.find((o) => o.id === ID)
+        let myObj = LISTA.find((o) => o.id === Number(ID))
         console.lof('myObj', myObj)
 
         for(const a in myObj){ 
