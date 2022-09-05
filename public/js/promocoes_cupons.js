@@ -208,47 +208,54 @@ async function getObjects(element) {
                 $(".listaDePromocoes").html("")
                 $(".listaDeCupons").html("")
                 $(".listaDeFretes").html("")
-                if (Array.isArray(cupons)) {
-                    for (const k in cupons) {
-                        $(".listaDeCupons").append(
-                            getCupom(cupons[k], 'Cupom')
-                        )
+
+                try{
+
+                    if (Array.isArray(cupons)) {
+                        for (const k in cupons) {
+                            $(".listaDeCupons").append(
+                                getCupom(cupons[k], 'Cupom')
+                            )
+                        }
+                    } else {
+                        if (cupons) {
+                            $(".listaDeCupons").append(
+                                getCupom(cupons, 'Cupom')
+                            )
+                        }
                     }
-                } else {
-                    if (cupons) {
-                        $(".listaDeCupons").append(
-                            getCupom(cupons, 'Cupom')
-                        )
+        
+                    if (Array.isArray(fretes)) {
+                        for (const k in fretes) {
+                            $(".listaDeFretes").append(
+                                getCupom(fretes[k], 'Frete Grátis')
+                            )
+                        }
+                    } else {
+                        if (fretes) {
+                            $(".listaDeFretes").append(
+                                getCupom(fretes, 'Frete Grátis')
+                            )
+                        }
                     }
+        
+                    if (Array.isArray(descontos)) {
+                        for (const k in descontos) {
+                            $(".listaDePromocoes").append(
+                                getCupom(descontos[k], 'Desconto')
+                            )
+                        }
+                    } else {
+                        if (descontos) {
+                            $(".listaDePromocoes").append(
+                                getCupom(descontos, 'Desconto')
+                            )
+                        }
+                    }
+                }catch(erro){
+                    console.log('erro cupons 2', erro)
                 }
-    
-                if (Array.isArray(fretes)) {
-                    for (const k in fretes) {
-                        $(".listaDeFretes").append(
-                            getCupom(fretes[k], 'Frete Grátis')
-                        )
-                    }
-                } else {
-                    if (fretes) {
-                        $(".listaDeFretes").append(
-                            getCupom(fretes, 'Frete Grátis')
-                        )
-                    }
-                }
-    
-                if (Array.isArray(descontos)) {
-                    for (const k in descontos) {
-                        $(".listaDePromocoes").append(
-                            getCupom(descontos[k], 'Desconto')
-                        )
-                    }
-                } else {
-                    if (descontos) {
-                        $(".listaDePromocoes").append(
-                            getCupom(descontos, 'Desconto')
-                        )
-                    }
-                }
+                
     
     
     
