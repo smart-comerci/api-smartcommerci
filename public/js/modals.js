@@ -45,7 +45,7 @@ async function modalAlteraLinks(elemento, idFuturo) {
     <h4 style="font-size: 24px !important" class="infoLabel">Alterar o link</h4>
     <p style="text-align: left;  display:none;font-size: 1.2rem;margin: 25px auto;margin-left: 20px;"  id="meuLinkExterno">https://meusite.com.br/<span style="text-weight: bold" id="meuLinkInterno"></span></p>
     <p style="text-align: left;  ;font-size: 1.2rem;margin: 25px auto;margin-left: 20px; color: lightblue;">${elemento.attr("linkTarget") ?elemento.attr("linkTarget") : ''}</p>
-    <div style="max-width: 100%; max-height: 60vh;    height: 60vh; margin-top: 80px;" class="container verticalScroll ">
+    <div style="max-width: 100%; max-height: 60vh;  margin-top: 80px;" class="container verticalScroll ">
       <hr class="baixoCabecalho" style="position: fixed;top: 165px !important;right: calc((100% - 648px) / 2) !important;width: 648px;box-shadow: 2px 2px 2px silver;/* margin: auto; */">
       <div style="padding:0 2%; margin-top: 5%" class="row"> 
           <label style=" font-size: 18px;" class="label">Categorias</label><br>  
