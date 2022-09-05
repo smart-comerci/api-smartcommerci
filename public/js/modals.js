@@ -149,8 +149,8 @@ async function modalAlteraLinks(elemento, idFuturo) {
     </div>
 
     <div>
-      <label style="font-size: 20px;" class="label">Link em uso:</label>
-      <p style="text-align: left;  ;font-size: 1.2rem;margin: 25px auto;margin-left: 20px; color: lightblue;"> <a href="${getMyUrl(sessionStorage.COLUMN_ORIGIN)}" target="_blank">${getMyUrl(sessionStorage.COLUMN_ORIGIN)}</a></p>
+      <label style="font-size: 20px;" class="label">Link em uso: <a href="${getMyUrl(sessionStorage.COLUMN_ORIGIN)}" target="_blank">${getMyUrl(sessionStorage.COLUMN_ORIGIN)}</a></label>
+ 
     </div>
  
     <div style="display: inline-flex; width: 100%;border-top: 0.949999988079071px solid #EDEDED;">
