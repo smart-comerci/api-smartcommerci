@@ -379,6 +379,8 @@ async function salvarLinkEscolhido(elemento, idFuturo){
          informar("alert-success", "As alterações foram salvas!", 3000)
 
          sessionStorage.MUDA_ID_LINK = JSON.stringify({ link:sessionStorage.LINK_ESCOLHIDO_TEMP,id: "#"+idFuturo})
+
+         $(".close").click()
           
          
       },

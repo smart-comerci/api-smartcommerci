@@ -1036,7 +1036,9 @@
                 </div>
 
                 <div style="padding: 20px;" class="group-input2">
-                    <textarea column="master_custom_texto_privacidade" table="masters" onchange="atualizaCampo($(this),0)" id="textoPrivacidade1" rows="3" style="background: none; font-size: 14px;" class="form-control inputProduct"
+                    <textarea column="master_custom_texto_privacidade" table="masters"
+                        onchange="atualizaCampo($(this),0)" id="textoPrivacidade1" rows="3"
+                        style="background: none; font-size: 14px;" class="form-control inputProduct"
                         placeholder="Insira o texto que será exibido"></textarea>
                 </div>
                 <br> <br>
@@ -1234,10 +1236,10 @@
                 </div>
                 <div class="new1">.</div>
                 <div class="listandoEmails4">
-                    
+
                 </div>
 
-                
+
 
 
                 {{!-- <div class="col-md-12 itemMsg">
@@ -1379,9 +1381,10 @@
 
                 <div class="new1">.</div>
                 <p class="mySubT3" style="color:   #F3B306 !important;">
-                    <span class="myInfoText3">Domínio em utilização: </span> www.smartcomerci.com.br <span
-                        class="inLabel" style="padding: 10px; color: green !important">Online</span><span
-                        class="inLabel2" style="padding: 10px;">Em Implantação</span>
+                    <span class="myInfoText3">Domínio em utilização: </span> <span
+                        id="myDomain">www.smartcomerci.com.br</span><span class="inLabel"
+                        style="padding: 10px; color: green !important">Online</span><span class="inLabel2"
+                        style="padding: 10px;">Em Implantação</span>
                 </p>
                 <div class="new1">.</div>
 
@@ -1636,7 +1639,7 @@
     }
 
     function insertPage(element) {
-       // console.log(element)
+        // console.log(element)
         let name = element.parent().find(".itemListaPagina").text()
         if (element[0].checked) {
 
@@ -1647,7 +1650,7 @@
             $(".paginasSelecionadas").append(html)
         } else {
             let lis = $(".paginasSelecionadas").find(".paginaInsert")
-           // console.log("lista de elementos", lis)
+            // console.log("lista de elementos", lis)
             lis.each(function () {
                 if ($(this).text().replace(/x/g, "") == name.text().replace(/x/g, "")) {
                     $(this).remove()
@@ -1685,6 +1688,15 @@
         }
         $("#listaPaginasExistentes").append(html)
     }
-    
+
+    try {
+        $("#myDomain").html(
+            JSON.parse(localStorage.DADOS_MATRIZ).site_front_domain
+        )
+    } catch (e) {
+
+    }
+
+
 
 </script>
