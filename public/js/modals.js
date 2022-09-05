@@ -238,7 +238,7 @@ async function modalAlteraLinks(elemento, idFuturo) {
 }
 
 function getMyUrl(myContent){
-  console.log("mySearch",myContent, myLinks)
+  console.log("mySearch",myContent, MY_LINKS)
   if(myContent){
     const result =  MY_LINKS?.find((ml) => ml.column_origin === myContent)
     if(result){
