@@ -141,11 +141,16 @@ async function modalAlteraLinks(elemento, idFuturo) {
             <label style="font-size: 20px;" class="label">Link externo</label> 
           </div>
                 <div class="input-group">
-                  <input value="${sessionStorage.COLUMN_ORIGIN}" id="buscaCategorias" onchange="setaLink($(this))" type="text" style="min-width: 300px;font-size: 1.3rem; max-width: 95%; margin: auto; border-radius: 5px" value="" class="form-control" placeholder="Insira aqui o link externo..." /> 
+                  <input id="buscaCategorias" onchange="setaLink($(this))" type="text" style="min-width: 300px;font-size: 1.3rem; max-width: 95%; margin: auto; border-radius: 5px" value="" class="form-control" placeholder="Insira aqui o link externo..." /> 
                 
                 </div>
       </div>
       
+    </div>
+
+    <div>
+      <label style="font-size: 20px;" class="label">Link em uso:</label>
+      <p style="text-align: left;  ;font-size: 1.2rem;margin: 25px auto;margin-left: 20px; color: lightblue;"> <a href="${sessionStorage.COLUMN_ORIGIN}" target="_blank">${sessionStorage.COLUMN_ORIGIN}</a></p>
     </div>
  
     <div style="display: inline-flex; width: 100%;border-top: 0.949999988079071px solid #EDEDED;">
