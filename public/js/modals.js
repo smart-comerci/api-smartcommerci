@@ -242,7 +242,18 @@ function getMyUrl(myContent){
   if(myContent){
     const result =  MY_LINKS?.find((ml) => ml.column_origin === myContent)
     if(result){
-      return result.url
+      if(result.url.indexOf("http") > -1){
+        return result.url
+      }else{
+        try{
+          let domain = JSON.parse(localStorage.DADOS_MATRIZ).site_front_domain
+          return `https://${domain}${result.url}`
+        }catch(e){
+          return result.url
+        }
+        
+      }
+      
     }else{
       return ""
     }
