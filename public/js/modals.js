@@ -135,7 +135,8 @@ async function modalAlteraLinks(elemento, idFuturo) {
             </div>
           </div>
       </div> 
-      <div style="margin-top: 3% !important;" class="col-md-12 grupo">
+      <div style="margin-top: 3% !important;     overflow: auto;
+      max-height: 390px;" class="col-md-12 grupo">
           <div style="padding: 0 2%; margin-top: 2%;" class="row">
             <div style="margin: 1% 2%;" class="switch__container ajuste"><input  column="desativados"  id="switch-shadow13" class="switch switch--shadow ativaLinksExterno" type="checkbox" /><label for="switch-shadow13"></label></div>
             <label style="font-size: 20px;" class="label">Link externo</label> 
