@@ -1,5 +1,6 @@
 
 let MY_PAGES_INST = []
+let MY_LINKS = []
 
 $.ajax({
   type: "POST",
@@ -11,6 +12,24 @@ $.ajax({
   success: function (data) {
 
     MY_PAGES_INST = data
+
+  },
+  error: function (data) {
+    console.log("erro institucional", data)
+  },
+  complete: function () { },
+});
+
+$.ajax({
+  type: "POST",
+  url: mainHost + '/getMyLinksBanners',
+  data: { "affiliate_id": localStorage.AFFILIATE_ID},
+  headers: {
+    "x-access-token": localStorage.token,
+  },
+  success: function (data) {
+
+    MY_LINKS = data
 
   },
   error: function (data) {
@@ -122,7 +141,7 @@ async function modalAlteraLinks(elemento, idFuturo) {
             <label style="font-size: 20px;" class="label">Link externo</label> 
           </div>
                 <div class="input-group">
-                  <input id="buscaCategorias" onchange="setaLink($(this))" type="text" style="min-width: 300px;font-size: 1.3rem; max-width: 95%; margin: auto; border-radius: 5px" value="" class="form-control" placeholder="Insira aqui o link externo..." /> 
+                  <input value="${sessionStorage.COLUMN_ORIGIN}" id="buscaCategorias" onchange="setaLink($(this))" type="text" style="min-width: 300px;font-size: 1.3rem; max-width: 95%; margin: auto; border-radius: 5px" value="" class="form-control" placeholder="Insira aqui o link externo..." /> 
                 
                 </div>
       </div>
