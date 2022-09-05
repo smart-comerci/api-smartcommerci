@@ -150,7 +150,7 @@ async function modalAlteraLinks(elemento, idFuturo) {
 
     <div>
       <label style="font-size: 20px;" class="label">Link em uso:</label>
-      <p style="text-align: left;  ;font-size: 1.2rem;margin: 25px auto;margin-left: 20px; color: lightblue;"> <a href="${sessionStorage.COLUMN_ORIGIN}" target="_blank">${sessionStorage.COLUMN_ORIGIN}</a></p>
+      <p style="text-align: left;  ;font-size: 1.2rem;margin: 25px auto;margin-left: 20px; color: lightblue;"> <a href="${getMyUrl(sessionStorage.COLUMN_ORIGIN)}" target="_blank">${getMyUrl(sessionStorage.COLUMN_ORIGIN)}</a></p>
     </div>
  
     <div style="display: inline-flex; width: 100%;border-top: 0.949999988079071px solid #EDEDED;">
@@ -237,7 +237,20 @@ async function modalAlteraLinks(elemento, idFuturo) {
 
 }
 
-
+function getMyUrl(myContent){
+  console.log("mySearch",myContent, myLinks)
+  if(myContent){
+    const result =  MY_LINKS?.find((ml) => ml.column_origin === myContent)
+    if(result){
+      return result.url
+    }else{
+      return ""
+    }
+  }else{
+    return ""
+  }
+  
+}
 
 function getMyPagesInst(TEXTAO, tipo) {
   var html3 = ''
