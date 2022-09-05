@@ -2640,6 +2640,7 @@
           $(".productImage").each(function () {
             let thisCode = $(this).parent().find("a").text().trim()
             let myCode = Number(thisCode)
+            $(this).css("background", "white")
             for (const k in data) {
               if (Number(data[k].product_code) == myCode) {
                 $(this).attr("src", data[k].product_thumbnail)
