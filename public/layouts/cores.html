@@ -2562,6 +2562,23 @@
 
     }
 
+    function getPrice(code) {
+      try {
+        let dat = JSON.parse(localStorage.MEUS_PRODUTOS_VITRINE)
+        console.log(dat)
+        for (const k in dat) {
+          if (dat[k].product_code == code) {
+            return dat[k].product_valor
+            break;
+          }
+        }
+      } catch (e) {
+        return 'null';
+      }
+
+    }
+
+
     async function searchProducts(text, container) {
       ////console.log("pesquisei", text)
       container.html("")
@@ -2843,6 +2860,8 @@
         
           <img src="" class="productImage"/>
           <p style="text-align: center;    font-size: 8px;    height: 80px;">Product name</p>
+          <div class="color: var(--primary); font-size: 1.9rem">★★★★★</div>
+          <label></label>
           <a style="display:none"></a>
           <hr>
         
@@ -2882,11 +2901,13 @@
         } else {
           for (const k in list) {
             const productSelect = dropzoneHtml2.cloneNode(1);
-            const [input, image, a] = productSelect.children;
+            const [input, image, a, label] = productSelect.children;
             productSelect.id = id
             a.innerHTML = list[k]
             //productSelect.attr("detalhe", code)
             image.src = getEan(Number(list[k]))
+            label.html = `<span style="color: black; font-weight: bold">R$ ${getPrice(Number(list[k]))} </span>` 
+
             productSelect.classList.add("conteudoInterno")
             //productSelect.addEventListener('click', showModalSearch());          
             wrapper.appendChild(productSelect);
