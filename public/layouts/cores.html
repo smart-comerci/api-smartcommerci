@@ -3270,6 +3270,8 @@
     }
 
     function destaqueMe(element, e) {
+
+
      
      const label  =element.find('label')
      //console.log(element,label)
@@ -3278,7 +3280,7 @@
       e.preventDefault();
       sessionStorage.REFERENCIA = element.attr("referencia")
       sessionStorage.ID_ORIGIN =  element.attr("id_origin")
-      sessionStorage.COLUMN_ORIGIN =  element.attr("column_origin")
+      sessionStorage.COLUMN_ORIGIN =  element.find("img").attr("src")//element.attr("column_origin")
       sessionStorage.TABLE_ORIGIN =  element.attr("table")
       if (element.attr("destacado") === "0" || element.attr("destacado") === undefined) {
         $(".backOverlay").show()
