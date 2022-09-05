@@ -2566,11 +2566,10 @@
       try {
         let dat = JSON.parse(localStorage.MEUS_PRODUTOS_VITRINE)
         console.log(dat)
-        for (const k in dat) {
-          if (dat[k].product_code == code) {
-            return dat[k].product_valor
-            break;
-          }
+        let value = 0.00
+        value = dat.find((dt) => dt.product_valor === code)
+        if(value){
+          return value
         }
       } catch (e) {
         return 'null';
