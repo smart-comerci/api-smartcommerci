@@ -944,7 +944,8 @@
 
     }
     function prepara() {
-      if (preparei == false) {
+      try{
+        if (preparei == false) {
         $("#tituloEMAIL").val("")
         $("#areaTXT").text("")
         let dat = JSON.parse(localStorage.EMAILS_MARKETING)
@@ -966,6 +967,10 @@
       }
 
 
+      }catch(err){
+        console.log("Erro ao preparar...", err)
+      }
+ 
     }
 
 
