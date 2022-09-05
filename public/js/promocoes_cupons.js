@@ -171,92 +171,98 @@ let OBJETO_DEFAULT = {
 let OBJECT_LIST = []
 
 async function getObjects(element) {
-    $.ajax({
-        type: "POST",
-        url: mainHost + '/getById',
-        data: {
-            table: "promocoes_cupons",
-            id_name: 'master_id',
-            id_value: MASTER_ID
 
-        },
-        headers: {
-            "x-access-token": localStorage.token,
-        },
-        success: function (data) {
-            console.log('getByTableName', data)
-            OBJECT_LIST = []
-            OBJETO_MODEL = OBJETO_DEFAULT
-            for (const k in data) {
-                const { id, createdAt, updatedAt, content } = data[k]
-                OBJECT_LIST.push({
-                    id: id,
-                    createdAt: createdAt,
-                    updatedAt: updatedAt,
-                    content: JSON.parse(content)
-                })
-            }
-
-            console.log('OBJECT_LIST', OBJECT_LIST)
-            localStorage.OBJECT_LIST = JSON.stringify(OBJECT_LIST)
-
-            const cupons = OBJECT_LIST.find((obj) => obj.content.main.type === 'Cupom')
-            const fretes = OBJECT_LIST.find((obj) => obj.content.main.type === 'Frete Grátis')
-            const descontos = OBJECT_LIST.find((obj) => obj.content.main.type === 'Desconto')
-            $(".listaDePromocoes").html("")
-            $(".listaDeCupons").html("")
-            $(".listaDeFretes").html("")
-            if (Array.isArray(cupons)) {
-                for (const k in cupons) {
-                    $(".listaDeCupons").append(
-                        getCupom(cupons[k], 'Cupom')
-                    )
+    try{
+        $.ajax({
+            type: "POST",
+            url: mainHost + '/getById',
+            data: {
+                table: "promocoes_cupons",
+                id_name: 'master_id',
+                id_value: MASTER_ID
+    
+            },
+            headers: {
+                "x-access-token": localStorage.token,
+            },
+            success: function (data) {
+                console.log('getByTableName', data)
+                OBJECT_LIST = []
+                OBJETO_MODEL = OBJETO_DEFAULT
+                for (const k in data) {
+                    const { id, createdAt, updatedAt, content } = data[k]
+                    OBJECT_LIST.push({
+                        id: id,
+                        createdAt: createdAt,
+                        updatedAt: updatedAt,
+                        content: JSON.parse(content)
+                    })
                 }
-            } else {
-                if (cupons) {
-                    $(".listaDeCupons").append(
-                        getCupom(cupons, 'Cupom')
-                    )
+    
+                console.log('OBJECT_LIST', OBJECT_LIST)
+                localStorage.OBJECT_LIST = JSON.stringify(OBJECT_LIST)
+    
+                const cupons = OBJECT_LIST.find((obj) => obj.content.main.type === 'Cupom')
+                const fretes = OBJECT_LIST.find((obj) => obj.content.main.type === 'Frete Grátis')
+                const descontos = OBJECT_LIST.find((obj) => obj.content.main.type === 'Desconto')
+                $(".listaDePromocoes").html("")
+                $(".listaDeCupons").html("")
+                $(".listaDeFretes").html("")
+                if (Array.isArray(cupons)) {
+                    for (const k in cupons) {
+                        $(".listaDeCupons").append(
+                            getCupom(cupons[k], 'Cupom')
+                        )
+                    }
+                } else {
+                    if (cupons) {
+                        $(".listaDeCupons").append(
+                            getCupom(cupons, 'Cupom')
+                        )
+                    }
                 }
-            }
-
-            if (Array.isArray(fretes)) {
-                for (const k in fretes) {
-                    $(".listaDeFretes").append(
-                        getCupom(fretes[k], 'Frete Grátis')
-                    )
+    
+                if (Array.isArray(fretes)) {
+                    for (const k in fretes) {
+                        $(".listaDeFretes").append(
+                            getCupom(fretes[k], 'Frete Grátis')
+                        )
+                    }
+                } else {
+                    if (fretes) {
+                        $(".listaDeFretes").append(
+                            getCupom(fretes, 'Frete Grátis')
+                        )
+                    }
                 }
-            } else {
-                if (fretes) {
-                    $(".listaDeFretes").append(
-                        getCupom(fretes, 'Frete Grátis')
-                    )
+    
+                if (Array.isArray(descontos)) {
+                    for (const k in descontos) {
+                        $(".listaDePromocoes").append(
+                            getCupom(descontos[k], 'Desconto')
+                        )
+                    }
+                } else {
+                    if (descontos) {
+                        $(".listaDePromocoes").append(
+                            getCupom(descontos, 'Desconto')
+                        )
+                    }
                 }
-            }
+    
+    
+    
+    
+            },
+            error: function (data) {
+                console.log('getByTableName', data)
+            },
+            complete: function () { },
+        });
+    }catch(err){
+        console.log("erro nos cupons:",err)
+    }
 
-            if (Array.isArray(descontos)) {
-                for (const k in descontos) {
-                    $(".listaDePromocoes").append(
-                        getCupom(descontos[k], 'Desconto')
-                    )
-                }
-            } else {
-                if (descontos) {
-                    $(".listaDePromocoes").append(
-                        getCupom(descontos, 'Desconto')
-                    )
-                }
-            }
-
-
-
-
-        },
-        error: function (data) {
-            console.log('getByTableName', data)
-        },
-        complete: function () { },
-    });
 }
 
 async function setObject(element) {
