@@ -2884,12 +2884,12 @@
         } else {
           for (const k in list) {
             const productSelect = dropzoneHtml2.cloneNode(1);
-            const [input, image, a, label] = productSelect.children;
+            const [input, image, a] = productSelect.children;
             productSelect.id = id
             a.innerHTML = list[k]
             //productSelect.attr("detalhe", code)
             image.src = getEan(Number(list[k]))
-      
+ 
 
 
             productSelect.classList.add("conteudoInterno")
