@@ -228,7 +228,7 @@ async function modalAlteraLinks(elemento, idFuturo) {
     }
   })
 
-  $(".modal-content").css("max-height", "50vh")
+  $(".modal-content").css("max-height", "65vh")
   $(".modal-content").css("border", "none")
 
 
