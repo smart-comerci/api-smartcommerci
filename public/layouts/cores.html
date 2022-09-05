@@ -2272,7 +2272,7 @@
 
             <div id="picture-drop" class="picture-drop d-flex flex-column align-items-center">
               <span id="picture-preview" class="rounded-icon icon-lg icon-orange bg-white mb-3">
-                <img id="picture-preview-content"   alt="Preview">
+                <img id="picture-preview-content" src="login/upload.svg" alt="Preview">
               </span>
 
               <p class="picture-drop-title">
@@ -2562,22 +2562,6 @@
 
     }
 
-    function getPrice(code) {
-      try {
-        let dat = JSON.parse(localStorage.MEUS_PRODUTOS_VITRINE)
-        console.log(dat)
-        let value = 0.00
-        value = dat.find((dt) => dt.product_valor === code)
-        if(value){
-          return value
-        }
-      } catch (e) {
-        return 'null';
-      }
-
-    }
-
-
     async function searchProducts(text, container) {
       ////console.log("pesquisei", text)
       container.html("")
@@ -2859,7 +2843,7 @@
         
           <img src="" class="productImage"/>
           <p style="text-align: center;    font-size: 8px;    height: 80px;">Product name</p>
-         
+          <div class="color: var(--primary); font-size: 1.9rem">★★★★★</div>
           <label></label>
           <a style="display:none"></a>
           <hr>
@@ -2869,8 +2853,6 @@
               <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
             </svg>
           </span>
-
-          <text class="color: var(--primary); font-size: 1.9rem">★★★★★</text>
           
         
         <div class="btnAdicionar">
@@ -2907,7 +2889,9 @@
             a.innerHTML = list[k]
             //productSelect.attr("detalhe", code)
             image.src = getEan(Number(list[k]))
-           // label.innerHTML = `<span style="color: black; font-weight: bold">R$ ${getPrice(Number(list[k]))} </span>`  
+      
+
+
             productSelect.classList.add("conteudoInterno")
             //productSelect.addEventListener('click', showModalSearch());          
             wrapper.appendChild(productSelect);
