@@ -580,10 +580,19 @@
     <script>
 introJs().setOptions({
   steps: [{
-    intro: "Hello world!"
+    intro: "Seja bem vindo!"
+  }, {
+    element: document.querySelector('#emailMasterLogin'),
+    intro: "Insira o seu e-mail!"
+  }, {
+    element: document.querySelector('#senhaMasterLogin'),
+    intro: "Agora a sua senha!"
   }, {
     element: document.querySelector('#logaCms'),
-    intro: "Click here to login!"
-  }]
+    intro: "Click aqui para logar!"
+  }
+  
+  
+  ]
 }).start();
     </script>
