@@ -2342,14 +2342,8 @@ async function updateTotalPedidos()   {
           }
 
         }
-        //console.log(
-          {
-            "table": "orders",
-            "name_id": "id",
-            "value_id": pedido.id,
-            "fields": columns
-          }
-        )
+     
+    
 
         await $.ajax({
           type: 'POST',
