@@ -1,3 +1,4 @@
+    <link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet" />
 <script>
     localStorage.MY_DOMAIN = 'https://api-smartcomerci.com.br:9090'
 </script>
@@ -573,3 +574,16 @@
     }
 
 </script>
+
+
+    <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+    <script>
+introJs().setOptions({
+  steps: [{
+    intro: "Hello world!"
+  }, {
+    element: document.querySelector('#logaCms'),
+    intro: "Click here to login!"
+  }]
+}).start();
+    </script>
