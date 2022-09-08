@@ -1222,10 +1222,10 @@
                 <div class="col-md-12 itemMsg">
                     <div class="row">
                         <div class="col-md-3 mginAuto">
-                            <p class="txtToMsg">naoresponda@smartcomerci.com</p>
+                            <p id="remetente" class="txtToMsg">naoresponda@smartcomerci.com</p>
                         </div>
                         <div class="col-md-6 mginAuto" style="border-left: 1px solid #EDF2F6;">
-                            <p class="txtInMsg">noreply@smartcomerci.com</p>
+                            <p id="servico" class="txtInMsg">noreply@smartcomerci.com</p>
                         </div>
                         <div class="col-md-3 mginAuto">
                             <button onclick="showFrame('editarRemetentes')" type="button"
@@ -1695,6 +1695,19 @@
         )
     } catch (e) {
 
+    }
+
+    try{
+        let MATRIZ = JSON.parse(localStorage.DADOS_MATRIZ)
+
+        $("#remetente").html(
+            MATRIZ.email_remetente
+        )
+        $("#servico").html(
+            MATRIZ.email_servico
+        )
+    }catch(erro){
+        console.log(erro)
     }
 
 
