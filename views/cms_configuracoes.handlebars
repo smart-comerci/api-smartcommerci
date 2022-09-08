@@ -1697,7 +1697,7 @@
 
     }
 
-    try{
+    try {
         let MATRIZ = JSON.parse(localStorage.DADOS_MATRIZ)
 
         $("#remetente").html(
@@ -1706,10 +1706,26 @@
         $("#servico").html(
             MATRIZ.email_servico
         )
-    }catch(erro){
+    } catch (erro) {
         console.log(erro)
+    } 
+
+    function getXML() {
+        $.ajax({
+            type: "POST",
+            url: mainHost + '/getXmlFile',
+            data: {
+                "affiliate_id": localStorage.AFFILIATE_ID 
+            },
+            headers: {
+                "x-access-token": localStorage.token,
+            },
+            success: function (data) {
+                console.log(data) 
+            },
+            error: function (data) { console.log(data)},
+            complete: function () { },
+        });
     }
-
-
 
 </script>
