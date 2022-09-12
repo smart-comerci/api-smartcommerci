@@ -2347,6 +2347,29 @@
             "value_id": pedido.id,
             "fields": columns
         })
+        let valorTotal = 0
+        for(const k in columns){
+            if(columns[k].column === "order_conteudo"){
+                try{
+                    let list = JSON.parse(columns[k].value)
+                    for(const a in list){
+                        valorTotal+= (list[a].quantidade * list[a].valor)
+                    }
+                    
+                }catch(err){}
+            }
+        }
+        for(const k in columns){
+            if(columns[k].column === "order_valor_entrega"){
+                    valorTotal+=columns[k].value
+            }
+        }
+
+         for(const k in columns){
+            if(columns[k].column === "order_valor_total"){
+                columns[k].value = valorTotal
+            }
+        }
 
         await $.ajax({
             type: 'POST',
