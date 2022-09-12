@@ -299,8 +299,8 @@
 <script>
     var mainHost = 'https://api-smartcomerci.com.br:9090';
 
-    localStorage.TODOS_OS_PEDIDOS=''
-    localStorage.PEDIDO_SENDO_EDITADO =''
+    localStorage.TODOS_OS_PEDIDOS = ''
+    localStorage.PEDIDO_SENDO_EDITADO = ''
 
     $(".esq").addClass("animated-background")
     $("#panelOrder2").addClass("animated-background")
@@ -309,9 +309,9 @@
         modalCount = 0
 
 
-    
 
-  async  function reloadThis() {
+
+    async function reloadThis() {
         await updateTotalPedidos()
         await $.ajax({
             type: "POST",
@@ -343,8 +343,8 @@
                 })
 
                 $(".esq").removeClass("animated-background")
-         
-             
+
+
                 setTimeout(() => {
                     if (localStorage.setStatusOrder == undefined) {
                         $(".orderActive").click()
@@ -524,8 +524,8 @@
                         }
                     },
                     complete: function () {
-                         $(".orderActive").click()
-                     },
+                        $(".orderActive").click()
+                    },
                 });
 
             },
@@ -1125,15 +1125,15 @@
                         //elemento.text(moment(elemento.attr("date")).format("DD/MMM HH:mm"))
                     }
                     // AQUI ATUALIZE O STATUS DO PEDIDO updateOrderStatus
-                   
+
                     var newsTATUS = status
                     if (status >= 4) {
                         newsTATUS = 4
                     }
 
                     let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
-                    for(const k in PEDIDOS){
-                        if(PEDIDOS[k].id == numberOrder){
+                    for (const k in PEDIDOS) {
+                        if (PEDIDOS[k].id == numberOrder) {
                             PEDIDOS[k]['order_status'] = newsTATUS
                         }
                     }
@@ -1141,7 +1141,7 @@
                     localStorage.TODOS_OS_PEDIDOS = JSON.stringify(PEDIDOS)
 
 
-            
+
                     $.ajax({
                         type: "POST",
                         url: mainHost + '/updateOrderStatus',
@@ -1180,16 +1180,16 @@
         var alvo = elemento.attr("alvo")
         let NUMERO_PEDIDO = Number(alvo.split("_")[1])
         //console.log(alvo)
-         let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
-         let ESTE_PEDIDO;
-            for(const k in PEDIDOS){
-              if(PEDIDOS[k].id == NUMERO_PEDIDO){
+        let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
+        let ESTE_PEDIDO;
+        for (const k in PEDIDOS) {
+            if (PEDIDOS[k].id == NUMERO_PEDIDO) {
                 ESTE_PEDIDO = PEDIDOS[k]
-              }
             }
+        }
 
         var listaProdutos = JSON.parse(ESTE_PEDIDO.order_conteudo)
-       
+
         //console.log("vou tentar")
         $.ajax({
             url: mainHost + '/getProductsFromOrder',
@@ -1223,7 +1223,7 @@
                     '<div class="card-header" style="border-radius: 20px 20px 0 0; border-bottom: 1px solid #efefef; background: #ffffff; padding: 1%; cursor: pointer; max-height: 110px;">' +
                     '<label style="margin-left: 5%; font-size: 1.3rem !important" class="label">Pedido<br><h3 style="font-size: 2rem !important; margin-top: -12%" class="SEO">#<span class="numeroPedido">' + alvo.replace("pedido_", "") + '</span></h3></label>' +
 
-                    '<div numero_pedido="'+NUMERO_PEDIDO+'"  class="finEdit">' +
+                    '<div numero_pedido="' + NUMERO_PEDIDO + '"  class="finEdit">' +
                     '<svg  xmlns="http://www.w3.org/2000/svg" style="margin:auto 5px auto 30px;" width="20" height="20" viewBox="0 0 20 20">' +
                     '<defs></defs>' +
                     '<path class="a" d="M12.929,15H2.083A2.086,2.086,0,0,1,0,12.917V2.084A2.086,2.086,0,0,1,2.083,0H7.928a.417.417,0,0,1,0,.833H2.083a1.252,1.252,0,0,0-1.25,1.25V12.917a1.252,1.252,0,0,0,1.25,1.25H12.929a1.251,1.251,0,0,0,1.25-1.25V7.084a.417.417,0,0,1,.834,0v5.833A2.086,2.086,0,0,1,12.929,15Zm-5-5.833H6.262a.417.417,0,0,1-.417-.416V7.084a.417.417,0,0,1,.122-.295L12.633.122a.417.417,0,0,1,.59,0L14.89,1.789a.416.416,0,0,1,0,.59L8.223,9.046A.414.414,0,0,1,7.928,9.167Zm5-8.161h0l-6.25,6.25V8.334H7.756l6.25-6.25L12.929,1.007Z"' +
@@ -1328,7 +1328,7 @@
 
 
                         butao.removeClass("animated-background")
-                        $(".finEdit").click( async function () {
+                        $(".finEdit").click(async function () {
 
                             let NUMERO_PEDIDO = Number($(this).attr("numero_pedido"))
 
@@ -1368,29 +1368,29 @@
                             //console.log(pedido2)
 
                             let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
-                           
-                            for(const k in PEDIDOS){
-                               if(PEDIDOS[k].id == NUMERO_PEDIDO){
-                                //console.log("achei o pedido", PEDIDOS[k])                               
-                                PEDIDOS[k]['order_conteudo'] = JSON.stringify(pedido2)  
-                               }
+
+                            for (const k in PEDIDOS) {
+                                if (PEDIDOS[k].id == NUMERO_PEDIDO) {
+                                    //console.log("achei o pedido", PEDIDOS[k])                               
+                                    PEDIDOS[k]['order_conteudo'] = JSON.stringify(pedido2)
+                                }
                             }
                             localStorage.TODOS_OS_PEDIDOS = JSON.stringify(PEDIDOS)
                             updateTotalPedidos()
 
                             let PEDIDOS2 = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
                             let qualPedido;
-                            for(const k in PEDIDOS2){
-                               if(PEDIDOS2[k].id == NUMERO_PEDIDO){
-                                //console.log("achei o pedido2", PEDIDOS2[k]) 
-                                qualPedido = PEDIDOS2[k] 
-                               }
+                            for (const k in PEDIDOS2) {
+                                if (PEDIDOS2[k].id == NUMERO_PEDIDO) {
+                                    //console.log("achei o pedido2", PEDIDOS2[k]) 
+                                    qualPedido = PEDIDOS2[k]
+                                }
                             }
 
-                            if(qualPedido != undefined){
-                               await salvaUmUnico(qualPedido)
+                            if (qualPedido != undefined) {
+                                await salvaUmUnico(qualPedido)
                             }
-                            
+
 
                             if (pedido2.length > 0) {
                                 jQuery(function ($) {
@@ -2167,205 +2167,208 @@
 
 
 
-async function clicaEmOrdem(elemento){
-    $("body").css("filter","blur(5px)")
-    await updateTotalPedidos()
-     var thisOrder = Number(elemento.find(".modalCount").text())
-     $(".order").removeClass("orderActive");
-     elemento.addClass("orderActive");
-     var alvo = elemento.attr("alvo")
-     var pedidoN = Number(alvo.split("_")[1])
-     let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
-     let ESTE_PEDIDO;
-     for(const k  in PEDIDOS){
-        if(Number(PEDIDOS[k].id === pedidoN)){
-          ESTE_PEDIDO = PEDIDOS[k]
+    async function clicaEmOrdem(elemento) {
+        $("body").css("filter", "blur(5px)")
+        await updateTotalPedidos()
+        var thisOrder = Number(elemento.find(".modalCount").text())
+        $(".order").removeClass("orderActive");
+        elemento.addClass("orderActive");
+        var alvo = elemento.attr("alvo")
+        var pedidoN = Number(alvo.split("_")[1])
+        let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
+        let ESTE_PEDIDO;
+        for (const k in PEDIDOS) {
+            if (Number(PEDIDOS[k].id === pedidoN)) {
+                ESTE_PEDIDO = PEDIDOS[k]
+            }
         }
-     }
-     //console.log('ESTE_PEDIDO', ESTE_PEDIDO)
-      var listaProdutos = JSON.parse(ESTE_PEDIDO.order_conteudo)
-      $("#framePDF").attr("src", "")
+        //console.log('ESTE_PEDIDO', ESTE_PEDIDO)
+        var listaProdutos = JSON.parse(ESTE_PEDIDO.order_conteudo)
+        $("#framePDF").attr("src", "")
 
 
-      localStorage.PEDIDO_PDF = JSON.stringify(ESTE_PEDIDO)
-
-                         
-                                localStorage.CLIENTE_PDF = JSON.stringify(listaProdutos)
-                                $("#framePDF").attr("src", "../pdf/myPDF.htm")
-
-         setTimeout(() => {
-
-                        $.ajax({
-                            type: "POST",
-                            url: "https://api-smartcomerci.com.br:9090/productsOrderByListOrder",
-                            headers: {
-                                "x-access-token": localStorage.token,
-                            },
-                            data: {
-                                "product_affiliate_id": localStorage.AFFILIATE_ID,
-                                "listaProdutos": listaProdutos
-                            },
-                            success: function (html2) {
+        localStorage.PEDIDO_PDF = JSON.stringify(ESTE_PEDIDO)
 
 
-                                var onde = "#listagem_" + alvo
-                                onde = onde.replace("_pedido", "")
-                                //console.log("onde ++++++++++++++")
-                                //console.log(html2)
-                                //console.log(onde)
-                                $(onde).html(html2)
-                                //console.log("onde ...........")
-                                //console.log(onde)
-                                $("#panelOrder2").html($("#" + alvo).html())
+        localStorage.CLIENTE_PDF = JSON.stringify(listaProdutos)
+        $("#framePDF").attr("src", "../pdf/myPDF.htm")
 
-                                $(".statusBar").each(function () {
-                                    //console.log($(this).attr("class"))
-                                    var status = Number($(this).attr("status"))
-                                    var statusName = Number($(this).attr("statusName"))
+        setTimeout(() => {
 
-                                    var color = '#f6b504',
-                                        bkColor = '#FAF3DF'
-                                    if (Number(status) == 4) {
-                                        color = 'rgb(80, 198, 130);'
-                                    }
-
-                                    //console.log(".status" + status + "_" + alvo.replace("pedido_", ""))
-                                    if (Number(status) == 4 && Number(statusName) == 4) {
-                                        color = '#50C682'
-                                        bkColor = '#99D4AE33;'
-                                        $("." + $(this).attr("icone")).parent().addClass("esse2")
-                                        $("." + $(this).attr("icone")).css("fill", color)
-                                        $("." + $(this).attr("icone")).parent().removeClass("inativo")
-                                    } else if (status == statusName || Number(status) > Number(statusName)) {
-                                        $("." + $(this).attr("icone")).css("fill", color)
-                                        $("." + $(this).attr("icone")).parent().addClass("esse")
-                                        $("." + $(this).attr("icone")).parent().removeClass("inativo")
-                                    }
+            $.ajax({
+                type: "POST",
+                url: "https://api-smartcomerci.com.br:9090/productsOrderByListOrder",
+                headers: {
+                    "x-access-token": localStorage.token,
+                },
+                data: {
+                    "product_affiliate_id": localStorage.AFFILIATE_ID,
+                    "listaProdutos": listaProdutos
+                },
+                success: function (html2) {
 
 
+                    var onde = "#listagem_" + alvo
+                    onde = onde.replace("_pedido", "")
+                    //console.log("onde ++++++++++++++")
+                    //console.log(html2)
+                    //console.log(onde)
+                    $(onde).html(html2)
+                    //console.log("onde ...........")
+                    //console.log(onde)
+                    $("#panelOrder2").html($("#" + alvo).html())
 
-                                })
+                    $(".statusBar").each(function () {
+                        //console.log($(this).attr("class"))
+                        var status = Number($(this).attr("status"))
+                        var statusName = Number($(this).attr("statusName"))
 
+                        var color = '#f6b504',
+                            bkColor = '#FAF3DF'
+                        if (Number(status) == 4) {
+                            color = 'rgb(80, 198, 130);'
+                        }
 
-                                $("#panelOrder2").removeClass("animated-background")
-                                $(".radius20").removeClass("animated-background")
-                                    $("body").css("filter","none")
-
-
-                            },
-                            error: function (html2) {
-                                //console.log(html2);
-                                    $("body").css("filter","none") 
-                            },
-                            complete: function () { },
-                        });
+                        //console.log(".status" + status + "_" + alvo.replace("pedido_", ""))
+                        if (Number(status) == 4 && Number(statusName) == 4) {
+                            color = '#50C682'
+                            bkColor = '#99D4AE33;'
+                            $("." + $(this).attr("icone")).parent().addClass("esse2")
+                            $("." + $(this).attr("icone")).css("fill", color)
+                            $("." + $(this).attr("icone")).parent().removeClass("inativo")
+                        } else if (status == statusName || Number(status) > Number(statusName)) {
+                            $("." + $(this).attr("icone")).css("fill", color)
+                            $("." + $(this).attr("icone")).parent().addClass("esse")
+                            $("." + $(this).attr("icone")).parent().removeClass("inativo")
+                        }
 
 
 
-                    }, 200)
+                    })
 
 
-     
-}
+                    $("#panelOrder2").removeClass("animated-background")
+                    $(".radius20").removeClass("animated-background")
+                    $("body").css("filter", "none")
 
- 
+
+                },
+                error: function (html2) {
+                    //console.log(html2);
+                    $("body").css("filter", "none")
+                },
+                complete: function () { },
+            });
+
+
+
+        }, 200)
+
+
+
+    }
 
 
 
 
 
-$.ajax({
-            type: "POST",
-            url: mainHost + '/getAllOrdersMaster',
+
+
+    $.ajax({
+        type: "POST",
+        url: mainHost + '/getAllOrdersMaster',
+        headers: {
+            "x-access-token": localStorage.token,
+        },
+        data: {
+            "master_id": localStorage.MASTER_ID
+        },
+        success: function (data) {
+            //console.log("os pedidos", data);
+
+            localStorage.TODOS_OS_PEDIDOS = JSON.stringify(data)
+
+            reloadThis()
+
+
+
+        },
+        error: function (data) {
+            //console.log(data);
+        },
+        complete: function () {
+
+        },
+    });
+
+    let checkupOrders = false
+    async function updateTotalPedidos() {
+        let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
+
+        if (!checkupOrders) {
+            for (const k in PEDIDOS) {
+                let CONTEUDO = JSON.parse(PEDIDOS[k].order_conteudo)
+                let valorEntrega = PEDIDOS[k].order_valor_entrega
+                let totalItens = 0
+                for (const c in CONTEUDO) {
+                    totalItens += (CONTEUDO[c].quantidade >= CONTEUDO[c].minimo_para_desconto ? CONTEUDO[c].valor : CONTEUDO[c].product_valor)
+                }
+                PEDIDOS[k]['order_valor_total'] = Number((valorEntrega + totalItens).toFixed(2))
+                PEDIDOS[k]['order_data_entrega'] = moment(PEDIDOS[k]['order_data_entrega']).format('YYYY-MM-DD')
+                PEDIDOS[k]['updatedAt'] = moment(PEDIDOS[k]['updatedAt']).format('YYYY-MM-DD')
+                PEDIDOS[k]['createdAt'] = moment(PEDIDOS[k]['createdAt']).format('YYYY-MM-DD')
+
+                salvaUmUnico(PEDIDOS[k])
+            }
+            localStorage.TODOS_OS_PEDIDOS = JSON.stringify(PEDIDOS)
+            checkupOrders = true
+        }
+
+
+
+
+
+    }
+
+    async function salvaUmUnico(pedido) {
+
+        let columns = []
+        for (const k in pedido) {
+            if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
+                columns.push({
+                    column: k,
+                    value: pedido[k]
+                })
+            }
+
+        }
+
+        console.log({
+            "value_id": pedido.id,
+            "fields": columns
+        })
+
+        await $.ajax({
+            type: 'POST',
+            url: mainHost + '/updateById',
             headers: {
                 "x-access-token": localStorage.token,
             },
             data: {
-                "master_id": localStorage.MASTER_ID
-                },
+                "table": "orders",
+                "name_id": "id",
+                "value_id": pedido.id,
+                "fields": columns
+            },
             success: function (data) {
-                //console.log("os pedidos", data);
-
-                localStorage.TODOS_OS_PEDIDOS = JSON.stringify(data) 
-
-                reloadThis()
-
-    
-
+                // //console.log(data)
             },
             error: function (data) {
-                //console.log(data);
+                //console.log(data)
             },
             complete: function () {
-
-            },
-        });
-
-let checkupOrders = false
-async function updateTotalPedidos()   {
-      let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
-
-      if(!checkupOrders){
-        for(const k in PEDIDOS){
-                let CONTEUDO = JSON.parse(PEDIDOS[k].order_conteudo)
-                let valorEntrega = PEDIDOS[k].order_valor_entrega
-                let totalItens = 0
-                for(const c in CONTEUDO){
-                    totalItens += (CONTEUDO[c].quantidade >= CONTEUDO[c].minimo_para_desconto ? CONTEUDO[c].valor : CONTEUDO[c].product_valor )
-                }
-                PEDIDOS[k]['order_valor_total'] = Number((valorEntrega + totalItens).toFixed(2))
-                PEDIDOS[k]['order_data_entrega'] = moment(PEDIDOS[k]['order_data_entrega']).format('YYYY-MM-DD')
-                PEDIDOS[k]['updatedAt']= moment(PEDIDOS[k]['updatedAt']).format('YYYY-MM-DD')
-                PEDIDOS[k]['createdAt']= moment(PEDIDOS[k]['createdAt']).format('YYYY-MM-DD')
-                
-                salvaUmUnico(PEDIDOS[k])
-        } 
-       localStorage.TODOS_OS_PEDIDOS = JSON.stringify(PEDIDOS)
-       checkupOrders = true
-      }
-
-      
-      
-
-
-}
-
-  async function salvaUmUnico(pedido) {
-       
-        let columns = []
-        for (const k in pedido) {
-          if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
-            columns.push({
-              column: k,
-              value: pedido[k]
-            })
-          }
-
-        }
-     
-    
-
-        await $.ajax({
-          type: 'POST',
-          url: mainHost + '/updateById',
-          headers: {
-            "x-access-token": localStorage.token,
-          },
-          data: {
-            "table": "orders",
-            "name_id": "id",
-            "value_id": pedido.id,
-            "fields": columns
-          },
-          success: function (data) {
-         // //console.log(data)
-          },
-          error: function (data) {
-            //console.log(data)
-          },
-          complete: function () {
-            // ao final da requisição...
-          }
+                // ao final da requisição...
+            }
         });
 
 
