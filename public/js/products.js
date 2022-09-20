@@ -104,8 +104,9 @@ function setPARAMETROS_FILTRO(elemento) {
     if (value != "") {
       active = true;
     }
-    //console.log(column, active, value)
+    console.log(column, active, value);
     var PRM = JSON.parse(localStorage.PARAMETROS_FILTROS);
+    console.log(PRM);
     for (const k in PRM) {
       //console.log(column, PRM[k].colmun)
       if (column == PRM[k].colmun) {
@@ -125,6 +126,7 @@ function setPARAMETROS_FILTRO(elemento) {
         PRM[k].active = active;
       }
     }
+
     localStorage.PARAMETROS_FILTROS = JSON.stringify(PRM);
     verFeedback();
   }
