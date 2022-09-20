@@ -720,7 +720,6 @@ async function personalRequest(
       totalItems: TOTAL_ITENS,
       order_type: order_type,
       column_order: column_order,
-      parameters: parametros,
     },
     success: function (products) {
       //////console.log(products)
