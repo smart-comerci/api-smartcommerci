@@ -6569,15 +6569,17 @@ async function buscaPeloFiltro(
   order_type,
   column_order
 ) {
-  console.log(
-    "buscando pelo filtro",
-    parametros,
-    TOTAL_ITENS,
-    continuando,
-    limite
-  );
+  console.log("buscando pelo filtro", {
+    affiliate_id: localStorage.AFFILIATE_ID,
+    limite: limite,
+    parameters: parametros,
+    explain: false,
+    lastId: lastID,
+    order_type: order_type,
+    column_order: column_order,
+  });
   if (loading) {
-    $("modalLoading").show();
+    // $("modalLoading").show();
   }
 
   $.ajax({
@@ -6597,7 +6599,7 @@ async function buscaPeloFiltro(
       is_product_image: true,
     },
     success: function (products) {
-      //////console.log(products)
+      console.log("by filtro", products);
       var lastRequest = {
         ADDRESS: "productAdvancedSearch",
         LAST_ID: Number(products[products.length - 1]?.id),
