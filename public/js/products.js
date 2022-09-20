@@ -685,7 +685,14 @@ async function personalRequest(
   PRODUCT_AFFILIATE_ID,
   continua
 ) {
-  //////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, order_type, column_order, PRODUCT_AFFILIATE_ID)
+  console.log(
+    ADDRESS,
+    LAST_ID,
+    TOTAL_ITENS,
+    order_type,
+    column_order,
+    PRODUCT_AFFILIATE_ID
+  );
   var lojas2 = JSON.parse(localStorage.LOJAS_CADASTRADAS);
   //////console.log(lojas2)
   for (const k in lojas2) {
@@ -6750,139 +6757,6 @@ async function buscaPeloFiltro(
       }
       //console.log("mudando o lastID 1", Number(products[products.length - 1]?.id))
       localStorage.LAST_ID = Number(products[products.length - 1]?.id);
-
-      // $(".product").click(function (e) {
-      //     var senderElement = e.target;
-      //     //////////console.log("senderElement")
-      //     //////////console.log(senderElement)
-      //     //////////console.log(senderElement.className)
-      //     if (senderElement.className == "switch switch--shadow") {
-      //         //////////console.log("vou tentar")
-      //         if (senderElement.className == 'switch switch--shadow')
-      //             acaoCheckbox($("#" + senderElement.id))
-      //     } else {
-
-      //         if (senderElement.className != "checkmark" &&
-      //             senderElement.className != "naoAbreModal" &&
-      //             senderElement.className != "checka form-control" &&
-      //             senderElement.className != "switch switch--shadow") {
-
-      //             var affiliate_id = $(this).attr("affiliate_id")
-      //             var product_code = $(this).attr("product_code");
-      //             var product_ean = $(this).attr("product_ean");
-      //             //////////console.log(affiliate_id, product_code)
-
-      //             $.ajax({
-      //                 type: 'POST',
-      //                 url: mainHost + '/productPictures',
-      //                 headers: {
-      //                     "x-access-token": localStorage.token
-      //                 },
-      //                 data: {
-      //                     "affiliate_id": affiliate_id,
-      //                     "product_code": product_code
-      //                 },
-      //                 success: function (data) {
-      //                     //////////console.log("productPictures")
-      //                     var listaImagens = []
-      //                     var firstImage = ""
-      //                     for (const k in PRODUCTS) {
-      //                         if (PRODUCTS[k].product_affiliate_id == affiliate_id && PRODUCTS[k].product_code == product_code) {
-      //                             firstImage = PRODUCTS[k].product_thumbnail
-      //                         }
-      //                     }
-      //                     if (firstImage != '') {
-      //                         listaImagens.push(firstImage)
-      //                     } else {
-      //                         listaImagens.push("images/default/produto-sem-imagem.jpg")
-      //                     }
-
-      //                     for (const k in PRODUCTS_IMAGES) {
-
-      //                         if (Number(product_ean) == Number(PRODUCTS_IMAGES[k].EAN)) {
-      //                             if (PRODUCTS_IMAGES[k].thumbnail != firstImage) {
-      //                                 if (PRODUCTS_IMAGES[k].thumbnail != '') {
-      //                                     listaImagens.push(PRODUCTS_IMAGES[k].thumbnail)
-      //                                 } else {
-      //                                     listaImagens.push("images/default/produto-sem-imagem.jpg")
-      //                                 }
-
-      //                             }
-
-      //                         }
-      //                     }
-      //                     if (data.length > 0) {
-      //                         for (const k in data) {
-      //                             var faz = true
-      //                             for (const j in listaImagens) {
-      //                                 if (data[k] == listaImagens[j]) {
-      //                                     faz = false
-      //                                 }
-      //                             }
-      //                             if (faz) {
-      //                                 if (data[k] != '') {
-      //                                     listaImagens.push(data[k])
-      //                                 } else {
-      //                                     listaImagens.push("images/default/produto-sem-imagem.jpg")
-      //                                 }
-
-      //                             }
-      //                         }
-
-      //                     }
-
-      //                     //////console.log("listaImagens")
-      //                     //////console.log(listaImagens)
-
-      //                     modalProduct(PRODUCTS, product_code, affiliate_id, listaImagens);
-
-      //                     localStorage.LISTA_IMAGENS = JSON.stringify(listaImagens)
-      //                 },
-      //                 error: function (data) {
-      //                     if (data.responseJSON.message.indexOf("token") > -1) {
-      //                         //alert("Necessário fazer login!<br>"+data.responseJSON.message)
-      //                         setTimeout(() => {
-      //                             localStorage.peregrino = location.href.split("/")[location.href.split("/").length - 1]
-      //                             location.replace("/cms-login")
-      //                         }, 2000)
-
-      //                     } else {
-      //                         //alert("Algo saiu errado!<br>"+data.responseJSON.message)
-      //                     }
-      //                     //////////console.log("productPictures")
-      //                     var listaImagens = []
-      //                     var firstImage = ""
-      //                     for (const k in PRODUCTS) {
-      //                         if (PRODUCTS[k].product_affiliate_id == affiliate_id && PRODUCTS[k].product_code == product_code) {
-      //                             firstImage = PRODUCTS[k].product_thumbnail
-      //                         }
-      //                     }
-      //                     listaImagens.push(firstImage)
-      //                     //listaImagens.push("images/default/produto-sem-imagem.jpg")
-      //                     for (const k in PRODUCTS_IMAGES) {
-      //                         //////////console.log(Number(product_ean)+" == "+Number(PRODUCTS_IMAGES[k].EAN))
-      //                         if (Number(product_ean) == Number(PRODUCTS_IMAGES[k].EAN)) {
-      //                             if (PRODUCTS_IMAGES[k].DATA.thumbnail != firstImage) {
-      //                                 listaImagens.push(PRODUCTS_IMAGES[k].DATA.thumbnail)
-      //                             }
-
-      //                         }
-      //                     }
-
-      //                     //////////console.log(listaImagens)
-      //                     modalProduct(PRODUCTS, product_code, affiliate_id, listaImagens);
-      //                     localStorage.LISTA_IMAGENS = JSON.stringify(listaImagens)
-      //                 },
-      //                 complete: function () {
-      //                     // ao final da requisição...
-      //                 }
-      //             });
-
-      //         }
-
-      //     }
-
-      // });
 
       $(".row").children().css("opacity", "1");
       $(".row").removeClass(" bg-gray-400");
