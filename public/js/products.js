@@ -705,8 +705,8 @@ async function personalRequest(
     }
   }
 
-  //////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, order_type, column_order, PRODUCT_AFFILIATE_ID)
-  // let parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
+  ////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, order_type, column_order, PRODUCT_AFFILIATE_ID)
+  let parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
 
   $.ajax({
     type: "POST",
@@ -720,6 +720,7 @@ async function personalRequest(
       totalItems: TOTAL_ITENS,
       order_type: order_type,
       column_order: column_order,
+      parameters: parametros,
     },
     success: function (products) {
       //////console.log(products)
