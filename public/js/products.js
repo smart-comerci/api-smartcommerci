@@ -96,7 +96,7 @@ function removeFiltrosAvancadosLoad() {
 }
 
 function setPARAMETROS_FILTRO(elemento) {
-  //console.log("my ID", elemento.attr("id"))
+  console.log("my ID", elemento.attr("id"));
   if (elemento.attr("id") == "searchProducts") {
     var column = elemento.attr("column"),
       value = elemento.val();
@@ -104,9 +104,10 @@ function setPARAMETROS_FILTRO(elemento) {
     if (value != "") {
       active = true;
     }
-    console.log(column, active, value);
+
     var PRM = JSON.parse(localStorage.PARAMETROS_FILTROS);
-    console.log(PRM);
+    PRM.find();
+
     for (const k in PRM) {
       //console.log(column, PRM[k].colmun)
       if (column == PRM[k].colmun) {
@@ -121,6 +122,8 @@ function setPARAMETROS_FILTRO(elemento) {
       active = elemento[0].checked;
     //////console.log(column,active)
     var PRM = JSON.parse(localStorage.PARAMETROS_FILTROS);
+    console.log(column, active, value);
+    console.log(PRM);
     for (const k in PRM) {
       if (column == PRM[k].colmun) {
         PRM[k].active = active;
@@ -3701,8 +3704,9 @@ function getTagsAndMarcas(TEXTAO, tipo) {
   return html3;
 }
 
-function subTagInput(ele, elemento, texto) {
-  //////console.log(ele,elemento,texto)
+function subTagInput(ele, elemento, texto, e) {
+  e = window.event;
+  e.stopPropagation();
 
   var listaTags = "",
     listaMarcas = "";
@@ -3716,8 +3720,6 @@ function subTagInput(ele, elemento, texto) {
     '" onclick="removeTAGMARCA($(this))"  style="max-width: 20%"  class="iconClose"><i class="far fa-times-circle"></i></label></div>';
   //////console.log("vou mostrar " ,ele[0].checked )
   if (ele[0].checked == true) {
-    // $("."+elemento).append(html)
-    //////console.log("elemento tal",$("."+elemento))
     insereCategoria($("." + elemento), ele, texto);
   } else {
     $("." + elemento)
