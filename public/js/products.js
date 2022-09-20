@@ -6897,6 +6897,7 @@ function feedbackPeloFiltro(
   continuando,
   limite
 ) {
+  console.log("buscando pelo feedback");
   var aguarde =
     '<div class="spinner-border text-light" style="color: white" role="status"><span class="sr-only">Loading...</span>  </div>';
   elemento.html(aguarde);
