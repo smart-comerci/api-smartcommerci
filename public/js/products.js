@@ -6499,7 +6499,13 @@ async function buscaPeloFiltro(
   lastID,
   loading
 ) {
-  //console.log("buscando pelo filtro", parametros, TOTAL_ITENS, continuando, limite)
+  console.log(
+    "buscando pelo filtro",
+    parametros,
+    TOTAL_ITENS,
+    continuando,
+    limite
+  );
   if (loading) {
     $("modalLoading").show();
   }
