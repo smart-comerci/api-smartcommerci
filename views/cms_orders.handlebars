@@ -543,7 +543,9 @@
                     informar("alert-primary", "Algo saiu errado!<br>" + resultado.responseJSON.message, 3000)
                 }
             },
-            complete: function () { },
+            complete: function () {
+                $("body").css("filter", "none")
+             },
         });
 
     }
@@ -2273,7 +2275,7 @@
 
 
 
-
+    $("body").css("filter", "blur(5px)")
     $.ajax({
         type: "POST",
         url: mainHost + '/getAllOrdersMaster',
@@ -2297,7 +2299,7 @@
             //console.log(data);
         },
         complete: function () {
-
+          $("body").css("filter", "none")
         },
     });
 
