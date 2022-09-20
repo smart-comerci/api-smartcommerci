@@ -3729,8 +3729,8 @@ function subTagInput(ele, elemento, texto, e) {
           $(this).remove();
         }
       });
+    verFeedback();
   }
-  verFeedback();
 }
 
 function getAffiliateName(AFFILIATES, ID) {
@@ -6019,15 +6019,21 @@ function verFeedback() {
   var tag = $(".minhasTags2").find(".categoriaLabel");
 
   var LISTA_SEARCH = JSON.parse(localStorage.PARAMETROS_FILTROS);
-  for (const k in LISTA_SEARCH) {
-    if (
-      LISTA_SEARCH[k].colmun == "tags" ||
-      LISTA_SEARCH[k].colmun == "categorias" ||
-      LISTA_SEARCH[k].colmun == "marcas"
-    ) {
-      LISTA_SEARCH[k].active = false;
-    }
-  }
+  LISTA_SEARCH.map((a) =>
+    a.colmun === "marcas" || a.colmun === "categorias" || a.colmun === "tags"
+      ? (a.active = false)
+      : (a.active = a.active)
+  );
+
+  // for (const k in LISTA_SEARCH) {
+  //   if (
+  //     LISTA_SEARCH[k].colmun == "tags" ||
+  //     LISTA_SEARCH[k].colmun == "categorias" ||
+  //     LISTA_SEARCH[k].colmun == "marcas"
+  //   ) {
+  //     LISTA_SEARCH[k].active = false;
+  //   }
+  // }
   cat.each(function () {
     LISTA_SEARCH.push({
       colmun: "categorias",
