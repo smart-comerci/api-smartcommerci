@@ -716,7 +716,7 @@ async function personalRequest(
     },
     data: {
       product_affiliate_id: AFFILIATE_ID,
-      lastID: LAST_ID,
+      lastID: 0,
       totalItems: TOTAL_ITENS,
       order_type: order_type,
       column_order: column_order,
