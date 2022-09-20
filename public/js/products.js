@@ -706,7 +706,7 @@ async function personalRequest(
   }
 
   //////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, order_type, column_order, PRODUCT_AFFILIATE_ID)
-  let parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
+  // let parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
 
   $.ajax({
     type: "POST",
@@ -6582,8 +6582,6 @@ async function buscaPeloFiltro(
       parameters: parametros,
       explain: false,
       lastId: lastID,
-      order_type: order_type,
-      column_order: column_order,
     },
     headers: {
       "x-access-token": localStorage.token,
