@@ -1249,6 +1249,7 @@
     flex-wrap: nowrap;
     height: 100%;
     max-width: 300px;
+    width: 300px;
     border-radius: 20px; }
     .datetimepicker-dummy .datetimepicker-dummy-wrapper:before, .datetimepicker-dummy .datetimepicker-dummy-wrapper::before {
       content: '';
