@@ -6035,21 +6035,62 @@ function verFeedback() {
   //   }
   // }
   cat.each(function () {
-    LISTA_SEARCH.push({
-      colmun: "categorias",
-      value: $(this).text(),
-      active: true,
-    });
+    let exist = LISTA_SEARCH.find(
+      (l) => l.colmun === "categorias" && l.value === $(this).text()
+    );
+    if (!exist) {
+      LISTA_SEARCH.push({
+        colmun: "categorias",
+        value: $(this).text(),
+        active: true,
+      });
+    } else {
+      LISTA_SEARCH.map((l) =>
+        l.colmun === "categorias" &&
+        l.value === $(this).text() &&
+        l.active === false
+          ? (l.active = true)
+          : (l.active = l.active)
+      );
+    }
   });
   tag.each(function () {
-    LISTA_SEARCH.push({ colmun: "tags", value: $(this).text(), active: true });
+    let exist = LISTA_SEARCH.find(
+      (l) => l.colmun === "tags" && l.value === $(this).text()
+    );
+    if (!exist) {
+      LISTA_SEARCH.push({
+        colmun: "tags",
+        value: $(this).text(),
+        active: true,
+      });
+    } else {
+      LISTA_SEARCH.map((l) =>
+        l.colmun === "tags" && l.value === $(this).text() && l.active === false
+          ? (l.active = true)
+          : (l.active = l.active)
+      );
+    }
   });
   marc.each(function () {
-    LISTA_SEARCH.push({
-      colmun: "marcas",
-      value: $(this).text(),
-      active: true,
-    });
+    let exist = LISTA_SEARCH.find(
+      (l) => l.colmun === "marcas" && l.value === $(this).text()
+    );
+    if (!exist) {
+      LISTA_SEARCH.push({
+        colmun: "marcas",
+        value: $(this).text(),
+        active: true,
+      });
+    } else {
+      LISTA_SEARCH.map((l) =>
+        l.colmun === "marcas" &&
+        l.value === $(this).text() &&
+        l.active === false
+          ? (l.active = true)
+          : (l.active = l.active)
+      );
+    }
   });
   localStorage.PARAMETROS_FILTROS = JSON.stringify(LISTA_SEARCH);
   feedbackPeloFiltro($(".txtFiltroGet"), LISTA_SEARCH, 10000, false, 10000);
