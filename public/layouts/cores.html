@@ -3447,11 +3447,7 @@
 
  
       window.addEventListener("beforeunload", function (event) {
-        if(alteracoes){
-          confirm("tem alteracao")
-        }else{
-          confirm("não tem alteracao")
-        }
+        event.returnValue = "Write something clever here..";
       });
 
 
