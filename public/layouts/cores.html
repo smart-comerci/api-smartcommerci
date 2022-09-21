@@ -1227,19 +1227,21 @@
 
     .btnAdicionar {
       padding: 15px;
-    border-top: 1px solid #f6b504;
-    width: 100%;
-    max-height: 40px;
-    color: #f6b504
+      border-top: 1px solid #f6b504;
+      width: 100%;
+      max-height: 40px;
+      color: #f6b504
     }
-    .infoPrice2{
+
+    .infoPrice2 {
       position: relative;
-    margin-top: -20px;
-    width: 90%;
-    text-align: left;
-    align-content: flex-start;
+      margin-top: -20px;
+      width: 90%;
+      text-align: left;
+      align-content: flex-start;
     }
-    .conteudoInterno{
+
+    .conteudoInterno {
       background-color: white !important;
     }
   </style>
@@ -3445,16 +3447,19 @@
       } catch (e) { }
     }, 1000);
 
- 
-     function unloadPage() {
-      if(alteracoes){
+
+    function unloadPage(event) {
+
+
+    }
+    $(window).on('unload', function (event) {
+      if (alteracoes) {
         alert("Com alterações!");
-      }else{
+      } else {
         alert("Sem alterações!");
       }
 
-      }
-      window.onbeforeunload = unloadPage;
+    });
 
 
 
