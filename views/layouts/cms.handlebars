@@ -648,7 +648,9 @@
                 if (window.location.href.indexOf('editar_home_cores') > -1 && alteracoes && alteracoes.length > 0) {
                     localStorage.alteracoes = ''
                     return confirm("Confirm refresh");
-                } 
+                } else{
+                     alert("INCOERENTE")
+                }
             }
             else {
                     alert("SEM ALTERACOES")
