@@ -1232,6 +1232,12 @@
             $(".sidbar").css("z-index", "1030")
             $("body").css("overflow", "auto")
         }
+
+ 
+    window.onbeforeunload = function (event) {
+    return confirm("Confirm refresh");
+    };
+ 
     </script>
 
 </body>
