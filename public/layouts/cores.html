@@ -3475,23 +3475,23 @@
     }, 1000);
 
  
-      window.onbeforeunload = async function () {
-          if (alteracoes.length > 0) {
-           await  $("modalSemSalvar").show()
-           setTimeout(() => {
-            return confirm("Necessário salvar")
-           }, 2000);
+      // window.onbeforeunload = async function () {
+      //     if (alteracoes.length > 0) {
+      //      await  $("modalSemSalvar").show()
+      //      setTimeout(() => {
+      //       return confirm("Necessário salvar")
+      //      }, 2000);
            
-          } 
-      };
+      //     } 
+      // };
 
-      $("modalSemSalvar").click(function(){
-        closeMNoSave()
-      })
+      // $("modalSemSalvar").click(function(){
+      //   closeMNoSave()
+      // })
 
-      function closeMNoSave(){
-         $("modalSemSalvar").hide()
-      }
+      // function closeMNoSave(){
+      //    $("modalSemSalvar").hide()
+      // }
 
 
 
