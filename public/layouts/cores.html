@@ -3445,14 +3445,9 @@
       } catch (e) { }
     }, 1000);
 
-     window.onbeforeunload = function (event) {
- 
-                let alteracoes = JSON.parse(alterText)
-                if (window.parent.location.href.indexOf('editar_home_cores') > -1 ) {
-                    localStorage.alteracoes = ''
-                    return confirm("Confirm refresh");
-                } 
-        }
+     window.onbeforeunload = function (event) { 
+                    return confirm("Confirm refresh"); 
+     }
 
 
 
