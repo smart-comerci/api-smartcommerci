@@ -3478,7 +3478,10 @@
       window.onbeforeunload = async function () {
           if (alteracoes) {
            await  $("modalSemSalvar").show()
-           return "Necessário salvar"
+           setTimeout(() => {
+            return confirm("Necessário salvar")
+           }, 2000);
+           
           } 
       };
 
