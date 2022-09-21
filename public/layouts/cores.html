@@ -3445,9 +3445,16 @@
       } catch (e) { }
     }, 1000);
 
-      window.addEventListener("beforeunload", function (event) {
-        event.returnValue = "Write something clever here..";
-      });
+
+      function verifyAlterations(){
+        if(alteracoes){
+          return confirm("TEM ALTERACOES", alteracoes.length)
+        }else{
+          return confirm("SEM ALTERACOES")
+        }
+      }
+
+      window.addEventListener("beforeunload", verifyAlterations);
 
 
 
