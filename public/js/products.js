@@ -106,7 +106,6 @@ function setPARAMETROS_FILTRO(elemento) {
     }
 
     var PRM = JSON.parse(localStorage.PARAMETROS_FILTROS);
-    PRM.find();
 
     for (const k in PRM) {
       //console.log(column, PRM[k].colmun)
