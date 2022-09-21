@@ -29,7 +29,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
     <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-        <script src="../js/moment.js"></script>
+    <script src="../js/moment.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
@@ -119,7 +119,7 @@
 
                         </li>
 
-                        <li id="marketing"    content="marketing" onclick="navegador($(this))"
+                        <li id="marketing" content="marketing" onclick="navegador($(this))"
                             class="li dropright show mainMenu navegador">
                             <a href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17.999" height="15.149"
@@ -145,7 +145,7 @@
                                 <p class="txtLink">Logística</p>
                             </a>
                         </li>
-                        <li id="conteudo"   class="li">
+                        <li id="conteudo" class="li">
                             <a href="/conteudo">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <defs></defs>
@@ -168,7 +168,7 @@
                             </a>
                         </li>
 
-                        <li id="confGerais"   content="confGerais" onclick="navegador($(this))"
+                        <li id="confGerais" content="confGerais" onclick="navegador($(this))"
                             class="li dropright show mainMenu navegador">
                             <a href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18.503" height="20"
@@ -257,7 +257,7 @@
                             </a>
                         </li>
                     </ul>
-                    <ul  style="display: none;"  content="marketing" class="nav marketingShow">
+                    <ul style="display: none;" content="marketing" class="nav marketingShow">
                         <li id="conteudo" class="li">
                             <a href="/promocoes">
                                 <p class="txtLink2  ">Promoções</p>
@@ -355,13 +355,13 @@
                                     </p>
                                 </a>
                             </li>
-                            <li style="opacity: 0;"  class="nav-item">
-                      
+                            <li style="opacity: 0;" class="nav-item">
+
                             </li>
-                             <li  style="opacity: 0;" class="nav-item">
-                            
+                            <li style="opacity: 0;" class="nav-item">
+
                             </li>
-                             <li onclick="showModal('userHeader', $(this))" class="nav-item">
+                            <li onclick="showModal('userHeader', $(this))" class="nav-item">
                                 <a class="nav-link">
 
                                     <img style="max-width: 50px; background: #f6b504; border-radius: 100%;"
@@ -639,76 +639,89 @@
 
 
     <script>
-        function sair() {
-            localStorage.clear()
-            location.replace("/cms-login")
-        }
+        window.onbeforeunload = function (event) {
 
-        function informar(className, texto, tempoDeTela) {
-            $(".alert").addClass(className)
-            $(".alert").text(texto)
-            $(".alert").fadeIn()
-            setTimeout(() => {
-                $(".alert").removeClass(className)
-                $(".alert").text('')
-                $(".alert").fadeOut()
-            }, tempoDeTela)
-        }
+            let alterText = localStorage.alteracoes
 
+            if (alterText != '' && alterText) {
+                let alteracoes = JSON.parse(alterText)
+                if (window.location.href.indexOf('editar_home_cores') > -1 && alteracoes && alteracoes.length > 0) {
+                    localStorage.alteracoes = ''
+                    return confirm("Confirm refresh");
+                } else {
+                    alert("SEM ALTERACOES")
+                }
+            }
+            function sair() {
+                localStorage.clear()
+                location.replace("/cms-login")
+            }
 
-
-
-
-
-
-        $("").parent().hide()
-
-        function fechaModalM() {
-            $(".mModal").css("display", "none")
-            //console.log("fechando")
-            $(".mModal").css("display", "none")
-            //console.log("fechei...")
-            $("#sidebar-wrapper2").hide()
-            $(this).hide()
-            hideModal()
-
-            $(this).removeClass("active")
-            $(".sidebar").removeClass("newSidebar");
-            $(".sidebar").removeClass("newSidebar2");
-            hideModal()
-        }
-
-        $(".superModal").click(function () {
-            $("#sidebar-wrapper2").hide()
-            $(this).hide()
-            $(this).removeClass("active")
-            $(".sidebar").removeClass("newSidebar");
-            $(".sidebar").removeClass("newSidebar2");
-            hideModal()
-        })
-        $(".superModal5").click(function () {
-
-            $(this).hide()
-            $(this).removeClass("active")
-
-            hideModal()
-        })
-        $(".navbar-toggle").hide()
+            function informar(className, texto, tempoDeTela) {
+                $(".alert").addClass(className)
+                $(".alert").text(texto)
+                $(".alert").fadeIn()
+                setTimeout(() => {
+                    $(".alert").removeClass(className)
+                    $(".alert").text('')
+                    $(".alert").fadeOut()
+                }, tempoDeTela)
+            }
 
 
 
-        $(".row").children().css("opacity", "0");
-        $(".row").addClass(" bg-gray-400");
-        var local = window.location.href.split("/")
-        local = local[local.length - 1]
 
-        $(".li").removeClass("active")
-        $(".li").find("p").removeClass("txtActive")
-        $(".li").find("a").removeClass("dourado")
 
-        $("#" + local).addClass("active")
-        $("#" + local).find("p").addClass("txtActive")
-        $("#" + local).find("a").addClass("dourado")
+
+
+            $("").parent().hide()
+
+            function fechaModalM() {
+                $(".mModal").css("display", "none")
+                //console.log("fechando")
+                $(".mModal").css("display", "none")
+                //console.log("fechei...")
+                $("#sidebar-wrapper2").hide()
+                $(this).hide()
+                hideModal()
+
+                $(this).removeClass("active")
+                $(".sidebar").removeClass("newSidebar");
+                $(".sidebar").removeClass("newSidebar2");
+                hideModal()
+            }
+
+            $(".superModal").click(function () {
+                $("#sidebar-wrapper2").hide()
+                $(this).hide()
+                $(this).removeClass("active")
+                $(".sidebar").removeClass("newSidebar");
+                $(".sidebar").removeClass("newSidebar2");
+                hideModal()
+            })
+            $(".superModal5").click(function () {
+
+                $(this).hide()
+                $(this).removeClass("active")
+
+                hideModal()
+            })
+            $(".navbar-toggle").hide()
+
+
+
+            $(".row").children().css("opacity", "0");
+            $(".row").addClass(" bg-gray-400");
+            var local = window.location.href.split("/")
+            local = local[local.length - 1]
+
+            $(".li").removeClass("active")
+            $(".li").find("p").removeClass("txtActive")
+            $(".li").find("a").removeClass("dourado")
+
+            $("#" + local).addClass("active")
+            $("#" + local).find("p").addClass("txtActive")
+            $("#" + local).find("a").addClass("dourado")
     </script>
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -728,75 +741,75 @@
     <script>
 
 
-        $(document).ready(function () {
+                $(document).ready(function () {
 
-            $(".li").click(function () {
-                $(".li").removeClass("active");
-                $(".li").find("a").removeClass("txtActive");
-                $(".li").find("a").removeClass("dourado");
-                $(".li").find(".txtLink").removeClass("txtActive");
+                    $(".li").click(function () {
+                        $(".li").removeClass("active");
+                        $(".li").find("a").removeClass("txtActive");
+                        $(".li").find("a").removeClass("dourado");
+                        $(".li").find(".txtLink").removeClass("txtActive");
 
-                $(this).find("a").addClass("txtActive");
-                $(this).find("a").addClass("dourado");
-                $(this).find(".txtLink").addClass("txtActive");
-                $(this).addClass("active");
-            });
+                        $(this).find("a").addClass("txtActive");
+                        $(this).find("a").addClass("dourado");
+                        $(this).find(".txtLink").addClass("txtActive");
+                        $(this).addClass("active");
+                    });
 
-            $(".ico").click(function () {
-                $(".ico").removeClass("activeClick")
-                $(".ico").addClass("iconOpaco")
-                $(this).removeClass("iconOpaco")
-                $(this).css("fill", "none !important")
-                $(this).addClass("activeClick")
-            })
+                    $(".ico").click(function () {
+                        $(".ico").removeClass("activeClick")
+                        $(".ico").addClass("iconOpaco")
+                        $(this).removeClass("iconOpaco")
+                        $(this).css("fill", "none !important")
+                        $(this).addClass("activeClick")
+                    })
 
-            $(".order").click(function () {
-                $(".order").removeClass("orderActive")
+                    $(".order").click(function () {
+                        $(".order").removeClass("orderActive")
 
-                $(this).addClass("orderActive")
-            })
+                        $(this).addClass("orderActive")
+                    })
 
-            $(".orderSearch").keyup(function () {
-                var text = $(this).val().toLowerCase();
-                //////console.log(text)
-                $(".order").each(function () {
-                    if ($(this).text().toLocaleLowerCase().indexOf(text) > -1) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
+                    $(".orderSearch").keyup(function () {
+                        var text = $(this).val().toLowerCase();
+                        //////console.log(text)
+                        $(".order").each(function () {
+                            if ($(this).text().toLocaleLowerCase().indexOf(text) > -1) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        })
+                    })
+
+                    $("#getSubSearch").click(function () {
+                        if ($("#subSearch").css("display") == "none") {
+                            $("#subSearch").fadeIn()
+                        } else {
+                            $("#subSearch").fadeOut()
+                        }
+                    })
+
+
+
+
+                });
+
+
+                $(".sidebar").click(function () {
+                    $("#sidebar-wrapper2").show()
                 })
-            })
-
-            $("#getSubSearch").click(function () {
-                if ($("#subSearch").css("display") == "none") {
-                    $("#subSearch").fadeIn()
-                } else {
-                    $("#subSearch").fadeOut()
-                }
-            })
 
 
 
-
-        });
-
-
-        $(".sidebar").click(function () {
-            $("#sidebar-wrapper2").show()
-        })
-
-
-
-        $("#sidebar-wrapper2").on('mouseover', function () {
-            $(".sidebar").add("newSidebar");
-        })
+                $("#sidebar-wrapper2").on('mouseover', function () {
+                    $(".sidebar").add("newSidebar");
+                })
             /*
-    $("#sidebar-wrapper2").on('mouseleave', function(){             
-        $(".sidebar").removeClass("newSidebar"); 
-                 
-    })
-    */
+        $("#sidebar-wrapper2").on('mouseleave', function(){             
+            $(".sidebar").removeClass("newSidebar"); 
+                     
+        })
+        */
 
 
 
@@ -816,7 +829,7 @@
     <script src="../js/html2canvas.js"></script>
     <script src="../js/canvg.js"></script>
     <script src="../js/jspdf.js"></script>
-     <script src="../js/moment.js"></script>
+    <script src="../js/moment.js"></script>
     <script src="../js/orders.js"></script>
     <script src="../js/drop.js"></script>
     <script src="../js/jquery.inputMask.js"></script>
@@ -825,25 +838,25 @@
 
 
     <script src="../js/jquery.ui.js"></script>
-        <script src="../js/modals.js"></script>
+    <script src="../js/modals.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
     <script>
-        function showModal(modal, elemento) {
-            $(".mModal").hide()
+                function showModal(modal, elemento) {
+                    $(".mModal").hide()
 
-            //console.log(".uuuuuuuuuuuuu" + modal)
-            $("." + modal).parent().show()
-            $("." + modal).show()
+                    //console.log(".uuuuuuuuuuuuu" + modal)
+                    $("." + modal).parent().show()
+                    $("." + modal).show()
 
-        }
+                }
 
-        function hideModal(elemento) {
+                function hideModal(elemento) {
 
-            $(".mModal").hide()
-            $(".mModal").css("display", "none")
-            $(".navActive").removeClass("navActive")
-        }
+                    $(".mModal").hide()
+                    $(".mModal").css("display", "none")
+                    $(".navActive").removeClass("navActive")
+                }
 
     </script>
 
@@ -851,202 +864,202 @@
 
     <script>
 
-       
-
-        //////console.log("veja o token => "+localStorage.token)
-        if (localStorage.token == undefined) {
-            //////console.log("redirecionando")
-
-            location.replace("/cms-login")
-        }
 
 
+                //////console.log("veja o token => "+localStorage.token)
+                if (localStorage.token == undefined) {
+                    //////console.log("redirecionando")
 
-        function OrdenaJson(lista, chave, ordem) {
-            return lista.sort(function (a, b) {
-                var x = a[chave];
-                var y = b[chave];
-                if (ordem === 'ASC') {
-                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                    location.replace("/cms-login")
                 }
-                if (ordem === 'DESC') {
-                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-                }
-            });
-        }
 
-        $.ajax({
-            type: "POST",
-            url: mainHost + '/getAllAffiliates',
-            data: { "affiliate_id": localStorage.MASTER_ID },
-            headers: {
-                "x-access-token": localStorage.token,
-                "is_product_image": true,
-            },
-            success: function (data) {
-                //////console.log(data); 
-                //  localStorage.LOJAS_CADASTRADAS = JSON.stringify(data)
-                var lojas = JSON.parse(localStorage.LOJAS_CADASTRADAS)
-                //console.log("vamos lá nas lojas")
-                //console.log(lojas)
-                for (const k in lojas) {
-                    var html = '<option ID_AFILIADA="' + lojas[k].id + '">' + lojas[k].id + ' - ' + lojas[k].affiliates_business_name + '</option>';
-                    if (lojas[k].id == Number(localStorage.AFFILIATE_ID)) {
-                        $(".listaDeUnidades").append(html)
+
+
+                function OrdenaJson(lista, chave, ordem) {
+                    return lista.sort(function (a, b) {
+                        var x = a[chave];
+                        var y = b[chave];
+                        if (ordem === 'ASC') {
+                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                        }
+                        if (ordem === 'DESC') {
+                            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                        }
+                    });
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: mainHost + '/getAllAffiliates',
+                    data: { "affiliate_id": localStorage.MASTER_ID },
+                    headers: {
+                        "x-access-token": localStorage.token,
+                        "is_product_image": true,
+                    },
+                    success: function (data) {
+                        //////console.log(data); 
+                        //  localStorage.LOJAS_CADASTRADAS = JSON.stringify(data)
+                        var lojas = JSON.parse(localStorage.LOJAS_CADASTRADAS)
+                        //console.log("vamos lá nas lojas")
+                        //console.log(lojas)
+                        for (const k in lojas) {
+                            var html = '<option ID_AFILIADA="' + lojas[k].id + '">' + lojas[k].id + ' - ' + lojas[k].affiliates_business_name + '</option>';
+                            if (lojas[k].id == Number(localStorage.AFFILIATE_ID)) {
+                                $(".listaDeUnidades").append(html)
+                            }
+
+                        }
+                        $(".listaDeUnidades").change(function () {
+                            localStorage.AFFILIATE_ID = $(this).val().split(" - ")[0];
+                            location.reload()
+                        })
+
+
+
+
+
+
+                    },
+                    error: function (data) {
+                        //console.log(data);
+                        if (data.responseJSON.message.indexOf("token") > -1) {
+
+                            informar("alert-primary", "Necessário fazer login!<br>" + data.responseJSON.message, 3000)
+                            setTimeout(() => {
+                                location.replace("/cms-login")
+                            }, 2000)
+
+                        } else {
+
+                            informar("alert-primary", "Algo saiu errado!<br>" + data.responseJSON.message, 3000)
+                        }
+                    },
+                    complete: function () {
+                        // ao final da requisição... 
+                    },
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: mainHost + '/me',
+                    data: { "token_me": localStorage.token_me },
+                    headers: {
+                        "x-access-token": localStorage.token,
+
+                    },
+                    success: function (data) {
+                        localStorage.DADOS_USER = JSON.stringify(data)
+                        $("#userName").text(data[0].USER_NAME)
+                        $("#userProfile").text(data[0].USER_PROFILE)
+                    },
+                    error: function (data) {
+                        //console.log(data)
+                    },
+                    complete: function () {
+                        // ao final da requisição... 
+                    },
+                });
+
+
+                $(".escondeMenu2").click(function () {
+                    if ($(this).attr("class").indexOf("mostraMenu") > -1) {
+                        $(this).removeClass("mostraMenu")
+                        $(".sidebar").css("width", "220px")
+                        $(".sidebar-wrapper").css("width", "220px")
+                        $(".main-panel").css('width', 'calc(100% - 220px)')
+                        $(".txtLink").show()
+                        $(".txtLink").css("display", "block !important")
+                        $(".setaBaixo").css("transform", "rotate(360deg)")
+                        $(this).find("svg").css("transform", "rotate(360deg)")
+                        $("#logoIMGA").attr("src", "../assets/img/lima-04.svg")
+                        $(".recolheLogo").css("width", "220px")
+                        $(".sidebar-wrapper2").show()
+
+
+                    } else {
+                        $(".recolheLogo").css("width", "70px")
+                        $(".navbar").css("max-width", "calc(100% - 70px)")
+                        $(this).addClass("mostraMenu")
+                        $(this).find("svg").css("transform", "rotate(180deg)")
+                        $(".sidebar").css("width", "70px")
+                        $(".sidebar-wrapper").css("width", "70px")
+                        $(".sidebar-wrapper2").hide()
+                        $(".main-panel").css('width', 'calc(100% - 70px)')
+                        $(".txtLink").hide()
+                        $(".setaBaixo").css("transform", "rotate(270deg)")
+                        $("#logoIMGA").attr("src", "../assets/icons/iconRecolhido.png")
+                        $(".btnVoltaAreaSide").css("right", "5px")
+
                     }
 
-                }
-                $(".listaDeUnidades").change(function () {
-                    localStorage.AFFILIATE_ID = $(this).val().split(" - ")[0];
-                    location.reload()
+
+                    //console.log(Number($(".sidebar").css("width").replace("px", "")))
+                    if (Number($(".sidebar").css("width").replace("px", "")) > 260) {
+                        $(".produtosShow").show()
+                        $(".vendasShow").show()
+                        $("." + $(this).attr("content") + "Show").fadeOut()
+                        $(".sidebar").removeClass("newSidebar");
+
+                        $(".superModal").hide()
+
+                        $(this).removeClass("active")
+                        $(".sidebar").removeClass("newSidebar");
+                        $(".sidebar").removeClass("newSidebar2");
+                    }
+                    $(".superModal").show()
                 })
 
 
+                function navegador(elemento) {
+                    $(".btnVoltaAreaSide").css("right", "220px")
+                    $(".sidebar-wrapper2").show()
+                    $(".produtosShow").hide()
+                    $(".vendasShow").hide()
+                    $(".marketingShow").hide()
+                    $("." + elemento.attr("content") + "Show").fadeIn()
+
+                    $("#produtos").removeClass("active")
+                    $(".superModal").show()
+                    $(".mainMenu").removeClass("active")
+                    elemento.addClass("active")
+                    //console.log(Number($(".sidebar").css("width").replace("px", "")))
+
+                    if (Number($(".sidebar").css("width").replace("px", "")) == 70) {
+                        //console.log("fiz 70")
+                        $(".sidebar").removeClass("newSidebar");
+                        $(".sidebar").addClass("newSidebar2");
+
+                    } else if (Number($(".sidebar").css("width").replace("px", "")) == 260) {
+                        $(".sidebar").addClass("newSidebar");
+                        $(".sidebar").removeClass("newSidebar2");
+
+                        //console.log("fiz 520")
+
+                    } else if (Number($(".sidebar").css("width").replace("px", "")) == 320) {
+                        $(".sidebar").removeClass("newSidebar");
+                        $(".sidebar").addClass("newSidebar2");
+
+                        //console.log("fiz 320")
+                        $(".superModal").show()
 
 
+                    } else {
+                        $(".sidebar").addClass("newSidebar");
+                        $(".sidebar").removeClass("newSidebar2");
+                        //console.log("fiz qualquer")
 
 
-            },
-            error: function (data) {
-                //console.log(data);
-                if (data.responseJSON.message.indexOf("token") > -1) {
+                    }
 
-                    informar("alert-primary", "Necessário fazer login!<br>" + data.responseJSON.message, 3000)
-                    setTimeout(() => {
-                        location.replace("/cms-login")
-                    }, 2000)
 
-                } else {
-
-                    informar("alert-primary", "Algo saiu errado!<br>" + data.responseJSON.message, 3000)
                 }
-            },
-            complete: function () {
-                // ao final da requisição... 
-            },
-        });
-
-        $.ajax({
-            type: "POST",
-            url: mainHost + '/me',
-            data: { "token_me": localStorage.token_me },
-            headers: {
-                "x-access-token": localStorage.token,
-
-            },
-            success: function (data) {
-                localStorage.DADOS_USER = JSON.stringify(data)
-                $("#userName").text(data[0].USER_NAME)
-                $("#userProfile").text(data[0].USER_PROFILE)
-            },
-            error: function (data) {
-                //console.log(data)
-            },
-            complete: function () {
-                // ao final da requisição... 
-            },
-        });
 
 
-        $(".escondeMenu2").click(function () {
-            if ($(this).attr("class").indexOf("mostraMenu") > -1) {
-                $(this).removeClass("mostraMenu")
-                $(".sidebar").css("width", "220px")
-                $(".sidebar-wrapper").css("width", "220px")
-                $(".main-panel").css('width', 'calc(100% - 220px)')
-                $(".txtLink").show()
-                $(".txtLink").css("display", "block !important")
-                $(".setaBaixo").css("transform", "rotate(360deg)")
-                $(this).find("svg").css("transform", "rotate(360deg)")
-                $("#logoIMGA").attr("src", "../assets/img/lima-04.svg")
-                $(".recolheLogo").css("width", "220px")
-                $(".sidebar-wrapper2").show()
-
-
-            } else {
-                $(".recolheLogo").css("width", "70px")
-                $(".navbar").css("max-width", "calc(100% - 70px)")
-                $(this).addClass("mostraMenu")
-                $(this).find("svg").css("transform", "rotate(180deg)")
-                $(".sidebar").css("width", "70px")
-                $(".sidebar-wrapper").css("width", "70px")
-                $(".sidebar-wrapper2").hide()
-                $(".main-panel").css('width', 'calc(100% - 70px)')
-                $(".txtLink").hide()
-                $(".setaBaixo").css("transform", "rotate(270deg)")
-                $("#logoIMGA").attr("src", "../assets/icons/iconRecolhido.png")
-                $(".btnVoltaAreaSide").css("right", "5px")
-
-            }
-
-
-            //console.log(Number($(".sidebar").css("width").replace("px", "")))
-            if (Number($(".sidebar").css("width").replace("px", "")) > 260) {
-                $(".produtosShow").show()
-                $(".vendasShow").show()
-                $("." + $(this).attr("content") + "Show").fadeOut()
-                $(".sidebar").removeClass("newSidebar");
-
-                $(".superModal").hide()
-
-                $(this).removeClass("active")
-                $(".sidebar").removeClass("newSidebar");
-                $(".sidebar").removeClass("newSidebar2");
-            }
-            $(".superModal").show()
-        })
-
-
-        function navegador(elemento) {
-            $(".btnVoltaAreaSide").css("right", "220px")
-            $(".sidebar-wrapper2").show()
-            $(".produtosShow").hide()
-            $(".vendasShow").hide()
-            $(".marketingShow").hide()
-            $("." + elemento.attr("content") + "Show").fadeIn()
-
-            $("#produtos").removeClass("active")
-            $(".superModal").show()
-            $(".mainMenu").removeClass("active")
-            elemento.addClass("active")
-            //console.log(Number($(".sidebar").css("width").replace("px", "")))
-
-            if (Number($(".sidebar").css("width").replace("px", "")) == 70) {
-                //console.log("fiz 70")
-                $(".sidebar").removeClass("newSidebar");
-                $(".sidebar").addClass("newSidebar2");
-
-            } else if (Number($(".sidebar").css("width").replace("px", "")) == 260) {
-                $(".sidebar").addClass("newSidebar");
-                $(".sidebar").removeClass("newSidebar2");
-
-                //console.log("fiz 520")
-
-            } else if (Number($(".sidebar").css("width").replace("px", "")) == 320) {
-                $(".sidebar").removeClass("newSidebar");
-                $(".sidebar").addClass("newSidebar2");
-
-                //console.log("fiz 320")
-                $(".superModal").show()
-
-
-            } else {
-                $(".sidebar").addClass("newSidebar");
-                $(".sidebar").removeClass("newSidebar2");
-                //console.log("fiz qualquer")
-
-
-            }
-
-
-        }
-
-
-        $("#buscaNav").change(function () {
-            if ($(this).val().indexOf("/") > -1) {
-                location.replace($(this).val())
-            }
-        })
+                $("#buscaNav").change(function () {
+                    if ($(this).val().indexOf("/") > -1) {
+                        location.replace($(this).val())
+                    }
+                })
 
 
 
@@ -1054,119 +1067,119 @@
     <script src="../js/calendar.js"></script>
     <script>
 
-        var calendar1 = bulmaCalendar.attach('.demo1', {
-            lang: 'en-US'
-        });
-        var calendar2 = bulmaCalendar.attach('.demo2', {
-            lang: 'en-US',
-            type: 'time'
-        });
-        var calendar3 = bulmaCalendar.attach('.demo3', {
-            lang: 'en-US',
-            type: 'datetime',
-        });
-        var calendar4 = bulmaCalendar.attach('.demo4', {
-            lang: 'pt-BR',
-            isRange: true,
-        });
-        var calendar5 = bulmaCalendar.attach('.demo5', {
-            lang: 'en-US',
-            displayMode: 'dialog',
-            color: 'dark',
-            isRange: true
-        });
-        var calendar6 = bulmaCalendar.attach('.demo6', {
-            lang: 'en-US',
-            displayMode: 'inline',
-        });
+                var calendar1 = bulmaCalendar.attach('.demo1', {
+                    lang: 'en-US'
+                });
+                var calendar2 = bulmaCalendar.attach('.demo2', {
+                    lang: 'en-US',
+                    type: 'time'
+                });
+                var calendar3 = bulmaCalendar.attach('.demo3', {
+                    lang: 'en-US',
+                    type: 'datetime',
+                });
+                var calendar4 = bulmaCalendar.attach('.demo4', {
+                    lang: 'pt-BR',
+                    isRange: true,
+                });
+                var calendar5 = bulmaCalendar.attach('.demo5', {
+                    lang: 'en-US',
+                    displayMode: 'dialog',
+                    color: 'dark',
+                    isRange: true
+                });
+                var calendar6 = bulmaCalendar.attach('.demo6', {
+                    lang: 'en-US',
+                    displayMode: 'inline',
+                });
 
-        setTimeout(() => {
-            $.ajax({
-                type: 'POST',
-                url: 'https://api-smartcomerci.com.br:9090/getStoreInformation',
-                data: { "master_id": localStorage.MASTER_ID },
-                success: function (data) {
-                    //console.log("dataStore")
-                    //console.log(data)
-                    for (const k in data) {
-                        $("#nomeTotalLoja").text(data[k].master_business_name)
-                        localStorage.NOME_LOJA = data[k].master_business_name
-                    }
+                setTimeout(() => {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'https://api-smartcomerci.com.br:9090/getStoreInformation',
+                        data: { "master_id": localStorage.MASTER_ID },
+                        success: function (data) {
+                            //console.log("dataStore")
+                            //console.log(data)
+                            for (const k in data) {
+                                $("#nomeTotalLoja").text(data[k].master_business_name)
+                                localStorage.NOME_LOJA = data[k].master_business_name
+                            }
 
 
-                },
-                error: function (data) {
-                    //console.log(data)
-                },
-                complete: function () {
-                    // ao final da requisição...
+                        },
+                        error: function (data) {
+                            //console.log(data)
+                        },
+                        complete: function () {
+                            // ao final da requisição...
+                        }
+                    });
+
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'https://api-smartcomerci.com.br:9090/informacoesDeClientes',
+                        data: { "affiliate_id": localStorage.AFFILIATE_ID },
+                        headers: {
+                            "x-access-token": localStorage.token,
+                        },
+                        success: function (data) {
+                            //console.log("dataClients")
+                            //console.log(data)
+
+                            $("#novosClientes").html(data.length)
+                            $("#clientesRecorrentes").html(data.length)
+                            setTimeout(() => {
+                                var receita = Number($("#receita").text().replace(",", ""))
+                                var pUn = receita / data.length
+                                //console.log('porcada', pUn)
+
+                                $("#taxaConversao").html((pUn * 100 / receita).toFixed(1) + "%")
+                                $("#percentualConversao").html((pUn * 100 / receita).toFixed(1) + "%")
+
+                                $("#taxaConversao").hide()
+
+                                $("#percentualConversao").hide()
+
+                            }, 1000)
+
+
+
+
+                        },
+                        error: function (data) {
+                            //console.log(data)
+                        },
+                        complete: function () {
+                            // ao final da requisição...
+                        }
+                    });
+
+
+
+
+
+                }, 350)
+
+
+                function fechaModalPDF(elemento) {
+                    elemento.parent().parent().hide()
+                    $("body").css("overflow", "auto")
                 }
-            });
-
-
-
-            $.ajax({
-                type: 'POST',
-                url: 'https://api-smartcomerci.com.br:9090/informacoesDeClientes',
-                data: { "affiliate_id": localStorage.AFFILIATE_ID },
-                headers: {
-                    "x-access-token": localStorage.token,
-                },
-                success: function (data) {
-                    //console.log("dataClients")
-                    //console.log(data)
-
-                    $("#novosClientes").html(data.length)
-                    $("#clientesRecorrentes").html(data.length)
-                    setTimeout(() => {
-                        var receita = Number($("#receita").text().replace(",", ""))
-                        var pUn = receita / data.length
-                        //console.log('porcada', pUn)
-
-                        $("#taxaConversao").html((pUn * 100 / receita).toFixed(1) + "%")
-                        $("#percentualConversao").html((pUn * 100 / receita).toFixed(1) + "%")
-
-                        $("#taxaConversao").hide()
-
-                        $("#percentualConversao").hide()
-
-                    }, 1000)
-
-
-
-
-                },
-                error: function (data) {
-                    //console.log(data)
-                },
-                complete: function () {
-                    // ao final da requisição...
+                function imprimePDF_FRAME() {
+                    $("#framePDF")[0].contentWindow.imprime()
                 }
-            });
-
-
-
-
-
-        }, 350)
-
-
-        function fechaModalPDF(elemento) {
-            elemento.parent().parent().hide()
-            $("body").css("overflow", "auto")
-        }
-        function imprimePDF_FRAME() {
-            $("#framePDF")[0].contentWindow.imprime()
-        }
 
 
 
     </script>
     <script>
-        function closeIframe(frameName) {
-            //console.log("fechando iframes...")
-            $("#" + frameName).hide()
-        }
+                function closeIframe(frameName) {
+                    //console.log("fechando iframes...")
+                    $("#" + frameName).hide()
+                }
     </script>
     <iframe id="autenticar" src="/layouts/autenticate.html"
         style="width: 100%; height: 102vh; position: absolute; top: 0; right: 0; display: none;    z-index: 9999;"
@@ -1198,65 +1211,56 @@
     <script src="../js/configuracoes.js"></script>
     <script src="../js/promocoes_cupons.js"></script>
     <script>
-        function showFrame(id, texto) {
-            localStorage.EMAIL_IN_EDIT = texto
-            var iframe = document.getElementById(id);
-            iframe.src = iframe.src;
-            iframe.contentWindow.location.reload();
-            $("#" + id).css("z-index", "1040")
-            window.scrollTo(0, 0);
-            $("body").css("overflow", "hidden")
-            $("#" + id).show()
-        }
-        function fecharFrame(id) {
-            //console.log("fechando rff ...")
-            $("#" + id).hide()
-            $(".navbar").css("z-index", "9")
-            $(".sidbar").css("z-index", "1030")
-            $("body").css("overflow", "auto")
-        }
+            function showFrame(id, texto) {
+                localStorage.EMAIL_IN_EDIT = texto
+                var iframe = document.getElementById(id);
+                iframe.src = iframe.src;
+                iframe.contentWindow.location.reload();
+                $("#" + id).css("z-index", "1040")
+                window.scrollTo(0, 0);
+                $("body").css("overflow", "hidden")
+                $("#" + id).show()
+            }
+            function fecharFrame(id) {
+                //console.log("fechando rff ...")
+                $("#" + id).hide()
+                $(".navbar").css("z-index", "9")
+                $(".sidbar").css("z-index", "1030")
+                $("body").css("overflow", "auto")
+            }
 
-        function editarLoja(id) {
-            localStorage.EDITANDO_LOJA_CONFIG = id
-            $("#editarLoja").attr("src", "/layouts/editarLoja.html?" + id)
-            $("#editarLoja").css("z-index", "1040")
-            window.scrollTo(0, 0);
+            function editarLoja(id) {
+                localStorage.EDITANDO_LOJA_CONFIG = id
+                $("#editarLoja").attr("src", "/layouts/editarLoja.html?" + id)
+                $("#editarLoja").css("z-index", "1040")
+                window.scrollTo(0, 0);
 
-            $("body").css("overflow", "hidden")
-            $("#editarLoja").show()
-        }
-        function fecharModalEdit() {
-            //console.log("fechando modal ...")
-            $("#editarLoja").hide()
-            $(".navbar").css("z-index", "9")
-            $(".sidbar").css("z-index", "1030")
-            $("body").css("overflow", "auto")
-        }
+                $("body").css("overflow", "hidden")
+                $("#editarLoja").show()
+            }
+            function fecharModalEdit() {
+                //console.log("fechando modal ...")
+                $("#editarLoja").hide()
+                $(".navbar").css("z-index", "9")
+                $(".sidbar").css("z-index", "1030")
+                $("body").css("overflow", "auto")
+            }
 
- 
-    window.onbeforeunload = function (event) {
-      
-        let alterText=localStorage.alteracoes
-          
-        if(alterText != '' && alterText){
-            let alteracoes=JSON.parse(alterText)
-            if(window.location.href.indexOf('editar_home_cores') > -1 && alteracoes && alteracoes.length > 0){
-            localStorage.alteracoes = ''
-            return confirm("Confirm refresh");
-        } else{
-alert("SEM ALTERACOES")
-        }
-        }
-        
-    };
- 
+
+
+
+        };
+
     </script>
 
 </body>
 
-<modalLoading style="display:none;    z-index: 9999;;background: rgb(0, 0, 0, 0.5); position: absolute; width: 100vw; height: 105vh; left: 0; top: 0">
-    <div style="margin: 25vh auto;width: 200px; height: 200px;  background: white; border-radius: 100%" class="modalLoading">
-        <div style="width: 150px;height: 150px; margin: 25px" class="spinner-border text-warning" role="status"><span class="sr-only">Loading...</span></div>
+<modalLoading
+    style="display:none;    z-index: 9999;;background: rgb(0, 0, 0, 0.5); position: absolute; width: 100vw; height: 105vh; left: 0; top: 0">
+    <div style="margin: 25vh auto;width: 200px; height: 200px;  background: white; border-radius: 100%"
+        class="modalLoading">
+        <div style="width: 150px;height: 150px; margin: 25px" class="spinner-border text-warning" role="status"><span
+                class="sr-only">Loading...</span></div>
     </div>
 </modalLoading>
 
