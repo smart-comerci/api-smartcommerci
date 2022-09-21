@@ -3427,7 +3427,7 @@ function changeMyActiveVertical(element) {
   //console.log("editando-me ...",element)
 
   let thisCategory = localStorage.SUB_CAT_ATUAL;
-  let subs = JSON.parse(localStorage.SUB_EDIT);
+  let subs = JSON.parse(ajustStrigfy(localStorage.SUB_EDIT));
   for (const k in subs) {
     if (subs[k].subCategoria.trim() == thisCategory.trim()) {
       let bnn = subs[k]["bannersVertical"];
