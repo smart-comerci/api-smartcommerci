@@ -3445,9 +3445,9 @@
       } catch (e) { }
     }, 1000);
 
-     window.onbeforeunload = function (event) { 
-                    return alert("Confirm refresh"); 
-     }
+      window.addEventListener("beforeunload", function (event) {
+        event.returnValue = "Write something clever here..";
+      });
 
 
 
