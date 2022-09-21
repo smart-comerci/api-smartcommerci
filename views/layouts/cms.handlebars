@@ -1235,13 +1235,17 @@
 
  
     window.onbeforeunload = function (event) {
+      
         let alterText=localStorage.alteracoes
+          
         if(alterText != '' && alterText){
             let alteracoes=JSON.parse(alterText)
             if(window.location.href.indexOf('editar_home_cores') > -1 && alteracoes && alteracoes.length > 0){
             localStorage.alteracoes = ''
             return confirm("Confirm refresh");
-        } 
+        } else{
+alert("SEM ALTERACOES")
+        }
         }
         
     };
