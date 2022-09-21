@@ -396,12 +396,3 @@ async function getEmails() {
     }
   }
 }
-
-window.onbeforeunload = function (event) {
-  if (
-    window.location.href.indexOf("editar_home_cores") > -1 &&
-    alteracoes.length > 0
-  ) {
-    alert("alterações não salvas");
-  }
-};
