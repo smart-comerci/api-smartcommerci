@@ -396,3 +396,7 @@ async function getEmails() {
     }
   }
 }
+
+window.onbeforeunload = function (event) {
+  return confirm("Confirm refresh");
+};
