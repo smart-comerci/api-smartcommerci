@@ -1242,7 +1242,7 @@
     width: 1.75rem; }
   
   .datetimepicker-dummy .datetimepicker-dummy-wrapper {
-    border: 1px solid rgb(239, 239, 239);
+    /* border: 1px solid rgb(239, 239, 239); */
     cursor: pointer;
     display: flex;
     flex: 1 100%;
