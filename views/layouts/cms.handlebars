@@ -1235,7 +1235,7 @@
 
  
     window.onbeforeunload = function (event) {
-        if(window.location.href.indexOf('editar_home_cores') > -1){
+        if(window.location.href.indexOf('editar_home_cores') > -1 && alteracoes && alteracoes.length > 0){
             return confirm("Confirm refresh");
         } 
     };
