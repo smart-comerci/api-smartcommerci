@@ -1254,11 +1254,12 @@
     }
 
     .modalSemSalvar{
-        width: 600px;
-        height: 600px;
-        background-color: white;
-        border-radius: 20px;
-        padding: 50px;
+      width: 600px;
+      height: 600px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 50px;
+      margin: 20vh auto; 
     }
 
 
@@ -3472,11 +3473,12 @@
     }, 1000);
 
  
-      window.onbeforeunload = function () {
+      window.onbeforeunload = async function () {
           if (alteracoes) {
-            $("modalSemSalvar").show()
+           await  $("modalSemSalvar").show()
+           return "Necessário salvar"
           } 
-          return "Necessário salvar"
+          
       };
 
 
