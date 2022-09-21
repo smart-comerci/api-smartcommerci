@@ -3528,7 +3528,7 @@ function changeMyActiveVerticalMain(element) {
           }
         } catch (e) {
           subs[k]["subcategorie_banners"] = JSON.parse(
-            subs[k]["subcategorie_banners"]
+            ajustStrigfy(subs[k]["subcategorie_banners"])
           );
         }
       }
