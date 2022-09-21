@@ -3446,10 +3446,15 @@
     }, 1000);
 
  
-      window.addEventListener("beforeunload", function (event) { 
-        event.returnValue = "Write something clever here..";
-      });
+     function unloadPage() {
+      if(alteracoes){
+        alert("Com alterações!");
+      }else{
+        alert("Sem alterações!");
+      }
 
+      }
+      window.onunload = unloadPage;
 
 
 
