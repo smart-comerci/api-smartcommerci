@@ -648,10 +648,13 @@
                 if (window.location.href.indexOf('editar_home_cores') > -1 && alteracoes && alteracoes.length > 0) {
                     localStorage.alteracoes = ''
                     return confirm("Confirm refresh");
-                } else {
-                    alert("SEM ALTERACOES")
-                }
+                } 
             }
+            else {
+                    alert("SEM ALTERACOES")
+                      
+                }
+        }
             function sair() {
                 localStorage.clear()
                 location.replace("/cms-login")
