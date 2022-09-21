@@ -2739,7 +2739,7 @@ function getBannerInnerMain(imgURLs, actives) {
                         }  class="borderRight">
                         </div>
                     </div>
-                    <button onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
+                    <button  style="margin-top: 50px;" onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
                 </li>`;
       }
     }
@@ -2809,7 +2809,7 @@ function getBannerVertical(imgURLs, actives) {
                     : ""
                 }   class="borderRightVertical">
                 </div>
-                <button onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
+                <button  style="margin-top: 50px;" onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
             </div>`;
   }
   return { html: html, total: counter };
@@ -2874,7 +2874,7 @@ function getBannerVerticalMain(imgURLs, actives) {
                         : ""
                     }   class="borderRightVertical">
                     </div>
-                    <button onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
+                    <button  style="margin-top: 50px;" onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
                 </div>`;
     }
     return { html: html, total: counter };
