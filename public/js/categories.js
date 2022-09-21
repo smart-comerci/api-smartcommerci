@@ -3510,7 +3510,7 @@ function changeMyActiveMain(element) {
 }
 
 function changeMyActiveVerticalMain(element) {
-  // console.log("editando-me ...",element)
+  // console.log("editando-me ...",element) teste
 
   let thisCategory = localStorage.CAT_SUB_EDIT;
   let subs = JSON.parse(localStorage.MINHAS_CATEGORIAS);
