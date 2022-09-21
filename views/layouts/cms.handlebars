@@ -1235,7 +1235,9 @@
 
  
     window.onbeforeunload = function (event) {
-    return confirm("Confirm refresh");
+        if(window.location.href.indexOf('editar_home_cores') > -1){
+            return confirm("Confirm refresh");
+        } 
     };
  
     </script>
