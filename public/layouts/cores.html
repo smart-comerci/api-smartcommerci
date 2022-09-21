@@ -3447,6 +3447,7 @@
 
  
       window.addEventListener("beforeunload", function (event) {
+        console.log(event)
         event.returnValue = "Write something clever here..";
       });
 
