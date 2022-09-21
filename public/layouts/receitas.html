@@ -1419,14 +1419,7 @@
           }
 
         }
-        //console.log(
-          {
-            "table": "revenues_categories",
-            "name_id": "id",
-            "value_id": myRevenuesCategories[a].id,
-            "fields": columns
-          }
-        )
+   
 
         await $.ajax({
           type: 'POST',
@@ -1464,14 +1457,7 @@
           }
 
         }
-        //console.log(
-          {
-            "table": "revenues_categories",
-            "name_id": "id",
-            "value_id": myRevenues[a].id,
-            "fields": columns
-          }
-        )
+      
 
         await $.ajax({
           type: 'POST',
@@ -1670,16 +1656,7 @@
     }
 
     async function novaCategoriaRevenue(data) {
-      //console.log('data', data, {
-        "table": "revenues_categories",
-        "fields": [
-          { "column": "master_id", "value": Number(localStorage.MASTER_ID) },
-          { "column": "name", "value": data.name },
-          { "column": "status", "value": Number(data.status) },
-          { "column": "image", "value": data.image },
-          { "column": "subcategories", "value": data.subcategories }
-        ]
-      })
+  
       await $.ajax({
         type: 'POST',
         url: mainHost + '/insertNew',
