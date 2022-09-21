@@ -2670,8 +2670,8 @@ function getBannerInner(imgURLs, actives) {
                     }  class="borderRight">
                     </div>
                 </div>
-                <br><br>
-                <button onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
+                 
+                <button style="margin-top: 50px;" onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
             </li>`;
     }
   }
