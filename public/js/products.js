@@ -5991,7 +5991,9 @@ function prdSeleciona5(elemento) {
   salvaCard2($(".listaTAGS_CARDS"), dados, Number(prd_code));
 }
 
-async function buscaAvancadaFiltros() {
+async function buscaAvancadaFiltros(html) {
+  console.log(html);
+  lastHtmlFilter = html.parent().html();
   var cat = $(".listaCategoriasFilter").find(".categoriaLabel");
   var marc = $(".minhasMarcas").find(".categoriaLabel");
   var tag = $(".minhasTags2").find(".categoriaLabel");
@@ -6104,6 +6106,8 @@ function verFeedback() {
   localStorage.PARAMETROS_FILTROS = JSON.stringify(LISTA_SEARCH);
   feedbackPeloFiltro($(".txtFiltroGet"), LISTA_SEARCH, 10000, false, 10000);
 }
+
+var lastHtmlFilter = null;
 
 function filter() {
   var TAGS = "",
@@ -6282,7 +6286,7 @@ function filter() {
     "</div>" +
     '<div style="display: inline-flex; width: 100%;border-top: 0.949999988079071px solid #EDEDED;">' +
     '<p onclick="removeFiltrosAvancados()" class="removeFiltros">Remover Filtros</p>' +
-    '<div onclick="buscaAvancadaFiltros()" class="btnFiltroGet">' +
+    `<div onclick="buscaAvancadaFiltros($(this).parent().parent()')" class="btnFiltroGet">` +
     '<svg style="margin: auto;" xmlns="http://www.w3.org/2000/svg" width="16.667" height="16.667" viewBox="0 0 16.667 16.667">' +
     '<path id="filter-alt" d="M8.333,16.667a8.333,8.333,0,1,1,8.333-8.333A8.343,8.343,0,0,1,8.333,16.667Zm0-15.833a7.5,7.5,0,1,0,6.495,3.75A7.508,7.508,0,0,0,8.333.833Zm1.25,10.834h-2.5a.417.417,0,0,1,0-.834h2.5a.417.417,0,0,1,0,.834Zm1.667-2.5H5.417a.417.417,0,0,1,0-.833H11.25a.417.417,0,1,1,0,.833Zm1.667-2.5H3.75a.417.417,0,1,1,0-.833h9.167a.417.417,0,1,1,0,.833Z" fill="#fff"/>' +
     "</svg>" +
@@ -6291,7 +6295,7 @@ function filter() {
     "</div>";
 
   bootbox.alert({
-    message: html,
+    message: lastHtmlFilter !== null ? lastHtmlFilter : html,
     onShow: function () {
       $(this)[0].id = "modalCentralFiltroInner";
       $(this)[0].height = "50vh";
