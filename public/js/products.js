@@ -6360,13 +6360,16 @@ function filter() {
         .find("input")
         .each(function () {
           let text = $(this).attr("onchange");
-          let coluna = text
-            .split("subTagInput($(this),'minhasTags2','")[0]
-            .replace("')", "")
-            .trim();
-          for (const k in listChecked) {
-            if (listChecked[k] === coluna) {
-              $(this)[0].checked = true;
+          console.log("texto ", text);
+          if (text) {
+            let coluna = text
+              .split("subTagInput($(this),'minhasTags2','")[0]
+              .replace("')", "")
+              .trim();
+            for (const k in listChecked) {
+              if (listChecked[k] === coluna) {
+                $(this)[0].checked = true;
+              }
             }
           }
         });
