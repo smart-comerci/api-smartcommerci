@@ -1,7 +1,3 @@
-//////////console.log("veja o token => "+localStorage.token)
-
-const { find } = require("core-js/core/array");
-
 function detectar_mobile() {
   var check = false; //wrapper no check
   (function (a) {
