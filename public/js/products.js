@@ -264,7 +264,7 @@ function ajustaFeedback(add, texto) {
         $("#parametrosFiltrados").text() + "," + texto
       );
     } else {
-      $("#parametrosFiltrados").text($("#searchProducts").val());
+      $("#parametrosFiltrados").html($("#searchProducts").val());
     }
   }
 }
@@ -6785,19 +6785,10 @@ async function buscaPeloFiltro(
       let totalFiltros = 0,
         currFilter = null,
         listFiedlsSearch = "";
-      for (const k in parametros) {
-        if (parametros[k].active == true) {
-          if (currFilter != parametros[k].colmun + "," + parametros[k].active) {
-            totalFiltros++;
-            listFiedlsSearch +=
-              parametros[k].colmun +
-              ": " +
-              (parametros[k].value == null ? "" : parametros[k].value) +
-              " ,";
-          }
-        }
-        currFilter = parametros[k].colmun + "," + parametros[k].active;
-      }
+      let items = parametros.filter((p) => p.active === true);
+      items.array.forEach((item) => {
+        listFiedlsSearch += item.colmun + ": <b>" + item.value + "</b>, ";
+      });
       $(".totalFiltros").text(totalFiltros);
       setTimeout(() => {
         ajustaFeedback(false, listFiedlsSearch);
