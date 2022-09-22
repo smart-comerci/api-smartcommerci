@@ -653,7 +653,7 @@ async function request(
       if ($("#searchProducts").val() == "") {
         ajustaFeedback(false, "");
       } else {
-        ajustaFeedback(true, $("#searchProducts").val());
+        ajustaFeedback(false, $("#searchProducts").val());
       }
     },
     error: function (data2) {
@@ -6800,7 +6800,7 @@ async function buscaPeloFiltro(
       }
       $(".totalFiltros").text(totalFiltros);
       setTimeout(() => {
-        ajustaFeedback(true, listFiedlsSearch);
+        ajustaFeedback(false, listFiedlsSearch);
       }, 3000);
 
       $(".close").click();
