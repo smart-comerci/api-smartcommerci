@@ -685,14 +685,14 @@ async function personalRequest(
   PRODUCT_AFFILIATE_ID,
   continua
 ) {
-  //console.log(
-    ADDRESS,
-    LAST_ID,
-    TOTAL_ITENS,
-    order_type,
-    column_order,
-    PRODUCT_AFFILIATE_ID
-  );
+  // //console.log(
+  //   ADDRESS,
+  //   LAST_ID,
+  //   TOTAL_ITENS,
+  //   order_type,
+  //   column_order,
+  //   PRODUCT_AFFILIATE_ID
+  // );
   var lojas2 = JSON.parse(localStorage.LOJAS_CADASTRADAS);
   ////////console.log(lojas2)
   for (const k in lojas2) {
@@ -6599,15 +6599,15 @@ async function buscaPeloFiltro(
   order_type,
   column_order
 ) {
-  //console.log("buscando pelo filtro", {
-    affiliate_id: localStorage.AFFILIATE_ID,
-    limite: limite,
-    parameters: parametros,
-    explain: false,
-    lastId: lastID,
-    order_type: order_type,
-    column_order: column_order,
-  });
+  // //console.log("buscando pelo filtro", {
+  //   affiliate_id: localStorage.AFFILIATE_ID,
+  //   limite: limite,
+  //   parameters: parametros,
+  //   explain: false,
+  //   lastId: lastID,
+  //   order_type: order_type,
+  //   column_order: column_order,
+  // });
   if (loading) {
     // $("modalLoading").show();
   }
