@@ -1227,23 +1227,25 @@
 
     .btnAdicionar {
       padding: 15px;
-    border-top: 1px solid #f6b504;
-    width: 100%;
-    max-height: 40px;
-    color: #f6b504
+      border-top: 1px solid #f6b504;
+      width: 100%;
+      max-height: 40px;
+      color: #f6b504
     }
-    .infoPrice2{
+
+    .infoPrice2 {
       position: relative;
-    margin-top: -20px;
-    width: 90%;
-    text-align: left;
-    align-content: flex-start;
+      margin-top: -20px;
+      width: 90%;
+      text-align: left;
+      align-content: flex-start;
     }
-    .conteudoInterno{
+
+    .conteudoInterno {
       background-color: white !important;
     }
 
-    modalSemSalvar{
+    modalSemSalvar {
       display: none;
       width: 100vw;
       height: 100vh;
@@ -1253,17 +1255,31 @@
       background-color: rgba(0, 0, 0, .5);
     }
 
-    .modalSemSalvar{
+    .modalSemSalvar {
       width: 600px;
       height: 600px;
       background-color: white;
       border-radius: 20px;
       padding: 50px;
-      margin: 20vh auto; 
+      margin: 20vh auto;
       z-index: 9;
     }
 
+    .titulo8 {
+      text-align: center;
+      font: normal normal bold 21px Roboto;
+      letter-spacing: 0px;
+      color: #323233;
+      opacity: 1;
+    }
 
+    .titulo7 { 
+      text-align: center;
+      font: normal normal 300 18px Roboto;
+      letter-spacing: 0px;
+      color: #687C97;
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -2422,44 +2438,49 @@
     </div>
 
   </modalProductSelect>
- 
 
-      <div class="modal" id="modalSemSalvar" tabindex="-1" aria-labelledby="modalChangePictureLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header justify-content-center">
-              <h5 class="modal-title m-auto" id="modalChangePictureLabel">Alterações não publicadas</h5>
-              <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="panel-header mb-4 d-flex align-items-center justify-content-center gap-2">
-                <div>
-                  <span class="rounded-icon icon-lg icon-orange me-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                      <path
-                        d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM232 152C232 138.8 242.8 128 256 128s24 10.75 24 24v128c0 13.25-10.75 24-24 24S232 293.3 232 280V152zM256 400c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 385.9 273.4 400 256 400z" />
-                    </svg>
-                  </span>
-                </div> 
-              </div>
+  <modalSemSalvar id="modalSemSalvar">
+    <div class="modal" tabindex="-1" aria-labelledby="modalChangePictureLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <h4 class="modal-title m-auto" id="modalChangePictureLabel">Alterações não publicadas</h4>
+            <button type="button" class="btn-close m-0" onclick="closeMNoSave()" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="panel-header mb-4 d-flex align-items-center justify-content-center gap-2">
               <div>
-                <h2>Existem alterações que não foram salvas</h2>
-                <p>Deseja realmente sair?<br>
-                  Caso saia, as alterações serão perdidas
-                </p> 
+                <span class="rounded-icon icon-lg icon-orange me-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path
+                      d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM232 152C232 138.8 242.8 128 256 128s24 10.75 24 24v128c0 13.25-10.75 24-24 24S232 293.3 232 280V152zM256 400c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 385.9 273.4 400 256 400z" />
+                  </svg>
+                </span>
               </div>
-      
-        
             </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Revisar alterações</button>
-           
-              <button  type="button" id="picture-save-button" tabindex="6"
-                class="btn btn-save rounded-pill">Sair sem publicar</button>
+            <div>
+              <h3 style="text-align: center" class="titulo8">Existem alterações que não foram salvas</h3>
+              <p class="titulo7" style="text-align: center">Deseja realmente sair?<br>
+                Caso saia, as alterações serão perdidas
+              </p>
             </div>
+
+
+          </div>
+          <div style="display: inline-flex" class="modal-footer justify-content-between">
+            <button style="background-color: white; border:1px solid #f6b504; color: #f6b504" type="button"
+              id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Revisar
+              alterações</button>
+
+            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Sair sem
+              publicar</button>
           </div>
         </div>
       </div>
+    </div>
+  </modalSemSalvar>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <script>
@@ -3505,22 +3526,22 @@
       } catch (e) { }
     }, 1000);
 
- 
-      window.onbeforeunload = async function () {
-          if (alteracoes.length > 0) {
-           await  $("#modalSemSalvar").show()
-           setTimeout(() => {
-            return confirm("Necessário salvar")
-           }, 2000);
-           
-          } 
-      };
 
- 
+    window.onbeforeunload = async function () {
+      if (alteracoes.length > 0) {
+        await $("#modalSemSalvar").show()
+        setTimeout(() => {
+          return confirm("Necessário salvar")
+        }, 2000);
 
-      function closeMNoSave(){
-         $("modalSemSalvar").hide()
       }
+    };
+
+
+
+    function closeMNoSave() {
+      $("#modalSemSalvar").hide()
+    }
 
 
 
