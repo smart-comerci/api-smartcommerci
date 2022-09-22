@@ -47,6 +47,7 @@ function removeFiltrosAvancados() {
   localStorage.PARAMETROS_FILTROS = JSON.stringify(PARAMETROS_FILTROS);
   $(".close").click();
   lastHtmlFilter = null;
+  $("#totalFiltros").text("0");
   setTimeout(() => {
     filter();
   }, 500);
