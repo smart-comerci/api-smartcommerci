@@ -6367,7 +6367,9 @@ function filter() {
               .replace("')", "")
               .trim();
             for (const k in listChecked) {
+              console.log(listChecked[k], coluna);
               if (listChecked[k] === coluna) {
+                console.log($(this)[0]);
                 $(this)[0].checked = true;
               }
             }
