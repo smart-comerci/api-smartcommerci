@@ -1,5 +1,7 @@
 //////////console.log("veja o token => "+localStorage.token)
 
+const { find } = require("core-js/core/array");
+
 function detectar_mobile() {
   var check = false; //wrapper no check
   (function (a) {
@@ -6345,6 +6347,12 @@ function filter() {
           $(this).attr("dropou", "1");
         }
       });
+
+      $(".bootbox-body")
+        .find("input")
+        .each(function () {
+          console.log($(this).attr("onchange"));
+        });
     },
     callback: function () {
       $("#modalInner").find(".modal-dialog").removeClass("modalCentral");
