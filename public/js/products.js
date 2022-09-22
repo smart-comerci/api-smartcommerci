@@ -6363,7 +6363,7 @@ function filter() {
           console.log("texto ", text);
           if (text) {
             let coluna = text
-              .split("subTagInput($(this),'minhasTags2','")[0]
+              .split("subTagInput($(this),'minhasTags2','")[1]
               .replace("')", "")
               .trim();
             for (const k in listChecked) {
