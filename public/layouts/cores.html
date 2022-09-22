@@ -2422,13 +2422,44 @@
     </div>
 
   </modalProductSelect>
+ 
 
-  <modalSemSalvar>
-    <div class="modalSemSalvar">
-      <h1>TESTE DE MODAL SEM SALVAR</h1>
-      <button onclick="closeMNoSave()" type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-  </modalSemSalvar>
+      <div class="modal" id="modalSemSalvar" tabindex="-1" aria-labelledby="modalChangePictureLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <h5 class="modal-title m-auto" id="modalChangePictureLabel">Alterações não publicadas</h5>
+              <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="panel-header mb-4 d-flex align-items-center justify-content-center gap-2">
+                <div>
+                  <span class="rounded-icon icon-lg icon-orange me-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                      <path
+                        d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM232 152C232 138.8 242.8 128 256 128s24 10.75 24 24v128c0 13.25-10.75 24-24 24S232 293.3 232 280V152zM256 400c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 385.9 273.4 400 256 400z" />
+                    </svg>
+                  </span>
+                </div> 
+              </div>
+              <div>
+                <h2>Existem alterações que não foram salvas</h2>
+                <p>Deseja realmente sair?<br>
+                  Caso saia, as alterações serão perdidas
+                </p> 
+              </div>
+      
+        
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Revisar alterações</button>
+           
+              <button  type="button" id="picture-save-button" tabindex="6"
+                class="btn btn-save rounded-pill">Sair sem publicar</button>
+            </div>
+          </div>
+        </div>
+      </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <script>
@@ -3475,23 +3506,21 @@
     }, 1000);
 
  
-      // window.onbeforeunload = async function () {
-      //     if (alteracoes.length > 0) {
-      //      await  $("modalSemSalvar").show()
-      //      setTimeout(() => {
-      //       return confirm("Necessário salvar")
-      //      }, 2000);
+      window.onbeforeunload = async function () {
+          if (alteracoes.length > 0) {
+           await  $("#modalSemSalvar").show()
+           setTimeout(() => {
+            return confirm("Necessário salvar")
+           }, 2000);
            
-      //     } 
-      // };
+          } 
+      };
 
-      // $("modalSemSalvar").click(function(){
-      //   closeMNoSave()
-      // })
+ 
 
-      // function closeMNoSave(){
-      //    $("modalSemSalvar").hide()
-      // }
+      function closeMNoSave(){
+         $("modalSemSalvar").hide()
+      }
 
 
 
