@@ -253,6 +253,7 @@ async function atualizaListaProdutos() {
 }
 
 function ajustaFeedback(add, texto) {
+  console.log("texto busca", texto);
   if (texto == "") {
     $("#parametrosFiltrados").text("");
     $("#totalItensFiltrados").text("0");
@@ -6785,6 +6786,7 @@ async function buscaPeloFiltro(
       let totalFiltros = 0,
         currFilter = null,
         listFiedlsSearch = "";
+      console.log("parametros", parametros);
 
       for (const k in parametros) {
         if (parametros[k].active == true) {
