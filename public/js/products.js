@@ -6369,8 +6369,7 @@ function filter() {
           console.log("texto ", text);
           if (text) {
             for (const k in listChecked) {
-              console.log(listChecked[k], coluna);
-              if (listChecked[k] === coluna) {
+              if (listChecked[k] === text) {
                 console.log($(this)[0]);
                 $(this)[0].checked = true;
               }
