@@ -6362,6 +6362,10 @@ function filter() {
           let text = $(this).attr("onchange");
           console.log("texto ", text);
           if (text) {
+            console.log(
+              "texto ",
+              text.split("subTagInput($(this),'minhasTags2','")
+            );
             let coluna = text
               .split("subTagInput($(this),'minhasTags2','")[1]
               .replace("')", "")
