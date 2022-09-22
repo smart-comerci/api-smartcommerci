@@ -3659,7 +3659,9 @@ function getCategoriesAndSubToFilter(MY_CATEGORIES) {
           txtCategories[a] != undefined
         ) {
           content +=
-            '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar"  onchange="subTagInput($(this),\'listaCategoriasFilter\',\'' +
+            '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar" meEncontre="' +
+            txtCategories[a] +
+            "\"  onchange=\"subTagInput($(this),'listaCategoriasFilter','" +
             txtCategories[a] +
             '\')" type="checkbox"><span class="checkmark"></span>' +
             txtCategories[a] +
@@ -3672,7 +3674,9 @@ function getCategoriesAndSubToFilter(MY_CATEGORIES) {
     content += "</ul>";
     html3 +=
       MY_CATEGORIES[k].categoria +
-      " <input class=\"marcar\"  onchange=\"subTagInput($(this),'listaCategoriasFilter','" +
+      ' <input class="marcar" meEncontre=\'' +
+      MY_CATEGORIES[k].categoria +
+      "'  onchange=\"subTagInput($(this),'listaCategoriasFilter','" +
       MY_CATEGORIES[k].categoria +
       '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
     html3 += content + "</li> ";
@@ -3699,7 +3703,9 @@ function getTagsAndMarcas(TEXTAO, tipo) {
         '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> ';
       html3 +=
         LISTA_01[k] +
-        ' <input class="marcar"  onchange="subTagInput($(this),\'' +
+        ' <input class="marcar" meEncontre="' +
+        LISTA_01[k] +
+        '"  onchange="subTagInput($(this),\'' +
         elemento +
         "','" +
         LISTA_01[k] +
@@ -6359,14 +6365,9 @@ function filter() {
       $(".bootbox-body")
         .find("input")
         .each(function () {
-          let text = $(this).attr("onchange");
+          let text = $(this).attr("meEncontre");
           console.log("texto ", text);
           if (text) {
-            console.log("texto ", text.split(","));
-            let coluna = text
-              .split("subTagInput($(this),'minhasTags2','")[1]
-              .replace("')", "")
-              .trim();
             for (const k in listChecked) {
               console.log(listChecked[k], coluna);
               if (listChecked[k] === coluna) {
