@@ -264,7 +264,7 @@ function ajustaFeedback(add, texto) {
         $("#parametrosFiltrados").text() + "," + texto
       );
     } else {
-      $("#parametrosFiltrados").html($("#searchProducts").val());
+      $("#parametrosFiltrados").text($("#searchProducts").val());
     }
   }
 }
@@ -6787,7 +6787,7 @@ async function buscaPeloFiltro(
         listFiedlsSearch = "";
       let items = parametros.filter((p) => p.active === true);
       items.array.forEach((item) => {
-        listFiedlsSearch += item.colmun + ": <b>" + item.value + "</b>, ";
+        listFiedlsSearch += item.colmun + ": " + item.value + ", ";
       });
       $(".totalFiltros").text(totalFiltros);
       setTimeout(() => {
