@@ -6344,10 +6344,31 @@ function filter() {
         }
       });
 
+      let parametrosF = JSON.parse(localStorage.PARAMETROS_FILTROS);
+      let listChecked = [];
+      for (const k in parametrosF) {
+        if (
+          parametrosF[k].active === true ||
+          parametrosF[k].active === "true"
+        ) {
+          listChecked.push(parametrosF[k].colmun);
+        }
+      }
+      console.log("listChecked", listChecked);
+
       $(".bootbox-body")
         .find("input")
         .each(function () {
-          console.log($(this).attr("onchange"));
+          let text = $(this).attr("onchange");
+          let coluna = text
+            .split("subTagInput($(this),'minhasTags2','")[0]
+            .replace("')", "")
+            .trim();
+          for (const k in listChecked) {
+            if (listChecked[k] === coluna) {
+              $(this)[0].checked = true;
+            }
+          }
         });
     },
     callback: function () {
