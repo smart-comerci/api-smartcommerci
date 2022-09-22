@@ -6761,7 +6761,6 @@ async function buscaPeloFiltro(
         );
       }
       //console.log("mudando o lastID 1", Number(products[products.length - 1]?.id))
-
       localStorage.LAST_ID = Number(products[products.length - 1]?.id);
 
       $(".row").children().css("opacity", "1");
@@ -6782,17 +6781,21 @@ async function buscaPeloFiltro(
 
       localStorage.LAST_REQUEST = "";
 
-      let parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
-      console.log(parametros);
-
       $("modalLoading").hide();
       let totalFiltros = 0,
         currFilter = null,
         listFiedlsSearch = "";
-      let items = parametros.filter((p) => p.active === true);
-      items.array.forEach((item) => {
-        listFiedlsSearch += item.colmun + ": " + item.value + ", ";
-      });
+
+      for (const k in parametros) {
+        if (parametros[k].active == true) {
+          if (currFilter != parametros[k].colmun + "," + parametros[k].active) {
+            totalFiltros++;
+            listFiedlsSearch +=
+              (parametros[k].value == null ? "" : parametros[k].value) + " ,";
+          }
+        }
+        currFilter = parametros[k].colmun + "," + parametros[k].active;
+      }
       $(".totalFiltros").text(totalFiltros);
       setTimeout(() => {
         ajustaFeedback(false, listFiedlsSearch);
