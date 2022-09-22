@@ -2439,8 +2439,8 @@
 
   </modalProductSelect>
 
-  <modalSemSalvar id="modalSemSalvar">
-    <div class="modal" tabindex="-1" aria-labelledby="modalChangePictureLabel" aria-hidden="true">
+  <modalSemSalvar >
+    <div id="modalSemSalvar" class="modal" tabindex="-1" aria-labelledby="modalChangePictureLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header justify-content-center">
@@ -3530,6 +3530,7 @@
     window.onbeforeunload = async function () {
       if (alteracoes.length > 0) {
         await $("#modalSemSalvar").show()
+        await $("modalSemSalvar").show()
         setTimeout(() => {
           return confirm("Necessário salvar")
         }, 2000);
@@ -3541,6 +3542,7 @@
 
     function closeMNoSave() {
       $("#modalSemSalvar").hide()
+      $("modalSemSalvar").hide()
     }
 
 
