@@ -1106,14 +1106,13 @@
 
 
     $("#putStep").keyup(function (event) {
+      console.log(event)
       if (event.keyCode === 13) {
         addStep(Number($("#tNumero").text()),$("#putStep").val())
         $("#putStep").val("")
-        document.getElementById("isScroll").scrollIntoView();
-
-
-        
+        document.getElementById("isScroll").scrollIntoView(); 
       }
+
     });
 
     function addStep(id,value) {
