@@ -6761,6 +6761,7 @@ async function buscaPeloFiltro(
         );
       }
       //console.log("mudando o lastID 1", Number(products[products.length - 1]?.id))
+
       localStorage.LAST_ID = Number(products[products.length - 1]?.id);
 
       $(".row").children().css("opacity", "1");
@@ -6780,6 +6781,9 @@ async function buscaPeloFiltro(
       $("#carregaMaisProdutos").html("Ver mais...");
 
       localStorage.LAST_REQUEST = "";
+
+      let parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
+      console.log(parametros);
 
       $("modalLoading").hide();
       let totalFiltros = 0,
