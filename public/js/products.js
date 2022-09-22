@@ -6357,7 +6357,7 @@ function filter() {
           parametrosF[k].active === true ||
           parametrosF[k].active === "true"
         ) {
-          listChecked.push(parametrosF[k].colmun);
+          listChecked.push(parametrosF[k].value);
         }
       }
       console.log("listChecked", listChecked);
