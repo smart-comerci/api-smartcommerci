@@ -3529,8 +3529,8 @@
 
     window.onbeforeunload = async function () {
       if (alteracoes.length > 0) {
-        await $("#modalSemSalvar").show()
-        await $("modalSemSalvar").show()
+        $("#modalSemSalvar").show()
+        $("modalSemSalvar").show()
         setTimeout(() => {
           return confirm("Necessário salvar")
         }, 2000);
