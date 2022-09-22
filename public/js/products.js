@@ -265,7 +265,7 @@ function ajustaFeedback(add, texto) {
         $("#parametrosFiltrados").text() + "," + texto
       );
     } else {
-      $("#parametrosFiltrados").text($("#searchProducts").val());
+      $("#parametrosFiltrados").text($("#searchProducts").val() + ", " + texto);
     }
   }
 }
