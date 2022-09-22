@@ -47,7 +47,7 @@ function removeFiltrosAvancados() {
   localStorage.PARAMETROS_FILTROS = JSON.stringify(PARAMETROS_FILTROS);
   $(".close").click();
   lastHtmlFilter = null;
-  $("#totalFiltros").text("0");
+  $(".totalFiltros").text("0");
   setTimeout(() => {
     filter();
   }, 500);
@@ -96,7 +96,7 @@ function removeFiltrosAvancadosLoad() {
 }
 
 function setPARAMETROS_FILTRO(elemento) {
-  console.log("my ID", elemento.attr("id"));
+  ////console.log("my ID", elemento.attr("id"));
   if (elemento.attr("id") == "searchProducts") {
     var column = elemento.attr("column"),
       value = elemento.val();
@@ -108,7 +108,7 @@ function setPARAMETROS_FILTRO(elemento) {
     var PRM = JSON.parse(localStorage.PARAMETROS_FILTROS);
 
     for (const k in PRM) {
-      //console.log(column, PRM[k].colmun)
+      ////console.log(column, PRM[k].colmun)
       if (column == PRM[k].colmun) {
         PRM[k].active = active;
         PRM[k].value = value;
@@ -119,10 +119,10 @@ function setPARAMETROS_FILTRO(elemento) {
     var column = elemento.attr("column"),
       value = elemento.attr("value"),
       active = elemento[0].checked;
-    //////console.log(column,active)
+    ////////console.log(column,active)
     var PRM = JSON.parse(localStorage.PARAMETROS_FILTROS);
-    console.log(column, active, value);
-    console.log(PRM);
+    //console.log(column, active, value);
+    //console.log(PRM);
     for (const k in PRM) {
       if (column == PRM[k].colmun) {
         PRM[k].active = active;
@@ -134,7 +134,7 @@ function setPARAMETROS_FILTRO(elemento) {
   }
 }
 if (localStorage.token == undefined || localStorage.token == "") {
-  //////////console.log("redirecionando")
+  ////////////console.log("redirecionando")
   localStorage.peregrino =
     location.href.split("/")[location.href.split("/").length - 1];
   localStorage.peregrino =
@@ -161,12 +161,12 @@ $.ajax({
     affiliate_id: AFFILIATE_ID,
   },
   success: function (data) {
-    //////////console.log("total de produtos");
-    //////////console.log(data);
+    ////////////console.log("total de produtos");
+    ////////////console.log(data);
     $(".totalPordutosCadastrados").html(data[0].total.toLocaleString());
   },
   error: function (data) {
-    //////////console.log(data)
+    ////////////console.log(data)
     if (data.responseJSON.message.indexOf("token") > -1) {
       //alert("Necessário fazer login!<br>"+data.responseJSON.message)
       setTimeout(() => {
@@ -248,12 +248,12 @@ async function atualizaListaProdutos() {
       last_request.PRODUCT_AFFILIATE_ID,
       last_request.PRODUCT_NAME
     );
-    //console.log("Recuperando")
+    ////console.log("Recuperando")
   }
 }
 
 function ajustaFeedback(add, texto) {
-  console.log("texto busca", texto);
+  //console.log("texto busca", texto);
   if (texto == "") {
     $("#parametrosFiltrados").text("");
     $("#totalItensFiltrados").text("0");
@@ -278,13 +278,13 @@ async function request(
   PRODUCT_AFFILIATE_ID,
   PRODUCT_NAME
 ) {
-  //console.log(ADDRESS, LAST_ID, TOTAL_ITENS, PRODUCT_CODE, PRODUCT_AFFILIATE_ID, PRODUCT_NAME)
+  ////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, PRODUCT_CODE, PRODUCT_AFFILIATE_ID, PRODUCT_NAME)
   var lojas2 = JSON.parse(localStorage.LOJAS_CADASTRADAS);
-  //////console.log(lojas2)
+  ////////console.log(lojas2)
   for (const k in lojas2) {
-    //////console.log(lojas2[k].id , Number(localStorage.AFFILIATE_ID))
+    ////////console.log(lojas2[k].id , Number(localStorage.AFFILIATE_ID))
     if (lojas2[k].id == Number(localStorage.AFFILIATE_ID)) {
-      //////console.log(lojas2[k].affiliates_business_name, "index = "+(Number(k) +1))
+      ////////console.log(lojas2[k].affiliates_business_name, "index = "+(Number(k) +1))
       $("#filialShow").html(" / " + lojas2[k].affiliates_business_name);
       localStorage.NOME_FILIAL = lojas2[k].affiliates_business_name;
       $("#filialShow").css("opacity", "0");
@@ -294,7 +294,7 @@ async function request(
     }
   }
 
-  //////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, PRODUCT_CODE, PRODUCT_AFFILIATE_ID, PRODUCT_NAME)
+  ////////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, PRODUCT_CODE, PRODUCT_AFFILIATE_ID, PRODUCT_NAME)
 
   $.ajax({
     type: "POST",
@@ -312,8 +312,8 @@ async function request(
       product_site_name: PRODUCT_NAME,
     },
     success: function (products) {
-      //console.log('produtos', products)
-      //console.log("mudando o lastID 2", Number(products[products.length - 1]?.id))
+      ////console.log('produtos', products)
+      ////console.log("mudando o lastID 2", Number(products[products.length - 1]?.id))
       localStorage.LAST_ID = Number(products[products.length - 1]?.id);
       var lastRequest = {
         ADDRESS: ADDRESS,
@@ -323,7 +323,7 @@ async function request(
         PRODUCT_AFFILIATE_ID: PRODUCT_AFFILIATE_ID,
         PRODUCT_NAME: PRODUCT_NAME,
       };
-      //console.log("boraa")
+      ////console.log("boraa")
       localStorage.LAST_REQUEST = JSON.stringify(lastRequest);
       if (PRODUCTS.length == 0) {
         $(".listaDeProdutos").html("");
@@ -361,7 +361,7 @@ async function request(
       } else {
         $(".plusProducts").hide();
       }
-      ////////console.log(products)
+      //////////console.log(products)
       localStorage.PRODUCTS_SEARCH = JSON.stringify(products);
 
       var PRODUCTS_SHOW = [];
@@ -496,19 +496,19 @@ async function request(
       }
 
       try {
-        //console.log("mudando o lastID 2", Number(products[products.length - 1]?.id))
+        ////console.log("mudando o lastID 2", Number(products[products.length - 1]?.id))
         localStorage.LAST_ID = Number(products[products.length - 1]?.id);
       } catch (e) {
-        //////console.log(e)
+        ////////console.log(e)
       }
 
       // $(".product").click(function (e) {
       //     var senderElement = e.target;
-      //     //////////console.log("senderElement")
-      //     //////////console.log(senderElement)
-      //     //////////console.log(senderElement.className)
+      //     ////////////console.log("senderElement")
+      //     ////////////console.log(senderElement)
+      //     ////////////console.log(senderElement.className)
       //     if (senderElement.className == "switch switch--shadow") {
-      //         //////////console.log("vou tentar")
+      //         ////////////console.log("vou tentar")
       //         if (senderElement.className == 'switch switch--shadow')
       //             acaoCheckbox($("#" + senderElement.id))
       //     } else {
@@ -521,7 +521,7 @@ async function request(
       //             var affiliate_id = $(this).attr("affiliate_id")
       //             var product_code = $(this).attr("product_code");
       //             var product_ean = $(this).attr("product_ean");
-      //             //////////console.log(affiliate_id, product_code)
+      //             ////////////console.log(affiliate_id, product_code)
 
       //             $.ajax({
       //                 type: 'POST',
@@ -534,7 +534,7 @@ async function request(
       //                     "product_code": product_code
       //                 },
       //                 success: function (data) {
-      //                     //////////console.log("productPictures")
+      //                     ////////////console.log("productPictures")
       //                     var listaImagens = []
       //                     var firstImage = ""
       //                     for (const k in PRODUCTS) {
@@ -582,8 +582,8 @@ async function request(
 
       //                     }
 
-      //                     //////console.log("listaImagens")
-      //                     //////console.log(listaImagens)
+      //                     ////////console.log("listaImagens")
+      //                     ////////console.log(listaImagens)
 
       //                     modalProduct(PRODUCTS, product_code, affiliate_id, listaImagens);
 
@@ -600,7 +600,7 @@ async function request(
       //                     } else {
       //                         //alert("Algo saiu errado!<br>"+data.responseJSON.message)
       //                     }
-      //                     //////////console.log("productPictures")
+      //                     ////////////console.log("productPictures")
       //                     var listaImagens = []
       //                     var firstImage = ""
       //                     for (const k in PRODUCTS) {
@@ -611,7 +611,7 @@ async function request(
       //                     listaImagens.push(firstImage)
       //                     //listaImagens.push("images/default/produto-sem-imagem.jpg")
       //                     for (const k in PRODUCTS_IMAGES) {
-      //                         //////////console.log(Number(product_ean)+" == "+Number(PRODUCTS_IMAGES[k].EAN))
+      //                         ////////////console.log(Number(product_ean)+" == "+Number(PRODUCTS_IMAGES[k].EAN))
       //                         if (Number(product_ean) == Number(PRODUCTS_IMAGES[k].EAN)) {
       //                             if (PRODUCTS_IMAGES[k].DATA.thumbnail != firstImage) {
       //                                 listaImagens.push(PRODUCTS_IMAGES[k].DATA.thumbnail)
@@ -620,7 +620,7 @@ async function request(
       //                         }
       //                     }
 
-      //                     //////////console.log(listaImagens)
+      //                     ////////////console.log(listaImagens)
       //                     modalProduct(PRODUCTS, product_code, affiliate_id, listaImagens);
       //                     localStorage.LISTA_IMAGENS = JSON.stringify(listaImagens)
       //                 },
@@ -641,7 +641,7 @@ async function request(
       $(".checka").change(function (e) {
         e.stopPropagation();
         e.preventDefault();
-        //////////console.log($(this)[0].checked);
+        ////////////console.log($(this)[0].checked);
         if ($(this)[0].checked) {
           $(this).parent().parent().parent().addClass("selecionado");
         } else {
@@ -660,7 +660,7 @@ async function request(
     error: function (data2) {
       $("#carregaMaisProdutos").html("Erro :(");
       $("#carregaMaisProdutos").css("border", "2px solid red");
-      //////console.log(data2);
+      ////////console.log(data2);
       if (data2.responseJSON.message.indexOf("token") > -1) {
         //alert("Necessário fazer login!<br>"+data2.responseJSON.message)
         setTimeout(() => {
@@ -685,7 +685,7 @@ async function personalRequest(
   PRODUCT_AFFILIATE_ID,
   continua
 ) {
-  console.log(
+  //console.log(
     ADDRESS,
     LAST_ID,
     TOTAL_ITENS,
@@ -694,18 +694,18 @@ async function personalRequest(
     PRODUCT_AFFILIATE_ID
   );
   var lojas2 = JSON.parse(localStorage.LOJAS_CADASTRADAS);
-  //////console.log(lojas2)
+  ////////console.log(lojas2)
   for (const k in lojas2) {
-    //////console.log(lojas2[k].id , Number(localStorage.AFFILIATE_ID))
+    ////////console.log(lojas2[k].id , Number(localStorage.AFFILIATE_ID))
     if (lojas2[k].id == Number(localStorage.AFFILIATE_ID)) {
-      //////console.log(lojas2[k].affiliates_business_name)
+      ////////console.log(lojas2[k].affiliates_business_name)
       $("#filialShow").html(" / " + lojas2[k].affiliates_business_name);
       // $(".listaDeUnidades")[0].options.selectedIndex = k +1
       // $(".listaDeUnidades")[1].options.selectedIndex = k +1
     }
   }
 
-  ////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, order_type, column_order, PRODUCT_AFFILIATE_ID)
+  //////console.log(ADDRESS, LAST_ID, TOTAL_ITENS, order_type, column_order, PRODUCT_AFFILIATE_ID)
   let parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
 
   $.ajax({
@@ -723,7 +723,7 @@ async function personalRequest(
       parameters: parametros,
     },
     success: function (products) {
-      //////console.log(products)
+      ////////console.log(products)
       if (continua) {
       } else {
         $(".listaDeProdutos").html("");
@@ -752,7 +752,7 @@ async function personalRequest(
       } else {
         $(".plusProducts").hide();
       }
-      ////////console.log(products)
+      //////////console.log(products)
       localStorage.PRODUCTS_SEARCH = JSON.stringify(products);
       if (PRODUCTS.length == 0) {
         $(".listaDeProdutos").html("");
@@ -886,16 +886,16 @@ async function personalRequest(
         );
       }
 
-      //console.log("mudando o lastID 3", Number(products[products.length - 1]?.id))
+      ////console.log("mudando o lastID 3", Number(products[products.length - 1]?.id))
       localStorage.LAST_ID = Number(products[products.length - 1]?.id);
 
       $(".product").click(function (e) {
         var senderElement = e.target;
-        //////////console.log("senderElement")
-        //////////console.log(senderElement)
-        //////////console.log(senderElement.className)
+        ////////////console.log("senderElement")
+        ////////////console.log(senderElement)
+        ////////////console.log(senderElement.className)
         if (senderElement.className == "switch switch--shadow") {
-          //////////console.log("vou tentar")
+          ////////////console.log("vou tentar")
           if (senderElement.className == "switch switch--shadow")
             acaoCheckbox($("#" + senderElement.id));
         } else {
@@ -908,7 +908,7 @@ async function personalRequest(
             var affiliate_id = $(this).attr("affiliate_id");
             var product_code = $(this).attr("product_code");
             var product_ean = $(this).attr("product_ean");
-            //////////console.log(affiliate_id, product_code)
+            ////////////console.log(affiliate_id, product_code)
 
             $.ajax({
               type: "POST",
@@ -921,7 +921,7 @@ async function personalRequest(
                 product_code: product_code,
               },
               success: function (data) {
-                //////////console.log("productPictures")
+                ////////////console.log("productPictures")
                 var listaImagens = [];
                 var firstImage = "";
                 for (const k in PRODUCTS) {
@@ -971,8 +971,8 @@ async function personalRequest(
                   }
                 }
 
-                //////console.log("listaImagens")
-                //////console.log(listaImagens)
+                ////////console.log("listaImagens")
+                ////////console.log(listaImagens)
 
                 modalProduct(
                   PRODUCTS,
@@ -996,7 +996,7 @@ async function personalRequest(
                 } else {
                   //alert("Algo saiu errado!<br>"+data.responseJSON.message)
                 }
-                //////////console.log("productPictures")
+                ////////////console.log("productPictures")
                 var listaImagens = [];
                 var firstImage = "";
                 for (const k in PRODUCTS) {
@@ -1010,7 +1010,7 @@ async function personalRequest(
                 listaImagens.push(firstImage);
                 //listaImagens.push("images/default/produto-sem-imagem.jpg")
                 for (const k in PRODUCTS_IMAGES) {
-                  //////////console.log(Number(product_ean)+" == "+Number(PRODUCTS_IMAGES[k].EAN))
+                  ////////////console.log(Number(product_ean)+" == "+Number(PRODUCTS_IMAGES[k].EAN))
                   if (Number(product_ean) == Number(PRODUCTS_IMAGES[k].EAN)) {
                     if (PRODUCTS_IMAGES[k].DATA.thumbnail != firstImage) {
                       listaImagens.push(PRODUCTS_IMAGES[k].DATA.thumbnail);
@@ -1018,7 +1018,7 @@ async function personalRequest(
                   }
                 }
 
-                //////////console.log(listaImagens)
+                ////////////console.log(listaImagens)
                 modalProduct(
                   PRODUCTS,
                   product_code,
@@ -1041,7 +1041,7 @@ async function personalRequest(
       $(".checka").change(function (e) {
         e.stopPropagation();
         e.preventDefault();
-        //////////console.log($(this)[0].checked);
+        ////////////console.log($(this)[0].checked);
         if ($(this)[0].checked) {
           $(this).parent().parent().parent().addClass("selecionado");
         } else {
@@ -1054,7 +1054,7 @@ async function personalRequest(
     error: function (data2) {
       $("#carregaMaisProdutos").html("Erro :(");
       $("#carregaMaisProdutos").css("border", "2px solid red");
-      //////console.log(data2);
+      ////////console.log(data2);
       if (data2.responseJSON.message.indexOf("token") > -1) {
         //alert("Necessário fazer login!<br>"+data2.responseJSON.message)
         setTimeout(() => {
@@ -1123,7 +1123,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
       ];
     }
   } catch (err) {
-    //////////console.log(err)
+    ////////////console.log(err)
     product_data = [
       {
         id: null,
@@ -1141,8 +1141,8 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
       },
     ];
   }
-  //////////console.log("ta aaii")
-  //console.log("ta aaii",product_data[0]);
+  ////////////console.log("ta aaii")
+  ////console.log("ta aaii",product_data[0]);
 
   var DESCONTOS_FULL = {
     produtos: [],
@@ -1188,22 +1188,22 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
       DESCONTOS_FULL["porcentagem"].active = false;
     }
   } catch (e) {
-    // console.log('não foi o parse',e)
+    // //console.log('não foi o parse',e)
   }
 
   try {
     if (!DESCONTOS_FULL["levePague"]["valorDescontado"]) {
-      //   console.log("não existo", DESCONTOS_FULL['levePague']['valorDescontado'])
+      //   //console.log("não existo", DESCONTOS_FULL['levePague']['valorDescontado'])
       DESCONTOS_FULL["levePague"] = {
         valorDescontado: "leve 0 pague 0",
         precoFinal: product_data[0].product_valor,
       };
-      // console.log("agora existo", DESCONTOS_FULL['levePague']['valorDescontado'])
+      // //console.log("agora existo", DESCONTOS_FULL['levePague']['valorDescontado'])
     } else {
-      // console.log("existo de boa", DESCONTOS_FULL['levePague']['valorDescontado'])
+      // //console.log("existo de boa", DESCONTOS_FULL['levePague']['valorDescontado'])
     }
   } catch (e) {
-    // console.log("deu errado o ajuste, seguindo normal")
+    // //console.log("deu errado o ajuste, seguindo normal")
     DESCONTOS_FULL = {
       produtos: [],
       subtracaoProduto: {
@@ -1235,10 +1235,10 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
     localStorage.listaDescontos = JSON.stringify(DESCONTOS_FULL);
   }
 
-  //////////console.log(product_data[0].product_affiliate_id);
+  ////////////console.log(product_data[0].product_affiliate_id);
 
-  //////////console.log("product_data")
-  //////////console.log(product_data)
+  ////////////console.log("product_data")
+  ////////////console.log(product_data)
 
   var compraPorPeso = "",
     mostrarPeso = "",
@@ -1330,7 +1330,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
   // } else {
   //     listandoDescontos = JSON.parse(product_data[0].product_site_discount_value)
   // }
-  // console.log('DESCONTOS_FULL',DESCONTOS_FULL)
+  // //console.log('DESCONTOS_FULL',DESCONTOS_FULL)
 
   var informacaoNutritiva = [
     { quantidade: 0, titulo: "" },
@@ -1343,7 +1343,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
     product_data[0].product_site_nutrition == ""
   ) {
   } else {
-    //////////console.log("informacaoNutritiva")
+    ////////////console.log("informacaoNutritiva")
     informacaoNutritiva = JSON.parse(product_data[0].product_site_nutrition);
   }
 
@@ -1425,8 +1425,8 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
   try {
     var informacaoNutricional = JSON.parse(product_data[0].product_site_info);
   } catch (err) {
-    //////////console.log("deu erroooo")
-    //////////console.log(err)
+    ////////////console.log("deu erroooo")
+    ////////////console.log(err)
   }
 
   function confere(valor, tipo) {
@@ -2315,7 +2315,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
     "</div>" +
     "</div>";
 
-  ////////console.log(htmlModal)
+  //////////console.log(htmlModal)
 
   if (!OM) {
     OM = true;
@@ -2324,7 +2324,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
       message: htmlModal,
       onShow: function () {
         localStorage.relacionados = product_data[0].product_site_related_code;
-        //////////console.log("This was logged in the callback!");
+        ////////////console.log("This was logged in the callback!");
         var listaNutricionalIndex = 3;
         var listaRelacionadas = [];
         try {
@@ -2342,7 +2342,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           },
           type: "POST",
           success: function (data) {
-            ////////console.log(data)
+            //////////console.log(data)
             localStorage.PRODUCTS_RELATEDS = JSON.stringify(data);
             $(".listaDeCartoesSelecionados").html(
               cardSelecionado2(
@@ -2351,7 +2351,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
             );
           },
           error: function (data) {
-            ////////console.log(data)
+            //////////console.log(data)
           },
         });
 
@@ -2440,12 +2440,12 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           $(".tabModal").removeClass("tabModalActive");
           $(this).addClass("tabModalActive");
           $(".tabContent").hide();
-          ////////console.log("#" + $(this).attr("content"));
+          //////////console.log("#" + $(this).attr("content"));
           $("#" + $(this).attr("content")).fadeIn();
 
-          ////////console.log($(this).attr("content").trim())
+          //////////console.log($(this).attr("content").trim())
           if ($(this).attr("content").trim() == "visualizar") {
-            ////////console.log("vou mudar");
+            //////////console.log("vou mudar");
             var html =
               '<div class="relacionadosProdutos"><div style="max-width: 90%" class="container">' +
               '<div clas="row">' +
@@ -2467,7 +2467,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
 
         $(".fa-times-circle").click(function (event) {
           event.preventDefault();
-          //////////console.log("ronan34 "+$(this).parent().attr("remove"))
+          ////////////console.log("ronan34 "+$(this).parent().attr("remove"))
           if ($(this).parent().attr("remove") == "relacionados") {
           } else {
             $(this).parent().parent().remove();
@@ -2494,7 +2494,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           }
         });
         $(".subCheck").click(function () {
-          //////////console.log("Cliquei")
+          ////////////console.log("Cliquei")
           if ($(this).attr("dropou") == "1") {
             $(this).parent().find(".listInner").hide();
             $(this).attr("dropou", "0");
@@ -2540,7 +2540,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           //data.append('fileimagem', $('#fileimagem')[0].files[0]);
           var contador = 1;
           data.append("fileimagem", elemento[0].files[0]);
-          //////////console.log("partindo..")
+          ////////////console.log("partindo..")
           var urlNew =
             "https://api-smartcomerci.com.br:9090/images/" +
             affiliate_id +
@@ -2549,7 +2549,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
             "/" +
             elemento[0].files[0].name;
 
-          //////console.log(elemento[0].files[0])
+          ////////console.log(elemento[0].files[0])
 
           $.ajax({
             url: "" + mainHost + "/uploadLogo",
@@ -2564,7 +2564,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
             contentType: false,
             type: "POST",
             success: function (data) {
-              //////////console.log(data)
+              ////////////console.log(data)
               var ur =
                 '<li draggable="true" picture_name="' +
                 elemento[0].files[0] +
@@ -2597,7 +2597,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
               $(".imagensProduto").prepend(ur);
               imagenPadrao(product_code, product_code, urlNew);
 
-              //////console.log(imageButtons(affiliate_id, product_code,ur))
+              ////////console.log(imageButtons(affiliate_id, product_code,ur))
               var alerta = bootbox.confirm({
                 message:
                   'Imagen salva com sucesso! <img   style="width: 60px; " src="' +
@@ -2619,7 +2619,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
               atualizaListaProdutos();
             },
             error: function (data) {
-              //////////console.log(data)
+              ////////////console.log(data)
               if (data.responseJSON.message.indexOf("token") > -1) {
                 //alert("Necessário fazer login!<br>"+data.responseJSON.message)
                 setTimeout(() => {
@@ -2652,13 +2652,13 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
         /*
                 $(".thumbProduct").draggable({
                     start: function() {
-                        //////////console.log("um")
+                        ////////////console.log("um")
                     },
                     drag: function() {
-                        //////////console.log("dois")
+                        ////////////console.log("dois")
                     },
                     stop: function() {
-                        //////////console.log("tres")
+                        ////////////console.log("tres")
                     }
                   });
                   */
@@ -2679,7 +2679,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
 
         // When the draggable p element enters the droptarget, change the DIVS's border style
         $(".thumbProduct").on("dragenter", function (event) {
-          //////console.log(event)
+          ////////console.log(event)
           if (event.target.className.indexOf("droptarget") > -1) {
             //  event.target.style.border = "3px dotted #f6b504";
           }
@@ -2704,13 +2704,13 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
                     Append the dragged element into the drop element
                 */
         $(".thumbProduct").on("drop", function (event) {
-          //////console.log("dropei", event)
+          ////////console.log("dropei", event)
           event.preventDefault();
 
           localStorage.url2 = $(this).find("img").attr("src");
           if (event.target.className.indexOf("droptarget") > -1) {
             var doador = "#" + localStorage.idDoador;
-            //////////console.log(doador)
+            ////////////console.log(doador)
             $(this).find("img").attr("src", localStorage.url1);
             $(this).find("img").css("border", "none");
             $(doador).attr("src", localStorage.url2);
@@ -2721,7 +2721,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
               localStorage.url1
             );
           } else {
-            //////console.log("is not droptarget")
+            ////////console.log("is not droptarget")
           }
         });
 
@@ -2763,7 +2763,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
         $(".ativaProduto2").click(function (e) {
           var senderElement = e.target;
           if (senderElement.className == "switch switch--shadow") {
-            //////////console.log("vou tentar")
+            ////////////console.log("vou tentar")
             if (senderElement.className == "switch switch--shadow")
               acaoCheckbox($("#" + senderElement.id));
           }
@@ -2776,7 +2776,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           });
           $(this).find("input")[0].checked = !$(this).find("input")[0].checked;
           if (senderElement.className == "switch switch--shadow") {
-            //////////console.log("vou tentar")
+            ////////////console.log("vou tentar")
             if (senderElement.className == "switch switch--shadow")
               acaoCheckbox($("#" + senderElement.id));
           }
@@ -2792,15 +2792,15 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           }
           var senderElement = e.target;
           if (senderElement.className == "switch switch--shadow") {
-            //////////console.log("vou tentar")
+            ////////////console.log("vou tentar")
             if (senderElement.className == "switch switch--shadow")
               acaoCheckbox($("#" + senderElement.id));
           }
         });
       },
       callback: function (result) {
-        //////////console.log("This was logged in the callback!");
-        //console.log("the callback result", result)
+        ////////////console.log("This was logged in the callback!");
+        ////console.log("the callback result", result)
 
         OM = false;
 
@@ -2824,8 +2824,8 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
         var txtDescontos = localStorage.textoDescontos;
 
         var detalhe = getProductCaract(product_data[0].product_code);
-        //  console.log('detalhe para salvar')
-        //  console.log(detalhe)
+        //  //console.log('detalhe para salvar')
+        //  //console.log(detalhe)
 
         $.ajax({
           type: "POST",
@@ -2917,11 +2917,11 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
             ],
           },
           success: function (data) {
-            //  console.log(data)
+            //  //console.log(data)
             atualizaListaProdutos();
           },
           error: function (data) {
-            //  console.log(data)
+            //  //console.log(data)
             if (data.responseJSON.message.indexOf("token") > -1) {
               //alert("Necessário fazer login!<br>"+data.responseJSON.message)
               setTimeout(() => {
@@ -2955,8 +2955,8 @@ function modalNewProduct() {
       affiliate_id: AFFILIATE_ID,
     },
     success: async function (data) {
-      //////console.log(data);
-      //////console.log("productSearch", 0, 25, data.product_code_new, localStorage.AFFILIATE_ID,  data.product_code_new)
+      ////////console.log(data);
+      ////////console.log("productSearch", 0, 25, data.product_code_new, localStorage.AFFILIATE_ID,  data.product_code_new)
       $(".listaDeProdutos").html("");
       request(
         "productSearch",
@@ -2972,7 +2972,7 @@ function modalNewProduct() {
       }, 1000);
     },
     error: function (data) {
-      //////console.log(data)
+      ////////console.log(data)
     },
     complete: function () {
       // ao final da requisição...
@@ -2988,7 +2988,7 @@ $("#carregaMaisProdutos").click(function () {
     localStorage.LAST_ID = 50;
   }
   var last_request = JSON.parse(localStorage.LAST_REQUEST);
-  //console.log("url=> getAllProducts", last_request.LAST_ID, 25, 0, 0, 0)
+  ////console.log("url=> getAllProducts", last_request.LAST_ID, 25, 0, 0, 0)
   carregaMais("getAllProducts", localStorage.LAST_ID, 25, 0, 0, 0);
 });
 
@@ -3002,7 +3002,7 @@ function getBadges(string) {
 }
 
 function getProductInfo(PRODUCTS, product_code, affiliate_id) {
-  //////////console.log(PRODUCTS, product_code, Number(affiliate_id));
+  ////////////console.log(PRODUCTS, product_code, Number(affiliate_id));
   var result = [];
   for (const k in PRODUCTS) {
     if (
@@ -3034,7 +3034,7 @@ $("#checkFull").change(function () {
 function ajustaDigitos(numero, digitos) {
   var prefix = "",
     result = numero;
-  //////////console.log(numero.toString().length);
+  ////////////console.log(numero.toString().length);
   if (numero.toString().length != digitos) {
     for (let a = 0; a < digitos - numero.toString().length; a++) {
       prefix += "0";
@@ -3102,7 +3102,7 @@ function calculaDesconto(tipo, elemento, precoProduto, origem) {
     };
   }
   if (tipo == "porcentagem") {
-    //  console.log('calculando aqui ... ')
+    //  //console.log('calculando aqui ... ')
     var res = Number(
       (
         precoProduto -
@@ -3257,17 +3257,17 @@ function calculaDesconto(tipo, elemento, precoProduto, origem) {
       precoFinal: res,
     };
   }
-  //console.log("calculei..." + tipo);
-  // console.log(precoProduto);
-  // console.log(listaDescontos)
+  ////console.log("calculei..." + tipo);
+  // //console.log(precoProduto);
+  // //console.log(listaDescontos)
   localStorage.listaDescontos = JSON.stringify(listaDescontos);
 }
 
 var contadorIds = 0;
 
 function insereCategoria(elemento, outroElemento, texto) {
-  //////console.log(elemento,outroElemento, texto)
-  //////console.log(texto, "mandei")
+  ////////console.log(elemento,outroElemento, texto)
+  ////////console.log(texto, "mandei")
   outroElemento.attr("id", "desmarcaInput" + contadorIds);
   var newID = "desmarcaInput" + contadorIds;
   if (texto.split(",").length == 0) {
@@ -3301,7 +3301,7 @@ function insereCategoria(elemento, outroElemento, texto) {
 }
 
 function removerei(elemento, desmarcar) {
-  //////console.log(desmarcar,"rona3")
+  ////////console.log(desmarcar,"rona3")
   if (elemento.parent().attr("removeStorage") == "relacionados") {
     localStorage.relacionados = localStorage.relacionados.replace(
       /$(this).parent().text()/g,
@@ -3313,21 +3313,21 @@ function removerei(elemento, desmarcar) {
   verFeedback();
 }
 function meDesmarca(texto) {
-  //////console.log(texto,'vou demsmarcar')
+  ////////console.log(texto,'vou demsmarcar')
   $(".subSmart").each(function () {
-    //////console.log(texto.trim(),$(this).text().trim())
+    ////////console.log(texto.trim(),$(this).text().trim())
     if ($(this).text().trim() == texto.trim()) {
       $(this).find("input")[0].checked = !$(this).find("input")[0].checked;
     }
   });
 }
 function retornaCategorias(texto) {
-  //////console.log('texto')
-  //////console.log(texto)
+  ////////console.log('texto')
+  ////////console.log(texto)
   var listaEnviada = [];
   function confere(texto) {
     for (const u in listaEnviada) {
-      //////console.log(listaEnviada[u].replace(/,/g,''),texto.replace(/,/g,''))
+      ////////console.log(listaEnviada[u].replace(/,/g,''),texto.replace(/,/g,''))
       if (listaEnviada[u].replace(/,/g, "") == texto.replace(/,/g, "")) {
         return false;
       }
@@ -3367,8 +3367,8 @@ function retornaCategorias(texto) {
             '\')"  class="iconClose"><i class="far fa-times-circle"></i></label>' +
             "</div>";
 
-          //////console.log(confere(lista[k]))
-          //////console.log(listaEnviada)
+          ////////console.log(confere(lista[k]))
+          ////////console.log(listaEnviada)
           if (confere(lista[k])) {
             listaEnviada.push(lista[k]);
             result += html;
@@ -3392,8 +3392,8 @@ function retornaCategorias(texto) {
 
 function getProductData(EAN, elementParent, pai) {
   //Example of cosmos bluesoft cunsult
-  //////////console.log("$(elementParent)")
-  //////////console.log(elementParent)
+  ////////////console.log("$(elementParent)")
+  ////////////console.log(elementParent)
 
   pai.addClass("animated-background");
   if (EAN != 0 && EAN != undefined && EAN != "" && EAN != null) {
@@ -3409,9 +3409,9 @@ function getProductData(EAN, elementParent, pai) {
           method: "GET",
         },
         success: function (picture) {
-          ////////console.log("myìctures")
-          // //////console.log(picture)
-          //////////console.log(picture.message)
+          //////////console.log("myìctures")
+          // ////////console.log(picture)
+          ////////////console.log(picture.message)
           if (picture.thumbnail != undefined) {
             var novo = true;
             for (const k in PRODUCTS_IMAGES) {
@@ -3428,11 +3428,11 @@ function getProductData(EAN, elementParent, pai) {
           }
 
           try {
-            //////////console.log(picture.message)
+            ////////////console.log(picture.message)
             pai.removeClass("animated-background");
-            //////////console.log("Recurso não existe")
+            ////////////console.log("Recurso não existe")
 
-            //////////console.log(picture)
+            ////////////console.log(picture)
             $.ajax({
               type: "POST",
               url: mainHost + "/productPictures",
@@ -3444,8 +3444,8 @@ function getProductData(EAN, elementParent, pai) {
                 product_code: $(elementParent).attr("product_code"),
               },
               success: function (data2) {
-                //////console.log("eu achei")
-                //////console.log(data2)
+                ////////console.log("eu achei")
+                ////////console.log(data2)
                 $(elementParent)
                   .find(".firstImage")
                   .attr(
@@ -3460,7 +3460,7 @@ function getProductData(EAN, elementParent, pai) {
                   );
               },
               error: function (data2) {
-                //////console.log(data2)
+                ////////console.log(data2)
                 try {
                   if (data.responseJSON.message.indexOf("token") > -1) {
                     //alert("Necessário fazer login!<br>"+data.responseJSON.message)
@@ -3473,8 +3473,8 @@ function getProductData(EAN, elementParent, pai) {
                     }, 2000);
                   }
                 } catch (ee) {
-                  // //////console.log("erro ee")
-                  //////////console.log(ee)
+                  // ////////console.log("erro ee")
+                  ////////////console.log(ee)
                 }
               },
               complete: function () {
@@ -3498,7 +3498,7 @@ function getProductData(EAN, elementParent, pai) {
         },
         error: function (data) {
           pai.removeClass("animated-background");
-          //////////console.log("cai na exceção")
+          ////////////console.log("cai na exceção")
           if (data.responseJSON.message.indexOf("token") > -1) {
             //alert("Necessário fazer login!<br>"+data.responseJSON.message)
             setTimeout(() => {
@@ -3509,7 +3509,7 @@ function getProductData(EAN, elementParent, pai) {
           } else {
             //alert("Algo saiu errado!<br>"+data.responseJSON.message)
           }
-          //////////console.log(data)
+          ////////////console.log(data)
           $.ajax({
             type: "POST",
             url: mainHost + "/productPictures",
@@ -3521,8 +3521,8 @@ function getProductData(EAN, elementParent, pai) {
               product_code: $(elementParent).attr("product_code"),
             },
             success: function (data) {
-              //////////console.log("eu achei")
-              //////////console.log(data)
+              ////////////console.log("eu achei")
+              ////////////console.log(data)
               $(elementParent)
                 .find(".firstImage")
                 .attr(
@@ -3537,7 +3537,7 @@ function getProductData(EAN, elementParent, pai) {
                 );
             },
             error: function (data) {
-              //////////console.log(data)
+              ////////////console.log(data)
               if (data.responseJSON.message.indexOf("token") > -1) {
                 //alert("Necessário fazer login!<br>"+data.responseJSON.message)
                 setTimeout(() => {
@@ -3561,10 +3561,10 @@ function getProductData(EAN, elementParent, pai) {
         },
       });
     } catch (eru) {
-      //////////console.log(eru)
+      ////////////console.log(eru)
     }
   } else {
-    //////////console.log("This product EAN is invalid = '"+EAN)
+    ////////////console.log("This product EAN is invalid = '"+EAN)
   }
 }
 
@@ -3578,7 +3578,7 @@ function getCatIconFromStorage(catName) {
 }
 
 function getCategoriesAndSub(MY_CATEGORIES, escolhidas) {
-  console.log(MY_CATEGORIES, escolhidas);
+  //console.log(MY_CATEGORIES, escolhidas);
   var html3 = "",
     nova = '<li class="novaLI"></li>';
 
@@ -3620,7 +3620,7 @@ function getCategoriesAndSub(MY_CATEGORIES, escolhidas) {
             "</label></div></li> ";
         }
 
-        ////////////console.log(content)
+        //////////////console.log(content)
       }
     }
     content += "</ul>";
@@ -3670,7 +3670,7 @@ function getCategoriesAndSubToFilter(MY_CATEGORIES) {
             "</label></div></li> ";
         }
 
-        ////////////console.log(content)
+        //////////////console.log(content)
       }
     }
     content += "</ul>";
@@ -3726,14 +3726,14 @@ function subTagInput(ele, elemento, texto, e) {
   var listaTags = "",
     listaMarcas = "";
 
-  //////console.log(elemento,texto)
+  ////////console.log(elemento,texto)
   var html =
     '<div  class="input-group categoriaLabel  "><label  >' +
     texto +
     '</label><label action="' +
     elemento +
     '" onclick="removeTAGMARCA($(this))"  style="max-width: 20%"  class="iconClose"><i class="far fa-times-circle"></i></label></div>';
-  //////console.log("vou mostrar " ,ele[0].checked )
+  ////////console.log("vou mostrar " ,ele[0].checked )
   if (ele[0].checked == true) {
     insereCategoria($("." + elemento), ele, texto);
   } else {
@@ -3749,7 +3749,7 @@ function subTagInput(ele, elemento, texto, e) {
 }
 
 function getAffiliateName(AFFILIATES, ID) {
-  //////console.log(AFFILIATES, ID)
+  ////////console.log(AFFILIATES, ID)
   for (const k in AFFILIATES) {
     if (AFFILIATES[k].id == Number(ID)) {
       return AFFILIATES[k].affiliates_business_name;
@@ -3776,7 +3776,7 @@ function produtoURL(EAN, PRODUCTS_IMAGES) {
 
 function imageButtons(affiliate_id, product_code, URLS) {
   var html = "";
-  // console.log(URLS)
+  // //console.log(URLS)
 
   if (URLS.length > 0) {
     for (const k in URLS) {
@@ -3811,21 +3811,21 @@ function imageButtons(affiliate_id, product_code, URLS) {
           if (pictureName != null) {
             del = "";
           }
-          //  console.log('this url', urlCurrent)
+          //  //console.log('this url', urlCurrent)
           html += `<li  draggable="true" picture_name="${URLS[k]}"  class=" thumbProduct "><figure class="figurefx pushup"><img   id="${affiliate_id}_${product_code}_${k}" class="imageThumb notCrash firstImage droptarget" src="${urlCurrent}"><figcaption  onmouseleave="mLeave($(this))"  onmouseover="mOver($(this))" class="miuda figcaption2">${del}<br>${moveButton2}</figcaption></figure></li>`;
         }
       }
     }
   }
 
-  //////////console.log(URLS)
-  //////////console.log(html)
+  ////////////console.log(URLS)
+  ////////////console.log(html)
   return html;
 }
 
 function imageShows(affiliate_id, product_code, URLS) {
-  //////console.log("URLS")
-  //////console.log(URLS)
+  ////////console.log("URLS")
+  ////////console.log(URLS)
   var html = "";
   var urlCurrent = "";
 
@@ -3875,7 +3875,7 @@ function imageShows(affiliate_id, product_code, URLS) {
 
   html += `<div draggable="true" class="  thumbProduct mainImageThumb" ><figure class="figurefx pushup"><img   id="${affiliate_id}_${product_code}" class="firstImageShow mainImageShow notCrash droptarget" src="${urlCurrent}"  onError="this.onerror=null;this.src='https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg';" ><figcaption  onmouseleave="mLeave($(this))"  onmouseover="mOver($(this))" class="droptarget">${del} <br>${moveButton}<span class="textFig">Imagem Principal</span></figcaption></figure></div>`;
 
-  //////////console.log(html)
+  ////////////console.log(html)
   return html;
 }
 
@@ -3887,7 +3887,7 @@ function deletaImagen(
   picture_name,
   elemento
 ) {
-  //////console.log(origem)
+  ////////console.log(origem)
   var alerta = bootbox.confirm({
     message:
       '<br> <h4 >Deseja deletar a imagem abaixo?</h4l><hr><img   src="' +
@@ -3945,11 +3945,11 @@ function deletaImagen(
             product_code: product_code,
           },
           success: function (data) {
-            //////////console.log(data)
+            ////////////console.log(data)
             elemento.parent().parent().parent().remove();
           },
           error: function (data) {
-            //////////console.log(data)
+            ////////////console.log(data)
             if (data.responseJSON.message.indexOf("token") > -1) {
               //alert("Necessário fazer login!<br>"+data.responseJSON.message)
               setTimeout(() => {
@@ -3974,7 +3974,7 @@ function deletaImagen(
 function imagenPadrao(product_ean, product_code, URL) {
   var imageURL = URL;
 
-  //////////console.log(imageURL )
+  ////////////console.log(imageURL )
 
   $.ajax({
     type: "POST",
@@ -3988,11 +3988,11 @@ function imagenPadrao(product_ean, product_code, URL) {
       product_code: product_code,
     },
     success: function (data) {
-      //////////console.log(data)
+      ////////////console.log(data)
       $("#" + product_ean).attr("src", imageURL);
     },
     error: function (data) {
-      //////////console.log(data)
+      ////////////console.log(data)
       if (data.responseJSON.message.indexOf("token") > -1) {
         //alert("Necessário fazer login!<br>"+data.responseJSON.message)
         setTimeout(() => {
@@ -4059,11 +4059,11 @@ function getSimilarProducts(product_data, limite) {
             product_data[k].product_site_discount_value
           );
           var mostra = product_data[k].product_site_discount_value;
-          //////////console.log("descontos ", product_data[k].product_site_name)
-          //////////console.log(mostra)
+          ////////////console.log("descontos ", product_data[k].product_site_name)
+          ////////////console.log(mostra)
           if (descontos != null) {
             precoDescontado = descontos.subtracao.precoFinal;
-            //////////console.log(precoDescontado)
+            ////////////console.log(precoDescontado)
             if (precoDescontado != null && precoDescontado != "null") {
               valorComDesconto =
                 '<span class="preco2">R$ ' +
@@ -4073,8 +4073,8 @@ function getSimilarProducts(product_data, limite) {
                 "</span></span>";
             }
           }
-          //////////console.log("valorComDesconto")
-          //////////console.log(valorComDesconto)
+          ////////////console.log("valorComDesconto")
+          ////////////console.log(valorComDesconto)
         }
         if (
           product_data[k].product_average_weight_value != "" &&
@@ -4204,7 +4204,7 @@ function getCardsProducts(elementContainer, tag, texto, limite) {
       }
     },
     error: function (data) {
-      //////////console.log(data)
+      ////////////console.log(data)
     },
     complete: function () {
       // ao final da requisição...
@@ -4233,7 +4233,7 @@ $("#novoProduto").click(function () {
 
 function acaoCheckbox(elemento, e) {
   e = window.event;
-  //console.log("status do elemento",elemento, elemento[0].checked)
+  ////console.log("status do elemento",elemento, elemento[0].checked)
 
   var status = "inactive",
     add = true;
@@ -4245,10 +4245,10 @@ function acaoCheckbox(elemento, e) {
     elemento.attr("checked", "true");
     status = "active";
   }
-  //console.log(elemento.attr("checked"))
+  ////console.log(elemento.attr("checked"))
   var detalhe = getProductCaract(elemento.attr("product_code"));
-  //console.log("cliquei no checkbox")
-  //console.log(detalhe)
+  ////console.log("cliquei no checkbox")
+  ////console.log(detalhe)
 
   switch (elemento.attr("acao")) {
     case "nutricao":
@@ -4258,7 +4258,7 @@ function acaoCheckbox(elemento, e) {
     case "informacaoImportante":
       break;
     case "ativarProduto":
-      //console.log("tentando ativar " )
+      ////console.log("tentando ativar " )
       setProductCaract(elemento.attr("product_code"), "product_status", status);
       $.ajax({
         type: "POST",
@@ -4348,10 +4348,10 @@ function acaoCheckbox(elemento, e) {
           ],
         },
         success: function (data) {
-          //console.log(data)
+          ////console.log(data)
         },
         error: function (data) {
-          //console.log(data)
+          ////console.log(data)
           if (data.responseJSON.message.indexOf("token") > -1) {
             //alert("Necessário fazer login!<br>"+data.responseJSON.message)
             setTimeout(() => {
@@ -4369,7 +4369,7 @@ function acaoCheckbox(elemento, e) {
       });
       break;
     case "tipoDesconto":
-      //////////console.log("ai o add => "+add)
+      ////////////console.log("ai o add => "+add)
       var desconto = elemento.attr("tipoDesconto");
       var txtDescontos = desconto;
       localStorage.textoDescontos = desconto;
@@ -4459,10 +4459,10 @@ function acaoCheckbox(elemento, e) {
           ],
         },
         success: function (data) {
-          //////////console.log(data)
+          ////////////console.log(data)
         },
         error: function (data) {
-          //////////console.log(data)
+          ////////////console.log(data)
           if (data.responseJSON.message.indexOf("token") > -1) {
             //alert("Necessário fazer login!<br>"+data.responseJSON.message)
             setTimeout(() => {
@@ -4481,7 +4481,7 @@ function acaoCheckbox(elemento, e) {
       break;
 
     case "relacionados":
-      //////////console.log("ai o add => "+add)
+      ////////////console.log("ai o add => "+add)
       var tipoRelacionamento = elemento.attr("tipoRelacionamento");
 
       var relacionamentos = "";
@@ -4489,19 +4489,19 @@ function acaoCheckbox(elemento, e) {
         localStorage.relacionamentos = "," + tipoRelacionamento;
         relacionamentos = localStorage.relacionamentos;
       } else {
-        //////////console.log("passo 1 ")
+        ////////////console.log("passo 1 ")
         relacionamentos = localStorage.relacionamentos;
         if (relacionamentos.indexOf(tipoRelacionamento) > -1) {
-          //////////console.log("passo 2 ")
+          ////////////console.log("passo 2 ")
           if (add == false) {
-            //////////console.log("passo 3 ")
+            ////////////console.log("passo 3 ")
             relacionamentos = relacionamentos.replace(
               "," + tipoRelacionamento,
               ""
             );
           }
         } else {
-          //////////console.log("passo ERRO ")
+          ////////////console.log("passo ERRO ")
           relacionamentos += "," + tipoRelacionamento;
         }
       }
@@ -4594,10 +4594,10 @@ function acaoCheckbox(elemento, e) {
           ],
         },
         success: function (data) {
-          //////////console.log(data)
+          ////////////console.log(data)
         },
         error: function (data) {
-          //////////console.log(data)
+          ////////////console.log(data)
           if (data.responseJSON.message.indexOf("token") > -1) {
             //alert("Necessário fazer login!<br>"+data.responseJSON.message)
             setTimeout(() => {
@@ -4623,8 +4623,8 @@ function acaoCheckbox(elemento, e) {
 }
 
 function getProductCaract(product_code) {
-  //////console.log('product_code')
-  //////console.log(product_code)
+  ////////console.log('product_code')
+  ////////console.log(product_code)
   var MY_PRD = [],
     enviou = false,
     vouRetornar = [];
@@ -4679,7 +4679,7 @@ function getProductCaract(product_code) {
       }
     }
     if (vouRetornar.length == 0) {
-      //////console.log(localStorage.relacionados)
+      ////////console.log(localStorage.relacionados)
 
       let RELACIONADOS = [];
       try {
@@ -4702,8 +4702,8 @@ function getProductCaract(product_code) {
 }
 
 function setProductCaract(product_code, column, newValue) {
-  //////console.log('product_code')
-  //////console.log(product_code)
+  ////////console.log('product_code')
+  ////////console.log(product_code)
   var MY_PRD = [],
     enviou = false,
     vouRetornar = [];
@@ -4767,7 +4767,7 @@ function setProductCaract(product_code, column, newValue) {
       localStorage.resultSearch = JSON.stringify(MY_PRD);
     }
     if (vouRetornar.length == 0) {
-      //////console.log(localStorage.relacionados)
+      ////////console.log(localStorage.relacionados)
       MY_PRD = JSON.parse(localStorage.relacionados);
       for (const k in MY_PRD) {
         if (MY_PRD[k].product_code == product_code) {
@@ -4790,8 +4790,8 @@ function setProductCaract(product_code, column, newValue) {
 
 function getProductCaract_local(product_code) {
   var MY_PRD = [];
-  ////////console.log("product_code")
-  ////////console.log(product_code)
+  //////////console.log("product_code")
+  //////////console.log(product_code)
   MY_PRD = JSON.parse(localStorage.PRODUCTS_RELATEDS);
 
   for (const k in MY_PRD) {
@@ -4806,8 +4806,8 @@ function updateField(elemento) {
   var acao = elemento.attr("acao");
   var valor = elemento.val();
   var detalhe = getProductCaract(product_code);
-  //console.log('detalhe')
-  ///console.log(detalhe)
+  ////console.log('detalhe')
+  /////console.log(detalhe)
 
   let VALOR_FINAL_PRODUTO = Number(detalhe.product_site_value);
   if (acao == "product_average_weight_value") {
@@ -4922,7 +4922,7 @@ function updateField(elemento) {
     }
   }
   var txt = JSON.stringify(lista);
-  // console.log(lista)
+  // //console.log(lista)
   $.ajax({
     type: "POST",
     url: mainHost + "/updateById",
@@ -4936,14 +4936,14 @@ function updateField(elemento) {
       fields: JSON.parse(txt),
     },
     success: function (data) {
-      //  console.log(data)
+      //  //console.log(data)
       elemento.css("color", "#f6b504");
 
       atualizaListaProdutos();
     },
     error: function (data) {
       elemento.css("color", "red");
-      //////////console.log(data)
+      ////////////console.log(data)
       if (data.responseJSON.message.indexOf("token") > -1) {
         //alert("Necessário fazer login!<br>"+data.responseJSON.message)
         setTimeout(() => {
@@ -4966,7 +4966,7 @@ function addTags(product_code, element, elementParent) {
   try {
     TAGS = JSON.parse(localStorage.CURRENT_TAGS_PRODUCT);
   } catch (err) {
-    //////////console.log(err)
+    ////////////console.log(err)
   }
   if (TAGS.length > 0) {
     insereCategoria(elementParent, element, texto);
@@ -5036,14 +5036,14 @@ function cardSelecionado(product_data) {
 
 function cardSelecionado2(lista) {
   var html = "";
-  ////////console.log("lista")
-  ////////console.log(lista)
+  //////////console.log("lista")
+  //////////console.log(lista)
   if (lista != null) {
     if (lista.length > 0) {
       for (const k in lista) {
         var product_data = getProductCaract_local(lista[k]);
-        ////////console.log("product_data")
-        ////////console.log(product_data)
+        //////////console.log("product_data")
+        //////////console.log(product_data)
         if (product_data != undefined) {
           var product_name = product_data.product_site_name;
           if (
@@ -5114,13 +5114,13 @@ function cardSelecionadoPromo(product_data, onde) {
 
 function cardSelecionadoPromo2(lista, onde) {
   var html = "";
-  ////////console.log("lista 2")
-  ////////console.log(lista)
+  //////////console.log("lista 2")
+  //////////console.log(lista)
   if (lista.length > 0) {
     for (const k in lista) {
-      ////////console.log(lista[k])
+      //////////console.log(lista[k])
       var product_data = getProductCaract(lista[k]);
-      //////console.log(product_data)
+      ////////console.log(product_data)
       html +=
         '<div product_code="' +
         product_data.product_code +
@@ -5155,23 +5155,23 @@ function getFromRelations(lista) {
   }
   var html = "",
     product_data = [];
-  ////////console.log(lista2)
+  //////////console.log(lista2)
   for (const k in lista2) {
     var detalhes = getProductCaract_local(lista2[k]);
-    ////////console.log("detalhes")
-    ////////console.log(detalhes)
+    //////////console.log("detalhes")
+    //////////console.log(detalhes)
     product_data.push(detalhes);
   }
 
   html = getSimilarProducts(product_data, 5);
 
-  //////////console.log(product_data)
+  ////////////console.log(product_data)
 
   return html;
 }
 
 function imagen_URL(EAN, product_code, PRODUCTS_IMAGES) {
-  //////////console.log(EAN,PRODUCTS_IMAGES)
+  ////////////console.log(EAN,PRODUCTS_IMAGES)
   var img_UPLOAD = [],
     fullLista = [];
   if (
@@ -5183,7 +5183,7 @@ function imagen_URL(EAN, product_code, PRODUCTS_IMAGES) {
   }
   var URL_IMAGE = "";
   for (const k in PRODUCTS_IMAGES) {
-    //////////console.log(PRODUCTS_IMAGES[k].EAN,EAN )
+    ////////////console.log(PRODUCTS_IMAGES[k].EAN,EAN )
 
     if (PRODUCTS_IMAGES[k].EAN === EAN) {
       fullLista.push(PRODUCTS_IMAGES[k].DATA.thumbnail);
@@ -5191,12 +5191,12 @@ function imagen_URL(EAN, product_code, PRODUCTS_IMAGES) {
       break;
     }
   }
-  ////////console.log("URL_IMAGE MOSTRA", URL_IMAGE)
-  ////////console.log("img_UPLOAD MOSTRA", img_UPLOAD)
+  //////////console.log("URL_IMAGE MOSTRA", URL_IMAGE)
+  //////////console.log("img_UPLOAD MOSTRA", img_UPLOAD)
   for (const k in img_UPLOAD) {
     if (URL_IMAGE.indexOf(PRODUCTS_IMAGES[k]) > -1) {
     } else {
-      //////////console.log("vou ver --- ",img_UPLOAD[k])
+      ////////////console.log("vou ver --- ",img_UPLOAD[k])
       if (img_UPLOAD[k] != null) {
         if (img_UPLOAD[k].indexOf("http") > -1) {
         } else {
@@ -5221,7 +5221,7 @@ function imagen_URL(EAN, product_code, PRODUCTS_IMAGES) {
             }
           }
           fullLista.push(contexto);
-          //////////console.log("contexto ",contexto)
+          ////////////console.log("contexto ",contexto)
         }
       }
     }
@@ -5230,10 +5230,10 @@ function imagen_URL(EAN, product_code, PRODUCTS_IMAGES) {
   if (fullLista.length == 0) {
     fullLista.push("images/default/produto-sem-imagem.jpg");
   }
-  //////////console.log("img_UPLOAD")
-  //////////console.log(img_UPLOAD)
-  //////////console.log("fullLista")
-  //////////console.log(fullLista)
+  ////////////console.log("img_UPLOAD")
+  ////////////console.log(img_UPLOAD)
+  ////////////console.log("fullLista")
+  ////////////console.log(fullLista)
   return fullLista;
 }
 
@@ -5245,10 +5245,10 @@ function getIconsToShow(product_code) {
     product_data.product_code,
     PRODUCTS_IMAGES
   );
-  //////////console.log("imagens")
-  //////////console.log(imagens)
-  //////////console.log("EAN")
-  //////////console.log(product_data.product_ean)
+  ////////////console.log("imagens")
+  ////////////console.log(imagens)
+  ////////////console.log("EAN")
+  ////////////console.log(product_data.product_ean)
   for (const k in imagens) {
     var contexto = "";
     if (
@@ -5312,8 +5312,8 @@ function getImageFromEAN(EAN, product_code, element) {
           method: "GET",
         },
         success: function (picture) {
-          ////////console.log("picture")
-          ////////console.log(picture)
+          //////////console.log("picture")
+          //////////console.log(picture)
 
           if (picture.thumbnail != undefined) {
             var novo = true;
@@ -5369,8 +5369,8 @@ function getImageFromEAN(EAN, product_code, element) {
                   } else {
                   }
                 } catch (ee) {
-                  //////////console.log("erro ee")
-                  //////////console.log(ee)
+                  ////////////console.log("erro ee")
+                  ////////////console.log(ee)
                 }
               },
               complete: function () {
@@ -5444,10 +5444,10 @@ function getImageFromEAN(EAN, product_code, element) {
         },
       });
     } catch (eru) {
-      //////////console.log(eru)
+      ////////////console.log(eru)
     }
   } else {
-    ////////console.log("This product EAN is invalid = '" + EAN)
+    //////////console.log("This product EAN is invalid = '" + EAN)
   }
 }
 
@@ -5474,7 +5474,7 @@ function addProdutoRelacao(element, limite, dados) {
 
   if (dados != undefined) {
     var data = dados;
-    ////////console.log(data)
+    //////////console.log(data)
     localStorage.resultSearch = JSON.stringify(data);
     elemento.html("");
     for (const k in data) {
@@ -5534,7 +5534,7 @@ function addProdutoRelacao(element, limite, dados) {
         product_site_name: texto,
       },
       success: function (data) {
-        ////////console.log(data)
+        //////////console.log(data)
         localStorage.resultSearch = JSON.stringify(data);
         elemento.html("");
         for (const k in data) {
@@ -5575,7 +5575,7 @@ function addProdutoRelacao(element, limite, dados) {
         }
       },
       error: function (data) {
-        //////////console.log(data)
+        ////////////console.log(data)
       },
       complete: function () {
         // ao final da requisição...
@@ -5593,7 +5593,7 @@ function addProdutoRelacao2(element, limite, dados) {
 
   if (dados != undefined) {
     var data = dados;
-    ////////console.log(data)
+    //////////console.log(data)
     localStorage.resultSearch = JSON.stringify(data);
     elemento.html("");
     for (const k in data) {
@@ -5644,7 +5644,7 @@ function addProdutoRelacao2(element, limite, dados) {
         product_site_name: texto,
       },
       success: function (data) {
-        ////////console.log(data)
+        //////////console.log(data)
         localStorage.resultSearch = JSON.stringify(data);
 
         elemento.html("");
@@ -5686,7 +5686,7 @@ function addProdutoRelacao2(element, limite, dados) {
         }
       },
       error: function (data) {
-        //////////console.log(data)
+        ////////////console.log(data)
       },
       complete: function () {
         // ao final da requisição...
@@ -5737,21 +5737,21 @@ function salvaCard2(elementContainer, data, code) {
   }
 }
 function removeThis2(element) {
-  //////////console.log("rona3")
+  ////////////console.log("rona3")
 
   //localStorage.relacionados = localStorage.relacionados.replace(/element.parent().text()/g, "")
   if (element.attr("remove") == "relacionados") {
-    ////////console.log("sou igual")
+    //////////console.log("sou igual")
     var news = [],
       ele = $(".iconClose2");
 
     var esse = element.attr("product_code");
-    ////////console.log("ele")
+    //////////console.log("ele")
 
-    ////////console.log(ele)
+    //////////console.log(ele)
 
-    ////////console.log("esse")
-    ////////console.log(esse)
+    //////////console.log("esse")
+    //////////console.log(esse)
 
     element.text();
     element.parent().parent().parent().remove();
@@ -5761,7 +5761,7 @@ function removeThis2(element) {
         news.push(Number($(this).attr("product_code")));
       }
     });
-    ////////console.log(news)
+    //////////console.log(news)
     localStorage.relacionados = JSON.stringify(news);
   } else {
     element.parent().parent().remove();
@@ -5774,7 +5774,7 @@ function removeProdutoDesconto(element) {
   let DESCONTOS = JSON.parse(localStorage.listaDescontos);
 
   let PRDs = DESCONTOS["produtos"];
-  // console.log(esseID,DESCONTOS )
+  // //console.log(esseID,DESCONTOS )
   let thisPRDs = [];
   for (const k in PRDs) {
     if (Number(PRDs[k]) != Number(esseID)) {
@@ -5783,7 +5783,7 @@ function removeProdutoDesconto(element) {
   }
   DESCONTOS["produtos"] = thisPRDs;
 
-  // console.log(DESCONTOS )
+  // //console.log(DESCONTOS )
   localStorage.listaDescontos = JSON.stringify(DESCONTOS);
 }
 function removeTAGMARCA(element) {
@@ -5800,7 +5800,7 @@ function setNutrition(elemento) {
     });
   });
   localStorage.tabelaNutricional = JSON.stringify(listaN);
-  //////console.log(listaN)
+  ////////console.log(listaN)
 }
 function limpaCampos(element) {
   element.parent().parent().find("input").val("");
@@ -5863,7 +5863,7 @@ function listaDevolveN(lista) {
 function criaNovaTag(elemento, e, elementoContainer) {
   e = window.event;
   var code = e.which || e.keyCode;
-  //////console.log(e, elemento)
+  ////////console.log(e, elemento)
   if (code == 13) {
     var html =
       '<li class="list-item liVariacoes animate__animated ">' +
@@ -5898,11 +5898,11 @@ function setLocal(id) {
 
 function changeMarcar(elemento, eu) {
   var texto = elemento.parent().text().trim();
-  //////console.log(elemento,eu,"vai")
+  ////////console.log(elemento,eu,"vai")
   if (elemento[0].checked == true) {
     insereCategoria($("#listaEtiquetasTag"), elemento, texto);
     $(".iconClose").click(function () {
-      //////////console.log("rona1")
+      ////////////console.log("rona1")
       if ($(this).parent().attr("removeStorage") == "relacionados") {
         localStorage.relacionados = localStorage.relacionados.replace(
           /$(this).parent().text()/g,
@@ -5912,9 +5912,9 @@ function changeMarcar(elemento, eu) {
 
       $(this).parent().remove();
       /*
-            //////console.log('alvo',alvo)
+            ////////console.log('alvo',alvo)
             $("."+alvo).each(function(){
-                //////console.log($(this).text() ,texto)
+                ////////console.log($(this).text() ,texto)
                 if($(this).text() == texto){
                     $(this).parent().find("input")[0].checked = !$(this).parent().find("input")[0].checked
                 }
@@ -5925,7 +5925,7 @@ function changeMarcar(elemento, eu) {
   } else {
     var lista = $("#listaEtiquetasTag").find("label");
     lista.each(function () {
-      //////////console.log($(this).text().trim(),texto)
+      ////////////console.log($(this).text().trim(),texto)
       if ($(this).text().trim() == texto) {
         $(this).parent().remove();
       }
@@ -5976,8 +5976,8 @@ function prdSeleciona5(elemento) {
       precoFinal: Number(elemento.attr("product_value")),
     },
   };
-  //////console.log("tentando")
-  //////console.log(elemento)
+  ////////console.log("tentando")
+  ////////console.log(elemento)
   if (
     localStorage.listaDescontos == null ||
     localStorage.listaDescontos == "null" ||
@@ -5986,19 +5986,19 @@ function prdSeleciona5(elemento) {
     localStorage.listaDescontos = JSON.stringify(listaDescontosOld);
   }
   var dados = JSON.parse(localStorage.resultSearch);
-  //////console.log(dados)
+  ////////console.log(dados)
   var prd_code = elemento.attr("product_code");
   var codigo_produto = Number(elemento.attr("product_code"));
   var news = JSON.parse(localStorage.listaDescontos);
-  //////console.log('news')
-  //////console.log(news)
+  ////////console.log('news')
+  ////////console.log(news)
   if (news) news.produtos.push(Number(prd_code));
   localStorage.listaDescontos = JSON.stringify(news);
   salvaCard2($(".listaTAGS_CARDS"), dados, Number(prd_code));
 }
 
 async function buscaAvancadaFiltros(html) {
-  console.log(html);
+  //console.log(html);
   lastHtmlFilter = html.parent().html();
   var cat = $(".listaCategoriasFilter").find(".categoriaLabel");
   var marc = $(".minhasMarcas").find(".categoriaLabel");
@@ -6124,8 +6124,8 @@ function filter() {
     localStorage.TAGS_MARCAS != "undefined"
   ) {
     var lst = JSON.parse(localStorage.TAGS_MARCAS);
-    //////console.log('lst')
-    //////console.log(lst)
+    ////////console.log('lst')
+    ////////console.log(lst)
     var mrc = lst.marcas;
     var lis = lst.tags;
     for (const k in mrc) {
@@ -6342,7 +6342,7 @@ function filter() {
         }
       });
       $(".subCheck").click(function () {
-        ////////console.log("Cliquei")
+        //////////console.log("Cliquei")
         if ($(this).attr("dropou") == "1") {
           $(this).parent().find(".listInner").hide();
           $(this).attr("dropou", "0");
@@ -6362,18 +6362,18 @@ function filter() {
           listChecked.push(parametrosF[k].value);
         }
       }
-      console.log("listChecked", listChecked);
+      //console.log("listChecked", listChecked);
 
       $(".bootbox-body")
         .find("input")
         .each(function () {
           let text = $(this).attr("meEncontre");
-          console.log("texto ", text);
+          //console.log("texto ", text);
           if (text) {
             for (const k in listChecked) {
-              console.log(listChecked[k], text);
+              //console.log(listChecked[k], text);
               if (listChecked[k] === text) {
-                console.log($(this)[0]);
+                //console.log($(this)[0]);
                 $(this)[0].checked = true;
               }
             }
@@ -6399,9 +6399,9 @@ function mLeave(element) {
 }
 
 function alteraPeso(elemento) {
-  // console.log("tentando...")
-  // console.log(elemento[0].checked)
-  // console.log(elemento.attr("objetivo"))
+  // //console.log("tentando...")
+  // //console.log(elemento[0].checked)
+  // //console.log(elemento.attr("objetivo"))
 
   var INFO_PESO = { compraPorPeso: false, mostrarPeso: false },
     novoPeso = [];
@@ -6414,7 +6414,7 @@ function alteraPeso(elemento) {
       INFO_PESO = JSON.parse(localStorage.INFO_PESO);
 
       if (elemento.attr("objetivo") == "mostrarPeso") {
-        //////console.log("tentando outro")
+        ////////console.log("tentando outro")
         INFO_PESO.mostrarPeso = elemento[0].checked;
 
         if (elemento[0].checked === true) {
@@ -6429,46 +6429,46 @@ function alteraPeso(elemento) {
           $(".precoFinalProduto").css("display", "none");
         }
       } else {
-        //////console.log("tentando outro1")
+        ////////console.log("tentando outro1")
         INFO_PESO.compraPorPeso = elemento[0].checked;
       }
     } catch (errrou) {
-      //////console.log(errrou)
+      ////////console.log(errrou)
       INFO_PESO = null;
       localStorage.INFO_PESO = null;
     }
-    //  console.log('monstrar o infopeso')
-    //  console.log(INFO_PESO)
-    //////console.log('pareidemostrar')
-    //  console.log('if', JSON.stringify(INFO_PESO))
+    //  //console.log('monstrar o infopeso')
+    //  //console.log(INFO_PESO)
+    ////////console.log('pareidemostrar')
+    //  //console.log('if', JSON.stringify(INFO_PESO))
     novoPeso = INFO_PESO;
-    // console.log('if', JSON.stringify(novoPeso))
+    // //console.log('if', JSON.stringify(novoPeso))
     localStorage.INFO_PESO = JSON.stringify(novoPeso);
   } else {
     if (elemento.attr("objetivo") == "mostrarPeso") {
       INFO_PESO = { compraPorPeso: false, mostrarPeso: elemento[0].checked };
       if (elemento[0].checked === true) {
-        //   console.log("mostra")
+        //   //console.log("mostra")
         document.getElementsByClassName("areaMostraPeso")[0].style.display =
           "inline-flex";
         $(".areaMostraPeso").css("display", "inline-flex");
         $(".precoFinalProduto").css("display", "flex");
       } else {
-        //   console.log("esconde")
+        //   //console.log("esconde")
         document.getElementsByClassName("areaMostraPeso")[0].style.display =
           "none";
         $(".areaMostraPeso").css("display", "none");
         $(".precoFinalProduto").css("display", "none");
       }
     } else {
-      //////console.log("tentando outro2")
+      ////////console.log("tentando outro2")
       INFO_PESO = { compraPorPeso: elemento[0].checked, mostrarPeso: false };
     }
 
-    // console.log('else', JSON.stringify(INFO_PESO))
+    // //console.log('else', JSON.stringify(INFO_PESO))
   }
   novoPeso = INFO_PESO;
-  //////console.log('if',JSON.stringify(novoPeso))
+  ////////console.log('if',JSON.stringify(novoPeso))
   localStorage.INFO_PESO = JSON.stringify(novoPeso);
 }
 
@@ -6485,7 +6485,7 @@ function listaAcoes(elemento) {
       });
     }
   });
-  //////console.log(elemento.val())
+  ////////console.log(elemento.val())
   localStorage.listaSelecaoCheck = JSON.stringify(listaMarcada);
 
   if (listaMarcada.length > 0) {
@@ -6499,7 +6499,7 @@ function listaAcoes(elemento) {
       case "excluir":
         mostraAcoes("EXCLUIR", listaMarcada.length);
         break;
-      default: //////console.log("nada");
+      default: ////////console.log("nada");
         break;
     }
   }
@@ -6520,7 +6520,7 @@ function SIM() {
     try {
       lista = JSON.parse(localStorage.listaSelecaoCheck);
     } catch (erro) {
-      //////console.log(erro)
+      ////////console.log(erro)
     }
   }
 
@@ -6538,11 +6538,11 @@ function SIM() {
         lista: lista,
       },
       success: function (data) {
-        //////console.log(data);
+        ////////console.log(data);
         atualizaListaProdutos();
       },
       error: function (data) {
-        //////console.log(data)
+        ////////console.log(data)
         atualizaListaProdutos();
       },
       complete: function () {},
@@ -6599,7 +6599,7 @@ async function buscaPeloFiltro(
   order_type,
   column_order
 ) {
-  console.log("buscando pelo filtro", {
+  //console.log("buscando pelo filtro", {
     affiliate_id: localStorage.AFFILIATE_ID,
     limite: limite,
     parameters: parametros,
@@ -6627,7 +6627,7 @@ async function buscaPeloFiltro(
       is_product_image: true,
     },
     success: function (products) {
-      console.log("by filtro", products);
+      //console.log("by filtro", products);
       var lastRequest = {
         ADDRESS: "productAdvancedSearch",
         LAST_ID: Number(products[products.length - 1]?.id),
@@ -6636,7 +6636,7 @@ async function buscaPeloFiltro(
         PRODUCT_AFFILIATE_ID: localStorage.AFFILIATE_ID,
         PRODUCT_NAME: "",
       };
-      //console.log("last request pelo filtro")
+      ////console.log("last request pelo filtro")
       localStorage.LAST_REQUEST = JSON.stringify(lastRequest);
 
       if (products.length == 0) {
@@ -6662,7 +6662,7 @@ async function buscaPeloFiltro(
       } else {
         $(".plusProducts").hide();
       }
-      ////////console.log(products)
+      //////////console.log(products)
       localStorage.PRODUCTS_SEARCH = JSON.stringify(products);
       // if (PRODUCTS.length == 0) {
       //     $(".listaDeProdutos").html("")
@@ -6799,7 +6799,7 @@ async function buscaPeloFiltro(
           $("#element" + k + "_" + products[k].product_ean)
         );
       }
-      //console.log("mudando o lastID 1", Number(products[products.length - 1]?.id))
+      ////console.log("mudando o lastID 1", Number(products[products.length - 1]?.id))
       localStorage.LAST_ID = Number(products[products.length - 1]?.id);
 
       $(".row").children().css("opacity", "1");
@@ -6808,7 +6808,7 @@ async function buscaPeloFiltro(
       $(".checka").change(function (e) {
         e.stopPropagation();
         e.preventDefault();
-        //////////console.log($(this)[0].checked);
+        ////////////console.log($(this)[0].checked);
         if ($(this)[0].checked) {
           $(this).parent().parent().parent().addClass("selecionado");
         } else {
@@ -6824,7 +6824,7 @@ async function buscaPeloFiltro(
       let totalFiltros = 0,
         currFilter = null,
         listFiedlsSearch = "";
-      console.log("parametros", parametros);
+      //console.log("parametros", parametros);
 
       for (const k in parametros) {
         if (parametros[k].active == true) {
@@ -6846,7 +6846,7 @@ async function buscaPeloFiltro(
     error: function (data2) {
       $("#carregaMaisProdutos").html("Erro :(");
       $("#carregaMaisProdutos").css("border", "2px solid red");
-      //////console.log(data2);
+      ////////console.log(data2);
       if (data2.responseJSON.message.indexOf("token") > -1) {
         //alert("Necessário fazer login!<br>"+data2.responseJSON.message)
         setTimeout(() => {
@@ -6871,7 +6871,7 @@ function feedbackPeloFiltro(
   continuando,
   limite
 ) {
-  console.log("buscando pelo feedback");
+  //console.log("buscando pelo feedback");
   var aguarde =
     '<div class="spinner-border text-light" style="color: white" role="status"><span class="sr-only">Loading...</span>  </div>';
   elemento.html(aguarde);
@@ -6890,12 +6890,12 @@ function feedbackPeloFiltro(
       is_product_image: true,
     },
     success: function (products) {
-      console.log("fdbf", products);
+      //console.log("fdbf", products);
       var quantos = products[0].rows;
       if (quantos == undefined || quantos == "undefined") {
         quantos = 0;
       }
-      //////console.log(quantos)
+      ////////console.log(quantos)
       elemento.text("Mostrar " + quantos + " produtos");
     },
     error: function (data2) {},
@@ -6917,12 +6917,12 @@ function updateTagsMarcas() {
       affiliate_id: localStorage.AFFILIATE_ID,
     },
     success: function (data) {
-      //////console.log('tags e marcas')
-      //////console.log(data)
+      ////////console.log('tags e marcas')
+      ////////console.log(data)
       localStorage.TAGS_MARCAS = JSON.stringify(data);
     },
     error: function (data) {
-      //////console.log(data)
+      ////////console.log(data)
     },
     complete: function () {
       // ao final da requisição...
@@ -6931,7 +6931,7 @@ function updateTagsMarcas() {
 }
 
 function marcaPromocao(elemento) {
-  console.log(elemento.attr("tipo"), elemento);
+  //console.log(elemento.attr("tipo"), elemento);
   let DESCONTOS = JSON.parse(localStorage.listaDescontos);
 
   if (elemento.attr("tipo") == "subtracao") {
@@ -6946,13 +6946,13 @@ function marcaPromocao(elemento) {
     $(".marcaPsubtracao")[0].checked = !elemento[0].checked;
   }
   if (elemento.attr("tipo") == "subtracaoProduto") {
-    //////console.log(  $(".marcaPsubtracao")[0].checked, !elemento[0].checked)
+    ////////console.log(  $(".marcaPsubtracao")[0].checked, !elemento[0].checked)
     DESCONTOS["subtracaoProduto"].active = elemento[0].checked;
     DESCONTOS["porcentagemProduto"].active = !elemento[0].checked;
     $(".marcaPporcentagemProduto")[0].checked = !elemento[0].checked;
   }
   if (elemento.attr("tipo") == "porcentagemProduto") {
-    //////console.log(  $(".marcaPsubtracao")[0].checked, !elemento[0].checked)
+    ////////console.log(  $(".marcaPsubtracao")[0].checked, !elemento[0].checked)
     DESCONTOS["porcentagemProduto"].active = elemento[0].checked;
     DESCONTOS["subtracaoProduto"].active = !elemento[0].checked;
     $(".marcaPsubtracaoProduto")[0].checked = !elemento[0].checked;
@@ -7012,11 +7012,11 @@ function retornoAlteraMassa() {
 function showModalProductF(elemento, e) {
   e = window.event;
   var senderElement = e.target;
-  //////////console.log("senderElement")
-  //////////console.log(senderElement)
-  //////////console.log(senderElement.className)
+  ////////////console.log("senderElement")
+  ////////////console.log(senderElement)
+  ////////////console.log(senderElement.className)
   if (senderElement.className == "switch switch--shadow") {
-    //////////console.log("vou tentar")
+    ////////////console.log("vou tentar")
     if (senderElement.className == "switch switch--shadow")
       acaoCheckbox($("#" + senderElement.id));
   } else {
@@ -7029,7 +7029,7 @@ function showModalProductF(elemento, e) {
       var affiliate_id = elemento.attr("affiliate_id");
       var product_code = elemento.attr("product_code");
       var product_ean = elemento.attr("product_ean");
-      //////////console.log(affiliate_id, product_code)
+      ////////////console.log(affiliate_id, product_code)
 
       $.ajax({
         type: "POST",
@@ -7042,7 +7042,7 @@ function showModalProductF(elemento, e) {
           product_code: product_code,
         },
         success: function (data) {
-          //////////console.log("productPictures")
+          ////////////console.log("productPictures")
           var listaImagens = [];
           var firstImage = "";
           for (const k in PRODUCTS) {
@@ -7088,8 +7088,8 @@ function showModalProductF(elemento, e) {
             }
           }
 
-          //////console.log("listaImagens")
-          //////console.log(listaImagens)
+          ////////console.log("listaImagens")
+          ////////console.log(listaImagens)
 
           modalProduct(PRODUCTS, product_code, affiliate_id, listaImagens);
 
@@ -7106,7 +7106,7 @@ function showModalProductF(elemento, e) {
           } else {
             //alert("Algo saiu errado!<br>"+data.responseJSON.message)
           }
-          //////////console.log("productPictures")
+          ////////////console.log("productPictures")
           var listaImagens = [];
           var firstImage = "";
           for (const k in PRODUCTS) {
@@ -7120,7 +7120,7 @@ function showModalProductF(elemento, e) {
           listaImagens.push(firstImage);
           //listaImagens.push("images/default/produto-sem-imagem.jpg")
           for (const k in PRODUCTS_IMAGES) {
-            //////////console.log(Number(product_ean)+" == "+Number(PRODUCTS_IMAGES[k].EAN))
+            ////////////console.log(Number(product_ean)+" == "+Number(PRODUCTS_IMAGES[k].EAN))
             if (Number(product_ean) == Number(PRODUCTS_IMAGES[k].EAN)) {
               if (PRODUCTS_IMAGES[k].DATA.thumbnail != firstImage) {
                 listaImagens.push(PRODUCTS_IMAGES[k].DATA.thumbnail);
@@ -7128,7 +7128,7 @@ function showModalProductF(elemento, e) {
             }
           }
 
-          //////////console.log(listaImagens)
+          ////////////console.log(listaImagens)
           modalProduct(PRODUCTS, product_code, affiliate_id, listaImagens);
           localStorage.LISTA_IMAGENS = JSON.stringify(listaImagens);
         },
