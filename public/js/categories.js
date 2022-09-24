@@ -3633,8 +3633,9 @@ function removeBannerMain(URL, table, element) {
 }
 
 function ajustStrigfy(texto) {
-  for (let a = 0; a < 100; a++) {
+  for (let a = 0; a < 120; a++) {
     texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
+    texto = texto.replace('"[', "[").replace(']"', "]");
   }
   return texto;
 }
