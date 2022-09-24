@@ -459,13 +459,6 @@ function modalEntrega(descricaoMetodo) {
     '<div content="areaEntrega" class="col-md tabModal">' +
     '<label class="labelTab"  style="text-align:center">Área de entrega</label>' +
     "</div>" +
-    '<div class="col-md ">' +
-    "<div onclick=\"deletaModal('" +
-    nome_metodo +
-    '\')" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto" class="input-group">' +
-    '<label  style="cursor:pointer;margin: -7% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Excluir</label>' +
-    "</div>" +
-    "</div>" +
     '<div class="col-md">' +
     '<div onclick="cancelModal()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto" class="input-group">' +
     '<label  style="cursor:pointer;margin:-7%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
@@ -1067,23 +1060,11 @@ function modalEntregaRetirada(descricaoMetodo) {
     '<div content="regras" class="col-md tabModal">' +
     '<label class="labelTab"  style="text-align:center">Regras</label>' +
     "</div>" +
-
-    
-    '<div class="col-md ">' +
-    '<div fieldName="retirada_agendada_horarios" onclick="deletaModal2(\'' +
-    nome_metodo +
-    '\', $(this))" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto" class="input-group">' +
-    '<label  style="cursor:pointer;margin: -7% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Excluir</label>' +
-    "</div>" +
-    "</div>" +
-
-
     '<div class="col-md">' +
     '<div  onclick="cancelaModal2()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto" class="input-group">' +
     '<label  style="cursor:pointer;margin:-7%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
     "</div>" +
     "</div>" +
-
     '<div class="col-md ">' +
     '<div fieldName="retirada_agendada_horarios" onclick="salvaModal2(\'' +
     nome_metodo +
@@ -1091,7 +1072,6 @@ function modalEntregaRetirada(descricaoMetodo) {
     '<label  style="cursor:pointer;margin: -7% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
     "</div>" +
     "</div>" +
-
     "</div>" +
     '<hr class="baixoCabecalho" style="position: fixed;top: 115px !important;left: 0px !important;width: 100%;box-shadow: 2px 2px 2px silver;"></hr>' +
     //======================================================AREA DE ENTREGA============================================================================================================
@@ -1748,25 +1728,6 @@ function salvaModal(nome_metodo) {
   start();
   $(".close").click();
 }
-
-
-function deletaModal(nome_metodo) {
- 
-  });
-  ////console.log(dadosEntregaHorario)
-
-  updateDetailsDelivery(
-    nome_metodo,
-    "entrega_agendada_horarios",
-    dadosEntregaHorario
-  );
-
-  updateDelivery("delivery_methods", JSON.stringify(DELIVERY_DETAILS));
-  start();
-  $(".close").click();
-}
-
-
 function cancelModal() {
   $(".close").click();
 }
@@ -1797,35 +1758,6 @@ function salvaModal2(nome_metodo, elemento) {
   updateDefaultParameters(elemento);
   $(".close").click();
 }
-
-function deletaModal2(nome_metodo, elemento) {
-  var dadosEntregaHorario = [];
-  $(".cardHorarios").each(function () {
-    var dia = $(this).attr("dia");
-    var horariosDia = [];
-    var status = $(this).find(".ativadoS")[0].checked;
-    var horarios = $(this).find(".umHorario");
-    horarios.each(function () {
-      horariosDia.push({
-        limiteAtivo: $(this).find(".limiteS")[0].checked,
-        limiteValor: $(this).find(".valorLimeteS").val(),
-        inicio: $(this).find(".inicioS").val(),
-        fim: $(this).find(".fimS").val(),
-      });
-    });
-    dadosEntregaHorario.push({
-      dia: dia,
-      status: status,
-      horarios: horariosDia,
-    });
-  });
-  console.log(dadosEntregaHorario)
-  localStorage.DADOS_ENTREGA_FILIAL = JSON.stringify(dadosEntregaHorario);
-  updateDefaultParameters(elemento);
-  $(".close").click();
-}
-
-
 function cancelaModal2() {
   $(".close").click();
 }
