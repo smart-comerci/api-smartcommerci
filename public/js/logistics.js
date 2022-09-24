@@ -445,6 +445,8 @@ function modalEntrega(descricaoMetodo) {
   }
   var nome_metodo = descricaoMetodo;
   localStorage.METODO_EDICAO = nome_metodo;
+
+  let binIcon = `<svg  xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 21 21" style="margin: auto">&gt;<defs></defs><path class="a" d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z" transform="translate(4 3)"></path></svg>`;
   var html =
     '<div style="max-width:100% " class="container">' +
     '<div class="row" style="    box-shadow: 0px 3px 5px #edf2f6; max-width: 90%;    margin: -0.8% auto;  ">' +
@@ -456,6 +458,13 @@ function modalEntrega(descricaoMetodo) {
     "</div>" +
     '<div content="areaEntrega" class="col-md tabModal">' +
     '<label class="labelTab"  style="text-align:center">Área de entrega</label>' +
+    "</div>" +
+    '<div class="col-md ">' +
+    "<div onclick=\"deletaModal('" +
+    nome_metodo +
+    '\')" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto" class="input-group">' +
+    '<label  style="cursor:pointer;margin: -7% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Excluir</label>' +
+    "</div>" +
     "</div>" +
     '<div class="col-md">' +
     '<div onclick="cancelModal()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto" class="input-group">' +
@@ -1058,11 +1067,23 @@ function modalEntregaRetirada(descricaoMetodo) {
     '<div content="regras" class="col-md tabModal">' +
     '<label class="labelTab"  style="text-align:center">Regras</label>' +
     "</div>" +
+
+    
+    '<div class="col-md ">' +
+    '<div fieldName="retirada_agendada_horarios" onclick="deletaModal2(\'' +
+    nome_metodo +
+    '\', $(this))" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto" class="input-group">' +
+    '<label  style="cursor:pointer;margin: -7% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Excluir</label>' +
+    "</div>" +
+    "</div>" +
+
+
     '<div class="col-md">' +
     '<div  onclick="cancelaModal2()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto" class="input-group">' +
     '<label  style="cursor:pointer;margin:-7%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
     "</div>" +
     "</div>" +
+
     '<div class="col-md ">' +
     '<div fieldName="retirada_agendada_horarios" onclick="salvaModal2(\'' +
     nome_metodo +
@@ -1070,6 +1091,7 @@ function modalEntregaRetirada(descricaoMetodo) {
     '<label  style="cursor:pointer;margin: -7% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
     "</div>" +
     "</div>" +
+
     "</div>" +
     '<hr class="baixoCabecalho" style="position: fixed;top: 115px !important;left: 0px !important;width: 100%;box-shadow: 2px 2px 2px silver;"></hr>' +
     //======================================================AREA DE ENTREGA============================================================================================================
@@ -1726,6 +1748,25 @@ function salvaModal(nome_metodo) {
   start();
   $(".close").click();
 }
+
+
+function deletaModal(nome_metodo) {
+ 
+  });
+  ////console.log(dadosEntregaHorario)
+
+  updateDetailsDelivery(
+    nome_metodo,
+    "entrega_agendada_horarios",
+    dadosEntregaHorario
+  );
+
+  updateDelivery("delivery_methods", JSON.stringify(DELIVERY_DETAILS));
+  start();
+  $(".close").click();
+}
+
+
 function cancelModal() {
   $(".close").click();
 }
@@ -1756,6 +1797,35 @@ function salvaModal2(nome_metodo, elemento) {
   updateDefaultParameters(elemento);
   $(".close").click();
 }
+
+function deletaModal2(nome_metodo, elemento) {
+  var dadosEntregaHorario = [];
+  $(".cardHorarios").each(function () {
+    var dia = $(this).attr("dia");
+    var horariosDia = [];
+    var status = $(this).find(".ativadoS")[0].checked;
+    var horarios = $(this).find(".umHorario");
+    horarios.each(function () {
+      horariosDia.push({
+        limiteAtivo: $(this).find(".limiteS")[0].checked,
+        limiteValor: $(this).find(".valorLimeteS").val(),
+        inicio: $(this).find(".inicioS").val(),
+        fim: $(this).find(".fimS").val(),
+      });
+    });
+    dadosEntregaHorario.push({
+      dia: dia,
+      status: status,
+      horarios: horariosDia,
+    });
+  });
+  console.log(dadosEntregaHorario)
+  localStorage.DADOS_ENTREGA_FILIAL = JSON.stringify(dadosEntregaHorario);
+  updateDefaultParameters(elemento);
+  $(".close").click();
+}
+
+
 function cancelaModal2() {
   $(".close").click();
 }
