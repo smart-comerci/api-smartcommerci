@@ -20,8 +20,8 @@
 
 </head>
 
-<body>
-  <div class="page-header">
+<body class="backBlack-apply">
+  <div class="page-header ">
     <div id="menu" class="menu">
       <ul class="breadcrumbs">
         <li class="breadcrumbs-item">
@@ -162,7 +162,7 @@
     </div>
   </div>
 
-  <div class="page-content">
+  <div class="page-content ">
     <div class="card mb-4">
       <div class="card-body d-flex">
         <div class="flex-1 d-flex align-items-center justify-content-start">
@@ -197,8 +197,8 @@
 
     <label id="modalNaoSalvou" style="display: none;" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalSemSalvar"></label>
 
-    <div class="preview">
-      <div class="preview-header">
+    <div class="preview backBlack-apply">
+      <div class="preview-header backBlack-apply">
         <div class="preview-header_logo">
           <label class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
             <img src="">
@@ -237,16 +237,16 @@
           Conta
         </button>
       </div>
-      <div class="preview-home">
+      <div class="preview-home backBlack-apply">
         <div class="preview-home_aside">
           <div class="preview-home_aside-image">
             <img src="menu.png">
           </div>
 
           <div class="preview-home_aside-drop">
-            <label origin="aside" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
+            <label id="aside" origin="aside" class="dropzone" >
               <!-- <input type="file" /> -->
-              <img src="" />
+              <img  src="" />
               <span class="rounded-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                   <path
@@ -254,13 +254,21 @@
                 </svg>
               </span>
             </label>
+            <div class="dropzone-prev  justify-content-center">
+              <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+                <text class="dropzone-prev-text">Editar Banner</text>
+              </button>
+              <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button ">
+                <text class="dropzone-prev-text">Editar Link</text>
+              </button> 
+            </div>
           </div>
         </div>
 
         <div class="preview-home_content">
           <div class="content-banner">
             <div class="content-banner_small">
-              <label origin="header_mainBanner" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
+              <label class="dropzone" origin="header_mainBanner"  id="header_mainBanner">
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -270,6 +278,14 @@
                   </svg>
                 </span>
               </label>
+              <div class="dropzone-prev  justify-content-center">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button backGold">
+                  <text class="dropzone-prev-text">Editar Banner</text>
+                </button>
+                <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                  <text class="dropzone-prev-text">Editar Link</text>
+                </button>
+              </div>
             </div>
 
             <div class="content-banner_region">
@@ -291,9 +307,9 @@
               </div>
 
               <div class="drop">
-                <label origin="header_aside" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
+                <label id="header_aside" origin="header_aside" class="dropzone" >
                   <!-- <input type="file" /> -->
-                  <img src="" />
+                  <img style="max-width: 50px; max-height: 80px" src="" />
                   <span class="rounded-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                       <path
@@ -301,11 +317,19 @@
                     </svg>
                   </span>
                 </label>
+                <div class="dropzone-prev  justify-content-center">
+                  <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button backGold">
+                    <text class="dropzone-prev-text">Editar Banner</text>
+                  </button>
+                  <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                    <text class="dropzone-prev-text">Editar Link</text>
+                  </button>
+                </div>
               </div>
             </div>
 
             <div class="content-banner_mini">
-              <label origin="header_first" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
+              <label id="header_first" origin="header_first" class="dropzone" >
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -315,10 +339,18 @@
                   </svg>
                 </span>
               </label>
+                          <div class="dropzone-prev  justify-content-center">
+                            <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+                              <text class="dropzone-prev-text">Editar Banner</text>
+                            </button>
+                            <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                              <text class="dropzone-prev-text">Editar Link</text>
+                            </button>
+                          </div>
             </div>
 
             <div class="content-banner_mini">
-              <label origin="header_second" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
+              <label id="header_second" origin="header_second" class="dropzone"  >
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -328,10 +360,18 @@
                   </svg>
                 </span>
               </label>
+              <div class="dropzone-prev  justify-content-center">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+                  <text class="dropzone-prev-text">Editar Banner</text>
+                </button>
+                <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                  <text class="dropzone-prev-text">Editar Link</text>
+                </button>
+              </div>
             </div>
 
             <div class="content-banner_mini">
-              <label origin="header_third" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
+              <label id="header_third" origin="header_third" class="dropzone" >
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -341,10 +381,19 @@
                   </svg>
                 </span>
               </label>
+              <div class="dropzone-prev  justify-content-center">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+                  <text class="dropzone-prev-text">Editar Banner</text>
+                </button>
+                <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                  <text class="dropzone-prev-text">Editar Link</text>
+                </button>
+              </div>
             </div>
+         
 
             <div class="content-banner_mini">
-              <label origin="header_fourty" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
+              <label id="header_fourty" origin="header_fourty" class="dropzone">
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -354,6 +403,14 @@
                   </svg>
                 </span>
               </label>
+              <div class="dropzone-prev  justify-content-center">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+                  <text class="dropzone-prev-text">Editar Banner</text>
+                </button>
+                <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                  <text class="dropzone-prev-text">Editar Link</text>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -641,10 +698,16 @@
             </ul>
           </div>
 
-          <div class="content-dynamic">
+          <div  class="listaHOME">
+
+
+            
+
+          </div>
+          <div class="content-dynamic2">
             <div>
-              <label class="dropzone" data-bs-toggle="modal" data-bs-target="#modalNewsletter">
-                <!-- <input type="file" /> -->
+              <label class="dropzone">
+          
                 <img src="" />
                 <span class="rounded-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -653,12 +716,24 @@
                   </svg>
                 </span>
               </label>
+              <div class="dropzone-prev  justify-content-center">
+                <button data-bs-toggle="modal" data-bs-target="#modalNewsletter" class="dropzone-prev-button  backGold">
+                  <text class="dropzone-prev-text">Editar Conteúdo</text>
+                </button>
+                <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                  <text class="dropzone-prev-text">Editar Link</text>
+                </button>
+              </div>
             </div>
           </div>
+
+         
+
+          
         </div>
 
         <div class="preview-home_banner">
-          <label class="dropzone" data-bs-toggle="modal" data-bs-target="#modalWhatsAppText">
+          <label class="dropzone" >
             <!-- <input type="file" /> -->
             <img src="" />
             <span class="rounded-icon">
@@ -668,39 +743,21 @@
               </svg>
             </span>
           </label>
+          <div class="dropzone-prev  justify-content-center">
+            <button data-bs-toggle="modal" data-bs-target="#modalWhatsAppText" class="dropzone-prev-button  backGold">
+              <text class="dropzone-prev-text">Editar Conteúdo</text>
+            </button>
+            <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+              <text class="dropzone-prev-text">Editar Link</text>
+            </button>
+          </div>
         </div>
       </div>
 
-      <section class="bottom-content">
+      <section class="bottom-content backBlack-apply">
         <div class="bottom-grid container">
           <div class="bottom-grid-banner">
             <label class="dropzone">
-              <input type="file" />
-              <img src="" />
-              <span class="rounded-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                  <path
-                    d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
-                </svg>
-              </span>
-            </label>
-          </div>
-
-          <div class="bottom-grid-item-1">
-            <label origin="footer_logo" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
- 
-              <img src="" />
-              <span class="rounded-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                  <path
-                    d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
-                </svg>
-              </span>
-            </label>
-          </div>
-
-          <div class="bottom-grid-item-2">
-            <label class="dropzone" data-bs-toggle="modal" data-bs-target="#modalTextoFooter">
               <!-- <input type="file" /> -->
               <img src="" />
               <span class="rounded-icon">
@@ -710,11 +767,19 @@
                 </svg>
               </span>
             </label>
+            <div class="dropzone-prev  justify-content-center">
+              <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button backGold">
+                <text class="dropzone-prev-text">Editar Conteúdo</text>
+              </button>
+              <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                <text class="dropzone-prev-text">Editar Link</text>
+              </button>
+            </div>
           </div>
 
-          <div class="bottom-grid-item-3">
-            <label class="dropzone">
-              <input type="file" />
+          <div class="bottom-grid-item-1">
+            <label id="footer_logo" origin="footer_logo" class="dropzone" >
+ 
               <img src="" />
               <span class="rounded-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -723,6 +788,54 @@
                 </svg>
               </span>
             </label>
+            <div class="dropzone-prev  justify-content-center">
+              <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button backGold">
+                <text class="dropzone-prev-text">Editar Conteúdo</text>
+              </button>
+              <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class=" dropzone-prev-button">
+                <text class="dropzone-prev-text">Editar Link</text>
+              </button>
+            </div>
+          </div>
+
+          <div class="bottom-grid-item-2">
+            <label class="dropzone" >
+              <!-- <input type="file" /> -->
+              <img src="" />
+              <span class="rounded-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path
+                    d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
+                </svg>
+              </span>
+            </label>
+            <div class="dropzone-prev  justify-content-center">
+              <button data-bs-toggle="modal" data-bs-target="#modalTextoFooter" class="dropzone-prev-button  backGold">
+                <text class="dropzone-prev-text">Editar Conteúdo</text>
+              </button>
+              <!-- <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class=" dropzone-prev-button">
+                <text class="dropzone-prev-text">Editar Link</text>
+              </button> -->
+            </div>
+          </div>
+
+          <div class="bottom-grid-item-3">
+            <label class="dropzone">
+              <!-- <input type="file" /> -->
+              <img src="" />
+              <span class="rounded-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path
+                    d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
+                </svg>
+              </span>
+            </label>
+            <div class="dropzone-prev  justify-content-center">
+              <button data-bs-toggle="modal" data-bs-target="#modalSocialMidia" class="dropzone-prev-button  backGold">
+                <text class="dropzone-prev-text">Editar Redes Sociais</text>
+              </button>
+            
+            </div>
           </div>
         </div>
 
@@ -735,8 +848,8 @@
       </section>
 
 
-      <div class="preview-footer_banner container">
-        <label class="dropzone" data-bs-toggle="modal" data-bs-target="#modalLegalText">
+      <div class="preview-footer_banner container backBlack-apply">
+        <label class="dropzone" >
           <!-- <input type="file" /> -->
           <img src="" />
           <span class="rounded-icon">
@@ -746,8 +859,13 @@
             </svg>
           </span>
         </label>
+          <div class="dropzone-prev  justify-content-center">
+            <button data-bs-toggle="modal" data-bs-target="#modalLegalText" class="dropzone-prev-button backGold">
+              <text class="dropzone-prev-text">Editar Conteúdo</text>
+            </button> 
+          </div>
       </div>
-      <div class="preview-footer">
+      <div class="preview-footer backBlack-apply">
         <div class="container">
           <div class="row align-items-center gap-0">
             <div class="col-12 col-md-7 copyright">
@@ -1043,7 +1161,7 @@
                 <label for="file-upload" class="btn btn-save rounded-pill">
                   Selecione do seu computador
                 </label>
-                <input id="file-upload" class="d-none" type="file"></input>
+                <input onchange="uploadAndUpdateFile($(this))" id="file-upload" class="d-none" type="file"></input>
               </div>
             </div>
           </div>
@@ -1068,7 +1186,7 @@
             <h4 class="textoTitle">Insira o texto</h4>
 
             <textarea maxlength="1500" id="legalText" onkeyup="setCaracters()" rows="20" class="textArea"></textarea>
-            <div class="backGold">
+            <div class="backGoldT">
               <p class="textGold"><span id="totalCaracters">0</span>/1500 Caracteres</p>
             </div>
             <script>
@@ -1103,7 +1221,7 @@
             <h4 class="textoTitle">Insira o texto</h4>
 
             <textarea maxlength="50" id="whatsText" onkeyup="setCaracters()" rows="5" class="textArea"></textarea>
-            <div class="backGold">
+            <div class="backGoldT">
               <p class="textGold"><span id="totalCaracters_whatsText">0</span>/50 Caracteres</p>
             </div>
             <script>
@@ -1141,7 +1259,7 @@
             <h4 class="textoTitle">Insira o texto</h4>
 
             <textarea maxlength="50" id="Newsletter" onkeyup="setCaracters()" rows="5" class="textArea"></textarea>
-            <div class="backGold">
+            <div class="backGoldT">
               <p class="textGold"><span id="totalCaracters_Newsletter">0</span>/50 Caracteres</p>
             </div>
             <script>
@@ -1152,7 +1270,7 @@
               }
             </script>
 
-            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Editar
+            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill ">Editar
               background</button>
 
 
@@ -1179,7 +1297,7 @@
             <h4 class="textoTitle">Insira o texto</h4>
 
             <textarea maxlength="150" id="TextoFooter" onkeyup="setCaracters()" rows="5" class="textArea"></textarea>
-            <div class="backGold">
+            <div class="backGoldT">
               <p class="textGold"><span id="totalCaracters_TextoFooter">0</span>/150 Caracteres</p>
             </div>
             <script>
@@ -1233,10 +1351,243 @@
       </div>
     </div>
 
+    <div class="modal" id="modalMudaLink" tabindex="-1" aria-labelledby="modalMudaLinkLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <h5 class="modal-title m-auto" id="modalMudaLinkLabel">Alterar Link</h5>
+            <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                <div class="contentBlock">
+                  <div style="display: inline-flex;" class="d-flex">
+                      <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                        <input onchange="showMe($(this))" fieldname="status" id="switch-shadow1890" class="switch switch--shadow disable-me" type="checkbox">
+                        <label for="switch-shadow1890"></label>
+                      </div>
+                      <label class="labelSwitch">Categoria e subcategoria</label>
+
+                  </div>
+                
+                  <div class="contentAfter">
+                  
+                  </div>
+                </div>
+
+
+                <div class="contentBlock">
+                  <div style="display: inline-flex;" class="d-flex">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18902"
+                        class="switch switch--shadow disable-me" type="checkbox">
+                      <label for="switch-shadow18902"></label>
+                    </div>
+                    <label class="labelSwitch">Link Externo</label>
+                
+                  </div>
+                
+                  <div class="contentAfter">
+                    <input class="inputNovo" placeholder="https://link-externo.com" />
+                  </div>
+                </div>
+
+                <div class="contentBlock">
+                  <div style="display: inline-flex;" class="d-flex">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18901"
+                        class="switch switch--shadow disable-me" type="checkbox">
+                      <label for="switch-shadow18901"></label>
+                    </div>
+                    <label class="labelSwitch">Página institucional / Secundária</label>
+                
+                  </div>
+                
+                  <div class="contentAfter">
+                
+                  </div>
+                </div>
+               
+ 
+     
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
+            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modalSocialMidia" tabindex="-1" aria-labelledby="modalSocialMidiaLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <h5 class="modal-title m-auto" id="modalSocialMidiaLabel">Alterar Link</h5>
+            <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189012"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow189012"></label>
+                </div>
+                <svg style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.821" height="17.643"
+                  viewBox="0 0 8.821 17.643">
+                  <defs>
+                    <clipPath id="clip-path">
+                      <path id="Caminho_6305" data-name="Caminho 6305"
+                        d="M959.657-209.431a5.709,5.709,0,0,0-1.543-.235c-.627,0-1.976.4-1.976,1.173v1.853h3.206v3.12h-3.206v8.61h-3.23v-8.61h-1.591v-3.12h1.591v-1.572c0-2.37,1.109-4.34,3.784-4.34a13.14,13.14,0,0,1,3.447.352Z"
+                        transform="translate(-951.317 212.551)" fill="#8897ad" clip-rule="evenodd" />
+                    </clipPath>
+                    <clipPath id="clip-path-2">
+                      <path id="Caminho_6304" data-name="Caminho 6304" d="M0-540.282H1693.7V-4584H0Z" transform="translate(0 4584)"
+                        fill="#8897ad" />
+                    </clipPath>
+                  </defs>
+                  <g id="Grupo_7969" data-name="Grupo 7969" clip-path="url(#clip-path)">
+                    <g id="Grupo_7968" data-name="Grupo 7968" transform="translate(-839.193 -3856.219)" clip-path="url(#clip-path-2)">
+                      <path id="Caminho_6303" data-name="Caminho 6303" d="M946.317-217.551H963.96v26.464H946.317Z"
+                        transform="translate(-111.535 4069.359)" fill="#8897ad" />
+                    </g>
+                  </g>
+                </svg>
+
+                <label class="labelSwitch">Facebook</label>
+    
+              </div>
+    
+              <div style="display: block;" class="contentAfter">
+                 <input class="inputNovo" placeholder="https://link-externo.com" />
+              </div>
+            </div>
+    
+    
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189021"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow189021"></label>
+                </div>
+                <svg  style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129" viewBox="0 0 22.939 16.129">
+                  <path id="youtube"
+                    d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
+                    transform="translate(-14.933 -64)" fill="#8897ad" />
+                </svg>
+                <label class="labelSwitch">Instagram</label>
+    
+              </div>
+    
+              <div  style="display: block;" class="contentAfter">
+                <input class="inputNovo" placeholder="https://link-externo.com" />
+              </div>
+            </div>
+    
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189011"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow189011"></label>
+                </div>
+                <svg  style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129" viewBox="0 0 22.939 16.129">
+                  <path id="youtube"
+                    d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
+                    transform="translate(-14.933 -64)" fill="#8897ad" />
+                </svg>
+                <label class="labelSwitch">You Tube</label>
+    
+              </div>
+    
+              <div style="display: block;" class="contentAfter">
+                <input class="inputNovo" placeholder="https://link-externo.com" />
+              </div>
+            </div>
+    
+    
+    
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
+            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modalVitrine" tabindex="-1" aria-labelledby="modalVitrineLabel" aria-hidden="true">
+      <div style="max-width: 100vw;" class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content superModal">
+          <div style="max-width: 1420px; min-width: 1366px; margin: auto" class="modal-header justify-content-center">
+            <h5 class="modal-title m-auto" id="modalVitrineLabel">Alterar Link</h5>
+            <button style="background-color: white; border: 1px solid #f6b504; color: #f6b504" type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"  class="btn btn-save rounded-pill">Cancelar</button>
+            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar</button>
+            <!-- <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button> -->
+          </div>
+          <div style="max-width: 1366px; min-width: 1024px; margin: auto" class="modal-body">
+
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189012"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow189012"></label>
+                </div>
+                <svg style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="8.821" height="17.643" viewBox="0 0 8.821 17.643">
+                  <defs>
+                    <clipPath id="clip-path">
+                      <path id="Caminho_6305" data-name="Caminho 6305"
+                        d="M959.657-209.431a5.709,5.709,0,0,0-1.543-.235c-.627,0-1.976.4-1.976,1.173v1.853h3.206v3.12h-3.206v8.61h-3.23v-8.61h-1.591v-3.12h1.591v-1.572c0-2.37,1.109-4.34,3.784-4.34a13.14,13.14,0,0,1,3.447.352Z"
+                        transform="translate(-951.317 212.551)" fill="#8897ad" clip-rule="evenodd" />
+                    </clipPath>
+                    <clipPath id="clip-path-2">
+                      <path id="Caminho_6304" data-name="Caminho 6304" d="M0-540.282H1693.7V-4584H0Z"
+                        transform="translate(0 4584)" fill="#8897ad" />
+                    </clipPath>
+                  </defs>
+                  <g id="Grupo_7969" data-name="Grupo 7969" clip-path="url(#clip-path)">
+                    <g id="Grupo_7968" data-name="Grupo 7968" transform="translate(-839.193 -3856.219)"
+                      clip-path="url(#clip-path-2)">
+                      <path id="Caminho_6303" data-name="Caminho 6303" d="M946.317-217.551H963.96v26.464H946.317Z"
+                        transform="translate(-111.535 4069.359)" fill="#8897ad" />
+                    </g>
+                  </g>
+                </svg>
+    
+                <label class="labelSwitch">Facebook</label>
+    
+              </div>
+    
+              <div style="display: block;" class="contentAfter">
+                <input class="inputNovo" placeholder="https://link-externo.com" />
+              </div>
+            </div>
+    
+     
+    
+    
+          </div>
+          <div class="modal-footer justify-content-between">
+            <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
+            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+
 
   </div>
+  <fundoModal></fundoModal>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="home.js"></script>
+
+
+  
   
 
 
