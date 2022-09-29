@@ -2,6 +2,10 @@ let notFound =
   "https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
 
 let homePage = {
+  logotipo: {
+    url: "",
+    link: "",
+  },
   mainColors: {
     first: "",
     second: "",
@@ -116,7 +120,10 @@ let homePage = {
     url: "",
     link: "",
   },
-  footerText: "",
+  footerText: {
+    text: "",
+    link: "",
+  },
   socialMidia: {
     facebook: {
       status: false,
@@ -135,15 +142,64 @@ let homePage = {
 };
 
 //================================NEWS UPDATES==============================
+
+function setOrigins(origin) {
+  console.log("ORIGIN in function", origin);
+  $(".modal")
+    .find("input")
+    .each(function () {
+      $(this).removeAttr("origin");
+    });
+
+  $(".modal")
+    .find("textarea")
+    .each(function () {
+      $(this).removeAttr("origin");
+    });
+
+  $(".modal")
+    .find("button")
+    .each(function () {
+      $(this).removeAttr("origin");
+    });
+
+  if (origin) {
+    $(".modal")
+      .find("input")
+      .each(function () {
+        $(this).attr("origin");
+      });
+
+    $(".modal")
+      .find("textarea")
+      .each(function () {
+        $(this).attr("origin", origin);
+      });
+
+    $(".modal")
+      .find("button")
+      .each(function () {
+        $(this).attr("origin", origin);
+      });
+
+    $(".switch").each(function () {
+      $(this).attr("origin", origin);
+    });
+  }
+}
 $(".dropzone").click(function (e) {
   e = window.event;
+
   e.stopPropagation();
   let origin = $(this).attr("origin");
+  console.log("ORIGIN", origin);
   $("#modalChangePicture").attr("origin", origin);
   $("#modalChangePicture").find("input").attr("origin", origin);
   if ($(this).attr("src")) {
     $("#modalChangePicture").find("img").attr("src", $(this).attr("src"));
   }
+
+  setOrigins(origin);
 
   $("#modalMudaLink").attr("origin", origin);
 
@@ -157,20 +213,39 @@ $(".dropzone").click(function (e) {
   $(this).parent().find(".dropzone-prev").show();
 });
 
+function newLink3(element) {
+  if (element.parent().find(".novoLink3").css("display") === "none") {
+    element.parent().find(".novoLink3").show();
+  } else {
+    element.parent().find(".novoLink3").hide();
+  }
+}
+
 function showMyPrev(element) {
   let origin = element.attr("origin");
   $("#modalChangePicture").attr("origin", origin);
   $("#modalChangePicture").find("input").attr("origin", origin);
+
+  setOrigins(origin);
+
   if (element.attr("src")) {
     $("#modalChangePicture").find("img").attr("src", element.attr("src"));
   }
+  console.log("the id", element, element.attr("id"));
+
+  if (element.attr("id") && element.attr("id").split("_")[0] === "produto") {
+    $("#modalVitrine").attr("origin", element.attr("id"));
+  } else {
+    $("#modalReceitas").attr("origin", element.attr("id"));
+  }
 
   $("#modalMudaLink").attr("origin", origin);
-  element.parent().parent().find("label").addClass("index9");
-  element.parent().parent().find("label").addClass("index9");
+  // element.parent().parent().find("label").addClass("index9");
+  // element.parent().parent().find("label").addClass("index9");
+  // element.parent().addClass("index9");
+  // element.parent().parent().parent().addClass("index9");
   element.parent().parent().addClass("index9");
-  //element.parent().parent().parent().addClass("index9");
-  element.parent().addClass("borderSelected");
+  element.parent().addClass("borderSelected index9");
 
   $("fundoModal").show();
 
@@ -315,6 +390,16 @@ div2.innerHTML = `
       </label> 
     `;
 
+const div3 = document.createElement("div");
+div3.innerHTML = ` 
+      <label onclick="showMyPrev($(this))" style="display: contents; " class="dropzone ">
+        <h1 style="position: absolute;margin-top: -25px;" class="labelSwitch">Receitas</h1> 
+        ${getRevenueCard()}
+        ${getRevenueCard()}
+        ${getRevenueCard()}  
+      </label> 
+    `;
+
 function getProductCard() {
   const card = `<div class="card-color-preview">
                       <div   >
@@ -324,10 +409,7 @@ function getProductCard() {
                       </div>
 
                       <div style="  background: url(${notFound}); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
-                      ${
-                        ""
-                        //  <img  style="z-index: 0" src="" class="imgProductCard"/>
-                      }
+                      
                       </div>
 
                       <div class="card-color-preview_mark">
@@ -360,8 +442,38 @@ function getProductCard() {
                 </div> `;
   return card;
 }
+
+function getRevenueCard() {
+  const card = `<div class="card-color-preview2">
+                     
+                      <div style="  background: url(${notFound}); background-size: cover; background-position: center;    width: 100%;    height: 150px;    margin: -5px auto; " class="card-color-preview_icon"></div>
+                      
+                      <div style="display: block; width: 90%; margin: auto" class="card-color-preview_button">
+                      <div class="lineContents">
+                       <h1 style="text-align: left;font-size: 14px;width: 90%;margin: auto;" class="titulo8">Nome da Receita Caseira</h1> 
+                      </div>
+                       <br>
+                       <br>
+                   
+                        <div class="lineContents">
+                          <div style="text-align: center; width: 30%" class="col-md-3">
+                            <p>+- 0mins</p>
+                          </div>
+                          <div style="text-align: center; width: 40%" class="col-md-6">
+                            <p> &#183; 0 Ingredientes</p>
+                          </div>
+                          <div style="text-align: center; width: 30%" class="col-md-3">
+                            <p> &#183; 0 porção</p>
+                          </div> 
+                        </div> 
+                 
+                      </div>
+                </div> `;
+  return card;
+}
 const dropzoneHtml = div.firstElementChild;
 const dropzoneHtml2 = div2.firstElementChild;
+const dropzoneHtml3 = div3.firstElementChild;
 
 const dynamicContent = {
   produtos: () => {
@@ -390,6 +502,10 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Excluir Vitrine</text>
       </button>
     </div>`);
+    wrapper.setAttribute(
+      "id",
+      "produto_" + Math.random().toFixed(5).replace(".", "")
+    );
     wrapper.appendChild(prev);
     content2.prepend(wrapper);
   },
@@ -415,16 +531,34 @@ const dynamicContent = {
     wrapper.classList.add("content-dynamic");
     $("#dropdown-content-dynamic").click();
 
-    for (let i = 0; i < 2; i++) {
-      const dropzone = dropzoneHtml.cloneNode(1);
-      const [input, image] = dropzone.children;
+    const dropzone = dropzoneHtml3.cloneNode(1);
+    // dropzone.addEventListener("dragover", handleDragOver);
+    // dropzone.addEventListener("drop", handleDragDrop(input, image));
+    // input.addEventListener("change", handleSelectFile(dropzone, image));
+    wrapper.appendChild(dropzone);
 
-      dropzone.addEventListener("dragover", handleDragOver);
-      dropzone.addEventListener("drop", handleDragDrop(input, image));
-      input.addEventListener("change", handleSelectFile(dropzone, image));
-      wrapper.appendChild(dropzone);
-    }
-
+    const prev =
+      createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#modalReceitas"
+        class="dropzone-prev-button  backGold"
+      >
+        <text class="dropzone-prev-text">Editar Vitrine</text>
+      </button>
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Excluir Vitrine</text>
+      </button>
+    </div>`);
+    wrapper.appendChild(prev);
+    wrapper.setAttribute(
+      "id",
+      "revenue_" + Math.random().toFixed(5).replace(".", "")
+    );
     content2.prepend(wrapper);
   },
 };
@@ -502,4 +636,144 @@ function createElementFromHTML(htmlString) {
   var div = document.createElement("div");
   div.innerHTML = htmlString.trim();
   return div.firstChild;
+}
+
+//=========================== Área de CRUD =====================
+async function uploadAndUpdateFile(element) {
+  // await ajax call to upload picture and return url
+
+  element
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .find("button")
+    .each(function () {
+      $(this).removeAttr("url", "URL_RECEBIDA_AJAX");
+    });
+
+  element
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .find("input")
+    .each(function () {
+      $(this).removeAttr("url", "URL_RECEBIDA_AJAX");
+    });
+  if ("URL_RECEBIDA_AJAX") {
+    element
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .find("button")
+      .each(function () {
+        $(this).attr("url", "URL_RECEBIDA_AJAX");
+      });
+
+    element
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .find("input")
+      .each(function () {
+        $(this).attr("url", "URL_RECEBIDA_AJAX");
+      });
+  }
+}
+
+async function changePicture(element) {
+  let origin = element.attr("origin");
+  if (origin) {
+    let thisURL = element.attr("url");
+    if (thisURL) {
+      console.log(origin.split("-"));
+      if (origin.split("-").length === 1) {
+        homePage[origin].url = thisURL;
+      } else if (origin.split("-").length === 2) {
+        homePage[origin.split("-")[0]][origin.split("-")[1]].url = thisURL;
+      } else if (origin.split("-").length === 3) {
+        homePage[origin.split("-")[0]][origin.split("-")[1]][
+          origin.split("-")[2]
+        ].url = thisURL;
+      }
+      console.log(homePage);
+    } else {
+      console.log("url ausente");
+    }
+  } else {
+    console.log("origin ausente");
+  }
+  $(".btn-close").click();
+}
+
+async function changeLink(element) {
+  let origin = element.attr("origin");
+  if (origin) {
+    let thisURL = element.attr("url");
+    if (thisURL) {
+      console.log(origin.split("-"));
+      if (origin.split("-").length === 1) {
+        homePage[origin].link = thisURL;
+      } else if (origin.split("-").length === 2) {
+        homePage[origin.split("-")[0]][origin.split("-")[1]].link = thisURL;
+      } else if (origin.split("-").length === 3) {
+        homePage[origin.split("-")[0]][origin.split("-")[1]][
+          origin.split("-")[2]
+        ].link = thisURL;
+      }
+      console.log(homePage);
+    } else {
+      console.log("url ausente");
+    }
+  } else {
+    console.log("origin ausente");
+  }
+  $(".btn-close").click();
+}
+
+async function changeText(element) {
+  let origin = element.attr("origin");
+  if (origin) {
+    let thisURL = element.attr("texto");
+    if (thisURL) {
+      console.log(origin.split("-"));
+      if (origin.split("-").length === 1) {
+        homePage[origin].text = thisURL;
+      } else if (origin.split("-").length === 2) {
+        homePage[origin.split("-")[0]][origin.split("-")[1]].text = thisURL;
+      } else if (origin.split("-").length === 3) {
+        homePage[origin.split("-")[0]][origin.split("-")[1]][
+          origin.split("-")[2]
+        ].text = thisURL;
+      }
+      console.log(homePage);
+    } else {
+      console.log("texto ausente");
+    }
+  } else {
+    console.log("origin ausente");
+  }
+  $(".btn-close").click();
+}
+
+function setUrlButton(element, e) {
+  element
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .find(".rounded-pill")
+    .attr("url", element.val());
+}
+function setTxtButton(element, e) {
+  element
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .find(".rounded-pill")
+    .attr("texto", element.val());
 }

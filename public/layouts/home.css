@@ -581,37 +581,38 @@
  }
 
  .content-dynamic {
-display: flex;
-    gap: 8px;
-    width: 100%;
-    height: 324px;
-    background: white;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding: 15px;
-    padding-bottom: 25px;
-        padding-top: 35px;
+     display: flex;
+     gap: 8px;
+     width: 100%;
+     height: 324px;
+     background: white;
+     padding-top: 15px;
+     padding-bottom: 15px;
+     padding: 15px;
+     padding-bottom: 25px;
+     padding-top: 35px;
  }
 
-  .content-dynamic2 {
-      display: flex;
-      gap: 8px;
-      width: 100%;
-      height: 324px;
-      background: white;
-      padding-top: 15px;
-      padding-bottom: 15px;
-      padding: 15px;
-      padding-bottom: 25px;
-      padding-top: 35px;
-  }
+ .content-dynamic2 {
+     display: flex;
+     gap: 8px;
+     width: 100%;
+     height: 324px;
+     background: white;
+     padding-top: 15px;
+     padding-bottom: 15px;
+     padding: 15px;
+     padding-bottom: 25px;
+     padding-top: 35px;
+ }
 
  .content-dynamic div {
      flex: 1;
  }
-  .content-dynamic2 div {
-      flex: 1;
-  }
+
+ .content-dynamic2 div {
+     flex: 1;
+ }
 
  .content-dynamic_small {
      height: 160px;
@@ -826,13 +827,44 @@ display: flex;
      text-align: center;
  }
 
+ .card-color-preview2 {
+     max-width: 32%;
+     border: 1px solid #D2D8E0;
+     border-radius: 5px;
+     padding-top: 5px;
+     margin: auto;
+ }
+
+ .card-color-preview2>* {
+     padding: 0 10px;
+ }
+
+ .card-color-preview2>*:first-child {
+     padding: 0 5px;
+ }
+
+ .card-color-preview2 .primary {
+     color: var(--color-temp-primary);
+     fill: var(--color-temp-primary);
+ }
+
+ .card-color-preview2>.secondary {
+     color: var(--color-temp-secondary);
+     fill: var(--color-temp-secondary);
+ }
+
+ .card-color-preview2>.actions {
+     color: var(--color-temp-actions);
+     fill: var(--color-temp-actions);
+ }
+
 
  .card-color-preview {
-        max-width: 150px;
-            border: 1px solid #D2D8E0;
-            border-radius: 5px;
-            padding-top: 5px;
-            margin: auto;
+     max-width: 150px;
+     border: 1px solid #D2D8E0;
+     border-radius: 5px;
+     padding-top: 5px;
+     margin: auto;
  }
 
  .card-color-preview>* {
@@ -1142,6 +1174,17 @@ display: flex;
      width: 100%;
      padding: 10px;
  }
+ .headerCon{
+    width: calc(100% + 30px);
+        margin-left: -15px;
+        margin-top: -15px;
+        padding: 15px;
+        background: white;
+        border: 1px solid #EDF2F6;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #EDF2F6;
+        border-radius: 16px 16px 0px 0px;
+ }
 
  .backGold {
      background: #FFFBF2 0% 0% no-repeat padding-box !important;
@@ -1309,9 +1352,8 @@ display: flex;
      background: #FCFCFD 0% 0% no-repeat padding-box;
      border: 1px solid #EDF2F6;
      border-radius: 16px;
-     opacity: 1;
-
-     width: 100%;
+     opacity: 1; 
+     width: 100%;     
      padding: 15px;
      margin-top: 15px;
  }
@@ -1334,24 +1376,147 @@ display: flex;
  }
 
  .imgProductCard {
-width:50px !important;
-    height: 50px !important;
-    margin-top: -35px;
-    display: block !important;
-    margin: -35px auto auto auto;
+     width: 50px !important;
+     height: 50px !important;
+     margin-top: -35px;
+     display: block !important;
+     margin: -35px auto auto auto;
  }
- .borderSelected{
-    border: 5px solid #f6b504;
-        border-radius: 20px;
+
+ .borderSelected {
+     border: 5px solid #f6b504;
+     border-radius: 20px;
  }
+
  .borderSelected2 {
      border: 1px solid #f6b504;
      border-radius: 20px;
  }
- .superModal{
-    height: 90vh;
-        position: absolute;
-        bottom: 0;
-        top: 10vh;
-        border-radius: 20px 20px 0 0;
+
+ .superModal {
+     height: 95vh;
+     position: absolute;
+     bottom: 0;
+     top: 5vh;
+     border-radius: 20px 20px 0 0;
+ }
+
+ .textoComun {
+     text-align: left;
+     font: normal normal normal 14px/18px Roboto;
+     letter-spacing: 0px;
+     color: #687C97;
+     opacity: 1;
+     margin-left: 100px;
+ }
+
+ .searchArea {
+     background: #FFFFFD 0% 0% no-repeat padding-box;
+     border: 1px solid #EFEFEF;
+     border-radius: 20px;
+     opacity: 1;
+     width: 100%;
+     display: inline-flex;
+     padding: 10px
+ }
+
+ .inputSearchArea {
+     text-align: left;
+     font: normal normal normal 14px/19px Roboto;
+     letter-spacing: 0px;
+     color: #687C97;
+     opacity: 1;
+     border: none;
+     width: 95%;
+ }
+
+ .cardProduct {
+     width: 164px;
+     height: 233px;
+     background: #FFFFFF 0% 0% no-repeat padding-box;
+     border: 1px solid #EDF2F6;
+     opacity: 1;
+     padding: 10px 10px 5px 10px;
+ }
+
+ .cardImage {
+     width: 153px;
+     height: 132px;
+ }
+
+ .cardText {
+     text-align: left;
+     font: normal normal bold 14px/19px Roboto;
+     letter-spacing: 0px;
+     color: #687C97;
+     opacity: 1;
+ }
+
+ .cardHeaderPrd {
+     display: inline-flex;
+     gap: 15px;
+ }
+
+ .cardNumber {
+     text-align: left;
+     font: normal normal bold 14px/19px Roboto;
+     letter-spacing: 0px;
+     color: #687C97;
+     opacity: 1;
+ }
+
+ .lineContents {
+     display: inline-flex;
+     width: 95%;
+     margin: auto;
+ }
+
+ .cardRevenue {
+
+     height: 233px;
+     background: #FFFFFF 0% 0% no-repeat padding-box;
+     border: 1px solid #EDF2F6;
+     opacity: 1;
+     padding: 10px 10px 5px 10px;
+ }
+
+ .cardImageRevenue {
+     width: 100%;
+     height: 200px;
+ }
+
+ .cardSearch {
+     width: 100%;
+     height: 80px;
+     background: #FFFFFF 0% 0% no-repeat padding-box;
+     border: 1px solid #EDF2F6;
+     border-radius: 15px;
+     opacity: 1;
+     padding: 10px 10px 5px 10px;
+     display: inline-flex;
+ }
+
+ .searchResult {
+     padding: 5px;
+     max-height: 500px;
+     height: 500px;
+     overflow: auto;
+ }
+
+ .itemSearch {
+     text-align: center;
+     padding: 10px;
+     display: inline-flex;
+     gap: 15px;
+ }
+
+ .imgSearch {
+     width: 50px;
+     height: 50px;
+     margin: auto 10px 10px 10px;
+     max-width: 50px;
+ }
+
+ .areaMenus{
+    padding-top:25px
  }

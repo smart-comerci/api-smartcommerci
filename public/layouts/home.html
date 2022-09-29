@@ -15,7 +15,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="home.css">
-  
+
+
 
 
 </head>
@@ -195,12 +196,13 @@
       </div>
     </div>
 
-    <label id="modalNaoSalvou" style="display: none;" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalSemSalvar"></label>
+    <label id="modalNaoSalvou"  origin="modalNaoSalvou" style="display: none;" class="dropzone" data-bs-toggle="modal"
+      data-bs-target="#modalSemSalvar"></label>
 
     <div class="preview backBlack-apply">
       <div class="preview-header backBlack-apply">
         <div class="preview-header_logo">
-          <label class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
+          <label origin="logotipo" class="dropzone" data-bs-toggle="modal" data-bs-target="#modalChangePicture">
             <img src="">
             <span class="rounded-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -244,9 +246,9 @@
           </div>
 
           <div class="preview-home_aside-drop">
-            <label id="aside" origin="aside" class="dropzone" >
+            <label id="aside" origin="asideBanner" class="dropzone">
               <!-- <input type="file" /> -->
-              <img  src="" />
+              <img src="" />
               <span class="rounded-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                   <path
@@ -255,12 +257,13 @@
               </span>
             </label>
             <div class="dropzone-prev  justify-content-center">
-              <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+              <button data-bs-toggle="modal" data-bs-target="#modalChangePicture"
+                class="dropzone-prev-button  backGold">
                 <text class="dropzone-prev-text">Editar Banner</text>
               </button>
               <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button ">
                 <text class="dropzone-prev-text">Editar Link</text>
-              </button> 
+              </button>
             </div>
           </div>
         </div>
@@ -268,7 +271,7 @@
         <div class="preview-home_content">
           <div class="content-banner">
             <div class="content-banner_small">
-              <label class="dropzone" origin="header_mainBanner"  id="header_mainBanner">
+              <label class="dropzone" origin="header-mainBanner" id="header-mainBanner">
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -279,7 +282,8 @@
                 </span>
               </label>
               <div class="dropzone-prev  justify-content-center">
-                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button backGold">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture"
+                  class="dropzone-prev-button backGold">
                   <text class="dropzone-prev-text">Editar Banner</text>
                 </button>
                 <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
@@ -307,7 +311,7 @@
               </div>
 
               <div class="drop">
-                <label id="header_aside" origin="header_aside" class="dropzone" >
+                <label id="header-asideBanner" origin="header-asideBanner" class="dropzone">
                   <!-- <input type="file" /> -->
                   <img style="max-width: 50px; max-height: 80px" src="" />
                   <span class="rounded-icon">
@@ -318,7 +322,8 @@
                   </span>
                 </label>
                 <div class="dropzone-prev  justify-content-center">
-                  <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button backGold">
+                  <button data-bs-toggle="modal" data-bs-target="#modalChangePicture"
+                    class="dropzone-prev-button backGold">
                     <text class="dropzone-prev-text">Editar Banner</text>
                   </button>
                   <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
@@ -329,28 +334,7 @@
             </div>
 
             <div class="content-banner_mini">
-              <label id="header_first" origin="header_first" class="dropzone" >
-                <!-- <input type="file" /> -->
-                <img src="" />
-                <span class="rounded-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                    <path
-                      d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
-                  </svg>
-                </span>
-              </label>
-                          <div class="dropzone-prev  justify-content-center">
-                            <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
-                              <text class="dropzone-prev-text">Editar Banner</text>
-                            </button>
-                            <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
-                              <text class="dropzone-prev-text">Editar Link</text>
-                            </button>
-                          </div>
-            </div>
-
-            <div class="content-banner_mini">
-              <label id="header_second" origin="header_second" class="dropzone"  >
+              <label id="header-footerBanners-first" origin="header-footerBanners-first" class="dropzone">
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -361,7 +345,8 @@
                 </span>
               </label>
               <div class="dropzone-prev  justify-content-center">
-                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture"
+                  class="dropzone-prev-button  backGold">
                   <text class="dropzone-prev-text">Editar Banner</text>
                 </button>
                 <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
@@ -371,7 +356,7 @@
             </div>
 
             <div class="content-banner_mini">
-              <label id="header_third" origin="header_third" class="dropzone" >
+              <label id="header-footerBanners-second" origin="header-footerBanners-second" class="dropzone">
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -382,7 +367,8 @@
                 </span>
               </label>
               <div class="dropzone-prev  justify-content-center">
-                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture"
+                  class="dropzone-prev-button  backGold">
                   <text class="dropzone-prev-text">Editar Banner</text>
                 </button>
                 <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
@@ -390,10 +376,9 @@
                 </button>
               </div>
             </div>
-         
 
             <div class="content-banner_mini">
-              <label id="header_fourty" origin="header_fourty" class="dropzone">
+              <label id="header-footerBanners-third" origin="header-footerBanners-third" class="dropzone">
                 <!-- <input type="file" /> -->
                 <img src="" />
                 <span class="rounded-icon">
@@ -404,7 +389,31 @@
                 </span>
               </label>
               <div class="dropzone-prev  justify-content-center">
-                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button  backGold">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture"
+                  class="dropzone-prev-button  backGold">
+                  <text class="dropzone-prev-text">Editar Banner</text>
+                </button>
+                <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
+                  <text class="dropzone-prev-text">Editar Link</text>
+                </button>
+              </div>
+            </div>
+
+
+            <div class="content-banner_mini">
+              <label id="header-footerBanners-fourty" origin="header-footerBanners-fourty" class="dropzone">
+                <!-- <input type="file" /> -->
+                <img src="" />
+                <span class="rounded-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path
+                      d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
+                  </svg>
+                </span>
+              </label>
+              <div class="dropzone-prev  justify-content-center">
+                <button data-bs-toggle="modal" data-bs-target="#modalChangePicture"
+                  class="dropzone-prev-button  backGold">
                   <text class="dropzone-prev-text">Editar Banner</text>
                 </button>
                 <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
@@ -698,16 +707,16 @@
             </ul>
           </div>
 
-          <div  class="listaHOME">
+          <div class="listaHOME">
 
 
-            
+
 
           </div>
           <div class="content-dynamic2">
             <div>
-              <label class="dropzone">
-          
+              <label origin="newsletter" class="dropzone">
+
                 <img src="" />
                 <span class="rounded-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -727,13 +736,13 @@
             </div>
           </div>
 
-         
 
-          
+
+
         </div>
 
         <div class="preview-home_banner">
-          <label class="dropzone" >
+          <label origin="whatsapp" class="dropzone">
             <!-- <input type="file" /> -->
             <img src="" />
             <span class="rounded-icon">
@@ -758,7 +767,7 @@
         <div class="bottom-grid container">
           <div class="bottom-grid-banner">
             <label class="dropzone">
-              <!-- <input type="file" /> -->
+              <!-- <input type="file" /> modalContatosLinks-->
               <img src="" />
               <span class="rounded-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -768,18 +777,15 @@
               </span>
             </label>
             <div class="dropzone-prev  justify-content-center">
-              <button data-bs-toggle="modal" data-bs-target="#modalChangePicture" class="dropzone-prev-button backGold">
-                <text class="dropzone-prev-text">Editar Conteúdo</text>
-              </button>
-              <button data-bs-toggle="modal" data-bs-target="#modalMudaLink" class="dropzone-prev-button">
-                <text class="dropzone-prev-text">Editar Link</text>
-              </button>
+              <button data-bs-toggle="modal" data-bs-target="#modalContatosLinks" class="dropzone-prev-button backGold">
+                <text class="dropzone-prev-text">Editar Clunas</text>
+              </button> 
             </div>
           </div>
 
           <div class="bottom-grid-item-1">
-            <label id="footer_logo" origin="footer_logo" class="dropzone" >
- 
+            <label id="footer_logo" origin="footerLogo" class="dropzone">
+
               <img src="" />
               <span class="rounded-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -799,7 +805,7 @@
           </div>
 
           <div class="bottom-grid-item-2">
-            <label class="dropzone" >
+            <label origin="footerText" class="dropzone">
               <!-- <input type="file" /> -->
               <img src="" />
               <span class="rounded-icon">
@@ -834,7 +840,7 @@
               <button data-bs-toggle="modal" data-bs-target="#modalSocialMidia" class="dropzone-prev-button  backGold">
                 <text class="dropzone-prev-text">Editar Redes Sociais</text>
               </button>
-            
+
             </div>
           </div>
         </div>
@@ -849,7 +855,7 @@
 
 
       <div class="preview-footer_banner container backBlack-apply">
-        <label class="dropzone" >
+        <label origin="legalText" class="dropzone">
           <!-- <input type="file" /> -->
           <img src="" />
           <span class="rounded-icon">
@@ -859,11 +865,11 @@
             </svg>
           </span>
         </label>
-          <div class="dropzone-prev  justify-content-center">
-            <button data-bs-toggle="modal" data-bs-target="#modalLegalText" class="dropzone-prev-button backGold">
-              <text class="dropzone-prev-text">Editar Conteúdo</text>
-            </button> 
-          </div>
+        <div class="dropzone-prev  justify-content-center">
+          <button data-bs-toggle="modal" data-bs-target="#modalLegalText" class="dropzone-prev-button backGold">
+            <text class="dropzone-prev-text">Editar Conteúdo</text>
+          </button>
+        </div>
       </div>
       <div class="preview-footer backBlack-apply">
         <div class="container">
@@ -1114,7 +1120,7 @@
       </div>
     </div>
 
-    <div class="modal" id="modalChangePicture" tabindex="-1" aria-labelledby="modalChangePictureLabel"
+    <div style="z-index: 9999999;" class="modal" id="modalChangePicture" tabindex="-1" aria-labelledby="modalChangePictureLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -1167,7 +1173,7 @@
           </div>
           <div class="modal-footer justify-content-between">
             <a class="close-modal" href="#" data-bs-dismiss="modal">Fechar</a>
-            <button type="button" id="picture-save-button" tabindex="6"
+            <button onclick="changePicture($(this),'url')" type="button" id="picture-save-button" tabindex="6"
               class="btn btn-save rounded-pill">Concluir</button>
           </div>
         </div>
@@ -1185,12 +1191,13 @@
           <div class="modal-body">
             <h4 class="textoTitle">Insira o texto</h4>
 
-            <textarea maxlength="1500" id="legalText" onkeyup="setCaracters()" rows="20" class="textArea"></textarea>
+            <textarea maxlength="1500" id="legalText" onkeyup="setCaracters7($(this))" rows="20" class="textArea"></textarea>
             <div class="backGoldT">
               <p class="textGold"><span id="totalCaracters">0</span>/1500 Caracteres</p>
             </div>
             <script>
-              function setCaracters() {
+              function setCaracters7(element) {
+                setTxtButton(element)
                 let legalText = document.getElementById("legalText")
                 console.log(legalText.value)
                 document.getElementById("totalCaracters").innerHTML = legalText.value.length
@@ -1202,7 +1209,7 @@
           </div>
           <div class="modal-footer justify-content-between">
             <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
-            <button type="button" id="picture-save-button" tabindex="6"
+            <button onclick="changeText($(this))" type="button" id="picture-save-button" tabindex="6"
               class="btn btn-save rounded-pill">Salvar</button>
           </div>
         </div>
@@ -1232,7 +1239,7 @@
               }
             </script>
 
-            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Editar
+            <button  data-bs-toggle="modal" data-bs-target="#modalChangePicture" type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Editar
               background</button>
 
 
@@ -1258,19 +1265,22 @@
           <div class="modal-body">
             <h4 class="textoTitle">Insira o texto</h4>
 
-            <textarea maxlength="50" id="Newsletter" onkeyup="setCaracters()" rows="5" class="textArea"></textarea>
+            <textarea maxlength="50" id="Newsletter" onkeyup="setCaracters9($(this))" rows="5" class="textArea"></textarea>
             <div class="backGoldT">
               <p class="textGold"><span id="totalCaracters_Newsletter">0</span>/50 Caracteres</p>
             </div>
             <script>
-              function setCaracters() {
-                let Newsletter = document.getElementById("Newsletter")
-                console.log(Newsletter.value)
-                document.getElementById("totalCaracters_Newsletter").innerHTML = Newsletter.value.length
+              function setCaracters9(element, e) {
+                e = window.event
+                console.log(  e)
+                setTxtButton(element)
+                let Newsletter = element.val()
+                console.log(Newsletter)
+                document.getElementById("totalCaracters_Newsletter").innerHTML = Newsletter.length
               }
             </script>
 
-            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill ">Editar
+            <button  data-bs-toggle="modal" data-bs-target="#modalChangePicture" type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill ">Editar
               background</button>
 
 
@@ -1278,7 +1288,7 @@
           </div>
           <div class="modal-footer justify-content-between">
             <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
-            <button type="button" id="picture-save-button" tabindex="6"
+            <button onclick="changeText($(this))" type="button" id="picture-save-button" tabindex="6"
               class="btn btn-save rounded-pill">Salvar</button>
           </div>
         </div>
@@ -1296,25 +1306,26 @@
           <div class="modal-body">
             <h4 class="textoTitle">Insira o texto</h4>
 
-            <textarea maxlength="150" id="TextoFooter" onkeyup="setCaracters()" rows="5" class="textArea"></textarea>
+            <textarea maxlength="150" id="TextoFooter" onkeyup="setCaracters8($(this))" rows="5" class="textArea"></textarea>
             <div class="backGoldT">
               <p class="textGold"><span id="totalCaracters_TextoFooter">0</span>/150 Caracteres</p>
             </div>
             <script>
-              function setCaracters() {
+              function setCaracters8(element) {
+                setTxtButton(element)
                 let TextoFooter = document.getElementById("TextoFooter")
                 console.log(TextoFooter.value)
                 document.getElementById("totalCaracters_TextoFooter").innerHTML = TextoFooter.value.length
               }
             </script>
- 
+
 
 
 
           </div>
           <div class="modal-footer justify-content-between">
             <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
-            <button type="button" id="picture-save-button" tabindex="6"
+            <button onclick="changeText($(this))" type="button" id="picture-save-button" tabindex="6"
               class="btn btn-save rounded-pill">Salvar</button>
           </div>
         </div>
@@ -1328,21 +1339,22 @@
             <h5 class="modal-title m-auto" id="modalSemSalvarLabel">Existem alterações que não foram salvas</h5>
             <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-    
+
           <div class="modal-body">
-          <h3 style="text-align: center" class="titulo8">Existem alterações que não foram salvas</h3>
-          <p class="titulo7" style="text-align: center">Deseja realmente sair?<br>
-            Caso saia, as alterações serão perdidas
-          </p>
-    
-    
-    
+            <h3 style="text-align: center" class="titulo8">Existem alterações que não foram salvas</h3>
+            <p class="titulo7" style="text-align: center">Deseja realmente sair?<br>
+              Caso saia, as alterações serão perdidas
+            </p>
+
+
+
           </div>
           <div class="modal-footer justify-content-between">
-            <button style="background-color: white; border:1px solid #f6b504; color: #f6b504;     max-width: 45%;    zoom: 92%;"
+            <button
+              style="background-color: white; border:1px solid #f6b504; color: #f6b504;     max-width: 45%;    zoom: 92%;"
               type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Revisar
               alterações</button>
-            
+
             <button style="     max-width: 45%;    zoom: 92%;" type="button" id="picture-save-button" tabindex="6"
               class="btn btn-save rounded-pill">Sair sem
               publicar</button>
@@ -1359,60 +1371,62 @@
             <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-                <div class="contentBlock">
-                  <div style="display: inline-flex;" class="d-flex">
-                      <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                        <input onchange="showMe($(this))" fieldname="status" id="switch-shadow1890" class="switch switch--shadow disable-me" type="checkbox">
-                        <label for="switch-shadow1890"></label>
-                      </div>
-                      <label class="labelSwitch">Categoria e subcategoria</label>
-
-                  </div>
-                
-                  <div class="contentAfter">
-                  
-                  </div>
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow1890"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow1890"></label>
                 </div>
+                <label class="labelSwitch">Categoria e subcategoria</label>
+
+              </div>
+
+              <div class="contentAfter">
+
+              </div>
+            </div>
 
 
-                <div class="contentBlock">
-                  <div style="display: inline-flex;" class="d-flex">
-                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18902"
-                        class="switch switch--shadow disable-me" type="checkbox">
-                      <label for="switch-shadow18902"></label>
-                    </div>
-                    <label class="labelSwitch">Link Externo</label>
-                
-                  </div>
-                
-                  <div class="contentAfter">
-                    <input class="inputNovo" placeholder="https://link-externo.com" />
-                  </div>
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18902"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow18902"></label>
                 </div>
+                <label class="labelSwitch">Link Externo</label>
 
-                <div class="contentBlock">
-                  <div style="display: inline-flex;" class="d-flex">
-                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18901"
-                        class="switch switch--shadow disable-me" type="checkbox">
-                      <label for="switch-shadow18901"></label>
-                    </div>
-                    <label class="labelSwitch">Página institucional / Secundária</label>
-                
-                  </div>
-                
-                  <div class="contentAfter">
-                
-                  </div>
+              </div>
+
+              <div class="contentAfter">
+                <input onkeyup="setUrlButton($(this))" class="inputNovo" placeholder="https://link-externo.com" />
+              </div>
+            </div>
+
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18901"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow18901"></label>
                 </div>
-               
- 
-     
+                <label class="labelSwitch">Página institucional / Secundária</label>
+
+              </div>
+
+              <div class="contentAfter">
+
+              </div>
+            </div>
+
+
+
           </div>
           <div class="modal-footer justify-content-between">
             <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
-            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar</button>
+            <button  onclick="changeLink($(this))" type="button" id="picture-save-button" tabindex="6"
+              class="btn btn-save rounded-pill">Salvar</button>
           </div>
         </div>
       </div>
@@ -1426,108 +1440,6 @@
             <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="contentBlock">
-              <div style="display: inline-flex;" class="d-flex">
-                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189012"
-                    class="switch switch--shadow disable-me" type="checkbox">
-                  <label for="switch-shadow189012"></label>
-                </div>
-                <svg style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.821" height="17.643"
-                  viewBox="0 0 8.821 17.643">
-                  <defs>
-                    <clipPath id="clip-path">
-                      <path id="Caminho_6305" data-name="Caminho 6305"
-                        d="M959.657-209.431a5.709,5.709,0,0,0-1.543-.235c-.627,0-1.976.4-1.976,1.173v1.853h3.206v3.12h-3.206v8.61h-3.23v-8.61h-1.591v-3.12h1.591v-1.572c0-2.37,1.109-4.34,3.784-4.34a13.14,13.14,0,0,1,3.447.352Z"
-                        transform="translate(-951.317 212.551)" fill="#8897ad" clip-rule="evenodd" />
-                    </clipPath>
-                    <clipPath id="clip-path-2">
-                      <path id="Caminho_6304" data-name="Caminho 6304" d="M0-540.282H1693.7V-4584H0Z" transform="translate(0 4584)"
-                        fill="#8897ad" />
-                    </clipPath>
-                  </defs>
-                  <g id="Grupo_7969" data-name="Grupo 7969" clip-path="url(#clip-path)">
-                    <g id="Grupo_7968" data-name="Grupo 7968" transform="translate(-839.193 -3856.219)" clip-path="url(#clip-path-2)">
-                      <path id="Caminho_6303" data-name="Caminho 6303" d="M946.317-217.551H963.96v26.464H946.317Z"
-                        transform="translate(-111.535 4069.359)" fill="#8897ad" />
-                    </g>
-                  </g>
-                </svg>
-
-                <label class="labelSwitch">Facebook</label>
-    
-              </div>
-    
-              <div style="display: block;" class="contentAfter">
-                 <input class="inputNovo" placeholder="https://link-externo.com" />
-              </div>
-            </div>
-    
-    
-            <div class="contentBlock">
-              <div style="display: inline-flex;" class="d-flex">
-                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189021"
-                    class="switch switch--shadow disable-me" type="checkbox">
-                  <label for="switch-shadow189021"></label>
-                </div>
-                <svg  style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129" viewBox="0 0 22.939 16.129">
-                  <path id="youtube"
-                    d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
-                    transform="translate(-14.933 -64)" fill="#8897ad" />
-                </svg>
-                <label class="labelSwitch">Instagram</label>
-    
-              </div>
-    
-              <div  style="display: block;" class="contentAfter">
-                <input class="inputNovo" placeholder="https://link-externo.com" />
-              </div>
-            </div>
-    
-            <div class="contentBlock">
-              <div style="display: inline-flex;" class="d-flex">
-                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189011"
-                    class="switch switch--shadow disable-me" type="checkbox">
-                  <label for="switch-shadow189011"></label>
-                </div>
-                <svg  style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129" viewBox="0 0 22.939 16.129">
-                  <path id="youtube"
-                    d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
-                    transform="translate(-14.933 -64)" fill="#8897ad" />
-                </svg>
-                <label class="labelSwitch">You Tube</label>
-    
-              </div>
-    
-              <div style="display: block;" class="contentAfter">
-                <input class="inputNovo" placeholder="https://link-externo.com" />
-              </div>
-            </div>
-    
-    
-    
-          </div>
-          <div class="modal-footer justify-content-between">
-            <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
-            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal" id="modalVitrine" tabindex="-1" aria-labelledby="modalVitrineLabel" aria-hidden="true">
-      <div style="max-width: 100vw;" class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content superModal">
-          <div style="max-width: 1420px; min-width: 1366px; margin: auto" class="modal-header justify-content-center">
-            <h5 class="modal-title m-auto" id="modalVitrineLabel">Alterar Link</h5>
-            <button style="background-color: white; border: 1px solid #f6b504; color: #f6b504" type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"  class="btn btn-save rounded-pill">Cancelar</button>
-            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar</button>
-            <!-- <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button> -->
-          </div>
-          <div style="max-width: 1366px; min-width: 1024px; margin: auto" class="modal-body">
-
             <div class="contentBlock">
               <div style="display: inline-flex;" class="d-flex">
                 <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
@@ -1556,29 +1468,913 @@
                     </g>
                   </g>
                 </svg>
-    
+
                 <label class="labelSwitch">Facebook</label>
-    
+
               </div>
-    
+
               <div style="display: block;" class="contentAfter">
                 <input class="inputNovo" placeholder="https://link-externo.com" />
               </div>
             </div>
-    
-     
-    
-    
+
+
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189021"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow189021"></label>
+                </div>
+                <svg style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
+                  viewBox="0 0 22.939 16.129">
+                  <path id="youtube"
+                    d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
+                    transform="translate(-14.933 -64)" fill="#8897ad" />
+                </svg>
+                <label class="labelSwitch">Instagram</label>
+
+              </div>
+
+              <div style="display: block;" class="contentAfter">
+                <input class="inputNovo" placeholder="https://link-externo.com" />
+              </div>
+            </div>
+
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189011"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow189011"></label>
+                </div>
+                <svg style="margin: 10px;" xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
+                  viewBox="0 0 22.939 16.129">
+                  <path id="youtube"
+                    d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
+                    transform="translate(-14.933 -64)" fill="#8897ad" />
+                </svg>
+                <label class="labelSwitch">You Tube</label>
+
+              </div>
+
+              <div style="display: block;" class="contentAfter">
+                <input class="inputNovo" placeholder="https://link-externo.com" />
+              </div>
+            </div>
+
+
+
           </div>
           <div class="modal-footer justify-content-between">
             <a class="close-modal" href="#" data-bs-dismiss="modal">Cancelar</a>
-            <button type="button" id="picture-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar</button>
+            <button type="button" id="picture-save-button" tabindex="6"
+              class="btn btn-save rounded-pill">Salvar</button>
           </div>
         </div>
       </div>
     </div>
 
+    <div class="modal" id="modalVitrine" tabindex="-1" aria-labelledby="modalVitrineLabel" aria-hidden="true">
+      <div style="max-width: 100vw;" class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content superModal">
+          <div style="max-width: 1420px; min-width: 1366px; margin: auto" class="modal-header justify-content-center">
+            <h5 style="text-align: left; float: left;width: 60%;" class="modal-title m-auto" id="modalVitrineLabel">
+              Editar Vitrine
+            </h5>
+            <button style="background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+              type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"
+              class="btn btn-save rounded-pill">Cancelar</button>
+            <button style=" margin-right: 15px" type="button" id="picture-save-button" tabindex="6"
+              class="btn btn-save rounded-pill">Salvar</button>
+            <button style="    border-radius: 100%;    border: 1px solid silver;" type="button" class="btn-close m-0"
+              data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div style="max-width: 1366px; min-width: 1024px; margin: auto;max-height: 90vh; overflow: auto"
+            class="modal-body">
+
+
+            <label class="labelSwitch">Título da vitrine</label>
+            <input class="inputNovo" />
+
+            <br>
+            <br><br>
+            <label class="labelSwitch">Categoria</label>
+            <input class="inputNovo" />
+
+            <br><br>
+
+            <label class="labelSwitch">Escolha o tipo de visualização</label>
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow1901235"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow1901235"></label>
+                </div>
+                <label class="labelSwitch">Smart</label><label
+                  style="float: right;    width: 80%;    text-align: right;    margin-top: 15px;"
+                  class="textGold">recomendado</label>
+
+              </div>
+
+
+              <p class="textoComun">Os produtos serão priorizados com base no consumidor. A plataforma irá exibir os
+                produtos que mais fazem sentido com os
+                hábitos de cada cliente.</p>
+
+            </div>
+
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow1890121"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow1890121"></label>
+                </div>
+                <label class="labelSwitch">Produtos mais vendidos</label>
+              </div>
+
+
+              <p class="textoComun">Os produtos mais vendidos em estoque serão priorizados na classificação da vitrine.
+              </p>
+
+            </div>
+
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow1890122"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow1890122"></label>
+                </div>
+                <label class="labelSwitch">Ofertas</label>
+              </div>
+
+
+              <p class="textoComun">Os produtos com desconto ativo serão priorizados. Os produtos mais vendidos em
+                ofertas serão priorizados na vitrine.</p>
+
+            </div>
+
+
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow1890123"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow1890123"></label>
+                </div>
+                <label class="labelSwitch">Personalizado</label>
+              </div>
+
+
+              <p class="textoComun">Você definira os produtos da vitrine. Escolha no máximo 6 produtos para serem
+                exibidos.</p>
+
+              <div class="searchArea">
+                <input class="inputSearchArea" />
+
+                <svg fill="#f6b504" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px">
+                  <path
+                    d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z" />
+                </svg>
+
+              </div>
+              <br>
+                <div style="display: block;" class="contentAfter">
+                
+                
+                  <div class="searchResult">
+                
+                    <div id="searchSpinner" style="margin: auto calc(50% - 30px);" class="spinner-border text-warning" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                
+                
+                
+                    <div class="cardSearch">
+                      <div
+                        style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                        class="imgSearch">
+                      </div>
+                
+                      <div class="itemSearch" style="padding-top: 15px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
+                          <defs></defs>
+                          <path class="a"
+                            d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                          </path>
+                          <path class="a"
+                            d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                            transform="translate(5)"></path>
+                        </svg>
+                        <p class="cardNumber">01</p>
+                      </div>
+                      <div class="itemSearch" style="padding-top: 15px;width: 60%;">
+                        <p class="cardText">Nome do produto ou receita loren ipsun dollor sit amen</p>
+                      </div>
+                
+                      <div class="itemSearch">
+                        <button style=" margin-right: 15px" type="button" id="picture-save-button" tabindex="6"
+                          class="btn btn-save rounded-pill">Adicionar</button>
+                      </div>
+                    </div>
+                
+                  </div>
+                
+                </div>
+              <br>
+
+
+              <div style="display: inline-flex !important; gap: 5px; padding-top: 50px; overflow-x: auto;">
+
+                <div class="cardProduct">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div
+                    style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                    class="cardImage">
+                  </div>
+
+                  <p class="cardText">Abacate lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+                <div class="cardProduct">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div
+                    style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                    class="cardImage">
+                  </div>
+
+                  <p class="cardText">Abacate lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+                <div class="cardProduct">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div
+                    style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                    class="cardImage">
+                  </div>
+
+                  <p class="cardText">Abacate lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+                <div class="cardProduct">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div
+                    style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                    class="cardImage">
+                  </div>
+
+                  <p class="cardText">Abacate lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+                <div class="cardProduct">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div
+                    style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                    class="cardImage">
+                  </div>
+
+                  <p class="cardText">Abacate lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+                <div class="cardProduct">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div
+                    style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                    class="cardImage">
+                  </div>
+
+                  <p class="cardText">Abacate lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+
+
+
+
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modalReceitas" tabindex="-1" aria-labelledby="modalReceitasLabel" aria-hidden="true">
+      <div style="max-width: 100vw;" class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content superModal">
+          <div style="max-width: 1420px; min-width: 1366px; margin: auto" class="modal-header justify-content-center">
+            <h5 style="text-align: left; float: left;width: 60%;" class="modal-title m-auto" id="modalReceitasLabel">
+              Vitrine Receitas
+            </h5>
+            <button style="background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+              type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"
+              class="btn btn-save rounded-pill">Cancelar</button>
+            <button style=" margin-right: 15px" type="button" id="picture-save-button" tabindex="6"
+              class="btn btn-save rounded-pill">Salvar</button>
+            <button style="    border-radius: 100%;    border: 1px solid silver;" type="button" class="btn-close m-0"
+              data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div style="max-width: 1366px; min-width: 1024px; margin: auto;max-height: 90vh; overflow: auto"
+            class="modal-body">
+
+
+            <label class="labelSwitch">Título da vitrine de receitas</label>
+            <input class="inputNovo" />
+
+            <br>
+            <br><br>
+            <label class="labelSwitch">Categoria</label>
+            <input class="inputNovo" />
+
+            <br><br>
+
+            <label class="labelSwitch">Escolha o tipo de visualização</label>
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow19012354"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow19012354"></label>
+                </div>
+                <label class="labelSwitch">Smart</label><label
+                  style="float: right;    width: 80%;    text-align: right;    margin-top: 15px;"
+                  class="textGold">recomendado</label>
+
+              </div>
+
+
+              <p class="textoComun">As receitas serão priorizadas com base no consumidor. A plataforma irá exibir as
+                receitas que mais fazem sentido com os
+                hábitos de cada cliente.</p>
+
+            </div>
+
+
+
+            <div class="contentBlock">
+              <div style="display: inline-flex;" class="d-flex">
+                <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                  <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18901234"
+                    class="switch switch--shadow disable-me" type="checkbox">
+                  <label for="switch-shadow18901234"></label>
+                </div>
+                <label class="labelSwitch">Personalizado</label>
+              </div>
+
+
+              <p class="textoComun">Você definira os produtos da vitrine. Escolha no máximo 3 receitas para serem
+                exibidas.</p>
+
+              <div class="searchArea">
+                <input class="inputSearchArea" />
+
+                <svg fill="#f6b504" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px">
+                  <path
+                    d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z" />
+                </svg>
+
+              </div>
+              <br>
+                  <div style="display: block;" class="contentAfter">
+                    
+
+                    <div class="searchResult">
+
+                      <div id="searchSpinner" style="margin: auto calc(50% - 30px);" class="spinner-border text-warning" role="status">
+                        <span class="sr-only"></span>
+                      </div>
+
+
+
+                      <div class="cardSearch">
+                        <div
+                          style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                          class="imgSearch">
+                        </div>
+                  
+                        <div class="itemSearch"  style="padding-top: 15px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
+                            <defs></defs>
+                            <path class="a"
+                              d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                            </path>
+                            <path class="a"
+                              d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                              transform="translate(5)"></path>
+                          </svg>
+                          <p class="cardNumber">01</p>
+                        </div>
+                        <div class="itemSearch" style="padding-top: 15px;width: 60%;">
+                          <p class="cardText">Nome do produto ou receita loren ipsun dollor sit amen</p>
+                        </div>
+                  
+                        <div class="itemSearch">
+                          <button style=" margin-right: 15px" type="button" id="picture-save-button" tabindex="6"
+                            class="btn btn-save rounded-pill">Adicionar</button>
+                        </div>
+                      </div>
+                  
+                    </div>
+
+                  </div>
+              <br>
+
+
+              <div style="display: inline-flex !important; gap: 5px; padding-top: 50px; overflow-x: auto;">
+
+
+                <div class="cardRevenue">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;    background-position: center;
+    margin-top: -50px;" class="cardImageRevenue">
+                  </div>
+
+                  <p class="cardText">Receitas lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+                <div class="cardRevenue">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;    background-position: center;
+                        margin-top: -50px;" class="cardImageRevenue">
+                  </div>
+
+                  <p class="cardText">Receitas lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+
+                <div class="cardRevenue">
+                  <div class="cardHeaderPrd">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
+                      viewBox="0 0 9 16">
+                      <defs></defs>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                      </path>
+                      <path class="a"
+                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                        transform="translate(5)"></path>
+                    </svg>
+                    <p class="cardNumber">01</p>
+                  </div>
+                  <div style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;    background-position: center;
+                          margin-top: -50px;" class="cardImageRevenue">
+                  </div>
+
+                  <p class="cardText">Receitas lorem ipsum sit amen dolor consec</p>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+      <div class="modal" id="modalContatosLinks" tabindex="-1" aria-labelledby="modalContatosLinksLabel" aria-hidden="true">
+        <div style="max-width: 100vw;" class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content superModal">
+            <div style="max-width: 1420px; min-width: 1366px; margin: auto" class="modal-header justify-content-center">
+              <h5 style="text-align: left; float: left;width: 60%;" class="modal-title m-auto" id="modalContatosLinksLabel">
+               Links e Contato
+              </h5>
+              <button style="background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+                type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"
+                class="btn btn-save rounded-pill">Cancelar</button>
+              <button style=" margin-right: 15px" type="button" id="picture-save-button" tabindex="6"
+                class="btn btn-save rounded-pill">Salvar</button>
+              <button style="    border-radius: 100%;    border: 1px solid silver;" type="button" class="btn-close m-0"
+                data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div style="max-width: 1366px; min-width: 1024px; margin: auto;max-height: 90vh; overflow: auto"
+              class="modal-body"> 
+              
+              <div style="max-width: 800px;" class="contentBlock"> 
+                <div class="headerCon">
+                  <label class="labelSwitch">Título da primeira coluna</label>
+                  <input class="inputNovo" placeholder="Insira o título" />
+                </div>
+ 
+                
+              
+                <div class="areaMenus"> 
+                  <div class="cardSearch">
+             
+                    <div class="itemSearch" style="padding-top: 15px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
+                        <defs></defs>
+                        <path class="a"
+                          d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                        </path>
+                        <path class="a"
+                          d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                          transform="translate(5)"></path>
+                      </svg>
+                  
+                    </div>
+                    <div class="itemSearch" style="padding-top: 15px;width: 60%;">
+                      <p class="cardText">Quem Somos</p>
+                    </div>
+                  
+                    <div class="itemSearch" style=" width: 300px;">
+                      <button style="zoom: 80%;background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+                        type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"
+                        class="btn btn-save rounded-pill">Remover da coluna</button>
+                    </div>
+                  </div>
+
+                </div>
+
+                
+
+                <div style="display: none" class="contentBlock novoLink3">
+                  <h1 class="labelSwitch">Novo Link</h1>
+                  <div class="contentBlock" style="display: inline-flex;">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18907" class="switch switch--shadow"
+                        type="checkbox">
+                      <label for="switch-shadow18907"></label>
+                    </div>
+                    <label class="labelSwitch">Página institucional / Secundária</label>
+                  </div> 
+                  <br>
+
+                  <div class="contentBlock">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18906" class="switch switch--shadow"
+                        type="checkbox">
+                      <label for="switch-shadow18906"></label>
+                    </div>
+                    <label class="labelSwitch">Link Externo</label>
+                    <input class="inputNovo" placeholder="Insira o link"/>
+                    <br><br>
+                    <input maxlength="25" class="inputNovo"  onkeyup="setCaracters5()" id="linkText"  placeholder="Insira o título"/>
+                    <br><br>
+                    <div class="backGoldT">
+                      <p class="textGold"><span id="totalCaracters_TextoLink">0</span>/25 Caracteres</p>
+                    </div>
+                    <script>
+                      function setCaracters5() {
+                        let legalText = document.getElementById("linkText")
+                        console.log(legalText.value)
+                        document.getElementById("totalCaracters_TextoLink").innerHTML = legalText.value.length
+                      }
+                    </script>
+                    <br><br>
+                    <button style="background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;" type="button"
+                      id="picture-save-button" tabindex="6" data-bs-dismiss="modal" class="btn btn-save rounded-pill">Adicionar</button>
+                  </div>
+                </div>
+                <br><br>
+
+                  <button  onclick="newLink3($(this))" style=" margin-right: 15px" type="button" id="picture-save-button" tabindex="6"
+                    class="btn btn-save rounded-pill">Novo Link</button>
+
+      
+              </div>
+
+              <div style="max-width: 800px;" class="contentBlock">
+                <div class="headerCon">
+                  <label class="labelSwitch">Título da segunda coluna</label>
+                  <input class="inputNovo" placeholder="Insira o título" />
+                </div>
+              
+                <div class="areaMenus">
+                  <div class="cardSearch">
+              
+                    <div class="itemSearch" style="padding-top: 15px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
+                        <defs></defs>
+                        <path class="a"
+                          d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                        </path>
+                        <path class="a"
+                          d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                          transform="translate(5)"></path>
+                      </svg>
+              
+                    </div>
+                    <div class="itemSearch" style="padding-top: 15px;width: 60%;">
+                      <p class="cardText">Quem Somos</p>
+                    </div>
+              
+                    <div class="itemSearch" style=" width: 300px;">
+                      <button
+                        style="zoom: 80%;background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+                        type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"
+                        class="btn btn-save rounded-pill">Remover da coluna</button>
+                    </div>
+                  </div>
+              
+                </div>
+              
+              
+              
+                <div style="display: none" class="contentBlock novoLink3">
+                  <h1 class="labelSwitch">Novo Link</h1>
+                  <div class="contentBlock" style="display: inline-flex;">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18905"
+                        class="switch switch--shadow" type="checkbox">
+                      <label for="switch-shadow18905"></label>
+                    </div>
+                    <label class="labelSwitch">Página institucional / Secundária</label>
+                  </div>
+                  <br>
+              
+                  <div class="contentBlock">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18904"
+                        class="switch switch--shadow" type="checkbox">
+                      <label for="switch-shadow18904"></label>
+                    </div>
+                    <label class="labelSwitch">Link Externo</label>
+                    <input class="inputNovo" placeholder="Insira o link" />
+                    <br><br>
+                    <input maxlength="25" class="inputNovo" onkeyup="setCaracters5()" id="linkText" placeholder="Insira o título" />
+                    <br><br>
+                    <div class="backGoldT">
+                      <p class="textGold"><span id="totalCaracters_TextoLink">0</span>/25 Caracteres</p>
+                    </div>
+                    <script>
+                      function setCaracters5() {
+                        let legalText = document.getElementById("linkText")
+                        console.log(legalText.value)
+                        document.getElementById("totalCaracters_TextoLink").innerHTML = legalText.value.length
+                      }
+                    </script>
+                    <br><br>
+                    <button style="background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+                      type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"
+                      class="btn btn-save rounded-pill">Adicionar</button>
+                  </div>
+                </div>
+                <br><br>
+              
+                <button  onclick="newLink3($(this))" style=" margin-right: 15px" type="button" id="picture-save-button" tabindex="6"
+                  class="btn btn-save rounded-pill">Novo Link</button>
+              
+              
+              </div>
+
+              <div style="max-width: 800px;" class="contentBlock">
+                  <div class="headerCon">
+                    <label class="labelSwitch">Título da terceira coluna</label>
+                    <input class="inputNovo" placeholder="Insira o título" />
+                  </div>
+                
+                <div class="areaMenus">
+                  <div class="cardSearch">
+              
+                    <div class="itemSearch" style="padding-top: 15px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
+                        <defs></defs>
+                        <path class="a"
+                          d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                        </path>
+                        <path class="a"
+                          d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                          transform="translate(5)"></path>
+                      </svg>
+              
+                    </div>
+                    <div class="itemSearch" style="padding-top: 15px;width: 60%;">
+                      <p class="cardText">Quem Somos</p>
+                    </div>
+              
+                    <div class="itemSearch" style=" width: 300px;">
+                      <button
+                        style="zoom: 80%;background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+                        type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"
+                        class="btn btn-save rounded-pill">Remover da coluna</button>
+                    </div>
+                  </div>
+              
+                </div>
+              
+              
+              
+                <div  style="display: none" class="contentBlock novoLink3">
+                    <div class="headerCon">
+                      <label class="labelSwitch">Novo Link</label>
+                    </div>
+               
+                  <div class="contentBlock" style="display: inline-flex;">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18903"
+                        class="switch switch--shadow" type="checkbox">
+                      <label for="switch-shadow18903"></label>
+                    </div>
+                    <label class="labelSwitch">Página institucional / Secundária</label>
+                  </div>
+                  <br>
+              
+                  <div class="contentBlock">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow189032"
+                        class="switch switch--shadow " type="checkbox">
+                      <label for="switch-shadow189032"></label>
+                    </div>
+                    <label class="labelSwitch">Link Externo</label>
+                    <input class="inputNovo" placeholder="Insira o link" />
+                    <br><br>
+                    <input maxlength="25" class="inputNovo" onkeyup="setCaracters5()" id="linkText" placeholder="Insira o título" />
+                    <br><br>
+                    <div class="backGoldT">
+                      <p class="textGold"><span id="totalCaracters_TextoLink">0</span>/25 Caracteres</p>
+                    </div>
+                    <script>
+                      function setCaracters5() {
+                        let legalText = document.getElementById("linkText")
+                        console.log(legalText.value)
+                        document.getElementById("totalCaracters_TextoLink").innerHTML = legalText.value.length
+                      } 
+                    </script>
+                    <br><br>
+                    <button style="background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+                      type="button" id="picture-save-button" tabindex="6" data-bs-dismiss="modal"
+                      class="btn btn-save rounded-pill">Adicionar</button>
+                  </div>
+                </div>
+                <br><br>
+              
+                <button onclick="newLink3($(this))" style=" margin-right: 15px" type="button" id="picture-save-button" tabindex="6"
+                  class="btn btn-save rounded-pill">Novo Link</button>
+              
+              
+              </div>
+
+
+              <div style="max-width: 800px;" class="contentBlock">
+                <div class="headerCon">
+                  <label class="labelSwitch">Coluna de contato</label>  
+                </div>
+
+                
+              
+                <label class="labelSwitch">Insira as informações de contato</label>
+                <textarea class="textArea" rows="5"></textarea>
+                <br><br> 
+              
+              </div>
+      
    
+      
+      
+      
+      
+      
+      
+            </div>
+      
+          </div>
+        </div>
+      </div>
+
+
+
 
 
   </div>
@@ -1587,8 +2383,8 @@
   <script src="home.js"></script>
 
 
-  
-  
+
+
 
 
 </body>
