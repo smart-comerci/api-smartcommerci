@@ -91,30 +91,25 @@ let homePage = {
     link: "",
   },
   footerLinks: {
-    firstColumn: [
-      {
-        text: "",
-        link: "",
-      },
-    ],
-    secondColumn: [
-      {
-        text: "",
-        link: "",
-      },
-    ],
-    thirdColumn: [
-      {
-        text: "",
-        link: "",
-      },
-    ],
-    fourtyColumn: [
-      {
-        text: "",
-        link: "",
-      },
-    ],
+    firstColumnTittle: {
+      text: "",
+      link: "",
+    },
+    secondColumnTittle: {
+      text: "",
+      link: "",
+    },
+    thirdColumnTittle: {
+      text: "",
+      link: "",
+    },
+    firstColumn: [],
+    secondColumn: [],
+    thirdColumn: [],
+    contactData: {
+      text: "",
+      link: "",
+    },
   },
   footerLogo: {
     url: "",
@@ -138,7 +133,10 @@ let homePage = {
       link: "",
     },
   },
-  legalText: "",
+  legalText: {
+    url: "",
+    link: "",
+  },
 };
 
 //================================NEWS UPDATES==============================
@@ -204,7 +202,7 @@ $(".dropzone").click(function (e) {
   $("#modalMudaLink").attr("origin", origin);
 
   $("fundoModal").show();
-  if ($(this).attr("origin") === "aside") {
+  if ($(this).attr("origin") === "asideBanner") {
     $(this).parent().parent().addClass("index9");
   } else {
     $(this).parent().addClass("index9");
@@ -279,6 +277,21 @@ function showMe(element) {
     element.parent().parent().parent().find(".contentAfter").show();
   } else {
     element.parent().parent().parent().find(".contentAfter").hide();
+  }
+
+  let apply = element.attr("id");
+  $(".disable-me").each(function () {
+    if ($(this).attr("id") !== apply) {
+      $(this)[0].checked = false;
+    }
+  });
+}
+
+function showMe2(element) {
+  if (element[0].checked === true) {
+    element.parent().parent().find(".contentAfter").show();
+  } else {
+    element.parent().parent().find(".contentAfter").hide();
   }
 
   let apply = element.attr("id");
@@ -574,6 +587,14 @@ document
   .addEventListener("click", dynamicContent.receitas);
 
 const changeColor = (cssVar, value) => {
+  console.log(cssVar, value);
+  if (cssVar === "--color-primary") {
+    homePage["mainColors"].first = value;
+  } else if (cssVar === "--color-secondary") {
+    homePage["mainColors"].second = value;
+  } else if (cssVar === "--color-actions") {
+    homePage["mainColors"].third = value;
+  }
   document.querySelector(":root").style.setProperty(cssVar, value);
 };
 
@@ -776,4 +797,120 @@ function setTxtButton(element, e) {
     .parent()
     .find(".rounded-pill")
     .attr("texto", element.val());
+}
+
+function setMeSocialMidia(element, target) {
+  let destiny = element.attr("destiny");
+  if (destiny) {
+    if (target === "active") {
+      let active = element[0].checked;
+      homePage["socialMidia"][destiny]["status"] = active;
+    } else {
+      let link = element.val();
+      homePage["socialMidia"][destiny]["link"] = link;
+    }
+    console.log(homePage);
+  } else {
+    console.log("destiny ausente");
+  }
+}
+
+function setMeFooterMenu(element, contatctData) {
+  if (!contatctData) {
+    let destiny = element.attr("destiny");
+    let link = element.attr("link");
+    let description = element.attr("description");
+
+    if (destiny) {
+      homePage["footerLinks"][destiny].push({
+        text: description,
+        link: link,
+      });
+
+      console.log(homePage);
+    } else {
+      console.log("destiny ausente");
+    }
+  } else {
+    let destiny = "contactData";
+    let text = element.val();
+
+    if (destiny) {
+      homePage["footerLinks"][destiny].text = text;
+      console.log(homePage);
+    } else {
+      console.log("destiny ausente");
+    }
+  }
+}
+
+function removeMeFooterMenu(element) {
+  let destiny = element.attr("destiny");
+  let link = element.attr("link");
+  let description = element.attr("description");
+  if (destiny) {
+    let thisObject = homePage["footerLinks"][destiny];
+    let newObject = [];
+    for (const k in thisObject) {
+      console.log(thisObject[k], description, link);
+      if (thisObject[k].text !== description || thisObject[k].link !== link) {
+        newObject.push({
+          text: thisObject[k].text,
+          link: thisObject[k].link,
+        });
+      }
+    }
+    console.log(newObject);
+    homePage["footerLinks"][destiny] = newObject;
+    console.log(homePage);
+  } else {
+    console.log("destiny ausente");
+  }
+  element.parent().parent().remove();
+}
+
+function addLink(element, destiny) {
+  let link = element.parent().find(".linkContact").val();
+  let text = element.parent().find(".textContact").val();
+
+  if (link && text && link != "" && text != "") {
+    element.attr("destiny", destiny);
+    element.attr("link", link);
+    element.attr("description", text);
+    setMeFooterMenu(element);
+    let HTML = `
+                        <div class="cardSearch"> 
+                          <div class="itemSearch" style="padding-top: 15px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
+                              <defs></defs>
+                              <path class="a"
+                                d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                              </path>
+                              <path class="a"
+                                d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                                transform="translate(5)"></path>
+                            </svg> 
+                          </div>
+                          <div class="itemSearch" style="padding-top: 15px;width: 60%;">
+                            <p class="cardText">${text}</p>
+                          </div> 
+                          <div class="itemSearch" style=" width: 300px;">
+                            <button onclick="removeMeFooterMenu($(this))" link="${link}" description="${text}" destiny="${destiny}" style="zoom: 80%;background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+                              type="button" id="picture-save-button" tabindex="6"  
+                              class="btn btn-save rounded-pill">Remover da coluna</button>
+                          </div>
+                        </div>
+                        `;
+    element.parent().parent().parent().find(".areaMenus").append(HTML);
+  }
+}
+
+function setColumnTitle(element) {
+  let destiny = element.attr("destiny");
+  if (destiny) {
+    homePage["footerLinks"][destiny].text = element.val();
+    console.log(homePage);
+  } else {
+    console.log("destiny ausente");
+  }
 }
