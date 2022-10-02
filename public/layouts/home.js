@@ -185,9 +185,10 @@ function setOrigins(origin) {
     });
   }
 }
+var GLOBAL_ELEMENT_EDIT = null
 $(".dropzone").click(function (e) {
   e = window.event;
-
+  GLOBAL_ELEMENT_EDIT = $(this)
   e.stopPropagation();
   let origin = $(this).attr("origin");
   console.log("ORIGIN", origin);
@@ -220,6 +221,7 @@ function newLink3(element) {
 }
 
 function showMyPrev(element) {
+  GLOBAL_ELEMENT_EDIT = element
   let origin = element.attr("origin");
   $("#modalChangePicture").attr("origin", origin);
   $("#modalChangePicture").find("input").attr("origin", origin);
@@ -720,6 +722,15 @@ async function changePicture(element) {
           origin.split("-")[2]
         ].url = thisURL;
       }
+      if (origin === `newsletter` || origin === `whatsapp`) {
+        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`background`, `url(${thisURL})`)
+        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`background-position`, `center`)
+        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`background-size`, `cover`)
+        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`zoom`, `90%`)
+      }
+
+      GLOBAL_ELEMENT_EDIT.find(`img`).attr(`src`, thisURL)
+      GLOBAL_ELEMENT_EDIT.addClass(`dropped`)
       console.log(homePage);
     } else {
       console.log("url ausente");
@@ -755,6 +766,13 @@ async function changeLink(element) {
   $(".btn-close").click();
 }
 
+function nl2br(str) {
+  var breakTag = '<br>';
+  let ret = (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, breakTag);
+
+  return ret
+}
+
 async function changeText(element) {
   let origin = element.attr("origin");
   if (origin) {
@@ -770,6 +788,18 @@ async function changeText(element) {
           origin.split("-")[2]
         ].text = thisURL;
       }
+      thisURL = nl2br(thisURL)
+      console.log(`thisURL`, thisURL)
+      GLOBAL_ELEMENT_EDIT.find(`.textDemo`).html(thisURL)
+      GLOBAL_ELEMENT_EDIT.addClass("dropped")
+      GLOBAL_ELEMENT_EDIT.find(".contentP").css("padding", "25px")
+      GLOBAL_ELEMENT_EDIT.find(".contentP").html(
+        nl2br(thisURL)
+      )
+      GLOBAL_ELEMENT_EDIT.css("background", "white")
+
+
+
       console.log(homePage);
     } else {
       console.log("texto ausente");
@@ -778,6 +808,8 @@ async function changeText(element) {
     console.log("origin ausente");
   }
   $(".btn-close").click();
+
+  GLOBAL_ELEMENT_EDIT.addClass("dropped")
 }
 
 function setUrlButton(element, e) {
@@ -809,6 +841,10 @@ function setMeSocialMidia(element, target) {
       let link = element.val();
       homePage["socialMidia"][destiny]["link"] = link;
     }
+    GLOBAL_ELEMENT_EDIT.addClass("dropped")
+    GLOBAL_ELEMENT_EDIT.css("background", "white")
+    GLOBAL_ELEMENT_EDIT.find(".midiasSociais").show()
+    setMidiasSociais()
     console.log(homePage);
   } else {
     console.log("destiny ausente");
@@ -842,6 +878,7 @@ function setMeFooterMenu(element, contatctData) {
       console.log("destiny ausente");
     }
   }
+  setLinksFooterElements()
 }
 
 function removeMeFooterMenu(element) {
@@ -873,6 +910,12 @@ function addLink(element, destiny) {
   let link = element.parent().find(".linkContact").val();
   let text = element.parent().find(".textContact").val();
 
+  GLOBAL_ELEMENT_EDIT.find(`.linksFooter`).show()
+  GLOBAL_ELEMENT_EDIT.find(`.linksFooter`).css(`display`, `inline-flex`)
+  GLOBAL_ELEMENT_EDIT.css(`background`, `white`)
+  GLOBAL_ELEMENT_EDIT.addClass(`dropped`)
+
+
   if (link && text && link != "" && text != "") {
     element.attr("destiny", destiny);
     element.attr("link", link);
@@ -902,6 +945,7 @@ function addLink(element, destiny) {
                         </div>
                         `;
     element.parent().parent().parent().find(".areaMenus").append(HTML);
+
   }
 }
 
@@ -913,4 +957,61 @@ function setColumnTitle(element) {
   } else {
     console.log("destiny ausente");
   }
+}
+
+
+
+
+
+function setLinksFooterElements() {
+  $(`.linksInternosPrimeira`).html("")
+  $(`.linksInternosSegunda`).html("")
+  $(`.linksInternosTerceira`).html("")
+
+  $(`.tituloLinkFooterPrimeira`).text(
+    homePage.footerLinks.firstColumnTittle.text
+  )
+  homePage.footerLinks.firstColumn.forEach((element) => {
+    $(`.linksInternosPrimeira`).append(
+      `<a class="linkInterno" href="${element.link}"> ${element.text} <a>`
+    )
+  })
+  $(`.tituloLinkFooterSegunda`).text(
+    homePage.footerLinks.secondColumnTittle.text
+  )
+  homePage.footerLinks.secondColumn.forEach((element) => {
+    $(`.linksInternosSegunda`).append(
+      `<a class="linkInterno" href="${element.link}"> ${element.text} <a>`
+    )
+  })
+  $(`.tituloLinkFooterTerceira`).text(
+    homePage.footerLinks.thirdColumnTittle.text
+  )
+  homePage.footerLinks.thirdColumn.forEach((element) => {
+    $(`.linksInternosTerceira`).append(
+      `<a class="linkInterno" href="${element.link}"> ${element.text} <a>`
+    )
+  })
+  $(`.contato`).find(`.linksInternos`).html(
+    homePage.footerLinks.contactData.text
+  )
+
+}
+
+function setMidiasSociais() {
+  $(`.midiasSociais`).html(``)
+
+  let youtube = `<svg  style="margin: 10px;${homePage.socialMidia.facebook.active === true ? `` : `display: block`} " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
+                  viewBox="0 0 22.939 16.129">
+                  <path id="facebook"
+                    d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
+                    transform="translate(-14.933 -64)" fill="#8897ad" />
+                </svg><a>`;
+
+
+
+  $(`.midiasSociais`).append(youtube)
+  $(`.midiasSociais`).append(youtube)
+  $(`.midiasSociais`).append(youtube)
+
 }

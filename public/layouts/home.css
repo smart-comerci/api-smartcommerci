@@ -704,6 +704,10 @@
      display: block;
  }
 
+ .dropzone.dropped .conteudoSalvo {
+     display: block;
+ }
+
  .dropzone.dropped {
      border: none;
  }
@@ -1174,16 +1178,17 @@
      width: 100%;
      padding: 10px;
  }
- .headerCon{
-    width: calc(100% + 30px);
-        margin-left: -15px;
-        margin-top: -15px;
-        padding: 15px;
-        background: white;
-        border: 1px solid #EDF2F6;
-        background: #FFFFFF 0% 0% no-repeat padding-box;
-        border: 1px solid #EDF2F6;
-        border-radius: 16px 16px 0px 0px;
+
+ .headerCon {
+     width: calc(100% + 30px);
+     margin-left: -15px;
+     margin-top: -15px;
+     padding: 15px;
+     background: white;
+     border: 1px solid #EDF2F6;
+     background: #FFFFFF 0% 0% no-repeat padding-box;
+     border: 1px solid #EDF2F6;
+     border-radius: 16px 16px 0px 0px;
  }
 
  .backGold {
@@ -1352,8 +1357,8 @@
      background: #FCFCFD 0% 0% no-repeat padding-box;
      border: 1px solid #EDF2F6;
      border-radius: 16px;
-     opacity: 1; 
-     width: 100%;     
+     opacity: 1;
+     width: 100%;
      padding: 15px;
      margin-top: 15px;
  }
@@ -1517,6 +1522,75 @@
      max-width: 50px;
  }
 
- .areaMenus{
-    padding-top:25px
+ .areaMenus {
+     padding-top: 25px
+ }
+
+ .conteudoSalvo {
+     width: 100%;
+     display: none;
+ }
+
+ .headerDemo {
+     width: 100%;
+     padding: 25px;
+     margin-top: 50px;
+ }
+
+ .textDemo {
+     text-align: left;
+     color: var(--color-primary);
+     font-size: 24px;
+
+ }
+
+ .inputDemo {
+     border: none;
+
+ }
+
+ .areaInputDemo {
+     padding: 10px;
+     border-radius: 10px;
+     background-color: white;
+     width: 300px;
+     margin-left: 25px;
+ }
+
+ .buttonDemo {
+     color: white;
+     background-color: var(--color-primary);
+     border-radius: 10px;
+     padding: 5px;
+     margin: auto;
+ }
+
+ .linksFooter {
+     background-color: white;
+     display: none;
+ }
+
+ .tituloLinkFooterPrimeira,
+ .tituloLinkFooterSegunda,
+ .tituloLinkFooterContato,
+ .tituloLinkFooterTerceira {
+     font-size: 18px;
+ }
+
+ .linkInterno {
+     font-size: 18px;
+     color: #687C97;
+ }
+
+ .linksInternosSegunda,
+ .linksInternosPrimeira,
+
+ .linksInternosTerceira {
+     display: grid;
+ }
+
+ .midiasSociais {
+     display: inline-flex;
+     gap: 15px;
+     padding: 25px;
  }
