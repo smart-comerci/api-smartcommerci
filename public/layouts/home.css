@@ -1575,11 +1575,13 @@
  .tituloLinkFooterContato,
  .tituloLinkFooterTerceira {
      font-size: 18px;
+     min-width: 25%;
  }
 
  .linkInterno {
      font-size: 18px;
      color: #687C97;
+     min-width: 200px;
  }
 
  .linksInternosSegunda,

@@ -1,3 +1,4 @@
+
 let notFound =
   "https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
 
@@ -662,9 +663,8 @@ function createElementFromHTML(htmlString) {
 }
 
 //=========================== Área de CRUD =====================
+let host = `http://localhost:7070`
 async function uploadAndUpdateFile(element) {
-  // await ajax call to upload picture and return url
-
   element
     .parent()
     .parent()
@@ -672,7 +672,7 @@ async function uploadAndUpdateFile(element) {
     .parent()
     .find("button")
     .each(function () {
-      $(this).removeAttr("url", "URL_RECEBIDA_AJAX");
+      $(this).removeAttr("url");
     });
 
   element
@@ -682,29 +682,55 @@ async function uploadAndUpdateFile(element) {
     .parent()
     .find("input")
     .each(function () {
-      $(this).removeAttr("url", "URL_RECEBIDA_AJAX");
+      $(this).removeAttr("url");
     });
-  if ("URL_RECEBIDA_AJAX") {
-    element
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .find("button")
-      .each(function () {
-        $(this).attr("url", "URL_RECEBIDA_AJAX");
-      });
 
-    element
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .find("input")
-      .each(function () {
-        $(this).attr("url", "URL_RECEBIDA_AJAX");
-      });
-  }
+  console.log(element)
+  let files = element[0].files
+  var data = new FormData();
+  data.append('fileimagem', files[0]);
+  await $.ajax({
+    url: host + '/uploadBanners',
+    headers: {
+      "x-access-token": localStorage.token,
+      "master_id": localStorage.MASTER_ID
+    },
+    data: data,
+    processData: false,
+    contentType: false,
+    type: 'POST',
+    success: function (data) {
+      console.log(data)
+      let URL = data.path.replace(`./public`, host)
+      console.log(`URL`, URL)
+
+      if (URL) {
+        element
+          .parent()
+          .parent()
+          .parent()
+          .parent()
+          .find("button")
+          .each(function () {
+            $(this).attr("url", URL);
+          });
+
+        element
+          .parent()
+          .parent()
+          .parent()
+          .parent()
+          .find("input")
+          .each(function () {
+            $(this).attr("url", URL);
+          });
+      }
+    },
+    error: function (data) { }
+  });
+
+
+
 }
 
 async function changePicture(element) {
@@ -1014,4 +1040,81 @@ function setMidiasSociais() {
   $(`.midiasSociais`).append(youtube)
   $(`.midiasSociais`).append(youtube)
 
+}
+
+//====================AREA FOR REQUEST========================
+
+getMyObjectHomeMain()
+async function getMyObjectHomeMain() {
+  $.ajax({
+    type: 'POST',
+    url: host + '/getById',
+    data: {
+      affiliate_id: localStorage.AFFILIATE_ID,
+      table: "masters",
+      id_name: "id",
+      id_value: localStorage.MASTER_ID,
+    },
+    headers: {
+      "x-access-token": localStorage.token,
+    },
+    success: function (data) {
+      console.log("data", data)
+      try {
+        let news = JSON.parse(data[0].home_main_info)
+        homePage = news
+        console.log(`home page`, homePage)
+        start()
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    error: function (data) {
+      console.log(data)
+    },
+    complete: function () { }
+  });
+
+}
+function start() {
+  $(`.dropzone`).each(function () {
+    let origin = $(this).attr(`origin`)
+    console.log(origin, origin.split(`-`).length)
+    if (origin.split(`-`).length === 1) {
+      $(this).addClass(`dropped`)
+      $(this).find(`img`).attr(`src`, homePage[origin]?.url)
+    } else if (origin.split(`-`).length === 2) {
+      $(this).addClass(`dropped`)
+      $(this).find(`img`).attr(`src`, homePage[origin.split(`-`)[0]][origin.split(`-`)[1]]?.url)
+    } else if (origin.split(`-`).length === 3) {
+      $(this).addClass(`dropped`)
+      $(this).find(`img`).attr(`src`, homePage[origin.split(`-`)[0]][origin.split(`-`)[1]][origin.split(`-`)[2]]?.url)
+    }
+  })
+  setLinksFooterElements()
+  setMidiasSociais()
+}
+
+logarDev()
+async function logarDev() {
+  $.ajax({
+    type: "POST",
+    url: host + '/login',
+    data: { user: `ronantj@hotmail.com`, table: "users_affiliates", prefix: "users_affiliate", password: `mdt1234@` },
+    success: function (data) {
+      console.log(data)
+      localStorage.AFFILIATE_ID = data.data.users_affiliate_id
+      localStorage.MASTER_ID = data.data.users_affiliate_master_id
+      localStorage.token = data.token
+
+
+    },
+    error: function (data) {
+      //console.log(data);
+      //   alertar("O login falhou!")
+    },
+    complete: function () {
+
+    },
+  });
 }
