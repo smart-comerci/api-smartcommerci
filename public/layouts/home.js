@@ -1328,7 +1328,8 @@ function addItensToList(element, code) {
   for (const k in homePage.body) {
     if (homePage.body[k].id === element.attr("currentId")) {
       if (homePage.body[k].products.length < 6) {
-        let prd = CACHE_SEARCH.find((c) => c.product_code === code);
+        console.log(code);
+        let prd = CACHE_SEARCH.find((c) => c.product_code === Number(code));
         homePage.body[k].products.push(prd.product_code);
         $("#lista").append(getCardProduct(prd));
       } else {
