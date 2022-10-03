@@ -1,4 +1,3 @@
-
 let notFound =
   "https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
 
@@ -186,10 +185,10 @@ function setOrigins(origin) {
     });
   }
 }
-var GLOBAL_ELEMENT_EDIT = null
+var GLOBAL_ELEMENT_EDIT = null;
 $(".dropzone").click(function (e) {
   e = window.event;
-  GLOBAL_ELEMENT_EDIT = $(this)
+  GLOBAL_ELEMENT_EDIT = $(this);
   e.stopPropagation();
   let origin = $(this).attr("origin");
   console.log("ORIGIN", origin);
@@ -222,7 +221,7 @@ function newLink3(element) {
 }
 
 function showMyPrev(element) {
-  GLOBAL_ELEMENT_EDIT = element
+  GLOBAL_ELEMENT_EDIT = element;
   let origin = element.attr("origin");
   $("#modalChangePicture").attr("origin", origin);
   $("#modalChangePicture").find("input").attr("origin", origin);
@@ -663,7 +662,7 @@ function createElementFromHTML(htmlString) {
 }
 
 //=========================== Área de CRUD =====================
-let host = `http://localhost:7070`
+let host = `https://api-smartcomerci.com.br:9090`;
 async function uploadAndUpdateFile(element) {
   element
     .parent()
@@ -685,24 +684,24 @@ async function uploadAndUpdateFile(element) {
       $(this).removeAttr("url");
     });
 
-  console.log(element)
-  let files = element[0].files
+  console.log(element);
+  let files = element[0].files;
   var data = new FormData();
-  data.append('fileimagem', files[0]);
+  data.append("fileimagem", files[0]);
   await $.ajax({
-    url: host + '/uploadBanners',
+    url: host + "/uploadBanners",
     headers: {
       "x-access-token": localStorage.token,
-      "master_id": localStorage.MASTER_ID
+      master_id: localStorage.MASTER_ID,
     },
     data: data,
     processData: false,
     contentType: false,
-    type: 'POST',
+    type: "POST",
     success: function (data) {
-      console.log(data)
-      let URL = data.path.replace(`./public`, host)
-      console.log(`URL`, URL)
+      console.log(data);
+      let URL = data.path.replace(`./public`, host);
+      console.log(`URL`, URL);
 
       if (URL) {
         element
@@ -726,11 +725,8 @@ async function uploadAndUpdateFile(element) {
           });
       }
     },
-    error: function (data) { }
+    error: function (data) {},
   });
-
-
-
 }
 
 async function changePicture(element) {
@@ -749,14 +745,23 @@ async function changePicture(element) {
         ].url = thisURL;
       }
       if (origin === `newsletter` || origin === `whatsapp`) {
-        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`background`, `url(${thisURL})`)
-        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`background-position`, `center`)
-        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`background-size`, `cover`)
-        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`zoom`, `90%`)
+        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
+          `background`,
+          `url(${thisURL})`
+        );
+        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
+          `background-position`,
+          `center`
+        );
+        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
+          `background-size`,
+          `cover`
+        );
+        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`zoom`, `90%`);
       }
 
-      GLOBAL_ELEMENT_EDIT.find(`img`).attr(`src`, thisURL)
-      GLOBAL_ELEMENT_EDIT.addClass(`dropped`)
+      GLOBAL_ELEMENT_EDIT.find(`img`).attr(`src`, thisURL);
+      GLOBAL_ELEMENT_EDIT.addClass(`dropped`);
       console.log(homePage);
     } else {
       console.log("url ausente");
@@ -793,10 +798,10 @@ async function changeLink(element) {
 }
 
 function nl2br(str) {
-  var breakTag = '<br>';
-  let ret = (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, breakTag);
+  var breakTag = "<br>";
+  let ret = (str + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, breakTag);
 
-  return ret
+  return ret;
 }
 
 async function changeText(element) {
@@ -814,17 +819,13 @@ async function changeText(element) {
           origin.split("-")[2]
         ].text = thisURL;
       }
-      thisURL = nl2br(thisURL)
-      console.log(`thisURL`, thisURL)
-      GLOBAL_ELEMENT_EDIT.find(`.textDemo`).html(thisURL)
-      GLOBAL_ELEMENT_EDIT.addClass("dropped")
-      GLOBAL_ELEMENT_EDIT.find(".contentP").css("padding", "25px")
-      GLOBAL_ELEMENT_EDIT.find(".contentP").html(
-        nl2br(thisURL)
-      )
-      GLOBAL_ELEMENT_EDIT.css("background", "white")
-
-
+      thisURL = nl2br(thisURL);
+      console.log(`thisURL`, thisURL);
+      GLOBAL_ELEMENT_EDIT.find(`.textDemo`).html(thisURL);
+      GLOBAL_ELEMENT_EDIT.addClass("dropped");
+      GLOBAL_ELEMENT_EDIT.find(".contentP").css("padding", "25px");
+      GLOBAL_ELEMENT_EDIT.find(".contentP").html(nl2br(thisURL));
+      GLOBAL_ELEMENT_EDIT.css("background", "white");
 
       console.log(homePage);
     } else {
@@ -835,7 +836,7 @@ async function changeText(element) {
   }
   $(".btn-close").click();
 
-  GLOBAL_ELEMENT_EDIT.addClass("dropped")
+  GLOBAL_ELEMENT_EDIT.addClass("dropped");
 }
 
 function setUrlButton(element, e) {
@@ -867,10 +868,10 @@ function setMeSocialMidia(element, target) {
       let link = element.val();
       homePage["socialMidia"][destiny]["link"] = link;
     }
-    GLOBAL_ELEMENT_EDIT.addClass("dropped")
-    GLOBAL_ELEMENT_EDIT.css("background", "white")
-    GLOBAL_ELEMENT_EDIT.find(".midiasSociais").show()
-    setMidiasSociais()
+    GLOBAL_ELEMENT_EDIT.addClass("dropped");
+    GLOBAL_ELEMENT_EDIT.css("background", "white");
+    GLOBAL_ELEMENT_EDIT.find(".midiasSociais").show();
+    setMidiasSociais();
     console.log(homePage);
   } else {
     console.log("destiny ausente");
@@ -904,7 +905,7 @@ function setMeFooterMenu(element, contatctData) {
       console.log("destiny ausente");
     }
   }
-  setLinksFooterElements()
+  setLinksFooterElements();
 }
 
 function removeMeFooterMenu(element) {
@@ -936,11 +937,10 @@ function addLink(element, destiny) {
   let link = element.parent().find(".linkContact").val();
   let text = element.parent().find(".textContact").val();
 
-  GLOBAL_ELEMENT_EDIT.find(`.linksFooter`).show()
-  GLOBAL_ELEMENT_EDIT.find(`.linksFooter`).css(`display`, `inline-flex`)
-  GLOBAL_ELEMENT_EDIT.css(`background`, `white`)
-  GLOBAL_ELEMENT_EDIT.addClass(`dropped`)
-
+  GLOBAL_ELEMENT_EDIT.find(`.linksFooter`).show();
+  GLOBAL_ELEMENT_EDIT.find(`.linksFooter`).css(`display`, `inline-flex`);
+  GLOBAL_ELEMENT_EDIT.css(`background`, `white`);
+  GLOBAL_ELEMENT_EDIT.addClass(`dropped`);
 
   if (link && text && link != "" && text != "") {
     element.attr("destiny", destiny);
@@ -971,7 +971,6 @@ function addLink(element, destiny) {
                         </div>
                         `;
     element.parent().parent().parent().find(".areaMenus").append(HTML);
-
   }
 }
 
@@ -985,70 +984,64 @@ function setColumnTitle(element) {
   }
 }
 
-
-
-
-
 function setLinksFooterElements() {
-  $(`.linksInternosPrimeira`).html("")
-  $(`.linksInternosSegunda`).html("")
-  $(`.linksInternosTerceira`).html("")
+  $(`.linksInternosPrimeira`).html("");
+  $(`.linksInternosSegunda`).html("");
+  $(`.linksInternosTerceira`).html("");
 
   $(`.tituloLinkFooterPrimeira`).text(
     homePage.footerLinks.firstColumnTittle.text
-  )
+  );
   homePage.footerLinks.firstColumn.forEach((element) => {
     $(`.linksInternosPrimeira`).append(
       `<a class="linkInterno" href="${element.link}"> ${element.text} <a>`
-    )
-  })
+    );
+  });
   $(`.tituloLinkFooterSegunda`).text(
     homePage.footerLinks.secondColumnTittle.text
-  )
+  );
   homePage.footerLinks.secondColumn.forEach((element) => {
     $(`.linksInternosSegunda`).append(
       `<a class="linkInterno" href="${element.link}"> ${element.text} <a>`
-    )
-  })
+    );
+  });
   $(`.tituloLinkFooterTerceira`).text(
     homePage.footerLinks.thirdColumnTittle.text
-  )
+  );
   homePage.footerLinks.thirdColumn.forEach((element) => {
     $(`.linksInternosTerceira`).append(
       `<a class="linkInterno" href="${element.link}"> ${element.text} <a>`
-    )
-  })
-  $(`.contato`).find(`.linksInternos`).html(
-    homePage.footerLinks.contactData.text
-  )
-
+    );
+  });
+  $(`.contato`)
+    .find(`.linksInternos`)
+    .html(homePage.footerLinks.contactData.text);
 }
 
 function setMidiasSociais() {
-  $(`.midiasSociais`).html(``)
+  $(`.midiasSociais`).html(``);
 
-  let youtube = `<svg  style="margin: 10px;${homePage.socialMidia.facebook.active === true ? `` : `display: block`} " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
+  let youtube = `<svg  style="margin: 10px;${
+    homePage.socialMidia.facebook.active === true ? `` : `display: block`
+  } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
                   viewBox="0 0 22.939 16.129">
                   <path id="facebook"
                     d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
                     transform="translate(-14.933 -64)" fill="#8897ad" />
                 </svg><a>`;
 
-
-
-  $(`.midiasSociais`).append(youtube)
-  $(`.midiasSociais`).append(youtube)
-  $(`.midiasSociais`).append(youtube)
-
+  $(`.midiasSociais`).append(youtube);
+  $(`.midiasSociais`).append(youtube);
+  $(`.midiasSociais`).append(youtube);
 }
 
 //====================AREA FOR REQUEST========================
 
-getMyObjectHomeMain()
+getMyObjectHomeMain();
 async function getMyObjectHomeMain() {
   $.ajax({
-    type: 'POST',
-    url: host + '/getById',
+    type: "POST",
+    url: host + "/getById",
     data: {
       affiliate_id: localStorage.AFFILIATE_ID,
       table: "masters",
@@ -1059,62 +1052,71 @@ async function getMyObjectHomeMain() {
       "x-access-token": localStorage.token,
     },
     success: function (data) {
-      console.log("data", data)
+      console.log("data", data);
       try {
-        let news = JSON.parse(data[0].home_main_info)
-        homePage = news
-        console.log(`home page`, homePage)
-        start()
+        let news = JSON.parse(data[0].home_main_info);
+        homePage = news;
+        console.log(`home page`, homePage);
+        start();
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
     error: function (data) {
-      console.log(data)
+      console.log(data);
     },
-    complete: function () { }
+    complete: function () {},
   });
-
 }
 function start() {
   $(`.dropzone`).each(function () {
-    let origin = $(this).attr(`origin`)
-    console.log(origin, origin.split(`-`).length)
+    let origin = $(this).attr(`origin`);
+    console.log(origin, origin.split(`-`).length);
     if (origin.split(`-`).length === 1) {
-      $(this).addClass(`dropped`)
-      $(this).find(`img`).attr(`src`, homePage[origin]?.url)
+      $(this).addClass(`dropped`);
+      $(this).find(`img`).attr(`src`, homePage[origin]?.url);
     } else if (origin.split(`-`).length === 2) {
-      $(this).addClass(`dropped`)
-      $(this).find(`img`).attr(`src`, homePage[origin.split(`-`)[0]][origin.split(`-`)[1]]?.url)
+      $(this).addClass(`dropped`);
+      $(this)
+        .find(`img`)
+        .attr(`src`, homePage[origin.split(`-`)[0]][origin.split(`-`)[1]]?.url);
     } else if (origin.split(`-`).length === 3) {
-      $(this).addClass(`dropped`)
-      $(this).find(`img`).attr(`src`, homePage[origin.split(`-`)[0]][origin.split(`-`)[1]][origin.split(`-`)[2]]?.url)
+      $(this).addClass(`dropped`);
+      $(this)
+        .find(`img`)
+        .attr(
+          `src`,
+          homePage[origin.split(`-`)[0]][origin.split(`-`)[1]][
+            origin.split(`-`)[2]
+          ]?.url
+        );
     }
-  })
-  setLinksFooterElements()
-  setMidiasSociais()
+  });
+  setLinksFooterElements();
+  setMidiasSociais();
 }
 
-logarDev()
+logarDev();
 async function logarDev() {
   $.ajax({
     type: "POST",
-    url: host + '/login',
-    data: { user: `ronantj@hotmail.com`, table: "users_affiliates", prefix: "users_affiliate", password: `mdt1234@` },
+    url: host + "/login",
+    data: {
+      user: `ronantj@hotmail.com`,
+      table: "users_affiliates",
+      prefix: "users_affiliate",
+      password: `mdt1234@`,
+    },
     success: function (data) {
-      console.log(data)
-      localStorage.AFFILIATE_ID = data.data.users_affiliate_id
-      localStorage.MASTER_ID = data.data.users_affiliate_master_id
-      localStorage.token = data.token
-
-
+      console.log(data);
+      localStorage.AFFILIATE_ID = data.data.users_affiliate_id;
+      localStorage.MASTER_ID = data.data.users_affiliate_master_id;
+      localStorage.token = data.token;
     },
     error: function (data) {
       //console.log(data);
       //   alertar("O login falhou!")
     },
-    complete: function () {
-
-    },
+    complete: function () {},
   });
 }
