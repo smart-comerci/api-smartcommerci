@@ -1284,6 +1284,7 @@ async function publishChanges() {
 }
 
 async function getProductsListIds(listIds) {
+  console.log("a lista ", listIds);
   return $.ajax({
     url: host + "/listaIds",
     data: {
