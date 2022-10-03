@@ -44,43 +44,7 @@ let homePage = {
       link: "",
     },
   },
-  body: [
-    {
-      type: "vitrine",
-      title: {
-        text: "",
-        link: "",
-      },
-      categories: [],
-      smart: false,
-      bestSellers: false,
-      offers: false,
-      personal: false,
-      products: [],
-    },
-    {
-      type: "revenues",
-      title: {
-        text: "",
-        link: "",
-      },
-      categories: [],
-      smart: false,
-      personal: false,
-      revenues: [],
-    },
-    {
-      type: "banners",
-      first: {
-        url: "",
-        link: "",
-      },
-      second: {
-        url: "",
-        link: "",
-      },
-    },
-  ],
+  body: [],
   newsletter: {
     text: "",
     link: "",
@@ -490,6 +454,83 @@ const dropzoneHtml = div.firstElementChild;
 const dropzoneHtml2 = div2.firstElementChild;
 const dropzoneHtml3 = div3.firstElementChild;
 
+function prepareVitrine(element) {
+  let myId = Math.random().toFixed(4).replace(".", "");
+  if (element.attr("conteudo") === "produto") {
+    let item = {
+      id: myId,
+      type: "vitrine",
+      title: {
+        text: "",
+        link: "",
+      },
+      categories: [],
+      smart: false,
+      bestSellers: false,
+      offers: false,
+      personal: false,
+      products: [],
+    };
+
+    homePage.body.push(item);
+  }
+  if (element.attr("conteudo") === "receita") {
+    let item = {
+      id: myId,
+      type: "revenues",
+      title: {
+        text: "",
+        link: "",
+      },
+      categories: [],
+      smart: false,
+      personal: false,
+      revenues: [],
+    };
+
+    homePage.body.push(item);
+  }
+  if (element.attr("conteudo") === "banner") {
+    let item = {
+      id: myId,
+      type: "banners",
+      first: {
+        url: "",
+        link: "",
+      },
+      second: {
+        url: "",
+        link: "",
+      },
+    };
+
+    homePage.body.push(item);
+  }
+  $("#modalVitrine").attr("idCurrentItem", myId);
+  $("#modalReceitas").attr("idCurrentItem", myId);
+  $("#modalVitrine")
+    .find("input")
+    .each(function () {
+      $(this).attr("idCurrentItem", myId);
+    });
+
+  $("#modalVitrine")
+    .find("button")
+    .each(function () {
+      $(this).attr("idCurrentItem", myId);
+    });
+  $("#modalReceitas")
+    .find("input")
+    .each(function () {
+      $(this).attr("idCurrentItem", myId);
+    });
+  $("#modalReceitas")
+    .find("button")
+    .each(function () {
+      $(this).attr("idCurrentItem", myId);
+    });
+}
+
 const dynamicContent = {
   produtos: () => {
     const wrapper = document.createElement("div");
@@ -503,6 +544,7 @@ const dynamicContent = {
     const prev =
       createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
+        conteudo="produto"
         data-bs-toggle="modal"
         data-bs-target="#modalVitrine"
         class="dropzone-prev-button  backGold"
@@ -1176,3 +1218,42 @@ async function publishChanges() {
     complete: function () {},
   });
 }
+
+async function getProductsListIds(listIds) {
+  $.ajax({
+    url: host + "/listaIds",
+    data: {
+      product_list_ids: listIds,
+      affiliate_id: localStorage.AFFILIATE_ID,
+    },
+    type: "POST",
+    success: function (data) {
+      console.log("produtos", data);
+    },
+    error: function (data) {
+      console.log("erro busca produto", data);
+    },
+  });
+}
+
+async function searchProducts(text) {
+  $.ajax({
+    url: host + "/productSearchSite",
+    data: {
+      product_code: text,
+      product_site_name: text,
+      product_affiliate_id: localStorage.AFFILIATE_ID,
+      lastID: 0,
+      totalItems: 50,
+    },
+    type: "POST",
+    success: function (data) {
+      console.log("produtos", data);
+    },
+    error: function (data) {
+      console.log("erro busca produto", data);
+    },
+  });
+}
+
+function setVitrine(element) {}
