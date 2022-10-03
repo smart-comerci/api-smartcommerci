@@ -725,7 +725,7 @@ const dynamicContent = {
 
 document
   .querySelector("#content-dynamic-produtos")
-  .addEventListener("click", dynamicContent.produtos);
+  .addEventListener("click", dynamicContent.produtos());
 document
   .querySelector("#content-dynamic-banners")
   .addEventListener("click", dynamicContent.banners);
