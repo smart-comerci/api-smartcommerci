@@ -598,6 +598,12 @@ function prepareVitrine(element) {
     });
 }
 
+function publicaFecha() {
+  publishChanges();
+  $(".btn-close").click();
+  location.reload();
+}
+
 const dynamicContent = {
   produtos: async (list, title) => {
     const wrapper = document.createElement("div");
