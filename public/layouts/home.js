@@ -543,6 +543,7 @@ const dynamicContent = {
     const prev =
       createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
+      onclick="prepareVitrine($(this))"
         conteudo="produto"
         data-bs-toggle="modal"
         data-bs-target="#modalVitrine"
