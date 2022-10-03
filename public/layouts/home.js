@@ -369,6 +369,7 @@ div2.innerHTML = `
 async function getAmostraVitrine(listaIds) {
   const div2 = document.createElement("div");
   let dadosPRD = await getProductsListIds(listaIds);
+  console.log("dadosPRD", dadosPRD);
   let fullHTML = "";
   for (const k in dadosPRD) {
     fullHTML += getCardProduct(
