@@ -1273,7 +1273,7 @@ function getProductHTML(data) {
                     </p>
                   </div>
 
-                  <div class="itemSearch">
+                  <div style="min-width: 80px" class="itemSearch">
                     <p class="labelSwitch">R$ ${data[k].product_site_value}</p>
                   </div>
 
@@ -1296,29 +1296,33 @@ function getProductHTML(data) {
 
 async function searchProducts(text) {
   $("#searchSpinner").show();
-  $.ajax({
-    url: host + "/productSearchSite",
-    data: {
-      product_code: text,
-      product_site_name: text,
-      product_affiliate_id: localStorage.AFFILIATE_ID,
-      lastID: 0,
-      totalItems: 50,
-    },
-    type: "POST",
-    success: function (data) {
-      console.log("produtos", data);
+  if (text != "") {
+    $.ajax({
+      url: host + "/productSearchSite",
+      data: {
+        product_code: text,
+        product_site_name: text,
+        product_affiliate_id: localStorage.AFFILIATE_ID,
+        lastID: 0,
+        totalItems: 50,
+      },
+      type: "POST",
+      success: function (data) {
+        console.log("produtos", data);
 
-      $(".areaResultado").html(getProductHTML(data));
+        $(".areaResultado").html(getProductHTML(data));
 
-      //here
-      $("#searchSpinner").hide();
-    },
-    error: function (data) {
-      console.log("erro busca produto", data);
-      $("#searchSpinner").hide();
-    },
-  });
+        //here
+        $("#searchSpinner").hide();
+      },
+      error: function (data) {
+        console.log("erro busca produto", data);
+        $("#searchSpinner").hide();
+      },
+    });
+  } else {
+    $(".areaResultado").html("");
+  }
 }
 
 function setVitrine(element) {
