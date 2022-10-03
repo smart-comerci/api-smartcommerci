@@ -1437,7 +1437,7 @@
 
  .cardProduct {
      width: 164px;
-     height: 233px;
+     height: auto;
      background: #FFFFFF 0% 0% no-repeat padding-box;
      border: 1px solid #EDF2F6;
      opacity: 1;
