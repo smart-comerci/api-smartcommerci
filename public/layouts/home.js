@@ -1270,9 +1270,7 @@ function getProductHTML(data, currentId) {
   for (const k in data) {
     HTML += `<div class="cardSearch">
                   <div
-                    style="background:  url(${
-                      data[k].product_thumbnail
-                    }) no-repeat padding-box; background-size: contain;"
+                    style="background:  url(${data[k].product_thumbnail}) no-repeat padding-box; background-size: contain;"
                     class="imgSearch"
                   ></div>
 
@@ -1310,9 +1308,7 @@ function getProductHTML(data, currentId) {
                   <div class="itemSearch">
                     <button
                       currentId="${currentId}"
-                      onclick="addItensToList($(this), '${JSON.stringify(
-                        data[k]
-                      )}')"
+                      onclick="addItensToList($(this), '${data[k].product_code}')"
                       style=" margin-right: 15px"
                       type="button"
                       id="picture-save-button"
@@ -1328,11 +1324,11 @@ function getProductHTML(data, currentId) {
   return HTML;
 }
 
-function addItensToList(element, json) {
+function addItensToList(element, code) {
   for (const k in homePage.body) {
     if (homePage.body[k].id === element.attr("currentId")) {
       if (homePage.body[k].products.length < 6) {
-        let prd = JSON.parse(json);
+        let prd = CACHE_SEARCH.find((c) => c.product_code === code);
         homePage.body[k].products.push(prd.product_code);
         $("#lista").append(getCardProduct(prd));
       } else {
@@ -1345,6 +1341,7 @@ function addItensToList(element, json) {
     }
   }
 }
+let CACHE_SEARCH = [];
 
 async function searchProducts(element) {
   let text = element.val();
@@ -1363,6 +1360,7 @@ async function searchProducts(element) {
       type: "POST",
       success: function (data) {
         console.log("produtos", data);
+        CACHE_SEARCH = data;
 
         $(".areaResultado").html(getProductHTML(data, currentId));
 
