@@ -685,7 +685,7 @@ const dynamicContent = {
         wrapper.appendChild(dropzone);
 
         const prev =
-          createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+          createElementFromHTML(`<div style="display: none;top: 350px;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
       onclick="prepareVitrine($(this))"
         conteudo="produto"
@@ -720,7 +720,7 @@ const dynamicContent = {
         wrapper.appendChild(dropzone);
 
         const prev =
-          createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+          createElementFromHTML(`<div style="    top: 350px;display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
       onclick="prepareVitrine($(this))"
         conteudo="produto"
