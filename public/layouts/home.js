@@ -705,7 +705,7 @@ const dynamicContent = {
     </div>`);
         wrapper.setAttribute(
           "id",
-          "produto_" + Math.random().toFixed(5).replace(".", "")
+          "banner_" + Math.random().toFixed(5).replace(".", "")
         );
         wrapper.appendChild(prev);
         content2.prepend(wrapper);
@@ -717,15 +717,34 @@ const dynamicContent = {
 
       for (let i = 0; i < 2; i++) {
         const dropzone = dropzoneHtml.cloneNode(1);
-        const [input, image] = dropzone.children;
-
-        dropzone.addEventListener("dragover", handleDragOver);
-        dropzone.addEventListener("drop", handleDragDrop(input, image));
-        input.addEventListener("change", handleSelectFile(dropzone, image));
         wrapper.appendChild(dropzone);
-      }
 
-      content2.prepend(wrapper);
+        const prev =
+          createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+      <button
+      onclick="prepareVitrine($(this))"
+        conteudo="produto"
+        data-bs-toggle="modal"
+        data-bs-target="#modalChangePicture"
+        class="dropzone-prev-button  backGold"
+      >
+        <text class="dropzone-prev-text">Editar Banner</text>
+      </button>
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Excluir Banner</text>
+      </button>
+    </div>`);
+        wrapper.setAttribute(
+          "id",
+          "banner_" + Math.random().toFixed(5).replace(".", "")
+        );
+        wrapper.appendChild(prev);
+        content2.prepend(wrapper);
+      }
     }
   },
   receitas: () => {
