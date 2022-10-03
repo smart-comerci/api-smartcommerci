@@ -352,10 +352,7 @@ div.innerHTML = `
     `;
 
 const div2 = document.createElement("div");
-div2.innerHTML = `
-
-       
- 
+div2.innerHTML = `  
       <label onclick="showMyPrev($(this))" style="display: contents; " class="dropzone ">
     <h1 style="position: absolute;margin-top: -25px;" class="labelSwitch">Confira estas ótimas ofertas</h1>
         
@@ -368,6 +365,27 @@ div2.innerHTML = `
  
       </label> 
     `;
+
+async function getAmostraVitrine(listaIds) {
+  const div2 = document.createElement("div");
+  let dadosPRD = await getProductsListIds(listaIds);
+  let fullHTML = "";
+  for (const k in dadosPRD) {
+    fullHTML += getCardProduct(
+      dadosPRD[k],
+      Math.random().toFixed(6).replace(".", "")
+    );
+  }
+
+  div2.innerHTML = `  
+      <label onclick="showMyPrev($(this))" style="display: contents; " class="dropzone ">
+    <h1 style="position: absolute;margin-top: -25px;" class="labelSwitch">Confira estas ótimas ofertas</h1>
+          ${fullHTML}
+    </label> 
+      `;
+
+  return div2;
+}
 
 const div3 = document.createElement("div");
 div3.innerHTML = ` 
@@ -531,17 +549,19 @@ function prepareVitrine(element) {
 }
 
 const dynamicContent = {
-  produtos: () => {
+  produtos: async (currentId, list) => {
     const wrapper = document.createElement("div");
     wrapper.classList.add("content-dynamic");
-    $("#dropdown-content-dynamic").click();
 
-    const dropzone = dropzoneHtml2.cloneNode(1);
-    const [input, image] = dropzone.children;
+    if (list == undefined) {
+      let content = await getAmostraVitrine(list);
+      const dropzoneHtml3 = content.firstElementChild;
+      const dropzone = dropzoneHtml3.cloneNode(1);
+      const [input, image] = dropzone.children;
 
-    wrapper.prepend(dropzone);
-    const prev =
-      createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+      wrapper.prepend(dropzone);
+      const prev =
+        createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
       onclick="prepareVitrine($(this))"
         conteudo="produto"
@@ -559,12 +579,45 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Excluir Vitrine</text>
       </button>
     </div>`);
-    wrapper.setAttribute(
-      "id",
-      "produto_" + Math.random().toFixed(5).replace(".", "")
-    );
-    wrapper.appendChild(prev);
-    content2.prepend(wrapper);
+      wrapper.setAttribute(
+        "id",
+        "produto_" + Math.random().toFixed(5).replace(".", "")
+      );
+      wrapper.appendChild(prev);
+      content2.prepend(wrapper);
+    } else {
+      $("#dropdown-content-dynamic").click();
+
+      const dropzone = dropzoneHtml2.cloneNode(1);
+      const [input, image] = dropzone.children;
+
+      wrapper.prepend(dropzone);
+      const prev =
+        createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+      <button
+      onclick="prepareVitrine($(this))"
+        conteudo="produto"
+        data-bs-toggle="modal"
+        data-bs-target="#modalVitrine"
+        class="dropzone-prev-button  backGold"
+      >
+        <text class="dropzone-prev-text">Editar Vitrine</text>
+      </button>
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Excluir Vitrine</text>
+      </button>
+    </div>`);
+      wrapper.setAttribute(
+        "id",
+        "produto_" + Math.random().toFixed(5).replace(".", "")
+      );
+      wrapper.appendChild(prev);
+      content2.prepend(wrapper);
+    }
   },
   banners: () => {
     const wrapper = document.createElement("div");
@@ -1099,6 +1152,16 @@ async function getMyObjectHomeMain() {
         let news = JSON.parse(ajustStrigfy(nl2br(data[0].home_main_info)));
         homePage = news;
         console.log(`home page`, homePage);
+
+        for (const l in homePage.body) {
+          if (homePage.body[l].type === "vitrine") {
+            dynamicContent.produtos(homePage.body[l].products);
+          }
+          if (homePage.body[l].type === "banners") {
+          }
+          if (homePage.body[l].type === "revenues") {
+          }
+        }
         start();
       } catch (err) {
         console.log(err);
@@ -1220,7 +1283,7 @@ async function publishChanges() {
 }
 
 async function getProductsListIds(listIds) {
-  $.ajax({
+  return $.ajax({
     url: host + "/listaIds",
     data: {
       product_list_ids: listIds,
@@ -1439,6 +1502,6 @@ function ajustStrigfy(texto) {
     texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
     texto = texto.replace('"[', "[").replace(']"', "]");
   }
-  console.log(texto);
+
   return texto;
 }
