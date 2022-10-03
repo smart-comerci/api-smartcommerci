@@ -1148,3 +1148,31 @@ function start() {
 //     complete: function () {},
 //   });
 // }
+
+async function publishChanges() {
+  await $.ajax({
+    type: "POST",
+    url: host + "/updateMastersTable",
+    data: {
+      master_id: localStorage.MASTER_ID,
+      field: "home_main_info",
+      value: JSON.stringify(homePage),
+    },
+    headers: {
+      "x-access-token": localStorage.token,
+    },
+    success: function (data) {
+      console.log("publish", data);
+      window.parent.informar(
+        "alert-success",
+        "As alterações foram aplicadas com sucesso!",
+        3000
+      );
+    },
+    error: function (data) {
+      console.log(data);
+      window.parent.informar("alert-danger", "Ocorreu um erro!", 3000);
+    },
+    complete: function () {},
+  });
+}
