@@ -1439,5 +1439,6 @@ function ajustStrigfy(texto) {
     texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
     texto = texto.replace('"[', "[").replace(']"', "]");
   }
+  console.log(texto);
   return texto;
 }
