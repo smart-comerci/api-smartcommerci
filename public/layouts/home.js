@@ -1237,9 +1237,12 @@ async function getProductsListIds(listIds) {
 }
 
 function getProductHTML(data) {
-  let HTML = `<div class="cardSearch">
+  let HTML = "";
+
+  for (const k in data) {
+    HTML += `<div class="cardSearch">
                   <div
-                    style="background:  url(https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg) no-repeat padding-box; background-size: contain;"
+                    style="background:  url(${data[k].product_thumbnail}) no-repeat padding-box; background-size: contain;"
                     class="imgSearch"
                   ></div>
 
@@ -1262,12 +1265,16 @@ function getProductHTML(data) {
                         transform="translate(5)"
                       ></path>
                     </svg>
-                    <p class="cardNumber">01</p>
+                    <p class="cardNumber">${data[k].product_code}</p>
                   </div>
                   <div class="itemSearch" style="padding-top: 15px;width: 60%;">
                     <p class="cardText">
-                      Nome do produto ou receita loren ipsun dollor sit amen
+                      ${data[k].product_site_name}
                     </p>
+                  </div>
+
+                  <div class="itemSearch">
+                    <p class="labelSwitch">R$ ${data[k].product_site_value}</p>
                   </div>
 
                   <div class="itemSearch">
@@ -1282,6 +1289,8 @@ function getProductHTML(data) {
                     </button>
                   </div>
                 </div>`;
+  }
+
   return HTML;
 }
 
@@ -1299,6 +1308,8 @@ async function searchProducts(text) {
     type: "POST",
     success: function (data) {
       console.log("produtos", data);
+
+      $(".areaResultado").html(getProductHTML(data));
 
       //here
       $("#searchSpinner").hide();
