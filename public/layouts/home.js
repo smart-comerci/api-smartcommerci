@@ -513,7 +513,6 @@ function prepareVitrine(element) {
     .each(function () {
       $(this).attr("idCurrentItem", myId);
     });
-
   $("#modalVitrine")
     .find("button")
     .each(function () {
