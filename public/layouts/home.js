@@ -603,7 +603,7 @@ const dynamicContent = {
     const wrapper = document.createElement("div");
     wrapper.classList.add("content-dynamic");
 
-    if (list !== undefined) {
+    if (list) {
       let content = await getAmostraVitrine(list, title);
       const dropzoneHtml3 = content.firstElementChild;
       const dropzone = dropzoneHtml3.cloneNode(1);
