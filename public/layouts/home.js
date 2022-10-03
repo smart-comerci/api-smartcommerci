@@ -1096,7 +1096,7 @@ async function getMyObjectHomeMain() {
     success: function (data) {
       console.log("data", data);
       try {
-        let news = JSON.parse(ajustStrigfy(data[0].home_main_info));
+        let news = JSON.parse(ajustStrigfy(nl2br(data[0].home_main_info)));
         homePage = news;
         console.log(`home page`, homePage);
         start();
