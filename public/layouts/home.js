@@ -1107,8 +1107,18 @@ function start() {
     }
     var r = document.querySelector(":root");
     r.style.setProperty("--color-primary", homePage.mainColors.first);
-    r.style.setProperty("--color-primary", homePage.mainColors.first);
-    r.style.setProperty("--color-actions", homePage.mainColors.first);
+    r.style.setProperty("--color-secondary", homePage.mainColors.second);
+    r.style.setProperty("--color-actions", homePage.mainColors.third);
+
+    document
+      .querySelector(":root")
+      .style.setProperty("--color-primary", homePage.mainColors.first);
+    document
+      .querySelector(":root")
+      .style.setProperty("--color-secondary", homePage.mainColors.second);
+    document
+      .querySelector(":root")
+      .style.setProperty("--color-actions", homePage.mainColors.third);
   });
   setLinksFooterElements();
   setMidiasSociais();
