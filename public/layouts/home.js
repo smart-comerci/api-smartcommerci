@@ -409,7 +409,7 @@ function getProductCard(data) {
     }
     const card = `<div class="card-color-preview">
                       <div   >
-                        <span     class="card-color-preview_tag" style=" z-index: 2 ;background: var(--color-primary);">
+                        <span     class="card-color-preview_tag" style=" z-index: 2 ;background: var(--color-secondary); color: var(--color-primary)">
                           ${tag}
                         </span>
                       </div>
