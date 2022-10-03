@@ -1105,6 +1105,10 @@ function start() {
     if (origin === "legalText" || origin === "footerText") {
       $(this).find(".contentP").html(homePage[origin]?.text);
     }
+    var r = document.querySelector(":root");
+    r.style.setProperty("--color-primary", homePage.mainColors.first);
+    r.style.setProperty("--color-primary", homePage.mainColors.first);
+    r.style.setProperty("--color-actions", homePage.mainColors.first);
   });
   setLinksFooterElements();
   setMidiasSociais();
