@@ -396,6 +396,7 @@ div3.innerHTML = `
     `;
 
 function getProductCard(data) {
+  console.log(data);
   let tag = "";
   if (data.product_site_tags) {
     tag = data.product_site_tags?.split(",")[0];
