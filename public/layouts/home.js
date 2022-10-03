@@ -1236,7 +1236,7 @@ async function getProductsListIds(listIds) {
   });
 }
 
-function getCardProduct(data) {
+function getCardProduct(data, currentId) {
   let HTML = `
                     <div id="prdCode_${data.product_code}" product_code="${data.product_code}" class="cardProduct">
                       <div class="cardHeaderPrd">
@@ -1250,6 +1250,9 @@ function getCardProduct(data) {
                             transform="translate(5)"></path>
                         </svg>
                         <p class="cardNumber">${data.product_code}</p>
+                         <div class="btnRemoveProduto">
+                          <div currentId="${currentId}" onclick="removeProduto7($(this))" class=" deleteThis"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21" style="fill: #f6b504;margin: 9px;">&gt;<defs></defs><path class="a" d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z" transform="translate(4 3)"></path></svg></div>
+                         </div>
                       </div>
                       <div
                         style="background:  url(${data.product_thumbnail}) no-repeat padding-box; background-size: contain;"
@@ -1312,9 +1315,7 @@ function getProductHTML(data, currentId) {
                     </svg>
                     <p class="cardNumber">${data[k].product_code}</p>
                   </div>
-                  <div class="btnRemoveProduto">
-                  <div currentId="${currentId}" onclick="removeProduto7($(this))" class=" deleteThis"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21" style="fill: #f6b504;margin: 9px;">&gt;<defs></defs><path class="a" d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z" transform="translate(4 3)"></path></svg></div>
-                  </div>
+             
                   <div class="itemSearch" style="padding-top: 15px;width: 60%;">
                     <p class="cardText">
                       ${data[k].product_site_name}
@@ -1351,7 +1352,7 @@ function addItensToList(element, code) {
         console.log(code);
         let prd = CACHE_SEARCH.find((c) => c.product_code === Number(code));
         homePage.body[k].products.push(prd.product_code);
-        $("#lista").append(getCardProduct(prd));
+        $("#lista").append(getCardProduct(prd, element.attr("currentId")));
       } else {
         window.parent.informar(
           "alert-danger",
