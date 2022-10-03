@@ -881,7 +881,7 @@
           <div class="bottom-grid-item-1">
             <label id="footer_logo" origin="footerLogo" class="dropzone">
 
-              <img style="max-width: 200px !important;height: 80px;" src="" />              <span class="rounded-icon">
+              <img style="max-width: 200px !important;height: 80px;" src="" /> <span class="rounded-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                   <path
                     d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
@@ -1678,17 +1678,17 @@
 
             <br>
             <br><br>
-            <label class="labelSwitch">Categoria</label> 
+            <label class="labelSwitch">Categoria</label>
             <div class="minhasCategorias5 inputNovo">
 
-            </div> 
+            </div>
             <br><br>
 
             <label class="labelSwitch">Escolha o tipo de visualização</label>
             <div class="contentBlock">
               <div style="display: inline-flex;" class="d-flex">
                 <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                  <input  conteudo="smart" onchange="setVitrine($(this))" fieldname="status" id="switch-shadow1901235"
+                  <input conteudo="smart" onchange="setVitrine($(this))" fieldname="status" id="switch-shadow1901235"
                     class="switch switch--shadow disable-me" type="checkbox">
                   <label for="switch-shadow1901235"></label>
                 </div>
@@ -1708,8 +1708,8 @@
             <div class="contentBlock">
               <div style="display: inline-flex;" class="d-flex">
                 <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                  <input  conteudo="bestSellers" onchange="setVitrine($(this))" fieldname="status" id="switch-shadow1890121"
-                    class="switch switch--shadow disable-me" type="checkbox">
+                  <input conteudo="bestSellers" onchange="setVitrine($(this))" fieldname="status"
+                    id="switch-shadow1890121" class="switch switch--shadow disable-me" type="checkbox">
                   <label for="switch-shadow1890121"></label>
                 </div>
                 <label class="labelSwitch">Produtos mais vendidos</label>
@@ -1724,7 +1724,7 @@
             <div class="contentBlock">
               <div style="display: inline-flex;" class="d-flex">
                 <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                  <input  conteudo="offers" onchange="setVitrine($(this))" fieldname="status" id="switch-shadow1890122"
+                  <input conteudo="offers" onchange="setVitrine($(this))" fieldname="status" id="switch-shadow1890122"
                     class="switch switch--shadow disable-me" type="checkbox">
                   <label for="switch-shadow1890122"></label>
                 </div>
@@ -1741,7 +1741,7 @@
             <div class="contentBlock">
               <div style="display: inline-flex;" class="d-flex">
                 <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
-                  <input  conteudo="personal" onchange="setVitrine($(this))" fieldname="status" id="switch-shadow1890123"
+                  <input conteudo="personal" onchange="setVitrine($(this))" fieldname="status" id="switch-shadow1890123"
                     class="switch switch--shadow disable-me" type="checkbox">
                   <label for="switch-shadow1890123"></label>
                 </div>
@@ -1752,39 +1752,41 @@
               <p class="textoComun">Você definira os produtos da vitrine. Escolha no máximo 6 produtos para serem
                 exibidos.</p>
 
-              
+
               <div style="display: block; padding: 25px; display: none;" class="contentAfter">
+                <div id="lista"
+                  style="display: inline-flex !important; gap: 5px; padding-top: 50px; overflow-x: auto; width: 100%;">
+
+                </div>
                 <div class="searchArea">
-                  <input  conteudo="search" onkeyup="setVitrine($(this))" class="inputSearchArea" />
-                
+                  <input conteudo="search" onkeyup="setVitrine($(this))" class="inputSearchArea" />
+
                   <svg fill="#f6b504" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px">
                     <path
                       d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z" />
                   </svg>
-                
+
                 </div>
                 <br>
 
 
-                <div  class="searchResult">
-                    <div id="lista" style="display: inline-flex !important; gap: 5px; padding-top: 50px; overflow-x: auto; width: 100%;">
-                    
-                    </div>
+                <div class="searchResult">
 
-                  <div id="searchSpinner" style="margin: auto calc(50% - 30px); display: none;" class="spinner-border text-warning"
-                    role="status">
+
+                  <div id="searchSpinner" style="margin: auto calc(50% - 30px); display: none;"
+                    class="spinner-border text-warning" role="status">
                     <span class="sr-only"></span>
                   </div>
-                 
+
                   <div class="areaResultado" style="max-height: 500px ; overflow: auto">
 
                   </div>
 
-                
 
 
 
-                  
+
+
 
                 </div>
 
