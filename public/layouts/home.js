@@ -366,7 +366,7 @@ div2.innerHTML = `
       </label> 
     `;
 
-async function getAmostraVitrine(listaIds) {
+async function getAmostraVitrine(listaIds, title) {
   const div2 = document.createElement("div");
   let dadosPRD = await getProductsListIds(listaIds);
   console.log("dadosPRD", dadosPRD);
@@ -377,7 +377,7 @@ async function getAmostraVitrine(listaIds) {
 
   div2.innerHTML = `  
       <label onclick="showMyPrev($(this))" style="display: contents; " class="dropzone ">
-    <h1 style="position: absolute;margin-top: -25px;" class="labelSwitch">Confira estas ótimas ofertas</h1>
+    <h1 style="position: absolute;margin-top: -25px;" class="labelSwitch">${title}</h1>
           ${fullHTML}
     </label> 
       `;
@@ -422,7 +422,7 @@ function getProductCard(data) {
                       </div>
 
                       <div class="card-color-preview_title">
-                        ${data.product_site_name.substr(0, 20)}
+                        ${data.product_site_name.substr(0, 20)}...
                       </div>
 
                       <div class="card-color-preview_units ">
@@ -599,12 +599,12 @@ function prepareVitrine(element) {
 }
 
 const dynamicContent = {
-  produtos: async (list) => {
+  produtos: async (list, title) => {
     const wrapper = document.createElement("div");
     wrapper.classList.add("content-dynamic");
 
     if (list !== undefined) {
-      let content = await getAmostraVitrine(list);
+      let content = await getAmostraVitrine(list, title);
       const dropzoneHtml3 = content.firstElementChild;
       const dropzone = dropzoneHtml3.cloneNode(1);
       const [input, image] = dropzone.children;
@@ -1205,7 +1205,10 @@ async function getMyObjectHomeMain() {
 
         for (const l in homePage.body) {
           if (homePage.body[l].type === "vitrine") {
-            dynamicContent.produtos(homePage.body[l].products);
+            dynamicContent.produtos(
+              homePage.body[l].products,
+              homePage.body[l].title
+            );
           }
           if (homePage.body[l].type === "banners") {
           }
