@@ -526,6 +526,7 @@ const dropzoneHtml2 = div2.firstElementChild;
 const dropzoneHtml3 = div3.firstElementChild;
 
 function prepareVitrine(element) {
+  setOrigins(element.attr("origin"));
   let myId = Math.random().toFixed(4).replace(".", "");
   if (element.attr("conteudo") === "produto") {
     let item = {
