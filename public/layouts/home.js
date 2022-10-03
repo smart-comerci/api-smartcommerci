@@ -680,8 +680,6 @@ const dynamicContent = {
     }
   },
   banners: (list) => {
-    let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
-
     if (list && list.length > 0) {
       const wrapper = document.createElement("div");
       wrapper.classList.add("content-dynamic", "content-dynamic_small");
@@ -689,6 +687,8 @@ const dynamicContent = {
 
       for (let i = 0; i < 2; i++) {
         const dropzone = dropzoneHtml.cloneNode(1);
+        let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
+        dropzone.setAttribute("id", thisOrigin);
         wrapper.appendChild(dropzone);
 
         const prev =
@@ -712,7 +712,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Excluir Banner</text>
       </button>
     </div>`);
-        wrapper.setAttribute("id", thisOrigin);
+
         wrapper.appendChild(prev);
         content2.prepend(wrapper);
       }
@@ -723,6 +723,8 @@ const dynamicContent = {
 
       for (let i = 0; i < 2; i++) {
         const dropzone = dropzoneHtml.cloneNode(1);
+        let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
+        dropzone.setAttribute("id", thisOrigin);
         wrapper.appendChild(dropzone);
 
         const prev =
@@ -746,7 +748,6 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Excluir Banner</text>
       </button>
     </div>`);
-        wrapper.setAttribute("id", thisOrigin);
         wrapper.appendChild(prev);
         content2.prepend(wrapper);
       }
