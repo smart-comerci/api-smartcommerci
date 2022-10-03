@@ -340,8 +340,7 @@ const content = document.querySelector(".preview-home_content");
 const content2 = document.querySelector(".listaHOME");
 const div = document.createElement("div");
 div.innerHTML = `
-      <label class="dropzone">
-        <input type="file" disabled/>
+      <label class="dropzone"> 
         <img src="" />
         <span  class="rounded-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -675,22 +674,59 @@ const dynamicContent = {
       content2.prepend(wrapper);
     }
   },
-  banners: () => {
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("content-dynamic", "content-dynamic_small");
-    $("#dropdown-content-dynamic").click();
+  banners: (list) => {
+    if (list && list.length > 0) {
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("content-dynamic", "content-dynamic_small");
+      $("#dropdown-content-dynamic").click();
 
-    for (let i = 0; i < 2; i++) {
-      const dropzone = dropzoneHtml.cloneNode(1);
-      const [input, image] = dropzone.children;
+      for (let i = 0; i < 2; i++) {
+        const dropzone = dropzoneHtml.cloneNode(1);
+        wrapper.appendChild(dropzone);
 
-      dropzone.addEventListener("dragover", handleDragOver);
-      dropzone.addEventListener("drop", handleDragDrop(input, image));
-      input.addEventListener("change", handleSelectFile(dropzone, image));
-      wrapper.appendChild(dropzone);
+        const prev =
+          createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+      <button
+      onclick="prepareVitrine($(this))"
+        conteudo="produto"
+        data-bs-toggle="modal"
+        data-bs-target="#modalChangePicture"
+        class="dropzone-prev-button  backGold"
+      >
+        <text class="dropzone-prev-text">Editar Banner</text>
+      </button>
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Excluir Banner</text>
+      </button>
+    </div>`);
+        wrapper.setAttribute(
+          "id",
+          "produto_" + Math.random().toFixed(5).replace(".", "")
+        );
+        wrapper.appendChild(prev);
+        content2.prepend(wrapper);
+      }
+    } else {
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("content-dynamic", "content-dynamic_small");
+      $("#dropdown-content-dynamic").click();
+
+      for (let i = 0; i < 2; i++) {
+        const dropzone = dropzoneHtml.cloneNode(1);
+        const [input, image] = dropzone.children;
+
+        dropzone.addEventListener("dragover", handleDragOver);
+        dropzone.addEventListener("drop", handleDragDrop(input, image));
+        input.addEventListener("change", handleSelectFile(dropzone, image));
+        wrapper.appendChild(dropzone);
+      }
+
+      content2.prepend(wrapper);
     }
-
-    content2.prepend(wrapper);
   },
   receitas: () => {
     const wrapper = document.createElement("div");
