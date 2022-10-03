@@ -187,6 +187,9 @@ function newLink3(element) {
 function showMyPrev(element) {
   GLOBAL_ELEMENT_EDIT = element;
   let origin = element.attr("origin");
+  if (!origin) {
+    origin = element.attr("id");
+  }
   $("#modalChangePicture").attr("origin", origin);
   $("#modalChangePicture").find("input").attr("origin", origin);
 
@@ -690,7 +693,8 @@ const dynamicContent = {
           createElementFromHTML(`<div style="display: none;top: 350px;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
       onclick="prepareVitrine($(this))"
-        conteudo="produto"
+          origin="${thisOrigin}"
+        conteudo="banner"
         data-bs-toggle="modal"
         data-bs-target="#modalChangePicture"
         class="dropzone-prev-button  backGold"
@@ -698,6 +702,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar Banner</text>
       </button>
       <button
+          origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalDeletaVitrine"
         class="dropzone-prev-button"
@@ -722,6 +727,7 @@ const dynamicContent = {
           createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
         onclick="prepareVitrine($(this))"
+        origin="${thisOrigin}"
         conteudo="banner"
         data-bs-toggle="modal"
         data-bs-target="#modalChangePicture"
@@ -730,6 +736,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar Banner</text>
       </button>
       <button
+          origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalDeletaVitrine"
         class="dropzone-prev-button"
