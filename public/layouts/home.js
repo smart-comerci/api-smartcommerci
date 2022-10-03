@@ -1102,6 +1102,9 @@ function start() {
     if (origin === "footerLinks") {
       $(this).find(".linksFooter").css("display", "inline-flex");
     }
+    if (origin === "legalText" || origin === "footerText") {
+      $(this).find(".contentP").html(homePage[origin]?.text);
+    }
   });
   setLinksFooterElements();
   setMidiasSociais();

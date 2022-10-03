@@ -1568,6 +1568,7 @@
  .linksFooter {
      background-color: white;
      display: none;
+        margin-top: 25px;
  }
 
  .tituloLinkFooterPrimeira,
