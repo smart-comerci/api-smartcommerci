@@ -1256,4 +1256,28 @@ async function searchProducts(text) {
   });
 }
 
-function setVitrine(element) {}
+function setVitrine(element) {
+  let splitContent = element.attr("conteudo").split("-").length;
+  if (splitContent === 1) {
+    if (element.attr("conteudo") === "products") {
+    } else if (element.attr("conteudo") === "categories") {
+    } else if (element.attr("conteudo") === "revenues") {
+    } else {
+      for (const k in homePage.body) {
+        if (homePage.body[k].id === element.attr("idcurrentitem")) {
+          homePage.body[k][element.attr("conteudo")] = element[0].checked;
+        }
+      }
+    }
+  } else if (splitContent === 2) {
+    for (const k in homePage.body) {
+      if (homePage.body[k].id === element.attr("idcurrentitem")) {
+        if (homePage.body[k].type === "banners") {
+        } else {
+          homePage.body[k][element.attr("conteudo")].text = element.val();
+        }
+      }
+    }
+  }
+  console.log(homePage);
+}
