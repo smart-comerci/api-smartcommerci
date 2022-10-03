@@ -1288,6 +1288,104 @@
       </div>
     </div>
 
+        <div style="z-index: 9999999;" class="modal" id="modalChangeBanner" tabindex="-1"
+          aria-labelledby="modalChangeBannerLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header justify-content-center">
+                <h5 class="modal-title m-auto" id="modalChangeBannerLabel">Alterar Imagen</h5>
+                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="panel-header mb-4 d-flex align-items-center justify-content-center gap-2">
+                  <div>
+                    <span class="rounded-icon icon-lg icon-orange me-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path
+                          d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM232 152C232 138.8 242.8 128 256 128s24 10.75 24 24v128c0 13.25-10.75 24-24 24S232 293.3 232 280V152zM256 400c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 385.9 273.4 400 256 400z" />
+                      </svg>
+                    </span>
+                  </div>
+        
+                  <div>
+                    <p class="file-title panel-title mb-0">
+                      <strong>Dimensões: <span class="text-orange">000px - 000px</span></strong>
+                    </p>
+        
+                    <p class="file-title panel-title mb-0">
+                      <strong>Com no máximo <span class="text-orange">000kb</span></strong>
+                    </p>
+                  </div>
+                </div>
+        
+                <div id="picture-drop" class="picture-drop d-flex flex-column align-items-center">
+                  <span id="picture-preview" class="rounded-icon icon-lg icon-orange bg-white mb-3">
+                    <img id="picture-preview-content" alt="Preview">
+                  </span>
+        
+                  <p class="picture-drop-title">
+                    Arraste a foto aqui
+                  </p>
+        
+                  <p class="dash-word">
+                    <strong>ou</strong>
+                  </p>
+        
+                  <div class="mb-2">
+                    <label for="file-upload" class="btn btn-save rounded-pill">
+                      Selecione do seu computador
+                    </label>
+                    <input onchange="uploadAndUpdateFile($(this))" id="file-upload" class="d-none" type="file"></input>
+                  </div>
+                </div>
+
+                <br>
+                <hr>
+                <br>
+                <div class="contentBlock">
+                  <div style="display: inline-flex;" class="d-flex">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow1890"
+                        class="switch switch--shadow disable-me" type="checkbox">
+                      <label for="switch-shadow1890"></label>
+                    </div>
+                    <label class="labelSwitch">Categoria e subcategoria</label>
+                
+                  </div>
+                
+                  <div class="contentAfter">
+                
+                  </div>
+                </div>
+                
+                
+                <div class="contentBlock">
+                  <div style="display: inline-flex;" class="d-flex">
+                    <div style="margin: 1% 2%; max-width: 50px; width: 50px; opacity: 1;" class="switch__container">
+                      <input onchange="showMe($(this))" fieldname="status" id="switch-shadow18902"
+                        class="switch switch--shadow disable-me" type="checkbox">
+                      <label for="switch-shadow18902"></label>
+                    </div>
+                    <label class="labelSwitch">Link Externo</label>
+                
+                  </div>
+                
+                  <div class="contentAfter">
+                    <input onkeyup="setUrlButton($(this))" class="inputNovo" placeholder="https://link-externo.com" />
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="modal-footer justify-content-between">
+                <a class="close-modal" href="#" data-bs-dismiss="modal">Fechar</a>
+                <button onclick="changePicture($(this),'url')" type="button" id="picture-save-button" tabindex="6"
+                  class="btn btn-save rounded-pill">Concluir</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
     <div class="modal" id="modalLegalText" tabindex="-1" aria-labelledby="modalLegalTextLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">

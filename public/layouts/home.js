@@ -344,7 +344,7 @@ const content = document.querySelector(".preview-home_content");
 const content2 = document.querySelector(".listaHOME");
 const div = document.createElement("div");
 div.innerHTML = `
-      <label onclick="showMyPrev($(this))" class="dropzone"> 
+      <label onclick="setMeBanner($(this))" class="dropzone"> 
         <img src="" />
         <span  class="rounded-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -690,30 +690,6 @@ const dynamicContent = {
         let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
         dropzone.setAttribute("id", thisOrigin);
         wrapper.appendChild(dropzone);
-
-        const prev =
-          createElementFromHTML(`<div style="display: none;top: 350px;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
-      <button
-      onclick="prepareVitrine($(this))"
-          origin="${thisOrigin}"
-        conteudo="banner"
-        data-bs-toggle="modal"
-        data-bs-target="#modalChangePicture"
-        class="dropzone-prev-button  backGold"
-      >
-        <text class="dropzone-prev-text">Editar Banner</text>
-      </button>
-      <button
-          origin="${thisOrigin}"
-        data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
-        class="dropzone-prev-button"
-      >
-        <text class="dropzone-prev-text">Excluir Banner</text>
-      </button>
-    </div>`);
-
-        wrapper.appendChild(prev);
         content2.prepend(wrapper);
       }
     } else {
@@ -726,30 +702,6 @@ const dynamicContent = {
         let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
         dropzone.setAttribute("id", thisOrigin);
         wrapper.appendChild(dropzone);
-
-        const prev =
-          createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
-      <button
-        onclick="prepareVitrine($(this))"
-        origin="${thisOrigin}"
-        conteudo="banner"
-        data-bs-toggle="modal"
-        data-bs-target="#modalChangePicture"
-        class="dropzone-prev-button  backGold"
-      >
-        <text class="dropzone-prev-text">Editar Banner</text>
-      </button>
-
-      <button
-          origin="${thisOrigin}"
-        data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
-        class="dropzone-prev-button"
-      >
-        <text class="dropzone-prev-text">Excluir Banner</text>
-      </button>
-    </div>`);
-        wrapper.appendChild(prev);
         content2.prepend(wrapper);
       }
     }
@@ -1626,4 +1578,8 @@ function ajustStrigfy(texto) {
   }
 
   return texto;
+}
+
+function setMeBanner(element) {
+  $("#modalChangeBanner").show();
 }
