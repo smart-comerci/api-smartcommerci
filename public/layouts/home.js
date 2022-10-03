@@ -1098,9 +1098,10 @@ function start() {
       .css("background", `url(${homePage[origin]?.url})`);
     $(this).find(".conteudoSalvo").css("background-size", "cover");
     $(this).find(".conteudoSalvo").css("background-position", "center");
-
     $(this).find(".linksFooter").show();
-    $(this).find(".midiasSociais").css("display", "inline-flex");
+    if (origin === "footerLinks") {
+      $(this).find(".linksFooter").css("display", "inline-flex");
+    }
   });
   setLinksFooterElements();
   setMidiasSociais();
