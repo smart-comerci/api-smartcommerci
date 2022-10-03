@@ -1325,7 +1325,7 @@ function getProductHTML(data, currentId) {
                     </p>
                   </div>
 
-                  <div style="min-width: 80px" class="itemSearch">
+                  <div style="min-width:  120px;" class="itemSearch">
                     <p class="labelSwitch">R$ ${data[k].product_valor}</p>
                   </div>
 
