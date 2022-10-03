@@ -1274,7 +1274,8 @@ function setVitrine(element) {
       if (homePage.body[k].id === element.attr("idcurrentitem")) {
         if (homePage.body[k].type === "banners") {
         } else {
-          homePage.body[k][element.attr("conteudo")].text = element.val();
+          homePage.body[k][element.attr("conteudo").split("-")[0]].text =
+            element.val();
         }
       }
     }
