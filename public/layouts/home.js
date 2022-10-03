@@ -1275,6 +1275,7 @@ function removeProduto7(element) {
     if (homePage.body[k].id === element.attr("currentId")) {
       let newPrd = [];
       for (const a in homePage.body[k].products) {
+        console.log("coparacao", homePage.body[k].products[a], Number(code));
         if (homePage.body[k].products[a] !== Number(code)) {
           newPrd.push(homePage.body[k].products[a]);
         }
@@ -1282,7 +1283,7 @@ function removeProduto7(element) {
       homePage.body[k].products = newPrd;
     }
   }
-  element.parent().remove();
+  element.parent().parent().remove();
   console.log(homePage);
 }
 
