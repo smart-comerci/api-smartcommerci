@@ -550,11 +550,11 @@ function prepareVitrine(element) {
 }
 
 const dynamicContent = {
-  produtos: async (currentId, list) => {
+  produtos: async (list) => {
     const wrapper = document.createElement("div");
     wrapper.classList.add("content-dynamic");
 
-    if (list == undefined) {
+    if (list !== undefined) {
       let content = await getAmostraVitrine(list);
       const dropzoneHtml3 = content.firstElementChild;
       const dropzone = dropzoneHtml3.cloneNode(1);
