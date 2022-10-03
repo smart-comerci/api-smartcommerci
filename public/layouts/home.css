@@ -949,8 +949,7 @@
      margin-bottom: 12px;
  }
 
- .card-color-preview_price:after {
-     content: 'R$ 3,50';
+ .card-color-preview_price:after { 
      font-size: 12px;
      font-weight: 300;
      text-decoration: line-through;
