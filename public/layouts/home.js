@@ -675,6 +675,8 @@ const dynamicContent = {
     }
   },
   banners: (list) => {
+    let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
+
     if (list && list.length > 0) {
       const wrapper = document.createElement("div");
       wrapper.classList.add("content-dynamic", "content-dynamic_small");
@@ -703,10 +705,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Excluir Banner</text>
       </button>
     </div>`);
-        wrapper.setAttribute(
-          "id",
-          "banner_" + Math.random().toFixed(5).replace(".", "")
-        );
+        wrapper.setAttribute("id", thisOrigin);
         wrapper.appendChild(prev);
         content2.prepend(wrapper);
       }
@@ -722,8 +721,8 @@ const dynamicContent = {
         const prev =
           createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
-      onclick="prepareVitrine($(this))"
-        conteudo="produto"
+        onclick="prepareVitrine($(this))"
+        conteudo="banner"
         data-bs-toggle="modal"
         data-bs-target="#modalChangePicture"
         class="dropzone-prev-button  backGold"
@@ -738,10 +737,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Excluir Banner</text>
       </button>
     </div>`);
-        wrapper.setAttribute(
-          "id",
-          "banner_" + Math.random().toFixed(5).replace(".", "")
-        );
+        wrapper.setAttribute("id", thisOrigin);
         wrapper.appendChild(prev);
         content2.prepend(wrapper);
       }
