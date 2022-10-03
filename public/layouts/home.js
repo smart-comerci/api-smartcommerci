@@ -372,10 +372,7 @@ async function getAmostraVitrine(listaIds) {
   console.log("dadosPRD", dadosPRD);
   let fullHTML = "";
   for (const k in dadosPRD) {
-    fullHTML += getCardProduct(
-      dadosPRD[k],
-      Math.random().toFixed(6).replace(".", "")
-    );
+    fullHTML += getProductCard(dadosPRD[k]);
   }
 
   div2.innerHTML = `  
@@ -398,24 +395,26 @@ div3.innerHTML = `
       </label> 
     `;
 
-function getProductCard() {
+function getProductCard(data) {
   const card = `<div class="card-color-preview">
                       <div   >
                         <span     class="card-color-preview_tag" style=" z-index: 2 ;background: var(--color-primary);">
-                          Tag
+                          ${data.product_site_tags?.split(",")[0]}
                         </span>
                       </div>
 
-                      <div style="  background: url(${notFound}); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
+                      <div style="  background: url(${
+                        data.product_thumbnail
+                      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
                       
                       </div>
 
                       <div class="card-color-preview_mark">
-                        Marca
+                       ${data.product_categoria}
                       </div>
 
                       <div class="card-color-preview_title">
-                        Card de teste lorem Ipsum sit amet
+                        ${data.product_site_name}
                       </div>
 
                       <div class="card-color-preview_units ">
@@ -427,7 +426,7 @@ function getProductCard() {
                       </div>
 
                       <div class="card-color-preview_price">
-                        R$ 2,50
+                        R$ ${data.product_valor}
                       </div>
 
                       <div class="card-color-preview_button">
