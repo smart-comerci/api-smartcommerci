@@ -1236,13 +1236,43 @@ async function getProductsListIds(listIds) {
   });
 }
 
-function getProductHTML(data) {
+function getCardProduct(data) {
+  let HTML = `
+                    <div class="cardProduct">
+                      <div class="cardHeaderPrd">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
+                          <defs></defs>
+                          <path class="a"
+                            d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                          </path>
+                          <path class="a"
+                            d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                            transform="translate(5)"></path>
+                        </svg>
+                        <p class="cardNumber">${data.product_code}</p>
+                      </div>
+                      <div
+                        style="background:  url(${data.product_thumbnail}) no-repeat padding-box; background-size: contain;"
+                        class="cardImage">
+                      </div>
+                  
+                      <p class="cardText">${data.product_site_name}</p>
+                  
+                  
+                    </div>
+  `;
+  return HTML;
+}
+
+function getProductHTML(data, currentId) {
   let HTML = "";
 
   for (const k in data) {
     HTML += `<div class="cardSearch">
                   <div
-                    style="background:  url(${data[k].product_thumbnail}) no-repeat padding-box; background-size: contain;"
+                    style="background:  url(${
+                      data[k].product_thumbnail
+                    }) no-repeat padding-box; background-size: contain;"
                     class="imgSearch"
                   ></div>
 
@@ -1274,11 +1304,15 @@ function getProductHTML(data) {
                   </div>
 
                   <div style="min-width: 80px" class="itemSearch">
-                    <p class="labelSwitch">R$ ${data[k].product_site_value}</p>
+                    <p class="labelSwitch">R$ ${data[k].product_valor}</p>
                   </div>
 
                   <div class="itemSearch">
                     <button
+                      currentId="${currentId}"
+                      onclick="addItensToList($(this), '${JSON.stringify(
+                        data[k]
+                      )}')"
                       style=" margin-right: 15px"
                       type="button"
                       id="picture-save-button"
@@ -1294,7 +1328,27 @@ function getProductHTML(data) {
   return HTML;
 }
 
-async function searchProducts(text) {
+function addItensToList(element, json) {
+  for (const k in homePage.body) {
+    if (homePage.body[k].id === element.attr("currentId")) {
+      if (homePage.body[k].products.length < 6) {
+        let prd = JSON.parse(json);
+        homePage.body[k].products.push(prd.product_code);
+        $("#lista").append(getCardProduct(prd));
+      } else {
+        window.parent.informar(
+          "alert-danger",
+          "Vitrine só comporta 6 itens!",
+          3000
+        );
+      }
+    }
+  }
+}
+
+async function searchProducts(element) {
+  let text = element.val();
+  let currentId = element.attr("idcurrentitem");
   $("#searchSpinner").show();
   if (text != "") {
     $.ajax({
@@ -1310,7 +1364,7 @@ async function searchProducts(text) {
       success: function (data) {
         console.log("produtos", data);
 
-        $(".areaResultado").html(getProductHTML(data));
+        $(".areaResultado").html(getProductHTML(data, currentId));
 
         //here
         $("#searchSpinner").hide();
@@ -1322,6 +1376,7 @@ async function searchProducts(text) {
     });
   } else {
     $(".areaResultado").html("");
+    $("#searchSpinner").hide();
   }
 }
 
