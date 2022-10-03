@@ -377,7 +377,7 @@ async function getAmostraVitrine(listaIds, title) {
 
   div2.innerHTML = `  
       <label onclick="showMyPrev($(this))" style="display: contents; " class="dropzone ">
-    <h1 style="position: absolute;margin-top: -25px;" class="labelSwitch">${title}</h1>
+    <h1 style="position: absolute;margin-top: -25px;" class="labelSwitch">${title.text}</h1>
           ${fullHTML}
     </label> 
       `;
