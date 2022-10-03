@@ -190,6 +190,7 @@ function showMyPrev(element) {
   if (!origin) {
     origin = element.attr("id");
   }
+  console.log("A ORIGEM", origin);
   $("#modalChangePicture").attr("origin", origin);
   $("#modalChangePicture").find("input").attr("origin", origin);
 
