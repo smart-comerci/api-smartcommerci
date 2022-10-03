@@ -396,16 +396,18 @@ div3.innerHTML = `
     `;
 
 function getProductCard(data) {
+  let tag = "";
+  if (data.product_site_tags) {
+    tag = data.product_site_tags?.split(",")[0];
+  }
   const card = `<div class="card-color-preview">
                       <div   >
                         <span     class="card-color-preview_tag" style=" z-index: 2 ;background: var(--color-primary);">
-                          ${data.product_site_tags?.split(",")[0]}
+                          ${tag}
                         </span>
                       </div>
 
-                      <div style="  background: url(${
-                        data.product_thumbnail
-                      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
+                      <div style="  background: url(${data.product_thumbnail}); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
                       
                       </div>
 
