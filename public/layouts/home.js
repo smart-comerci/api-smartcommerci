@@ -1388,7 +1388,7 @@ function setVitrine(element) {
     } else if (element.attr("conteudo") === "personal") {
       showMe(element);
     } else if (element.attr("conteudo") === "search") {
-      searchProducts(element.val());
+      searchProducts(element);
     } else if (element.attr("conteudo") === "revenues") {
     } else {
       for (const k in homePage.body) {
