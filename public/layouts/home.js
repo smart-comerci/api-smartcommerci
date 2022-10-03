@@ -395,6 +395,8 @@ div3.innerHTML = `
       </label> 
     `;
 
+function cutString(str) {}
+
 function getProductCard(data) {
   if (data) {
     console.log("os dados", data);
@@ -409,7 +411,9 @@ function getProductCard(data) {
                         </span>
                       </div>
 
-                      <div style="  background: url(${data.product_thumbnail}); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
+                      <div style="  background: url(${
+                        data.product_thumbnail
+                      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
                       
                       </div>
 
@@ -418,7 +422,7 @@ function getProductCard(data) {
                       </div>
 
                       <div class="card-color-preview_title">
-                        ${data.product_site_name}
+                        ${data.product_site_name.substr(0, 20)}
                       </div>
 
                       <div class="card-color-preview_units ">
