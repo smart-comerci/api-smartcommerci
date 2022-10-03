@@ -1096,7 +1096,7 @@ async function getMyObjectHomeMain() {
     success: function (data) {
       console.log("data", data);
       try {
-        let news = JSON.parse(data[0].home_main_info);
+        let news = JSON.parse(ajustStrigfy(data[0].home_main_info));
         homePage = news;
         console.log(`home page`, homePage);
         start();
@@ -1432,4 +1432,12 @@ function setVitrine(element) {
     }
   }
   console.log(homePage);
+}
+
+function ajustStrigfy(texto) {
+  for (let a = 0; a < 120; a++) {
+    texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
+    texto = texto.replace('"[', "[").replace(']"', "]");
+  }
+  return texto;
 }
