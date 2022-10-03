@@ -1091,6 +1091,10 @@ function start() {
           ]?.url
         );
     }
+
+    $(this).find(".conteudoSalvo").show();
+    $(this).find(".linksFooter").show();
+    $(this).find(".midiasSociais").show();
   });
   setLinksFooterElements();
   setMidiasSociais();
