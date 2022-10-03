@@ -1270,7 +1270,7 @@ function getCardProduct(data, currentId) {
 }
 
 function removeProduto7(element) {
-  let code = element.parent().attr("product_code");
+  let code = element.parent().parent().parent().attr("product_code");
   for (const k in homePage.body) {
     if (homePage.body[k].id === element.attr("currentId")) {
       let newPrd = [];
@@ -1283,7 +1283,7 @@ function removeProduto7(element) {
       homePage.body[k].products = newPrd;
     }
   }
-  element.parent().parent().remove();
+  element.parent().parent().parent().remove();
   console.log(homePage);
 }
 
