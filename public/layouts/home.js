@@ -340,7 +340,7 @@ const content = document.querySelector(".preview-home_content");
 const content2 = document.querySelector(".listaHOME");
 const div = document.createElement("div");
 div.innerHTML = `
-      <label class="dropzone"> 
+      <label onclick="showMyPrev($(this))" class="dropzone"> 
         <img src="" />
         <span  class="rounded-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -787,12 +787,12 @@ const dynamicContent = {
 // document
 //   .querySelector("#content-dynamic-produtos")
 //   .addEventListener("click", dynamicContent.produtos);
-document
-  .querySelector("#content-dynamic-banners")
-  .addEventListener("click", dynamicContent.banners);
-document
-  .querySelector("#content-dynamic-receitas")
-  .addEventListener("click", dynamicContent.receitas);
+// document
+//   .querySelector("#content-dynamic-banners")
+//   .addEventListener("click", dynamicContent.banners);
+// document
+//   .querySelector("#content-dynamic-receitas")
+//   .addEventListener("click", dynamicContent.receitas);
 
 const changeColor = (cssVar, value) => {
   console.log(cssVar, value);
