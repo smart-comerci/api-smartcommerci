@@ -870,6 +870,7 @@
      border-radius: 5px;
      padding-top: 5px;
      margin: auto;
+    height: 270px;
  }
 
  .card-color-preview>* {
