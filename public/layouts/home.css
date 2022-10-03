@@ -1502,10 +1502,7 @@
  }
 
  .searchResult {
-     padding: 5px;
-     max-height: 500px;
-     height: 500px;
-     overflow: auto;
+     padding: 5px; 
  }
 
  .itemSearch {
