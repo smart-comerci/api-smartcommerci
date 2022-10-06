@@ -162,7 +162,9 @@ function start() {
     }
 
     html =
-      '<div onclick="abreModal(this, $(this))" style="border: 1px solid #efefef; margin-top: 5%; padding: 5%" class="row radius20 metodoEntrega">' +
+      '<div metodu="' +
+      DELIVERY_DETAILS[k].descricao +
+      '" onclick="abreModal(this, $(this))" style="border: 1px solid #efefef; margin-top: 5%; padding: 5%" class="row radius20 metodoEntrega">' +
       '<div class="col-md-8">' +
       '<div class="col-md-12"><span class="segundoTxt descricaoMetodo">' +
       DELIVERY_DETAILS[k].descricao +
@@ -419,7 +421,7 @@ function abreModal(e, elemento) {
   ////console.log(e)
   ////console.log(src)
 
-  var descricaoMetodo = elemento.find(".descricaoMetodo").text();
+  var descricaoMetodo = elemento.attr("metodu");
   if (e.target.className.indexOf("switch") > -1 || e.target.className == "") {
     ////console.log("Nao e pra abrir "+e.target.className)
   } else {
@@ -451,6 +453,7 @@ function modalEntrega(descricaoMetodo) {
       dadosMetodo = DELIVERY_DETAILS[k];
     }
   }
+  console.log("DADOS DO METODOD", dadosMetodo);
   var nome_metodo = descricaoMetodo;
   localStorage.METODO_EDICAO = nome_metodo;
 
