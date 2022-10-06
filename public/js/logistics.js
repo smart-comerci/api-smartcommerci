@@ -89,9 +89,9 @@ $.ajax({
     }
 
     if (data[0].faixa_cep == 1 || data[0].faixa_cep == "1") {
-      setTimeout(() => {
-        $("#switch-shadow975").click();
-      }, 2000);
+      $("#switch-shadow975")[0].checked = true;
+      $("#edicaoAvancadaCheck")[0].checked = false;
+      $("#iframeIn").hide();
     }
 
     if (data[0].exclui_faixa_cep == 1) {
