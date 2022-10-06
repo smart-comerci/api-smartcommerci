@@ -503,16 +503,6 @@ function modalEntrega(descricaoMetodo) {
     '<label style="margin-top: 10px" class="txtLabel modalLabelTxt">Selecione essa opção caso queria remover alguma faixa de CEP deste método de entrega</label>' +
     "<br><br><br>" +
     '<div class="maisFaixa">' +
-    '<div class="row">' +
-    '<div style="padding-left: none;" class="col-md-5">' +
-    '<label class="txtLabel">Inicial</label><br>' +
-    '<div class="group-input2"><input type="text" fieldName="localidade_exclui_ceps" class="form-control inputProduct cep detalheEntrega"   onchange="alteraField($(this))" placeholder="132001-001" posicao="CEP_INICIAL"></div><br>' +
-    "</div>" +
-    '<div  style="padding-left: none;" class="col-md-5">' +
-    '<label class="txtLabel">Final</label><br>' +
-    '<div class="group-input2"><input fieldName="localidade_exclui_ceps" class="form-control inputProduct cep detalheEntrega"   onchange="alteraField($(this))" placeholder="132001-001" posicao="CEP_FINAL"></div><br>' +
-    "</div>" +
-    "</div>" +
     "</div>" +
     "</div>" +
     '<div onclick="addMaisFaixa()" style="cursor: pointer; margin: 5% 0%;cursor: pointer; border-radius: 20px; font: bold 1rem Roboto; background-color: rgb(246, 181, 4); max-width: 200px; height: 40px; border: 2px solid rgb(246, 181, 4);     opacity: 1; cursor: pointer" class="input-group novaFaixaCep">' +
@@ -876,18 +866,21 @@ function modalEntrega(descricaoMetodo) {
           localidade_exclui_ceps: "",
         });
       }
-
-      let value1 = null,
-        value2 = null;
-      for (const a in dadosMetodo.localidade_exclui_ceps) {
-        if (dadosMetodo.localidade_exclui_ceps[a].posicao === "CEP_INICIAL") {
-          value1 = dadosMetodo.localidade_exclui_ceps[a].valor;
+      if (dadosMetodo.localidade_exclui_ceps.length > 0) {
+        let value1 = null,
+          value2 = null;
+        for (const a in dadosMetodo.localidade_exclui_ceps) {
+          if (dadosMetodo.localidade_exclui_ceps[a].posicao === "CEP_INICIAL") {
+            value1 = dadosMetodo.localidade_exclui_ceps[a].valor;
+          }
+          if (dadosMetodo.localidade_exclui_ceps[a].posicao === "CEP_FINAL") {
+            value2 = dadosMetodo.localidade_exclui_ceps[a].valor;
+            addMaisFaixaLoad(value1, value2);
+            (value1 = null), (value2 = null);
+          }
         }
-        if (dadosMetodo.localidade_exclui_ceps[a].posicao === "CEP_FINAL") {
-          value2 = dadosMetodo.localidade_exclui_ceps[a].valor;
-          addMaisFaixaLoad(value1, value2);
-          (value1 = null), (value2 = null);
-        }
+      } else {
+        addMaisFaixa("", "");
       }
 
       $(".cep").mask("00000-000");
