@@ -88,7 +88,7 @@ $.ajax({
       localStorage.my_lat_lon = data[0].lat_lon;
     }
 
-    if (data[0].faixa_cep == 1 || data[0].faixa_cep == "1") {
+    if (data[0].faixa_cep == 1) {
       $("#switch-shadow975")[0].checked = true;
       $("#edicaoAvancadaCheck")[0].checked = false;
       $("#iframeIn").hide();
