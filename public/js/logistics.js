@@ -52,6 +52,7 @@ var DELIVERY_DETAILS = [
   },
 ];
 
+let FULL_INFO_DELIVERY = [];
 $.ajax({
   type: "POST",
   url: mainHost + "/getById",
@@ -68,6 +69,7 @@ $.ajax({
   success: function (data) {
     console.log("pegando detalhes de entrega");
     console.log(data);
+    FULL_INFO_DELIVERY = data;
     localStorage.FULL_DELIVERY_DEFAULT = JSON.stringify(data);
     if (data[0].delivery_methods != null) {
       DELIVERY_DETAILS = JSON.parse(ajustStrigfy(data[0].delivery_methods));
