@@ -86,8 +86,9 @@ $.ajax({
       localStorage.my_lat_lon = data[0].lat_lon;
     }
 
-    if (data[0].faixa_active == 1) {
+    if (data[0].faixa_cep == 1) {
       $("#switch-shadow975").attr("checked", "true");
+      $("#switch-shadow975")[0].checked = true;
     }
 
     if (data[0].exclui_faixa_cep == 1) {
@@ -1773,6 +1774,7 @@ async function salvaModal(nome_metodo) {
   await updateDelivery("delivery_methods", JSON.stringify(DELIVERY_DETAILS));
   start();
   $(".close").click();
+  location.reload();
 }
 function cancelModal() {
   $(".close").click();
