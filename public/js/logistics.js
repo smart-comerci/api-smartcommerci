@@ -87,8 +87,9 @@ $.ajax({
     }
 
     if (data[0].faixa_cep == 1) {
-      $("#switch-shadow975").attr("checked", "true");
-      $("#switch-shadow975")[0].checked = true;
+      setTimeout(() => {
+        $("#switch-shadow975").click();
+      }, 2000);
     }
 
     if (data[0].exclui_faixa_cep == 1) {
