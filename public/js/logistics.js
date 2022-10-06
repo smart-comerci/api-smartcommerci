@@ -86,7 +86,7 @@ $.ajax({
       localStorage.my_lat_lon = data[0].lat_lon;
     }
 
-    if (data[0].faixa_cep == 1) {
+    if (data[0].faixa_cep == 1 || data[0].faixa_cep == "1") {
       setTimeout(() => {
         $("#switch-shadow975").click();
       }, 2000);
