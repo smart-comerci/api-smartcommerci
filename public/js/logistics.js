@@ -92,6 +92,7 @@ $.ajax({
       $("#switch-shadow975")[0].checked = true;
       $("#edicaoAvancadaCheck")[0].checked = false;
       $("#iframeIn").hide();
+      $("#areaEsconde").show();
     }
 
     if (data[0].exclui_faixa_cep == 1) {
