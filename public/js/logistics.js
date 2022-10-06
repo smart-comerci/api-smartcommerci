@@ -1656,8 +1656,6 @@ function alteraField(elemento) {
   } else {
     if (elemento.attr("fieldName") == "localidade_exclui_ceps") {
       var pai = elemento.parent().parent().parent().parent().find(".cep");
-
-      ////console.log(pai)
       var myExcludeCEPS = [];
       pai.each(function () {
         myExcludeCEPS.push({
@@ -1679,8 +1677,8 @@ function alteraField(elemento) {
   }
 }
 
-function updateDelivery(fieldName, fieldValue) {
-  $.ajax({
+async function updateDelivery(fieldName, fieldValue) {
+  await $.ajax({
     type: "POST",
     url: mainHost + "/updateDeliveryDefault",
 
@@ -1693,10 +1691,10 @@ function updateDelivery(fieldName, fieldValue) {
       fieldValue: fieldValue,
     },
     success: function (data) {
-      //console.log(data)
+      console.log(data);
     },
     error: function (data) {
-      //console.log(data)
+      console.log(data);
     },
     complete: function () {
       // ao final da requisição...
@@ -1704,7 +1702,7 @@ function updateDelivery(fieldName, fieldValue) {
   });
 }
 
-function salvaModal(nome_metodo) {
+async function salvaModal(nome_metodo) {
   var dadosEntregaHorario = [];
   $(".cardHorarios").each(function () {
     var dia = $(this).attr("dia");
@@ -1733,7 +1731,7 @@ function salvaModal(nome_metodo) {
     dadosEntregaHorario
   );
 
-  updateDelivery("delivery_methods", JSON.stringify(DELIVERY_DETAILS));
+  await updateDelivery("delivery_methods", JSON.stringify(DELIVERY_DETAILS));
   start();
   $(".close").click();
 }
