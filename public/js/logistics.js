@@ -877,6 +877,19 @@ function modalEntrega(descricaoMetodo) {
         });
       }
 
+      let value1 = null,
+        value2 = null;
+      for (const a in dadosMetodo.localidade_exclui_ceps) {
+        if (dadosMetodo.localidade_exclui_ceps[a].posicao === "CEP_INICIAL") {
+          value1 = dadosMetodo.localidade_exclui_ceps[a].valor;
+        }
+        if (dadosMetodo.localidade_exclui_ceps[a].posicao === "CEP_FINAL") {
+          value2 = dadosMetodo.localidade_exclui_ceps[a].valor;
+          addMaisFaixaLoad(value1, value2);
+          (value1 = null), (value2 = null);
+        }
+      }
+
       $(".cep").mask("00000-000");
       $(".inicioS").mask("00:00");
       $(".fimS").mask("00:00");
@@ -1620,6 +1633,36 @@ function addMaisFaixa() {
     '<div  style="padding-left: none;" class="col-md-4">' +
     '<label class="txtLabel">Final</label><br>' +
     '<div class="group-input2"><input  fieldName="localidade_exclui_ceps" class="form-control inputProduct cep detalheEntrega"   onchange="alteraField($(this))" placeholder="132001-001" posicao="CEP_FINAL"></div><br>' +
+    "</div>" +
+    '<div class="col-md-2">' +
+    '<div class="input-group iconOpaco ico etiquetaRedonda">' +
+    '<svg pedido="00008" onclick="deletarFaixaCep($(this))"  xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 21 21" style="' +
+    'margin: auto">&gt;<defs></defs>' +
+    '<path class="a" d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z" transform="translate(4 3)"></path>' +
+    "</svg>" +
+    "</div>" +
+    "</div>" +
+    "</div>";
+  $(".cep").mask("00000-000");
+  $(".maisFaixa").append(html);
+  $(".cep").mask("00000-000");
+}
+
+function addMaisFaixaLoad(values1, values2) {
+  $(".cep").mask("00000-000");
+  var html =
+    '<div class="row">' +
+    '<div style="padding-left: none;" class="col-md-4">' +
+    '<label class="txtLabel">Inicial</label><br>' +
+    '<div class="group-input2"><input value="' +
+    values1 +
+    '" type="text" fieldName="localidade_exclui_ceps" class="form-control inputProduct cep detalheEntrega"   onchange="alteraField($(this))" placeholder="132001-001" posicao="CEP_INICIAL"></div><br>' +
+    "</div>" +
+    '<div  style="padding-left: none;" class="col-md-4">' +
+    '<label class="txtLabel">Final</label><br>' +
+    '<div class="group-input2"><input  value="' +
+    values2 +
+    '"  fieldName="localidade_exclui_ceps" class="form-control inputProduct cep detalheEntrega"   onchange="alteraField($(this))" placeholder="132001-001" posicao="CEP_FINAL"></div><br>' +
     "</div>" +
     '<div class="col-md-2">' +
     '<div class="input-group iconOpaco ico etiquetaRedonda">' +
