@@ -4,6 +4,14 @@ var mainHost = "https://api-smartcomerci.com.br:9090";
 var locais = JSON.parse(ajustStrigfy(localStorage.LOJAS_CADASTRADAS));
 ////console.log(locais)
 
+function ajustStrigfy(texto) {
+  for (let a = 0; a < 120; a++) {
+    texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
+    texto = texto.replace('"[', "[").replace(']"', "]");
+  }
+  return texto;
+}
+
 var url = window.location.href.split("/");
 url = url[url.length - 1];
 for (const k in locais) {
@@ -205,7 +213,7 @@ function uptadeCheckActive(descricao) {
 }
 
 function updateDetailsDelivery(descricao, columnValue, newValue) {
-  ////console.log(descricao, columnValue, newValue)
+  console.log(descricao, columnValue, newValue);
   switch (columnValue) {
     case "descricao":
       for (const k in DELIVERY_DETAILS) {
@@ -1634,7 +1642,8 @@ function alteraD2(e1, e2) {
 }
 
 function alteraField(elemento) {
-  ////console.log('editando...')
+  console.log("editando...", elemento.attr("fieldName"));
+
   var nome_metodo = localStorage.METODO_EDICAO;
   if (nome_metodo == "") {
     if (elemento.attr("fieldName") == "descricao") {

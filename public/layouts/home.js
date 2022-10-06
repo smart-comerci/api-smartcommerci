@@ -344,13 +344,27 @@ const content = document.querySelector(".preview-home_content");
 const content2 = document.querySelector(".listaHOME");
 const div = document.createElement("div");
 div.innerHTML = `
-      <label onclick="setMeBanner($(this))" class="dropzone"> 
-        <img src="" />
+      <label onclick="showMyPrev($(this))" class="dropzone"> 
+
+        <div>
+ <img src="" />
         <span  class="rounded-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
             <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
           </svg>
         </span>
+        </div>
+
+         <div>
+ <img src="" />
+        <span  class="rounded-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
+          </svg>
+        </span>
+        </div>
+
+       
       </label> 
     `;
 
@@ -685,25 +699,84 @@ const dynamicContent = {
       wrapper.classList.add("content-dynamic", "content-dynamic_small");
       $("#dropdown-content-dynamic").click();
 
-      for (let i = 0; i < 2; i++) {
-        const dropzone = dropzoneHtml.cloneNode(1);
-        let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
-        dropzone.setAttribute("id", thisOrigin);
-        wrapper.appendChild(dropzone);
-        content2.prepend(wrapper);
-      }
+      const dropzone = dropzoneHtml.cloneNode(1);
+      let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
+      dropzone.setAttribute("id", thisOrigin);
+      wrapper.appendChild(dropzone);
+
+      const prev =
+        createElementFromHTML(`<div style="display: none;top: 350px;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+      <button
+      onclick="prepareVitrine($(this))"
+          origin="${thisOrigin}"
+        conteudo="banner"
+        data-bs-toggle="modal"
+        data-bs-target="#modalChangePicture"
+        class="dropzone-prev-button  backGold"
+      >
+        <text class="dropzone-prev-text">Editar Banner</text>
+      </button>
+      <button
+          origin="${thisOrigin}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Editar link</text>
+      </button>
+      <button
+          origin="${thisOrigin}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Excluir Banners</text>
+      </button>
+    </div>`);
+
+      wrapper.appendChild(prev);
+      content2.prepend(wrapper);
     } else {
       const wrapper = document.createElement("div");
       wrapper.classList.add("content-dynamic", "content-dynamic_small");
       $("#dropdown-content-dynamic").click();
 
-      for (let i = 0; i < 2; i++) {
-        const dropzone = dropzoneHtml.cloneNode(1);
-        let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
-        dropzone.setAttribute("id", thisOrigin);
-        wrapper.appendChild(dropzone);
-        content2.prepend(wrapper);
-      }
+      const dropzone = dropzoneHtml.cloneNode(1);
+      let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
+      dropzone.setAttribute("id", thisOrigin);
+      wrapper.appendChild(dropzone);
+
+      const prev =
+        createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+     <button
+      onclick="prepareVitrine($(this))"
+          origin="${thisOrigin}"
+        conteudo="banner"
+        data-bs-toggle="modal"
+        data-bs-target="#modalChangePicture"
+        class="dropzone-prev-button  backGold"
+      >
+        <text class="dropzone-prev-text">Editar Banner</text>
+      </button>
+      <button
+          origin="${thisOrigin}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Editar link</text>
+      </button>
+      <button
+          origin="${thisOrigin}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Excluir Banners</text>
+      </button>
+    </div>`);
+      wrapper.appendChild(prev);
+      content2.prepend(wrapper);
     }
   },
   receitas: () => {
@@ -1578,8 +1651,4 @@ function ajustStrigfy(texto) {
   }
 
   return texto;
-}
-
-function setMeBanner(element) {
-  $("#modalChangeBanner").show();
 }
