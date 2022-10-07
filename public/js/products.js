@@ -3391,11 +3391,9 @@ function retornaCategorias(texto) {
 }
 
 function getProductData(EAN, elementParent, pai) {
-  //Example of cosmos bluesoft cunsult
-  ////////////console.log("$(elementParent)")
-  ////////////console.log(elementParent)
-
-  pai.addClass("animated-background");
+ let url = window.location.href
+        if (url.indexOf("produ") > -1) {
+           pai.addClass("animated-background");
   if (EAN != 0 && EAN != undefined && EAN != "" && EAN != null) {
     try {
       // $.ajax({
@@ -3435,6 +3433,7 @@ function getProductData(EAN, elementParent, pai) {
         ////////////console.log("Recurso não existe")
 
         ////////////console.log(picture)
+        if()
         $.ajax({
           type: "POST",
           url: mainHost + "/productPictures",
@@ -3568,6 +3567,10 @@ function getProductData(EAN, elementParent, pai) {
   } else {
     ////////////console.log("This product EAN is invalid = '"+EAN)
   }
+
+        }
+
+ 
 }
 
 function getCatIconFromStorage(catName) {
