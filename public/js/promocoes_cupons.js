@@ -4,8 +4,8 @@ var mainHost = "https://api-smartcomerci.com.br:9090";
 
 let TAGS = [];
 
-let url = window.location.href;
-if (url.indexOf("promo") > -1 || url.indexOf("cupo") > -1) {
+let url7 = window.location.href;
+if (url7.indexOf("promo") > -1 || url7.indexOf("cupo") > -1) {
   $.ajax({
     type: "POST",
     url: "https://api-smartcomerci.com.br:9090/getCategories",
