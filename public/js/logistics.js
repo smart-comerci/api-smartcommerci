@@ -1790,18 +1790,6 @@ async function salvaModal(nome_metodo) {
     });
   });
 
-  async function deletaMetodoModal(nome_metodo) {
-    let newMetodos = [];
-    for (const a in DELIVERY_DETAILS) {
-      if (DELIVERY_DETAILS[a].descricao !== nome_metodo) {
-        newMetodos.push(DELIVERY_DETAILS[a]);
-      }
-    }
-    await updateDelivery("delivery_methods", JSON.stringify(newMetodos));
-
-    location.reload();
-  }
-
   ////console.log(dadosEntregaHorario)
 
   updateDetailsDelivery(
@@ -2179,4 +2167,16 @@ function deletarFaixaCep(elemento) {
   } else {
     faixaCepContexto(classePai, "exclui_faixa_cep_values");
   }
+}
+
+async function deletaMetodoModal(nome_metodo) {
+  let newMetodos = [];
+  for (const a in DELIVERY_DETAILS) {
+    if (DELIVERY_DETAILS[a].descricao !== nome_metodo) {
+      newMetodos.push(DELIVERY_DETAILS[a]);
+    }
+  }
+  await updateDelivery("delivery_methods", JSON.stringify(newMetodos));
+
+  location.reload();
 }
