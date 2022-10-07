@@ -90,7 +90,7 @@ $.ajax({
     console.log("cep", data[0].faixa_cep);
     if (data[0].faixa_cep === 1) {
       $("#switch-shadow975")[0].checked = true;
-      $("#edicaoAvancadaCheck")[0].checked = false;
+      // $("#edicaoAvancadaCheck")[0].checked = false;
       $("#iframeIn").hide();
       $(".areaEsconde").show();
     }
@@ -101,7 +101,7 @@ $.ajax({
       $(".insereFaixaCepExcluir").show();
     }
     if (data[0].lat_lon_active == 1) {
-      $("#edicaoAvancadaCheck").attr("checked", "true");
+      // $("#edicaoAvancadaCheck").attr("checked", "true");
       $("#iframe").fadeIn();
       $("#botaoEditarArea").fadeIn();
       $(".areaEsconde").fadeOut();
@@ -143,7 +143,7 @@ $.ajax({
 
     if (data[0].faixa_cep === 1) {
       $("#switch-shadow975")[0].checked = true;
-      $("#edicaoAvancadaCheck")[0].checked = false;
+      // $("#edicaoAvancadaCheck")[0].checked = false;
       setTimeout(() => {
         $("#iframeIn").hide();
         $(".areaEsconde").show();
@@ -387,19 +387,19 @@ for (const k in lojas_cadastradas) {
   $("#conteudoLogistica").append(html);
 }
 
-$("#edicaoAvancadaCheck").change(function () {
-  //////console.log("Mudei")
-  $("#iframe").fadeIn();
-  $("#botaoEditarArea").fadeIn();
-  $(".areaEsconde").fadeOut();
-  $("#switch-shadow975")[0].checked = false;
-});
+// $("#edicaoAvancadaCheck").change(function () {
+//   //////console.log("Mudei")
+//   $("#iframe").fadeIn();
+//   $("#botaoEditarArea").fadeIn();
+//   $(".areaEsconde").fadeOut();
+//   $("#switch-shadow975")[0].checked = false;
+// });
 
 $("#switch-shadow975").change(function () {
   $("#iframe").fadeOut();
   $("#botaoEditarArea").fadeOut();
   $(".areaEsconde").fadeIn();
-  $("#edicaoAvancadaCheck")[0].checked = false;
+  //$("#edicaoAvancadaCheck")[0].checked = false;
 });
 
 $("#botaoEditarArea").click(function () {
