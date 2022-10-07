@@ -225,49 +225,7 @@
 
 
                </div>
-{{!-- 
-               <div style="padding: 5%; margin-top:3%" class="col-md-12 grupoConteudo">
-                  <div class="row">
-                     <div class="col-md-8  edicaoAvancada">
-                        <div class="row">
-                           <div style="    margin-top: -1%;" class="switch__container  ajuste2"><input
-                                 fieldName="lat_lon_active" onchange="updateDefaultParameters($(this))"
-                                 id="edicaoAvancadaCheck" class="switch switch--shadow" type="checkbox"><label
-                                 for="edicaoAvancadaCheck"></label></div>
-                           <label class="txtLabel" style="margin-left: 3%;"> Edição avançada</label>
-
-                        </div>
-
-
-                     </div>
-
-
-                     <div style="display: none;" id="botaoEditarArea" class="col-md-4 botaoEditar">
-                        <div
-                           style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(255, 255, 255);max-width: 150px;height: 40px;border: 1px solid #687c97;float: right;/* margin-right: 15px; */opacity: 1;"
-                           class="input-group">
-                           <div style="border: none; margin: auto;" class="input-group-append">
-                              <div style="border: none; margin: auto; padding: 1%;" class="input-group-text"><svg
-                                    xmlns="http://www.w3.org/2000/svg" style="margin: 6% auto;fill: #687c97;" width="20"
-                                    height="20" viewBox="0 0 20 20">
-                                    <defs></defs>
-                                    <path class="a"
-                                       d="M12.929,15H2.083A2.086,2.086,0,0,1,0,12.917V2.084A2.086,2.086,0,0,1,2.083,0H7.928a.417.417,0,0,1,0,.833H2.083a1.252,1.252,0,0,0-1.25,1.25V12.917a1.252,1.252,0,0,0,1.25,1.25H12.929a1.251,1.251,0,0,0,1.25-1.25V7.084a.417.417,0,0,1,.834,0v5.833A2.086,2.086,0,0,1,12.929,15Zm-5-5.833H6.262a.417.417,0,0,1-.417-.416V7.084a.417.417,0,0,1,.122-.295L12.633.122a.417.417,0,0,1,.59,0L14.89,1.789a.416.416,0,0,1,0,.59L8.223,9.046A.414.414,0,0,1,7.928,9.167Zm5-8.161h0l-6.25,6.25V8.334H7.756l6.25-6.25L12.929,1.007Z"
-                                       transform="translate(2.488 2.499)"></path>
-                                 </svg></div>
-                           </div><label id="editaCat" style="margin: -1% auto;min-width: 60%;cursor: pointer;"
-                              class="label">Editar área</label>
-                        </div>
-                     </div>
-
-                  </div>
-                  {{!-- <div id="iframe" style="display: none;" class="com-md-12 notScroll">
-                     <iframe fieldName="lat_lon" id="iframeIn" src="/map/mapas/areaView.html" width="100%" height="520"
-                        style="border:0; border-radius: 20px" allowfullscreen="" loading="lazy"></iframe>
-                  </div> --}}
-
-
-               </div> --}}
+       
             </div>
 
 
@@ -288,3 +246,50 @@
    <option>10 km</option>
 
 </datalist>
+<script>
+   /*
+    
+               <div style="padding: 5%; margin-top:3%" class="col-md-12 grupoConteudo">
+                  <div class="row">
+                     <div class="col-md-8  edicaoAvancada">
+                        <div class="row">
+                           <div style="    margin-top: -1%;" class="switch__container  ajuste2"><input
+                                 fieldName="lat_lon_active" onchange="updateDefaultParameters($(this))"
+                                 id="edicaoAvancadaCheck" class="switch switch--shadow" type="checkbox"><label
+                                 for="edicaoAvancadaCheck"></label></div>
+                           <label class="txtLabel" style="margin-left: 3%;"> Edição avançada</label>
+
+                        </div>
+
+
+                     </div>
+
+
+                     <div style="display: none;" id="botaoEditarArea" class="col-md-4 botaoEditar">
+                        <div
+                           style="cursor: pointer;border-radius: 20px;font: bold 1rem Roboto;background-color: rgb(255, 255, 255);max-width: 150px;height: 40px;border: 1px solid #687c97;float: right; opacity: 1; "
+         class="input-group" >
+                           <div style="border: none; margin: auto;" class="input-group-append">
+                              <div style="border: none; margin: auto; padding: 1%;" class="input-group-text"><svg
+                                    xmlns="http://www.w3.org/2000/svg" style="margin: 6% auto;fill: #687c97;" width="20"
+                                    height="20" viewBox="0 0 20 20">
+                                    <defs></defs>
+                                    <path class="a"
+                                       d="M12.929,15H2.083A2.086,2.086,0,0,1,0,12.917V2.084A2.086,2.086,0,0,1,2.083,0H7.928a.417.417,0,0,1,0,.833H2.083a1.252,1.252,0,0,0-1.25,1.25V12.917a1.252,1.252,0,0,0,1.25,1.25H12.929a1.251,1.251,0,0,0,1.25-1.25V7.084a.417.417,0,0,1,.834,0v5.833A2.086,2.086,0,0,1,12.929,15Zm-5-5.833H6.262a.417.417,0,0,1-.417-.416V7.084a.417.417,0,0,1,.122-.295L12.633.122a.417.417,0,0,1,.59,0L14.89,1.789a.416.416,0,0,1,0,.59L8.223,9.046A.414.414,0,0,1,7.928,9.167Zm5-8.161h0l-6.25,6.25V8.334H7.756l6.25-6.25L12.929,1.007Z"
+                                       transform="translate(2.488 2.499)"></path>
+                                 </svg></div>
+                           </div><label id="editaCat" style="margin: -1% auto;min-width: 60%;cursor: pointer;"
+                              class="label">Editar área</label>
+                        </div >
+                     </div >
+
+                  </div >
+            <div id="iframe" style="display: none;" class="com-md-12 notScroll">
+               <iframe fieldName="lat_lon" id="iframeIn" src="/map/mapas/areaView.html" width="100%" height="520"
+                  style="border:0; border-radius: 20px" allowfullscreen="" loading="lazy"></iframe>
+            </div> 
+               </div > 
+
+
+   */
+</script>
