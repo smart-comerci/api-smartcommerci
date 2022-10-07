@@ -199,11 +199,15 @@ function start() {
       '" class="switch switch--shadow" type="checkbox"><label for="switch-shadow987' +
       contagem +
       '"></label></div>' +
+      `<div class="input-group iconOpaco ico etiquetaRedonda"><svg   onclick="removeMetodoEntrega1($(this))" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 21 21" style="margin: auto">&gt;<defs></defs><path class="a" d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z" transform="translate(4 3)"></path></svg></div>` +
       "</div>" +
       "</div>";
     $(".listaMetodosEntrega").append(html);
     contagem++;
   }
+}
+function removeMetodoEntrega1(element) {
+  console.log(element);
 }
 
 function uptadeCheckActive(descricao) {
