@@ -72,7 +72,7 @@ function removeFiltrosAvancadosLoad() {
   var parametros = [];
   try {
     parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
-  } catch (e) { }
+  } catch (e) {}
   let totalFiltros = 0,
     currFilter = null,
     listFiedlsSearch = "";
@@ -226,7 +226,7 @@ async function atualizaListaProdutos() {
     var parametros = [];
     try {
       parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
-    } catch (e) { }
+    } catch (e) {}
     if (parametros.length > 0) {
       await buscaPeloFiltro(
         parametros,
@@ -672,7 +672,7 @@ async function request(
         //alert("Algo saiu errado!<br>"+data2.responseJSON.message)
       }
     },
-    complete: function () { },
+    complete: function () {},
   });
 }
 
@@ -734,10 +734,10 @@ async function personalRequest(
           if (lojas2[k].id != Number(localStorage.AFFILIATE_ID)) {
             $(".listaFiliaisC").append(
               "<button onclick='setLocal(" +
-              lojas2[k].id +
-              ")' class='btn btn-primary'>Ver <b>'" +
-              lojas2[k].affiliates_business_name +
-              "'</b></button>"
+                lojas2[k].id +
+                ")' class='btn btn-primary'>Ver <b>'" +
+                lojas2[k].affiliates_business_name +
+                "'</b></button>"
             );
           }
           if (lojas2[k].id == Number(localStorage.AFFILIATE_ID)) {
@@ -989,7 +989,7 @@ async function personalRequest(
                   setTimeout(() => {
                     localStorage.peregrino =
                       location.href.split("/")[
-                      location.href.split("/").length - 1
+                        location.href.split("/").length - 1
                       ];
                     location.replace("/cms-login");
                   }, 2000);
@@ -1066,7 +1066,7 @@ async function personalRequest(
         //alert("Algo saiu errado!<br>"+data2.responseJSON.message)
       }
     },
-    complete: function () { },
+    complete: function () {},
   });
 }
 
@@ -1075,7 +1075,7 @@ async function carregaMais(ADDRESS, lastID, elemento) {
   var parametros = [];
   try {
     parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
-  } catch (e) { }
+  } catch (e) {}
   if (parametros.length > 0) {
     let isOk = false;
     for (const k in parametros) {
@@ -1620,19 +1620,20 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
     "</div>" +
     '<label style=" font-size: 20px;" class="label">Permitir compra por peso</label> ' +
     "</div>" +
-    `${compraPorPeso
-      ? '<div style="padding: 15px; width: 100%" class="row precoFinalProduto">' +
-      '<div class="col-md-6"> </div>' +
-      '<div class="col-md-6">' +
-      '<label style=" font-size: 20px;" class="label">Preço que será utilizado:</label> ' +
-      '<div class="group-input2" style="display: inline-flex;"><div class="iconLogistica" style=" height: 45px;width: 50px; margin: auto 2%!important;    background: #F9FAFB 0% 0% no-repeat padding-box !important;"><svg xmlns="http://www.w3.org/2000/svg" style="margin: 10px 15px;" width="15" height="25" viewBox="0 0 10.015 15.574"><path id="_105" data-name="105" d="M9.052-6.032c0-3.651-5.346-2.695-5.346-4.375,0-.464.42-.7,1.058-.7a7.9,7.9,0,0,1,3.274,1.087l1-2.1A7.5,7.5,0,0,0,5.865-13.2v-2.115H3.939v2.13c-1.854.3-3.013,1.42-3.013,3.028,0,3.593,5.346,2.55,5.346,4.274,0,.536-.493.826-1.275.826A6.483,6.483,0,0,1,1.317-6.6L.288-4.525a7.485,7.485,0,0,0,3.651,1.55V-.744H5.865V-2.961C7.691-3.207,9.052-4.25,9.052-6.032Z" transform="translate(0.337 15.818)" fill="none" stroke="#687c96" stroke-width="1"></path></svg></div><input acao="product_site_value" product_code="' +
-      product_data[0].product_code +
-      '" onchange="updateField($(this))" class="form-control inputProduct" placeholder="R$ 0.00" value="' +
-      product_data[0].product_site_value +
-      '" id="valorProdutoFinal"></div>' +
-      "</div>" +
-      "</div>"
-      : "<div></div>"
+    `${
+      compraPorPeso
+        ? '<div style="padding: 15px; width: 100%" class="row precoFinalProduto">' +
+          '<div class="col-md-6"> </div>' +
+          '<div class="col-md-6">' +
+          '<label style=" font-size: 20px;" class="label">Preço que será utilizado:</label> ' +
+          '<div class="group-input2" style="display: inline-flex;"><div class="iconLogistica" style=" height: 45px;width: 50px; margin: auto 2%!important;    background: #F9FAFB 0% 0% no-repeat padding-box !important;"><svg xmlns="http://www.w3.org/2000/svg" style="margin: 10px 15px;" width="15" height="25" viewBox="0 0 10.015 15.574"><path id="_105" data-name="105" d="M9.052-6.032c0-3.651-5.346-2.695-5.346-4.375,0-.464.42-.7,1.058-.7a7.9,7.9,0,0,1,3.274,1.087l1-2.1A7.5,7.5,0,0,0,5.865-13.2v-2.115H3.939v2.13c-1.854.3-3.013,1.42-3.013,3.028,0,3.593,5.346,2.55,5.346,4.274,0,.536-.493.826-1.275.826A6.483,6.483,0,0,1,1.317-6.6L.288-4.525a7.485,7.485,0,0,0,3.651,1.55V-.744H5.865V-2.961C7.691-3.207,9.052-4.25,9.052-6.032Z" transform="translate(0.337 15.818)" fill="none" stroke="#687c96" stroke-width="1"></path></svg></div><input acao="product_site_value" product_code="' +
+          product_data[0].product_code +
+          '" onchange="updateField($(this))" class="form-control inputProduct" placeholder="R$ 0.00" value="' +
+          product_data[0].product_site_value +
+          '" id="valorProdutoFinal"></div>' +
+          "</div>" +
+          "</div>"
+        : "<div></div>"
     }` +
     "</div>" +
     "</div>" +
@@ -2328,7 +2329,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
         var listaRelacionadas = [];
         try {
           listaRelacionadas = JSON.parse(localStorage.relacionados);
-        } catch (er) { }
+        } catch (er) {}
 
         $.ajax({
           url: "" + mainHost + "/listaIds",
@@ -2612,7 +2613,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
                   $(".bootbox-accept").css("float", "right");
                   $(".bootbox-cancel").css("float", "right");
                 },
-                callback: function (e) { },
+                callback: function (e) {},
               });
               $(".firstImageShow ").attr("src", urlNew);
               atualizaListaProdutos();
@@ -2624,7 +2625,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
                 setTimeout(() => {
                   localStorage.peregrino =
                     location.href.split("/")[
-                    location.href.split("/").length - 1
+                      location.href.split("/").length - 1
                     ];
                   location.replace("/cms-login");
                 }, 2000);
@@ -2667,7 +2668,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
         });
 
         // While dragging the p element, change the color of the output text
-        $(".thumbProduct").on("drag", function (event) { });
+        $(".thumbProduct").on("drag", function (event) {});
 
         // Output some text when finished dragging the p element and reset the opacity
         $(".thumbProduct").on("dragend", function (event) {
@@ -3043,7 +3044,7 @@ function ajustaDigitos(numero, digitos) {
   return result;
 }
 
-function reorganiza(PRODUCTS, field, sentido) { }
+function reorganiza(PRODUCTS, field, sentido) {}
 
 function calculaDesconto(tipo, elemento, precoProduto, origem) {
   precoProduto = Number(precoProduto);
@@ -3064,7 +3065,7 @@ function calculaDesconto(tipo, elemento, precoProduto, origem) {
   ) {
     try {
       listaDescontos = JSON.parse(localStorage.listaDescontos);
-    } catch (err) { }
+    } catch (err) {}
   }
 
   if (tipo == "subtracao") {
@@ -3226,7 +3227,7 @@ function calculaDesconto(tipo, elemento, precoProduto, origem) {
   if (tipo == "levePague") {
     var res = Number(
       (Number($("#pagueD").val().replace(",", ".")) * precoProduto) /
-      Number($("#compreD").val()).toFixed(2).replace(",", ".")
+        Number($("#compreD").val()).toFixed(2).replace(",", ".")
     );
     elemento.parent().parent().parent().find(".valorDescontadoD").val(res);
     elemento
@@ -3390,12 +3391,23 @@ function retornaCategorias(texto) {
 }
 
 function getProductData(EAN, elementParent, pai) {
-  let url = window.location.href
+ 
 
   pai.addClass("animated-background");
   if (EAN != 0 && EAN != undefined && EAN != "" && EAN != null) {
     try {
- 
+      // $.ajax({
+      //   type: "POST",
+      //   url: mainHost + "/getMyPicture",
+      //   headers: {
+      //     "x-access-token": localStorage.token,
+      //   },
+      //   data: {
+      //     EAN: EAN,
+      //     method: "GET",
+      //   },
+      //   success: function (picture) {
+
       let picture = {
         thumbnail:
           "https://api-smartcomerci.com.br:9090/pictures_ean/" + EAN + ".png",
@@ -3421,55 +3433,55 @@ function getProductData(EAN, elementParent, pai) {
         ////////////console.log("Recurso não existe")
 
         ////////////console.log(picture)
-        if ()
-          $.ajax({
-            type: "POST",
-            url: mainHost + "/productPictures",
-            headers: {
-              "x-access-token": localStorage.token,
-            },
-            data: {
-              affiliate_id: $(elementParent).attr("affiliate_id"),
-              product_code: $(elementParent).attr("product_code"),
-            },
-            success: function (data2) {
-              ////////console.log("eu achei")
-              ////////console.log(data2)
-              $(elementParent)
-                .find(".firstImage")
-                .attr(
-                  "src",
-                  mainHost +
+        if()
+        $.ajax({
+          type: "POST",
+          url: mainHost + "/productPictures",
+          headers: {
+            "x-access-token": localStorage.token,
+          },
+          data: {
+            affiliate_id: $(elementParent).attr("affiliate_id"),
+            product_code: $(elementParent).attr("product_code"),
+          },
+          success: function (data2) {
+            ////////console.log("eu achei")
+            ////////console.log(data2)
+            $(elementParent)
+              .find(".firstImage")
+              .attr(
+                "src",
+                mainHost +
                   "/images/" +
                   $(elementParent).attr("affiliate_id") +
                   "/" +
                   $(elementParent).attr("product_code") +
                   "/" +
                   data2[0]
-                );
-            },
-            error: function (data2) {
-              ////////console.log(data2)
-              try {
-                if (data.responseJSON.message.indexOf("token") > -1) {
-                  //alert("Necessário fazer login!<br>"+data.responseJSON.message)
-                  setTimeout(() => {
-                    localStorage.peregrino =
-                      location.href.split("/")[
+              );
+          },
+          error: function (data2) {
+            ////////console.log(data2)
+            try {
+              if (data.responseJSON.message.indexOf("token") > -1) {
+                //alert("Necessário fazer login!<br>"+data.responseJSON.message)
+                setTimeout(() => {
+                  localStorage.peregrino =
+                    location.href.split("/")[
                       location.href.split("/").length - 1
-                      ];
-                    location.replace("/cms-login");
-                  }, 2000);
-                }
-              } catch (ee) {
-                // ////////console.log("erro ee")
-                ////////////console.log(ee)
+                    ];
+                  location.replace("/cms-login");
+                }, 2000);
               }
-            },
-            complete: function () {
-              // ao final da requisição...
-            },
-          });
+            } catch (ee) {
+              // ////////console.log("erro ee")
+              ////////////console.log(ee)
+            }
+          },
+          complete: function () {
+            // ao final da requisição...
+          },
+        });
       } catch (erru) {
         PRODUCTS_IMAGES.push({
           EAN: EAN,
@@ -3484,17 +3496,77 @@ function getProductData(EAN, elementParent, pai) {
           .attr("src", "THIS FULL DESCRIPTION FROM COSMOS");
         pai.removeClass("animated-background");
       }
-      
+      //   },
+      //   error: function (data) {
+      //     pai.removeClass("animated-background");
+      //     ////////////console.log("cai na exceção")
+      //     if (data.responseJSON.message.indexOf("token") > -1) {
+      //       //alert("Necessário fazer login!<br>"+data.responseJSON.message)
+      //       setTimeout(() => {
+      //         localStorage.peregrino =
+      //           location.href.split("/")[location.href.split("/").length - 1];
+      //         location.replace("/cms-login");
+      //       }, 2000);
+      //     } else {
+      //       //alert("Algo saiu errado!<br>"+data.responseJSON.message)
+      //     }
+      //     ////////////console.log(data)
+      //     $.ajax({
+      //       type: "POST",
+      //       url: mainHost + "/productPictures",
+      //       headers: {
+      //         "x-access-token": localStorage.token,
+      //       },
+      //       data: {
+      //         affiliate_id: $(elementParent).attr("affiliate_id"),
+      //         product_code: $(elementParent).attr("product_code"),
+      //       },
+      //       success: function (data) {
+      //         ////////////console.log("eu achei")
+      //         ////////////console.log(data)
+      //         $(elementParent)
+      //           .find(".firstImage")
+      //           .attr(
+      //             "src",
+      //             mainHost +
+      //               "/images/" +
+      //               $(elementParent).attr("affiliate_id") +
+      //               "/" +
+      //               $(elementParent).attr("product_code") +
+      //               "/" +
+      //               data[0]
+      //           );
+      //       },
+      //       error: function (data) {
+      //         ////////////console.log(data)
+      //         if (data.responseJSON.message.indexOf("token") > -1) {
+      //           //alert("Necessário fazer login!<br>"+data.responseJSON.message)
+      //           setTimeout(() => {
+      //             localStorage.peregrino =
+      //               location.href.split("/")[
+      //                 location.href.split("/").length - 1
+      //               ];
+      //             location.replace("/cms-login");
+      //           }, 2000);
+      //         } else {
+      //           //alert("Algo saiu errado!<br>"+data.responseJSON.message)
+      //         }
+      //       },
+      //       complete: function () {
+      //         // ao final da requisição...
+      //       },
+      //     });
+      //   },
+      //   complete: function () {
+      //     // ao final da requisição...
+      //   },
+      // });
     } catch (eru) {
       ////////////console.log(eru)
     }
   } else {
     ////////////console.log("This product EAN is invalid = '"+EAN)
   }
-
-
-
-
 }
 
 function getCatIconFromStorage(catName) {
@@ -3933,7 +4005,7 @@ function imagenPadrao(product_ean, product_code, URL) {
         //alert("Algo saiu errado!<br>"+data.responseJSON.message)
       }
     },
-    complete: function () { },
+    complete: function () {},
   });
 }
 
@@ -4613,7 +4685,7 @@ function getProductCaract(product_code) {
       let RELACIONADOS = [];
       try {
         RELACIONADOS = JSON.parse(localStorage.relacionados);
-      } catch (e) { }
+      } catch (e) {}
 
       MY_PRD = RELACIONADOS;
       for (const k in MY_PRD) {
@@ -5274,14 +5346,14 @@ function getImageFromEAN(EAN, product_code, element) {
                 element.css(
                   "background",
                   "url(" +
-                  mainHost +
-                  "/images/" +
-                  localStorage.AFFILIATE_ID +
-                  "/" +
-                  product_code +
-                  "/" +
-                  data2[0] +
-                  ")"
+                    mainHost +
+                    "/images/" +
+                    localStorage.AFFILIATE_ID +
+                    "/" +
+                    product_code +
+                    "/" +
+                    data2[0] +
+                    ")"
                 );
               },
               error: function (data2) {
@@ -5291,7 +5363,7 @@ function getImageFromEAN(EAN, product_code, element) {
                     setTimeout(() => {
                       localStorage.peregrino =
                         location.href.split("/")[
-                        location.href.split("/").length - 1
+                          location.href.split("/").length - 1
                         ];
                       location.replace("/cms-login");
                     }, 2000);
@@ -5334,14 +5406,14 @@ function getImageFromEAN(EAN, product_code, element) {
               element.css(
                 "background",
                 "url(" +
-                mainHost +
-                "/images/" +
-                localStorage.AFFILIATE_ID +
-                "/" +
-                product_code +
-                "/" +
-                data2[0] +
-                ")"
+                  mainHost +
+                  "/images/" +
+                  localStorage.AFFILIATE_ID +
+                  "/" +
+                  product_code +
+                  "/" +
+                  data2[0] +
+                  ")"
               );
             },
             error: function (data2) {
@@ -5351,7 +5423,7 @@ function getImageFromEAN(EAN, product_code, element) {
                   setTimeout(() => {
                     localStorage.peregrino =
                       location.href.split("/")[
-                      location.href.split("/").length - 1
+                        location.href.split("/").length - 1
                       ];
                     location.replace("/cms-login");
                   }, 2000);
@@ -5876,7 +5948,7 @@ function addRelacionados(elemento) {
   var relacionados = [];
   try {
     relacionados = JSON.parse(localStorage.relacionados);
-  } catch (err) { }
+  } catch (err) {}
   relacionados.push(Number(elemento.attr("product_code")));
   localStorage.relacionados = JSON.stringify(relacionados);
 }
@@ -5956,7 +6028,7 @@ async function buscaAvancadaFiltros(html) {
   var parametros = [];
   try {
     parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
-  } catch (e) { }
+  } catch (e) {}
 }
 
 function verFeedback() {
@@ -5993,8 +6065,8 @@ function verFeedback() {
     } else {
       LISTA_SEARCH.map((l) =>
         l.colmun === "categorias" &&
-          l.value === $(this).text() &&
-          l.active === false
+        l.value === $(this).text() &&
+        l.active === false
           ? (l.active = true)
           : (l.active = l.active)
       );
@@ -6031,8 +6103,8 @@ function verFeedback() {
     } else {
       LISTA_SEARCH.map((l) =>
         l.colmun === "marcas" &&
-          l.value === $(this).text() &&
-          l.active === false
+        l.value === $(this).text() &&
+        l.active === false
           ? (l.active = true)
           : (l.active = l.active)
       );
@@ -6474,7 +6546,7 @@ function SIM() {
         ////////console.log(data)
         atualizaListaProdutos();
       },
-      complete: function () { },
+      complete: function () {},
     });
   }
 }
@@ -6573,10 +6645,10 @@ async function buscaPeloFiltro(
           if (lojas2[k].id != Number(localStorage.AFFILIATE_ID)) {
             $(".listaFiliaisC").append(
               "<button onclick='setLocal(" +
-              lojas2[k].id +
-              ")' class='btn btn-primary'>Ver <b>'" +
-              lojas2[k].affiliates_business_name +
-              "'</b></button>"
+                lojas2[k].id +
+                ")' class='btn btn-primary'>Ver <b>'" +
+                lojas2[k].affiliates_business_name +
+                "'</b></button>"
             );
           }
           if (lojas2[k].id == Number(localStorage.AFFILIATE_ID)) {
@@ -6827,7 +6899,7 @@ function feedbackPeloFiltro(
       ////////console.log(quantos)
       elemento.text("Mostrar " + quantos + " produtos");
     },
-    error: function (data2) { },
+    error: function (data2) {},
     complete: function () {
       // ao final da requisição...
     },
@@ -6933,8 +7005,8 @@ function retornoAlteraMassa() {
 
   bootbox.alert({
     message: html,
-    onShow: function () { },
-    callback: function () { },
+    onShow: function () {},
+    callback: function () {},
   });
 }
 
