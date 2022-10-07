@@ -805,7 +805,7 @@
           <div class="modal-title">Editar Loja</div>
 
           <div class="button-list">
-            <button  onclick="window.parent.fecharModalEdit()" class="btn btn-inverse">Cancelar</button>
+            <button onclick="window.parent.fecharModalEdit()" class="btn btn-inverse">Cancelar</button>
 
             <button onclick="salvar()" class="btn">Salvar</button>
           </div>
@@ -841,8 +841,11 @@
                     </div>
                   </div>
                 </div>
-                <input alvo="input-file" onchange="uploadBannerLoja($(this))" style="display: none" type="file" name="pegabann" id="pegabann">
-                <div onclick="pegabann()" style="background-position:center; background-repeat: no-repeat; zoom: 90%; background-size: cover" id="input-file" class="input-file">
+                <input alvo="input-file" onchange="uploadBannerLoja($(this))" style="display: none" type="file"
+                  name="pegabann" id="pegabann">
+                <div onclick="pegabann()"
+                  style="background-position:center; background-repeat: no-repeat; zoom: 90%; background-size: cover"
+                  id="input-file" class="input-file">
                   <i class="icon-upload">
                     <svg id="Grupo_2886" data-name="Grupo 2886" xmlns="http://www.w3.org/2000/svg" width="63"
                       height="63" viewBox="0 0 63 63">
@@ -854,7 +857,7 @@
                           fill="#f3b306" />
                       </g>
                     </svg>
-                    
+
                   </i>
 
                   Arraste as imagens aqui
@@ -870,7 +873,7 @@
 
                 <div class="title-box">
                   Nome da loja
-                  <input  onchange="edita('affiliates_business_name', $(this))" type="text" id="nome" />
+                  <input onchange="edita('affiliates_business_name', $(this))" type="text" id="nome" />
                 </div>
 
 
@@ -880,28 +883,28 @@
                   <div class="col-md-4">
                     <div class="title-box">
                       CNPJ
-                      <input  onchange="edita('affiliates_business_cnpj', $(this))" id="cnpj" type="text" />
+                      <input onchange="edita('affiliates_business_cnpj', $(this))" id="cnpj" type="text" />
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="title-box">
                       Telefone
-                      <input  onchange="edita('affiliates_business_telefone', $(this))" id="telefone" type="text" />
+                      <input onchange="edita('affiliates_business_telefone', $(this))" id="telefone" type="text" />
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="title-box">
                       E-mail
-                      <input  onchange="edita('affiliates_business_mail', $(this))" id="email" type="text" />
+                      <input onchange="edita('affiliates_business_mail', $(this))" id="email" type="text" />
                     </div>
                   </div>
 
                 </div>
                 <div class="title-box">
                   Endereço
-                  <input  onchange="edita('affiliates_business_endereco', $(this))" type="text" id="endereco" />
+                  <input onchange="edita('affiliates_business_endereco', $(this))" type="text" id="endereco" />
                 </div>
 
 
@@ -912,7 +915,8 @@
 
                 <div class="title-box">
                   Horário de funcionamento
-                  <div onchange="edita('affiliates_business_horario', $(this))" class="textarea" id="horario" contenteditable="true">
+                  <div onchange="edita('affiliates_business_horario', $(this))" class="textarea" id="horario"
+                    contenteditable="true">
 
                   </div>
                 </div>
@@ -935,121 +939,128 @@
   <script src="https://cdn.tiny.cloud/1/z1adkptdq0hutx22w6ho70748femf1xrmkybikjmdvsceakc/tinymce/6/tinymce.min.js"
     referrerpolicy="origin"></script>
   <script>
-    function iniciaEditorHtml(idElemento) {
-      tinymce.init({
-        selector: idElemento,
-        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-        toolbar_mode: 'floating',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-      });
-    }
 
-    //chamada teste
-    iniciaEditorHtml("#editorFullCode")
-
-
-
-    var loja = Number(localStorage.EDITANDO_LOJA_CONFIG)
-    ////console.log("a loja é", loja)
-
-    let lojas3 = JSON.parse(localStorage.LOJAS_CADASTRADAS)
-    let dadoLoja = []
-    for (const k in lojas3) {
-      if (loja == lojas3[k].id) {
-        dadoLoja = lojas3[k]
+    let url = window.location.href
+    if (url.indexOf("configuracoes") > -1) {
+      function iniciaEditorHtml(idElemento) {
+        tinymce.init({
+          selector: idElemento,
+          plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+          toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+          toolbar_mode: 'floating',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+        });
       }
-    }
-    ////console.log(lojas3, dadoLoja)
-    $("#nome").val(dadoLoja.affiliates_business_name)
-    $("#telefone").val(dadoLoja.affiliates_business_telefone)
-    $("#cnpj").val(dadoLoja.affiliates_business_cnpj)
-    $("#horario").html(dadoLoja.affiliates_business_horario)
-    $("#endereco").val(dadoLoja.affiliates_business_endereco)
-    $("#email").val(dadoLoja.affiliates_business_mail)
-    $("#mapa").val(dadoLoja.affiliates_business_mapa)
-    $("#input-file").css("background",`url(${dadoLoja.affiliates_business_photo})`)
-   // $("#foto").val(dadoLoja.affiliates_business_mapa)
 
-    localStorage.IN_EDIT_LOJA = JSON.stringify(dadoLoja)
-
-  function edita(column, element){
-    let data = JSON.parse(localStorage.IN_EDIT_LOJA)
-    data[column] = element.val()
-    localStorage.IN_EDIT_LOJA = JSON.stringify(data)
-  }
- 
+      //chamada teste
+      iniciaEditorHtml("#editorFullCode")
 
 
 
+      var loja = Number(localStorage.EDITANDO_LOJA_CONFIG)
+      ////console.log("a loja é", loja)
+
+      let lojas3 = JSON.parse(localStorage.LOJAS_CADASTRADAS)
+      let dadoLoja = []
+      for (const k in lojas3) {
+        if (loja == lojas3[k].id) {
+          dadoLoja = lojas3[k]
+        }
+      }
+      ////console.log(lojas3, dadoLoja)
+      $("#nome").val(dadoLoja.affiliates_business_name)
+      $("#telefone").val(dadoLoja.affiliates_business_telefone)
+      $("#cnpj").val(dadoLoja.affiliates_business_cnpj)
+      $("#horario").html(dadoLoja.affiliates_business_horario)
+      $("#endereco").val(dadoLoja.affiliates_business_endereco)
+      $("#email").val(dadoLoja.affiliates_business_mail)
+      $("#mapa").val(dadoLoja.affiliates_business_mapa)
+      $("#input-file").css("background", `url(${dadoLoja.affiliates_business_photo})`)
+      // $("#foto").val(dadoLoja.affiliates_business_mapa)
+
+      localStorage.IN_EDIT_LOJA = JSON.stringify(dadoLoja)
+
+      function edita(column, element) {
+        let data = JSON.parse(localStorage.IN_EDIT_LOJA)
+        data[column] = element.val()
+        localStorage.IN_EDIT_LOJA = JSON.stringify(data)
+      }
 
 
 
-   function salvar(){
-     let data = JSON.parse(localStorage.IN_EDIT_LOJA)
-     let dados = {
-       id : Number(localStorage.EDITANDO_LOJA_CONFIG),
-       affiliates_master_id: data['affiliates_master_id'],
-       affiliates_business_name: data['affiliates_business_name'],
-       affiliates_business_telefone: data['affiliates_business_telefone'],
-       affiliates_business_mail: data['affiliates_business_mail'],
-       affiliates_business_horario: data['affiliates_business_horario'],
-       affiliates_business_endereco: data['affiliates_business_endereco'],
-       affiliates_business_numero: data['affiliates_business_numero'],
-       affiliates_business_cep: data['affiliates_business_cep'],
-       affiliates_business_bairro: data['affiliates_business_bairro'],
-       affiliates_business_cidade: data['affiliates_business_cidade'],
-       affiliates_business_estado: data['affiliates_business_estado'],
-       affiliates_business_lat_lon: data['affiliates_business_lat_lon'],
-       affiliates_business_tipo: data['affiliates_business_tipo'],
-       affiliates_business_cnpj: data['affiliates_business_cnpj'],
-       affiliates_business_mapa: data['affiliates_business_mapa'],
-       affiliates_business_photo: data['affiliates_business_photo']
-     }
-     window.parent.updateAffiliate(dados)
-   }
 
-   function pegabann(){
-    $("#pegabann").click()
-   }
 
-   var mainHost = 'https://api-smartcomerci.com.br:9090';
-   function uploadBannerLoja(element) {
-    
-    var data = new FormData();
-      var contador = 1;
-      data.append('fileimagem', element[0].files[0]);
-      $.ajax({
-        url: mainHost + '/uploadBanners',
-        headers: {
-          "x-access-token": localStorage.token,
-          "master_id": localStorage.MASTER_ID
-        },
-        data: data,
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        success: function (data) {
+
+
+      function salvar() {
+        let data = JSON.parse(localStorage.IN_EDIT_LOJA)
+        let dados = {
+          id: Number(localStorage.EDITANDO_LOJA_CONFIG),
+          affiliates_master_id: data['affiliates_master_id'],
+          affiliates_business_name: data['affiliates_business_name'],
+          affiliates_business_telefone: data['affiliates_business_telefone'],
+          affiliates_business_mail: data['affiliates_business_mail'],
+          affiliates_business_horario: data['affiliates_business_horario'],
+          affiliates_business_endereco: data['affiliates_business_endereco'],
+          affiliates_business_numero: data['affiliates_business_numero'],
+          affiliates_business_cep: data['affiliates_business_cep'],
+          affiliates_business_bairro: data['affiliates_business_bairro'],
+          affiliates_business_cidade: data['affiliates_business_cidade'],
+          affiliates_business_estado: data['affiliates_business_estado'],
+          affiliates_business_lat_lon: data['affiliates_business_lat_lon'],
+          affiliates_business_tipo: data['affiliates_business_tipo'],
+          affiliates_business_cnpj: data['affiliates_business_cnpj'],
+          affiliates_business_mapa: data['affiliates_business_mapa'],
+          affiliates_business_photo: data['affiliates_business_photo']
+        }
+        window.parent.updateAffiliate(dados)
+      }
+
+      function pegabann() {
+        $("#pegabann").click()
+      }
+
+      var mainHost = 'https://api-smartcomerci.com.br:9090';
+      function uploadBannerLoja(element) {
+
+        var data = new FormData();
+        var contador = 1;
+        data.append('fileimagem', element[0].files[0]);
+        $.ajax({
+          url: mainHost + '/uploadBanners',
+          headers: {
+            "x-access-token": localStorage.token,
+            "master_id": localStorage.MASTER_ID
+          },
+          data: data,
+          processData: false,
+          contentType: false,
+          type: 'POST',
+          success: function (data) {
             //console.log(data)
 
             //console.log('o alvo pricipal -> ',$("#"+element.attr("target"))) 
 
-            $("#input-file").css("background","url("+data.path?.replace('./public','https://api-smartcomerci.com.br:9090')+")")
+            $("#input-file").css("background", "url(" + data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090') + ")")
             //console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:9090')}`)
 
             let dataL = JSON.parse(localStorage.IN_EDIT_LOJA)
-            dataL['affiliates_business_photo'] = data.path?.replace('./public','https://api-smartcomerci.com.br:9090')
+            dataL['affiliates_business_photo'] = data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')
             localStorage.IN_EDIT_LOJA = JSON.stringify(dataL)
 
-            
 
-        },
-        error: function (data) {
-          //console.log(data) 
-        }
-      });
-}
+
+          },
+          error: function (data) {
+            //console.log(data) 
+          }
+        });
+      }
+
+
+
+    }
 
   </script>
 </body>

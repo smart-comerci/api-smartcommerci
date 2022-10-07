@@ -1011,166 +1011,168 @@
     referrerpolicy="origin"></script>
   <script>
     var mainHost = 'https://api-smartcomerci.com.br:9090';
-    function iniciaEditorHtml(idElemento) {
-      tinymce.init({
-        selector: idElemento,
-        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-        toolbar_mode: 'floating',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-      });
-    }
+       let url = window.location.href
+        if (url.indexOf("receita") > -1) {
+             function iniciaEditorHtml(idElemento) {
+            tinymce.init({
+              selector: idElemento,
+              plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+              toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+              toolbar_mode: 'floating',
+              tinycomments_mode: 'embedded',
+              tinycomments_author: 'Author name',
+            });
+          }
 
-    //chamada teste
-    iniciaEditorHtml("#editorFullCode")
+          //chamada teste
+          iniciaEditorHtml("#editorFullCode")
 
-    function showMeContent(elemento) {
-      //console.log(elemento)
-      if (elemento.attr("mostrei") == 1) {
-        elemento.parent().parent().find(".conteudo").fadeOut()
+          function showMeContent(elemento) {
+            //console.log(elemento)
+            if (elemento.attr("mostrei") == 1) {
+              elemento.parent().parent().find(".conteudo").fadeOut()
 
-        elemento.parent().parent().removeClass("ativei")
+              elemento.parent().parent().removeClass("ativei")
 
-        elemento.attr("mostrei", 0)
-      } else {
-        elemento.parent().parent().find(".conteudo").fadeIn()
+              elemento.attr("mostrei", 0)
+            } else {
+              elemento.parent().parent().find(".conteudo").fadeIn()
 
-        elemento.parent().parent().addClass("ativei")
-        elemento.attr("mostrei", 1)
-      }
-
-    }
-
-    let CATEGORIAS = [], RECEITAS = []
-    $.ajax({
-      type: "POST",
-      url: mainHost + '/getByTableName',
-      data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues_categories" },
-      headers: {
-        "x-access-token": localStorage.token,
-      },
-      success: function (data) {
-        CATEGORIAS = data
-        $.ajax({
-          type: "POST",
-          url: mainHost + '/getByTableName',
-          data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues" },
-          headers: {
-            "x-access-token": localStorage.token,
-          },
-          success: function (data2) {
-            //console.log(data2)
-            RECEITAS = data2
-            //console.log(data)
-            localStorage.MY_REVENUES_CATEGORIES = JSON.stringify(data)
-            try {
-              let MATRIZ = JSON.parse(localStorage.DADOS_MATRIZ)
-              if (MATRIZ.master_custom_ferramentas.indexOf('Receitas') > -1) {
-                $("#ativar-pagina")[0].checked = true
-                $("#pagAtiva").text("ativada")
-              }
-              $("#bannerPrincipal").css("background", `url(${MATRIZ.master_banner_revenues})`)
-              $("#bannerPrincipal").attr("value", `${MATRIZ.master_banner_revenues}`)
-            } catch (error) {
-
+              elemento.parent().parent().addClass("ativei")
+              elemento.attr("mostrei", 1)
             }
-            try{
-              localStorage.MY_REVENUES = JSON.stringify(data2)
-            }catch(er){
-              //console.log(er)
-            }
-
-
-            $(".listCategoriasRevenues").html(
-              getCategoriesRevenues(data,data2)
-              
-            ) 
-
-          },
-          error: function (data) {
-            //console.log("erro get", data)
-
-            window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
-          },
-          complete: function () { },
-        });
-
-
-
-
-      },
-      error: function (data) {
-        //console.log("erro get", data)
-
-        window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
-      },
-      complete: function () { },
-    });
-
-    function inEdit(element) {
-      $("modalRevenue").attr("id", element.attr("target"))
-      $('modalRevenue').show()
-
-      if (element.attr("target") != 'NOVA' && element.attr("target") != 'TODAS') {
-        let MY_CATS = []
-        try {
-          MY_CATS = JSON.parse(localStorage.MY_REVENUES_CATEGORIES)
-        } catch (e) { }
-        for (const k in MY_CATS) {
-          if (MY_CATS[k].id == Number(element.attr("target"))) {
-            $("#ativar-pagina2")[0].checked = MY_CATS[k].status
-            $("#bannerCat1").attr("value", MY_CATS[k].image)
-            $("#bannerCat1").css("background", `url(${MY_CATS[k].image})`)
-            $("#bannerCat1").css("background-size", "cover !important")
-            $("#bannerCat1").css("background-position", "center !important")
-            $("#bannerCat1").css("zoom", "100% !important")
-            $("#nameCategory").val(MY_CATS[k].name)
 
           }
-        }
+
+          let CATEGORIAS = [], RECEITAS = []
+          $.ajax({
+            type: "POST",
+            url: mainHost + '/getByTableName',
+            data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues_categories" },
+            headers: {
+              "x-access-token": localStorage.token,
+            },
+            success: function (data) {
+              CATEGORIAS = data
+              $.ajax({
+                type: "POST",
+                url: mainHost + '/getByTableName',
+                data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues" },
+                headers: {
+                  "x-access-token": localStorage.token,
+                },
+                success: function (data2) {
+                  //console.log(data2)
+                  RECEITAS = data2
+                  //console.log(data)
+                  localStorage.MY_REVENUES_CATEGORIES = JSON.stringify(data)
+                  try {
+                    let MATRIZ = JSON.parse(localStorage.DADOS_MATRIZ)
+                    if (MATRIZ.master_custom_ferramentas.indexOf('Receitas') > -1) {
+                      $("#ativar-pagina")[0].checked = true
+                      $("#pagAtiva").text("ativada")
+                    }
+                    $("#bannerPrincipal").css("background", `url(${MATRIZ.master_banner_revenues})`)
+                    $("#bannerPrincipal").attr("value", `${MATRIZ.master_banner_revenues}`)
+                  } catch (error) {
+
+                  }
+                  try {
+                    localStorage.MY_REVENUES = JSON.stringify(data2)
+                  } catch (er) {
+                    //console.log(er)
+                  }
+
+
+                  $(".listCategoriasRevenues").html(
+                    getCategoriesRevenues(data, data2)
+
+                  )
+
+                },
+                error: function (data) {
+                  //console.log("erro get", data)
+
+                  window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
+                },
+                complete: function () { },
+              });
 
 
 
-      } else {
-        $("#bannerCat1").css("background", "none")
-      }
 
+            },
+            error: function (data) {
+              //console.log("erro get", data)
 
-    }
+              window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
+            },
+            complete: function () { },
+          });
 
+          function inEdit(element) {
+            $("modalRevenue").attr("id", element.attr("target"))
+            $('modalRevenue').show()
 
+            if (element.attr("target") != 'NOVA' && element.attr("target") != 'TODAS') {
+              let MY_CATS = []
+              try {
+                MY_CATS = JSON.parse(localStorage.MY_REVENUES_CATEGORIES)
+              } catch (e) { }
+              for (const k in MY_CATS) {
+                if (MY_CATS[k].id == Number(element.attr("target"))) {
+                  $("#ativar-pagina2")[0].checked = MY_CATS[k].status
+                  $("#bannerCat1").attr("value", MY_CATS[k].image)
+                  $("#bannerCat1").css("background", `url(${MY_CATS[k].image})`)
+                  $("#bannerCat1").css("background-size", "cover !important")
+                  $("#bannerCat1").css("background-position", "center !important")
+                  $("#bannerCat1").css("zoom", "100% !important")
+                  $("#nameCategory").val(MY_CATS[k].name)
 
-    function getCategoriesRevenues(categories,data2) {
-      let html = ''
-
-
-      function pegaReceita(categoria,data2){
-        let retorna = '', count = 0
-        
-              for(let u in data2){
-                let toDo = false
-                for(let o in data2[u].category.split(',')){
-                  
-                  if(data2[u].category.split(',')[o] == categoria){
-                    toDo = true
-                  
-                  } 
-                }
-                if(toDo){
-                  count ++
-                retorna +=  getRevenues(data2[u])
                 }
               }
-             
-              
-      
-        return {html:retorna,total: count}
-      }
 
-      for (const k in categories) {
-       
-        html += `
+
+
+            } else {
+              $("#bannerCat1").css("background", "none")
+            }
+
+
+          }
+
+
+
+          function getCategoriesRevenues(categories, data2) {
+            let html = ''
+
+
+            function pegaReceita(categoria, data2) {
+              let retorna = '', count = 0
+
+              for (let u in data2) {
+                let toDo = false
+                for (let o in data2[u].category.split(',')) {
+
+                  if (data2[u].category.split(',')[o] == categoria) {
+                    toDo = true
+
+                  }
+                }
+                if (toDo) {
+                  count++
+                  retorna += getRevenues(data2[u])
+                }
+              }
+
+
+
+              return { html: retorna, total: count }
+            }
+
+            for (const k in categories) {
+
+              html += `
         <div style="margin-top: 15px" class="col-md-12 item">
               <div class="row cabecalho">
                 <div class="col-md-1" style="margin: auto;">
@@ -1198,7 +1200,7 @@
                   <p class="negrito">${categories[k].name}</p>
                 </div>
                 <div class="col-md-2" style="margin: auto;">
-                  <label class="label totalSubCategorias">${pegaReceita(categories[k].name,data2).total} Receitas</label>
+                  <label class="label totalSubCategorias">${pegaReceita(categories[k].name, data2).total} Receitas</label>
                 </div>
                 <div class="col-md-2" style="margin: auto;">
 
@@ -1274,28 +1276,28 @@
 
                 </div> 
                 <div id="${categories[k].name?.replace(' ', '_')}" >
-                  ${pegaReceita(categories[k].name,data2).html}
+                  ${pegaReceita(categories[k].name, data2).html}
                 </div>
               </div>
             </div> `;
 
 
-      }
-      return html
-    }
+            }
+            return html
+          }
 
-    function addReceita(targetId, dataValues) {
-      $("#" + targetId).append(
-        getRevenues(dataValues)
-      )
-    }
+          function addReceita(targetId, dataValues) {
+            $("#" + targetId).append(
+              getRevenues(dataValues)
+            )
+          }
 
-   
 
-    function getRevenues(data) {
-      //console.log('os dados',data)
-      let INDEX = Math.random().toFixed(2).replace('.','')
-      let html = `
+
+          function getRevenues(data) {
+            //console.log('os dados',data)
+            let INDEX = Math.random().toFixed(2).replace('.', '')
+            let html = `
         <div class="row">
                     <div class="col-md-2"
                       style="padding-left: 50px;border-left: 1px dashed silver;/* border-bottom: 1px dashed silver; *//* margin-top: -90px; */">
@@ -1396,346 +1398,349 @@
 
 
 
-        
-      
-      
-      return html
-    }
 
-    function meEdita(id){
-      window.parent.location.replace('../receita_interna/'+id)
-    }
-    async function saveRevenuesCategories() {
-      let myRevenuesCategories = JSON.parse(localStorage.MY_REVENUES_CATEGORIES)
-      let myRevenues = JSON.parse(localStorage.MY_REVENUES)
-      for (const a in myRevenuesCategories) {
-        let columns = []
-        for (const k in myRevenuesCategories[a]) {
-          if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
-            columns.push({
-              column: k,
-              value: myRevenuesCategories[a][k]
-            })
+
+
+            return html
           }
 
-        }
-   
-
-        await $.ajax({
-          type: 'POST',
-          url: mainHost + '/updateById',
-          headers: {
-            "x-access-token": localStorage.token,
-          },
-          data: {
-            "table": "revenues_categories",
-            "name_id": "id",
-            "value_id": myRevenuesCategories[a].id,
-            "fields": columns
-          },
-          success: function (data) {
-            window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
-          },
-          error: function (data) {
-            window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-          },
-          complete: function () {
-            // ao final da requisição...
+          function meEdita(id) {
+            window.parent.location.replace('../receita_interna/' + id)
           }
-        });
+          async function saveRevenuesCategories() {
+            let myRevenuesCategories = JSON.parse(localStorage.MY_REVENUES_CATEGORIES)
+            let myRevenues = JSON.parse(localStorage.MY_REVENUES)
+            for (const a in myRevenuesCategories) {
+              let columns = []
+              for (const k in myRevenuesCategories[a]) {
+                if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
+                  columns.push({
+                    column: k,
+                    value: myRevenuesCategories[a][k]
+                  })
+                }
 
-      }
-
-      for (const a in myRevenues) {
-        let columns = []
-        for (const k in myRevenues[a]) {
-          if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
-            columns.push({
-              column: k,
-              value: myRevenues[a][k]
-            })
-          }
-
-        }
-      
-
-        await $.ajax({
-          type: 'POST',
-          url: mainHost + '/updateById',
-          headers: {
-            "x-access-token": localStorage.token,
-          },
-          data: {
-            "table": "revenues",
-            "name_id": "id",
-            "value_id": myRevenues[a].id,
-            "fields": columns
-          },
-          success: function (data) {
-            window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
-          },
-          error: function (data) {
-            window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-          },
-          complete: function () {
-            // ao final da requisição...
-          }
-        });
-
-      }
-
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/singleUpdate',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "table": "masters",
-          "column": "master_banner_revenues",
-          "newValue": $("#bannerPrincipal").attr("value"),
-          "columnId": "id",
-          "idValue": localStorage.MASTER_ID
-        },
-        success: function (data) {
-          window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
-          setTimeout(() => {
-            window.parent.location.reload()
-          }, 2000);
-        },
-        error: function (data) {
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
-        }
-      });
-
-    }
-    
-    function getFile(target) {
-      $("#fileBannerCat").attr("target", target.attr("target"))
-      $("#fileBannerCat").click()
-    }
-
-    function getImageFromSite(element) {
-      var data = new FormData();
-      var contador = 1;
-      data.append('fileimagem', element[0].files[0]);
-      $.ajax({
-        url: mainHost + '/uploadBanners',
-        headers: {
-          "x-access-token": localStorage.token,
-          "master_id": localStorage.MASTER_ID
-        },
-        data: data,
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        success: function (data) {
-          //console.log(data)
-          $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')})`)
-          $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
-          $("#" + element.attr("target")).css("background-size", "cover !important")
-          $("#" + element.attr("target")).css("background-position", "center !important")
-          $("#" + element.attr("target")).css("zoom", "100% !important")
+              }
 
 
+              await $.ajax({
+                type: 'POST',
+                url: mainHost + '/updateById',
+                headers: {
+                  "x-access-token": localStorage.token,
+                },
+                data: {
+                  "table": "revenues_categories",
+                  "name_id": "id",
+                  "value_id": myRevenuesCategories[a].id,
+                  "fields": columns
+                },
+                success: function (data) {
+                  window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
+                },
+                error: function (data) {
+                  window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+                },
+                complete: function () {
+                  // ao final da requisição...
+                }
+              });
 
-          //console.log(element.parent().parent().find('input'))
-          //console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
-
-
-
-        },
-        error: function (data) {
-          //console.log(data)
-        }
-      });
-
-    }
-
-    async function salvaNovaCat() {
-      if ($("modalRevenue").attr("id") == "NOVA") {
-        let active = $("#ativar-pagina2")[0].checked ? 1 : 0
-        let name = $("#nameCategory").val()
-        let imagen = $("#bannerCat1").attr("value")
-        let data = {
-          status: active,
-          image: imagen,
-          name: name,
-          subcategories: '[]'
-        }
-        await novaCategoriaRevenue(data)
-      } else
-
-        if ($("modalRevenue").attr("id") == "TODAS") {
-
-        } else {
-          let active = $("#ativar-pagina2")[0].checked ? 1 : 0
-          let name = $("#nameCategory").val()
-          let imagen = $("#bannerCat1").attr("value")
-          let MY_CATS = []
-          try {
-            MY_CATS = JSON.parse(localStorage.MY_REVENUES_CATEGORIES)
-          } catch (e) { }
-          for (const k in MY_CATS) {
-            if (MY_CATS[k].id == Number($("modalRevenue").attr("id"))) {
-              MY_CATS[k]['status'] = active
-              MY_CATS[k]['image'] = imagen
-              MY_CATS[k]['name'] = name
             }
-          }
-          localStorage.MY_REVENUES_CATEGORIES = JSON.stringify(MY_CATS)
-          $(".listCategoriasRevenues").html(
-            getCategoriesRevenues(MY_CATS)
-          )
 
-        }
+            for (const a in myRevenues) {
+              let columns = []
+              for (const k in myRevenues[a]) {
+                if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
+                  columns.push({
+                    column: k,
+                    value: myRevenues[a][k]
+                  })
+                }
+
+              }
 
 
-      $("modalRevenue").hide()
-    }
+              await $.ajax({
+                type: 'POST',
+                url: mainHost + '/updateById',
+                headers: {
+                  "x-access-token": localStorage.token,
+                },
+                data: {
+                  "table": "revenues",
+                  "name_id": "id",
+                  "value_id": myRevenues[a].id,
+                  "fields": columns
+                },
+                success: function (data) {
+                  window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
+                },
+                error: function (data) {
+                  window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+                },
+                complete: function () {
+                  // ao final da requisição...
+                }
+              });
 
-
-
-    async function newRevenue(category) {
-
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/insertNew',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "table": "revenues",
-          "fields": [
-            { "column": "master_id", "value": Number(localStorage.MASTER_ID) },
-            { "column": "category", "value": category },
-            { "column": "status", "value": Number(1) },
-            { "column": "banner_topo", "value": "" },
-            { "column": "title", "value": "NOVA RECEITA EDITÁVEL" },
-            { "column": "image", "value": "" },
-            { "column": "tempo_minutos", "value": Number(1) },
-            { "column": "porcoes", "value": Number(1) },
-            { "column": "product_list", "value": "" },
-            { "column": "ingredientes", "value": "" },
-            { "column": "modo_preparo", "value": "" },
-            { "column": "midia", "value": "" }
-          ]
-        },
-        success: function (data) {
-          addReceita(
-            category,
-            {
-              "id": data.insertId,
-              "master_id": Number(localStorage.MASTER_ID),
-              "status": 1,
-              "banner_topo": "",
-              "title": "NOVA RECEITA EDITÁVEL",
-              "mage": "",
-              "tempo_minutos": 1,
-              "porcoes": 1,
-              "product_list": "",
-              "ingredientes": "",
-              "modo_preparo": "",
-              "midia": ""
             }
-          )
-          window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
 
-        },
-        error: function (data) {
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
-        }
-      });
+            await $.ajax({
+              type: 'POST',
+              url: mainHost + '/singleUpdate',
+              headers: {
+                "x-access-token": localStorage.token,
+              },
+              data: {
+                "table": "masters",
+                "column": "master_banner_revenues",
+                "newValue": $("#bannerPrincipal").attr("value"),
+                "columnId": "id",
+                "idValue": localStorage.MASTER_ID
+              },
+              success: function (data) {
+                window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
+                setTimeout(() => {
+                  window.parent.location.reload()
+                }, 2000);
+              },
+              error: function (data) {
+                window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+              },
+              complete: function () {
+                // ao final da requisição...
+              }
+            });
 
-    }
-
-    async function novaCategoriaRevenue(data) {
-  
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/insertNew',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "table": "revenues_categories",
-          "fields": [
-            { "column": "master_id", "value": Number(localStorage.MASTER_ID) },
-            { "column": "status", "value": Number(data.status) },
-            { "column": "name", "value": data.name },
-            { "column": "image", "value": data.image },
-
-            { "column": "subcategories", "value": data.subcategories }
-          ]
-        },
-        success: function (data) {
-          window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
-          setTimeout(() => {
-            window.parent.location.reload()
-          }, 2000);
-        },
-        error: function (data) {
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
-        }
-      });
-    }
-
-
-    function ativaReceita(element){
-       let id = Number(element.attr("idRevenue"))
-       let newValue = 0 
-       if(element[0].checked){
-        newValue = 1
-       }
-       let REVs = JSON.parse(localStorage.MY_REVENUES)
-       for(const k in REVs){
-        if(REVs[k].id == id){
-          REVs[k]['status'] = newValue
-        }
-       }
-       
-       localStorage.MY_REVENUES = JSON.stringify(REVs)
-    }
-
-  async  function deleteRevenue(ID, element) {
-       if(ID){
-        await $.ajax({
-          type: 'POST',
-          url: mainHost + '/deleteById',
-          headers: {
-            "x-access-token": localStorage.token,
-          },
-          data: {
-            "table": "revenues", 
-            "item_id": ID 
-          },
-          success: function (data) {
-            window.parent.informar("alert-success", "Receita removida com sucesso!", 3000)
-
-            element.parent().parent().parent().parent().remove()
-          },
-          error: function (data) {
-            window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-          },
-          complete: function () {
-            // ao final da requisição...
           }
-        });
 
-       }
-       
+          function getFile(target) {
+            $("#fileBannerCat").attr("target", target.attr("target"))
+            $("#fileBannerCat").click()
+          }
 
-    }
+          function getImageFromSite(element) {
+            var data = new FormData();
+            var contador = 1;
+            data.append('fileimagem', element[0].files[0]);
+            $.ajax({
+              url: mainHost + '/uploadBanners',
+              headers: {
+                "x-access-token": localStorage.token,
+                "master_id": localStorage.MASTER_ID
+              },
+              data: data,
+              processData: false,
+              contentType: false,
+              type: 'POST',
+              success: function (data) {
+                //console.log(data)
+                $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')})`)
+                $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
+                $("#" + element.attr("target")).css("background-size", "cover !important")
+                $("#" + element.attr("target")).css("background-position", "center !important")
+                $("#" + element.attr("target")).css("zoom", "100% !important")
 
+
+
+                //console.log(element.parent().parent().find('input'))
+                //console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
+
+
+
+              },
+              error: function (data) {
+                //console.log(data)
+              }
+            });
+
+          }
+
+          async function salvaNovaCat() {
+            if ($("modalRevenue").attr("id") == "NOVA") {
+              let active = $("#ativar-pagina2")[0].checked ? 1 : 0
+              let name = $("#nameCategory").val()
+              let imagen = $("#bannerCat1").attr("value")
+              let data = {
+                status: active,
+                image: imagen,
+                name: name,
+                subcategories: '[]'
+              }
+              await novaCategoriaRevenue(data)
+            } else
+
+              if ($("modalRevenue").attr("id") == "TODAS") {
+
+              } else {
+                let active = $("#ativar-pagina2")[0].checked ? 1 : 0
+                let name = $("#nameCategory").val()
+                let imagen = $("#bannerCat1").attr("value")
+                let MY_CATS = []
+                try {
+                  MY_CATS = JSON.parse(localStorage.MY_REVENUES_CATEGORIES)
+                } catch (e) { }
+                for (const k in MY_CATS) {
+                  if (MY_CATS[k].id == Number($("modalRevenue").attr("id"))) {
+                    MY_CATS[k]['status'] = active
+                    MY_CATS[k]['image'] = imagen
+                    MY_CATS[k]['name'] = name
+                  }
+                }
+                localStorage.MY_REVENUES_CATEGORIES = JSON.stringify(MY_CATS)
+                $(".listCategoriasRevenues").html(
+                  getCategoriesRevenues(MY_CATS)
+                )
+
+              }
+
+
+            $("modalRevenue").hide()
+          }
+
+
+
+          async function newRevenue(category) {
+
+            await $.ajax({
+              type: 'POST',
+              url: mainHost + '/insertNew',
+              headers: {
+                "x-access-token": localStorage.token,
+              },
+              data: {
+                "table": "revenues",
+                "fields": [
+                  { "column": "master_id", "value": Number(localStorage.MASTER_ID) },
+                  { "column": "category", "value": category },
+                  { "column": "status", "value": Number(1) },
+                  { "column": "banner_topo", "value": "" },
+                  { "column": "title", "value": "NOVA RECEITA EDITÁVEL" },
+                  { "column": "image", "value": "" },
+                  { "column": "tempo_minutos", "value": Number(1) },
+                  { "column": "porcoes", "value": Number(1) },
+                  { "column": "product_list", "value": "" },
+                  { "column": "ingredientes", "value": "" },
+                  { "column": "modo_preparo", "value": "" },
+                  { "column": "midia", "value": "" }
+                ]
+              },
+              success: function (data) {
+                addReceita(
+                  category,
+                  {
+                    "id": data.insertId,
+                    "master_id": Number(localStorage.MASTER_ID),
+                    "status": 1,
+                    "banner_topo": "",
+                    "title": "NOVA RECEITA EDITÁVEL",
+                    "mage": "",
+                    "tempo_minutos": 1,
+                    "porcoes": 1,
+                    "product_list": "",
+                    "ingredientes": "",
+                    "modo_preparo": "",
+                    "midia": ""
+                  }
+                )
+                window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
+
+              },
+              error: function (data) {
+                window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+              },
+              complete: function () {
+                // ao final da requisição...
+              }
+            });
+
+          }
+
+          async function novaCategoriaRevenue(data) {
+
+            await $.ajax({
+              type: 'POST',
+              url: mainHost + '/insertNew',
+              headers: {
+                "x-access-token": localStorage.token,
+              },
+              data: {
+                "table": "revenues_categories",
+                "fields": [
+                  { "column": "master_id", "value": Number(localStorage.MASTER_ID) },
+                  { "column": "status", "value": Number(data.status) },
+                  { "column": "name", "value": data.name },
+                  { "column": "image", "value": data.image },
+
+                  { "column": "subcategories", "value": data.subcategories }
+                ]
+              },
+              success: function (data) {
+                window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
+                setTimeout(() => {
+                  window.parent.location.reload()
+                }, 2000);
+              },
+              error: function (data) {
+                window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+              },
+              complete: function () {
+                // ao final da requisição...
+              }
+            });
+          }
+
+
+          function ativaReceita(element) {
+            let id = Number(element.attr("idRevenue"))
+            let newValue = 0
+            if (element[0].checked) {
+              newValue = 1
+            }
+            let REVs = JSON.parse(localStorage.MY_REVENUES)
+            for (const k in REVs) {
+              if (REVs[k].id == id) {
+                REVs[k]['status'] = newValue
+              }
+            }
+
+            localStorage.MY_REVENUES = JSON.stringify(REVs)
+          }
+
+          async function deleteRevenue(ID, element) {
+            if (ID) {
+              await $.ajax({
+                type: 'POST',
+                url: mainHost + '/deleteById',
+                headers: {
+                  "x-access-token": localStorage.token,
+                },
+                data: {
+                  "table": "revenues",
+                  "item_id": ID
+                },
+                success: function (data) {
+                  window.parent.informar("alert-success", "Receita removida com sucesso!", 3000)
+
+                  element.parent().parent().parent().parent().remove()
+                },
+                error: function (data) {
+                  window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+                },
+                complete: function () {
+                  // ao final da requisição...
+                }
+              });
+
+            }
+
+
+          }
+
+
+        }
+ 
   </script>
 
 </body>

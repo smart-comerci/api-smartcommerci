@@ -1106,254 +1106,256 @@
   <script>
     var mainHost = 'https://api-smartcomerci.com.br:9090';
 
-    function fechaMe(element) {
-      $('.listaProdutos').html('')
-      element.hide()
-    }
+        let url = window.location.href
+          if (url.indexOf("receita") > -1) {
+            function fechaMe(element) {
+              $('.listaProdutos').html('')
+              element.hide()
+            }
 
 
 
 
 
-    function addStep(id, value) {
-      //console.log(id,value) 
-      if (value != "") {
+            function addStep(id, value) {
+              //console.log(id,value) 
+              if (value != "") {
 
-        if (Number(id)) {
-          INDEX = id
-        }
-        let html = '<div class="row stepRevenue">' +
-          '<div style="margin: auto; padding: 20px;" class="col-md-1">' +
-          '<div class="numero">' +
-          '<p class="tNumero">' + INDEX + '</p>' +
-          '</div>' +
-          '</div>' +
-          '<div style=" margin: auto; " class="col-md-10">' +
-          '<div class="subItem">' +
-          '<p class="subTitem">' +
-          value +
-          '</p>' +
-          '</div>' +
-          '</div>' +
-          '<div style="margin: auto; padding: 20px;" class="col-md-1">' +
-          '<div id="' + INDEX + '" onclick="removeStep($(this))" class=" deleteThis borderIcon">' +
-          '<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"' +
-          'style="fill: #f6b504;margin: 9px;">&gt;<defs></defs>' +
-          '<path class="a"' +
-          'd="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z"' +
-          'transform="translate(4 3)"></path>' +
-          '</svg>' +
-          '</div>' +
-          '</div>' +
-          '</div>';
+                if (Number(id)) {
+                  INDEX = id
+                }
+                let html = '<div class="row stepRevenue">' +
+                  '<div style="margin: auto; padding: 20px;" class="col-md-1">' +
+                  '<div class="numero">' +
+                  '<p class="tNumero">' + INDEX + '</p>' +
+                  '</div>' +
+                  '</div>' +
+                  '<div style=" margin: auto; " class="col-md-10">' +
+                  '<div class="subItem">' +
+                  '<p class="subTitem">' +
+                  value +
+                  '</p>' +
+                  '</div>' +
+                  '</div>' +
+                  '<div style="margin: auto; padding: 20px;" class="col-md-1">' +
+                  '<div id="' + INDEX + '" onclick="removeStep($(this))" class=" deleteThis borderIcon">' +
+                  '<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"' +
+                  'style="fill: #f6b504;margin: 9px;">&gt;<defs></defs>' +
+                  '<path class="a"' +
+                  'd="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z"' +
+                  'transform="translate(4 3)"></path>' +
+                  '</svg>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>';
 
-        $(".listPass").append(html)
-        let steps = []
-        try {
-          steps = JSON.parse(JSON.parse(localStorage.THIS_REVENUE).modo_preparo)
+                $(".listPass").append(html)
+                let steps = []
+                try {
+                  steps = JSON.parse(JSON.parse(localStorage.THIS_REVENUE).modo_preparo)
 
-        } catch (e) { }
-        steps.push({
-          id: INDEX, instucao: value
-        })
+                } catch (e) { }
+                steps.push({
+                  id: INDEX, instucao: value
+                })
 
-        $("#tNumero").text(INDEX + 1)
-        editRevenue('modo_preparo', JSON.stringify(steps))
+                $("#tNumero").text(INDEX + 1)
+                editRevenue('modo_preparo', JSON.stringify(steps))
 
-      } else {
-        $("#putStep").css("border", "1px solid red")
+              } else {
+                $("#putStep").css("border", "1px solid red")
 
-        window.parent.informar("alert-primary", "Preencha antes de continuar!", 3000)
-      }
-
-
-    }
-    function removeStep(element) {
-
-      let steps = []
-      try {
-        steps = JSON.parse(JSON.parse(localStorage.THIS_REVENUE).modo_preparo)
-
-      } catch (e) { }
-
-      let newSteps = []
-      for (const k in steps) {
-        if (steps[k].id != Number(element.attr("id"))) {
-          newSteps.push(steps[k])
-        }
-      }
-      editRevenue('modo_preparo', JSON.stringify(newSteps))
-
-      if (value < 0) { value = 0 }
-      $("#tNumero").text($(".tNumero").length + 1)
-      // let contagen = 1
-      // $(".tNumero").each(function(){
-      //   $(this).text(contagen)
-      //   contagen++
-      // })
+                window.parent.informar("alert-primary", "Preencha antes de continuar!", 3000)
+              }
 
 
-    }
+            }
+            function removeStep(element) {
 
-    let THIS_REVENUE = Number(location.href.split('?')[1])
-    $.ajax({
-      type: "POST",
-      url: mainHost + '/getByTableName',
-      data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues" },
-      headers: {
-        "x-access-token": localStorage.token,
-      },
-      success: async function (data2) {
-        //console.log(data2)
-        let myRevenue
-        for (const j in data2) {
-          if (data2[j].id == THIS_REVENUE) {
-            myRevenue = data2[j]
-          }
-        }
+              let steps = []
+              try {
+                steps = JSON.parse(JSON.parse(localStorage.THIS_REVENUE).modo_preparo)
 
-        //console.log(myRevenue)
-        localStorage.THIS_REVENUE = JSON.stringify(myRevenue)
+              } catch (e) { }
 
-        $("#title").val(myRevenue.title)
-        $("#titleTop").text(myRevenue.title)
-        $("#tempo_minutos").val(myRevenue.tempo_minutos)
-        $("#porcoes").val(myRevenue.porcoes)
-        let ingredientes = []
-        try {
-          ingredientes = JSON.parse(myRevenue.ingredientes)
-        } catch (e) { }
-        $("#ingredientesTotal").text(ingredientes.length)
+              let newSteps = []
+              for (const k in steps) {
+                if (steps[k].id != Number(element.attr("id"))) {
+                  newSteps.push(steps[k])
+                }
+              }
+              editRevenue('modo_preparo', JSON.stringify(newSteps))
 
-        for (const k in ingredientes) {
-          addContent(ingredientes[k].product_code, ingredientes[k])
-        }
-
-        $("#bannerTopo").css("background", `url(${myRevenue.banner_topo})`)
-        let MIDIA = "https://uploads.metropoles.com/wp-content/uploads/2018/04/13144922/2018-04-13.jpg"
-        let MD_ACTIVE = false
-        try {
-          MUDIA = JSON.parse(myRevenue.midia).url
-          MD_ACTIVE = JSON.parse(myRevenue.midia).active
-        } catch (e) { }
-
-        let modoPreparo = []
-        try {
-          modoPreparo = JSON.parse(myRevenue.modo_preparo)
-        } catch (e) { }
-
-        //console.log("modo preparo",modoPreparo)
-
-        for (const k in modoPreparo) {
-          addStep(modoPreparo[k].id, modoPreparo[k].instucao)
-        }
+              if (value < 0) { value = 0 }
+              $("#tNumero").text($(".tNumero").length + 1)
+              // let contagen = 1
+              // $(".tNumero").each(function(){
+              //   $(this).text(contagen)
+              //   contagen++
+              // })
 
 
+            }
 
-        $("#ativar-pagina")[0].checked = myRevenue.status
-        $("#ativar-pagina3")[0].checked = MD_ACTIVE
-        $("#MIDIA").val(MIDIA)
-        $("#previewMidia").css("background", `url(${getThumb(MIDIA)})`)
-        if (myRevenue.status) {
-          $("#desativada").text("ativada")
-        }
+            let THIS_REVENUE = Number(location.href.split('?')[1])
+            $.ajax({
+              type: "POST",
+              url: mainHost + '/getByTableName',
+              data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues" },
+              headers: {
+                "x-access-token": localStorage.token,
+              },
+              success: async function (data2) {
+                //console.log(data2)
+                let myRevenue
+                for (const j in data2) {
+                  if (data2[j].id == THIS_REVENUE) {
+                    myRevenue = data2[j]
+                  }
+                }
+
+                //console.log(myRevenue)
+                localStorage.THIS_REVENUE = JSON.stringify(myRevenue)
+
+                $("#title").val(myRevenue.title)
+                $("#titleTop").text(myRevenue.title)
+                $("#tempo_minutos").val(myRevenue.tempo_minutos)
+                $("#porcoes").val(myRevenue.porcoes)
+                let ingredientes = []
+                try {
+                  ingredientes = JSON.parse(myRevenue.ingredientes)
+                } catch (e) { }
+                $("#ingredientesTotal").text(ingredientes.length)
+
+                for (const k in ingredientes) {
+                  addContent(ingredientes[k].product_code, ingredientes[k])
+                }
+
+                $("#bannerTopo").css("background", `url(${myRevenue.banner_topo})`)
+                let MIDIA = "https://uploads.metropoles.com/wp-content/uploads/2018/04/13144922/2018-04-13.jpg"
+                let MD_ACTIVE = false
+                try {
+                  MUDIA = JSON.parse(myRevenue.midia).url
+                  MD_ACTIVE = JSON.parse(myRevenue.midia).active
+                } catch (e) { }
+
+                let modoPreparo = []
+                try {
+                  modoPreparo = JSON.parse(myRevenue.modo_preparo)
+                } catch (e) { }
+
+                //console.log("modo preparo",modoPreparo)
+
+                for (const k in modoPreparo) {
+                  addStep(modoPreparo[k].id, modoPreparo[k].instucao)
+                }
 
 
 
-      },
-      error: function (data) {
-        //console.log("erro get", data)
-
-        window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
-      },
-      complete: function () { },
-    });
-
-    function getImageFromSite(element) {
-      var data = new FormData();
-      var contador = 1;
-      data.append('fileimagem', element[0].files[0]);
-      $.ajax({
-        url: mainHost + '/uploadBanners',
-        headers: {
-          "x-access-token": localStorage.token,
-          "master_id": localStorage.MASTER_ID
-        },
-        data: data,
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        success: function (data) {
-          //console.log(data)
-          $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')})`)
-          $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
-          $("#" + element.attr("target")).css("background-size", "cover !important")
-          $("#" + element.attr("target")).css("background-position", "center !important")
-          $("#" + element.attr("target")).css("zoom", "100% !important")
+                $("#ativar-pagina")[0].checked = myRevenue.status
+                $("#ativar-pagina3")[0].checked = MD_ACTIVE
+                $("#MIDIA").val(MIDIA)
+                $("#previewMidia").css("background", `url(${getThumb(MIDIA)})`)
+                if (myRevenue.status) {
+                  $("#desativada").text("ativada")
+                }
 
 
 
-          //console.log(element.parent().parent().find('input'))
-          //console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
+              },
+              error: function (data) {
+                //console.log("erro get", data)
 
-          editRevenue('banner_topo', data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090'))
+                window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
+              },
+              complete: function () { },
+            });
 
-
-
-
-        },
-        error: function (data) {
-          //console.log(data)
-        }
-      });
-
-    }
-    function getFile(target) {
-      $("#fileBannerCat").attr("target", target.attr("target"))
-      $("#fileBannerCat").click()
-    }
-
-
-    function editRevenue(column, newValue) {
-
-      let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
-      REVENUE[column] = newValue
-      localStorage.THIS_REVENUE = JSON.stringify(REVENUE)
-
-    }
-    async function searchProducts(text, container) {
-      //console.log("pesquisei", text)
-      container.html("")
-      let dados = await $.ajax({
-        url: mainHost + '/productSearchSite',
-        data: {
-          "product_code": text,
-          "product_site_name": text,
-          "product_affiliate_id": localStorage.AFFILIATE_ID,
-          "lastID": 0,
-          "totalItems": 50,
-
-        },
-        type: 'POST',
-        success: function (data) {
-          //console.log("produtos", data)
+            function getImageFromSite(element) {
+              var data = new FormData();
+              var contador = 1;
+              data.append('fileimagem', element[0].files[0]);
+              $.ajax({
+                url: mainHost + '/uploadBanners',
+                headers: {
+                  "x-access-token": localStorage.token,
+                  "master_id": localStorage.MASTER_ID
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                  //console.log(data)
+                  $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')})`)
+                  $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
+                  $("#" + element.attr("target")).css("background-size", "cover !important")
+                  $("#" + element.attr("target")).css("background-position", "center !important")
+                  $("#" + element.attr("target")).css("zoom", "100% !important")
 
 
-          localStorage.SEARCH_REVENUES = JSON.stringify(data)
 
-        },
-        error: function (data) {
-          //console.log("erro busca produto", data)
-        }
-      });
-      if (dados.length > 0) {
-        $(".btnClose").show()
-      } else {
-        $(".btnClose").hide()
-      }
+                  //console.log(element.parent().parent().find('input'))
+                  //console.log(`${data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090')}`)
 
-      for (const k in dados) {
-        let html = `
+                  editRevenue('banner_topo', data.path?.replace('./public', 'https://api-smartcomerci.com.br:9090'))
+
+
+
+
+                },
+                error: function (data) {
+                  //console.log(data)
+                }
+              });
+
+            }
+            function getFile(target) {
+              $("#fileBannerCat").attr("target", target.attr("target"))
+              $("#fileBannerCat").click()
+            }
+
+
+            function editRevenue(column, newValue) {
+
+              let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
+              REVENUE[column] = newValue
+              localStorage.THIS_REVENUE = JSON.stringify(REVENUE)
+
+            }
+            async function searchProducts(text, container) {
+              //console.log("pesquisei", text)
+              container.html("")
+              let dados = await $.ajax({
+                url: mainHost + '/productSearchSite',
+                data: {
+                  "product_code": text,
+                  "product_site_name": text,
+                  "product_affiliate_id": localStorage.AFFILIATE_ID,
+                  "lastID": 0,
+                  "totalItems": 50,
+
+                },
+                type: 'POST',
+                success: function (data) {
+                  //console.log("produtos", data)
+
+
+                  localStorage.SEARCH_REVENUES = JSON.stringify(data)
+
+                },
+                error: function (data) {
+                  //console.log("erro busca produto", data)
+                }
+              });
+              if (dados.length > 0) {
+                $(".btnClose").show()
+              } else {
+                $(".btnClose").hide()
+              }
+
+              for (const k in dados) {
+                let html = `
             <div class="itemLista itemProd row">
               <div class="col-md-2">
                 <img style="margin: auto;max-width: 50px; max-height: 50px" src="${dados[k].product_thumbnail}" />
@@ -1371,65 +1373,65 @@
               </div>
             </div>
           `;
-        container.append(html)
-      }
-    }
-
-    async function addContent(ID, dados) {
-
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/listaIds',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "product_list_ids": [ID],
-          "affiliate_id": localStorage.AFFILIATE_ID
-        },
-        success: function (data) {
-          let PRD = data
-          //console.log(PRD)
-          let thisPRD = null
-          for (const k in PRD) {
-            if (PRD[k].product_code == ID) {
-              thisPRD = PRD[k]
+                container.append(html)
+              }
             }
-          }
 
-          if (thisPRD) {
-            getProduct(thisPRD, dados)
-          } else {
-            //console.log("nçao achei produto")
-          }
-        },
-        error: function (data) {
-          //console.log(data)
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
-        }
-      });
+            async function addContent(ID, dados) {
+
+              await $.ajax({
+                type: 'POST',
+                url: mainHost + '/listaIds',
+                headers: {
+                  "x-access-token": localStorage.token,
+                },
+                data: {
+                  "product_list_ids": [ID],
+                  "affiliate_id": localStorage.AFFILIATE_ID
+                },
+                success: function (data) {
+                  let PRD = data
+                  //console.log(PRD)
+                  let thisPRD = null
+                  for (const k in PRD) {
+                    if (PRD[k].product_code == ID) {
+                      thisPRD = PRD[k]
+                    }
+                  }
+
+                  if (thisPRD) {
+                    getProduct(thisPRD, dados)
+                  } else {
+                    //console.log("nçao achei produto")
+                  }
+                },
+                error: function (data) {
+                  //console.log(data)
+                  window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+                },
+                complete: function () {
+                  // ao final da requisição...
+                }
+              });
 
 
 
 
 
 
-    }
+            }
 
 
-    function getProduct(productData, dados) {
+            function getProduct(productData, dados) {
 
-      if (!dados) {
-        dados = {
-          quantidade: 0, medida: 0, texto: ""
-        }
-      }
-      let ID = $(".itemProduto").length + 1
-      let html =
-        `
+              if (!dados) {
+                dados = {
+                  quantidade: 0, medida: 0, texto: ""
+                }
+              }
+              let ID = $(".itemProduto").length + 1
+              let html =
+                `
       <div class="col-md-12 itemProduto">
                   <div style="border-bottom: 0.949999988079071px solid #EDF2F6;" class="row">
                     <div style="margin: auto;" class="col-md-1">
@@ -1532,173 +1534,177 @@
 
                 </div>
       `
-      $(".conteudo").append(html)
-      let myIngredient = {
-        product_code: productData.product_code,
-        quantidade: "",
-        medida: "",
-        texto: "",
-      }
-      let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
-      let ING = []
-      try {
-        ING = JSON.parse(REVENUE.ingredientes)
-      } catch (e) {
+              $(".conteudo").append(html)
+              let myIngredient = {
+                product_code: productData.product_code,
+                quantidade: "",
+                medida: "",
+                texto: "",
+              }
+              let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
+              let ING = []
+              try {
+                ING = JSON.parse(REVENUE.ingredientes)
+              } catch (e) {
 
-      }
+              }
 
-      ING.push(myIngredient)
-      editRevenue('ingredientes', JSON.stringify(ING))
-      $("#ingredientesTotal").text(ING.length)
-    }
+              ING.push(myIngredient)
+              editRevenue('ingredientes', JSON.stringify(ING))
+              $("#ingredientesTotal").text(ING.length)
+            }
 
-    function editaTitulo(element) {
-      editRevenue('title', element.val())
-      $("#titleTop").text(element.val())
-    }
+            function editaTitulo(element) {
+              editRevenue('title', element.val())
+              $("#titleTop").text(element.val())
+            }
 
-    function editacampo(element, coluna) {
-      editRevenue(coluna, element.val())
-    }
+            function editacampo(element, coluna) {
+              editRevenue(coluna, element.val())
+            }
 
-    function editaIngrediente(element, coluna) {
-      //console.log(element, coluna)
+            function editaIngrediente(element, coluna) {
+              //console.log(element, coluna)
 
-      let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
-      let ING = []
-      try {
-        ING = JSON.parse(REVENUE.ingredientes)
-      } catch (e) {
+              let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
+              let ING = []
+              try {
+                ING = JSON.parse(REVENUE.ingredientes)
+              } catch (e) {
 
-      }
-      for (const k in ING) {
-        if (ING[k].product_code == Number(element.attr("product_code"))) {
-          ING[k][coluna] = element.val()
-        }
-      }
-      editRevenue('ingredientes', JSON.stringify(ING))
-    }
+              }
+              for (const k in ING) {
+                if (ING[k].product_code == Number(element.attr("product_code"))) {
+                  ING[k][coluna] = element.val()
+                }
+              }
+              editRevenue('ingredientes', JSON.stringify(ING))
+            }
 
-    function editaMidia(element, active) {
-      let MIDIA = { active: active[0].checked, url: element.val() }
+            function editaMidia(element, active) {
+              let MIDIA = { active: active[0].checked, url: element.val() }
 
-      $("#previewMidia").css("background", `url(${getThumb(element.val())})`)
-      editRevenue('midia', JSON.stringify(MIDIA))
-    }
+              $("#previewMidia").css("background", `url(${getThumb(element.val())})`)
+              editRevenue('midia', JSON.stringify(MIDIA))
+            }
 
-    function getThumb(URL) {
-      if (URL.indexOf('youtube') > -1) {
-        URL = URL.split("=")[1]
-        return `https://img.youtube.com/vi/${URL}/0.jpg`
-      } else {
-        return URL
-      }
+            function getThumb(URL) {
+              if (URL.indexOf('youtube') > -1) {
+                URL = URL.split("=")[1]
+                return `https://img.youtube.com/vi/${URL}/0.jpg`
+              } else {
+                return URL
+              }
 
-    }
-    async function deleteRevenue() {
-      let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
+            }
+            async function deleteRevenue() {
+              let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
 
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/deleteById',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "table": "revenues",
-          "item_id": myRevenue.id
-        },
-        success: function (data) {
-          window.parent.informar("alert-success", "Receita removida com sucesso!", 3000)
-        },
-        error: function (data) {
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
-        }
-      });
+              await $.ajax({
+                type: 'POST',
+                url: mainHost + '/deleteById',
+                headers: {
+                  "x-access-token": localStorage.token,
+                },
+                data: {
+                  "table": "revenues",
+                  "item_id": myRevenue.id
+                },
+                success: function (data) {
+                  window.parent.informar("alert-success", "Receita removida com sucesso!", 3000)
+                },
+                error: function (data) {
+                  window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+                },
+                complete: function () {
+                  // ao final da requisição...
+                }
+              });
 
-    }
+            }
 
-    async function saveRevenue() {
-      let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
-      let columns = []
-      for (const k in myRevenue) {
-        if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
-          columns.push({
-            column: k,
-            value: myRevenue[k]
-          })
-        }
+            async function saveRevenue() {
+              let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
+              let columns = []
+              for (const k in myRevenue) {
+                if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
+                  columns.push({
+                    column: k,
+                    value: myRevenue[k]
+                  })
+                }
 
-      }
-      // //console.log(
-      //   {
-      //     "table": "revenues",
-      //     "name_id": "id",
-      //     "value_id": myRevenue.id,
-      //     "fields": columns
-      //   }
-      // )
+              }
+              // //console.log(
+              //   {
+              //     "table": "revenues",
+              //     "name_id": "id",
+              //     "value_id": myRevenue.id,
+              //     "fields": columns
+              //   }
+              // )
 
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/updateById',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "table": "revenues",
-          "name_id": "id",
-          "value_id": myRevenue.id,
-          "fields": columns
-        },
-        success: function (data) {
-          window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
-        },
-        error: function (data) {
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
-        }
-      });
-
-
-    }
-
-    function removeIngrediente(element) {
-      let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
-      let ingredientes = []
-      try {
-        ingredientes = JSON.parse(myRevenue.ingredientes)
-      } catch (e) { }
-      let newIngs = []
-      for (const k in ingredientes) {
-        if (Number(element.attr("product_code") != ingredientes[k].product_code)) {
-          newIngs.push(ingredientes[k])
-        }
-      }
-      myRevenue.ingredientes = JSON.stringify(newIngs)
-      localStorage.THIS_REVENUE = JSON.stringify(myRevenue)
-
-      element.parent().parent().parent().remove()
-    }
-
-    $("#putStep").keyup(function (event) {
-      console.log(event)
-      if (event.keyCode === 13) {
-        addStep(Number($("#tNumero").text()), $("#putStep").val())
-        $("#putStep").val("")
-        document.getElementById("isScroll").scrollIntoView();
-      }
-    });
+              await $.ajax({
+                type: 'POST',
+                url: mainHost + '/updateById',
+                headers: {
+                  "x-access-token": localStorage.token,
+                },
+                data: {
+                  "table": "revenues",
+                  "name_id": "id",
+                  "value_id": myRevenue.id,
+                  "fields": columns
+                },
+                success: function (data) {
+                  window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
+                },
+                error: function (data) {
+                  window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+                },
+                complete: function () {
+                  // ao final da requisição...
+                }
+              });
 
 
+            }
+
+            function removeIngrediente(element) {
+              let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
+              let ingredientes = []
+              try {
+                ingredientes = JSON.parse(myRevenue.ingredientes)
+              } catch (e) { }
+              let newIngs = []
+              for (const k in ingredientes) {
+                if (Number(element.attr("product_code") != ingredientes[k].product_code)) {
+                  newIngs.push(ingredientes[k])
+                }
+              }
+              myRevenue.ingredientes = JSON.stringify(newIngs)
+              localStorage.THIS_REVENUE = JSON.stringify(myRevenue)
+
+              element.parent().parent().parent().remove()
+            }
+
+            $("#putStep").keyup(function (event) {
+              console.log(event)
+              if (event.keyCode === 13) {
+                addStep(Number($("#tNumero").text()), $("#putStep").val())
+                $("#putStep").val("")
+                document.getElementById("isScroll").scrollIntoView();
+              }
+            });
 
 
 
+            
+
+
+          }
+
+    
 
   </script>
 
