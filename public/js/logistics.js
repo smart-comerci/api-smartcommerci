@@ -880,7 +880,10 @@ function modalEntrega(descricaoMetodo) {
           localidade_exclui_ceps: "",
         });
       }
-      if (dadosMetodo.localidade_exclui_ceps.length > 0) {
+      if (
+        dadosMetodo.localidade_exclui_ceps &&
+        dadosMetodo.localidade_exclui_ceps.length > 0
+      ) {
         let value1 = null,
           value2 = null;
         for (const a in dadosMetodo.localidade_exclui_ceps) {
