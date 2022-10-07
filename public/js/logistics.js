@@ -491,7 +491,7 @@ function modalEntrega(descricaoMetodo) {
     "<div onclick=\"deletaMetodoModal('" +
     nome_metodo +
     '\')" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto" class="input-group">' +
-    '<label  style="cursor:pointer;margin: -7% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
+    '<label  style="cursor:pointer;margin: -7% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Excluir</label>' +
     "</div>" +
     "</div>" +
     '<div class="col-md">' +
