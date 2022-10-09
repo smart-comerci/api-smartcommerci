@@ -1,5 +1,3 @@
-const { async } = require("regenerator-runtime");
-
 var mainHost = "https://api-smartcomerci.com.br:9090";
 
 comecando();
