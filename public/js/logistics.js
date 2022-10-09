@@ -146,7 +146,7 @@ $.ajax({
       $("#iframeIn").hide();
       $(".areaEsconde").show();
     }
-    console.l("após mostrar conteudo");
+    console.log("após mostrar conteudo");
   },
   error: function (data) {
     console.log(data);
