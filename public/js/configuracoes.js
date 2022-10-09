@@ -1,6 +1,8 @@
+const { async } = require("regenerator-runtime");
+
 var mainHost = "https://api-smartcomerci.com.br:9090";
 
-$(window).on("load", function () {
+$(window).on("load", async function () {
   $(".todasConfiguracoes").css("filter", "none");
 });
 comecando();

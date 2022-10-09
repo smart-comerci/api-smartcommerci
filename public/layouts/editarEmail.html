@@ -883,7 +883,7 @@
       var preparei = false
     let url = window.location.href
     if(url.indexOf("configuracoes") > -1){ 
-      $(window).on("load", function () {
+      $(window).on("load", async function () {
         let preparando = setInterval(() => {
           $("#nomeDoEmail").html(localStorage.EMAIL_IN_EDIT?.toString())
           prepara();
