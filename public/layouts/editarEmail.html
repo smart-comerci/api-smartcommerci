@@ -883,7 +883,7 @@
       var preparei = false
     let url = window.location.href
     if(url.indexOf("configuracoes") > -1){ 
-      $(window).on("load", async function () {
+   //   $(window).on("load",  function () {
         let preparando = setInterval(() => {
           $("#nomeDoEmail").html(localStorage.EMAIL_IN_EDIT?.toString())
           prepara();
@@ -898,7 +898,7 @@
           clearInterval(preparando)
           //console.log("Parei de preparar...")
         })
-      })
+     // })
       function iniciaEditorHtml(idElemento) {
         tinymce.init({
           selector: idElemento,

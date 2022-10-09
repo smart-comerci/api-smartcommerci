@@ -2,9 +2,6 @@ const { async } = require("regenerator-runtime");
 
 var mainHost = "https://api-smartcomerci.com.br:9090";
 
-$(window).on("load", async function () {
-  $(".todasConfiguracoes").css("filter", "none");
-});
 comecando();
 
 function comecando() {
@@ -257,6 +254,7 @@ function getLojasCad() {
       "</div>";
   }
   $(".listaLojasCadastradas").append(html);
+  $(".todasConfiguracoes").css("filter", "none");
 }
 
 async function updateAffiliate(dados) {
