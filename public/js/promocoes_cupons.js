@@ -269,7 +269,7 @@ if (url7.indexOf("promo") > -1 || url7.indexOf("cupo") > -1) {
   }
 
   async function updateLog(alterador, alteracao, desconto_id) {
-    await $.ajax({
+    $.ajax({
       type: "POST",
       url: mainHost + "/insertLogsPromotional",
       data: {
@@ -293,7 +293,7 @@ if (url7.indexOf("promo") > -1 || url7.indexOf("cupo") > -1) {
 
   async function insertNew(myObject) {
     console.log("disparando...");
-    await $.ajax({
+    $.ajax({
       type: "POST",
       url: mainHost + "/insertNew",
       data: {
@@ -338,11 +338,7 @@ if (url7.indexOf("promo") > -1 || url7.indexOf("cupo") > -1) {
       },
       success: async function (data) {
         console.log("deleteObject", data);
-        await updateLog(
-          localStorage.MAIL_MASTER_CLIENTE,
-          "Apagou este registro",
-          ID
-        );
+        updateLog(localStorage.MAIL_MASTER_CLIENTE, "Apagou este registro", ID);
         getObjects();
       },
       error: function (data) {
@@ -371,7 +367,7 @@ if (url7.indexOf("promo") > -1 || url7.indexOf("cupo") > -1) {
       },
       success: async function (data) {
         console.log("updateById", data);
-        await updateLog(
+        updateLog(
           localStorage.MAIL_MASTER_CLIENTE,
           getChanges(myObject, ID),
           ID
@@ -395,7 +391,7 @@ if (url7.indexOf("promo") > -1 || url7.indexOf("cupo") > -1) {
     }
     if (type === "update") {
       if (ID) {
-        await updateObject(OBJETO_MODEL, ID);
+        updateObject(OBJETO_MODEL, ID);
         OBJETO_MODEL = OBJETO_DEFAULT;
       } else {
         console.log("ID not provided", ID);
@@ -407,7 +403,7 @@ if (url7.indexOf("promo") > -1 || url7.indexOf("cupo") > -1) {
 
   async function CLOSE_AND_DELETE(ID) {
     if (ID) {
-      await deleteObject(ID);
+      deleteObject(ID);
     }
 
     $(".close").click();

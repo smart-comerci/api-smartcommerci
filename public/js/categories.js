@@ -285,7 +285,7 @@ async function criaNovaCategoria() {
         $(this).find(".CATEGORIA_PRINCIPAL").innerText = "EDITE ESTE CAMPO";
         alvoC = $(this).find(".catEdit")[0];
       });
-      await updateSequencia("esconder");
+      updateSequencia("esconder");
       alvoC.click();
     },
     error: function (resultado) {
@@ -2251,7 +2251,7 @@ function CANCELA_EDIT() {
   }
 }
 async function SALVA_EDIT() {
-  await updateSequencia("esconder");
+  updateSequencia("esconder");
   if (
     sessionStorage.NEED_TO_SAVE != undefined ||
     sessionStorage.NEED_TO_SAVE != null ||

@@ -1743,7 +1743,7 @@ function alteraField(elemento) {
 }
 
 async function updateDelivery(fieldName, fieldValue) {
-  await $.ajax({
+  $.ajax({
     type: "POST",
     url: mainHost + "/updateDeliveryDefault",
 
@@ -1797,7 +1797,7 @@ async function salvaModal(nome_metodo) {
     dadosEntregaHorario
   );
 
-  await updateDelivery("delivery_methods", JSON.stringify(DELIVERY_DETAILS));
+  updateDelivery("delivery_methods", JSON.stringify(DELIVERY_DETAILS));
   start();
   $(".close").click();
   location.reload();
@@ -2175,7 +2175,7 @@ async function deletaMetodoModal(nome_metodo) {
       newMetodos.push(DELIVERY_DETAILS[a]);
     }
   }
-  await updateDelivery("delivery_methods", JSON.stringify(newMetodos));
+  updateDelivery("delivery_methods", JSON.stringify(newMetodos));
 
   location.reload();
 }

@@ -490,7 +490,7 @@ async function cancelaProduto(elemento) {
     .find(".iconeColetar")
     .attr("src", "/assets/icons/desfazBranco.svg");
 
-  await updateOrderDetails(
+  updateOrderDetails(
     atualPedido,
     Number(localStorage.numeroPedido),
     valorTotal
@@ -587,7 +587,7 @@ async function reativaColetaProduto(elemento) {
     //console.log(listaSeparados)
     localStorage.listaSeparados = JSON.stringify(listaSeparados);
 
-    var toDo = await insertTracing(
+    var toDo = insertTracing(
       "separacao",
       localStorage.numeroPedido,
       localStorage.listaSeparados
@@ -635,7 +635,7 @@ async function reativaColetaProduto(elemento) {
       }
     }
     localStorage.ORDER_EDIT = JSON.stringify(atualPedido);
-    await updateOrderDetails(
+    updateOrderDetails(
       atualPedido,
       Number(localStorage.numeroPedido),
       valorTotal
@@ -678,7 +678,7 @@ function finalizaSeparacao(elemento) {
   $(".finalizaSeparacao").show();
 }
 async function registraFim(elemento) {
-  await insertTracing(
+  insertTracing(
     "finalizado",
     localStorage.numeroPedido,
     localStorage.listaSeparados
@@ -738,7 +738,7 @@ async function adicionarProdutoAoPedido(elemento) {
   var valorT =
     Number($("#totalPedido").text().replace(",", ".")) +
     detalhes.quantidade * detalhes.valor;
-  var atualiza = await updateOrderDetails(
+  var atualiza = updateOrderDetails(
     atualPedido,
     Number(localStorage.numeroPedido),
     valorT
@@ -797,7 +797,7 @@ async function removerProdutoAoPedido(elemento) {
   //console.log('outroValor + '+entrega)
   //console.log(outroValor)
   outroValor += Number(entrega);
-  var atualiza = await updateOrderDetails(
+  var atualiza = updateOrderDetails(
     novoPedido2,
     Number(localStorage.numeroPedido),
     outroValor
@@ -891,7 +891,7 @@ async function editarProdutoDoPedido(elemento) {
   //console.log('outroValor + '+entrega)
   //console.log(outroValor)
   outroValor += Number(entrega);
-  var atualiza = await updateOrderDetails(
+  var atualiza = updateOrderDetails(
     novoPedido,
     Number(localStorage.numeroPedido),
     outroValor
@@ -925,7 +925,7 @@ function adjust() {
   $(".meuProduto").animate({ scrollLeft: leftPos + 200 }, 800);
 }
 async function startAll() {
-  var tracing = await getTracing();
+  var tracing = getTracing();
   var loader = setInterval(() => {
     if (pedidos.length > 0 && clientes.length > 0) {
       //console.log('pedidos')
@@ -1076,7 +1076,7 @@ async function request(urlEnd, params) {
 async function getPedidos(pedidos) {
   AFFILIATE_ID = Number(localStorage.AFFILIATE_ID);
   //console.log("AFFILIATE ID",AFFILIATE_ID)
-  var dados = await request("getById", {
+  var dados = request("getById", {
     table: "orders",
     id_name: "order_affiliate_id",
     id_value: AFFILIATE_ID,
@@ -1084,14 +1084,14 @@ async function getPedidos(pedidos) {
   pedidos.push(dados);
 }
 async function getTracing() {
-  return await request("getById", {
+  return request("getById", {
     table: "tracingOrder",
     id_name: "affiliate_id",
     id_value: AFFILIATE_ID,
   });
 }
 async function getClients(clientes) {
-  var dados = await request("getById", {
+  var dados = request("getById", {
     table: "users_clients",
     id_name: "users_client_affiliate_id",
     id_value: AFFILIATE_ID,
@@ -1099,7 +1099,7 @@ async function getClients(clientes) {
   clientes.push(dados);
 }
 async function login(user, key) {
-  return await request("login", {
+  return request("login", {
     user: user,
     table: "users_affiliates",
     prefix: "users_affiliate",
@@ -1108,7 +1108,7 @@ async function login(user, key) {
 }
 async function updateOrderDetails(newList, numeroPedido, valorPedido) {
   //console.log(newList, numeroPedido, valorPedido)
-  return await request("updateOrderDetails", {
+  return request("updateOrderDetails", {
     NUM_PEDIDO: numeroPedido,
     VALOR_PEDIDO: valorPedido,
     ITENS_PEDIDO: JSON.stringify(newList),
@@ -1116,11 +1116,11 @@ async function updateOrderDetails(newList, numeroPedido, valorPedido) {
 }
 async function insertTracing(status, numeroPedido, detalhes) {
   //console.log(status, numeroPedido, detalhes)
-  var tracingAtual = await getTracing();
+  var tracingAtual = getTracing();
   //console.log('tracingAtual')
   //console.log(tracingAtual)
 
-  return await request("insertNew", {
+  return request("insertNew", {
     table: "tracingOrder",
     fields: [
       { column: "affiliate_id", value: AFFILIATE_ID },
@@ -1137,7 +1137,7 @@ async function search(element) {
     .parent()
     .find(".areaBuscaModalContainer");
   container.html("");
-  var dados = await request("productSearch", {
+  var dados = request("productSearch", {
     product_affiliate_id: AFFILIATE_ID,
     product_site_name: element.val(),
     product_code: element.val(),

@@ -228,7 +228,7 @@ async function atualizaListaProdutos() {
       parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
     } catch (e) {}
     if (parametros.length > 0) {
-      await buscaPeloFiltro(
+      buscaPeloFiltro(
         parametros,
         10000,
         false,
@@ -1084,7 +1084,7 @@ async function carregaMais(ADDRESS, lastID, elemento) {
       }
     }
     if (isOk) {
-      await buscaPeloFiltro(parametros, 10000, true, 10000, lastID, false);
+      buscaPeloFiltro(parametros, 10000, true, 10000, lastID, false);
     } else {
       request(ADDRESS, lastID, 25, 0, 0, 0);
     }
@@ -5932,7 +5932,7 @@ async function buscaAvancadaFiltros(html) {
     });
   });
   localStorage.PARAMETROS_FILTROS = JSON.stringify(LISTA_SEARCH);
-  await buscaPeloFiltro(LISTA_SEARCH, 10000, false, 10000, true);
+  buscaPeloFiltro(LISTA_SEARCH, 10000, false, 10000, true);
   var parametros = [];
   try {
     parametros = JSON.parse(localStorage.PARAMETROS_FILTROS);
