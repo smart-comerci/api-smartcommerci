@@ -254,7 +254,6 @@ function getLojasCad() {
       "</div>";
   }
   $(".listaLojasCadastradas").append(html);
-  $(".todasConfiguracoes").css("filter", "none");
 }
 
 async function updateAffiliate(dados) {
@@ -396,3 +395,5 @@ async function getEmails() {
     }
   }
 }
+
+$(".todasConfiguracoes").css("filter", "none");
