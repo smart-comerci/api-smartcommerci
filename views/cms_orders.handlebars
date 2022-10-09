@@ -312,8 +312,8 @@
 
 
     async function reloadThis() {
-        await updateTotalPedidos()
-        await $.ajax({
+         updateTotalPedidos()
+         $.ajax({
             type: "POST",
             url: "https://api-smartcomerci.com.br:7070/getOrdersTemplate",
             headers: {
@@ -1390,7 +1390,8 @@
                             }
 
                             if (qualPedido != undefined) {
-                                await salvaUmUnico(qualPedido)
+                                 salvaUmUnico(qualPedido)
+                                 
                             }
 
 
@@ -2171,7 +2172,7 @@
 
     async function clicaEmOrdem(elemento) {
         $("body").css("filter", "blur(5px)")
-        await updateTotalPedidos()
+        updateTotalPedidos()
         var thisOrder = Number(elemento.find(".modalCount").text())
         $(".order").removeClass("orderActive");
         elemento.addClass("orderActive");
@@ -2304,6 +2305,7 @@
     });
 
     let checkupOrders = false
+
     async function updateTotalPedidos() {
         let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
 
@@ -2370,7 +2372,7 @@
             }
         }
 
-        await $.ajax({
+ $.ajax({
             type: 'POST',
             url: mainHost + '/updateById',
             headers: {
