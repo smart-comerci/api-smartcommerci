@@ -144,10 +144,9 @@ $.ajax({
     if (data[0].faixa_cep === 1) {
       $("#switch-shadow975")[0].checked = true;
       // $("#edicaoAvancadaCheck")[0].checked = false;
-      setTimeout(() => {
-        $("#iframeIn").hide();
-        $(".areaEsconde").show();
-      }, 2000);
+
+      $("#iframeIn").hide();
+      $(".areaEsconde").show();
     }
   },
   error: function (data) {
