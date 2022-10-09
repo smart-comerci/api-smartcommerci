@@ -1087,7 +1087,7 @@
         setTimeout(() => {
             $.ajax({
                 type: 'POST',
-                url: 'https://api-smartcomerci.com.br:9090/getStoreInformation',
+                url: 'https://api-smartcomerci.com.br:7070/getStoreInformation',
                 data: { "master_id": localStorage.MASTER_ID },
                 success: function (data) {
                     //console.log("dataStore")
@@ -1111,7 +1111,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: 'https://api-smartcomerci.com.br:9090/informacoesDeClientes',
+                url: 'https://api-smartcomerci.com.br:7070/informacoesDeClientes',
                 data: { "affiliate_id": localStorage.AFFILIATE_ID },
                 headers: {
                     "x-access-token": localStorage.token,

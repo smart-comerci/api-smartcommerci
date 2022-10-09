@@ -297,7 +297,7 @@
 </div>
 <script src="../assets/js/core/jquery.min.js"></script>
 <script>
-    var mainHost = 'https://api-smartcomerci.com.br:9090';
+    var mainHost = 'https://api-smartcomerci.com.br:7070';
 
     localStorage.TODOS_OS_PEDIDOS = ''
     localStorage.PEDIDO_SENDO_EDITADO = ''
@@ -315,7 +315,7 @@
         await updateTotalPedidos()
         await $.ajax({
             type: "POST",
-            url: "https://api-smartcomerci.com.br:9090/getOrdersTemplate",
+            url: "https://api-smartcomerci.com.br:7070/getOrdersTemplate",
             headers: {
                 "x-access-token": localStorage.token,
             },
@@ -428,7 +428,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "https://api-smartcomerci.com.br:9090/getOrdersTemplate",
+                    url: "https://api-smartcomerci.com.br:7070/getOrdersTemplate",
                     headers: {
                         "x-access-token": localStorage.token,
                     },
@@ -1400,7 +1400,7 @@
 
                                     $.ajax({
                                         type: "POST",
-                                        url: 'https://api-smartcomerci.com.br:9090/updateOrderDetails',
+                                        url: 'https://api-smartcomerci.com.br:7070/updateOrderDetails',
                                         headers: {
                                             "x-access-token": localStorage.token,
                                         },
@@ -2199,7 +2199,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "https://api-smartcomerci.com.br:9090/productsOrderByListOrder",
+                url: "https://api-smartcomerci.com.br:7070/productsOrderByListOrder",
                 headers: {
                     "x-access-token": localStorage.token,
                 },

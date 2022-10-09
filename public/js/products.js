@@ -143,7 +143,7 @@ if (localStorage.token == undefined || localStorage.token == "") {
 }
 
 var AFFILIATE_ID = localStorage.AFFILIATE_ID;
-var mainHost = "https://api-smartcomerci.com.br:9090";
+var mainHost = "https://api-smartcomerci.com.br:7070";
 
 var PRODUCTS_IMAGES = [];
 var AFFILIATES = JSON.parse(localStorage.LOJAS_CADASTRADAS);
@@ -2542,7 +2542,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           data.append("fileimagem", elemento[0].files[0]);
           ////////////console.log("partindo..")
           var urlNew =
-            "https://api-smartcomerci.com.br:9090/images/" +
+            "https://api-smartcomerci.com.br:7070/images/" +
             affiliate_id +
             "/" +
             product_code +
@@ -3411,13 +3411,13 @@ function getProductData(EAN, elementParent, pai) {
       //  success: function (picture) {
       // let picture =
       // {
-      //   thumbnail: "https://api-smartcomerci.com.br:9090/pictures_ean/" +
+      //   thumbnail: "https://api-smartcomerci.com.br:7070/pictures_ean/" +
       //     EAN +
       //     ".png"
       // }
       let picture = {
         thumbnail:
-          "https://api-smartcomerci.com.br:9090/pictures_ean/" + EAN + ".png",
+          "https://api-smartcomerci.com.br:7070/pictures_ean/" + EAN + ".png",
       };
       if (picture.thumbnail != undefined) {
         var novo = true;

@@ -1052,7 +1052,7 @@ function getOrderInfo(id) {
 async function request(urlEnd, params) {
   return $.ajax({
     type: "POST",
-    url: "https://api-smartcomerci.com.br:9090/" + urlEnd,
+    url: "https://api-smartcomerci.com.br:7070/" + urlEnd,
     headers: { "x-access-token": localStorage.token },
     data: params,
     success: function (data) {
