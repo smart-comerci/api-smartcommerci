@@ -3390,31 +3390,10 @@ function retornaCategorias(texto) {
   return "";
 }
 
-function getProductData(EAN, elementParent, pai) {
-  //Example of cosmos bluesoft cunsult
-  ////////////console.log("$(elementParent)")
-  ////////////console.log(elementParent)
-
+async function getProductData(EAN, elementParent, pai) {
   pai.addClass("animated-background");
   if (EAN != 0 && EAN != undefined && EAN != "" && EAN != null) {
     try {
-      // $.ajax({
-      //   type: "POST",
-      //   url: mainHost + "/getMyPicture",
-      //   headers: {
-      //     "x-access-token": localStorage.token,
-      //   },
-      //   data: {
-      //     EAN: EAN,
-      //     method: "GET",
-      //   },
-      //  success: function (picture) {
-      // let picture =
-      // {
-      //   thumbnail: "https://api-smartcomerci.com.br:7070/pictures_ean/" +
-      //     EAN +
-      //     ".png"
-      // }
       let picture = {
         thumbnail:
           "https://api-smartcomerci.com.br:7070/pictures_ean/" + EAN + ".png",
@@ -3435,11 +3414,7 @@ function getProductData(EAN, elementParent, pai) {
       }
 
       try {
-        ////////////console.log(picture.message)
         pai.removeClass("animated-background");
-        ////////////console.log("Recurso não existe")
-
-        ////////////console.log(picture)
         $.ajax({
           type: "POST",
           url: mainHost + "/productPictures",
@@ -3451,8 +3426,6 @@ function getProductData(EAN, elementParent, pai) {
             product_code: $(elementParent).attr("product_code"),
           },
           success: function (data2) {
-            ////////console.log("eu achei")
-            ////////console.log(data2)
             $(elementParent)
               .find(".firstImage")
               .attr(
@@ -3479,10 +3452,7 @@ function getProductData(EAN, elementParent, pai) {
                   location.replace("/cms-login");
                 }, 2000);
               }
-            } catch (ee) {
-              // ////////console.log("erro ee")
-              ////////////console.log(ee)
-            }
+            } catch (ee) {}
           },
           complete: function () {
             // ao final da requisição...
@@ -3502,76 +3472,8 @@ function getProductData(EAN, elementParent, pai) {
           .attr("src", "THIS FULL DESCRIPTION FROM COSMOS");
         pai.removeClass("animated-background");
       }
-      //},
-      // error: function (data) {
-      //   pai.removeClass("animated-background");
-      //   ////////////console.log("cai na exceção")
-      //   if (data.responseJSON.message.indexOf("token") > -1) {
-      //     //alert("Necessário fazer login!<br>"+data.responseJSON.message)
-      //     setTimeout(() => {
-      //       localStorage.peregrino =
-      //         location.href.split("/")[location.href.split("/").length - 1];
-      //       location.replace("/cms-login");
-      //     }, 2000);
-      //   } else {
-      //     //alert("Algo saiu errado!<br>"+data.responseJSON.message)
-      //   }
-      //   ////////////console.log(data)
-      //   $.ajax({
-      //     type: "POST",
-      //     url: mainHost + "/productPictures",
-      //     headers: {
-      //       "x-access-token": localStorage.token,
-      //     },
-      //     data: {
-      //       affiliate_id: $(elementParent).attr("affiliate_id"),
-      //       product_code: $(elementParent).attr("product_code"),
-      //     },
-      //     success: function (data) {
-      //       ////////////console.log("eu achei")
-      //       ////////////console.log(data)
-      //       $(elementParent)
-      //         .find(".firstImage")
-      //         .attr(
-      //           "src",
-      //           mainHost +
-      //             "/images/" +
-      //             $(elementParent).attr("affiliate_id") +
-      //             "/" +
-      //             $(elementParent).attr("product_code") +
-      //             "/" +
-      //             data[0]
-      //         );
-      //     },
-      //     error: function (data) {
-      //       ////////////console.log(data)
-      //       if (data.responseJSON.message.indexOf("token") > -1) {
-      //         //alert("Necessário fazer login!<br>"+data.responseJSON.message)
-      //         setTimeout(() => {
-      //           localStorage.peregrino =
-      //             location.href.split("/")[
-      //               location.href.split("/").length - 1
-      //             ];
-      //           location.replace("/cms-login");
-      //         }, 2000);
-      //       } else {
-      //         //alert("Algo saiu errado!<br>"+data.responseJSON.message)
-      //       }
-      //     },
-      //     complete: function () {
-      //       // ao final da requisição...
-      //     },
-      //   });
-      // },
-      // complete: function () {
-      // ao final da requisição...
-      //},
-      // });
-    } catch (eru) {
-      ////////////console.log(eru)
-    }
+    } catch (eru) {}
   } else {
-    ////////////console.log("This product EAN is invalid = '"+EAN)
   }
 }
 
