@@ -140,13 +140,14 @@ $.ajax({
     localStorage.DELIVERY_DETAILS = JSON.stringify(DELIVERY_DETAILS);
 
     start();
-
-    if (data[0].faixa_cep === 1) {
-      $("#switch-shadow975")[0].checked = true;
-      $("#iframeIn").hide();
-      $(".areaEsconde").show();
-    }
-    console.log("após mostrar conteudo");
+    setTimeout(() => {
+      if (data[0].faixa_cep === 1) {
+        $("#switch-shadow975")[0].checked = true;
+        $("#iframeIn").hide();
+        $(".areaEsconde").show();
+      }
+      console.log("após mostrar conteudo");
+    }, 2000);
   },
   error: function (data) {
     console.log(data);

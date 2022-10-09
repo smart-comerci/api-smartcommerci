@@ -1100,7 +1100,7 @@
 
                 },
                 error: function (data) {
-                    //console.log(data)
+                    console.log(data)
                 },
                 complete: function () {
                     // ao final da requisição...
@@ -1117,8 +1117,8 @@
                     "x-access-token": localStorage.token,
                 },
                 success: function (data) {
-                    //console.log("dataClients")
-                    //console.log(data)
+                     console.log("dataClients")
+                    console.log(data)
 
                     $("#novosClientes").html(data.length)
                     $("#clientesRecorrentes").html(data.length)
