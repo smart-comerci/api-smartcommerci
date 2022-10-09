@@ -143,14 +143,13 @@ $.ajax({
 
     if (data[0].faixa_cep === 1) {
       $("#switch-shadow975")[0].checked = true;
-      // $("#edicaoAvancadaCheck")[0].checked = false;
-
       $("#iframeIn").hide();
       $(".areaEsconde").show();
     }
+    console.l("após mostrar conteudo");
   },
   error: function (data) {
-    ////console.log(data)
+    console.log(data);
   },
   complete: function () {
     // ao final da requisição...
@@ -160,7 +159,7 @@ $.ajax({
 var contagem = 0;
 
 function start() {
-  ////console.log(DELIVERY_DETAILS)
+  console.log("start inicia");
   $(".listaMetodosEntrega").html("");
   for (const k in DELIVERY_DETAILS) {
     var html = "",
