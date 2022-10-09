@@ -18,7 +18,9 @@ function comecando() {
       getLojasCad();
     },
     error: function (data) {},
-    complete: function () {},
+    complete: function () {
+      $(".todasConfiguracoes").css("filter", "none");
+    },
   });
 
   $.ajax({
@@ -38,7 +40,9 @@ function comecando() {
       localStorage.DT_PF = JSON.stringify(data);
     },
     error: function (data) {},
-    complete: function () {},
+    complete: function () {
+      $(".todasConfiguracoes").css("filter", "none");
+    },
   });
 
   $.ajax({
@@ -58,7 +62,9 @@ function comecando() {
       sessionStorage.M = JSON.stringify(data);
     },
     error: function (data) {},
-    complete: function () {},
+    complete: function () {
+      $(".todasConfiguracoes").css("filter", "none");
+    },
   });
   $.ajax({
     type: "POST",
@@ -77,7 +83,9 @@ function comecando() {
       sessionStorage.A = JSON.stringify(data);
     },
     error: function (data) {},
-    complete: function () {},
+    complete: function () {
+      $(".todasConfiguracoes").css("filter", "none");
+    },
   });
 
   startSession();
@@ -395,5 +403,3 @@ async function getEmails() {
     }
   }
 }
-
-$(".todasConfiguracoes").css("filter", "none");
