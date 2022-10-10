@@ -46,15 +46,15 @@
 </head>
 
 <script>
-    $("body").css("filter", "blur(5px)")
+
     $(window).on("load", function () {
         $("modalLoading").hide()
-        $("body").css("filter", "none")
+
     })
 </script>
 
 <modalLoading
-    style="  z-index: 9999;;background: rgb(0, 0, 0, 0.5); position: absolute; width: 100vw; height: 105vh; left: 0; top: 0">
+    style="  z-index: 9999;;background: rgb(0, 0, 0, 1); position: absolute; width: 100vw; height: 105vh; left: 0; top: 0">
     <div style="margin: 25vh auto;width: 200px; height: 200px;  background: white; border-radius: 100%"
         class="modalLoading">
         <div style="width: 150px;height: 150px; margin: 25px" class="spinner-border text-warning" role="status"><span
@@ -65,7 +65,7 @@
 
 
 
-<body style="filter: blur(5px);">
+<body>
 
     <div class="wrapper">
         <div class="sidebar " data-color="orange">
