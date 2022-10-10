@@ -49,18 +49,7 @@
 
 
 <body>
-    <style>
-        .progress {
-            width: 70vw;
-            position: absolute;
-            margin-left: 15vw;
-        }
-    </style>
 
-    <div class="progress">
-        <div style="background-color: #f6b504;" class="progress-bar" role="progressbar" style="width: 25%"
-            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
     <div class="wrapper">
         <div class="sidebar " data-color="orange">
 
@@ -1215,6 +1204,14 @@ $(".sidebar").removeClass("newSidebar");
     <script src="../js/configuracoes.js"></script>
     <script src="../js/promocoes_cupons.js"></script>
     <script>
+
+
+        $(window).on("load", function () {
+            $("modalLoading").hide()
+        })
+
+
+
         function showFrame(id, texto) {
             localStorage.EMAIL_IN_EDIT = texto
             var iframe = document.getElementById(id);
