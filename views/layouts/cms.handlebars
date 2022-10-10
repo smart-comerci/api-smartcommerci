@@ -46,9 +46,10 @@
 </head>
 
 <script>
-    $("modalLoading").show()
+    $("body").css("filter", "blur(5px)")
     $(window).on("load", function () {
         $("modalLoading").hide()
+        $("body").css("filter", "none")
     })
 </script>
 
@@ -64,7 +65,7 @@
 
 
 
-<body>
+<body style="filter: blur(5px);">
 
     <div class="wrapper">
         <div class="sidebar " data-color="orange">
