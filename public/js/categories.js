@@ -83,8 +83,8 @@ function continua() {
       },
       success: function (categories) {
         try {
-          // console.log("Categories")
-          // console.log(categories.results)
+          console.log("Categories");
+          console.log(categories.results);
 
           CATEGORIES = categories.results;
           var CATEGORIES_SHOW = [];
@@ -224,7 +224,7 @@ function continua() {
             esseHtml2?.addClass("active");
           });
         } catch (err) {
-          // console.log("err internal categories get", err)
+          console.log("err internal categories get", err);
         }
       },
       error: function (data2) {
