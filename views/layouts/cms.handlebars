@@ -45,6 +45,22 @@
     </style>
 </head>
 
+<script>
+    $("modalLoading").show()
+    $(window).on("load", function () {
+        $("modalLoading").hide()
+    })
+</script>
+
+<modalLoading
+    style="display:none;    z-index: 9999;;background: rgb(0, 0, 0, 0.5); position: absolute; width: 100vw; height: 105vh; left: 0; top: 0">
+    <div style="margin: 25vh auto;width: 200px; height: 200px;  background: white; border-radius: 100%"
+        class="modalLoading">
+        <div style="width: 150px;height: 150px; margin: 25px" class="spinner-border text-warning" role="status"><span
+                class="sr-only">Loading...</span></div>
+    </div>
+</modalLoading>
+
 
 
 
@@ -1206,9 +1222,7 @@ $(".sidebar").removeClass("newSidebar");
     <script>
 
 
-        $(window).on("load", function () {
-            $("modalLoading").hide()
-        })
+
 
 
 
@@ -1253,13 +1267,6 @@ $(".sidebar").removeClass("newSidebar");
 </body>
 
 
-<modalLoading
-    style="display:none;    z-index: 9999;;background: rgb(0, 0, 0, 0.5); position: absolute; width: 100vw; height: 105vh; left: 0; top: 0">
-    <div style="margin: 25vh auto;width: 200px; height: 200px;  background: white; border-radius: 100%"
-        class="modalLoading">
-        <div style="width: 150px;height: 150px; margin: 25px" class="spinner-border text-warning" role="status"><span
-                class="sr-only">Loading...</span></div>
-    </div>
-</modalLoading>
+
 
 </html>
