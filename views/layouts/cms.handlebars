@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
- 
+
     <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
     <script src="../js/moment.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
@@ -46,6 +46,18 @@
 </head>
 
 
+<style>
+    .progress {
+        width: 70vw;
+        position: absolute;
+        margin-left: 15vw;
+    }
+</style>
+
+<div class="progress">
+    <div style="background-color: #f6b504;" class="progress-bar" role="progressbar" style="width: 25%"
+        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
 
 <body class="">
     <div class="wrapper">
@@ -796,11 +808,11 @@
             $(".sidebar").add("newSidebar");
         })
             /*
-    $("#sidebar-wrapper2").on('mouseleave', function(){             
-        $(".sidebar").removeClass("newSidebar"); 
-                 
-    })
-    */
+$("#sidebar-wrapper2").on('mouseleave', function(){             
+$(".sidebar").removeClass("newSidebar"); 
+ 
+})
+*/
 
 
 
@@ -1117,7 +1129,7 @@
                     "x-access-token": localStorage.token,
                 },
                 success: function (data) {
-                     console.log("dataClients")
+                    console.log("dataClients")
                     console.log(data)
 
                     $("#novosClientes").html(data.length)
@@ -1241,17 +1253,7 @@
     </script>
 
 </body>
-<style>
-    .progress{
-        position: center;
 
-    }
-</style>
-
-<div class="progress">
-    <div style="background-color: #f6b504;" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-        aria-valuemax="100"></div>
-</div>
 
 <modalLoading
     style="display:none;    z-index: 9999;;background: rgb(0, 0, 0, 0.5); position: absolute; width: 100vw; height: 105vh; left: 0; top: 0">
