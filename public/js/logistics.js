@@ -89,10 +89,12 @@ $.ajax({
     }
     console.log("cep", data[0].faixa_cep);
     if (data[0].faixa_cep === 1) {
-      $("#switch-shadow975")[0].checked = true;
-      // $("#edicaoAvancadaCheck")[0].checked = false;
-      $("#iframeIn").hide();
-      $(".areaEsconde").show();
+      try {
+        $("#switch-shadow975")[0].checked = true;
+        // $("#edicaoAvancadaCheck")[0].checked = false;
+        $("#iframeIn").hide();
+        $(".areaEsconde").show();
+      } catch (err) {}
     }
 
     if (data[0].exclui_faixa_cep == 1) {
@@ -142,9 +144,12 @@ $.ajax({
     start();
     setTimeout(() => {
       if (data[0].faixa_cep === 1) {
-        $("#switch-shadow975")[0].checked = true;
-        $("#iframeIn").hide();
-        $(".areaEsconde").show();
+        try {
+          $("#switch-shadow975")[0].checked = true;
+          // $("#edicaoAvancadaCheck")[0].checked = false;
+          $("#iframeIn").hide();
+          $(".areaEsconde").show();
+        } catch (err) {}
       }
       console.log("após mostrar conteudo");
     }, 2000);
