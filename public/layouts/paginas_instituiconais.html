@@ -1072,24 +1072,24 @@
       </div>
     </div>
   </div>
-  <!-- <script src="https://api-smartcomerci.com.br/js/tinymce.js"></script> -->
+  <script src="https://api-smartcomerci.com.br/js/tinymce.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     let url = window.location.href
     if (url.indexOf("paginas_institucionais") > -1) {
-      // function iniciaEditorHtml(idElemento) {
-      //   tinymce.init({
-      //     selector: idElemento,
-      //     plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-      //     toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-      //     toolbar_mode: 'floating',
-      //     tinycomments_mode: 'embedded',
-      //     tinycomments_author: 'Author name',
-      //   });
-      // }
+      function iniciaEditorHtml(idElemento) {
+        tinymce.init({
+          selector: idElemento,
+          plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+          toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+          toolbar_mode: 'floating',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+        });
+      }
 
-      // //chamada teste
-      // iniciaEditorHtml("#editorFullCode")
+      //chamada teste
+      iniciaEditorHtml("#editorFullCode")
 
 
       var mainHost = 'https://api-smartcomerci.com.br:9090';
