@@ -143,7 +143,6 @@ if (localStorage.token == undefined || localStorage.token == "") {
 }
 
 var AFFILIATE_ID = localStorage.AFFILIATE_ID;
-var mainHost = "https://api-smartcomerci.com.br:7070";
 
 var PRODUCTS_IMAGES = [];
 var AFFILIATES = JSON.parse(localStorage.LOJAS_CADASTRADAS);
