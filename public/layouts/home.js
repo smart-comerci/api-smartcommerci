@@ -728,8 +728,38 @@ const dynamicContent = {
       </button>
     </div>`);
 
+      const prev2 =
+        createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
+      <button
+      onclick="prepareVitrine($(this))"
+          origin="${thisOrigin}"
+        conteudo="banner"
+        data-bs-toggle="modal"
+        data-bs-target="#modalChangePicture"
+        class="dropzone-prev-button  backGold"
+      >
+        <text class="dropzone-prev-text">Editar Banner</text>
+      </button>
+      <button
+          origin="${thisOrigin}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Editar link</text>
+      </button>
+      <button
+          origin="${thisOrigin}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Excluir Banner</text>
+      </button>
+    </div>`);
+
       wrapper.appendChild(prev);
-      wrapper1.appendChild(prev);
+      wrapper1.appendChild(prev2);
       container.prepend(wrapper);
       container.prepend(wrapper1);
       content2.prepend(container);
@@ -820,8 +850,38 @@ const dynamicContent = {
       </button>
     </div>`);
 
+      const prev2 =
+        createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
+      <button
+      onclick="prepareVitrine($(this))"
+          origin="${thisOrigin}"
+        conteudo="banner"
+        data-bs-toggle="modal"
+        data-bs-target="#modalChangePicture"
+        class="dropzone-prev-button  backGold"
+      >
+        <text class="dropzone-prev-text">Editar Banner</text>
+      </button>
+      <button
+          origin="${thisOrigin}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Editar link</text>
+      </button>
+      <button
+          origin="${thisOrigin}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDeletaVitrine"
+        class="dropzone-prev-button"
+      >
+        <text class="dropzone-prev-text">Excluir Banner</text>
+      </button>
+    </div>`);
+
       wrapper.appendChild(prev);
-      wrapper1.appendChild(prev);
+      wrapper1.appendChild(prev2);
       container.prepend(wrapper);
       container.prepend(wrapper1);
       content2.prepend(container);
