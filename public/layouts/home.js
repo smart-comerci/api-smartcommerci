@@ -1145,6 +1145,7 @@ async function changePicture(element) {
           homePage.body[k][element.attr("stage")].url = thisURL;
           let newid = origin.split("_")[1] + "_banner";
           $(".dropzone").each(function () {
+            console.log($(this).attr("id_get"), newid);
             if ($(this).attr("id_get") === newid) {
               $(this).find("img").attr("src", thisURL);
             }
