@@ -1113,6 +1113,7 @@ async function changePicture(element) {
     if (origin.split("_")[0] === "banner") {
       for (const k in homePage.body) {
         if (homePage.body[k].id === origin.split("_")[1]) {
+          homePage.body[k][element.attr("stage")].url = thisURL;
         }
       }
     } else {
@@ -1158,26 +1159,36 @@ async function changePicture(element) {
 
 async function changeLink(element) {
   let origin = element.attr("origin");
-  if (origin) {
+  if (origin.split("_")[0] === "banner") {
     let thisURL = element.attr("url");
-    if (thisURL) {
-      console.log(origin.split("-"));
-      if (origin.split("-").length === 1) {
-        homePage[origin].link = thisURL;
-      } else if (origin.split("-").length === 2) {
-        homePage[origin.split("-")[0]][origin.split("-")[1]].link = thisURL;
-      } else if (origin.split("-").length === 3) {
-        homePage[origin.split("-")[0]][origin.split("-")[1]][
-          origin.split("-")[2]
-        ].link = thisURL;
+    for (const k in homePage.body) {
+      if (homePage.body[k].id === origin.split("_")[1]) {
+        homePage.body[k][element.attr("stage")].link = thisURL;
       }
-      console.log(homePage);
-    } else {
-      console.log("url ausente");
     }
   } else {
-    console.log("origin ausente");
+    if (origin) {
+      let thisURL = element.attr("url");
+      if (thisURL) {
+        console.log(origin.split("-"));
+        if (origin.split("-").length === 1) {
+          homePage[origin].link = thisURL;
+        } else if (origin.split("-").length === 2) {
+          homePage[origin.split("-")[0]][origin.split("-")[1]].link = thisURL;
+        } else if (origin.split("-").length === 3) {
+          homePage[origin.split("-")[0]][origin.split("-")[1]][
+            origin.split("-")[2]
+          ].link = thisURL;
+        }
+        console.log(homePage);
+      } else {
+        console.log("url ausente");
+      }
+    } else {
+      console.log("origin ausente");
+    }
   }
+
   $(".btn-close").click();
 }
 
