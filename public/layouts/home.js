@@ -854,6 +854,8 @@ const dynamicContent = {
       let theId = Math.random().toFixed(5).replace(".", "");
       let thisOrigin = "banner_" + theId;
       dropzone.setAttribute("id", thisOrigin);
+      dropzone1.setAttribute("id_get", theId + "_banner");
+      dropzone.setAttribute("id_get", theId + "_banner");
       wrapper.appendChild(dropzone);
       wrapper1.appendChild(dropzone1);
 
