@@ -2307,12 +2307,21 @@
 
     let checkupOrders = false
 
+    function ajustStrigfy(texto) {
+        texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
+        texto = texto.replace('"[', "[").replace(']"', "]");
+        return texto;
+    }
+
+
     async function updateTotalPedidos() {
         let PEDIDOS = JSON.parse(localStorage.TODOS_OS_PEDIDOS)
 
         if (!checkupOrders) {
             for (const k in PEDIDOS) {
-                let CONTEUDO = JSON.parse(PEDIDOS[k].order_conteudo.replace(/:""/g, ':"'))
+                let CONTEUDO = JSON.parse(ajustStrigfy(PEDIDOS[k].order_conteudo.replace(/:""/g, ':"').replace(/:","/g, ':"')))
+
+
                 let valorEntrega = PEDIDOS[k].order_valor_entrega
                 let totalItens = 0
                 for (const c in CONTEUDO) {
