@@ -791,7 +791,7 @@ const dynamicContent = {
       wrapper1.appendChild(dropzone1);
 
       const prev =
-        createElementFromHTML(`<div style="display: none;top: 350px;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+        createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
       onclick="prepareVitrine($(this))"
           origin="${thisOrigin}"
