@@ -356,7 +356,7 @@ const content = document.querySelector(".preview-home_content");
 const content2 = document.querySelector(".listaHOME");
 const div = document.createElement("div");
 div.innerHTML = `
-      <label style="padding: 50px;" onclick="showMyPrev($(this))" class="dropzone">  
+      <label style="padding: 50px; width: 100%; height: " onclick="showMyPrev($(this))" class="dropzone">  
           <div>
             <img src="" />
             <span  class="rounded-icon">
@@ -727,6 +727,8 @@ const dynamicContent = {
       dropzone1.setAttribute("id_get", theId + "_banner");
       dropzone.setAttribute("id_get", theId + "_banner");
 
+      wrapper.style.height = "auto";
+      wrapper1.style.height = "auto";
       wrapper.appendChild(dropzone);
       wrapper1.appendChild(dropzone1);
 
@@ -1148,6 +1150,10 @@ async function changePicture(element) {
             console.log($(this).attr("id_get"), newid);
             if ($(this).attr("id_get") === newid) {
               $(this).find("img").attr("src", thisURL);
+              $(this).find("img").css("width", "100%");
+              $(this).find("img").css("height", "auto");
+              $(this).find("img").css("height", "450px");
+              $(this).find("img").show();
             }
           });
         }
