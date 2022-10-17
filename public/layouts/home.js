@@ -741,6 +741,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar Banner</text>
       </button>
       <button
+      nclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalMudaLink"
@@ -749,6 +750,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar link</text>
       </button>
       <button
+      nclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalDeletaVitrine"
@@ -771,6 +773,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar Banner</text>
       </button>
       <button
+      onclick="prepareVitrine($(this),'second')"
           origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalMudaLink"
@@ -779,6 +782,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar link</text>
       </button>
       <button
+      onclick="prepareVitrine($(this),'second')"
           origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalDeletaVitrine"
@@ -864,6 +868,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar Banner</text>
       </button>
       <button
+      onclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalMudaLink"
@@ -872,6 +877,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar link</text>
       </button>
       <button
+      onclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalDeletaVitrine"
@@ -894,6 +900,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar Banner</text>
       </button>
       <button
+      onclick="prepareVitrine($(this), 'second')"
           origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalMudaLink"
@@ -902,6 +909,7 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar link</text>
       </button>
       <button
+      onclick="prepareVitrine($(this), 'second')"
           origin="${thisOrigin}"
         data-bs-toggle="modal"
         data-bs-target="#modalDeletaVitrine"
