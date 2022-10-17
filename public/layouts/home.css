@@ -870,7 +870,7 @@
      border-radius: 5px;
      padding-top: 5px;
      margin: auto;
-    height: 270px;
+     height: 270px;
  }
 
  .card-color-preview>* {
@@ -949,7 +949,7 @@
      margin-bottom: 12px;
  }
 
- .card-color-preview_price:after { 
+ .card-color-preview_price:after {
      font-size: 12px;
      font-weight: 300;
      text-decoration: line-through;
@@ -1503,7 +1503,7 @@
  }
 
  .searchResult {
-     padding: 5px; 
+     padding: 5px;
  }
 
  .itemSearch {
@@ -1566,7 +1566,7 @@
  .linksFooter {
      background-color: white;
      display: none;
-        margin-top: 25px;
+     margin-top: 25px;
  }
 
  .tituloLinkFooterPrimeira,
@@ -1594,4 +1594,9 @@
      display: inline-flex;
      gap: 15px;
      padding: 25px;
+ }
+
+ .doisBanners {
+     display: inline-flex;
+     width: 100%;
  }

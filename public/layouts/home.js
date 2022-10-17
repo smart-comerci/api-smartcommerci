@@ -686,6 +686,7 @@ const dynamicContent = {
       const container = document.createElement("div");
       const wrapper = document.createElement("div");
       const wrapper1 = document.createElement("div");
+      container.classList.add("doisBanners");
       wrapper.classList.add("content-dynamic", "content-dynamic_small");
       wrapper1.classList.add("content-dynamic", "content-dynamic_small");
       $("#dropdown-content-dynamic").click();
@@ -775,6 +776,7 @@ const dynamicContent = {
       //   content2.prepend(wrapper);
 
       const container = document.createElement("div");
+      container.classList.add("doisBanners");
       const wrapper = document.createElement("div");
       const wrapper1 = document.createElement("div");
       wrapper.classList.add("content-dynamic", "content-dynamic_small");
