@@ -743,7 +743,7 @@ const dynamicContent = {
       <button
           origin="${thisOrigin}"
         data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+        data-bs-target="#modalMudaLink"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Editar link</text>
@@ -773,7 +773,7 @@ const dynamicContent = {
       <button
           origin="${thisOrigin}"
         data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+        data-bs-target="#modalMudaLink"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Editar link</text>
@@ -866,7 +866,7 @@ const dynamicContent = {
       <button
           origin="${thisOrigin}"
         data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+        data-bs-target="#modalMudaLink"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Editar link</text>
@@ -896,7 +896,7 @@ const dynamicContent = {
       <button
           origin="${thisOrigin}"
         data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+        data-bs-target="#modalMudaLink"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Editar link</text>
