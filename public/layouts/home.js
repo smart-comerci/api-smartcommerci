@@ -527,7 +527,7 @@ const dropzoneHtml = div.firstElementChild;
 const dropzoneHtml2 = div2.firstElementChild;
 const dropzoneHtml3 = div3.firstElementChild;
 
-function prepareVitrine(element) {
+function prepareVitrine(element, position) {
   let myId = Math.random().toFixed(4).replace(".", "");
   if (element.attr("conteudo") === "produto") {
     let item = {
@@ -565,20 +565,33 @@ function prepareVitrine(element) {
   }
   if (element.attr("conteudo") === "banner") {
     setOrigins(element.attr("origin"));
-    let item = {
-      id: myId,
-      type: "banners",
-      first: {
-        url: "",
-        link: "",
-      },
-      second: {
-        url: "",
-        link: "",
-      },
-    };
+    let exists = homePage.body.find(
+      (b) => b.type === "banners" && b.id === myId
+    );
+    if (!exists) {
+      let item = {
+        id: myId,
+        type: "banners",
+        [position]: {
+          url: "",
+          link: "",
+        },
+      };
 
-    homePage.body.push(item);
+      homePage.body.push(item);
+    } else {
+      for (const k in homePage.body) {
+        if (
+          homePage.body[k].type === "banners" &&
+          homePage.body[k].id === myId
+        ) {
+          homePage.body[k][position] = {
+            url: "",
+            link: "",
+          };
+        }
+      }
+    }
   }
   $("#modalVitrine").attr("idCurrentItem", myId);
   $("#modalReceitas").attr("idCurrentItem", myId);
@@ -693,15 +706,19 @@ const dynamicContent = {
 
       const dropzone = dropzoneHtml.cloneNode(1);
       const dropzone1 = dropzoneHtml.cloneNode(1);
-      let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
+
+      let theId = Math.random().toFixed(5).replace(".", "");
+      let thisOrigin = "banner_" + theId;
+
       dropzone.setAttribute("id", thisOrigin);
+
       wrapper.appendChild(dropzone);
       wrapper1.appendChild(dropzone1);
 
       const prev =
         createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
-      onclick="prepareVitrine($(this))"
+      onclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
         conteudo="banner"
         data-bs-toggle="modal"
@@ -731,7 +748,7 @@ const dynamicContent = {
       const prev2 =
         createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
-      onclick="prepareVitrine($(this))"
+      onclick="prepareVitrine($(this),'second')"
           origin="${thisOrigin}"
         conteudo="banner"
         data-bs-toggle="modal"
@@ -815,7 +832,8 @@ const dynamicContent = {
 
       const dropzone = dropzoneHtml.cloneNode(1);
       const dropzone1 = dropzoneHtml.cloneNode(1);
-      let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
+      let theId = Math.random().toFixed(5).replace(".", "");
+      let thisOrigin = "banner_" + theId;
       dropzone.setAttribute("id", thisOrigin);
       wrapper.appendChild(dropzone);
       wrapper1.appendChild(dropzone1);
@@ -823,7 +841,7 @@ const dynamicContent = {
       const prev =
         createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
-      onclick="prepareVitrine($(this))"
+      onclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
         conteudo="banner"
         data-bs-toggle="modal"
@@ -853,7 +871,7 @@ const dynamicContent = {
       const prev2 =
         createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
-      onclick="prepareVitrine($(this))"
+      onclick="prepareVitrine($(this), 'second')"
           origin="${thisOrigin}"
         conteudo="banner"
         data-bs-toggle="modal"
@@ -1079,38 +1097,41 @@ async function changePicture(element) {
   let origin = element.attr("origin");
   if (origin) {
     let thisURL = element.attr("url");
-    if (thisURL) {
-      console.log(origin.split("-"));
-      if (origin.split("-").length === 1) {
-        homePage[origin].url = thisURL;
-      } else if (origin.split("-").length === 2) {
-        homePage[origin.split("-")[0]][origin.split("-")[1]].url = thisURL;
-      } else if (origin.split("-").length === 3) {
-        homePage[origin.split("-")[0]][origin.split("-")[1]][
-          origin.split("-")[2]
-        ].url = thisURL;
-      }
-      if (origin === `newsletter` || origin === `whatsapp`) {
-        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
-          `background`,
-          `url(${thisURL})`
-        );
-        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
-          `background-position`,
-          `center`
-        );
-        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
-          `background-size`,
-          `cover`
-        );
-        GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`zoom`, `90%`);
-      }
-
-      GLOBAL_ELEMENT_EDIT.find(`img`).attr(`src`, thisURL);
-      GLOBAL_ELEMENT_EDIT.addClass(`dropped`);
-      console.log(homePage);
+    if (origin.split("_")[0] === "banner") {
     } else {
-      console.log("url ausente");
+      if (thisURL) {
+        console.log(origin.split("-"));
+        if (origin.split("-").length === 1) {
+          homePage[origin].url = thisURL;
+        } else if (origin.split("-").length === 2) {
+          homePage[origin.split("-")[0]][origin.split("-")[1]].url = thisURL;
+        } else if (origin.split("-").length === 3) {
+          homePage[origin.split("-")[0]][origin.split("-")[1]][
+            origin.split("-")[2]
+          ].url = thisURL;
+        }
+        if (origin === `newsletter` || origin === `whatsapp`) {
+          GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
+            `background`,
+            `url(${thisURL})`
+          );
+          GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
+            `background-position`,
+            `center`
+          );
+          GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(
+            `background-size`,
+            `cover`
+          );
+          GLOBAL_ELEMENT_EDIT.find(`.conteudoSalvo`).css(`zoom`, `90%`);
+        }
+
+        GLOBAL_ELEMENT_EDIT.find(`img`).attr(`src`, thisURL);
+        GLOBAL_ELEMENT_EDIT.addClass(`dropped`);
+        console.log(homePage);
+      } else {
+        console.log("url ausente");
+      }
     }
   } else {
     console.log("origin ausente");
