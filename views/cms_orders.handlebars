@@ -39,7 +39,8 @@
                     class="datetimepicker-dummy-input is-datetimepicker-range primeiraData" type="text">
                 <input style="display: none;" placeholder="" readonly="readonly"
                     class="datetimepicker-dummy-input segundaData" type="text">
-                <input style="text-align:center !important; width: 100%; opacity: 1 !important" type="text" class="demo4" value=" - ">
+                <input style="text-align:center !important; width: 100%; opacity: 1 !important" type="text"
+                    class="demo4" value=" - ">
             </div>
         </div>
 
@@ -312,8 +313,8 @@
 
 
     async function reloadThis() {
-         updateTotalPedidos()
-         $.ajax({
+        updateTotalPedidos()
+        $.ajax({
             type: "POST",
             url: "https://api-smartcomerci.com.br:7070/getOrdersTemplate",
             headers: {
@@ -545,7 +546,7 @@
             },
             complete: function () {
                 $("body").css("filter", "none")
-             },
+            },
         });
 
     }
@@ -1390,8 +1391,8 @@
                             }
 
                             if (qualPedido != undefined) {
-                                 salvaUmUnico(qualPedido)
-                                 
+                                salvaUmUnico(qualPedido)
+
                             }
 
 
@@ -1910,7 +1911,7 @@
                 },
                 success: function (data) {
                     //console.log('dados pedido');
-                     console.log(data);
+                    console.log(data);
                     localStorage.PEDIDO_PDF = JSON.stringify(data)
 
                     var listaItens = JSON.parse(data[0].order_conteudo)
@@ -2300,7 +2301,7 @@
             //console.log(data);
         },
         complete: function () {
-          
+
         },
     });
 
@@ -2311,7 +2312,7 @@
 
         if (!checkupOrders) {
             for (const k in PEDIDOS) {
-                let CONTEUDO = JSON.parse(PEDIDOS[k].order_conteudo)
+                let CONTEUDO = JSON.parse(PEDIDOS[k].order_conteudo.replace(/:""/g, ':"'))
                 let valorEntrega = PEDIDOS[k].order_valor_entrega
                 let totalItens = 0
                 for (const c in CONTEUDO) {
@@ -2322,7 +2323,7 @@
                 PEDIDOS[k]['updatedAt'] = moment(PEDIDOS[k]['updatedAt']).format('YYYY-MM-DD')
                 PEDIDOS[k]['createdAt'] = moment(PEDIDOS[k]['createdAt']).format('YYYY-MM-DD')
 
-               // salvaUmUnico(PEDIDOS[k])
+                // salvaUmUnico(PEDIDOS[k])
             }
             localStorage.TODOS_OS_PEDIDOS = JSON.stringify(PEDIDOS)
             checkupOrders = true
@@ -2347,32 +2348,32 @@
 
         }
 
-     
+
         let valorTotal = 0
-        for(const k in columns){
-            if(columns[k].column === "order_conteudo"){
-                try{
+        for (const k in columns) {
+            if (columns[k].column === "order_conteudo") {
+                try {
                     let list = JSON.parse(columns[k].value)
-                    for(const a in list){
-                        valorTotal+= (list[a].quantidade * list[a].valor)
+                    for (const a in list) {
+                        valorTotal += (list[a].quantidade * list[a].valor)
                     }
-                    
-                }catch(err){}
+
+                } catch (err) { }
             }
         }
-        for(const k in columns){
-            if(columns[k].column === "order_valor_entrega"){
-                    valorTotal+=columns[k].value
+        for (const k in columns) {
+            if (columns[k].column === "order_valor_entrega") {
+                valorTotal += columns[k].value
             }
         }
 
-         for(const k in columns){
-            if(columns[k].column === "order_valor_total"){
+        for (const k in columns) {
+            if (columns[k].column === "order_valor_total") {
                 columns[k].value = valorTotal
             }
         }
 
- $.ajax({
+        $.ajax({
             type: 'POST',
             url: mainHost + '/updateById',
             headers: {
