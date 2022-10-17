@@ -344,7 +344,7 @@ const content = document.querySelector(".preview-home_content");
 const content2 = document.querySelector(".listaHOME");
 const div = document.createElement("div");
 div.innerHTML = `
-      <label onclick="showMyPrev($(this))" class="dropzone">  
+      <label style="padding: 50px;" onclick="showMyPrev($(this))" class="dropzone">  
           <div>
             <img src="" />
             <span  class="rounded-icon">
@@ -699,7 +699,7 @@ const dynamicContent = {
       wrapper1.appendChild(dropzone1);
 
       const prev =
-        createElementFromHTML(`<div style="display: none;top: 350px;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+        createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
       onclick="prepareVitrine($(this))"
           origin="${thisOrigin}"
