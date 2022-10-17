@@ -2331,8 +2331,7 @@
                 PEDIDOS[k]['order_data_entrega'] = moment(PEDIDOS[k]['order_data_entrega']).format('YYYY-MM-DD')
                 PEDIDOS[k]['updatedAt'] = moment(PEDIDOS[k]['updatedAt']).format('YYYY-MM-DD')
                 PEDIDOS[k]['createdAt'] = moment(PEDIDOS[k]['createdAt']).format('YYYY-MM-DD')
-
-                // salvaUmUnico(PEDIDOS[k])
+                salvaUmUnico(PEDIDOS[k])
             }
             localStorage.TODOS_OS_PEDIDOS = JSON.stringify(PEDIDOS)
             checkupOrders = true
