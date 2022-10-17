@@ -2319,7 +2319,7 @@
 
         if (!checkupOrders) {
             for (const k in PEDIDOS) {
-                let CONTEUDO = JSON.parse(ajustStrigfy(PEDIDOS[k].order_conteudo.replace(/:""/g, ':"').replace(/:","/g, ':"')))
+                let CONTEUDO = JSON.parse(ajustStrigfy(PEDIDOS[k]))
 
 
                 let valorEntrega = PEDIDOS[k].order_valor_entrega
