@@ -1144,9 +1144,11 @@ async function changePicture(element) {
         if (homePage.body[k].id === origin.split("_")[1]) {
           homePage.body[k][element.attr("stage")].url = thisURL;
           let newid = origin.split("_")[1] + "_banner";
-          $("#" + newid)
-            .find("img")
-            .attr("src", thisURL);
+          $(".dropzone").each(function () {
+            if ($(this).attr("id_get") === newid) {
+              $(this).find("img").attr("src", thisURL);
+            }
+          });
         }
       }
     } else {
