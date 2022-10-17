@@ -105,7 +105,7 @@ let homePage = {
 
 //================================NEWS UPDATES==============================
 
-function setOrigins(origin) {
+function setOrigins(origin, stage) {
   console.log("ORIGIN in function", origin);
   $(".modal")
     .find("input")
@@ -129,23 +129,35 @@ function setOrigins(origin) {
     $(".modal")
       .find("input")
       .each(function () {
-        $(this).attr("origin");
+        $(this).attr("origin", origin);
+        if (origin.split("_")[0] === "banner") {
+          $(this).attr("stage", stage);
+        }
       });
 
     $(".modal")
       .find("textarea")
       .each(function () {
         $(this).attr("origin", origin);
+        if (origin.split("_")[0] === "banner") {
+          $(this).attr("stage", stage);
+        }
       });
 
     $(".modal")
       .find("button")
       .each(function () {
         $(this).attr("origin", origin);
+        if (origin.split("_")[0] === "banner") {
+          $(this).attr("stage", stage);
+        }
       });
 
     $(".switch").each(function () {
       $(this).attr("origin", origin);
+      if (origin.split("_")[0] === "banner") {
+        $(this).attr("stage", stage);
+      }
     });
   }
 }
@@ -564,7 +576,7 @@ function prepareVitrine(element, position) {
     homePage.body.push(item);
   }
   if (element.attr("conteudo") === "banner") {
-    setOrigins(element.attr("origin"));
+    setOrigins(element.attr("origin"), position);
     myId = element.attr("origin").split("_")[1];
     let exists = homePage.body.find(
       (b) => b.type === "banners" && b.id === myId
@@ -1099,6 +1111,10 @@ async function changePicture(element) {
   if (origin) {
     let thisURL = element.attr("url");
     if (origin.split("_")[0] === "banner") {
+      for (const k in homePage.body) {
+        if (homePage.body[k].id === origin.split("_")[1]) {
+        }
+      }
     } else {
       if (thisURL) {
         console.log(origin.split("-"));
