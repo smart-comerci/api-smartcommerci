@@ -724,6 +724,8 @@ const dynamicContent = {
       let thisOrigin = "banner_" + theId;
 
       dropzone.setAttribute("id", thisOrigin);
+      dropzone1.setAttribute("id_get", theId + "_banner");
+      dropzone.setAttribute("id_get", theId + "_banner");
 
       wrapper.appendChild(dropzone);
       wrapper1.appendChild(dropzone1);
@@ -1049,6 +1051,15 @@ function createElementFromHTML(htmlString) {
 //=========================== Área de CRUD =====================
 let host = `https://api-smartcomerci.com.br:9090`;
 async function uploadAndUpdateFile(element) {
+  if (element.attr("url")) {
+    element
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .find("img")
+      .attr("src", element.attr("url"));
+  }
   element
     .parent()
     .parent()
@@ -1104,6 +1115,14 @@ async function uploadAndUpdateFile(element) {
           .parent()
           .parent()
           .parent()
+          .find("img")
+          .attr("src", URL);
+
+        element
+          .parent()
+          .parent()
+          .parent()
+          .parent()
           .find("input")
           .each(function () {
             $(this).attr("url", URL);
@@ -1122,6 +1141,10 @@ async function changePicture(element) {
       for (const k in homePage.body) {
         if (homePage.body[k].id === origin.split("_")[1]) {
           homePage.body[k][element.attr("stage")].url = thisURL;
+          let newid = origin.split("_")[1] + "_banner";
+          $("#" + newid)
+            .find("img")
+            .attr("src", thisURL);
         }
       }
     } else {
