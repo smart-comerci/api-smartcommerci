@@ -565,6 +565,7 @@ function prepareVitrine(element, position) {
   }
   if (element.attr("conteudo") === "banner") {
     setOrigins(element.attr("origin"));
+    myId = element.attr("origin").split("_")[1];
     let exists = homePage.body.find(
       (b) => b.type === "banners" && b.id === myId
     );
