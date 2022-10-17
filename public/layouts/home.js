@@ -733,18 +733,64 @@ const dynamicContent = {
       container.prepend(wrapper1);
       content2.prepend(container);
     } else {
+      //   const wrapper = document.createElement("div");
+      //   wrapper.classList.add("content-dynamic", "content-dynamic_small");
+      //   $("#dropdown-content-dynamic").click();
+
+      //   const dropzone = dropzoneHtml.cloneNode(1);
+      //   let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
+      //   dropzone.setAttribute("id", thisOrigin);
+      //   wrapper.appendChild(dropzone);
+
+      //   const prev =
+      //     createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+      //  <button
+      //   onclick="prepareVitrine($(this))"
+      //       origin="${thisOrigin}"
+      //     conteudo="banner"
+      //     data-bs-toggle="modal"
+      //     data-bs-target="#modalChangePicture"
+      //     class="dropzone-prev-button  backGold"
+      //   >
+      //     <text class="dropzone-prev-text">Editar Banner</text>
+      //   </button>
+      //   <button
+      //       origin="${thisOrigin}"
+      //     data-bs-toggle="modal"
+      //     data-bs-target="#modalDeletaVitrine"
+      //     class="dropzone-prev-button"
+      //   >
+      //     <text class="dropzone-prev-text">Editar link</text>
+      //   </button>
+      //   <button
+      //       origin="${thisOrigin}"
+      //     data-bs-toggle="modal"
+      //     data-bs-target="#modalDeletaVitrine"
+      //     class="dropzone-prev-button"
+      //   >
+      //     <text class="dropzone-prev-text">Excluir Banners</text>
+      //   </button>
+      // </div>`);
+      //   wrapper.appendChild(prev);
+      //   content2.prepend(wrapper);
+
+      const container = document.createElement("div");
       const wrapper = document.createElement("div");
+      const wrapper1 = document.createElement("div");
       wrapper.classList.add("content-dynamic", "content-dynamic_small");
+      wrapper1.classList.add("content-dynamic", "content-dynamic_small");
       $("#dropdown-content-dynamic").click();
 
       const dropzone = dropzoneHtml.cloneNode(1);
+      const dropzone1 = dropzoneHtml.cloneNode(1);
       let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
       dropzone.setAttribute("id", thisOrigin);
       wrapper.appendChild(dropzone);
+      wrapper1.appendChild(dropzone1);
 
       const prev =
-        createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
-     <button
+        createElementFromHTML(`<div style="display: none;top: 350px;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
+      <button
       onclick="prepareVitrine($(this))"
           origin="${thisOrigin}"
         conteudo="banner"
@@ -768,11 +814,15 @@ const dynamicContent = {
         data-bs-target="#modalDeletaVitrine"
         class="dropzone-prev-button"
       >
-        <text class="dropzone-prev-text">Excluir Banners</text>
+        <text class="dropzone-prev-text">Excluir Banner</text>
       </button>
     </div>`);
+
       wrapper.appendChild(prev);
-      content2.prepend(wrapper);
+      wrapper1.appendChild(prev);
+      container.prepend(wrapper);
+      container.prepend(wrapper1);
+      content2.prepend(container);
     }
   },
   receitas: () => {
