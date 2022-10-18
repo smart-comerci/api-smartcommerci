@@ -1151,24 +1151,28 @@ async function changePicture(element) {
           $(".dropzone").each(function () {
             console.log($(this).attr("id_get"), newid, newid2);
             if ($(this).attr("id_get") === newid) {
-              $(this).find("img").attr("src", thisURL);
-              $(this).find("img").css("width", "100%");
-              $(this).find("img").css("height", "200px");
-              $(this).parent().css("height", "270px");
-              $(this).css("border", "none");
-              $(this).css("background", "none");
-              $(this).find(".rounded-icon").remove();
-              $(this).find("img").show();
+              if (element.attr("stage") === "second") {
+                $(this).find("img").attr("src", thisURL);
+                $(this).find("img").css("width", "100%");
+                $(this).find("img").css("height", "200px");
+                $(this).parent().css("height", "270px");
+                $(this).css("border", "none");
+                $(this).css("background", "none");
+                $(this).find(".rounded-icon").remove();
+                $(this).find("img").show();
+              }
             }
             if ($(this).attr("id_get") === newid2) {
-              $(this).find("img").attr("src", thisURL);
-              $(this).find("img").css("width", "100%");
-              $(this).find("img").css("height", "200px");
-              $(this).parent().css("height", "270px");
-              $(this).css("border", "none");
-              $(this).css("background", "none");
-              $(this).find(".rounded-icon").remove();
-              $(this).find("img").show();
+              if (element.attr("stage") === "first") {
+                $(this).find("img").attr("src", thisURL);
+                $(this).find("img").css("width", "100%");
+                $(this).find("img").css("height", "200px");
+                $(this).parent().css("height", "270px");
+                $(this).css("border", "none");
+                $(this).css("background", "none");
+                $(this).find(".rounded-icon").remove();
+                $(this).find("img").show();
+              }
             }
           });
         }
