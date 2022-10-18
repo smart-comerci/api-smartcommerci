@@ -1152,6 +1152,9 @@ async function changePicture(element) {
               $(this).find("img").attr("src", thisURL);
               $(this).find("img").css("width", "100%");
               $(this).find("img").css("height", "200px");
+              $(this).parent().css("height", "270px");
+              $(this).css("border", "none");
+              $(this).css("background", "none");
               $(this).find(".rounded-icon").remove();
               $(this).find("img").show();
             }
