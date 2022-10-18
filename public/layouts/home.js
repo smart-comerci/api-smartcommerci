@@ -1151,8 +1151,8 @@ async function changePicture(element) {
             if ($(this).attr("id_get") === newid) {
               $(this).find("img").attr("src", thisURL);
               $(this).find("img").css("width", "100%");
-              $(this).find("img").css("height", "auto");
-              $(this).find("img").css("height", "450px");
+              $(this).find("img").css("height", "200px");
+              $(this).find(".rounded-icon").remove();
               $(this).find("img").show();
             }
           });
