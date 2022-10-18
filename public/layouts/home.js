@@ -725,8 +725,8 @@ const dynamicContent = {
       let thisOrigin = "banner_" + theId;
 
       dropzone.setAttribute("id", thisOrigin);
-      dropzone1.setAttribute("id_get", theId + "_banner");
-      dropzone.setAttribute("id_get", theId + "_banner");
+      dropzone1.setAttribute("id_get", theId + "_banner1");
+      dropzone.setAttribute("id_get", theId + "_banner2");
 
       wrapper.style.height = "auto";
       wrapper1.style.height = "auto";
@@ -857,8 +857,8 @@ const dynamicContent = {
       let theId = Math.random().toFixed(5).replace(".", "");
       let thisOrigin = "banner_" + theId;
       dropzone.setAttribute("id", thisOrigin);
-      dropzone1.setAttribute("id_get", theId + "_banner");
-      dropzone.setAttribute("id_get", theId + "_banner");
+      dropzone1.setAttribute("id_get", theId + "_banner1");
+      dropzone.setAttribute("id_get", theId + "_banner2");
       wrapper.appendChild(dropzone);
       wrapper1.appendChild(dropzone1);
 
@@ -1146,7 +1146,7 @@ async function changePicture(element) {
       for (const k in homePage.body) {
         if (homePage.body[k].id === origin.split("_")[1]) {
           homePage.body[k][element.attr("stage")].url = thisURL;
-          let newid = origin.split("_")[1] + "_banner";
+          let newid = origin.split("_")[1] + "_" + origin.split("_")[0];
           $(".dropzone").each(function () {
             console.log($(this).attr("id_get"), newid);
             if ($(this).attr("id_get") === newid) {
