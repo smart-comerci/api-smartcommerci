@@ -540,6 +540,7 @@ const dropzoneHtml2 = div2.firstElementChild;
 const dropzoneHtml3 = div3.firstElementChild;
 
 function prepareVitrine(element, position) {
+  console.log(element, position);
   let myId = Math.random().toFixed(4).replace(".", "");
   if (element.attr("conteudo") === "produto") {
     let item = {
