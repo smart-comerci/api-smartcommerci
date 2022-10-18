@@ -1146,10 +1146,21 @@ async function changePicture(element) {
       for (const k in homePage.body) {
         if (homePage.body[k].id === origin.split("_")[1]) {
           homePage.body[k][element.attr("stage")].url = thisURL;
-          let newid = origin.split("_")[1] + "_" + origin.split("_")[0];
+          let newid = origin.split("_")[1] + "_banner1";
+          let newid2 = origin.split("_")[1] + "_banner2";
           $(".dropzone").each(function () {
-            console.log($(this).attr("id_get"), newid);
+            console.log($(this).attr("id_get"), newid, newid2);
             if ($(this).attr("id_get") === newid) {
+              $(this).find("img").attr("src", thisURL);
+              $(this).find("img").css("width", "100%");
+              $(this).find("img").css("height", "200px");
+              $(this).parent().css("height", "270px");
+              $(this).css("border", "none");
+              $(this).css("background", "none");
+              $(this).find(".rounded-icon").remove();
+              $(this).find("img").show();
+            }
+            if ($(this).attr("id_get") === newid2) {
               $(this).find("img").attr("src", thisURL);
               $(this).find("img").css("width", "100%");
               $(this).find("img").css("height", "200px");
