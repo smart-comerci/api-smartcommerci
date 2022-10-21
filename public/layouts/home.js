@@ -842,7 +842,7 @@ const dynamicContent = {
       wrapper1.appendChild(prev2);
       container.append(wrapper);
       container.append(wrapper1);
-      content2.append(container);
+      content2.prepend(container);
 
       setBannerIn(theId, list["first"].url, "first");
       setBannerIn(theId, list["second"].url, "second");
