@@ -1546,9 +1546,6 @@ async function getMyObjectHomeMain() {
           if (obj.type === "revenues") {
           }
         }
-        console.log(conteudo);
-        conteudo = homePage.body;
-        console.log("conteudo 2", conteudo);
 
         // for (const l in conteudo) {
         //   if (conteudo[l].type === "vitrine") {
