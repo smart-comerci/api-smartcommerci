@@ -1557,7 +1557,9 @@ async function getMyObjectHomeMain() {
           console.log("index", index);
           let obj = homePage.body[homePage.body.length - index];
           if (obj.type === "vitrine") {
-            dynamicContent.produtos(obj.products, obj.title, obj.id);
+            if (obj.products.length > 0) {
+              dynamicContent.produtos(obj.products, obj.title, obj.id);
+            }
           }
           if (obj.type === "banners") {
             dynamicContent.banners(obj);
