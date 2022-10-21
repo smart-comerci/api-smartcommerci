@@ -1533,19 +1533,15 @@ async function getMyObjectHomeMain() {
         let news = JSON.parse(ajustStrigfy(nl2br(data[0].home_main_info)));
         homePage = news;
         console.log(`home page`, homePage);
-
-        for (let l = homePage.body.length; l >= 0; l--) {
-          l = l - 1;
-          if (homePage.body[l].type === "vitrine") {
-            dynamicContent.produtos(
-              homePage.body[l].products,
-              homePage.body[l].title
-            );
+        let conteudo = homePage.body.reverse();
+        for (const l in conteudo) {
+          if (conteudo[l].type === "vitrine") {
+            dynamicContent.produtos(conteudo[l].products, conteudo[l].title);
           }
-          if (homePage.body[l].type === "banners") {
-            dynamicContent.banners(homePage.body[l]);
+          if (conteudo[l].type === "banners") {
+            dynamicContent.banners(conteudo[l]);
           }
-          if (homePage.body[l].type === "revenues") {
+          if (conteudo[l].type === "revenues") {
           }
         }
         start();
