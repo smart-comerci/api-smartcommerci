@@ -685,7 +685,7 @@ const dynamicContent = {
         "produto_" + Math.random().toFixed(5).replace(".", "")
       );
       wrapper.appendChild(prev);
-      content2.append(wrapper);
+      content2.prepend(wrapper);
     } else {
       $("#dropdown-content-dynamic").click();
 
