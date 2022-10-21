@@ -717,7 +717,7 @@ const dynamicContent = {
         container.classList.add("doisBanners");
         wrapper.classList.add("content-dynamic", "content-dynamic_small");
         wrapper1.classList.add("content-dynamic", "content-dynamic_small");
-        $("#dropdown-content-dynamic").click();
+        //$("#dropdown-content-dynamic").click();
 
         const dropzone = dropzoneHtml.cloneNode(1);
         const dropzone1 = dropzoneHtml.cloneNode(1);
@@ -728,6 +728,21 @@ const dynamicContent = {
         dropzone.setAttribute("id", thisOrigin);
         dropzone1.setAttribute("id_get", theId + "_banner1");
         dropzone.setAttribute("id_get", theId + "_banner2");
+
+        // dropzone
+        //   .querySelector("img")
+        //   .setAttribute("src", list[k]["second"].url);
+        // dropzone1
+        //   .querySelector("img")
+        //   .setAttribute("src", list[k]["first"].url);
+
+        // dropzone.querySelector("img").style.width = "100%";
+
+        // dropzone1.querySelector("img").style.width = "100%";
+
+        // dropzone1
+        //   .querySelector("img")
+        //   .setAttribute("src", list[k]["first"].url);
 
         wrapper.style.height = "auto";
         wrapper1.style.height = "auto";
@@ -804,8 +819,8 @@ const dynamicContent = {
         container.prepend(wrapper1);
         content2.prepend(container);
 
-        setBannerIn(dropzone, list[k]["first"].url);
-        setBannerIn(dropzone1, list[k]["second"].url);
+        setBannerIn(theId, list[k]["first"].url, "first");
+        setBannerIn(theId, list[k]["second"].url, "second");
       }
     } else {
       const container = document.createElement("div");
@@ -1102,16 +1117,36 @@ async function uploadAndUpdateFile(element) {
   });
 }
 
-async function setBannerIn(target, url) {
-  let thisURL = url;
-  target.find("img").attr("src", thisURL);
-  target.find("img").css("width", "100%");
-  target.find("img").css("height", "200px");
-  target.parent().css("height", "270px");
-  target.css("border", "none");
-  target.css("background", "none");
-  target.find(".rounded-icon").remove();
-  target.find("img").show();
+async function setBannerIn(targetId, thisURL, stage) {
+  let newid = targetId + "_banner1";
+  let newid2 = targetId + "_banner2";
+  $(".dropzone").each(function () {
+    console.log($(this).attr("id_get"), newid, newid2);
+    if ($(this).attr("id_get") === newid) {
+      if (stage === "second") {
+        $(this).find("img").attr("src", thisURL);
+        $(this).find("img").css("width", "100%");
+        $(this).find("img").css("height", "200px");
+        $(this).parent().css("height", "270px");
+        $(this).css("border", "none");
+        $(this).css("background", "none");
+        $(this).find(".rounded-icon").remove();
+        $(this).find("img").show();
+      }
+    }
+    if ($(this).attr("id_get") === newid2) {
+      if (stage === "first") {
+        $(this).find("img").attr("src", thisURL);
+        $(this).find("img").css("width", "100%");
+        $(this).find("img").css("height", "200px");
+        $(this).parent().css("height", "270px");
+        $(this).css("border", "none");
+        $(this).css("background", "none");
+        $(this).find(".rounded-icon").remove();
+        $(this).find("img").show();
+      }
+    }
+  });
 }
 
 async function changePicture(element) {
