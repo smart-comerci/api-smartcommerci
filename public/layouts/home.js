@@ -1498,7 +1498,7 @@ async function getMyObjectHomeMain() {
             );
           }
           if (homePage.body[l].type === "banners") {
-            //dynamicContent.banners(homePage.body[l]);
+            dynamicContent.banners(homePage.body[l]);
           }
           if (homePage.body[l].type === "revenues") {
           }
