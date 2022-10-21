@@ -709,7 +709,7 @@ const dynamicContent = {
     }
   },
   banners: (list) => {
-    if (list && list.length > 0) {
+    if (list) {
       console.log("asdads ", list);
       for (const k in list) {
         const container = document.createElement("div");
