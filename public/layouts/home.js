@@ -710,31 +710,32 @@ const dynamicContent = {
   },
   banners: (list) => {
     if (list && list.length > 0) {
-      const container = document.createElement("div");
-      const wrapper = document.createElement("div");
-      const wrapper1 = document.createElement("div");
-      container.classList.add("doisBanners");
-      wrapper.classList.add("content-dynamic", "content-dynamic_small");
-      wrapper1.classList.add("content-dynamic", "content-dynamic_small");
-      $("#dropdown-content-dynamic").click();
+      for (const k in list) {
+        const container = document.createElement("div");
+        const wrapper = document.createElement("div");
+        const wrapper1 = document.createElement("div");
+        container.classList.add("doisBanners");
+        wrapper.classList.add("content-dynamic", "content-dynamic_small");
+        wrapper1.classList.add("content-dynamic", "content-dynamic_small");
+        //$("#dropdown-content-dynamic").click();
 
-      const dropzone = dropzoneHtml.cloneNode(1);
-      const dropzone1 = dropzoneHtml.cloneNode(1);
+        const dropzone = dropzoneHtml.cloneNode(1);
+        const dropzone1 = dropzoneHtml.cloneNode(1);
 
-      let theId = Math.random().toFixed(5).replace(".", "");
-      let thisOrigin = "banner_" + theId;
+        let theId = Math.random().toFixed(5).replace(".", "");
+        let thisOrigin = "banner_" + theId;
 
-      dropzone.setAttribute("id", thisOrigin);
-      dropzone1.setAttribute("id_get", theId + "_banner1");
-      dropzone.setAttribute("id_get", theId + "_banner2");
+        dropzone.setAttribute("id", thisOrigin);
+        dropzone1.setAttribute("id_get", theId + "_banner1");
+        dropzone.setAttribute("id_get", theId + "_banner2");
 
-      wrapper.style.height = "auto";
-      wrapper1.style.height = "auto";
-      wrapper.appendChild(dropzone);
-      wrapper1.appendChild(dropzone1);
+        wrapper.style.height = "auto";
+        wrapper1.style.height = "auto";
+        wrapper.appendChild(dropzone);
+        wrapper1.appendChild(dropzone1);
 
-      const prev =
-        createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
+        const prev =
+          createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
       onclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
@@ -765,8 +766,8 @@ const dynamicContent = {
       </button>
     </div>`);
 
-      const prev2 =
-        createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
+        const prev2 =
+          createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
       onclick="prepareVitrine($(this),'second')"
           origin="${thisOrigin}"
@@ -797,53 +798,16 @@ const dynamicContent = {
       </button>
     </div>`);
 
-      wrapper.appendChild(prev);
-      wrapper1.appendChild(prev2);
-      container.prepend(wrapper);
-      container.prepend(wrapper1);
-      content2.prepend(container);
+        wrapper.appendChild(prev);
+        wrapper1.appendChild(prev2);
+        container.prepend(wrapper);
+        container.prepend(wrapper1);
+        content2.prepend(container);
+
+        setBannerIn(dropzone, list[k]["first"].url);
+        setBannerIn(dropzone1, url[k]["second"].url);
+      }
     } else {
-      //   const wrapper = document.createElement("div");
-      //   wrapper.classList.add("content-dynamic", "content-dynamic_small");
-      //   $("#dropdown-content-dynamic").click();
-
-      //   const dropzone = dropzoneHtml.cloneNode(1);
-      //   let thisOrigin = "banner_" + Math.random().toFixed(5).replace(".", "");
-      //   dropzone.setAttribute("id", thisOrigin);
-      //   wrapper.appendChild(dropzone);
-
-      //   const prev =
-      //     createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
-      //  <button
-      //   onclick="prepareVitrine($(this))"
-      //       origin="${thisOrigin}"
-      //     conteudo="banner"
-      //     data-bs-toggle="modal"
-      //     data-bs-target="#modalChangePicture"
-      //     class="dropzone-prev-button  backGold"
-      //   >
-      //     <text class="dropzone-prev-text">Editar Banner</text>
-      //   </button>
-      //   <button
-      //       origin="${thisOrigin}"
-      //     data-bs-toggle="modal"
-      //     data-bs-target="#modalDeletaVitrine"
-      //     class="dropzone-prev-button"
-      //   >
-      //     <text class="dropzone-prev-text">Editar link</text>
-      //   </button>
-      //   <button
-      //       origin="${thisOrigin}"
-      //     data-bs-toggle="modal"
-      //     data-bs-target="#modalDeletaVitrine"
-      //     class="dropzone-prev-button"
-      //   >
-      //     <text class="dropzone-prev-text">Excluir Banners</text>
-      //   </button>
-      // </div>`);
-      //   wrapper.appendChild(prev);
-      //   content2.prepend(wrapper);
-
       const container = document.createElement("div");
       container.classList.add("doisBanners");
       const wrapper = document.createElement("div");
@@ -1136,6 +1100,18 @@ async function uploadAndUpdateFile(element) {
     },
     error: function (data) {},
   });
+}
+
+async function setBannerIn(target, url) {
+  let thisURL = url;
+  target.find("img").attr("src", thisURL);
+  target.find("img").css("width", "100%");
+  target.find("img").css("height", "200px");
+  target.parent().css("height", "270px");
+  target.css("border", "none");
+  target.css("background", "none");
+  target.find(".rounded-icon").remove();
+  target.find("img").show();
 }
 
 async function changePicture(element) {
@@ -1522,6 +1498,7 @@ async function getMyObjectHomeMain() {
             );
           }
           if (homePage.body[l].type === "banners") {
+            dynamicContent.banners(homePage.body[l]);
           }
           if (homePage.body[l].type === "revenues") {
           }
