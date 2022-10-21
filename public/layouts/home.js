@@ -1118,6 +1118,7 @@ async function uploadAndUpdateFile(element) {
 }
 
 async function setBannerIn(targetId, thisURL, stage) {
+  console.log(targetId, thisURL, stage);
   let newid = targetId + "_banner1";
   let newid2 = targetId + "_banner2";
   $(".dropzone").each(function () {
