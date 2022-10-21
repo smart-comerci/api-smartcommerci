@@ -842,7 +842,7 @@ const dynamicContent = {
       wrapper1.appendChild(prev2);
       container.append(wrapper);
       container.append(wrapper1);
-      content2.prepend(container);
+      content2.append(container);
 
       setBannerIn(theId, list["first"].url, "first");
       setBannerIn(theId, list["second"].url, "second");
@@ -936,7 +936,7 @@ const dynamicContent = {
       wrapper1.appendChild(prev2);
       container.prepend(wrapper);
       container.prepend(wrapper1);
-      content2.prepend(container);
+      content2.append(container);
     }
   },
   receitas: () => {
