@@ -726,6 +726,7 @@ const dynamicContent = {
         let thisOrigin = "banner_" + theId;
 
         dropzone.setAttribute("id", thisOrigin);
+        //asd
         dropzone.setAttribute("origin", thisOrigin);
         dropzone.setAttribute("stage", "first");
 
