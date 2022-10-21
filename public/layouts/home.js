@@ -792,7 +792,7 @@ const dynamicContent = {
       <button
       nclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
-          alvoRemove="${thisOrigin}"
+          alvoRemove="${theId}_1"
           onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
@@ -823,7 +823,7 @@ const dynamicContent = {
       </button>
       <button 
           origin="${thisOrigin}"
-          alvoRemove="${theId}"
+          alvoRemove="${theId}_2"
           onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
