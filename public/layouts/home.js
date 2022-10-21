@@ -710,6 +710,7 @@ const dynamicContent = {
   },
   banners: (list) => {
     if (list && list.length > 0) {
+      console.log("asdads ", list);
       for (const k in list) {
         const container = document.createElement("div");
         const wrapper = document.createElement("div");
@@ -786,7 +787,7 @@ const dynamicContent = {
       >
         <text class="dropzone-prev-text">Excluir Banner</text>
       </button>
-    </div>`);
+          </div>`);
 
         const prev2 =
           createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
@@ -818,7 +819,7 @@ const dynamicContent = {
       >
         <text class="dropzone-prev-text">Excluir Banner</text>
       </button>
-    </div>`);
+          </div>`);
 
         wrapper.appendChild(prev);
         wrapper1.appendChild(prev2);
