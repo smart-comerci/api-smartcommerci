@@ -736,7 +736,8 @@ const dynamicContent = {
       let theId = Math.random().toFixed(5).replace(".", "");
       let thisOrigin = "banner_" + theId;
 
-      dropzone.setAttribute("id", theId);
+      dropzone.setAttribute("id", theId + "_1");
+      dropzone1.setAttribute("id", theId + "_2");
       //asd
       dropzone.setAttribute("origin", thisOrigin);
       dropzone.setAttribute("stage", "first");
@@ -822,7 +823,7 @@ const dynamicContent = {
       </button>
       <button 
           origin="${thisOrigin}"
-          alvoRemove="${thisOrigin}"
+          alvoRemove="${theId}"
           onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
@@ -852,7 +853,9 @@ const dynamicContent = {
       const dropzone1 = dropzoneHtml.cloneNode(1);
       let theId = Math.random().toFixed(5).replace(".", "");
       let thisOrigin = "banner_" + theId;
-      dropzone.setAttribute("id", theId);
+      dropzone.setAttribute("id", theId + "_1");
+      dropzone1.setAttribute("id", theId + "_2");
+
       dropzone1.setAttribute("id_get", theId + "_banner1");
       dropzone.setAttribute("id_get", theId + "_banner2");
       wrapper.appendChild(dropzone);
@@ -882,7 +885,7 @@ const dynamicContent = {
       <button
       onclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
-               alvoRemove="${thisOrigin}"
+               alvoRemove="${thisOrigin}_2"
         onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
@@ -914,7 +917,7 @@ const dynamicContent = {
       <button
       onclick="prepareVitrine($(this), 'second')"
           origin="${thisOrigin}"
-               alvoRemove="${thisOrigin}"
+               alvoRemove="${theId}_1"
         onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
