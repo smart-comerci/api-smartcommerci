@@ -1555,7 +1555,7 @@ async function getMyObjectHomeMain() {
         for (const u in homePage.body) {
           const index = Number(u) + 1;
           console.log("index", index);
-          let obj = homePage.body[u]; //homePage.body[homePage.body.length - index];
+          let obj = homePage.body[homePage.body.length - index];
           console.log("O OBJETO", obj);
           if (obj.type === "vitrine") {
             if (obj.products.length > 0) {
