@@ -831,6 +831,7 @@ const dynamicContent = {
         setBannerIn(theId, list[k]["second"].url, "second");
       }
     } else {
+      console.log("uuuuuuu ", list);
       const container = document.createElement("div");
       container.classList.add("doisBanners");
       const wrapper = document.createElement("div");
