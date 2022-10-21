@@ -711,54 +711,54 @@ const dynamicContent = {
   banners: (list) => {
     if (list) {
       console.log("asdads ", list);
-      for (const k in list) {
-        const container = document.createElement("div");
-        const wrapper = document.createElement("div");
-        const wrapper1 = document.createElement("div");
-        container.classList.add("doisBanners");
-        wrapper.classList.add("content-dynamic", "content-dynamic_small");
-        wrapper1.classList.add("content-dynamic", "content-dynamic_small");
-        //$("#dropdown-content-dynamic").click();
 
-        const dropzone = dropzoneHtml.cloneNode(1);
-        const dropzone1 = dropzoneHtml.cloneNode(1);
+      const container = document.createElement("div");
+      const wrapper = document.createElement("div");
+      const wrapper1 = document.createElement("div");
+      container.classList.add("doisBanners");
+      wrapper.classList.add("content-dynamic", "content-dynamic_small");
+      wrapper1.classList.add("content-dynamic", "content-dynamic_small");
+      //$("#dropdown-content-dynamic").click();
 
-        let theId = Math.random().toFixed(5).replace(".", "");
-        let thisOrigin = "banner_" + theId;
+      const dropzone = dropzoneHtml.cloneNode(1);
+      const dropzone1 = dropzoneHtml.cloneNode(1);
 
-        dropzone.setAttribute("id", thisOrigin);
-        //asd
-        dropzone.setAttribute("origin", thisOrigin);
-        dropzone.setAttribute("stage", "first");
+      let theId = Math.random().toFixed(5).replace(".", "");
+      let thisOrigin = "banner_" + theId;
 
-        dropzone1.setAttribute("origin", thisOrigin);
-        dropzone1.setAttribute("stage", "second");
+      dropzone.setAttribute("id", thisOrigin);
+      //asd
+      dropzone.setAttribute("origin", thisOrigin);
+      dropzone.setAttribute("stage", "first");
 
-        dropzone1.setAttribute("id_get", theId + "_banner1");
-        dropzone.setAttribute("id_get", theId + "_banner2");
+      dropzone1.setAttribute("origin", thisOrigin);
+      dropzone1.setAttribute("stage", "second");
 
-        // dropzone
-        //   .querySelector("img")
-        //   .setAttribute("src", list[k]["second"].url);
-        // dropzone1
-        //   .querySelector("img")
-        //   .setAttribute("src", list[k]["first"].url);
+      dropzone1.setAttribute("id_get", theId + "_banner1");
+      dropzone.setAttribute("id_get", theId + "_banner2");
 
-        // dropzone.querySelector("img").style.width = "100%";
+      // dropzone
+      //   .querySelector("img")
+      //   .setAttribute("src", list[k]["second"].url);
+      // dropzone1
+      //   .querySelector("img")
+      //   .setAttribute("src", list[k]["first"].url);
 
-        // dropzone1.querySelector("img").style.width = "100%";
+      // dropzone.querySelector("img").style.width = "100%";
 
-        // dropzone1
-        //   .querySelector("img")
-        //   .setAttribute("src", list[k]["first"].url);
+      // dropzone1.querySelector("img").style.width = "100%";
 
-        wrapper.style.height = "auto";
-        wrapper1.style.height = "auto";
-        wrapper.appendChild(dropzone);
-        wrapper1.appendChild(dropzone1);
+      // dropzone1
+      //   .querySelector("img")
+      //   .setAttribute("src", list[k]["first"].url);
 
-        const prev =
-          createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
+      wrapper.style.height = "auto";
+      wrapper1.style.height = "auto";
+      wrapper.appendChild(dropzone);
+      wrapper1.appendChild(dropzone1);
+
+      const prev =
+        createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
       onclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
@@ -789,8 +789,8 @@ const dynamicContent = {
       </button>
           </div>`);
 
-        const prev2 =
-          createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
+      const prev2 =
+        createElementFromHTML(`<div class="dropzone-prev  justify-content-center umBanner">
       <button
       onclick="prepareVitrine($(this),'second')"
           origin="${thisOrigin}"
@@ -821,15 +821,14 @@ const dynamicContent = {
       </button>
           </div>`);
 
-        wrapper.appendChild(prev);
-        wrapper1.appendChild(prev2);
-        container.prepend(wrapper);
-        container.prepend(wrapper1);
-        content2.prepend(container);
+      wrapper.appendChild(prev);
+      wrapper1.appendChild(prev2);
+      container.prepend(wrapper);
+      container.prepend(wrapper1);
+      content2.prepend(container);
 
-        setBannerIn(theId, list[k]["first"].url, "first");
-        setBannerIn(theId, list[k]["second"].url, "second");
-      }
+      setBannerIn(theId, list["first"].url, "first");
+      setBannerIn(theId, list["second"].url, "second");
     } else {
       console.log("uuuuuuu ", list);
       const container = document.createElement("div");
