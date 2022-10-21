@@ -1535,7 +1535,7 @@ async function getMyObjectHomeMain() {
         console.log(`home page`, homePage);
         let conteudo = [];
         for (const u in homePage.body) {
-          const index = u + 1;
+          const index = Number(u) + 1;
           console.log("index", index);
           conteudo.push(homePage.body[homePage.body.length - index]);
         }
