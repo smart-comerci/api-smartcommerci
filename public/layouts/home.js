@@ -1534,7 +1534,7 @@ async function getMyObjectHomeMain() {
         homePage = news;
         console.log(`home page`, homePage);
 
-        for (const l in homePage.body) {
+        for (let l = homePage.body.length; l >= 0; l--) {
           if (homePage.body[l].type === "vitrine") {
             dynamicContent.produtos(
               homePage.body[l].products,
