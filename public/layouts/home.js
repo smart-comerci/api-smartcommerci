@@ -1925,4 +1925,8 @@ function removeSection(element) {
   $("#" + element.attr("alvoRemove"))
     .parent()
     .remove();
+
+  let theId = element.attr("alvoRemove").replace("_1", "").replace("_2", "");
+  homePage.body = homePage.body.filter((bd) => bd.id !== theId);
+  console.log(homePage);
 }
