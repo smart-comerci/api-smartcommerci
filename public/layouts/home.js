@@ -1933,8 +1933,8 @@ function ajustStrigfy(texto) {
 
 function removeSection(element) {
   if (
-    element.attr("alvoRemove").indexOf("_1") ||
-    element.attr("alvoRemove").indexOf("_2")
+    element.attr("alvoRemove").indexOf("_1") > -1 ||
+    element.attr("alvoRemove").indexOf("_2") > -1
   ) {
     $("#" + element.attr("alvoRemove"))
       .parent()
