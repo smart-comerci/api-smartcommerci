@@ -1553,54 +1553,61 @@ async function getMyObjectHomeMain() {
 function start() {
   $(`.dropzone`).each(function () {
     let origin = $(this).attr(`origin`);
-    console.log(origin, origin.split(`-`).length);
-    if (origin.split(`-`).length === 1) {
-      $(this).addClass(`dropped`);
-      $(this).find(`img`).attr(`src`, homePage[origin]?.url);
-    } else if (origin.split(`-`).length === 2) {
-      $(this).addClass(`dropped`);
-      $(this)
-        .find(`img`)
-        .attr(`src`, homePage[origin.split(`-`)[0]][origin.split(`-`)[1]]?.url);
-    } else if (origin.split(`-`).length === 3) {
-      $(this).addClass(`dropped`);
-      $(this)
-        .find(`img`)
-        .attr(
-          `src`,
-          homePage[origin.split(`-`)[0]][origin.split(`-`)[1]][
-            origin.split(`-`)[2]
-          ]?.url
-        );
-    }
+    if (origin) {
+      console.log(origin, origin.split(`-`).length);
+      if (origin.split(`-`).length === 1) {
+        $(this).addClass(`dropped`);
+        $(this).find(`img`).attr(`src`, homePage[origin]?.url);
+      } else if (origin.split(`-`).length === 2) {
+        $(this).addClass(`dropped`);
+        $(this)
+          .find(`img`)
+          .attr(
+            `src`,
+            homePage[origin.split(`-`)[0]][origin.split(`-`)[1]]?.url
+          );
+      } else if (origin.split(`-`).length === 3) {
+        $(this).addClass(`dropped`);
+        $(this)
+          .find(`img`)
+          .attr(
+            `src`,
+            homePage[origin.split(`-`)[0]][origin.split(`-`)[1]][
+              origin.split(`-`)[2]
+            ]?.url
+          );
+      }
 
-    $(this).find(".conteudoSalvo").show();
-    $(this)
-      .find(".conteudoSalvo")
-      .css("background", `url(${homePage[origin]?.url})`);
-    $(this).find(".conteudoSalvo").css("background-size", "cover");
-    $(this).find(".conteudoSalvo").css("background-position", "center");
-    $(this).find(".linksFooter").show();
-    if (origin === "footerLinks") {
-      $(this).find(".linksFooter").css("display", "inline-flex");
-    }
-    if (origin === "legalText" || origin === "footerText") {
-      $(this).find(".contentP").html(homePage[origin]?.text);
-    }
-    var r = document.querySelector(":root");
-    r.style.setProperty("--color-primary", homePage.mainColors.first);
-    r.style.setProperty("--color-secondary", homePage.mainColors.second);
-    r.style.setProperty("--color-actions", homePage.mainColors.third);
+      $(this).find(".conteudoSalvo").show();
+      $(this)
+        .find(".conteudoSalvo")
+        .css("background", `url(${homePage[origin]?.url})`);
+      $(this).find(".conteudoSalvo").css("background-size", "cover");
+      $(this).find(".conteudoSalvo").css("background-position", "center");
+      $(this).find(".linksFooter").show();
+      if (origin === "footerLinks") {
+        $(this).find(".linksFooter").css("display", "inline-flex");
+      }
+      if (origin === "legalText" || origin === "footerText") {
+        $(this).find(".contentP").html(homePage[origin]?.text);
+      }
+      var r = document.querySelector(":root");
+      r.style.setProperty("--color-primary", homePage.mainColors.first);
+      r.style.setProperty("--color-secondary", homePage.mainColors.second);
+      r.style.setProperty("--color-actions", homePage.mainColors.third);
 
-    document
-      .querySelector(":root")
-      .style.setProperty("--color-primary", homePage.mainColors.first);
-    document
-      .querySelector(":root")
-      .style.setProperty("--color-secondary", homePage.mainColors.second);
-    document
-      .querySelector(":root")
-      .style.setProperty("--color-actions", homePage.mainColors.third);
+      document
+        .querySelector(":root")
+        .style.setProperty("--color-primary", homePage.mainColors.first);
+      document
+        .querySelector(":root")
+        .style.setProperty("--color-secondary", homePage.mainColors.second);
+      document
+        .querySelector(":root")
+        .style.setProperty("--color-actions", homePage.mainColors.third);
+    } else {
+      console.log($(this), "não tem origin");
+    }
   });
   setLinksFooterElements();
   setMidiasSociais();
