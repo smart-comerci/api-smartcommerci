@@ -735,7 +735,7 @@ const dynamicContent = {
       container.classList.add("doisBanners");
       wrapper.classList.add("content-dynamic", "content-dynamic_small");
       wrapper1.classList.add("content-dynamic", "content-dynamic_small");
-      //$("#dropdown-content-dynamic").click();
+      $("#dropdown-content-dynamic").click();
 
       const dropzone = dropzoneHtml.cloneNode(1);
       const dropzone1 = dropzoneHtml.cloneNode(1);
