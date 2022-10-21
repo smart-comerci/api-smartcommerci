@@ -820,8 +820,7 @@ const dynamicContent = {
       >
         <text class="dropzone-prev-text">Editar link</text>
       </button>
-      <button
-      onclick="prepareVitrine($(this),'second')"
+      <button 
           origin="${thisOrigin}"
           alvoRemove="${thisOrigin}"
           onclick="removeSection($(this))"
