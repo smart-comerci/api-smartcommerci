@@ -351,6 +351,7 @@ const dropdown = document.querySelector(".styled-dropdown");
 dropdown.previousElementSibling.addEventListener("click", () => {
   dropdown.classList.toggle("show");
 });
+//dasd
 
 const content = document.querySelector(".preview-home_content");
 const content2 = document.querySelector(".listaHOME");
