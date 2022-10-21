@@ -638,7 +638,7 @@ function publicaFecha() {
 }
 
 const dynamicContent = {
-  produtos: async (list, title) => {
+  produtos: async (list, title, id) => {
     const wrapper = document.createElement("div");
     wrapper.classList.add("content-dynamic");
 
@@ -648,7 +648,7 @@ const dynamicContent = {
       const dropzone = dropzoneHtml3.cloneNode(1);
       const [input, image] = dropzone.children;
 
-      let theId = list.id ?? Math.random().toFixed(5).replace(".", "");
+      let theId = id ?? Math.random().toFixed(5).replace(".", "");
       let thisOrigin = theId;
       dropzone.setAttribute("id", thisOrigin);
 
@@ -1550,7 +1550,7 @@ async function getMyObjectHomeMain() {
           console.log("index", index);
           let obj = homePage.body[homePage.body.length - index];
           if (obj.type === "vitrine") {
-            dynamicContent.produtos(obj.products, obj.title);
+            dynamicContent.produtos(obj.products, obj.title, obj.id);
           }
           if (obj.type === "banners") {
             dynamicContent.banners(obj);
