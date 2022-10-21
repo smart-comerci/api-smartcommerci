@@ -1533,7 +1533,10 @@ async function getMyObjectHomeMain() {
         let news = JSON.parse(ajustStrigfy(nl2br(data[0].home_main_info)));
         homePage = news;
         console.log(`home page`, homePage);
-        let conteudo = homePage.body.reverse();
+        let conteudo = [];
+        for (const u in homePage.body) {
+          conteudo.push(homePage.body[homePage.body.length - (u + 1)]);
+        }
         for (const l in conteudo) {
           if (conteudo[l].type === "vitrine") {
             dynamicContent.produtos(conteudo[l].products, conteudo[l].title);
