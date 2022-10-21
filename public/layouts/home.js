@@ -1931,9 +1931,19 @@ function ajustStrigfy(texto) {
 }
 
 function removeSection(element) {
-  $("#" + element.attr("alvoRemove"))
-    .parent()
-    .remove();
+  if (
+    element.attr("alvoRemove").indexOf("_1") ||
+    element.attr("alvoRemove").indexOf("_2")
+  ) {
+    $("#" + element.attr("alvoRemove"))
+      .parent()
+      .parent()
+      .remove();
+  } else {
+    $("#" + element.attr("alvoRemove"))
+      .parent()
+      .remove();
+  }
 
   let theId = element.attr("alvoRemove").replace("_1", "").replace("_2", "");
   homePage.body = homePage.body.filter((bd) => bd.id !== theId);
