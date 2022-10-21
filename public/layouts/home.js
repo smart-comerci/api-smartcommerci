@@ -1533,26 +1533,33 @@ async function getMyObjectHomeMain() {
         let news = JSON.parse(ajustStrigfy(nl2br(data[0].home_main_info)));
         homePage = news;
         console.log(`home page`, homePage);
-        let conteudo = [];
         for (const u in homePage.body) {
           const index = Number(u) + 1;
           console.log("index", index);
-          conteudo.push(homePage.body[homePage.body.length - index]);
+          let obj = homePage.body[homePage.body.length - index];
+          if (obj.type === "vitrine") {
+            dynamicContent.produtos(obj.products, obj.title);
+          }
+          if (obj.type === "banners") {
+            dynamicContent.banners(obj);
+          }
+          if (obj.type === "revenues") {
+          }
         }
         console.log(conteudo);
         conteudo = homePage.body;
         console.log("conteudo 2", conteudo);
 
-        for (const l in conteudo) {
-          if (conteudo[l].type === "vitrine") {
-            dynamicContent.produtos(conteudo[l].products, conteudo[l].title);
-          }
-          if (conteudo[l].type === "banners") {
-            dynamicContent.banners(conteudo[l]);
-          }
-          if (conteudo[l].type === "revenues") {
-          }
-        }
+        // for (const l in conteudo) {
+        //   if (conteudo[l].type === "vitrine") {
+        //     dynamicContent.produtos(conteudo[l].products, conteudo[l].title);
+        //   }
+        //   if (conteudo[l].type === "banners") {
+        //     dynamicContent.banners(conteudo[l]);
+        //   }
+        //   if (conteudo[l].type === "revenues") {
+        //   }
+        // }
         start();
       } catch (err) {
         console.log(err);
