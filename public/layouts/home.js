@@ -685,7 +685,7 @@ const dynamicContent = {
         "produto_" + Math.random().toFixed(5).replace(".", "")
       );
       wrapper.appendChild(prev);
-      content2.prepend(wrapper);
+      content2.append(wrapper);
     } else {
       $("#dropdown-content-dynamic").click();
 
@@ -722,7 +722,7 @@ const dynamicContent = {
         "produto_" + Math.random().toFixed(5).replace(".", "")
       );
       wrapper.appendChild(prev);
-      content2.prepend(wrapper);
+      content2.append(wrapper);
     }
   },
   banners: (list) => {
