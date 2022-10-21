@@ -1920,5 +1920,7 @@ function ajustStrigfy(texto) {
 }
 
 function removeSection(element) {
-  $("#" + element.attr("alvoRemove")).remove();
+  $("#" + element.attr("alvoRemove"))
+    .parent()
+    .remove();
 }
