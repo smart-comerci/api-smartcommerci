@@ -1537,6 +1537,7 @@ async function getMyObjectHomeMain() {
         for (const u in homePage.body) {
           conteudo.push(homePage.body[homePage.body.length - (u + 1)]);
         }
+        console.log(conteudo);
         for (const l in conteudo) {
           if (conteudo[l].type === "vitrine") {
             dynamicContent.produtos(conteudo[l].products, conteudo[l].title);
