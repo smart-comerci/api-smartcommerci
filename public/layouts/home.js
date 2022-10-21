@@ -805,7 +805,7 @@ const dynamicContent = {
         content2.prepend(container);
 
         setBannerIn(dropzone, list[k]["first"].url);
-        setBannerIn(dropzone1, url[k]["second"].url);
+        setBannerIn(dropzone1, list[k]["second"].url);
       }
     } else {
       const container = document.createElement("div");
@@ -1498,7 +1498,7 @@ async function getMyObjectHomeMain() {
             );
           }
           if (homePage.body[l].type === "banners") {
-            dynamicContent.banners(homePage.body[l]);
+            //dynamicContent.banners(homePage.body[l]);
           }
           if (homePage.body[l].type === "revenues") {
           }
