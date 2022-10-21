@@ -823,8 +823,8 @@ const dynamicContent = {
 
       wrapper.appendChild(prev);
       wrapper1.appendChild(prev2);
-      container.prepend(wrapper);
-      container.prepend(wrapper1);
+      container.append(wrapper);
+      container.append(wrapper1);
       content2.append(container);
 
       setBannerIn(theId, list["first"].url, "first");
