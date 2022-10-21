@@ -348,10 +348,16 @@ dropzones.forEach((dropzone) => {
 
 const dropdown = document.querySelector(".styled-dropdown");
 
-dropdown.previousElementSibling.addEventListener("click", () => {
-  dropdown.classList.toggle("show");
-});
+// dropdown.previousElementSibling.addEventListener("click", () => {
+//   dropdown.classList.toggle("show");
+// });
 //dasd
+
+document
+  .querySelector("#dropdown-content-dynamic")
+  .addEventListener("click", () => {
+    dropdown.classList.toggle("show");
+  });
 
 const content = document.querySelector(".preview-home_content");
 const content2 = document.querySelector(".listaHOME");
