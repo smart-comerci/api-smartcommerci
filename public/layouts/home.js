@@ -648,7 +648,7 @@ const dynamicContent = {
       const dropzone = dropzoneHtml3.cloneNode(1);
       const [input, image] = dropzone.children;
 
-      let theId = Math.random().toFixed(5).replace(".", "");
+      let theId = list.id ?? Math.random().toFixed(5).replace(".", "");
       let thisOrigin = theId;
       dropzone.setAttribute("id", thisOrigin);
 
@@ -733,7 +733,7 @@ const dynamicContent = {
       const dropzone = dropzoneHtml.cloneNode(1);
       const dropzone1 = dropzoneHtml.cloneNode(1);
 
-      let theId = Math.random().toFixed(5).replace(".", "");
+      let theId = list.id ?? Math.random().toFixed(5).replace(".", "");
       let thisOrigin = "banner_" + theId;
 
       dropzone.setAttribute("id", theId + "_1");
