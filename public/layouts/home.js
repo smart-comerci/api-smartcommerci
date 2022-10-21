@@ -648,11 +648,16 @@ const dynamicContent = {
       const dropzone = dropzoneHtml3.cloneNode(1);
       const [input, image] = dropzone.children;
 
+      let theId = Math.random().toFixed(5).replace(".", "");
+      let thisOrigin = theId;
+      dropzone.setAttribute("id", thisOrigin);
+
       wrapper.prepend(dropzone);
       const prev =
         createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
       onclick="prepareVitrine($(this))"
+        theOrigin="${thisOrigin}"
         conteudo="produto"
         data-bs-toggle="modal"
         data-bs-target="#modalVitrine"
@@ -661,8 +666,8 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar Vitrine</text>
       </button>
       <button
-        data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+        alvoRemove="${thisOrigin}"
+        onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Excluir Vitrine</text>
@@ -680,11 +685,16 @@ const dynamicContent = {
       const dropzone = dropzoneHtml2.cloneNode(1);
       const [input, image] = dropzone.children;
 
+      let theId = Math.random().toFixed(5).replace(".", "");
+      let thisOrigin = theId;
+      dropzone.setAttribute("id", thisOrigin);
+
       wrapper.prepend(dropzone);
       const prev =
         createElementFromHTML(`<div style="display: none;position: absolute;margin: 300px;" class="dropzone-prev  justify-content-center">
       <button
       onclick="prepareVitrine($(this))"
+       theOrigin="${thisOrigin}"
         conteudo="produto"
         data-bs-toggle="modal"
         data-bs-target="#modalVitrine"
@@ -693,8 +703,8 @@ const dynamicContent = {
         <text class="dropzone-prev-text">Editar Vitrine</text>
       </button>
       <button
-        data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+        alvoRemove="${thisOrigin}"
+        onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Excluir Vitrine</text>
@@ -781,8 +791,8 @@ const dynamicContent = {
       <button
       nclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
-        data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+          alvoRemove="${thisOrigin}"
+          onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Excluir Banner</text>
@@ -813,8 +823,8 @@ const dynamicContent = {
       <button
       onclick="prepareVitrine($(this),'second')"
           origin="${thisOrigin}"
-        data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+          alvoRemove="${thisOrigin}"
+          onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Excluir Banner</text>
@@ -873,8 +883,8 @@ const dynamicContent = {
       <button
       onclick="prepareVitrine($(this), 'first')"
           origin="${thisOrigin}"
-        data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+               alvoRemove="${thisOrigin}"
+        onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Excluir Banner</text>
@@ -905,8 +915,8 @@ const dynamicContent = {
       <button
       onclick="prepareVitrine($(this), 'second')"
           origin="${thisOrigin}"
-        data-bs-toggle="modal"
-        data-bs-target="#modalDeletaVitrine"
+               alvoRemove="${thisOrigin}"
+        onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
         <text class="dropzone-prev-text">Excluir Banner</text>
@@ -1907,4 +1917,8 @@ function ajustStrigfy(texto) {
   }
 
   return texto;
+}
+
+function removeSection(element) {
+  $("#" + element.attr("alvoRemove")).remove();
 }
