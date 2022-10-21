@@ -803,7 +803,7 @@ const dynamicContent = {
           onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
-        <text class="dropzone-prev-text">Excluir Banner</text>
+        <text class="dropzone-prev-text">Excluir Lista de Banners</text>
       </button>
           </div>`);
 
@@ -834,7 +834,7 @@ const dynamicContent = {
           onclick="removeSection($(this))"
         class="dropzone-prev-button"
       >
-        <text class="dropzone-prev-text">Excluir Banner</text>
+        <text class="dropzone-prev-text">Excluir Lista de Banners</text>
       </button>
           </div>`);
 
@@ -1556,6 +1556,7 @@ async function getMyObjectHomeMain() {
           const index = Number(u) + 1;
           console.log("index", index);
           let obj = homePage.body[homePage.body.length - index];
+          console.log(obj);
           if (obj.type === "vitrine") {
             if (obj.products.length > 0) {
               dynamicContent.produtos(obj.products, obj.title, obj.id);
