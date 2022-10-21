@@ -736,7 +736,7 @@ const dynamicContent = {
       let theId = Math.random().toFixed(5).replace(".", "");
       let thisOrigin = "banner_" + theId;
 
-      dropzone.setAttribute("id", thisOrigin);
+      dropzone.setAttribute("id", theId);
       //asd
       dropzone.setAttribute("origin", thisOrigin);
       dropzone.setAttribute("stage", "first");
@@ -853,7 +853,7 @@ const dynamicContent = {
       const dropzone1 = dropzoneHtml.cloneNode(1);
       let theId = Math.random().toFixed(5).replace(".", "");
       let thisOrigin = "banner_" + theId;
-      dropzone.setAttribute("id", thisOrigin);
+      dropzone.setAttribute("id", theId);
       dropzone1.setAttribute("id_get", theId + "_banner1");
       dropzone.setAttribute("id_get", theId + "_banner2");
       wrapper.appendChild(dropzone);
