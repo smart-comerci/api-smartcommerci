@@ -725,7 +725,7 @@ const dynamicContent = {
       content2.append(wrapper);
     }
   },
-  banners: (list) => {
+  banners: async (list) => {
     if (list) {
       console.log("asdads ", list);
 
@@ -939,7 +939,7 @@ const dynamicContent = {
       content2.append(container);
     }
   },
-  receitas: () => {
+  receitas: async () => {
     const wrapper = document.createElement("div");
     wrapper.classList.add("content-dynamic");
     $("#dropdown-content-dynamic").click();
@@ -1546,7 +1546,7 @@ async function getMyObjectHomeMain() {
     headers: {
       "x-access-token": localStorage.token,
     },
-    success: function (data) {
+    success: async function (data) {
       console.log("data", data);
       try {
         let news = JSON.parse(ajustStrigfy(nl2br(data[0].home_main_info)));
@@ -1559,11 +1559,11 @@ async function getMyObjectHomeMain() {
           console.log("O OBJETO", obj);
           if (obj.type === "vitrine") {
             if (obj.products.length > 0) {
-              dynamicContent.produtos(obj.products, obj.title, obj.id);
+              await dynamicContent.produtos(obj.products, obj.title, obj.id);
             }
           }
           if (obj.type === "banners") {
-            dynamicContent.banners(obj);
+            await dynamicContent.banners(obj);
           }
           if (obj.type === "revenues") {
           }
