@@ -558,6 +558,7 @@ function prepareVitrine(element, position) {
 
       if (thisItem) {
         addItensToListStantalone(element.attr("theOrigin"));
+        $(".btnAddItem").attr();
       } else {
         let item = {
           id: myId,
@@ -1863,7 +1864,7 @@ function getProductHTML(data, currentId) {
                       type="button"
                       id="picture-save-button"
                       tabindex="6"
-                      class="btn btn-save rounded-pill"
+                      class="btn btn-save rounded-pill btnAddItem"
                     >
                       Adicionar
                     </button>
@@ -1914,7 +1915,7 @@ let CACHE_SEARCH = [];
 
 async function searchProducts(element) {
   let text = element.val();
-  let currentId = element.attr("idcurrentitem");
+  let currentId = element.attr("origin");
   $("#searchSpinner").show();
   if (text != "") {
     $.ajax({
