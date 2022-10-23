@@ -566,6 +566,13 @@ function prepareVitrine(element, position) {
     };
 
     homePage.body.push(item);
+
+    if (element.attr("theOrigin")) {
+      let thisItem = homePage.body.find(
+        (b) => b.id === element.attr("theOrigin")
+      );
+      console.log(thisItem);
+    }
   }
   if (element.attr("conteudo") === "receita") {
     let item = {
@@ -1679,6 +1686,18 @@ function start() {
 // }
 
 async function publishChanges() {
+  let newBody = homePage.body,
+    theBody = [];
+  for (const k in newBody) {
+    if (newBody[k].type === "vitrine") {
+      if (newBody[k].products.length > 0) {
+        theBody.push(newBody[k]);
+      }
+    } else {
+      theBody.push(newBody[k]);
+    }
+  }
+  homePage.body = theBody;
   await $.ajax({
     type: "POST",
     url: host + "/updateMastersTable",
