@@ -558,7 +558,6 @@ function prepareVitrine(element, position) {
 
       if (thisItem) {
         addItensToListStantalone(element.attr("theOrigin"));
-        $(".inputSearchArea").attr("idcurrentitem", element.attr("theOrigin"));
       } else {
         let item = {
           id: myId,
@@ -1916,9 +1915,14 @@ let CACHE_SEARCH = [];
 async function searchProducts(element) {
   let text = element.val();
   let currentId = element.attr("idcurrentitem");
-  // if (element.attr("origin")) {
-  //   currentId = element.attr("origin");
-  // }
+  let exi = homePage.body.find((bd) => bd.id === element.attr("idcurrentitem"));
+
+  if (element.attr("origin") && !exi) {
+    exi = homePage.body.find((bd) => bd.id === element.attr("origin"));
+    if (exi) {
+      currentId = element.attr("origin");
+    }
+  }
 
   $("#searchSpinner").show();
   if (text != "") {
