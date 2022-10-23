@@ -558,7 +558,7 @@ function prepareVitrine(element, position) {
 
       if (thisItem) {
         addItensToListStantalone(element.attr("theOrigin"));
-        $(".btnAddItem").attr();
+        $(".inputSearchArea").attr("idcurrentitem", element.attr("theOrigin"));
       } else {
         let item = {
           id: myId,
