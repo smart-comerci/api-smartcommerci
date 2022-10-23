@@ -1881,6 +1881,7 @@ async function addItensToListStantalone(id) {
       if (homePage.body[k].id === id) {
         if (homePage.body[k].products.length > 0) {
           let products = await getProductsListIds(homePage.body[k].products);
+          localStorage.CACHE_SEARCH = JSON.stringify(products);
           for (const k in products) {
             $("#lista").append(getCardProduct(products[k], id));
           }
