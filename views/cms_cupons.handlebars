@@ -345,6 +345,7 @@
             cupomData = OBJETO_DEFAULT
             type = 'insert'
         } else {
+            OBJECT_LIST = JSON.parse(localStorage.OBJECT_LIST)
             console.log('normal buscando pelo nome', name)
             cupomData = OBJECT_LIST.find((cp) => cp.content.main.name === name)
             originalData = cupomData
