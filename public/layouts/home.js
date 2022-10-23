@@ -1915,10 +1915,10 @@ let CACHE_SEARCH = [];
 
 async function searchProducts(element) {
   let text = element.val();
-  let currentId = element.attr("currentid");
-  if (element.attr("origin")) {
-    currentId = element.attr("origin");
-  }
+  let currentId = element.attr("idcurrentitem");
+  // if (element.attr("origin")) {
+  //   currentId = element.attr("origin");
+  // }
 
   $("#searchSpinner").show();
   if (text != "") {
