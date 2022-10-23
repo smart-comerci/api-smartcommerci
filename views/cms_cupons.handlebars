@@ -278,65 +278,6 @@
         return html
     }
 
-    let OBJETO_DEFAULT = {
-        main: {
-            active: false,
-            type: "",
-            name: "",
-            description: "",
-            allAffiliates: false,
-            affiliates: "all",
-        },
-        cupom: {
-            cupomCode: "",
-            fromCPF: false,
-            toCPF: "",
-        },
-        type: {
-            valueActive: false,
-            value: 0,
-            percentActive: false,
-            percent: 0,
-        },
-        requires: {
-            withoutRequires: false,
-            totalFromCartActive: false,
-            totalFromCart: 0,
-            totalInCartActive: false,
-            totalInCart: 0,
-        },
-        applicability: {
-            allProducts: false,
-            especificCategories: false,
-            especificCategoriesValue: [],
-            especificTags: false,
-            especificTagsValue: [],
-        },
-        validate: {
-            withoutTimeLimits: false,
-            especificDate: false,
-            dateStart: "",
-            dateEnd: "",
-        },
-        marketLimits: {
-            withoutLimits: false,
-            byTotalsActive: false,
-            byTotals: 0,
-        },
-        clientLimits: {
-            withoutLimits: false,
-            onFirstPurchase: false,
-            byTotalsActive: false,
-            byTotals: 0,
-        },
-        accumulation: {
-            grantAccumulation: false,
-            denyAccumulation: false,
-        },
-    };
-
-
-    let OBJECT_LIST = [];
 
     function modalEditCupom(element, name) {
         OBJETO_MODEL = OBJETO_DEFAULT
