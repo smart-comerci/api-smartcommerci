@@ -80,7 +80,7 @@
 
     .uti_box {
         max-width: 708px;
-       
+
         /* UI Properties */
         background: #FFFFFF 0% 0% no-repeat padding-box;
         border: 1px solid #EDF2F6;
@@ -524,6 +524,64 @@
         return html
     }
 
+    let OBJETO_DEFAULT = {
+        main: {
+            active: false,
+            type: "",
+            name: "",
+            description: "",
+            allAffiliates: false,
+            affiliates: "all",
+        },
+        cupom: {
+            cupomCode: "",
+            fromCPF: false,
+            toCPF: "",
+        },
+        type: {
+            valueActive: false,
+            value: 0,
+            percentActive: false,
+            percent: 0,
+        },
+        requires: {
+            withoutRequires: false,
+            totalFromCartActive: false,
+            totalFromCart: 0,
+            totalInCartActive: false,
+            totalInCart: 0,
+        },
+        applicability: {
+            allProducts: false,
+            especificCategories: false,
+            especificCategoriesValue: [],
+            especificTags: false,
+            especificTagsValue: [],
+        },
+        validate: {
+            withoutTimeLimits: false,
+            especificDate: false,
+            dateStart: "",
+            dateEnd: "",
+        },
+        marketLimits: {
+            withoutLimits: false,
+            byTotalsActive: false,
+            byTotals: 0,
+        },
+        clientLimits: {
+            withoutLimits: false,
+            onFirstPurchase: false,
+            byTotalsActive: false,
+            byTotals: 0,
+        },
+        accumulation: {
+            grantAccumulation: false,
+            denyAccumulation: false,
+        },
+    };
+
+
     function modalEditDesconto(element, name) {
         OBJETO_MODEL = OBJETO_DEFAULT
         let cupomData, type = 'update', originalData
@@ -909,7 +967,7 @@
                                             </div>
                                             <div style="max-height: 30vh" class="col-md-12 verticalScroll">
                                                 <ul style="    margin-top: 5%;" class="list animate__animated "> 
-                                                ${getCategoriesAndSubPromocoes(MY_CATEGORIES,cupomData.applicability.especificCategoriesValue)}
+                                                ${getCategoriesAndSubPromocoes(MY_CATEGORIES, cupomData.applicability.especificCategoriesValue)}
                                                 </ul>
                                             </div>
                                         </div>
@@ -961,7 +1019,7 @@
                                             </div>
                                             <div style="max-height: 30vh" class="col-md-12 verticalScroll">
                                                 <ul style="    margin-top: 5%;" class="list animate__animated "> 
-                                                ${getTags(TAGS,cupomData.applicability.especificTagsValue)}
+                                                ${getTags(TAGS, cupomData.applicability.especificTagsValue)}
                                                 </ul>
                                             </div>
                                         </div>
@@ -1223,7 +1281,7 @@
                         $("#logAlteracoes").html(
                             getAlteracoes(LISTA_ALTERACOES)
                         )
-                        
+
                     },
                     error: function (data2) {
                         console.log('data2 catgosss');
