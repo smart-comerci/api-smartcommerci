@@ -550,28 +550,47 @@ function prepareVitrine(element, position) {
   console.log(element, position);
   let myId = Math.random().toFixed(4).replace(".", "");
   if (element.attr("conteudo") === "produto") {
-    let item = {
-      id: myId,
-      type: "vitrine",
-      title: {
-        text: "",
-        link: "",
-      },
-      categories: [],
-      smart: false,
-      bestSellers: false,
-      offers: false,
-      personal: false,
-      products: [],
-    };
-
-    homePage.body.push(item);
-
     if (element.attr("theOrigin")) {
       let thisItem = homePage.body.find(
         (b) => b.id === element.attr("theOrigin")
       );
       console.log(thisItem);
+
+      if (thisItem) {
+        addItensToListStantalone(element.attr("theOrigin"));
+      } else {
+        let item = {
+          id: myId,
+          type: "vitrine",
+          title: {
+            text: "",
+            link: "",
+          },
+          categories: [],
+          smart: false,
+          bestSellers: false,
+          offers: false,
+          personal: false,
+          products: [],
+        };
+        homePage.body.push(item);
+      }
+    } else {
+      let item = {
+        id: myId,
+        type: "vitrine",
+        title: {
+          text: "",
+          link: "",
+        },
+        categories: [],
+        smart: false,
+        bestSellers: false,
+        offers: false,
+        personal: false,
+        products: [],
+      };
+      homePage.body.push(item);
     }
   }
   if (element.attr("conteudo") === "receita") {
@@ -1855,6 +1874,22 @@ function getProductHTML(data, currentId) {
   return HTML;
 }
 
+async function addItensToListStantalone(id) {
+  if (id) {
+    $("#lista").html("");
+    for (const k in homePage.body) {
+      if (homePage.body[k].id === id) {
+        if (homePage.body[k].products.length > 0) {
+          let products = await getProductsListIds(homePage.body[k].products);
+          for (const k in products) {
+            $("#lista").append(getCardProduct(products[k], id));
+          }
+        }
+      }
+    }
+  }
+}
+
 function addItensToList(element, code) {
   for (const k in homePage.body) {
     if (homePage.body[k].id === element.attr("currentId")) {
@@ -1873,6 +1908,7 @@ function addItensToList(element, code) {
     }
   }
 }
+
 let CACHE_SEARCH = [];
 
 async function searchProducts(element) {
