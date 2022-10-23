@@ -471,58 +471,6 @@
 </div>
 
 <script>
-    function getCupom(cupomData, type) {
-        let originalData = cupomData
-        cupomData = cupomData.content
-        console.log("cupom data get", cupomData)
-        let html = `
-            <div  type="${type}"  target="${cupomData.main.name}" onclick="modalEditDesconto($(this),'${cupomData.main.name}')" class="row radius20 product "
-                        style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
-                        <div style="max-width: 80px;" class="col-sm">
-                            <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
-                                    class="checkmark"></span></label>
-                        </div>
-                        <div style="max-width: 90px; min-width: 90px; " class="col-sm paddingTop20">
-                            <span class="codigoItem">${originalData.id}</span>
-                        </div>
-                        <div style="min-width: 200px !important; max-width: 200px !important;"
-                            class="col-sm  col-text paddingTop20">
-                            <label class="label" style="line-height: 1.5 !important;">${cupomData.main.name}</label>
-                        </div>
-
-                        <div style="min-width: 150px !important; max-width: 150px !important;"
-                            class="col-sm paddingTop20">
-                            <label style="font-size:10px !important; padding: 10px" class="infoLabel infoValor">${cupomData.main.affiliates === 'all' || cupomData.main.allAffiliates ? 'Todas' : cupomData.main.affiliates
-            }</label>
-                        </div>
-                        <div style="min-width: 150px !important; max-width: 150px !important;"
-                            class="col-sm paddingTop20">
-                            <label style="font-size:10px !important; padding: 10px"
-                                class="infoLabel infoValor">${00}</label>
-                        </div>
-                        <div class="col-sm paddingTop20">
-                            <label class="label" style="line-height: 1.5 !important;">${cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' :
-                cupomData.validate.especificDate ? cupomData.validate.dateStart : 'Não especificado'
-            }</label>
-                        </div>
-                        <div class="col-sm paddingTop20">
-                            <label class="label" style="line-height: 1.5 !important;">${cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' :
-                cupomData.validate.especificDate ? cupomData.validate.dateEnd : 'Não especificado'
-            }</label>
-                        </div>
-
-                        <div class="col-sm">
-                            <div class="switch__container  checkaLiga"><input
-                            ${cupomData.main.active === true ? 'checked="true"' : ''}
-                             acao="ativarProduto" checked="true"
-                                    product_code="998503" id="switch-shadow030" class="switch switch--shadow"
-                                    type="checkbox"><label class="naoAbreModal" for="switch-shadow030"></label></div>
-                        </div>
-                    </div>
-         `
-
-        return html
-    }
 
     let OBJECT_LIST = [];
 
@@ -582,6 +530,59 @@
             denyAccumulation: false,
         },
     };
+    function getCupom(cupomData, type) {
+        let originalData = cupomData
+        cupomData = cupomData.content
+        console.log("cupom data get", cupomData)
+        let html = `
+            <div  type="${type}"  target="${cupomData.main.name}" onclick="modalEditDesconto($(this),'${cupomData.main.name}')" class="row radius20 product "
+                        style="border: 1px solid #efefef; margin-top: 1%; padding-bottom: 1%; ">
+                        <div style="max-width: 80px;" class="col-sm">
+                            <label class="checkSmart"><input class="checka form-control" type="checkbox"><span
+                                    class="checkmark"></span></label>
+                        </div>
+                        <div style="max-width: 90px; min-width: 90px; " class="col-sm paddingTop20">
+                            <span class="codigoItem">${originalData.id}</span>
+                        </div>
+                        <div style="min-width: 200px !important; max-width: 200px !important;"
+                            class="col-sm  col-text paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${cupomData.main.name}</label>
+                        </div>
+
+                        <div style="min-width: 150px !important; max-width: 150px !important;"
+                            class="col-sm paddingTop20">
+                            <label style="font-size:10px !important; padding: 10px" class="infoLabel infoValor">${cupomData.main.affiliates === 'all' || cupomData.main.allAffiliates ? 'Todas' : cupomData.main.affiliates
+            }</label>
+                        </div>
+                        <div style="min-width: 150px !important; max-width: 150px !important;"
+                            class="col-sm paddingTop20">
+                            <label style="font-size:10px !important; padding: 10px"
+                                class="infoLabel infoValor">${00}</label>
+                        </div>
+                        <div class="col-sm paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' :
+                cupomData.validate.especificDate ? cupomData.validate.dateStart : 'Não especificado'
+            }</label>
+                        </div>
+                        <div class="col-sm paddingTop20">
+                            <label class="label" style="line-height: 1.5 !important;">${cupomData.validate.withoutTimeLimits ? 'Ilimitado ...' :
+                cupomData.validate.especificDate ? cupomData.validate.dateEnd : 'Não especificado'
+            }</label>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="switch__container  checkaLiga"><input
+                            ${cupomData.main.active === true ? 'checked="true"' : ''}
+                             acao="ativarProduto" checked="true"
+                                    product_code="998503" id="switch-shadow030" class="switch switch--shadow"
+                                    type="checkbox"><label class="naoAbreModal" for="switch-shadow030"></label></div>
+                        </div>
+                    </div>
+         `
+
+        return html
+    }
+
 
 
     function modalEditDesconto(element, name) {
