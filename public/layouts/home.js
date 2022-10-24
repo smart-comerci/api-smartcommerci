@@ -3,6 +3,23 @@ let notFound =
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
+var arrowDown3 =
+  '<div class=" deleteThis3 dropCategoriaButton ">' +
+  '<svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36">' +
+  '<g transform="translate(36 36) rotate(180)">' +
+  '<g transform="translate(28 28) rotate(180)">' +
+  '<g class="b">' +
+  '<g class="c">' +
+  '<circle class="e" cx="10" cy="10" r="10" />' +
+  '<circle class="f" cx="10" cy="10" r="9.5" />' +
+  "</g>" +
+  '<path class="d" d="M581.273,789.774a.82.82,0,0,1-.081-1.079l.081-.092,3.685-3.593-3.685-3.593a.82.82,0,0,1-.081-1.079l.081-.093a.849.849,0,0,1,1.094-.081l.094.081,4.279,4.179a.82.82,0,0,1,.081,1.079l-.081.093-4.279,4.179A.849.849,0,0,1,581.273,789.774Z"' +
+  ' transform="translate(795.009 -573.615) rotate(90)"/>' +
+  "</g>" +
+  "</g>" +
+  "</g>" +
+  "</svg>" +
+  "</div>";
 
 let homePage = {
   logotipo: {
