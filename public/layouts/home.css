@@ -7,12 +7,12 @@
  }
 
  :root {
-     --color-primary: #50C682;
-     --color-secondary: #DCF4E6;
-     --color-actions: #49B476;
-     --color-temp-primary: #50C682;
-     --color-temp-secondary: #DCF4E6;
-     --color-temp-actions: #49B476;
+     --color-primary: #160349;
+     --color-secondary: #d2dbd5;
+     --color-actions: #242660;
+     --color-temp-primary: #160349;
+     --color-temp-secondary: #d2dbd5;
+     --color-temp-actions: #242660;
  }
 
  .modal-body {
