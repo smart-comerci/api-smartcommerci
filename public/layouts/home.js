@@ -1016,10 +1016,13 @@ const changeColor = (cssVar, value) => {
   console.log(cssVar, value);
   if (cssVar === "--color-primary") {
     homePage["mainColors"].first = value;
+    $("#color-badge_label-primary").html(value);
   } else if (cssVar === "--color-secondary") {
     homePage["mainColors"].second = value;
+    $("#color-badge_label-secondary").html(value);
   } else if (cssVar === "--color-actions") {
     homePage["mainColors"].third = value;
+    $("#color-badge_label-actions").html(value);
   }
   document.querySelector(":root").style.setProperty(cssVar, value);
 };
