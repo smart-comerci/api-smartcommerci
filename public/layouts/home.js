@@ -1885,7 +1885,7 @@ async function addItensToListStantalone(id) {
     $("#lista").html("");
     for (const k in homePage.body) {
       if (homePage.body[k].id === id) {
-        $("#tituloVitrine1").val(homePage.body[k].title);
+        $("#tituloVitrine1").val(homePage.body[k].title.text);
         if (homePage.body[k].products.length > 0) {
           let products = await getProductsListIds(homePage.body[k].products);
           localStorage.CACHE_SEARCH = JSON.stringify(products);
