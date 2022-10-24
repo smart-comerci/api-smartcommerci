@@ -1,5 +1,7 @@
 let notFound =
   "https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
+let MY_CATEGORIES = [],
+  CATEGORIES = [];
 
 let homePage = {
   logotipo: {
@@ -2047,4 +2049,101 @@ function removeSection(element) {
   let theId = element.attr("alvoRemove").replace("_1", "").replace("_2", "");
   homePage.body = homePage.body.filter((bd) => bd.id !== theId);
   console.log(homePage);
+}
+
+$.ajax({
+  type: "POST",
+  url: "https://api-smartcomerci.com.br:7070/getCategories",
+  headers: {
+    "x-access-token": localStorage.token,
+  },
+  data: {
+    affiliate_id: localStorage.AFFILIATE_ID,
+    master_id: localStorage.MASTER_ID,
+  },
+  success: function (categories) {
+    console.log("Categories", categories.results);
+    CATEGORIES = categories.results;
+    var CATEGORIES_SHOW = [];
+    var myCategories = getCategorias(CATEGORIES);
+    MY_CATEGORIES = myCategories;
+    console.log("AS CATEGORIAS", MY_CATEGORIES);
+  },
+  error: function (data2) {
+    console.log(data2);
+  },
+  complete: function () {},
+});
+
+function OrdenaJson(lista, chave, ordem) {
+  return lista.sort(function (a, b) {
+    var x = a[chave];
+    var y = b[chave];
+    if (ordem === "ASC") {
+      return x < y ? -1 : x > y ? 1 : 0;
+    }
+    if (ordem === "DESC") {
+      return x > y ? -1 : x < y ? 1 : 0;
+    }
+  });
+}
+function getCategorias(CATEGORIES) {
+  var listaCategoriasPrimarias = [],
+    CATEGORIAS_FULL = [];
+  var currCategorie = null;
+
+  CATEGORIES = OrdenaJson(CATEGORIES, "product_site_categories", "ASC");
+  for (const k in CATEGORIES) {
+    var textou = CATEGORIES[k].product_site_categories;
+    if (textou == null || textou == "null") {
+      textou = "Novo,";
+    }
+    if (textou.split(",")[0] != currCategorie) {
+      listaCategoriasPrimarias.push({ categoria: textou.split(",")[0] });
+    }
+    currCategorie = textou.split(",")[0];
+  }
+
+  var listaSubCategorias = [];
+  for (const k in listaCategoriasPrimarias) {
+    var thisCategorieGroup = "";
+    for (const s in CATEGORIES) {
+      if (CATEGORIES[s].product_site_categories != null) {
+        if (
+          CATEGORIES[s].product_site_categories.split(",")[0] ==
+          listaCategoriasPrimarias[k].categoria
+        ) {
+          var list = CATEGORIES[s].product_site_categories.split(",");
+          for (const l in list) {
+            if (thisCategorieGroup.indexOf(list[l]) < 0 && l > 0) {
+              thisCategorieGroup += list[l] + ",";
+            }
+          }
+        }
+      }
+    }
+    thisCategorieGroup += "?";
+    thisCategorieGroup = thisCategorieGroup?.replace(",?", "");
+    CATEGORIAS_FULL.push({
+      categoria: listaCategoriasPrimarias[k].categoria,
+      subCategorias: thisCategorieGroup,
+      cat_status: 0,
+      sub_status: "[]",
+    });
+  }
+  ////console.log(CATEGORIAS_FULL)
+
+  if (MINHAS_CATEGORIAS.length == 0) {
+    if (CATEGORIAS_FULL.length == 0) {
+      alert("Não há categorias cadastradas!");
+    } else {
+      setTimeout(() => {
+        $("#salvandoAlteracoes").click();
+      }, 5000);
+
+      return CATEGORIAS_FULL;
+    }
+  } else {
+    return MINHAS_CATEGORIAS;
+  }
 }
