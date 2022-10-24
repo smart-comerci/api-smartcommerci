@@ -1974,19 +1974,45 @@ function setVitrine(element) {
       searchProducts(element);
     } else if (element.attr("conteudo") === "revenues") {
     } else {
-      for (const k in homePage.body) {
-        if (homePage.body[k].id === element.attr("idcurrentitem")) {
-          homePage.body[k][element.attr("conteudo")] = element[0].checked;
+      let exist = homePage.body.find(
+        (bd) => bd.id === element.attr("idcurrentitem")
+      );
+      if (exist) {
+        for (const k in homePage.body) {
+          if (homePage.body[k].id === element.attr("idcurrentitem")) {
+            homePage.body[k][element.attr("conteudo")] = element[0].checked;
+          }
+        }
+      } else {
+        for (const k in homePage.body) {
+          if (homePage.body[k].id === element.attr("origin")) {
+            homePage.body[k][element.attr("conteudo")] = element[0].checked;
+          }
         }
       }
     }
   } else if (splitContent === 2) {
-    for (const k in homePage.body) {
-      if (homePage.body[k].id === element.attr("idcurrentitem")) {
-        if (homePage.body[k].type === "banners") {
-        } else {
-          homePage.body[k][element.attr("conteudo").split("-")[0]].text =
-            element.val();
+    let exist = homePage.body.find(
+      (bd) => bd.id === element.attr("idcurrentitem")
+    );
+    if (exist) {
+      for (const k in homePage.body) {
+        if (homePage.body[k].id === element.attr("idcurrentitem")) {
+          if (homePage.body[k].type === "banners") {
+          } else {
+            homePage.body[k][element.attr("conteudo").split("-")[0]].text =
+              element.val();
+          }
+        }
+      }
+    } else {
+      for (const k in homePage.body) {
+        if (homePage.body[k].id === element.attr("origin")) {
+          if (homePage.body[k].type === "banners") {
+          } else {
+            homePage.body[k][element.attr("conteudo").split("-")[0]].text =
+              element.val();
+          }
         }
       }
     }
