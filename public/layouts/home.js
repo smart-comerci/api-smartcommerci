@@ -1580,6 +1580,9 @@ async function getMyObjectHomeMain() {
       try {
         let news = JSON.parse(ajustStrigfy(nl2br(data[0].home_main_info)));
         homePage = news;
+        $("#color-badge_label-actions").html(news.mainColors.third);
+        $("#color-badge_label-primary").html(news.mainColors.primary);
+        $("#color-badge_label-secondary").html(news.mainColors.secondary);
         console.log(`home page`, homePage);
         for (const u in homePage.body) {
           const index = Number(u) + 1;
