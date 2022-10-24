@@ -3,23 +3,6 @@ let notFound =
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
-var arrowDown3 =
-  '<div class=" deleteThis3 dropCategoriaButton ">' +
-  '<svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36">' +
-  '<g transform="translate(36 36) rotate(180)">' +
-  '<g transform="translate(28 28) rotate(180)">' +
-  '<g class="b">' +
-  '<g class="c">' +
-  '<circle class="e" cx="10" cy="10" r="10" />' +
-  '<circle class="f" cx="10" cy="10" r="9.5" />' +
-  "</g>" +
-  '<path class="d" d="M581.273,789.774a.82.82,0,0,1-.081-1.079l.081-.092,3.685-3.593-3.685-3.593a.82.82,0,0,1-.081-1.079l.081-.093a.849.849,0,0,1,1.094-.081l.094.081,4.279,4.179a.82.82,0,0,1,.081,1.079l-.081.093-4.279,4.179A.849.849,0,0,1,581.273,789.774Z"' +
-  ' transform="translate(795.009 -573.615) rotate(90)"/>' +
-  "</g>" +
-  "</g>" +
-  "</g>" +
-  "</svg>" +
-  "</div>";
 
 let homePage = {
   logotipo: {
@@ -2086,7 +2069,7 @@ $.ajax({
     var myCategories = getCategorias(CATEGORIES);
     MY_CATEGORIES = myCategories;
     console.log("AS CATEGORIAS", MY_CATEGORIES);
-    $(".showCategorias").html(getCategoriesAndSubToFilter(MY_CATEGORIES));
+    // $(".showCategorias").html(getCategoriesAndSubToFilter(MY_CATEGORIES));
   },
   error: function (data2) {
     console.log(data2);
@@ -2105,116 +2088,4 @@ function OrdenaJson(lista, chave, ordem) {
       return x > y ? -1 : x < y ? 1 : 0;
     }
   });
-}
-function getCategorias(CATEGORIES) {
-  var listaCategoriasPrimarias = [],
-    CATEGORIAS_FULL = [];
-  var currCategorie = null;
-
-  CATEGORIES = OrdenaJson(CATEGORIES, "product_site_categories", "ASC");
-  for (const k in CATEGORIES) {
-    var textou = CATEGORIES[k].product_site_categories;
-    if (textou == null || textou == "null") {
-      textou = "Novo,";
-    }
-    if (textou.split(",")[0] != currCategorie) {
-      listaCategoriasPrimarias.push({ categoria: textou.split(",")[0] });
-    }
-    currCategorie = textou.split(",")[0];
-  }
-
-  var listaSubCategorias = [];
-  for (const k in listaCategoriasPrimarias) {
-    var thisCategorieGroup = "";
-    for (const s in CATEGORIES) {
-      if (CATEGORIES[s].product_site_categories != null) {
-        if (
-          CATEGORIES[s].product_site_categories.split(",")[0] ==
-          listaCategoriasPrimarias[k].categoria
-        ) {
-          var list = CATEGORIES[s].product_site_categories.split(",");
-          for (const l in list) {
-            if (thisCategorieGroup.indexOf(list[l]) < 0 && l > 0) {
-              thisCategorieGroup += list[l] + ",";
-            }
-          }
-        }
-      }
-    }
-    thisCategorieGroup += "?";
-    thisCategorieGroup = thisCategorieGroup?.replace(",?", "");
-    CATEGORIAS_FULL.push({
-      categoria: listaCategoriasPrimarias[k].categoria,
-      subCategorias: thisCategorieGroup,
-      cat_status: 0,
-      sub_status: "[]",
-    });
-  }
-  ////console.log(CATEGORIAS_FULL)
-
-  if (MINHAS_CATEGORIAS.length == 0) {
-    if (CATEGORIAS_FULL.length == 0) {
-      alert("Não há categorias cadastradas!");
-    } else {
-      setTimeout(() => {
-        $("#salvandoAlteracoes").click();
-      }, 5000);
-
-      return CATEGORIAS_FULL;
-    }
-  } else {
-    return MINHAS_CATEGORIAS;
-  }
-}
-
-function getCategoriesAndSubToFilter(MY_CATEGORIES) {
-  var html3 = "",
-    nova = '<li class="novaLI"></li>';
-
-  for (const k in MY_CATEGORIES) {
-    var content =
-      '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
-    html3 +=
-      '<li    class="list-item sub-list-item animate__animated targetBusca">' +
-      arrowDown3 +
-      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="' +
-      MY_CATEGORIES[k].categorie_icon +
-      '" style="width: 30px; height: 30px; margin-top -10%"/> ';
-    content += nova;
-    if (MY_CATEGORIES[k].subCategorias != "?") {
-      var txtCategories = MY_CATEGORIES[k].subCategorias.split(",");
-      for (let a = 0; a < txtCategories.length; a++) {
-        if (
-          txtCategories[a].length > 0 &&
-          txtCategories[a] != "" &&
-          txtCategories[a] != "null" &&
-          txtCategories[a] != "undefined" &&
-          txtCategories[a] != null &&
-          txtCategories[a] != undefined
-        ) {
-          content +=
-            '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar" meEncontre="' +
-            txtCategories[a] +
-            "\"  onchange=\"subTagInput($(this),'listaCategoriasFilter','" +
-            txtCategories[a] +
-            '\')" type="checkbox"><span class="checkmark"></span>' +
-            txtCategories[a] +
-            "</label></div></li> ";
-        }
-
-        //////////////console.log(content)
-      }
-    }
-    content += "</ul>";
-    html3 +=
-      MY_CATEGORIES[k].categoria +
-      ' <input class="marcar" meEncontre=\'' +
-      MY_CATEGORIES[k].categoria +
-      "'  onchange=\"subTagInput($(this),'listaCategoriasFilter','" +
-      MY_CATEGORIES[k].categoria +
-      '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
-    html3 += content + "</li> ";
-  }
-
-  return html3;
 }
