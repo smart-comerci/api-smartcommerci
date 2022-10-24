@@ -1,7 +1,8 @@
 let notFound =
   "https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
-let MY_CATEGORIES = [],
-  CATEGORIES = [];
+var CATEGORIES = [],
+  MY_CATEGORIES = [],
+  MINHAS_CATEGORIAS = [];
 
 let homePage = {
   logotipo: {
