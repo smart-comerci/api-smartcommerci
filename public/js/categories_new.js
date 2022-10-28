@@ -40,7 +40,7 @@ const categoriesObject = {
   categories: [],
 };
 
-function criaNovaCategoria() {
+function addCategory() {
   let categoria = new Category({
     id: this.categories.length,
     title: "Nova Categoria",
