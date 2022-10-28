@@ -59,9 +59,6 @@ async function getCategories() {
       "x-access-token": localStorage.token,
     },
     data: "",
-    success: function (data) {},
-    error: function (data) {},
-    complete: function () {},
   });
   if (!resultado) {
     const criaPrimeiroAcesso = await criarPrimeiroAcesso();
@@ -85,9 +82,6 @@ async function criarPrimeiroAcesso() {
       "x-access-token": localStorage.token,
     },
     data: categoriesObject,
-    success: function (data) {},
-    error: function (data) {},
-    complete: function () {},
   });
   console.log(resultado);
 }
