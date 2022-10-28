@@ -1,6 +1,6 @@
 const api_host = "https://api-smartcomerci.com.br:7070";
 getCategories();
-const categoriesObject = {
+let categoriesObject = {
   affiliateId: Number(localStorage.AFFILIATE_ID),
   masterId: Number(localStorage.MASTER_ID),
   limitToShow: 8,
