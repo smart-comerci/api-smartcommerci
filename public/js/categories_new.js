@@ -1,5 +1,5 @@
 class Category {
-  id = null;
+  id = 0;
   title = "";
   keywords = [];
   description = "";
@@ -13,7 +13,7 @@ class Category {
   constructor() {}
 }
 class Subcategory {
-  id = null;
+  id = 0;
   title = "";
   keywords = [];
   description = "";
