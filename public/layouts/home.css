@@ -1612,3 +1612,30 @@
      display: block;
      display: none;
  }
+
+
+ /* CATEGORIE LIST STYLES */
+ .deleteThis3 {
+     cursor: pointer !important;
+     width: 37px;
+     height: 37px;
+     background: #FFFBF2 0% 0% no-repeat padding-box;
+     border-radius: 26px;
+     opacity: 1;
+     margin-top: -15px;
+ }
+
+ .subSmart {
+     width: 400px !important;
+     display: block;
+     border-radius: 2px;
+     cursor: initial;
+     font-size: 14px;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+     position: relative;
+     padding-left: 35px;
+     margin-top: -7px !important;
+ }
