@@ -1,4 +1,5 @@
 class Category {
+  id = null;
   title = "";
   keywords = [];
   description = "";
@@ -12,6 +13,7 @@ class Category {
   constructor() {}
 }
 class Subcategory {
+  id = null;
   title = "";
   keywords = [];
   description = "";
@@ -37,3 +39,11 @@ const categoriesObject = {
   limitToShow: 8,
   categories: [],
 };
+
+function criaNovaCategoria() {
+  let categoria = new Category({
+    id: this.categories.length,
+    title: "Nova Categoria",
+  });
+  categoriesObject.categories.push(categoria);
+}
