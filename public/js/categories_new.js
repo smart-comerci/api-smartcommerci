@@ -57,11 +57,13 @@ async function publicarAlteracoes() {
   const resultado = await $.ajax({
     type: "POST",
     url: api_host + "/categorie_create",
+    headers: {
+      "x-access-token": localStorage.token,
+    },
     data: categoriesObject,
     success: function (data) {},
     error: function (data) {},
     complete: function () {},
   });
-
   console.log(resultado);
 }
