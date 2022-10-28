@@ -67,7 +67,13 @@ async function getCategories() {
     const criaPrimeiroAcesso = await criarPrimeiroAcesso();
     console.log("Primeiro acesso", criaPrimeiroAcesso);
   } else {
-    categoriesObject = resultado.data;
+    if (Array.isArray(resultado.data)) {
+      categoriesObject = resultado.data.find(
+        (dt) => dt.affiliateId === Number(localStorage.AFFILIATE_ID)
+      );
+    } else {
+      categoriesObject = resultado.data;
+    }
   }
   console.log(resultado, categoriesObject);
 }
