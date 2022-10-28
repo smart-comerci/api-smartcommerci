@@ -1,3 +1,5 @@
+const api_host = "https://api-smartcomerci.com.br:7070";
+
 const categoriesObject = {
   affiliateId: localStorage.AFFILIATE_ID,
   masterId: localStorage.MASTER_ID,
@@ -49,4 +51,17 @@ function addCategory() {
   let categoria = new Category(categoriesObject.categories.length);
   categoriesObject.categories.push(categoria);
   console.log(categoriesObject);
+}
+
+async function publicarAlteracoes() {
+  const resultado = await $.ajax({
+    type: "POST",
+    url: api_host + "/categorie_create",
+    data: categoriesObject,
+    success: function (data) {},
+    error: function (data) {},
+    complete: function () {},
+  });
+
+  console.log(resultado);
 }
