@@ -1,3 +1,10 @@
+const categoriesObject = {
+  affiliateId: localStorage.AFFILIATE_ID,
+  masterId: localStorage.MASTER_ID,
+  limitToShow: 8,
+  categories: [],
+};
+
 class Category {
   id = 0;
   title = "";
@@ -10,7 +17,9 @@ class Category {
     asideMenu: [],
   };
   subcategories = [];
-  constructor() {}
+  constructor(id) {
+    this.id = id;
+  }
 }
 class Subcategory {
   id = 0;
@@ -31,19 +40,13 @@ class Subcategory {
     personal: false,
     products: [],
   };
-  constructor() {}
+  constructor(id) {
+    this.id = id;
+  }
 }
-const categoriesObject = {
-  affiliateId: localStorage.AFFILIATE_ID,
-  masterId: localStorage.MASTER_ID,
-  limitToShow: 8,
-  categories: [],
-};
 
 function addCategory() {
-  let categoria = new Category({
-    id: categoriesObject.categories.length,
-    title: "Nova Categoria",
-  });
+  let categoria = new Category(categoriesObject.categories.length);
   categoriesObject.categories.push(categoria);
+  console.log(categoriesObject);
 }
