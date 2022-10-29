@@ -71,8 +71,9 @@ async function getCategories() {
     } else {
       categoriesObject = resultado.data;
     }
+
     categoriesObject.categories.forEach((dado) => {
-      categoryElementLi(dado);
+      $("#listaCategoriasLoja").append(categoryElementLi(dado));
     });
   }
   console.log(resultado, categoriesObject);
