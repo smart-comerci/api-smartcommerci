@@ -92,6 +92,9 @@ async function criarPrimeiroAcesso() {
 
 function subcategoryElementLi(dado) {
   let html = "";
+  if (!dado || dado.length === 0) {
+    return html;
+  }
   for (const k in dado) {
     html += `
   <li draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle" >
