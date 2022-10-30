@@ -76,7 +76,7 @@ async function getCategories() {
   console.log(resultado, categoriesObject);
   categoriesObject.categories.forEach((cat) => {
     console.log(cat);
-    $("#listaCategoriasLoja").html(categoryElementLi(cat));
+    $("#listaCategoriasLoja").append(categoryElementLi(cat));
   });
 }
 async function criarPrimeiroAcesso() {
