@@ -50,6 +50,14 @@ function addCategory() {
   let categoria = new Category(categoriesObject.categories.length);
   categoriesObject.categories.push(categoria);
   console.log(categoriesObject);
+  showCategories();
+}
+function showCategories() {
+  $("#listaCategoriasLoja"), html("");
+  categoriesObject.categories.forEach((cat) => {
+    console.log(cat);
+    $("#listaCategoriasLoja").append(categoryElementLi(cat));
+  });
 }
 async function getCategories() {
   const resultado = await $.ajax({
@@ -74,10 +82,7 @@ async function getCategories() {
     }
   }
   console.log(resultado, categoriesObject);
-  categoriesObject.categories.forEach((cat) => {
-    console.log(cat);
-    $("#listaCategoriasLoja").append(categoryElementLi(cat));
-  });
+  showCategories();
 }
 async function criarPrimeiroAcesso() {
   const resultado = await $.ajax({
