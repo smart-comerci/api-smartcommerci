@@ -74,6 +74,9 @@ async function getCategories() {
     }
   }
   console.log(resultado, categoriesObject);
+  categoriesObject.forEach((cat) => {
+    categoryElementLi(cat);
+  });
 }
 async function criarPrimeiroAcesso() {
   const resultado = await $.ajax({
