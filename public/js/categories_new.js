@@ -74,7 +74,7 @@ async function getCategories() {
     }
   }
   console.log(resultado, categoriesObject);
-  categoriesObject.forEach((cat) => {
+  categoriesObject.categories.forEach((cat) => {
     categoryElementLi(cat);
   });
 }
