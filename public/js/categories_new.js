@@ -57,7 +57,8 @@ function showCategories() {
   categoriesObject.categories.forEach((cat) => {
     console.log(cat);
     $("#listaCategoriasLoja").append(categoryElementLi(cat));
-    if (cat.id === categoriesObject.limitToShow) {
+    console.log(cat.id, categoriesObject.limitToShow - 1);
+    if (cat.id === categoriesObject.limitToShow - 1) {
       $("#listaCategoriasLoja").append(
         `<br><br><h1 class="hiperTitle">Outras Categorias <span class="hiperTitleSub">(Exibe em "todas as categorias" no menu)</h1><hr>`
       );
