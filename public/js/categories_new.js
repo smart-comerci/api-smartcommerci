@@ -60,7 +60,7 @@ async function getCategories() {
     },
     data: "",
   });
-  console.log(resultado);
+  console.log("O RESULTADO", resultado);
   if (!resultado) {
     const criaPrimeiroAcesso = await criarPrimeiroAcesso();
     console.log("Primeiro acesso", criaPrimeiroAcesso);
