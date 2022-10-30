@@ -53,7 +53,7 @@ function addCategory() {
   showCategories();
 }
 function showCategories() {
-  $("#listaCategoriasLoja"), html("");
+  $("#listaCategoriasLoja").html("");
   categoriesObject.categories.forEach((cat) => {
     console.log(cat);
     $("#listaCategoriasLoja").append(categoryElementLi(cat));
