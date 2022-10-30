@@ -86,6 +86,17 @@ async function criarPrimeiroAcesso() {
   });
   console.log(resultado);
 }
+async function publicarAlteracoes() {
+  const resultado = await $.ajax({
+    type: "POST",
+    url: api_host + "/categorie_update/" + localStorage.AFFILIATE_ID,
+    headers: {
+      "x-access-token": localStorage.token,
+    },
+    data: categoriesObject,
+  });
+  console.log(resultado);
+}
 
 function subcategoryElementLi(dado) {
   let html = "";
