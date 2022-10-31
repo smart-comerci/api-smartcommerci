@@ -516,6 +516,6 @@ function reordenaListas3() {
   }
 }
 
-setInterval(() => {
-  reordenaListas3();
-}, 1000);
+// setInterval(() => {
+//   reordenaListas3();
+// }, 1000);
