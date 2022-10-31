@@ -450,10 +450,12 @@ function reordenaListas3() {
     var index = 1;
     var subs = [];
     let idCat = $(this).attr("idCat");
-    let subcategories = categories.find((dt) => dt.id === idCat).subcategories;
+    let subcategories = categories.find((dt) =>
+      Number(dt.id === idCat)
+    ).subcategories;
     items.each(function () {
       let idSub = $(this).attr("idSub");
-      let thisSub = subcategories.find((dt) => dt.id === idSub);
+      let thisSub = subcategories.find((dt) => Number(dt.id) === idSub);
       thisSub.id = (index - 1).toString();
       subs.push(thisSub);
       $(this).find(".posicaoSubCategoriaNew").text(index);
@@ -462,7 +464,7 @@ function reordenaListas3() {
 
     console.log(subs, subcategories);
     for (const a in categoriesObject.categories) {
-      if (categoriesObject.categories[k].id === idCat) {
+      if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
         categoriesObject.categories[k].subcategories = subs;
       }
     }
@@ -475,7 +477,7 @@ function reordenaListas3() {
     let cats = [];
     items.each(function () {
       let idCat = $(this).attr("idCat");
-      let thisCat = categories.find((dt) => dt.id === idCat);
+      let thisCat = categories.find((dt) => Number(dt.id) === Number(idCat));
       thisCat.id = (index - 1).toString();
       cats.push(thisCat);
       $(this).find(".posicaoCategoriaNew").text(index);
