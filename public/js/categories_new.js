@@ -314,7 +314,7 @@ function subcategoryElementLi(dado, mainId) {
 }
 function categoryElementLi(dado) {
   return `
- <li idCat="${mainId}" class="itemSortable2 ui-sortable-handle">
+ <li idCat="${dado.id}" class="itemSortable2 ui-sortable-handle">
     <div title="'null'" description="'null'" draggable="true" class="categorie vouClonar">
         <div class="row radius20 cabecalho" style="border: 1px solid #efefef; margin-top: 1%; padding-right: 2%">
             <div style="max-width: 100px; opacity: 1; margin: 1% auto;" class="col-sm dropCategoriaContent">
