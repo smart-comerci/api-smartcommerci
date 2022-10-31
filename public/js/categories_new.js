@@ -478,7 +478,7 @@ function reordenaListas3() {
           let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
           let mainId = Number($(this).attr("catId"));
           $(this).find(".posicaoSubCategoriaNew").text(index3);
-          if (thisCat) {
+          if (thisCat && thisCat.subcategories) {
             let lastSub = thisCat.subcategories.find(
               (dt) => Number(dt.id) === lastId
             );
