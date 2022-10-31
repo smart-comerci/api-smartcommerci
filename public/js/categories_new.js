@@ -168,9 +168,10 @@ function addCategory(id) {
     }
     console.log("currCat", currCategory);
     let subcategoria = new Subcategory(currCategory.subcategories.length);
+    currCategory.subcategories.push(subcategoria);
     for (const k in categoriesObject.categories) {
       if (categoriesObject.categories[k].id === id) {
-        categoriesObject.categories[k].subcategories.push(subcategoria);
+        categoriesObject.categories[k] = currCategory;
       }
     }
     console.log(categoriesObject);
