@@ -445,42 +445,36 @@ function OrdenaJson(lista, chave, ordem) {
 }
 
 function reordenaListas3() {
-  $(".superSortable").each(function () {
-    var items = $(this).find(".itemSortable");
+  $(".itemSortable1").each(function () {
     var index = 1;
-    items.each(function () {
-      let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
-      let mainId = Number($(this).attr("catId"));
-      $(this).find(".posicaoSubCategoriaNew").text(index);
+    let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
+    let mainId = Number($(this).attr("catId"));
+    $(this).find(".posicaoSubCategoriaNew").text(index);
 
-      for (const k in categoriesObject.categories) {
-        if (categoriesObject.categories[k].id === mainId) {
-          for (const a in categoriesObject.categories[k].subcategories) {
-            if (categoriesObject.categories[k].subcategories[a].id === lastId) {
-              categoriesObject.categories[k].subcategories[a].id = index - 1;
-              console.log(categoriesObject.categories[k].subcategories);
-            }
+    for (const k in categoriesObject.categories) {
+      if (categoriesObject.categories[k].id === mainId) {
+        for (const a in categoriesObject.categories[k].subcategories) {
+          if (categoriesObject.categories[k].subcategories[a].id === lastId) {
+            categoriesObject.categories[k].subcategories[a].id = index - 1;
+            console.log(categoriesObject.categories[k].subcategories);
           }
         }
       }
-      index++;
-    });
+    }
+    index++;
   });
 
-  $(".fullSortable").each(function () {
-    var items = $(this).find(".itemSortable2");
+  $(".itemSortable2").each(function () {
     var index = 1;
-    items.each(function () {
-      let lastId = Number($(this).find(".posicaoCategoriaNew").text());
-      $(this).find(".posicaoCategoriaNew").text(index);
-      for (const k in categoriesObject.categories) {
-        if (categoriesObject.categories[k].id === lastId) {
-          categoriesObject.categories[k].id = index - 1;
-          console.log(categoriesObject.categories);
-        }
+    let lastId = Number($(this).find(".posicaoCategoriaNew").text());
+    $(this).find(".posicaoCategoriaNew").text(index);
+    for (const k in categoriesObject.categories) {
+      if (categoriesObject.categories[k].id === lastId) {
+        categoriesObject.categories[k].id = index - 1;
+        console.log(categoriesObject.categories);
       }
-      index++;
-    });
+    }
+    index++;
   });
 
   let theCategories = OrdenaJson(categoriesObject.categories, "id", "ASC");
