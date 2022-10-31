@@ -474,7 +474,7 @@ function reordenaListas3() {
           index++;
         });
       });
-    console.log("indices das subs", subIndex, catecategoriesObject.categories);
+    console.log("indices das subs", subIndex, categoriesObject.categories);
     for (const k in categoriesObject.categories[k]) {
       if (categoriesObject.categories[k].id === idCat) {
         for (const a in categoriesObject.categories[k].subcategories) {
