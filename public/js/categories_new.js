@@ -459,6 +459,7 @@ function reordenaListas3() {
       let lastCat = categoriesObject.categories.find(
         (dt) => Number(dt.id) === lastId
       );
+
       thisCat = lastCat;
       if (lastCat) {
         lastCat.id = index;
@@ -467,7 +468,7 @@ function reordenaListas3() {
       $(this).find(".posicaoCategoriaNew").text(index);
       index++;
     });
-
+    console.log("a cat", thisCat);
     $(this)
       .find(".superSortable")
       .each(function () {
@@ -482,6 +483,7 @@ function reordenaListas3() {
             let lastSub = thisCat.subcategories.find(
               (dt) => Number(dt.id) === lastId
             );
+            console.log("a sub", lastSub);
             if (lastSub) {
               lastSub.id = index3;
               subIndex.push(lastSub);
