@@ -398,7 +398,7 @@ function categoryElementLi(dado) {
             style=" border: 1px solid #efefef; margin-top: -2px; padding-right: 2%; display:none;    background-color: #f8f9ff; max-height: 80vh">
             <div style="margin-top: 1%; width: 100%; opacity: 1;" class="row">
                 <div class="col-md-12" style="opacity: 1;">
-                    <div   
+                    <div   onclick="addCategory(${dado.id})"
                         style="    z-index: 999;;cursor:pointer;border-left: 5px dotted silver;margin-left: 7%;cursor: pointer; border-radius: 20px; font: bold 1rem Roboto; background-color: rgb(246, 181, 4); max-width: 200px; height: 40px; border: 2px solid rgb(246, 181, 4); float: left; opacity: 1;"
                         class="input-group outraSubCat">
                         <div style="border: none; margin: auto;" class="input-group-append">
