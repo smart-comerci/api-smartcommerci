@@ -445,22 +445,47 @@ function OrdenaJson(lista, chave, ordem) {
 }
 function reordenaListas3() {
   $(".superSortable").each(function () {
+    let categories = categoriesObject.categories;
     var items = $(this).find(".itemSortable");
     var index = 1;
+    var subs = [];
+    let idCat = $(this).attr("idCat");
+    let subcategories = categories.find((dt) => dt.id === idCat).subcategories;
     items.each(function () {
-      //$(this).find(".posicaoSubCategoriaNew").text(index);
+      let idSub = $(this).attr("idSub");
+      let thisSub = subcategories.find((dt) => dt.id === idSub);
+      thisSub.id = (index - 1).toString();
+      subs.push(thisSub);
+      $(this).find(".posicaoSubCategoriaNew").text(index);
       index++;
     });
+
+    console.log(subs, subcategories);
+    for (const a in categoriesObject.categories) {
+      if (categoriesObject.categories[k].id === idCat) {
+        categoriesObject.categories[k].subcategories = subs;
+      }
+    }
   });
 
   $(".fullSortable").each(function () {
     var items = $(this).find(".itemSortable2");
+    let categories = categoriesObject.categories;
     var index = 1;
+    let cats = [];
     items.each(function () {
-      //$(this).find(".posicaoCategoriaNew").text(index);
+      let idCat = $(this).attr("idCat");
+      let thisCat = categories.find((dt) => dt.id === idCat);
+      thisCat.id = (index - 1).toString();
+      cats.push(thisCat);
+      $(this).find(".posicaoCategoriaNew").text(index);
       index++;
     });
+    console.log(cats, categoriesObject.categories);
+    categoriesObject.categories = cats;
   });
+
+  console.log("RESUTLADO", categoriesObject);
 }
 
 setInterval(() => {
