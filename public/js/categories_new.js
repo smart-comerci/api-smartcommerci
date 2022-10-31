@@ -510,16 +510,17 @@ function reordenaListas3() {
     categoriesObject.categories[k] = catIndex;
   }
 
-  let theCategories = OrdenaJson(categoriesObject.categories, "id", "ASC");
-  categoriesObject.categories = theCategories;
-  for (const k in categoriesObject.categories) {
-    let theSubcategories = OrdenaJson(
-      categoriesObject.categories[k].subcategories,
-      "id",
-      "ASC"
-    );
-    categoriesObject.categories[k].subcategories = theSubcategories;
-  }
+  // let theCategories = OrdenaJson(categoriesObject.categories, "id", "ASC");
+  // categoriesObject.categories = theCategories;
+
+  // for (const k in categoriesObject.categories) {
+  //   let theSubcategories = OrdenaJson(
+  //     categoriesObject.categories[k].subcategories,
+  //     "id",
+  //     "ASC"
+  //   );
+  //   categoriesObject.categories[k].subcategories = theSubcategories;
+  // }
 }
 setInterval(() => {
   reordenaListas3();
