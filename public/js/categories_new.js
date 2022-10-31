@@ -484,7 +484,7 @@ function reordenaListas3() {
     }
   });
   console.log("indices das cats", catIndex, categoriesObject);
-  for (const k in categoriesObject.categories[k]) {
+  for (const k in categoriesObject.categories) {
     categoriesObject.categories[k].id = catIndex[k];
   }
 
