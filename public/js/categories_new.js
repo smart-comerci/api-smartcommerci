@@ -454,7 +454,7 @@ function reordenaListas3() {
       $(this).find(".posicaoSubCategoriaNew").text(index);
 
       for (const k in categoriesObject.categories) {
-        if (categoriesObject.categories[k].id === mainId) {
+        if (Number(categoriesObject.categories[k].id) === mainId) {
           for (const a in categoriesObject.categories[k].subcategories) {
             if (categoriesObject.categories[k].subcategories[a].id === lastId) {
               categoriesObject.categories[k].subcategories[a].id = index - 1;
@@ -475,7 +475,7 @@ function reordenaListas3() {
       console.log("comparacao ids", lastId, index);
       $(this).find(".posicaoCategoriaNew").text(index);
       for (const k in categoriesObject.categories) {
-        if (categoriesObject.categories[k].id === lastId) {
+        if (Number(categoriesObject.categories[k].id) === lastId) {
           categoriesObject.categories[k].id = index - 1;
           console.log(categoriesObject.categories);
         }
