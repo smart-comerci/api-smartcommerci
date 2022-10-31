@@ -449,22 +449,18 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable");
     var index = 1;
     var subs = [];
-    console.log(items);
 
     items.each(function () {
       let idCat = $(this).attr("idCat");
-      console.log(idCat, categories);
       let subcategories = categories.find(
         (dt) => Number(dt.id) === Number(idCat)
       ).subcategories;
       let idSub = $(this).attr("idSub");
-      console.log("ID CATEGORIA", idCat, categories, subcategories);
       let thisSub = subcategories.find((dt) => Number(dt.id) === Number(idSub));
       thisSub.id = (index - 1).toString();
       subs.push(thisSub);
       $(this).find(".posicaoSubCategoriaNew").text(index);
       index++;
-      console.log("as subs", subs);
       for (const k in categoriesObject.categories) {
         if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
           categoriesObject.categories[k].subcategories = subs;
@@ -486,11 +482,8 @@ function reordenaListas3() {
       $(this).find(".posicaoCategoriaNew").text(index);
       index++;
     });
-    console.log(cats, categoriesObject.categories);
     categoriesObject.categories = cats;
   });
-
-  console.log("RESUTLADO", categoriesObject);
 }
 
 setInterval(() => {
