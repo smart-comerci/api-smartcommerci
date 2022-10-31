@@ -467,40 +467,41 @@ function reordenaListas3() {
       }
       $(this).find(".posicaoCategoriaNew").text(index);
       index++;
-    });
-    console.log("a cat", thisCat);
-    $(this)
-      .find(".superSortable")
-      .each(function () {
-        var items3 = $(this).find(".itemSortable");
-        var index3 = 1;
-        var idsub = Number($(this).attr("idSub"));
-        items.each(function () {
-          let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
-          let mainId = Number($(this).attr("catId"));
-          $(this).find(".posicaoSubCategoriaNew").text(index3);
-          if (thisCat && thisCat.subcategories) {
-            let lastSub = thisCat.subcategories.find(
-              (dt) => Number(dt.id) === lastId
-            );
-            console.log("a sub", lastSub);
-            if (lastSub) {
-              lastSub.id = index3;
-              subIndex.push(lastSub);
-            }
-          }
 
-          index++;
+      console.log("a cat", thisCat);
+      $(this)
+        .find(".superSortable")
+        .each(function () {
+          var items3 = $(this).find(".itemSortable");
+          var index3 = 1;
+          var idsub = Number($(this).attr("idSub"));
+          items.each(function () {
+            let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
+            let mainId = Number($(this).attr("catId"));
+            $(this).find(".posicaoSubCategoriaNew").text(index3);
+            if (thisCat && thisCat.subcategories) {
+              let lastSub = thisCat.subcategories.find(
+                (dt) => Number(dt.id) === lastId
+              );
+              console.log("a sub", lastSub);
+              if (lastSub) {
+                lastSub.id = index3;
+                subIndex.push(lastSub);
+              }
+            }
+
+            index3++;
+          });
         });
-      });
-    console.log("indices das subs", subIndex, categoriesObject.categories);
-    for (const k in categoriesObject.categories) {
-      if (categoriesObject.categories[k].id === idCat) {
-        for (const a in categoriesObject.categories[k].subcategories) {
-          categoriesObject.categories[k].subcategories = subIndex;
+      console.log("indices das subs", subIndex, categoriesObject.categories);
+      for (const k in categoriesObject.categories) {
+        if (categoriesObject.categories[k].id === idCat) {
+          for (const a in categoriesObject.categories[k].subcategories) {
+            categoriesObject.categories[k].subcategories = subIndex;
+          }
         }
       }
-    }
+    });
   });
   console.log("indices das cats", catIndex, categoriesObject);
   for (const k in categoriesObject.categories) {
