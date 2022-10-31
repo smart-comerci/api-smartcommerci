@@ -152,27 +152,6 @@ $.ajax({
         } catch (err) {}
       }
       console.log("após mostrar conteudo");
-      setTimeout(() => {
-        var lojas_cadastradas = JSON.parse(
-          ajustStrigfy(localStorage.LOJAS_CADASTRADAS)
-        );
-
-        for (const k in lojas_cadastradas) {
-          var html =
-            '<div style="background: white; margin-left: 2%; margin-top: 25px" class="col-md-3 radius20">  ' +
-            '<a style="max-width: 100%" affiliate_id="' +
-            lojas_cadastradas[k].affiliate_id +
-            '" href="/loja/' +
-            lojas_cadastradas[k].affiliates_business_name.replace(/ /g, "_") +
-            '"><img style="margin:auto; opacity: 0.5" src="images/default/unidade-sem-foto.jpg"></a><hr>  ' +
-            '<h5 class="label" style="text-align: left; font-size: 20px; font-weight: bold">' +
-            lojas_cadastradas[k].affiliates_business_name +
-            "</h5>" +
-            '<p class="label" style="text-align: left; font-size: 14px;">0 métodos de entrega ativos</p>' +
-            "</div>";
-          $("#conteudoLogistica").append(html);
-        }
-      }, 500);
     }, 2000);
   },
   error: function (data) {
@@ -2185,3 +2164,26 @@ async function deletaMetodoModal(nome_metodo) {
 
   location.reload();
 }
+
+setInterval(() => {
+  var lojas_cadastradas = JSON.parse(
+    ajustStrigfy(localStorage.LOJAS_CADASTRADAS)
+  );
+  $("#conteudoLogistica").html("");
+
+  for (const k in lojas_cadastradas) {
+    var html =
+      '<div style="background: white; margin-left: 2%; margin-top: 25px" class="col-md-3 radius20">  ' +
+      '<a style="max-width: 100%" affiliate_id="' +
+      lojas_cadastradas[k].affiliate_id +
+      '" href="/loja/' +
+      lojas_cadastradas[k].affiliates_business_name.replace(/ /g, "_") +
+      '"><img style="margin:auto; opacity: 0.5" src="images/default/unidade-sem-foto.jpg"></a><hr>  ' +
+      '<h5 class="label" style="text-align: left; font-size: 20px; font-weight: bold">' +
+      lojas_cadastradas[k].affiliates_business_name +
+      "</h5>" +
+      '<p class="label" style="text-align: left; font-size: 14px;">0 métodos de entrega ativos</p>' +
+      "</div>";
+    $("#conteudoLogistica").append(html);
+  }
+}, 2500);
