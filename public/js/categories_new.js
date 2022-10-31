@@ -452,17 +452,6 @@ function reordenaListas3() {
       let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
       let mainId = Number($(this).attr("catId"));
       $(this).find(".posicaoSubCategoriaNew").text(index);
-
-      for (const k in categoriesObject.categories) {
-        if (Number(categoriesObject.categories[k].id) === mainId) {
-          for (const a in categoriesObject.categories[k].subcategories) {
-            if (categoriesObject.categories[k].subcategories[a].id === lastId) {
-              categoriesObject.categories[k].subcategories[a].id = index - 1;
-              console.log(categoriesObject.categories[k].subcategories);
-            }
-          }
-        }
-      }
       index++;
     });
   });
@@ -474,12 +463,6 @@ function reordenaListas3() {
       let lastId = Number($(this).find(".posicaoCategoriaNew").text());
       console.log("comparacao ids", lastId, index);
       $(this).find(".posicaoCategoriaNew").text(index);
-      for (const k in categoriesObject.categories) {
-        if (Number(categoriesObject.categories[k].id) === lastId) {
-          categoriesObject.categories[k].id = index - 1;
-          console.log(categoriesObject.categories);
-        }
-      }
       index++;
     });
   });
