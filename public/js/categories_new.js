@@ -458,6 +458,7 @@ function reordenaListas3() {
           for (const a in categoriesObject.categories[k].subcategories) {
             if (categoriesObject.categories[k].subcategories[a].id === lastId) {
               categoriesObject.categories[k].subcategories[a].id = index - 1;
+              console.log(categoriesObject.categories[k].subcategories);
             }
           }
         }
@@ -475,6 +476,7 @@ function reordenaListas3() {
       for (const k in categoriesObject.categories) {
         if (categoriesObject.categories[k].id === lastId) {
           categoriesObject.categories[k].id = index - 1;
+          console.log(categoriesObject.categories);
         }
       }
       index++;
