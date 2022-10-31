@@ -1894,7 +1894,7 @@ function reordenaListas() {
 }
 setInterval(() => {
   reordenaListas();
-}, 500);
+}, 1000);
 
 function updateIconSVG(element, categorieName) {
   ////console.log("asdsadasd")

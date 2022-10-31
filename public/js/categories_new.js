@@ -1,4 +1,6 @@
 const api_host = "https://api-smartcomerci.com.br:7070";
+let currentCategoryId = null,
+  currentSubcategoryId = null;
 getCategories();
 let categoriesObject = {
   affiliateId: Number(localStorage.AFFILIATE_ID),
@@ -21,6 +23,116 @@ class Category {
   subcategories = [];
   constructor(id) {
     this.id = id;
+  }
+}
+function editCategoryField(
+  cat,
+  id,
+  field,
+  newValue,
+  idSub,
+  subField,
+  newValueSub
+) {
+  if (cat) {
+    if (field !== "banners" && field !== "subcategories") {
+      let currCategory = categoriesObject.categories.find((dt) => dt.id === id);
+      if (field === "keywors") {
+        let exists = currCategory[field].find((a) => a === newValue);
+        if (!exists) {
+          currCategory[field].push(newValue);
+        } else {
+          console.log("Value '" + newValue + "' alread exists!");
+        }
+      } else {
+        currCategory[field] = newValue;
+      }
+      for (const k in categoriesObject.categories) {
+        if (categoriesObject.categories[k].id === id) {
+          categoriesObject.categories[k] = currCategory;
+        }
+      }
+    } else {
+      console.log("Not changes this from here...");
+    }
+  } else {
+    if (subField !== "banners" && subField !== "subcategories") {
+      let currCategory = categoriesObject.categories.find((dt) => dt.id === id);
+      let currSubCategory = currCategory.subcategories.find(
+        (dt) => dt.id === idSub
+      );
+      if (subField === "keywors") {
+        let exists = currSubCategory[subField].find((a) => a === newValueSub);
+        if (!exists) {
+          currSubCategory[subField].push(newValueSub);
+        } else {
+          console.log("Value '" + newValueSub + "' alread exists!");
+        }
+      } else {
+        currSubCategory[subField] = newValueSub;
+      }
+      for (const k in categoriesObject.categories) {
+        if (categoriesObject.categories[k].id === id) {
+          for (const a in categoriesObject.categories[k].subcategories) {
+            if (categoriesObject.categories[k].subcategories[a].id === idSub) {
+              categoriesObject.categories[k].subcategories[a] = currSubCategory;
+            }
+          }
+        }
+      }
+    } else {
+      console.log("Not changes this from here...");
+    }
+  }
+}
+function setBanners(cat, id, newValue, idSub, newValueSub) {
+  if (cat) {
+    let currCategory = categoriesObject.categories.find((dt) => dt.id === id);
+    let exists = currCategory[field].find((dt) => dt.url === newValue);
+    if (!exists) {
+      currCategory[field].push({
+        id: currCategory[field].length,
+        url: newValue,
+      });
+    } else {
+      for (const k in currCategory[field]) {
+        if (currCategory[field].id === id) {
+          currCategory[field].url = newValue;
+        }
+      }
+    }
+    for (const k in categoriesObject.categories) {
+      if (categoriesObject.categories[k].id === id) {
+        categoriesObject.categories[k] = currCategory;
+      }
+    }
+  } else {
+    let currCategory = categoriesObject.categories.find((dt) => dt.id === id);
+    let currSubCategory = currCategory.subcategories.find(
+      (dt) => dt.id === idSub
+    );
+    let exists = currSubCategory[field].find((dt) => dt.url === newValueSub);
+    if (!exists) {
+      currSubCategory[field].push({
+        id: currSubCategory[field].length,
+        url: newValueSub,
+      });
+    } else {
+      for (const k in currSubCategory[field]) {
+        if (currSubCategory[field].id === idSub) {
+          currSubCategory[field].url = newValueSub;
+        }
+      }
+    }
+    for (const k in categoriesObject.categories) {
+      if (categoriesObject.categories[k].id === id) {
+        for (const a in categoriesObject.categories[k].subcategories) {
+          if (categoriesObject.categories[k].subcategories[a].id === idSub) {
+            categoriesObject.categories[k].subcategories[a] = currSubCategory;
+          }
+        }
+      }
+    }
   }
 }
 class Subcategory {
@@ -46,12 +158,25 @@ class Subcategory {
     this.id = id;
   }
 }
-function addCategory() {
-  let categoria = new Category(categoriesObject.categories.length);
-  categoriesObject.categories.push(categoria);
-  console.log(categoriesObject);
-  showCategories();
+function addCategory(id) {
+  if (id) {
+    let currCategory = categoriesObject.categories.find((dt) => dt.id === id);
+    let subcategoria = new Subcategory(currCategory.subcategories.length);
+    for (const k in categoriesObject.categories) {
+      if (categoriesObject.categories[k].id === id) {
+        categoriesObject.categories[k].subcategories.push(subcategoria);
+      }
+    }
+    console.log(categoriesObject);
+    showCategories();
+  } else {
+    let categoria = new Category(categoriesObject.categories.length);
+    categoriesObject.categories.push(categoria);
+    console.log(categoriesObject);
+    showCategories();
+  }
 }
+
 function showCategories() {
   $("#listaCategoriasLoja").html("");
   categoriesObject.categories.forEach((cat) => {
@@ -141,7 +266,7 @@ function subcategoryElementLi(dado) {
                                                         transform="translate(5)"></path>
                                                 </svg></div>
                                             <div class="col-sm  numberCat" style="opacity: 1;">
-                                                <sp class="posicaoSubCategoria">${dado[k].id}</sp>
+                                                <sp class="posicaoSubCategoriaNew">${dado[k].id}</sp>
                                             </div>
                                         </div>
                                     </div>
@@ -205,7 +330,7 @@ function categoryElementLi(dado) {
                                 d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
                                 transform="translate(5)"></path>
                         </svg></div>
-                    <div class="col-sm posicaoCategoria numberCat" style="opacity: 1;">${
+                    <div class="col-sm posicaoCategoriaNew numberCat" style="opacity: 1;">${
                       dado.id
                     }</div>
                 </div>
@@ -306,3 +431,49 @@ function categoryElementLi(dado) {
 </li>
   `;
 }
+function OrdenaJson(lista, chave, ordem) {
+  return lista.sort(function (a, b) {
+    var x = a[chave];
+    var y = b[chave];
+    if (ordem === "ASC") {
+      return x < y ? -1 : x > y ? 1 : 0;
+    }
+    if (ordem === "DESC") {
+      return x > y ? -1 : x < y ? 1 : 0;
+    }
+  });
+}
+
+function reordenaListas() {
+  $(".superSortable").each(function () {
+    var items = $(this).find(".itemSortable");
+    var index = 1;
+    items.each(function () {
+      $(this).find(".posicaoSubCategoriaNew").text(index);
+      index++;
+    });
+  });
+
+  $(".fullSortable").each(function () {
+    var items = $(this).find(".itemSortable2");
+    var index = 1;
+    items.each(function () {
+      $(this).find(".posicaoCategoriaNew").text(index);
+      index++;
+    });
+  });
+
+  let theCategories = OrdenaJson(categoriesObject.categories, "id", "ASC");
+  categoriesObject.categories = theCategories;
+  for (const k in categoriesObject.categories) {
+    let theSubcategories = OrdenaJson(
+      categoriesObject.categories[k].subcategories,
+      "id",
+      "ASC"
+    );
+    categoriesObject.categories[k].subcategories = theSubcategories;
+  }
+}
+setInterval(() => {
+  reordenaListas();
+}, 1000);
