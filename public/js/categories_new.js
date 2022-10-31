@@ -472,6 +472,7 @@ function reordenaListas3() {
     var index = 1;
     items.each(function () {
       let lastId = Number($(this).find(".posicaoCategoriaNew").text());
+      console.log("comparacao ids", lastId, index);
       $(this).find(".posicaoCategoriaNew").text(index);
       for (const k in categoriesObject.categories) {
         if (categoriesObject.categories[k].id === lastId) {
