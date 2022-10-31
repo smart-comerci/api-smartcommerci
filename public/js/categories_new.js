@@ -449,6 +449,7 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable");
     var index = 1;
     var subs = [];
+    console.log(items);
 
     items.each(function () {
       let idCat = $(this).attr("idCat");
@@ -463,14 +464,13 @@ function reordenaListas3() {
       subs.push(thisSub);
       $(this).find(".posicaoSubCategoriaNew").text(index);
       index++;
-    });
-
-    console.log("as subs", subs);
-    for (const a in categoriesObject.categories) {
-      if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
-        categoriesObject.categories[k].subcategories = subs;
+      console.log("as subs", subs);
+      for (const k in categoriesObject.categories) {
+        if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
+          categoriesObject.categories[k].subcategories = subs;
+        }
       }
-    }
+    });
   });
 
   $(".fullSortable").each(function () {
