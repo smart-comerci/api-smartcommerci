@@ -456,7 +456,9 @@ function reordenaListas3() {
     items.each(function () {
       let lastId = Number($(this).find(".posicaoCategoriaNew").text());
       console.log("comparacao ids", lastId, index);
-      let lastCat = categoriesObject.categories.find((dt) => dt.id === lastId);
+      let lastCat = categoriesObject.categories.find(
+        (dt) => Number(dt.id) === lastId
+      );
       lastCat.id = index;
       catIndex.push(lastCat);
       $(this).find(".posicaoCategoriaNew").text(index);
@@ -473,7 +475,9 @@ function reordenaListas3() {
           let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
           let mainId = Number($(this).attr("catId"));
           $(this).find(".posicaoSubCategoriaNew").text(index3);
-          let lastSub = thisCat.subcategories.find((dt) => dt.id === lastId);
+          let lastSub = thisCat.subcategories.find(
+            (dt) => Number(dt.id) === lastId
+          );
 
           lastSub.id = index3;
           subIndex.push(lastSub);
