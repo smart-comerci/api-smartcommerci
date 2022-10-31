@@ -465,7 +465,7 @@ function reordenaListas3() {
       index++;
     });
 
-    console.log(subs, subcategories);
+    console.log("as subs", subs);
     for (const a in categoriesObject.categories) {
       if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
         categoriesObject.categories[k].subcategories = subs;
