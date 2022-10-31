@@ -185,7 +185,6 @@ function addCategory(id) {
 }
 
 function showCategories() {
-  repareObj();
   $("#listaCategoriasLoja").html("");
   categoriesObject.categories.forEach((cat) => {
     console.log(cat);
