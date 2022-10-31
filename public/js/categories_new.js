@@ -185,6 +185,7 @@ function addCategory(id) {
 }
 
 function showCategories() {
+  repareObj();
   $("#listaCategoriasLoja").html("");
   categoriesObject.categories.forEach((cat) => {
     console.log(cat);
@@ -452,6 +453,26 @@ function OrdenaJson(lista, chave, ordem) {
   });
 }
 function reordenaListas3() {
+  $(".superSortable").each(function () {
+    var items = $(this).find(".itemSortable");
+    var index = 1;
+    items.each(function () {
+      $(this).find(".posicaoSubCategoria").text(index);
+      index++;
+    });
+  });
+
+  $(".fullSortable").each(function () {
+    var items = $(this).find(".itemSortable2");
+    var index = 1;
+    items.each(function () {
+      $(this).find(".posicaoCategoria").text(index);
+      index++;
+    });
+  });
+}
+
+function repareObj() {
   try {
     $(".superSortable").each(function () {
       let categories = categoriesObject.categories;
@@ -472,7 +493,6 @@ function reordenaListas3() {
         console.log(subcategories, thisSub);
         if (thisSub) {
           thisSub.id = (index - 1).toString();
-
           subs.push(thisSub);
         }
 
