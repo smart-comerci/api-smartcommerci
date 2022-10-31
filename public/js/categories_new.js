@@ -238,14 +238,14 @@ async function publicarAlteracoes() {
   console.log(resultado);
 }
 
-function subcategoryElementLi(dado) {
+function subcategoryElementLi(dado, mainId) {
   let html = "";
   if (!dado || dado.length === 0) {
     return html;
   }
   for (const k in dado) {
     html += `
-  <li draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle" >
+  <li idCat="${mainId}" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle" >
                             <div class="row"
                                 style="display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
                                 <span class="trilha2" style="opacity: 1;">.....</span>
@@ -422,7 +422,7 @@ function categoryElementLi(dado) {
                 <div class="col-md-12 verticalScroll"
                     style="max-height: 550px;margin-bottom: 20px;opacity: 1;margin-top: -12px;margin-left: 1px;">
                     <ul id="sortable" class="listInner3 dropCategoria superSortable ui-sortable" style=""> 
-                     ${subcategoryElementLi(dado.subcategories)}
+                     ${subcategoryElementLi(dado.subcategories, dado.id)}
                     </ul>
                 </div>
             </div>
@@ -449,7 +449,19 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable");
     var index = 1;
     items.each(function () {
+      let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
+      let mainId = Number($(this).attr("catId"));
       $(this).find(".posicaoSubCategoriaNew").text(index);
+
+      for (const k in categoriesObject.categories) {
+        if (categoriesObject.categories[k].id === mainId) {
+          for (const a in categoriesObject.categories[k].subcategories) {
+            if (categoriesObject.categories[k].subcategories[a].id === lastId) {
+              categoriesObject.categories[k].subcategories[a].id = index - 1;
+            }
+          }
+        }
+      }
       index++;
     });
   });
@@ -458,7 +470,13 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable2");
     var index = 1;
     items.each(function () {
+      let lastId = Number($(this).find(".posicaoCategoriaNew").text());
       $(this).find(".posicaoCategoriaNew").text(index);
+      for (const k in categoriesObject.categories) {
+        if (categoriesObject.categories[k].id === lastId) {
+          categoriesObject.categories[k].id = index - 1;
+        }
+      }
       index++;
     });
   });
