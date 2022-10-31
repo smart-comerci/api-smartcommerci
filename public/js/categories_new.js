@@ -470,9 +470,12 @@ function reordenaListas3() {
           (dt) => Number(dt.id) === Number(idSub)
         );
         console.log(subcategories, thisSub);
-        thisSub.id = (index - 1).toString();
+        if (thisSub) {
+          thisSub.id = (index - 1).toString();
 
-        subs.push(thisSub);
+          subs.push(thisSub);
+        }
+
         $(this).find(".posicaoSubCategoriaNew").text(index);
         index++;
         for (const k in categoriesObject.categories) {
