@@ -484,6 +484,19 @@ function reordenaListas3() {
     });
     categoriesObject.categories = cats;
   });
+
+  categoriesObject.categories = OrdenaJson(
+    categoriesObject.categories,
+    "id",
+    "ASC"
+  );
+  for (const k in categoriesObject.categories) {
+    categoriesObject.categories[k].subcategories = OrdenaJson(
+      categoriesObject.categories[k].subcategories,
+      "id",
+      "ASC"
+    );
+  }
 }
 
 setInterval(() => {
