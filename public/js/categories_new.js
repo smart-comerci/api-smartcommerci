@@ -450,12 +450,15 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable2");
     var idCat = Number($(this).attr("idCat"));
     var index = 1,
+      thisCat = null,
       subIndex = [];
 
     items.each(function () {
       let lastId = Number($(this).find(".posicaoCategoriaNew").text());
       console.log("comparacao ids", lastId, index);
-      catIndex.push(index);
+      let lastCat = categoriesObject.categories.find((dt) => dt.id === lastId);
+      lastCat.id = index;
+      catIndex.push(lastCat);
       $(this).find(".posicaoCategoriaNew").text(index);
       index++;
     });
@@ -470,7 +473,10 @@ function reordenaListas3() {
           let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
           let mainId = Number($(this).attr("catId"));
           $(this).find(".posicaoSubCategoriaNew").text(index3);
-          subIndex.push(index3);
+          let lastSub = thisCat.subcategories.find((dt) => dt.id === lastId);
+
+          lastSub.id = index3;
+          subIndex.push(lastSub);
           index++;
         });
       });
@@ -478,14 +484,14 @@ function reordenaListas3() {
     for (const k in categoriesObject.categories) {
       if (categoriesObject.categories[k].id === idCat) {
         for (const a in categoriesObject.categories[k].subcategories) {
-          categoriesObject.categories[k].subcategories[a].id = subIndex[a];
+          categoriesObject.categories[k].subcategories = subIndex;
         }
       }
     }
   });
   console.log("indices das cats", catIndex, categoriesObject);
   for (const k in categoriesObject.categories) {
-    categoriesObject.categories[k].id = catIndex[k];
+    categoriesObject.categories[k] = catIndex;
   }
 
   let theCategories = OrdenaJson(categoriesObject.categories, "id", "ASC");
