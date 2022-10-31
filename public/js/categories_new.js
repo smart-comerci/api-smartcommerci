@@ -475,7 +475,7 @@ function reordenaListas3() {
         });
       });
     console.log("indices das subs", subIndex, categoriesObject.categories);
-    for (const k in categoriesObject.categories[k]) {
+    for (const k in categoriesObject.categories) {
       if (categoriesObject.categories[k].id === idCat) {
         for (const a in categoriesObject.categories[k].subcategories) {
           categoriesObject.categories[k].subcategories[a].id = subIndex[a];
