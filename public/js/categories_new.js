@@ -450,7 +450,7 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable2");
     var idCat = Number($(this).attr("idCat"));
     var index = 1,
-      thisCat = null,
+      thisCat = {},
       subIndex = [];
 
     items.each(function () {
@@ -459,8 +459,10 @@ function reordenaListas3() {
       let lastCat = categoriesObject.categories.find(
         (dt) => Number(dt.id) === lastId
       );
-      lastCat.id = index;
-      catIndex.push(lastCat);
+      if (lastCat) {
+        lastCat.id = index;
+        catIndex.push(lastCat);
+      }
       $(this).find(".posicaoCategoriaNew").text(index);
       index++;
     });
@@ -478,9 +480,10 @@ function reordenaListas3() {
           let lastSub = thisCat.subcategories.find(
             (dt) => Number(dt.id) === lastId
           );
-
-          lastSub.id = index3;
-          subIndex.push(lastSub);
+          if (lastSub) {
+            lastSub.id = index3;
+            subIndex.push(lastSub);
+          }
           index++;
         });
       });
