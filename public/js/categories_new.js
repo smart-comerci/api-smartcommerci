@@ -160,7 +160,9 @@ class Subcategory {
 }
 function addCategory(id) {
   if (id) {
-    let currCategory = categoriesObject.categories.find((dt) => dt.id === id);
+    let currCategory = categoriesObject.categories.find(
+      (dt) => Number(dt.id) === Number(id)
+    );
     let subcategoria = new Subcategory(currCategory.subcategories.length);
     for (const k in categoriesObject.categories) {
       if (categoriesObject.categories[k].id === id) {
