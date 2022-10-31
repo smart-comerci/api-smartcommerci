@@ -179,7 +179,20 @@ function addCategory(id) {
     setTimeout(() => {
       $(".itemSortable").each(function () {
         if ($(this).attr("idSub") === id) {
-          $(this).find(".dropCategoriaContent2").click();
+          $(this)
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .find(".dropCategoriaContent2")
+            .click();
         }
       });
     }, 2000);
