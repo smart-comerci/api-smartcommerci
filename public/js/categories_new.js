@@ -262,7 +262,7 @@ function subcategoryElementLi(dado, mainId) {
                                     <div style="max-width: 100px; opacity: 1; margin: 1% auto;"
                                         class="col-sm dropCategoriaContent">
                                         <div class="row" style="padding: 5%;">
-                                            <div class="col-sm dropCategoriaContent" style="opacity: 1;"><svg
+                                            <div onclick="showContent($(this))" class="col-sm dropCategoriaContent2" style="opacity: 1;"><svg
                                                     class="iconGrid" xmlns="http://www.w3.org/2000/svg"
                                                     style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
                                                     <defs></defs>
@@ -326,7 +326,7 @@ function categoryElementLi(dado) {
  <li idCat="${dado.id}" class="itemSortable2 ui-sortable-handle">
     <div title="'null'" description="'null'" draggable="true" class="categorie vouClonar">
         <div class="row radius20 cabecalho" style="border: 1px solid #efefef; margin-top: 1%; padding-right: 2%">
-            <div style="max-width: 100px; opacity: 1; margin: 1% auto;" class="col-sm dropCategoriaContent">
+            <div  onclick="showContent($(this))" style="max-width: 100px; opacity: 1; margin: 1% auto;" class="col-sm dropCategoriaContent2">
                 <div class="row" style="padding: 5%;">
                     <div class="col-sm dropCategoriaContent" style="opacity: 1;"><svg class="iconGrid"
                             xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23"
@@ -546,3 +546,26 @@ setInterval(() => {
     console.log(err);
   }
 }, 1000);
+
+function showContent(element) {
+  if (
+    element.attr("dropado") == "nao" ||
+    element.attr("dropado") == undefined
+  ) {
+    element.parent().parent().find(".cabecalho").removeClass("radius20");
+    element.parent().parent().find(".cabecalho").addClass("radius20Top");
+    element.parent().parent().find(".cabecalho").addClass("bordaDourada");
+    $(".seta").removeClass("rotate180");
+    element.parent().parent().find(".seta").addClass("rotate180");
+
+    element.attr("dropado", "sim");
+    element.parent().parent().find(".dropCategoria").show();
+  } else {
+    element.parent().parent().find(".cabecalho").removeClass("radius20Top");
+    element.parent().parent().find(".cabecalho").addClass("radius20");
+    element.parent().parent().find(".cabecalho").removeClass("bordaDourada");
+    element.attr("dropado", "nao");
+    element.parent().parent().find(".dropCategoria").hide();
+    element.parent().parent().find(".seta").removeClass("rotate180");
+  }
+}
