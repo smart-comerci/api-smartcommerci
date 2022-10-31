@@ -175,6 +175,14 @@ function addCategory(id) {
       }
     }
     console.log(categoriesObject);
+
+    setTimeout(() => {
+      $(".itemSortable").each(function () {
+        if ($(this).attr("idSub") === id) {
+          $(this).find(".dropCategoriaContent2").click();
+        }
+      });
+    }, 2000);
     showCategories();
   } else {
     let categoria = new Category(categoriesObject.categories.length);
@@ -259,8 +267,8 @@ function subcategoryElementLi(dado, mainId) {
                                 <span class="trilha2" style="opacity: 1;">.....</span>
                                 <div class="row radius20 subCabecalho"
                                     style="margin-left: 0.2%; border: 1px solid rgb(239, 239, 239); margin-top: 1%; padding-right: 15px; min-width: 100%; background: white !important; opacity: 1;">
-                                    <div style="max-width: 100px; opacity: 1; margin: 1% auto;"
-                                        class="col-sm dropCategoriaContent">
+                                    <div style="max-width: 100px; opacity: 1; margin: 1% auto;" "showContent($(this))"
+                                        class="col-sm dropCategoriaContent2">
                                         <div class="row" style="padding: 5%;">
                                             <div onclick="showContent($(this))" class="col-sm dropCategoriaContent2" style="opacity: 1;"><svg
                                                     class="iconGrid" xmlns="http://www.w3.org/2000/svg"
