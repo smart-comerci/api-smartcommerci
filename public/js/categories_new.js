@@ -456,6 +456,7 @@ function reordenaListas3() {
     items.each(function () {
       let lastId = Number($(this).find(".posicaoCategoriaNew").text());
       console.log("comparacao ids", lastId, index);
+      console.log("index", lastId - 1, index);
       let lastCat = categoriesObject.categories.find(
         (dt) => Number(dt.id) === lastId - 1
       );
