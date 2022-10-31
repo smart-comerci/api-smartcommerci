@@ -444,7 +444,7 @@ function OrdenaJson(lista, chave, ordem) {
   });
 }
 
-function reordenaListas() {
+function reordenaListas3() {
   $(".superSortable").each(function () {
     var items = $(this).find(".itemSortable");
     var index = 1;
@@ -479,5 +479,5 @@ function reordenaListas() {
   }
 }
 setInterval(() => {
-  reordenaListas();
+  reordenaListas3();
 }, 1000);
