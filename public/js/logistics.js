@@ -2169,8 +2169,8 @@ setInterval(() => {
   var lojas_cadastradas = JSON.parse(
     ajustStrigfy(localStorage.LOJAS_CADASTRADAS)
   );
+  console.log("LOJAS_CADASTRADAS", lojas_cadastradas);
   $("#conteudoLogistica").html("");
-
   for (const k in lojas_cadastradas) {
     var html =
       '<div style="background: white; margin-left: 2%; margin-top: 25px" class="col-md-3 radius20">  ' +
