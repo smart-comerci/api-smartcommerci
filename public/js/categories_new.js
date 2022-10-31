@@ -252,7 +252,7 @@ function subcategoryElementLi(dado, mainId) {
   }
   for (const k in dado) {
     html += `
-  <li idCat="${mainId}" idSub="${dado.id}" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle" >
+  <li idCat="${mainId}" idSub="${dado[k].id}" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle" >
                             <div class="row"
                                 style="display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
                                 <span class="trilha2" style="opacity: 1;">.....</span>
