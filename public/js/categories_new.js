@@ -516,6 +516,10 @@ function reordenaListas3() {
   }
 }
 
-// setInterval(() => {
-//   reordenaListas3();
-// }, 1000);
+setInterval(() => {
+  try {
+    reordenaListas3();
+  } catch (err) {
+    console.log(err);
+  }
+}, 1000);
