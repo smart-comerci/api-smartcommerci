@@ -196,6 +196,7 @@ function showCategories() {
       );
     }
   });
+  repareObj();
 }
 async function getCategories() {
   const resultado = await $.ajax({
