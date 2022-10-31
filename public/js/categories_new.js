@@ -450,12 +450,12 @@ function reordenaListas3() {
     var index = 1;
     var subs = [];
     let idCat = $(this).attr("idCat");
-    let subcategories = categories.find((dt) =>
-      Number(dt.id === idCat)
+    let subcategories = categories.find(
+      (dt) => Number(dt.id) === Number(idCat)
     ).subcategories;
     items.each(function () {
       let idSub = $(this).attr("idSub");
-      let thisSub = subcategories.find((dt) => Number(dt.id) === idSub);
+      let thisSub = subcategories.find((dt) => Number(dt.id) === Number(idSub));
       thisSub.id = (index - 1).toString();
       subs.push(thisSub);
       $(this).find(".posicaoSubCategoriaNew").text(index);
