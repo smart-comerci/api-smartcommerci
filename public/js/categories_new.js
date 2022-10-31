@@ -453,6 +453,7 @@ function reordenaListas3() {
     let subcategories = categories.find(
       (dt) => Number(dt.id) === Number(idCat)
     ).subcategories;
+    console.log("ID CATEGORIA", idCat, categories, subcategories);
     items.each(function () {
       let idSub = $(this).attr("idSub");
       let thisSub = subcategories.find((dt) => Number(dt.id) === Number(idSub));
