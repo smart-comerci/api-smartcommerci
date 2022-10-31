@@ -318,6 +318,7 @@ function subcategoryElementLi(dado, mainId) {
                         </li>
   `;
   }
+  return html;
 }
 function categoryElementLi(dado) {
   return `
