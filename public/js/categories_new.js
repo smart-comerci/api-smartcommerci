@@ -443,54 +443,56 @@ function OrdenaJson(lista, chave, ordem) {
     }
   });
 }
-// function reordenaListas3() {
-//   $(".superSortable").each(function () {
-//     let categories = categoriesObject.categories;
-//     var items = $(this).find(".itemSortable");
-//     var index = 1;
-//     var subs = [];
-//     let idCat = $(this).attr("idCat");
-//     let subcategories = categories.find(
-//       (dt) => Number(dt.id) === Number(idCat)
-//     ).subcategories;
-//     console.log("ID CATEGORIA", idCat, categories, subcategories);
-//     items.each(function () {
-//       let idSub = $(this).attr("idSub");
-//       let thisSub = subcategories.find((dt) => Number(dt.id) === Number(idSub));
-//       thisSub.id = (index - 1).toString();
-//       subs.push(thisSub);
-//       $(this).find(".posicaoSubCategoriaNew").text(index);
-//       index++;
-//     });
+function reordenaListas3() {
+  $(".superSortable").each(function () {
+    let categories = categoriesObject.categories;
+    var items = $(this).find(".itemSortable");
+    var index = 1;
+    var subs = [];
 
-//     console.log(subs, subcategories);
-//     for (const a in categoriesObject.categories) {
-//       if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
-//         categoriesObject.categories[k].subcategories = subs;
-//       }
-//     }
-//   });
+    items.each(function () {
+      let idCat = $(this).attr("idCat");
+      console.log(idCat, categories);
+      let subcategories = categories.find(
+        (dt) => Number(dt.id) === Number(idCat)
+      ).subcategories;
+      let idSub = $(this).attr("idSub");
+      console.log("ID CATEGORIA", idCat, categories, subcategories);
+      let thisSub = subcategories.find((dt) => Number(dt.id) === Number(idSub));
+      thisSub.id = (index - 1).toString();
+      subs.push(thisSub);
+      $(this).find(".posicaoSubCategoriaNew").text(index);
+      index++;
+    });
 
-//   $(".fullSortable").each(function () {
-//     var items = $(this).find(".itemSortable2");
-//     let categories = categoriesObject.categories;
-//     var index = 1;
-//     let cats = [];
-//     items.each(function () {
-//       let idCat = $(this).attr("idCat");
-//       let thisCat = categories.find((dt) => Number(dt.id) === Number(idCat));
-//       thisCat.id = (index - 1).toString();
-//       cats.push(thisCat);
-//       $(this).find(".posicaoCategoriaNew").text(index);
-//       index++;
-//     });
-//     console.log(cats, categoriesObject.categories);
-//     categoriesObject.categories = cats;
-//   });
+    console.log(subs, subcategories);
+    for (const a in categoriesObject.categories) {
+      if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
+        categoriesObject.categories[k].subcategories = subs;
+      }
+    }
+  });
 
-//   console.log("RESUTLADO", categoriesObject);
-// }
+  $(".fullSortable").each(function () {
+    var items = $(this).find(".itemSortable2");
+    let categories = categoriesObject.categories;
+    var index = 1;
+    let cats = [];
+    items.each(function () {
+      let idCat = $(this).attr("idCat");
+      let thisCat = categories.find((dt) => Number(dt.id) === Number(idCat));
+      thisCat.id = (index - 1).toString();
+      cats.push(thisCat);
+      $(this).find(".posicaoCategoriaNew").text(index);
+      index++;
+    });
+    console.log(cats, categoriesObject.categories);
+    categoriesObject.categories = cats;
+  });
 
-// setInterval(() => {
-//   reordenaListas3();
-// }, 1000);
+  console.log("RESUTLADO", categoriesObject);
+}
+
+setInterval(() => {
+  reordenaListas3();
+}, 1000);
