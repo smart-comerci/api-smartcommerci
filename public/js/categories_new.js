@@ -464,8 +464,11 @@ function reordenaListas3() {
         (dt) => Number(dt.id) === Number(idCat)
       ).subcategories;
       let idSub = $(this).attr("idSub");
+      console.log(Number(dt.id), Number(idSub));
       let thisSub = subcategories.find((dt) => Number(dt.id) === Number(idSub));
+      console.log(subcategories, thisSub);
       thisSub.id = (index - 1).toString();
+
       subs.push(thisSub);
       $(this).find(".posicaoSubCategoriaNew").text(index);
       index++;
