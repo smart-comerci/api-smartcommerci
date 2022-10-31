@@ -443,86 +443,26 @@ function OrdenaJson(lista, chave, ordem) {
     }
   });
 }
-
 function reordenaListas3() {
-  let catIndex = [];
-  $(".fullSortable").each(function () {
-    var items = $(this).find(".itemSortable2");
-    var idCat = Number($(this).attr("idCat"));
-    var index = 1,
-      thisCat = {},
-      subIndex = [];
-
+  $(".superSortable").each(function () {
+    var items = $(this).find(".itemSortable");
+    var index = 1;
     items.each(function () {
-      let lastId = Number($(this).find(".posicaoCategoriaNew").text());
-      console.log("comparacao ids", lastId, index);
-      console.log("index", lastId - 1, index);
-      let lastCat = categoriesObject.categories.find(
-        (dt) => Number(dt.id) === lastId - 1
-      );
-
-      thisCat = lastCat;
-      if (lastCat) {
-        lastCat.id = index;
-        catIndex.push(lastCat);
-      }
-      $(this).find(".posicaoCategoriaNew").text(index);
+      $(this).find(".posicaoSubCategoriaNew").text(index);
       index++;
-
-      console.log("a cat", thisCat);
-      $(this)
-        .find(".superSortable")
-        .each(function () {
-          var items3 = $(this).find(".itemSortable");
-          var index3 = 1;
-          var idsub = Number($(this).attr("idSub"));
-          items.each(function () {
-            let lastId3 = Number(
-              $(this).find(".posicaoSubCategoriaNew").text()
-            );
-            let mainId = Number($(this).attr("catId"));
-            $(this).find(".posicaoSubCategoriaNew").text(index3);
-            if (thisCat && thisCat.subcategories) {
-              let lastSub = thisCat.subcategories.find(
-                (dt) => Number(dt.id) === lastId3 - 1
-              );
-              console.log("a sub", lastSub);
-              if (lastSub) {
-                lastSub.id = index3;
-                subIndex.push(lastSub);
-              }
-            }
-
-            index3++;
-          });
-        });
-      console.log("indices das subs", subIndex, categoriesObject.categories);
-      for (const k in categoriesObject.categories) {
-        if (categoriesObject.categories[k].id === idCat) {
-          for (const a in categoriesObject.categories[k].subcategories) {
-            categoriesObject.categories[k].subcategories = subIndex;
-          }
-        }
-      }
     });
   });
-  console.log("indices das cats", catIndex, categoriesObject);
-  for (const k in categoriesObject.categories) {
-    categoriesObject.categories[k] = catIndex;
-  }
 
-  // let theCategories = OrdenaJson(categoriesObject.categories, "id", "ASC");
-  // categoriesObject.categories = theCategories;
-
-  // for (const k in categoriesObject.categories) {
-  //   let theSubcategories = OrdenaJson(
-  //     categoriesObject.categories[k].subcategories,
-  //     "id",
-  //     "ASC"
-  //   );
-  //   categoriesObject.categories[k].subcategories = theSubcategories;
-  // }
+  $(".fullSortable").each(function () {
+    var items = $(this).find(".itemSortable2");
+    var index = 1;
+    items.each(function () {
+      $(this).find(".posicaoCategoriaNew").text(index);
+      index++;
+    });
+  });
 }
+
 setInterval(() => {
   reordenaListas3();
 }, 1000);
