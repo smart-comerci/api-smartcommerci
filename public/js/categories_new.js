@@ -245,7 +245,7 @@ function subcategoryElementLi(dado, mainId) {
   }
   for (const k in dado) {
     html += `
-  <li idCat="${mainId}" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle" >
+  <li idCat="${mainId}" idSub="${dado.id}" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle" >
                             <div class="row"
                                 style="display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
                                 <span class="trilha2" style="opacity: 1;">.....</span>
@@ -314,7 +314,7 @@ function subcategoryElementLi(dado, mainId) {
 }
 function categoryElementLi(dado) {
   return `
- <li class="itemSortable2 ui-sortable-handle">
+ <li idCat="${mainId}" class="itemSortable2 ui-sortable-handle">
     <div title="'null'" description="'null'" draggable="true" class="categorie vouClonar">
         <div class="row radius20 cabecalho" style="border: 1px solid #efefef; margin-top: 1%; padding-right: 2%">
             <div style="max-width: 100px; opacity: 1; margin: 1% auto;" class="col-sm dropCategoriaContent">
@@ -445,27 +445,48 @@ function OrdenaJson(lista, chave, ordem) {
 }
 
 function reordenaListas3() {
-  $(".superSortable").each(function () {
-    var items = $(this).find(".itemSortable");
-    var index = 1;
-    items.each(function () {
-      let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
-      let mainId = Number($(this).attr("catId"));
-      $(this).find(".posicaoSubCategoriaNew").text(index);
-      index++;
-    });
-  });
-
+  let catIndex = [];
   $(".fullSortable").each(function () {
     var items = $(this).find(".itemSortable2");
-    var index = 1;
+    var idCat = Number($(this).attr("idCat"));
+    var index = 1,
+      subIndex = [];
+
     items.each(function () {
       let lastId = Number($(this).find(".posicaoCategoriaNew").text());
       console.log("comparacao ids", lastId, index);
+      catIndex.push(index);
       $(this).find(".posicaoCategoriaNew").text(index);
       index++;
     });
+
+    $(this)
+      .find(".superSortable")
+      .each(function () {
+        var items3 = $(this).find(".itemSortable");
+        var index3 = 1;
+        var idsub = Number($(this).attr("idSub"));
+        items.each(function () {
+          let lastId = Number($(this).find(".posicaoSubCategoriaNew").text());
+          let mainId = Number($(this).attr("catId"));
+          $(this).find(".posicaoSubCategoriaNew").text(index3);
+          subIndex.push(index3);
+          index++;
+        });
+      });
+    console.log("indices das subs", subIndex, catecategoriesObject.categories);
+    for (const k in categoriesObject.categories[k]) {
+      if (categoriesObject.categories[k].id === idCat) {
+        for (const a in categoriesObject.categories[k].subcategories) {
+          categoriesObject.categories[k].subcategories[a].id = subIndex[a];
+        }
+      }
+    }
   });
+  console.log("indices das cats", catIndex, categoriesObject);
+  for (const k in categoriesObject.categories[k]) {
+    categoriesObject.categories[k].id = catIndex[k];
+  }
 
   let theCategories = OrdenaJson(categoriesObject.categories, "id", "ASC");
   categoriesObject.categories = theCategories;
