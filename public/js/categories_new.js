@@ -466,7 +466,7 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable");
     var index = 1;
     items.each(function () {
-      $(this).find(".posicaoSubCategoria").text(index);
+      $(this).find(".posicaoSubCategoriaNew").text(index);
       index++;
     });
   });
