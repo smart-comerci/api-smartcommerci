@@ -177,23 +177,10 @@ function addCategory(id) {
     console.log(categoriesObject);
 
     setTimeout(() => {
-      $(".itemSortable").each(function () {
-        console.log("encontrando", $(this).attr("idSub"), id);
-        if ($(this).attr("idSub") === id) {
-          $(this)
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .find(".dropCategoriaContent2")
-            .click();
+      $(".itemSortable2").each(function () {
+        console.log("encontrando", $(this).attr("idCat"), id);
+        if ($(this).attr("idCat") === id) {
+          $(this).find(".dropCategoriaContent2").click();
         }
       });
     }, 2000);
