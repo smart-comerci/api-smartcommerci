@@ -183,6 +183,12 @@ function addCategory(id) {
           $(this).find(".dropCategoriaContent2").click();
         }
       });
+      $(function () {
+        $(".superSortable").sortable({
+          placeholder: "ui-state-highlight",
+        });
+        $(".superSortable").disableSelection();
+      });
     }, 200);
     showCategories();
   } else {
