@@ -243,7 +243,7 @@ async function criarPrimeiroAcesso() {
   console.log(resultado);
 }
 async function publicarAlteracoes() {
-  repareObj();
+  //repareObj();
   const resultado = await $.ajax({
     type: "POST",
     url: api_host + "/categorie_update/" + localStorage.AFFILIATE_ID,
