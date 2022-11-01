@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="icon" type="image/png" href="https://api-smartcomerci.com.br/images/logo/favicon.ico" />
+  <link rel="icon" type="image/png" href="https://api-smartcomerci.com.br/images/logo/favicon.ico" />
   <title>Document</title>
 </head>
 
@@ -843,8 +843,8 @@
 
                 <div class="title-box">
                   Texto do e-mail
-                  <div style="display: none" table="emails_marketing" id="areaTXT" column="conteudo" class="textarea vaiSalvar" rows="10"
-                    contenteditable="true"> 
+                  <div style="display: none" table="emails_marketing" id="areaTXT" column="conteudo"
+                    class="textarea vaiSalvar" rows="10" contenteditable="true">
                   </div>
                   <div class="editor-box">
                     <textarea style="width: 100%;" name="" id="editorFullCode" cols="30" rows="10"></textarea>
@@ -877,189 +877,187 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://api-smartcomerci.com.br/js/tinymce.js"></script>
   <script>
-     
- 
-     var mainHost = 'https://api-smartcomerci.com.br:9090';
-      var preparei = false
+
+
+    var mainHost = 'https://api-smartcomerci.com.br:9090';
+    var preparei = false
     let url = window.location.href
-    if(url.indexOf("configuracoes") > -1){ 
-     $(window).on("load",  function () {
-        let preparando = setInterval(() => {
-          $("#nomeDoEmail").html(localStorage.EMAIL_IN_EDIT?.toString())
-          prepara();
-          //console.log("Preparando")
-        }, 1000);
-        setTimeout(() => {
-          $("#nomeDoEmail").html(localStorage.EMAIL_IN_EDIT?.toString())
-          prepara();
-        }, 1000);
 
-        $(".vaiSalvar").keyup(function () {
-          clearInterval(preparando)
-          //console.log("Parei de preparar...")
-        })
-     })
-      function iniciaEditorHtml(idElemento) {
-        tinymce.init({
-          selector: idElemento,
-          plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-          toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-          toolbar_mode: 'floating',
-          tinycomments_mode: 'embedded',
-          tinycomments_author: 'Author name',
-        });
+    $(window).on("load", function () {
+      let preparando = setInterval(() => {
+        $("#nomeDoEmail").html(localStorage.EMAIL_IN_EDIT?.toString())
+        prepara();
+        //console.log("Preparando")
+      }, 1000);
+      setTimeout(() => {
+        $("#nomeDoEmail").html(localStorage.EMAIL_IN_EDIT?.toString())
+        prepara();
+      }, 1000);
+
+      $(".vaiSalvar").keyup(function () {
+        clearInterval(preparando)
+        //console.log("Parei de preparar...")
+      })
+    })
+    function iniciaEditorHtml(idElemento) {
+      tinymce.init({
+        selector: idElemento,
+        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+      });
+    }
+
+    iniciaEditorHtml("#editorFullCode")
+
+
+
+    localStorage.EMAILS_MARKETING = ''
+    $.ajax({
+      type: "POST",
+      url: window.parent.mainHost + '/getMarketInfo',
+      data: { "masterId": localStorage.MASTER_ID },
+      headers: {
+        "x-access-token": localStorage.token,
+      },
+      success: function (data) {
+        // console.log("atualizando marketing..")
+        localStorage.EMAILS_MARKETING = JSON.stringify(data)
+
+      },
+      error: function (data) {
+        //console.log("erro marketing", data)
+      },
+      complete: function () { },
+    });
+
+
+    function getMarketMail() {
+      let dat = JSON.parse(localStorage.EMAILS_MARKETING)
+      for (const k in dat) {
+        if (localStorage.EMAIL_IN_EDIT == dat[k].tipo_email) {
+
+          return dat[k]
+
+
+        }
       }
- 
-     iniciaEditorHtml("#editorFullCode")
+
+    }
+    function prepara() {
+      try {
+        if (preparei == false) {
+          $("#tituloEMAIL").val("")
+          $("#areaTXT").text("")
+          let dat = JSON.parse(localStorage.EMAILS_MARKETING)
+          for (const k in dat) {
+            if (localStorage.EMAIL_IN_EDIT == dat[k].tipo_email) {
+
+              $("#tituloEMAIL").val(dat[k].titulo)
+              $("#areaTXT").text(dat[k].conteudo)
+
+              tinymce.activeEditor.setContent(dat[k].conteudo);
+
+              //tinymce.get("editorFullCode").getContent()
+
+
+            }
+          }
+          preparei = true
+          //console.log('estou preparado',preparei)
+        }
+
+
+      } catch (err) {
+        console.log("Erro ao preparar...", err)
+      }
+
+    }
 
 
 
-      localStorage.EMAILS_MARKETING = ''
-      $.ajax({
-        type: "POST",
-        url: window.parent.mainHost + '/getMarketInfo',
-        data: { "masterId": localStorage.MASTER_ID },
+    var loja = Number(localStorage.EDITANDO_LOJA_CONFIG)
+    //console.log("a loja é", loja)
+
+    async function salvar() {
+      // setTimeout(() => {
+      //   $(".vaiSalvar").each(function () {
+      //     $(this).attr("idValue", getMarketMail().id)
+      //     $(".vaiSalvar").attr("idValue", getMarketMail().id)
+      //    // $("#areaTXT").attr('newValue', tinymce.get("editorFullCode").getContent())
+      //     window.parent.atualizaCampo($(this), 0)
+      //   })
+      //   window.parent.location.reload()
+
+      //       master_id
+      // tipo_email
+      // titulo
+      // descricao
+      // conteudo
+      // modelo
+      // }, 1000);
+      //       Alteração de senha
+      // Pedido recebido
+
+      console.log({
+        "fields": [
+          { column: "conteudo", tipo_email: localStorage.EMAIL_IN_EDIT, value: tinymce.get("editorFullCode").getContent() },
+          { column: "titulo", tipo_email: localStorage.EMAIL_IN_EDIT, value: $("#tituloEMAIL").val() }
+        ],
+
+        "master_id": localStorage.MASTER_ID
+      })
+
+      await $.ajax({
+        type: 'POST',
+        url: mainHost + '/updateMailMarketingContent',
         headers: {
           "x-access-token": localStorage.token,
         },
-        success: function (data) {
-          // console.log("atualizando marketing..")
-          localStorage.EMAILS_MARKETING = JSON.stringify(data)
-
-        },
-        error: function (data) {
-          //console.log("erro marketing", data)
-        },
-        complete: function () { },
-      });
-
-
-      function getMarketMail() {
-        let dat = JSON.parse(localStorage.EMAILS_MARKETING)
-        for (const k in dat) {
-          if (localStorage.EMAIL_IN_EDIT == dat[k].tipo_email) {
-
-            return dat[k]
-
-
-          }
-        }
-
-      }
-      function prepara() {
-        try {
-          if (preparei == false) {
-            $("#tituloEMAIL").val("")
-            $("#areaTXT").text("")
-            let dat = JSON.parse(localStorage.EMAILS_MARKETING)
-            for (const k in dat) {
-              if (localStorage.EMAIL_IN_EDIT == dat[k].tipo_email) {
-
-                $("#tituloEMAIL").val(dat[k].titulo)
-                $("#areaTXT").text(dat[k].conteudo)
-
-                tinymce.activeEditor.setContent(dat[k].conteudo);
-
-                //tinymce.get("editorFullCode").getContent()
-
-
-              }
-            }
-            preparei = true
-            //console.log('estou preparado',preparei)
-          }
-
-
-        } catch (err) {
-          console.log("Erro ao preparar...", err)
-        }
-
-      }
-
-
-
-      var loja = Number(localStorage.EDITANDO_LOJA_CONFIG)
-      //console.log("a loja é", loja)
-
-      async function salvar() {
-        // setTimeout(() => {
-        //   $(".vaiSalvar").each(function () {
-        //     $(this).attr("idValue", getMarketMail().id)
-        //     $(".vaiSalvar").attr("idValue", getMarketMail().id)
-        //    // $("#areaTXT").attr('newValue', tinymce.get("editorFullCode").getContent())
-        //     window.parent.atualizaCampo($(this), 0)
-        //   })
-        //   window.parent.location.reload()
-
-        //       master_id
-        // tipo_email
-        // titulo
-        // descricao
-        // conteudo
-        // modelo
-        // }, 1000);
-        //       Alteração de senha
-        // Pedido recebido
- 
-        console.log({
+        data: {
           "fields": [
             { column: "conteudo", tipo_email: localStorage.EMAIL_IN_EDIT, value: tinymce.get("editorFullCode").getContent() },
             { column: "titulo", tipo_email: localStorage.EMAIL_IN_EDIT, value: $("#tituloEMAIL").val() }
           ],
 
           "master_id": localStorage.MASTER_ID
-        })
+        },
+        success: function (data) {
+          console.log(data)
+          window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
+          setTimeout(() => {
+            window.parent.location.reload()
+          }, 2000);
+        },
+        error: function (data) {
 
-        await $.ajax({
-          type: 'POST',
-          url: mainHost + '/updateMailMarketingContent',
-          headers: {
-            "x-access-token": localStorage.token,
-          },
-          data: {
-            "fields": [
-              { column: "conteudo", tipo_email: localStorage.EMAIL_IN_EDIT, value: tinymce.get("editorFullCode").getContent() },
-              { column: "titulo", tipo_email: localStorage.EMAIL_IN_EDIT, value: $("#tituloEMAIL").val() }
-            ],
-
-            "master_id": localStorage.MASTER_ID
-          },
-          success: function (data) {
-            console.log(data)
-            window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
-            setTimeout(() => {
-              window.parent.location.reload()
-            }, 2000);
-          },
-          error: function (data) {
-
-            window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-          },
-          complete: function () {
-            // ao final da requisição...
-          }
-        });
-
-
-
-
-
-      }
-      let fim = 5, co = 0
-
-      let tim = setInterval(() => {
-        co++
-        if (co < fim) {
-          $(".tox-notification").hide()
-        } else {
-          clearInterval(tim)
+          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+        },
+        complete: function () {
+          // ao final da requisição...
         }
-      }, 1000)
-      
+      });
 
-      
+
+
+
+
     }
-    
+    let fim = 5, co = 0
+
+    let tim = setInterval(() => {
+      co++
+      if (co < fim) {
+        $(".tox-notification").hide()
+      } else {
+        clearInterval(tim)
+      }
+    }, 1000)
+
+
+
   </script>
 </body>
 
