@@ -481,7 +481,7 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable2");
     var index = 1;
     items.each(function () {
-      $(this).find(".posicaoCategoria").text(index);
+      $(this).find(".posicaoCategoriaNew").text(index);
       index++;
     });
   });
