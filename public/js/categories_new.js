@@ -493,9 +493,9 @@ function repareObj() {
       let subcategories = categories.find(
         (dt) => Number(dt.id) === Number(idCat)
       ).subcategories;
-      if (subcategories) {
-        subs = subcategories;
-      }
+      // if (subcategories) {
+      //   subs = subcategories;
+      // }
 
       items.each(function () {
         let idSub = $(this).attr("idSub");
@@ -511,12 +511,12 @@ function repareObj() {
 
         $(this).find(".posicaoSubCategoriaNew").text(index);
         index++;
-        for (const k in categoriesObject.categories) {
-          if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
-            categoriesObject.categories[k].subcategories = subs;
-          }
-        }
       });
+      for (const k in categoriesObject.categories) {
+        if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
+          categoriesObject.categories[k].subcategories = subs;
+        }
+      }
     });
 
     $(".fullSortable").each(function () {
