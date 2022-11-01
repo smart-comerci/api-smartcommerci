@@ -472,7 +472,7 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable");
     var index = 1;
     items.each(function () {
-      //$(this).find(".posicaoSubCategoriaNew").text(index);
+      $(this).find(".posicaoSubCategoriaNew").text(index);
       index++;
     });
   });
@@ -481,7 +481,7 @@ function reordenaListas3() {
     var items = $(this).find(".itemSortable2");
     var index = 1;
     items.each(function () {
-      //$(this).find(".posicaoCategoriaNew").text(index);
+      $(this).find(".posicaoCategoriaNew").text(index);
       index++;
     });
   });
@@ -558,13 +558,13 @@ function repareObj() {
   }
 }
 
-setInterval(() => {
+setTimeout(() => {
   try {
     reordenaListas3();
   } catch (err) {
     console.log(err);
   }
-}, 1000);
+}, 5000);
 
 function showContent(element) {
   if (
