@@ -183,7 +183,7 @@ function addCategory(id) {
           $(this).find(".dropCategoriaContent2").click();
         }
       });
-    }, 2000);
+    }, 500);
     showCategories();
   } else {
     let categoria = new Category(categoriesObject.categories.length);
