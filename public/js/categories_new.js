@@ -243,7 +243,7 @@ async function criarPrimeiroAcesso() {
   console.log(resultado);
 }
 async function publicarAlteracoes() {
-  //repareObj();
+  repareObj();
   const resultado = await $.ajax({
     type: "POST",
     url: api_host + "/categorie_update/" + localStorage.AFFILIATE_ID,
@@ -491,9 +491,14 @@ function repareObj() {
 
       items.each(function () {
         let idCat = $(this).attr("idCat");
+
         let subcategories = categories.find(
           (dt) => Number(dt.id) === Number(idCat)
         ).subcategories;
+        if (subcategories) {
+          subs = subcategories;
+        }
+
         let idSub = $(this).attr("idSub");
         console.log("ID ", Number(idSub));
         let thisSub = subcategories.find(
