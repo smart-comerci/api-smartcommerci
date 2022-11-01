@@ -179,7 +179,7 @@ function addCategory(id) {
     setTimeout(() => {
       $(".itemSortable2").each(function () {
         console.log("encontrando", $(this).attr("idCat"), id);
-        if ($(this).attr("idCat") === id) {
+        if (Number($(this).attr("idCat")) === Number(id)) {
           $(this).find(".dropCategoriaContent2").click();
         }
       });
