@@ -489,16 +489,15 @@ function repareObj() {
       var index = 1;
       var subs = [];
 
+      let idCat = items[0].attr("idCat");
+      let subcategories = categories.find(
+        (dt) => Number(dt.id) === Number(idCat)
+      ).subcategories;
+      if (subcategories) {
+        subs = subcategories;
+      }
+
       items.each(function () {
-        let idCat = $(this).attr("idCat");
-
-        let subcategories = categories.find(
-          (dt) => Number(dt.id) === Number(idCat)
-        ).subcategories;
-        if (subcategories) {
-          subs = subcategories;
-        }
-
         let idSub = $(this).attr("idSub");
         console.log("ID ", Number(idSub));
         let thisSub = subcategories.find(
