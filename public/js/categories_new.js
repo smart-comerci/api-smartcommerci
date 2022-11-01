@@ -178,6 +178,7 @@ function addCategory(id) {
 
     setTimeout(() => {
       $(".itemSortable").each(function () {
+        console.log("encontrando", $(this).attr("idSub"), id);
         if ($(this).attr("idSub") === id) {
           $(this)
             .parent()
