@@ -71,7 +71,7 @@ function modalDrop() {
             contentType: false,
             type: "POST",
             success: function (data) {
-              // console.log(data)
+              console.log(data);
               let fileName4 = data.filename;
 
               $.ajax({
@@ -87,7 +87,7 @@ function modalDrop() {
                 contentType: false,
                 type: "POST",
                 success: function (retorno) {
-                  //  console.log("retorno",retorno)
+                  console.log("retorno", retorno);
                   let totalMudancas = retorno.dados.length;
 
                   function verifyTypes() {
@@ -177,12 +177,12 @@ function modalDrop() {
                   }
                 },
                 error: function (data2) {
-                  // console.log(data2)
+                  console.log(data2);
                 },
               });
             },
             error: function (data) {
-              // console.log(data)
+              console.log(data);
             },
           });
         } catch (err) {
