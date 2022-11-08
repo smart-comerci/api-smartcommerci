@@ -106,6 +106,110 @@ let homePage = {
   },
 };
 
+function corrigeHomePage() {
+  homePage = {
+    logotipo: {
+      url: "",
+      link: "",
+    },
+    mainColors: {
+      first: "",
+      second: "",
+      third: "",
+      fourty: "",
+    },
+    asideBanner: {
+      url: "",
+      link: "",
+    },
+    header: {
+      mainBanner: {
+        url: "",
+        link: "",
+      },
+      footerBanners: {
+        first: {
+          url: "",
+          link: "",
+        },
+        second: {
+          url: "",
+          link: "",
+        },
+        third: {
+          url: "",
+          link: "",
+        },
+        fourty: {
+          url: "",
+          link: "",
+        },
+      },
+      asideBanner: {
+        url: "",
+        link: "",
+      },
+    },
+    body: [],
+    newsletter: {
+      text: "",
+      link: "",
+    },
+    whatsapp: {
+      text: "",
+      url: "",
+      link: "",
+    },
+    footerLinks: {
+      firstColumnTittle: {
+        text: "",
+        link: "",
+      },
+      secondColumnTittle: {
+        text: "",
+        link: "",
+      },
+      thirdColumnTittle: {
+        text: "",
+        link: "",
+      },
+      firstColumn: [],
+      secondColumn: [],
+      thirdColumn: [],
+      contactData: {
+        text: "",
+        link: "",
+      },
+    },
+    footerLogo: {
+      url: "",
+      link: "",
+    },
+    footerText: {
+      text: "",
+      link: "",
+    },
+    socialMidia: {
+      facebook: {
+        status: false,
+        link: "",
+      },
+      instagram: {
+        status: false,
+        link: "",
+      },
+      youTube: {
+        status: false,
+        link: "",
+      },
+    },
+    legalText: {
+      url: "",
+      link: "",
+    },
+  };
+}
+
 //================================NEWS UPDATES==============================
 
 function setOrigins(origin, stage) {
@@ -1211,6 +1315,9 @@ async function setBannerIn(targetId, thisURL, stage) {
 
 async function changePicture(element) {
   let origin = element.attr("origin");
+  if (!homePage) {
+    corrigeHomePage();
+  }
   if (origin) {
     let thisURL = element.attr("url");
     if (origin.split("_")[0] === "banner") {
@@ -1250,6 +1357,7 @@ async function changePicture(element) {
       }
     } else {
       console.log("homePage ...", homePage);
+
       if (thisURL) {
         console.log(origin.split("-"));
         if (origin.split("-").length === 1) {
