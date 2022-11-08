@@ -18,7 +18,7 @@ function mostra() {
   $(".listaDeCategorias").html("");
   $.ajax({
     type: "POST",
-    url: "https://api-smartcomerci.com.br:7070/getCatList",
+    url: "https://www.api-smartcomerci.com.br:7070/getCatList",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -73,7 +73,7 @@ function continua() {
   try {
     $.ajax({
       type: "POST",
-      url: "https://api-smartcomerci.com.br:7070/getCategories",
+      url: "https://www.api-smartcomerci.com.br:7070/getCategories",
       headers: {
         "x-access-token": localStorage.token,
       },
@@ -255,7 +255,7 @@ function continua() {
 async function criaNovaCategoria() {
   $.ajax({
     type: "POST",
-    url: "https://api-smartcomerci.com.br:7070/maisUmaCategoria",
+    url: "https://www.api-smartcomerci.com.br:7070/maisUmaCategoria",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -442,7 +442,7 @@ function infoCategoria_keyWord(categoria) {
 
 //     $.ajax({
 //         type: "POST",
-//         url: "https://api-smartcomerci.com.br:7070/updateCategoryList",
+//         url: "https://www.api-smartcomerci.com.br:7070/updateCategoryList",
 //         headers: {
 //             "x-access-token": localStorage.token,
 //         },
@@ -606,7 +606,7 @@ async function updateSequencia(mostra1) {
   // console.log('as categorias', lista)
   $.ajax({
     type: "POST",
-    url: "https://api-smartcomerci.com.br:7070/updateCategoryList",
+    url: "https://www.api-smartcomerci.com.br:7070/updateCategoryList",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -1858,13 +1858,13 @@ function iconesSmartCommerci2(categorieName) {
       html +=
         '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;"   id="' +
         aleatoryID(
-          "https://api-smartcomerci.com.br/assets/icons/" + LISTA_ICONES[k]
+          "https://www.api-smartcomerci.com.br/assets/icons/" + LISTA_ICONES[k]
         ) +
         '_icone" onclick="fila($(this), \'' +
         categorieName +
         "','updateIconSVG')\" class=\"boxIconDefault \">" +
         '<i  style="display:none" class="fas fa-check iconSelectedCheck"></i>' +
-        '<img class="imgIcone" style="width: 100%;" src="https://api-smartcomerci.com.br/assets/icons/' +
+        '<img class="imgIcone" style="width: 100%;" src="https://www.api-smartcomerci.com.br/assets/icons/' +
         LISTA_ICONES[k] +
         '" />' +
         "</div>";
@@ -1907,7 +1907,7 @@ function updateIconSVG(element, categorieName) {
 
   $.ajax({
     type: "POST",
-    url: "https://api-smartcomerci.com.br:7070/updateCategorieDetail",
+    url: "https://www.api-smartcomerci.com.br:7070/updateCategorieDetail",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -1949,7 +1949,7 @@ function updateCategoriaDetalhe(element, categorieName) {
 
     $.ajax({
       type: "POST",
-      url: "https://api-smartcomerci.com.br:7070/updateCategorieDetail",
+      url: "https://www.api-smartcomerci.com.br:7070/updateCategorieDetail",
       headers: {
         "x-access-token": localStorage.token,
       },
@@ -1980,7 +1980,7 @@ function updateCategoriaDetalhe(element, categorieName) {
 function mudaDetalhe(fieldName, content, categorieName) {
   $.ajax({
     type: "POST",
-    url: "https://api-smartcomerci.com.br:7070/updateCategorieDetail",
+    url: "https://www.api-smartcomerci.com.br:7070/updateCategorieDetail",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -2483,7 +2483,7 @@ function salvaModalSubCategoria() {
     //  console.log(editados)
     $.ajax({
       type: "POST",
-      url: "https://api-smartcomerci.com.br:7070/updateCategorieDetail",
+      url: "https://www.api-smartcomerci.com.br:7070/updateCategorieDetail",
       headers: {
         "x-access-token": localStorage.token,
       },
@@ -2580,11 +2580,11 @@ function sobeIcone(elemento) {
       var html =
         '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;" id="' +
         aleatoryID(
-          "https://api-smartcomerci.com.br/assets/icons/cliente_" +
+          "https://www.api-smartcomerci.com.br/assets/icons/cliente_" +
             elemento[0].files[0].name
         ) +
         '_icone" onclick="fila($(this), \'ALIMENTICIOS\',\'updateIconSVG\')" class="boxIconDefault "><svg style="display: none;" class="svg-inline--fa fa-check fa-w-16 iconSelectedCheck" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>' +
-        '<!-- <i style="display:none" class="fas fa-check iconSelectedCheck"></i> Font Awesome fontawesome.com --><img class="imgIcone" style="width: 100%;" src="https://api-smartcomerci.com.br/assets/icons/cliente_' +
+        '<!-- <i style="display:none" class="fas fa-check iconSelectedCheck"></i> Font Awesome fontawesome.com --><img class="imgIcone" style="width: 100%;" src="https://www.api-smartcomerci.com.br/assets/icons/cliente_' +
         elemento[0].files[0].name +
         '"></div>';
       $(".iconesClientes").prepend(html);
@@ -2936,7 +2936,7 @@ function uploadBannerCat(element) {
                 active: false,
                 url: data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 ),
               },
             ],
@@ -2948,7 +2948,7 @@ function uploadBannerCat(element) {
           "background",
           `url(${data.path?.replace(
             "./public",
-            "https://api-smartcomerci.com.br:7070"
+            "https://www.api-smartcomerci.com.br:7070"
           )})`
         );
         $("#" + element.attr("target")).css(
@@ -2963,7 +2963,7 @@ function uploadBannerCat(element) {
       }
 
       // console.log(element.parent().parent().find('input'))
-      // console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:7070')}`)
+      // console.log(`${data.path?.replace('./public','https://www.api-smartcomerci.com.br:7070')}`)
 
       let thisCategory = localStorage.SUB_CAT_ATUAL;
       let subs = JSON.parse(localStorage.SUB_EDIT);
@@ -2977,7 +2977,7 @@ function uploadBannerCat(element) {
                   active: element.parent().parent().find("input")[0].checked,
                   url: `${data.path?.replace(
                     "./public",
-                    "https://api-smartcomerci.com.br:7070"
+                    "https://www.api-smartcomerci.com.br:7070"
                   )}`,
                 },
               ];
@@ -2986,7 +2986,7 @@ function uploadBannerCat(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 )}`,
               });
               subs[k]["banners"] = bnn;
@@ -2997,7 +2997,7 @@ function uploadBannerCat(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 )}`,
               },
             ];
@@ -3039,7 +3039,7 @@ function uploadBannerCatMain(element) {
                 active: false,
                 url: data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 ),
               },
             ],
@@ -3051,7 +3051,7 @@ function uploadBannerCatMain(element) {
           "background",
           `url(${data.path?.replace(
             "./public",
-            "https://api-smartcomerci.com.br:7070"
+            "https://www.api-smartcomerci.com.br:7070"
           )})`
         );
         $("#" + element.attr("target")).css(
@@ -3066,7 +3066,7 @@ function uploadBannerCatMain(element) {
       }
 
       //    console.log(element.parent().parent().find('input'))
-      //    console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:7070')}`)
+      //    console.log(`${data.path?.replace('./public','https://www.api-smartcomerci.com.br:7070')}`)
 
       let thisCategory = localStorage.CAT_SUB_EDIT;
       let subs = JSON.parse(localStorage.MINHAS_CATEGORIAS);
@@ -3097,7 +3097,7 @@ function uploadBannerCatMain(element) {
                   active: element.parent().parent().find("input")[0].checked,
                   url: `${data.path?.replace(
                     "./public",
-                    "https://api-smartcomerci.com.br:7070"
+                    "https://www.api-smartcomerci.com.br:7070"
                   )}`,
                 },
               ];
@@ -3110,7 +3110,7 @@ function uploadBannerCatMain(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 )}`,
               });
               subs[k]["subcategorie_banners"]["banners"] = bnn;
@@ -3127,7 +3127,7 @@ function uploadBannerCatMain(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 )}`,
               },
             ];
@@ -3172,7 +3172,7 @@ function uploadBannerCatVertical(element) {
                 active: false,
                 url: data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 ),
               },
             ],
@@ -3184,7 +3184,7 @@ function uploadBannerCatVertical(element) {
           "background",
           `url(${data.path?.replace(
             "./public",
-            "https://api-smartcomerci.com.br:7070"
+            "https://www.api-smartcomerci.com.br:7070"
           )})`
         );
         $("#" + element.attr("target")).css(
@@ -3199,7 +3199,7 @@ function uploadBannerCatVertical(element) {
       }
 
       //  console.log(element.parent().parent().find('input'))
-      //  console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:7070')}`)
+      //  console.log(`${data.path?.replace('./public','https://www.api-smartcomerci.com.br:7070')}`)
 
       let thisCategory = localStorage.SUB_CAT_ATUAL;
       let subs = JSON.parse(localStorage.SUB_EDIT);
@@ -3213,7 +3213,7 @@ function uploadBannerCatVertical(element) {
                   active: element.parent().parent().find("input")[0].checked,
                   url: `${data.path?.replace(
                     "./public",
-                    "https://api-smartcomerci.com.br:7070"
+                    "https://www.api-smartcomerci.com.br:7070"
                   )}`,
                 },
               ];
@@ -3222,7 +3222,7 @@ function uploadBannerCatVertical(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 )}`,
               });
               subs[k]["bannersVertical"] = bnn;
@@ -3233,7 +3233,7 @@ function uploadBannerCatVertical(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 )}`,
               },
             ];
@@ -3275,7 +3275,7 @@ function uploadBannerCatVerticalMain(element) {
                 active: false,
                 url: data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 ),
               },
             ],
@@ -3287,7 +3287,7 @@ function uploadBannerCatVerticalMain(element) {
           "background",
           `url(${data.path?.replace(
             "./public",
-            "https://api-smartcomerci.com.br:7070"
+            "https://www.api-smartcomerci.com.br:7070"
           )})`
         );
         $("#" + element.attr("target")).css(
@@ -3302,7 +3302,7 @@ function uploadBannerCatVerticalMain(element) {
       }
 
       // console.log(element.parent().parent().find('input'))
-      // console.log(`${data.path?.replace('./public','https://api-smartcomerci.com.br:7070')}`)
+      // console.log(`${data.path?.replace('./public','https://www.api-smartcomerci.com.br:7070')}`)
 
       let thisCategory = localStorage.CAT_SUB_EDIT;
       let subs = JSON.parse(localStorage.MINHAS_CATEGORIAS);
@@ -3336,7 +3336,7 @@ function uploadBannerCatVerticalMain(element) {
                   active: element.parent().parent().find("input")[0].checked,
                   url: `${data.path?.replace(
                     "./public",
-                    "https://api-smartcomerci.com.br:7070"
+                    "https://www.api-smartcomerci.com.br:7070"
                   )}`,
                 },
               ];
@@ -3348,7 +3348,7 @@ function uploadBannerCatVerticalMain(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 )}`,
               });
               subs[k]["subcategorie_banners"]["bannersVertical"] = bnn;
@@ -3363,7 +3363,7 @@ function uploadBannerCatVerticalMain(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://api-smartcomerci.com.br:7070"
+                  "https://www.api-smartcomerci.com.br:7070"
                 )}`,
               },
             ];

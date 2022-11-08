@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="icon" type="image/png" href="https://api-smartcomerci.com.br/images/logo/favicon.ico" />
+  <link rel="icon" type="image/png" href="https://www.api-smartcomerci.com.br/images/logo/favicon.ico" />
   <title>Conteudo</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -167,7 +172,7 @@
     .btn-primary:hover,
     .btn-primary:focus,
     .btn-primary:active,
-    .btn-primary:disabled  {
+    .btn-primary:disabled {
       background: #F6B504;
       color: #ffffff;
       border: none;
@@ -176,7 +181,7 @@
     .btn-outline-primary,
     .btn-outline-primary:hover,
     .btn-outline-primary:focus,
-    .btn-outline-primary:active  {
+    .btn-outline-primary:active {
       background: #ffffff;
       border: 1px solid;
       color: #F6B504;
@@ -185,7 +190,7 @@
     .btn-secondary,
     .btn-secondary:hover,
     .btn-secondary:focus,
-    .btn-secondary:active  {
+    .btn-secondary:active {
       color: #F6B504;
       background: #FFFBF2;
       border: none;
@@ -218,7 +223,7 @@
       border-right: 2px solid #D2D8E0;
 
       margin: 0 5rem;
-    }  
+    }
 
     .page-header {
       display: flex;
@@ -263,7 +268,7 @@
       justify-content: center;
       gap: 0.8rem;
       background: #FFFBF2;
-      border: 2px dashed #F8C63F;      
+      border: 2px dashed #F8C63F;
       cursor: pointer;
     }
 
@@ -356,17 +361,17 @@
       margin-left: 0.2rem;
     }
 
-    .switch input:checked ~ .switch-toggle {
+    .switch input:checked~.switch-toggle {
       border: none;
       background: #F6B504;
     }
 
-    .switch input:checked ~ .switch-toggle:before {
+    .switch input:checked~.switch-toggle:before {
       left: 2.2em;
       background: #ffffff;
     }
 
-    .switch input:checked ~ .switch-label:after {
+    .switch input:checked~.switch-label:after {
       content: "Ativa";
     }
 
@@ -393,6 +398,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="page-header">
     <h3 class="mb-0">Conteúdo</h3>
@@ -430,10 +436,11 @@
           <div class="card-body card-body-top card-body_upload card-fixed-content">
             <span class="rounded-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
+                <path
+                  d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
               </svg>
             </span>
-              
+
             <p class="card-body_upload-text">
               Modal sem edição
             </p>
@@ -447,12 +454,13 @@
 
     <hr>
 
-    <h3 class="d-inline-block">Páginas Institucionais</h3> <span class="badge rounded-pill custom-badge align-middle"><span id="totalPaginas">0</span>/15</span>
+    <h3 class="d-inline-block">Páginas Institucionais</h3> <span
+      class="badge rounded-pill custom-badge align-middle"><span id="totalPaginas">0</span>/15</span>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-3 mb-5 minhasPaginas">
-      
-     
-<!--
+
+
+      <!--
      
       <div class="col">
         <div onclick="window.parent.location.replace('../nossas_lojas')" class="card">
@@ -490,13 +498,15 @@
 
       <div class="col">
         <div onclick="criarNovaPagina()" class="card">
-          <div class="card-body card-body_upload card-fixed-content" data-bs-toggle="modal" data-bs-target="#modalMaximumPageAmount">
+          <div class="card-body card-body_upload card-fixed-content" data-bs-toggle="modal"
+            data-bs-target="#modalMaximumPageAmount">
             <span class="rounded-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
+                <path
+                  d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
               </svg>
             </span>
-              
+
             <p class="card-body_upload-text">
               Nova página institucional
             </p>
@@ -508,7 +518,7 @@
     <hr>
 
     <h3 class="d-inline-block">Receitas</h3>
-    
+
     <div class="mb-2">
       <label class="switch">
         <input type="checkbox" id="pedido_perm">
@@ -518,7 +528,8 @@
     </div>
 
     <p class="body-text">
-      Ativando a funcionalidade “receitas” seus clientes poderão acessar a página pelo menu principal e poderão ver as receitas ativas
+      Ativando a funcionalidade “receitas” seus clientes poderão acessar a página pelo menu principal e poderão ver as
+      receitas ativas
     </p>
 
     <div id="minhasReceitas" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-3 mb-5">
@@ -531,18 +542,19 @@
         </div>
       </div>
 
- 
- 
+
+
 
       <div class="col">
-        <div  onclick="window.parent.location.replace('../receitas')" class="card">
+        <div onclick="window.parent.location.replace('../receitas')" class="card">
           <div class="card-body card-body_upload card-fixed-content">
             <span class="rounded-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
+                <path
+                  d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
               </svg>
             </span>
-              
+
             <p class="card-body_upload-text">
               Adicionar receitas
             </p>
@@ -554,7 +566,7 @@
     <hr>
 
     <h3 style="display: none !important;" class="d-inline-block">Assinatura</h3>
-    
+
     <div style="display: none;" class="mb-2">
       <label class="switch">
         <input type="checkbox" id="pedido_perm">
@@ -564,7 +576,8 @@
     </div>
 
     <p style="display: none;" class="body-text">
-      Ativando a funcionalidade “assinatura” seus clientes poderão acessar a página pelo menu principal e poderão ver as receitas ativas
+      Ativando a funcionalidade “assinatura” seus clientes poderão acessar a página pelo menu principal e poderão ver as
+      receitas ativas
     </p>
 
     <div style="display: none;" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-3 mb-5">
@@ -573,10 +586,11 @@
           <div class="card-body card-body-top card-body_upload card-fixed-content">
             <span class="rounded-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
+                <path
+                  d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
               </svg>
             </span>
-              
+
             <p class="card-body_upload-text">
               Página não criada
             </p>
@@ -586,7 +600,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col">
         <div class="card">
           <img src="site-print.png" class="card-img-top card-fixed-content" alt="...">
@@ -598,7 +612,8 @@
     </div>
   </div>
 
-  <div class="modal" id="modalMaximumPageAmount" tabindex="-1" aria-labelledby="modalMaximumPageAmountLabel" aria-hidden="true">
+  <div class="modal" id="modalMaximumPageAmount" tabindex="-1" aria-labelledby="modalMaximumPageAmountLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header justify-content-center">
@@ -609,9 +624,12 @@
         <div class="modal-body">
           <div class="panel-header text-center mb-4">
             <p class="rounded-icon icon-xlg icon-orange">
-              <svg xmlns="http://www.w3.org/2000/svg" id="Layer_x0020_1" width="32.854" height="32.854" viewBox="0 0 32.854 32.854">
-                <rect id="Retângulo_1684" data-name="Retângulo 1684" width="32.854" height="32.854" fill="none"/>
-                <path id="exclamation-triangle" d="M10.5,21A10.5,10.5,0,0,1,3.075,3.075,10.5,10.5,0,1,1,10.5,21Zm0-20A9.5,9.5,0,1,0,20,10.5,9.511,9.511,0,0,0,10.5,1ZM11,14H10V13h1v1Zm-.5-3a.5.5,0,0,1-.5-.5v-4a.5.5,0,0,1,1,0v4A.5.5,0,0,1,10.5,11Z" transform="translate(5.927 5.927)" fill="#f8c63f"/>
+              <svg xmlns="http://www.w3.org/2000/svg" id="Layer_x0020_1" width="32.854" height="32.854"
+                viewBox="0 0 32.854 32.854">
+                <rect id="Retângulo_1684" data-name="Retângulo 1684" width="32.854" height="32.854" fill="none" />
+                <path id="exclamation-triangle"
+                  d="M10.5,21A10.5,10.5,0,0,1,3.075,3.075,10.5,10.5,0,1,1,10.5,21Zm0-20A9.5,9.5,0,1,0,20,10.5,9.511,9.511,0,0,0,10.5,1ZM11,14H10V13h1v1Zm-.5-3a.5.5,0,0,1-.5-.5v-4a.5.5,0,0,1,1,0v4A.5.5,0,0,1,10.5,11Z"
+                  transform="translate(5.927 5.927)" fill="#f8c63f" />
               </svg>
             </p>
 
@@ -636,13 +654,13 @@
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  
+
   <script>
-    var mainHost = 'https://api-smartcomerci.com.br:9090';
-$.ajax({
+    var mainHost = 'https://www.api-smartcomerci.com.br:9090';
+    $.ajax({
       type: "POST",
-      url:  mainHost + '/getByTableName',
-      data: { "masterId": localStorage.MASTER_ID, "idName" : "master_id", "tableName": "institucional_pages" },
+      url: mainHost + '/getByTableName',
+      data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "institucional_pages" },
       headers: {
         "x-access-token": localStorage.token,
       },
@@ -651,7 +669,7 @@ $.ajax({
         //console.log("coletando paginas institucionais..")
         localStorage.INSTITUCIONAL_PAGES = JSON.stringify(data)
         addPage()
- 
+
 
       },
       error: function (data) {
@@ -661,69 +679,69 @@ $.ajax({
     });
 
 
-    function addPage(){
-      var html =''
+    function addPage() {
+      var html = ''
       let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES)
-      for(const k in paginas){
+      for (const k in paginas) {
         let checked = ''
-        if(paginas[k].status == 1){
+        if (paginas[k].status == 1) {
           checked = 'checked=true'
-        } 
-        html += '<div class="col">'+
-                    '<div onclick="window.parent.location.replace(\'../paginas_institucionais/'+paginas[k].name_page+'\')" class="card">'+
-                      '<img src="site-print.png" class="card-img-top card-fixed-content" alt="...">'+
-                      '<div class="card-body">'+
-                        '<h5 class="card-title">'+paginas[k].name_page.replace(/-/g,' ').toUpperCase()+'</h5>'+
-                        '<div>'+
-                           '<label class="switch">'+
-                            '<input '+checked+' type="checkbox" id="pedido_perm'+paginas[k].id+'">'+
-                            '<span class="switch-toggle"></span>'+
-                            '<span class="switch-label">Página</span>'+
-                          '</label>'+
-                        '</div>'+
-                      '</div>'+
-                    '</div>'+
-                  '</div>';
+        }
+        html += '<div class="col">' +
+          '<div onclick="window.parent.location.replace(\'../paginas_institucionais/' + paginas[k].name_page + '\')" class="card">' +
+          '<img src="site-print.png" class="card-img-top card-fixed-content" alt="...">' +
+          '<div class="card-body">' +
+          '<h5 class="card-title">' + paginas[k].name_page.replace(/-/g, ' ').toUpperCase() + '</h5>' +
+          '<div>' +
+          '<label class="switch">' +
+          '<input ' + checked + ' type="checkbox" id="pedido_perm' + paginas[k].id + '">' +
+          '<span class="switch-toggle"></span>' +
+          '<span class="switch-label">Página</span>' +
+          '</label>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
       }
       $(".minhasPaginas").prepend(html)
-      
+
     }
 
-    function criarNovaPagina(){
+    function criarNovaPagina() {
       window.parent.location.replace(
-      '../paginas_institucionais/PAGINA-NOVA'  
+        '../paginas_institucionais/PAGINA-NOVA'
       )
     }
 
     $.ajax({
-          type: "POST",
-          url: mainHost + '/getByTableName',
-          data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues" },
-          headers: {
-            "x-access-token": localStorage.token,
-          },
-          success: function (data2) {
-            //console.log('revenuess',data2)
-            let html = ''
-            for(const k in data2){
-              html += getRevenueCard(data2[k])
-            }
-            //console.log(html)
+      type: "POST",
+      url: mainHost + '/getByTableName',
+      data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues" },
+      headers: {
+        "x-access-token": localStorage.token,
+      },
+      success: function (data2) {
+        //console.log('revenuess',data2)
+        let html = ''
+        for (const k in data2) {
+          html += getRevenueCard(data2[k])
+        }
+        //console.log(html)
 
-            $("#minhasReceitas").prepend(html)
-            
-          },
-          error: function (data) {
-            //console.log("erro get", data)
+        $("#minhasReceitas").prepend(html)
 
-            window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
-          },
-          complete: function () { },
-        });
+      },
+      error: function (data) {
+        //console.log("erro get", data)
+
+        window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
+      },
+      complete: function () { },
+    });
 
 
-    
-    function getRevenueCard(dados){
+
+    function getRevenueCard(dados) {
 
       let html = `
       <div class="col">
@@ -733,7 +751,7 @@ $.ajax({
             <h5 class="card-title">${dados.title}</h5>
             <div>
               <label class="switch">
-                <input ${dados.status == 1 ? 'checked="true"':''} type="checkbox" id="pedido_perm">
+                <input ${dados.status == 1 ? 'checked="true"' : ''} type="checkbox" id="pedido_perm">
                 <span class="switch-toggle"></span>
                 <span class="switch-label">Receita</span>
               </label>
@@ -743,9 +761,10 @@ $.ajax({
       </div>`
 
       return html
-      
+
     }
 
   </script>
 </body>
+
 </html>

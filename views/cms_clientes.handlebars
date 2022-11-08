@@ -132,13 +132,14 @@
         color: #687C97;
         opacity: 1;
     }
-    .infoLabel{
-            text-align: center;
-            font: normal normal normal 14px Roboto;
-            letter-spacing: 0px;
-            color: #687C97;
-            margin: auto;
-            opacity: 1;
+
+    .infoLabel {
+        text-align: center;
+        font: normal normal normal 14px Roboto;
+        letter-spacing: 0px;
+        color: #687C97;
+        margin: auto;
+        opacity: 1;
     }
 </style>
 
@@ -226,7 +227,7 @@
                 </div>
                 <div class="listaUsuarios4">
 
-                   
+
 
                 </div>
             </div>
@@ -240,20 +241,20 @@
 <script>
 
 
-clientRequest({"affiliate_id":localStorage.AFFILIATE_ID},'/getClientsUsersFromAffiliate',  true, 'USERS_CLIENTS_'+localStorage.AFFILIATE_ID)
+    clientRequest({ "affiliate_id": localStorage.AFFILIATE_ID }, '/getClientsUsersFromAffiliate', true, 'USERS_CLIENTS_' + localStorage.AFFILIATE_ID)
 
-    function clientRequest(params, url, cache, chaveCache){
+    function clientRequest(params, url, cache, chaveCache) {
         return $.ajax({
             type: 'POST',
-            url: 'https://api-smartcomerci.com.br:9090' + url,
+            url: 'https://www.api-smartcomerci.com.br:9090' + url,
             data: params,
             headers: {
                 'x-access-token': localStorage.token,
             },
             success: function (data) {
                 //console.log(data)
-                
-                if(cache)            {
+
+                if (cache) {
                     sessionStorage[chaveCache] = JSON.stringify(data)
                 }
             },
@@ -264,55 +265,55 @@ clientRequest({"affiliate_id":localStorage.AFFILIATE_ID},'/getClientsUsersFromAf
         });
 
 
-        
+
     }
-    function redirectThis(id){
-        location.replace('../cliente/'+id)
+    function redirectThis(id) {
+        location.replace('../cliente/' + id)
     }
 
-    function getUuarios7(){
+    function getUuarios7() {
         let html7 = ''
         let lista = []
-        try{
-           lista =  JSON.parse(sessionStorage['USERS_CLIENTS_'+localStorage.AFFILIATE_ID])
-        }catch(err){
+        try {
+            lista = JSON.parse(sessionStorage['USERS_CLIENTS_' + localStorage.AFFILIATE_ID])
+        } catch (err) {
             //console.log(err)
         }
-        let pedidos = 0, assinaturas = 0 
+        let pedidos = 0, assinaturas = 0
 
-        for(const k in lista){
-             $(".listaUsuarios4").html("")
+        for (const k in lista) {
+            $(".listaUsuarios4").html("")
             let letter = lista[k].users_client_name.split("")[0] ? lista[k].users_client_name.split("")[0].toUpperCase() : "?"
-            html7 +=     '<div onclick="redirectThis('+lista[k].id+')" affiliate_id="'+localStorage.AFFILIATE_ID+'" class="row radius20 userCms">'+
-                            '<div style="max-width: 70px; opacity: 1;" class="col-sm"><label class="checkSmart"><input'+
-                                        'class="checka form-control" type="checkbox"><span class="checkmark"></span></label>'+
-                            '</div>'+
-                            '<div class="col-sm" style="opacity: 1; display: inline-flex; gap: 15px; padding-top: 10px">'+
-                                '<div style="max-width: 20%;">'+
-                                    '<p class="firstLetter">'+letter+'</p>'+
-                                '</div>'+
-                                '<div style="max-width: 80%;   margin: auto">'+
-                                    '<p field="products.product_valor" sentido="ASC" class="infoLabel ordena">'+lista[k].users_client_name+
-                                        '</p>'+
-                                '</div>'+
-                            '</div>'+
-                            '<div class="col-sm" style="opacity: 1; ">'+
-                                '<p field="products.product_valor" sentido="ASC"'+
-                                    'class="infoLabel ordena">'+lista[k].users_client_mail+'</p>'+
-                            '</div>'+
-                            '<div class="col-sm" style="opacity: 1;">'+
-                                '<p style="font-size:10px !important; padding: 10px; width: auto !important"'+
-                                    'class="infoLabel infoValor">'+pedidos+'</p>'+
-                            '</div>'+
-                            '<div class="col-sm" style="opacity: 1;">'+
-                                '<p style="font-size:10px !important; padding: 10px; width: auto !important"'+
-                                    'class="infoLabel infoValor">'+assinaturas+'</p>'+
-                            '</div>'+
-                            '<div class="col-sm" style="opacity: 1;">'+
-                                '<p field="products.product_valor" sentido="ASC" class="infoLabel ordena">'+moment(lista[k].createdAt).format('DD, MMMM, YYYY')+
-                                    '</p>'+
-                            '</div>'+
-                        '</div>';
+            html7 += '<div onclick="redirectThis(' + lista[k].id + ')" affiliate_id="' + localStorage.AFFILIATE_ID + '" class="row radius20 userCms">' +
+                '<div style="max-width: 70px; opacity: 1;" class="col-sm"><label class="checkSmart"><input' +
+                'class="checka form-control" type="checkbox"><span class="checkmark"></span></label>' +
+                '</div>' +
+                '<div class="col-sm" style="opacity: 1; display: inline-flex; gap: 15px; padding-top: 10px">' +
+                '<div style="max-width: 20%;">' +
+                '<p class="firstLetter">' + letter + '</p>' +
+                '</div>' +
+                '<div style="max-width: 80%;   margin: auto">' +
+                '<p field="products.product_valor" sentido="ASC" class="infoLabel ordena">' + lista[k].users_client_name +
+                '</p>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-sm" style="opacity: 1; ">' +
+                '<p field="products.product_valor" sentido="ASC"' +
+                'class="infoLabel ordena">' + lista[k].users_client_mail + '</p>' +
+                '</div>' +
+                '<div class="col-sm" style="opacity: 1;">' +
+                '<p style="font-size:10px !important; padding: 10px; width: auto !important"' +
+                'class="infoLabel infoValor">' + pedidos + '</p>' +
+                '</div>' +
+                '<div class="col-sm" style="opacity: 1;">' +
+                '<p style="font-size:10px !important; padding: 10px; width: auto !important"' +
+                'class="infoLabel infoValor">' + assinaturas + '</p>' +
+                '</div>' +
+                '<div class="col-sm" style="opacity: 1;">' +
+                '<p field="products.product_valor" sentido="ASC" class="infoLabel ordena">' + moment(lista[k].createdAt).format('DD, MMMM, YYYY') +
+                '</p>' +
+                '</div>' +
+                '</div>';
         }
 
 
@@ -373,7 +374,7 @@ clientRequest({"affiliate_id":localStorage.AFFILIATE_ID},'/getClientsUsersFromAf
                     }
                     $.ajax({
                         type: 'POST',
-                        url: 'https://api-smartcomerci.com.br:9090' + '/autenticateAdmin',
+                        url: 'https://www.api-smartcomerci.com.br:9090' + '/autenticateAdmin',
                         data: params,
                         headers: {
                             'x-access-token': localStorage.token,
@@ -411,11 +412,11 @@ clientRequest({"affiliate_id":localStorage.AFFILIATE_ID},'/getClientsUsersFromAf
         })
     }
 
- $("body").css("filter", "blur(10px)")
+    $("body").css("filter", "blur(10px)")
     let olha = setInterval(() => {
-        if (sessionStorage['USERS_CLIENTS_'+localStorage.AFFILIATE_ID]) {
+        if (sessionStorage['USERS_CLIENTS_' + localStorage.AFFILIATE_ID]) {
             setTimeout(() => {
-               getUuarios7()
+                getUuarios7()
                 $("body").css("filter", "none")
                 clearInterval(olha)
             }, 1500)

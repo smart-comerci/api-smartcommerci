@@ -1,5 +1,5 @@
 let notFound =
-  "https://api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
+  "https://www.api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
@@ -1092,7 +1092,7 @@ function createElementFromHTML(htmlString) {
 }
 
 //=========================== Área de CRUD =====================
-let host = `https://api-smartcomerci.com.br:9090`;
+let host = `https://www.api-smartcomerci.com.br:9090`;
 async function uploadAndUpdateFile(element) {
   if (element.attr("url")) {
     element
@@ -2054,7 +2054,7 @@ function removeSection(element) {
 
 $.ajax({
   type: "POST",
-  url: "https://api-smartcomerci.com.br:7070/getCategories",
+  url: "https://www.api-smartcomerci.com.br:7070/getCategories",
   headers: {
     "x-access-token": localStorage.token,
   },

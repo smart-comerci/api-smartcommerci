@@ -1,4 +1,4 @@
-var mainHost = "https://api-smartcomerci.com.br:9090";
+var mainHost = "https://www.api-smartcomerci.com.br:9090";
 
 comecando();
 
@@ -143,7 +143,7 @@ async function atualizaCampo(elemento, reload) {
     : localStorage.MASTER_ID;
 
   // if(newValue.indexOf("C:\\fakepath\\")>-1){
-  //   newValue = newValue.replace("C:\\fakepath\\","https://api-smartcomerci.com.br:7070/images/"+localStorage.MASTER_ID+"/")
+  //   newValue = newValue.replace("C:\\fakepath\\","https://www.api-smartcomerci.com.br:7070/images/"+localStorage.MASTER_ID+"/")
   // }
 
   let params = {

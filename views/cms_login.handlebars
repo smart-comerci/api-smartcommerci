@@ -1,6 +1,5 @@
-
 <script>
-    localStorage.MY_DOMAIN = 'https://api-smartcomerci.com.br:9090'
+    localStorage.MY_DOMAIN = 'https://www.api-smartcomerci.com.br:9090'
 </script>
 <style>
     .título-vitrines {
@@ -133,8 +132,7 @@
 
 
                     <br>
-                    <input onclick="logando()" class="btn btn-success btnStart "
-                        value="Continuar">
+                    <input onclick="logando()" class="btn btn-success btnStart " value="Continuar">
                     <br>
                     <br>
                     <p onclick="enviaCodigo()" class="reenviar">Reenviar código</p>
@@ -223,7 +221,7 @@
 </style>
 
 <script>
-    var mainHost = 'https://api-smartcomerci.com.br:9090'
+    var mainHost = 'https://www.api-smartcomerci.com.br:9090'
     function locals(id) {
         var list = ['Mundo das Embalagens']
         return list[id]
@@ -231,7 +229,7 @@
 
 
     function validaSenha(field) {
- 
+
         if (validacaoEmail($("#emailMasterLogin"))) {
 
             if (field.val().length > 0) {
@@ -306,19 +304,19 @@
                 url: mainHost + '/login',
                 data: { user: $("#emailMasterLogin").val(), table: "users_affiliates", prefix: "users_affiliate", password: $("#senhaMasterLogin").val() },
                 success: function (data) {
-                     //console.log("mostro aqui",data.data);
+                    //console.log("mostro aqui",data.data);
                     localStorage.AFFILIATE_ID = data.data.users_affiliate_id
                     //  
-                     localStorage.MASTER_ID = data.data.users_affiliate_master_id
-                     meToo(data.token, data.token_me, data.data.users_affiliate_master_id)
+                    localStorage.MASTER_ID = data.data.users_affiliate_master_id
+                    meToo(data.token, data.token_me, data.data.users_affiliate_master_id)
 
-                     startOk(data.data.users_affiliate_master_id)
- 
+                    startOk(data.data.users_affiliate_master_id)
+
 
 
                 },
                 error: function (data) {
-                   //console.log(data);
+                    //console.log(data);
                     //   alertar("O login falhou!")
                 },
                 complete: function () {
@@ -347,31 +345,31 @@
             success: function (data) {
                 //console.log('data 1');
                 //console.log(data);
-               /*
-
- DATA = data
-                var listaId = []
-                for (const k in data) {
-                    var newI = true
-                    for (const a in listaId) {
-                        if (listaId[a] == data[k].master_id) { newI = false }
-                    }
-                    if (newI) {
-                        listaId.push(data[k].master_id)
-                    }
-                }
-                for (const k in listaId) {
-                    if (locals(Number(listaId[k]) - 1) != undefined) {
-                        $(".listaMatriz").append('<button onclick="startOk(' +master_id + ')" class="btn btn-success">' + locals(0) + '</button><hr>')
-                    }
-                }
-
-               */
-             
-                
+                /*
+ 
+  DATA = data
+                 var listaId = []
+                 for (const k in data) {
+                     var newI = true
+                     for (const a in listaId) {
+                         if (listaId[a] == data[k].master_id) { newI = false }
+                     }
+                     if (newI) {
+                         listaId.push(data[k].master_id)
+                     }
+                 }
+                 for (const k in listaId) {
+                     if (locals(Number(listaId[k]) - 1) != undefined) {
+                         $(".listaMatriz").append('<button onclick="startOk(' +master_id + ')" class="btn btn-success">' + locals(0) + '</button><hr>')
+                     }
+                 }
+ 
+                */
 
 
-               // $("modal").fadeIn()
+
+
+                // $("modal").fadeIn()
 
             },
             error: function (data) {
@@ -383,7 +381,7 @@
         });
 
     }
-    
+
     function startOk(master_id) {
         //console.log("master ID", master_id) 
         localStorage.NAME_SHOP = locals(master_id - 1)
@@ -481,7 +479,7 @@
                 "is_product_image": true,
             },
             success: function (data) {
-               //console.log(data);
+                //console.log(data);
                 if (data.length > 0) {
 
                     $(".form3").fadeOut()
@@ -532,7 +530,7 @@
     }
 
 
- 
+
     function logando() {
         var email = $("#emailMasterLogin").val()
         $.ajax({
@@ -544,13 +542,13 @@
                 "is_product_image": true,
             },
             success: function (data) {
-                 //console.log("validacao", data);
-                 localStorage.FULL_DATA_USER_LOGGED = JSON.stringify(data)
-                 localStorage.AFF_ID = data.data.users_affiliate_id
-                 localStorage.MASTER_ID = data.data.users_affiliate_master_id
-               
-                 meToo(data.token, data.token_me, data.data.users_affiliate_master_id)
-                 startOk(data.data.users_affiliate_master_id)
+                //console.log("validacao", data);
+                localStorage.FULL_DATA_USER_LOGGED = JSON.stringify(data)
+                localStorage.AFF_ID = data.data.users_affiliate_id
+                localStorage.MASTER_ID = data.data.users_affiliate_master_id
+
+                meToo(data.token, data.token_me, data.data.users_affiliate_master_id)
+                startOk(data.data.users_affiliate_master_id)
 
             },
             error: function (data) {
@@ -565,7 +563,7 @@
             },
         });
     }
- 
+
     function esqueceuSenha() {
         if (validacaoEmail($("#emailMasterLogin"))) {
 
@@ -574,4 +572,3 @@
     }
 
 </script>
-
