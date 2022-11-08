@@ -1249,6 +1249,7 @@ async function changePicture(element) {
         }
       }
     } else {
+      console.log("homePage ...", homePage);
       if (thisURL) {
         console.log(origin.split("-"));
         if (origin.split("-").length === 1) {
