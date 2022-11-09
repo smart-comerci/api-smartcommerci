@@ -159,10 +159,12 @@ class Subcategory {
   }
 }
 function addCategory(id) {
-  if (id) {
+  console.log("adicionando sub", id);
+  if (id || id === "0" || id === 0) {
     let currCategory = categoriesObject.categories.find(
       (dt) => Number(dt.id) === Number(id)
     );
+    console.log("encontrei a categoria", currCategory);
     if (!currCategory.subcategories) {
       currCategory.subcategories = [];
     }
@@ -249,7 +251,7 @@ async function criarPrimeiroAcesso() {
   console.log(resultado);
 }
 async function publicarAlteracoes() {
-  repareObj();
+  repareObjOk();
   const resultado = await $.ajax({
     type: "POST",
     url: api_host + "/categorie_update/" + localStorage.AFFILIATE_ID,
@@ -487,23 +489,54 @@ function reordenaListas3() {
   });
 }
 
+function repareObjOk() {
+  try {
+    let categories = categoriesObject.categories;
+    let newCats = [];
+    $(".itemSortable2").each(function () {
+      let subCats = [];
+      let idCat = $(this).attr("idCat");
+      let thisCat = categories.find((dt) => Number(dt.id) === Number(idCat));
+      $(this)
+        .find(".itemSortable")
+        .each(function () {
+          let idSub = $(this).attr("idSub");
+          let thisSub = thisCat.subcategories.find(
+            (dt) => Number(dt.id) === Number(idSub)
+          );
+          subCats.push(thisSub);
+        });
+      thisCat.subcategories = subCats;
+      newCats.push(thisCat);
+    });
+    categoriesObject.categories = newCats;
+    console.log("hroa da veradde", categoriesObject);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function repareObj() {
   try {
     $(".superSortable").each(function () {
       let categories = categoriesObject.categories;
       var items = $(this).find(".itemSortable");
       var index = 1;
-      var subs = [];
 
-      let idCat = items[0].attr("idCat");
-      let subcategories = categories.find(
-        (dt) => Number(dt.id) === Number(idCat)
-      ).subcategories;
       // if (subcategories) {
       //   subs = subcategories;
       // }
 
       items.each(function () {
+        var subs = [];
+
+        let idCat = $(this).attr("idCat");
+
+        console.log("idCat", idCat[0]);
+        let subcategories = categories.find(
+          (dt) => Number(dt.id) === Number(idCat)
+        ).subcategories;
+
         let idSub = $(this).attr("idSub");
         console.log("ID ", Number(idSub));
         let thisSub = subcategories.find(
@@ -517,19 +550,19 @@ function repareObj() {
 
         $(this).find(".posicaoSubCategoriaNew").text(index);
         index++;
-      });
-      for (const k in categoriesObject.categories) {
-        if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
-          categoriesObject.categories[k].subcategories = subs;
+        for (const k in categoriesObject.categories) {
+          if (Number(categoriesObject.categories[k].id) === Number(idCat)) {
+            categoriesObject.categories[k].subcategories = subs;
+          }
         }
-      }
+      });
     });
-
+    let cats = [];
     $(".fullSortable").each(function () {
       var items = $(this).find(".itemSortable2");
       let categories = categoriesObject.categories;
       var index = 1;
-      let cats = [];
+
       items.each(function () {
         let idCat = $(this).attr("idCat");
         let thisCat = categories.find((dt) => Number(dt.id) === Number(idCat));
@@ -538,8 +571,8 @@ function repareObj() {
         $(this).find(".posicaoCategoriaNew").text(index);
         index++;
       });
-      categoriesObject.categories = cats;
     });
+    categoriesObject.categories = cats;
 
     categoriesObject.categories = OrdenaJson(
       categoriesObject.categories,
