@@ -2158,11 +2158,11 @@
             <div style="max-width: 800px;" class="contentBlock">
               <div class="headerCon">
                 <label class="labelSwitch">Título da primeira coluna</label>
-                <input destiny="firstColumnTittle" onkeyup="setColumnTitle($(this))" class="inputNovo"
+                <input destiny="firstColumnTittle" onkeyup="setColumnTitle($(this))" class="inputNovo colunas"
                   placeholder="Insira o título" />
               </div>
 
-              <div class="areaMenus">
+              <div class="areaMenus firstColumn">
               </div>
               <div style="display: none" class="contentBlock novoLink3">
                 <h1 class="labelSwitch">Novo Link</h1>
@@ -2227,10 +2227,10 @@
             <div style="max-width: 800px;" class="contentBlock">
               <div class="headerCon">
                 <label class="labelSwitch">Título da segunda coluna</label>
-                <input destiny="secondColumnTittle" onkeyup="setColumnTitle($(this))" class="inputNovo"
+                <input destiny="secondColumnTittle" onkeyup="setColumnTitle($(this))" class="inputNovo colunas"
                   placeholder="Insira o título" />
               </div>
-              <div class="areaMenus">
+              <div class="areaMenus secondColumn">
               </div>
 
               <div style="display: none" class="contentBlock novoLink3">
@@ -2296,11 +2296,11 @@
             <div style="max-width: 800px;" class="contentBlock">
               <div class="headerCon">
                 <label class="labelSwitch">Título da terceira coluna</label>
-                <input destiny="thirdColumnTittle" onkeyup="setColumnTitle($(this))" class="inputNovo"
+                <input destiny="thirdColumnTittle" onkeyup="setColumnTitle($(this))" class="inputNovo colunas"
                   placeholder="Insira o título" />
               </div>
 
-              <div class="areaMenus">
+              <div class="areaMenus thirdColumn">
 
               </div>
 
@@ -2376,7 +2376,8 @@
 
 
               <label class="labelSwitch">Insira as informações de contato</label>
-              <textarea onchange="setMeFooterMenu($(this), 'contatctData')" class="textArea" rows="5"></textarea>
+              <textarea id="contactDataMenu" onchange="setMeFooterMenu($(this), 'contatctData')" class="textArea"
+                rows="5"></textarea>
               <br><br>
 
             </div>

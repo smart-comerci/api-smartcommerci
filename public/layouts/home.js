@@ -1610,6 +1610,47 @@ function addLink(element, destiny) {
   }
 }
 
+function addLinkObject(text, link, destiny) {
+  // let link = element.parent().find(".linkContact").val();
+  // let text = element.parent().find(".textContact").val();
+
+  // GLOBAL_ELEMENT_EDIT.find(`.linksFooter`).show();
+  // GLOBAL_ELEMENT_EDIT.find(`.linksFooter`).css(`display`, `inline-flex`);
+  // GLOBAL_ELEMENT_EDIT.css(`background`, `white`);
+  // GLOBAL_ELEMENT_EDIT.addClass(`dropped`);
+
+  if (link && text && link != "" && text != "") {
+    // element.attr("destiny", destiny);
+    // element.attr("link", link);
+    // element.attr("description", text);
+    // setMeFooterMenu(element);
+    let HTML = `
+                        <div class="cardSearch"> 
+                          <div class="itemSearch" style="padding-top: 15px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="fill: #687c97;" width="13.5" height="23" viewBox="0 0 9 16">
+                              <defs></defs>
+                              <path class="a"
+                                d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                              </path>
+                              <path class="a"
+                                d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                                transform="translate(5)"></path>
+                            </svg> 
+                          </div>
+                          <div class="itemSearch" style="padding-top: 15px;width: 60%;">
+                            <p class="cardText">${text}</p>
+                          </div> 
+                          <div class="itemSearch" style=" width: 300px;">
+                            <button onclick="removeMeFooterMenu($(this))" link="${link}" description="${text}" destiny="${destiny}" style="zoom: 80%;background-color: white; border: 1px solid #f6b504; color: #f6b504; margin-right: 15px;"
+                              type="button" id="picture-save-button" tabindex="6"  
+                              class="btn btn-save rounded-pill">Remover da coluna</button>
+                          </div>
+                        </div>
+                        `;
+    return HTML;
+  }
+  return "";
+}
 function setColumnTitle(element) {
   let destiny = element.attr("destiny");
   if (destiny) {
@@ -1696,6 +1737,49 @@ async function getMyObjectHomeMain() {
         $("#color-badge_label-primary").html(news.mainColors.first);
         $("#color-badge_label-secondary").html(news.mainColors.second);
         console.log(`home page`, homePage);
+        $("#contactDataMenu").val(homePage.footerLinks.contactData.text);
+        if (homePage.footerLinks.firstColumn.length > 0) {
+          console.log("homePage.footerLinks", homePage.footerLinks);
+          for (const k in homePage.footerLinks.firstColumn) {
+            $(".firstColumn").append(
+              addLinkObject(
+                homePage.footerLinks.firstColumn[k].text,
+                homePage.footerLinks.firstColumn[k].link,
+                "firstColumn"
+              )
+            );
+          }
+        }
+        if (homePage.footerLinks.secondColumn.length > 0) {
+          for (const k in homePage.footerLinks.secondColumn) {
+            $(".secondColumn").append(
+              addLinkObject(
+                homePage.footerLinks.secondColumn[k].text,
+                homePage.footerLinks.secondColumn[k].link,
+                "secondColumn"
+              )
+            );
+          }
+        }
+        if (homePage.footerLinks.thirdColumn.length > 0) {
+          for (const k in homePage.footerLinks.thirdColumn) {
+            $(".thirdColumn").append(
+              addLinkObject(
+                homePage.footerLinks.thirdColumn[k].text,
+                homePage.footerLinks.thirdColumn[k].link,
+                "thirdColumn"
+              )
+            );
+          }
+        }
+
+        for (const k in homePage.footerLinks) {
+          $(".colunas").each(function () {
+            if ($(this).attr("destiny") === k) {
+              $(this).val(homePage.footerLinks[k].text);
+            }
+          });
+        }
         for (const u in homePage.body) {
           const index = Number(u) + 1;
           console.log("index", index);
