@@ -1010,7 +1010,7 @@
 
   <script src="https://www.api-smartcomerci.com.br/js/tinymce.js"></script>
   <script>
-    var mainHost = 'https://www.api-smartcomerci.com.br:9090';
+    var mainHost = 'https://www.api-smartcomerci.com.br:7070';
     let url = window.location.href
     if (url.indexOf("receita") > -1) {
       function iniciaEditorHtml(idElemento) {
@@ -1536,8 +1536,8 @@
           type: 'POST',
           success: function (data) {
             //console.log(data)
-            $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:9090')})`)
-            $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:9090')}`)
+            $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')})`)
+            $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
             $("#" + element.attr("target")).css("background-size", "cover !important")
             $("#" + element.attr("target")).css("background-position", "center !important")
             $("#" + element.attr("target")).css("zoom", "100% !important")
@@ -1545,7 +1545,7 @@
 
 
             //console.log(element.parent().parent().find('input'))
-            //console.log(`${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:9090')}`)
+            //console.log(`${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
 
 
 

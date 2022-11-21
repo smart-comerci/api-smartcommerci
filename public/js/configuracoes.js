@@ -1,4 +1,4 @@
-var mainHost = "https://www.api-smartcomerci.com.br:9090";
+var mainHost = "https://www.api-smartcomerci.com.br:7070";
 
 comecando();
 

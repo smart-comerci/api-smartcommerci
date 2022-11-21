@@ -1196,7 +1196,7 @@ function createElementFromHTML(htmlString) {
 }
 
 //=========================== Área de CRUD =====================
-let host = `https://www.api-smartcomerci.com.br:9090`;
+let host = `https://www.api-smartcomerci.com.br:7070`;
 async function uploadAndUpdateFile(element) {
   if (element.attr("url")) {
     element
