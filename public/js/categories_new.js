@@ -1,4 +1,4 @@
-const api_host = "https://www.api-smartcomerci.com.br:9090";
+const api_host = "https://www.smartlima.com.br:7070";
 let currentCategoryId = null,
   currentSubcategoryId = null;
 getCategories();
@@ -363,7 +363,7 @@ function categoryElementLi(dado) {
             </div>
             <div style="max-width: 70px; margin: 7px auto; opacity: 1;" class="col-sm">
                 <div style="max-width: 120px;" class="iconCategorie"><img style="    max-width: 30px !important;"
-                        src="https://www.api-smartcomerci.com.br:9090/assets/icons/cliente_Icone Embalagens.png"></div>
+                        src="https://www.smartlima.com.br:7070/assets/icons/cliente_Icone Embalagens.png"></div>
             </div>
             <div class="col-sm" style="opacity: 1;"><label
                     class="label nomeCategoria CATEGORIA_PRINCIPAL">${

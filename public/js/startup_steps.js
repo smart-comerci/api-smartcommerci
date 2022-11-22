@@ -18,7 +18,7 @@ if (detectar_mobile()) {
   location.replace("/picking-login");
 }
 
-var mainHost = "https://www.api-smartcomerci.com.br:9090";
+var mainHost = "https://www.smartlima.com.br:7070";
 var urlLocal = window.location.href.split("?");
 if (urlLocal[urlLocal.length - 1] == "login") {
   $(".form").hide();
