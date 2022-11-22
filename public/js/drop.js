@@ -18,7 +18,7 @@ function modalDrop() {
     "</svg>" +
     "</div>" +
     "</div>" +
-    '<label style="margin: -1% auto; min-width: 60%; color: #f6b504 !important; cursor:pointer" class="label"><a href="https://www.api-smartcomerci.com.br:7070/modelo.xlsx">Download planilha sem produtos</a></label>' +
+    '<label style="margin: -1% auto; min-width: 60%; color: #f6b504 !important; cursor:pointer" class="label"><a href="https://www.api-smartcomerci.com.br:9090/modelo.xlsx">Download planilha sem produtos</a></label>' +
     "</div>" +
     '<div   class="input-group btnDrop">' +
     '<div style="border: none; margin: auto;" class="input-group-append">' +
@@ -59,7 +59,7 @@ function modalDrop() {
           data.append("fileimagem", $(this)[0].files[0]);
 
           $.ajax({
-            url: "https://www.api-smartcomerci.com.br:7070/uploadPlanilha",
+            url: "https://www.api-smartcomerci.com.br:9090/uploadPlanilha",
             headers: {
               "x-access-token": localStorage.token,
               master_id: localStorage.MASTER_ID,
@@ -75,7 +75,7 @@ function modalDrop() {
               let fileName4 = data.filename;
 
               $.ajax({
-                url: "https://www.api-smartcomerci.com.br:7070/excel2Json",
+                url: "https://www.api-smartcomerci.com.br:9090/excel2Json",
                 headers: {
                   "x-access-token": localStorage.token,
                   master_id: localStorage.MASTER_ID,
@@ -108,8 +108,7 @@ function modalDrop() {
                         for (const k in confere) {
                           if (
                             tipos[i].toLocaleLowerCase() ==
-                              k.toLocaleLowerCase() ||
-                            k.toLocaleLowerCase() == "product_thumbail"
+                            k.toLocaleLowerCase()
                           ) {
                             listaConferida.push({
                               tipo: k.toLocaleLowerCase(),
@@ -139,33 +138,51 @@ function modalDrop() {
                   //  console.log("verificando",verifyTypes())
 
                   if (verifyTypes().status) {
-                    let listData = retorno.dados;
+                    let listData = retorno.dados.filter(
+                      (x) => x.product_site_ean != ""
+                    );
+                    console.log("listData0", listData);
                     let listOffQuerys = [];
                     for (const k in listData) {
                       let sql = "update product_details set ";
-                      for (const a in listData[k]) {
-                        if (
-                          Number(listData[k][a]) &&
-                          a.toLocaleLowerCase() != "product_site_ean"
-                        ) {
-                          sql += " " + a + " = " + listData[k][a] + ", ";
-                        } else {
-                          sql += " " + a + ' = "' + listData[k][a] + '", ';
+
+                      if (
+                        listData[k].product_site_ean &&
+                        listData[k].product_site_ean !== ""
+                      ) {
+                        for (const a in listData[k]) {
+                          if (a !== "") {
+                            if (
+                              Number(listData[k][a]) &&
+                              a.toLocaleLowerCase() != "product_site_ean" &&
+                              a.toLocaleLowerCase() != "product_thumbnail"
+                            ) {
+                              sql += " " + a + " = " + listData[k][a] + ", ";
+                            } else {
+                              sql += " " + a + ' = "' + listData[k][a] + '", ';
+                            }
+                          }
+                        }
+                        sql +=
+                          " where product_affiliate_id =" +
+                          localStorage.AFFILIATE_ID +
+                          " and product_site_ean = " +
+                          listData[k].product_site_ean;
+                        sql = sql.replace(/,  where/g, " where");
+                        if (listData[k].product_site_ean !== "") {
+                          listOffQuerys.push(sql);
                         }
                       }
-                      sql +=
-                        " where product_affiliate_id =" +
-                        localStorage.AFFILIATE_ID +
-                        " and product_site_ean = " +
-                        listData[k].product_site_ean;
-                      sql = sql.replace(/,  where/g, " where");
-                      listOffQuerys.push(sql);
                     }
 
                     //  console.log('listOffQuerys',listOffQuerys)
                     //  console.log(JSON.stringify(listOffQuerys))
 
-                    modalDropConfirma(fileName4, totalMudancas, listOffQuerys);
+                    modalDropConfirma(
+                      fileName4,
+                      listData.length,
+                      listOffQuerys
+                    );
                   } else {
                     // console.log("planilha incorreta")
 
@@ -265,9 +282,10 @@ function openArquivoPlanilha() {
 }
 
 function finalizaAjustes(listOffQuerys) {
+  console.log(listOffQuerys);
   $.ajax({
     type: "POST",
-    url: "https://www.api-smartcomerci.com.br:7070/multiQuerys",
+    url: "https://www.api-smartcomerci.com.br:9090/multiQuerys",
     data: { listaQuerys: listOffQuerys },
     headers: {
       "x-access-token": localStorage.token,

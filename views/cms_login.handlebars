@@ -1,5 +1,5 @@
 <script>
-    localStorage.MY_DOMAIN = 'https://www.api-smartcomerci.com.br:7070'
+    localStorage.MY_DOMAIN = 'https://www.api-smartcomerci.com.br:9090'
 </script>
 <style>
     .título-vitrines {
@@ -221,7 +221,7 @@
 </style>
 
 <script>
-    var mainHost = 'https://www.api-smartcomerci.com.br:7070'
+    var mainHost = 'https://www.api-smartcomerci.com.br:9090'
     function locals(id) {
         var list = ['Mundo das Embalagens']
         return list[id]
@@ -304,7 +304,7 @@
                 url: mainHost + '/login',
                 data: { user: $("#emailMasterLogin").val(), table: "users_affiliates", prefix: "users_affiliate", password: $("#senhaMasterLogin").val() },
                 success: function (data) {
-                    //console.log("mostro aqui",data.data);
+                    console.log("mostro aqui", data.data);
                     localStorage.AFFILIATE_ID = data.data.users_affiliate_id
                     //  
                     localStorage.MASTER_ID = data.data.users_affiliate_master_id
@@ -316,7 +316,7 @@
 
                 },
                 error: function (data) {
-                    //console.log(data);
+                    console.log(data);
                     //   alertar("O login falhou!")
                 },
                 complete: function () {
@@ -343,8 +343,8 @@
                 "x-access-token": token
             },
             success: function (data) {
-                //console.log('data 1');
-                //console.log(data);
+                console.log('data 1');
+                console.log(data);
                 /*
  
   DATA = data
@@ -373,7 +373,7 @@
 
             },
             error: function (data) {
-                ////console.log(data);
+                console.log(data);
             },
             complete: function () {
                 // ao final da requisição... 
@@ -394,8 +394,8 @@
                 "is_product_image": true,
             },
             success: function (data) {
-                //console.log('data 2'); 
-                //console.log(data); 
+                console.log('data 2');
+                console.log(data);
                 localStorage.LOJAS_CADASTRADAS = JSON.stringify(data)
                 localStorage.NOME_LOJA = data[0].affiliates_business_name
                 localStorage.NAME_SHOP = data[0].affiliates_business_name
@@ -408,8 +408,8 @@
                         "is_product_image": true,
                     },
                     success: function (data) {
-                        //console.log('data 0');
-                        ////console.log(data);
+                        console.log('data 0');
+                        console.log(data);
                         localStorage.MASTER_ID = master_id
                         localStorage.MAIL_MASTER_CLIENTE = $("#emailMasterLogin").val()
                         location.replace('/produtos')
@@ -418,8 +418,8 @@
 
                     },
                     error: function (data) {
-                        //console.log('erro');
-                        ////console.log(data);
+                        console.log('erro');
+                        console.log(data);
 
                     },
                     complete: function () {
@@ -435,7 +435,7 @@
 
             },
             error: function (data) {
-                //console.log(data);
+                console.log(data);
 
             },
             complete: function () {
@@ -479,7 +479,7 @@
                 "is_product_image": true,
             },
             success: function (data) {
-                //console.log(data);
+                console.log(data);
                 if (data.length > 0) {
 
                     $(".form3").fadeOut()
@@ -492,8 +492,8 @@
 
             },
             error: function (data) {
-                ////console.log('erro');
-                ////console.log(data);
+                console.log('erro');
+                console.log(data);
 
             },
             complete: function () {
@@ -515,12 +515,12 @@
                 "is_product_image": true,
             },
             success: function (data) {
-                ////console.log(data);
+                console.log(data);
 
             },
             error: function (data) {
-                ////console.log('erro');
-                ////console.log(data);
+                console.log('erro');
+                console.log(data);
 
             },
             complete: function () {
@@ -542,7 +542,7 @@
                 "is_product_image": true,
             },
             success: function (data) {
-                //console.log("validacao", data);
+                console.log("validacao", data);
                 localStorage.FULL_DATA_USER_LOGGED = JSON.stringify(data)
                 localStorage.AFF_ID = data.data.users_affiliate_id
                 localStorage.MASTER_ID = data.data.users_affiliate_master_id
@@ -552,9 +552,9 @@
 
             },
             error: function (data) {
-                //console.log('erro');
+                console.log('erro');
                 $(".digito").css("border", "1px solid red")
-                //console.log(data);
+                console.log(data);
                 informar('alert-danger', "Código invalido!", 3000)
 
             },
