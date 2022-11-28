@@ -1290,9 +1290,9 @@
      top: 0;
      z-index: 2;
      width: 100vw;
-     height: 250vh;
+     height: 1250vh;
      min-width: 100vw;
-     min-height: 150vh;
+     min-height: 350vh;
      background: rgb(0, 0, 0, 0.5) !important;
  }
 
@@ -1638,4 +1638,8 @@
      position: relative;
      padding-left: 35px;
      margin-top: -7px !important;
+ }
+
+ .noShow {
+     display: none !important;
  }
