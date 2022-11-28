@@ -1,12 +1,12 @@
 var AFFILIATE_ID = localStorage.AFFILIATE_ID;
 var MASTER_ID = localStorage.MASTER_ID;
-var mainHost = "https://www.api-smartcomerci.com.br:9090";
+var mainHost = "https://www.api-smartcomerci.com.br:6060";
 
 let TAGS = [];
 
 $.ajax({
   type: "POST",
-  url: "https://www.api-smartcomerci.com.br:9090/getCategories",
+  url: "https://www.api-smartcomerci.com.br:6060/getCategories",
   headers: {
     "x-access-token": localStorage.token,
   },
@@ -30,7 +30,7 @@ $.ajax({
 
 $.ajax({
   type: "POST",
-  url: "https://www.api-smartcomerci.com.br:9090/getTagsLists",
+  url: "https://www.api-smartcomerci.com.br:6060/getTagsLists",
   headers: {
     "x-access-token": localStorage.token,
   },

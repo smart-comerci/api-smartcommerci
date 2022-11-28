@@ -1,6 +1,6 @@
 var AFFILIATES = [],
   count = 0;
-var mainHost = "https://www.api-smartcomerci.com.br:9090";
+var mainHost = "https://www.api-smartcomerci.com.br:6060";
 var locais = JSON.parse(ajustStrigfy(localStorage.LOJAS_CADASTRADAS));
 ////console.log(locais)
 

@@ -12,7 +12,7 @@ function OrdenaJson(lista, chave, ordem) {
 }
 $.ajax({
   type: "POST",
-  url: "https://www.api-smartcomerci.com.br:9090/getAllOrdersMaster",
+  url: "https://www.api-smartcomerci.com.br:6060/getAllOrdersMaster",
   data: { master_id: localStorage.MASTER_ID },
   headers: {
     "x-access-token": localStorage.token,
