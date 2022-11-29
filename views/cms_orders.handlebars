@@ -2308,8 +2308,11 @@
     let checkupOrders = false
 
     function ajustStrigfy(texto) {
-        texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
-        texto = texto.replace('"[', "[").replace(']"', "]");
+        try {
+            texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
+            texto = texto.replace('"[', "[").replace(']"', "]");
+            return texto;
+        } catch (err) { }
         return texto;
     }
 
