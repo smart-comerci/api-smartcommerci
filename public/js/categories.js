@@ -3632,7 +3632,13 @@ function removeBannerMain(URL, table, element) {
   element.parent().parent().parent().remove();
 }
 
+function checkObject(obj) {
+  return typeof obj === "object" && obj !== null;
+}
 function ajustStrigfy(texto) {
+  if (checkObject(texto)) {
+    return texto;
+  }
   try {
     texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
     texto = texto.replace('"[', "[").replace(']"', "]");
