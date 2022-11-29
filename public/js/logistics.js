@@ -4,13 +4,13 @@ var mainHost = "https://www.smartlima.com.br:7070";
 var locais = JSON.parse(ajustStrigfy(localStorage.LOJAS_CADASTRADAS));
 ////console.log(locais)
 
-function ajustStrigfy(texto) {
-  for (let a = 0; a < 120; a++) {
-    texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
-    texto = texto.replace('"[', "[").replace(']"', "]");
-  }
-  return texto;
-}
+// function ajustStrigfy(texto) {
+//   for (let a = 0; a < 120; a++) {
+//     texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
+//     texto = texto.replace('"[', "[").replace(']"', "]");
+//   }
+//   return texto;
+// }
 
 var url = window.location.href.split("/");
 url = url[url.length - 1];
