@@ -83,6 +83,27 @@
             <div style="display: inline-flex;">
                 <div style="background: white; overflow-x: hidden;" class="sidebar-wrapper" id="sidebar-wrapper">
                     <ul class="nav">
+                        <li style="display: none" id="clientes-smart" class="li smart-clients">
+                            <a href="/clientes-smart">
+                                <svg style="fill: #f6b504;" xmlns="http://www.w3.org/2000/svg" width="14" height="18"
+                                    viewBox="0 0 14 18">
+                                    <defs></defs>
+                                    <g transform="translate(-5 -3)">
+                                        <path class="a"
+                                            d="M2.5,18A2.5,2.5,0,0,1,0,15.5V3.5A2.5,2.5,0,0,1,2.5,1a.5.5,0,0,1,0,1A1.5,1.5,0,0,0,1,3.5v12A1.5,1.5,0,0,0,2.5,17h9A1.5,1.5,0,0,0,13,15.5V3.5A1.5,1.5,0,0,0,11.5,2a.5.5,0,1,1,0-1A2.5,2.5,0,0,1,14,3.5v12A2.5,2.5,0,0,1,11.5,18Zm1-5a.5.5,0,1,1,0-1h5a.5.5,0,1,1,0,1Zm0-3a.5.5,0,1,1,0-1h7a.5.5,0,1,1,0,1Zm0-3a.5.5,0,1,1,0-1h7a.5.5,0,1,1,0,1ZM9,1.5A.5.5,0,0,0,8.5,1h-3a.5.5,0,0,0-.5.5.5.5,0,0,1-1,0A1.5,1.5,0,0,1,5.5,0h3A1.5,1.5,0,0,1,10,1.5a.5.5,0,0,1-1,0Z"
+                                            transform="translate(5 3)" />
+                                    </g>
+                                </svg>
+                                <p style="color: #f6b504; font-weight: bold; font-size: 1.1rem" class="txtLink ">
+                                    Clientes</p>
+                            </a>
+                        </li>
+                        <li style="display: none" id="gap" class="li smart-clients">
+
+
+                            <br><br><br><br>
+
+                        </li>
                         <li id="dashboard" class="li">
                             <a href="/dashboard">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
@@ -252,7 +273,7 @@
                                 <p class="txtLink2  ">Assinaturas</p>
                             </a>
                         </li>
-                        <li style="display: none" id="busca" class="li">
+                        <li id="busca" class="li">
                             <a href="/clientes">
                                 <p class="txtLink2  ">Clientes</p>
                             </a>
@@ -1265,6 +1286,12 @@ $(".sidebar").removeClass("newSidebar");
             $(".navbar").css("z-index", "9")
             $(".sidbar").css("z-index", "1030")
             $("body").css("overflow", "auto")
+        }
+
+        if (localStorage.AFFILIATE_ID === "231") {
+            $(".smart-clients").show()
+        } else {
+            $(".smart-clients").hide()
         }
 
 

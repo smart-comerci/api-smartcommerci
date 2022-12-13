@@ -2307,11 +2307,22 @@
 
     let checkupOrders = false
 
+
+    function checkObject(obj) {
+        return typeof obj === "object" && obj !== null;
+    }
     function ajustStrigfy(texto) {
-        texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
-        texto = texto.replace('"[', "[").replace(']"', "]");
+        if (checkObject(texto)) {
+            return texto;
+        }
+        try {
+            texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
+            texto = texto.replace('"[', "[").replace(']"', "]");
+            return texto;
+        } catch (err) { }
         return texto;
     }
+
 
 
     async function updateTotalPedidos() {
@@ -2319,7 +2330,8 @@
 
         if (!checkupOrders) {
             for (const k in PEDIDOS) {
-                let CONTEUDO = JSON.parse(ajustStrigfy(PEDIDOS[k]))
+                console.log(PEDIDOS[k])
+                let CONTEUDO = JSON.parse(ajustStrigfy(PEDIDOS[k].order_conteudo))
 
 
                 let valorEntrega = PEDIDOS[k].order_valor_entrega
@@ -2327,7 +2339,7 @@
                 for (const c in CONTEUDO) {
                     totalItens += (CONTEUDO[c].quantidade >= CONTEUDO[c].minimo_para_desconto ? CONTEUDO[c].valor : CONTEUDO[c].product_valor)
                 }
-                PEDIDOS[k]['order_valor_total'] = Number((valorEntrega + totalItens).toFixed(2))
+                PEDIDOS[k]['order_valor_total'] = Number((valorEntrega + totalItens)).toFixed(2)
                 PEDIDOS[k]['order_data_entrega'] = moment(PEDIDOS[k]['order_data_entrega']).format('YYYY-MM-DD')
                 PEDIDOS[k]['updatedAt'] = moment(PEDIDOS[k]['updatedAt']).format('YYYY-MM-DD')
                 PEDIDOS[k]['createdAt'] = moment(PEDIDOS[k]['createdAt']).format('YYYY-MM-DD')

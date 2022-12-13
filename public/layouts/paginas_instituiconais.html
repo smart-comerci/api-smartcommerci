@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="https://www.api-smartcomerci.com.br:6060/images/logo/favicon.ico" />
   <title>Document</title>
+  <link rel="icon" type="image/png" href="../assets/img/lima-04.svg" />
 </head>
 
 <body>
@@ -1076,17 +1077,103 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     let url = window.location.href
-    if (url.indexOf("paginas_institucionais") > -1) {
-      function iniciaEditorHtml(idElemento) {
-        tinymce.init({
-          selector: idElemento,
-          plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-          toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-          toolbar_mode: 'floating',
-          tinycomments_mode: 'embedded',
-          tinycomments_author: 'Author name',
-        });
+
+    function iniciaEditorHtml(idElemento) {
+      tinymce.init({
+        selector: idElemento,
+        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+      });
+    }
+
+    //chamada teste
+    iniciaEditorHtml("#editorFullCode")
+
+
+    var mainHost = 'https://www.smartlima.com.br:7070';
+    var NAME_PAGE = window.location.href.split("?")[1]
+    var NEW = true
+
+    $("#tituloPage").val(NAME_PAGE)
+
+    $.ajax({
+      type: "POST",
+      url: mainHost + '/getContentPage',
+      data: { "master_id": localStorage.MASTER_ID, "name_page": NAME_PAGE },
+      headers: {
+        "x-access-token": localStorage.token,
+      },
+      success: function (data) {
+        if (data.length > 0) {
+          NEW = false
+        }
+        setTimeout(() => {
+
+
+          $("#editorFullCode").html(
+            data[0].content_page
+          )
+
+
+          tinymce.activeEditor.setContent(data[0].content_page);
+
+
+
+          $("#tituloPageTop").text(
+            NAME_PAGE
+          )
+          $("#tituloPage").val(
+            data[0].titulo_page
+          )
+
+          setTimeout(() => {
+            var myContent = tinymce.get("editorFullCode").getContent();
+            //console.log(myContent)
+          }, 10000);
+
+          //console.log('pag nova', NEW)
+
+
+
+          if (data[0].status == 1) {
+            $("#ativar-pagina")[0].checked = true
+            $("#ativar-pagina").attr("checked", "true")
+          }
+
+          $('.page-institucional').css("filter", "none")
+
+
+
+
+        }, 5000);
+        //console.log(data)
+
+
+      },
+      error: function (data) {
+        $('.page-institucional').css("filter", "none")
+        //console.log("erro institucional", data)
+        window.parent.informar("alert-danger", "Algo saiu errado ao carregar a página!", 3000)
+      },
+      complete: function () {
+        $('.page-institucional').css("filter", "none")
+      },
+    });
+
+
+    let fim = 5, co = 0
+
+    let tim = setInterval(() => {
+      co++
+      if (co < fim) {
+        $(".tox-notification").hide()
+      } else {
+        clearInterval(tim)
       }
+    }, 1000)
 
       //chamada teste
       iniciaEditorHtml("#editorFullCode")
@@ -1098,117 +1185,37 @@
 
       $("#tituloPage").val(NAME_PAGE)
 
+      var myContent = tinymce.get("editorFullCode").getContent();
+      let ATIVO = 0
+      if ($("#ativar-pagina")[0].checked) { ATIVO = 1 }
+      //console.log('ATIVO?', ATIVO)
       $.ajax({
         type: "POST",
-        url: mainHost + '/getContentPage',
-        data: { "master_id": localStorage.MASTER_ID, "name_page": NAME_PAGE },
+        url: mainHost + '/setContentPage',
+        data: { "master_id": localStorage.MASTER_ID, "titulo_page": $("#tituloPage").val(), "status": ATIVO, "name_page": NAME_PAGE, "content_page": myContent, "new": NEW },
         headers: {
           "x-access-token": localStorage.token,
         },
         success: function (data) {
-          if (data.length > 0) {
-            NEW = false
-          }
-          setTimeout(() => {
-
-
-            $("#editorFullCode").html(
-              data[0].content_page
-            )
-
-
-            tinymce.activeEditor.setContent(data[0].content_page);
-
-
-
-            $("#tituloPageTop").text(
-              NAME_PAGE
-            )
-            $("#tituloPage").val(
-              data[0].titulo_page
-            )
-
-            setTimeout(() => {
-              var myContent = tinymce.get("editorFullCode").getContent();
-              //console.log(myContent)
-            }, 10000);
-
-            //console.log('pag nova', NEW)
-
-
-
-            if (data[0].status == 1) {
-              $("#ativar-pagina")[0].checked = true
-              $("#ativar-pagina").attr("checked", "true")
-            }
-
-            $('.page-institucional').css("filter", "none")
-
-
-
-
-          }, 5000);
           //console.log(data)
 
 
+          window.parent.informar("alert-success", "As alterações foram aplicadas com sucesso!", 3000)
         },
         error: function (data) {
-          $('.page-institucional').css("filter", "none")
-          //console.log("erro institucional", data)
-          window.parent.informar("alert-danger", "Algo saiu errado ao carregar a página!", 3000)
+          //console.log("erro publish", data)
+
+          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
         },
-        complete: function () {
-          $('.page-institucional').css("filter", "none")
-        },
+        complete: function () { },
       });
 
-
-      let fim = 5, co = 0
-
-      let tim = setInterval(() => {
-        co++
-        if (co < fim) {
-          $(".tox-notification").hide()
-        } else {
-          clearInterval(tim)
-        }
-      }, 1000)
-
-      function publish() {
-        //console.log('PAGINA NOVA',NEW)
-
-        var myContent = tinymce.get("editorFullCode").getContent();
-        let ATIVO = 0
-        if ($("#ativar-pagina")[0].checked) { ATIVO = 1 }
-        //console.log('ATIVO?', ATIVO)
-        $.ajax({
-          type: "POST",
-          url: mainHost + '/setContentPage',
-          data: { "master_id": localStorage.MASTER_ID, "titulo_page": $("#tituloPage").val(), "status": ATIVO, "name_page": NAME_PAGE, "content_page": myContent, "new": NEW },
-          headers: {
-            "x-access-token": localStorage.token,
-          },
-          success: function (data) {
-            //console.log(data)
-
-
-            window.parent.informar("alert-success", "As alterações foram aplicadas com sucesso!", 3000)
-          },
-          error: function (data) {
-            //console.log("erro publish", data)
-
-            window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-          },
-          complete: function () { },
-        });
-
-      }
-
-
-
-
-
     }
+
+
+
+
+
 
 
 

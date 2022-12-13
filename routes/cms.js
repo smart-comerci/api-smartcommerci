@@ -103,6 +103,10 @@ module.exports.all = function (app) {
     setup(newAPP);
     res.render("cms_home", { MY_DOMAIN: myDomain });
   });
+  app.get("/clientes-smart", async function (req, res) {
+    setup(newAPP);
+    res.render("cms_clientes_smart", { MY_DOMAIN: myDomain });
+  });
   app.get("/pedidos", async function (req, res) {
     setup(newAPP);
     res.render("cms_orders", { MY_DOMAIN: myDomain });

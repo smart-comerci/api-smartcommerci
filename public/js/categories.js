@@ -84,7 +84,7 @@ function continua() {
       success: function (categories) {
         try {
           console.log("Categories");
-          console.log(categories.results);
+          console.log(categories);
 
           CATEGORIES = categories.results;
           var CATEGORIES_SHOW = [];
@@ -312,6 +312,7 @@ function getCategorias(CATEGORIES) {
   var listaCategoriasPrimarias = [],
     CATEGORIAS_FULL = [];
   var currCategorie = null;
+  console.log("TRATANDO CATEGORIES", CATEGORIES);
 
   CATEGORIES = OrdenaJson(CATEGORIES, "product_site_categories", "ASC");
   for (const k in CATEGORIES) {
@@ -3633,8 +3634,17 @@ function removeBannerMain(URL, table, element) {
   element.parent().parent().parent().remove();
 }
 
+function checkObject(obj) {
+  return typeof obj === "object" && obj !== null;
+}
 function ajustStrigfy(texto) {
-  texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
-  texto = texto.replace('"[', "[").replace(']"', "]");
+  if (checkObject(texto)) {
+    return texto;
+  }
+  try {
+    texto = texto.replace(/"{/g, "{").replace(/}"/g, "}");
+    texto = texto.replace('"[', "[").replace(']"', "]");
+    return texto;
+  } catch (err) {}
   return texto;
 }
