@@ -35,7 +35,43 @@ function comecando() {
       "x-access-token": localStorage.token,
     },
     success: function (data) {
+      console.log("getSingleTable", data, {
+        table: "users_profiles",
+        idName: "master_id",
+        idValue: localStorage.MASTER_ID,
+        order: "updatedAt desc",
+        limit: "0,100",
+      });
       localStorage.DT_PF = JSON.stringify(data);
+    },
+    error: function (data) {},
+    complete: function () {
+      $(".todasConfiguracoes").css("filter", "none");
+    },
+  });
+
+  $.ajax({
+    type: "POST",
+    url: mainHost + "/getSingleTable",
+    data: {
+      table: "masters",
+      idName: "master_estoque_negativo",
+      idValue: "'on'",
+      order: "updatedAt desc",
+      limit: "0,100",
+    },
+    headers: {
+      "x-access-token": localStorage.token,
+    },
+    success: function (data) {
+      console.log("getSingleTable", data, {
+        table: "masters",
+        idName: "master_estoque_negativo",
+        idValue: "on",
+        order: "updatedAt desc",
+        limit: "0,100",
+      });
+      sessionStorage.ALL_CLIENTS = JSON.stringify(data);
     },
     error: function (data) {},
     complete: function () {

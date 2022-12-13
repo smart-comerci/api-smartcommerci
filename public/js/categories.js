@@ -84,7 +84,7 @@ function continua() {
       success: function (categories) {
         try {
           console.log("Categories");
-          console.log(categories.results);
+          console.log(categories);
 
           CATEGORIES = categories.results;
           var CATEGORIES_SHOW = [];
@@ -312,6 +312,7 @@ function getCategorias(CATEGORIES) {
   var listaCategoriasPrimarias = [],
     CATEGORIAS_FULL = [];
   var currCategorie = null;
+  console.log("TRATANDO CATEGORIES", CATEGORIES);
 
   CATEGORIES = OrdenaJson(CATEGORIES, "product_site_categories", "ASC");
   for (const k in CATEGORIES) {
