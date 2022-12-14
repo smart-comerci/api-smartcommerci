@@ -88,11 +88,42 @@ function continua() {
 
           CATEGORIES = categories.results;
           var CATEGORIES_SHOW = [];
+          console.log(CATEGORIES);
           var breakPoint = 100,
             count = 0;
+          let CAT_CERTAS = []
 
-          var myCategories = getCategorias(CATEGORIES);
+          if (CATEGORIES.length > 0 && CATEGORIES[0].product_site_categories) {
+            for (const k in CATEGORIES) {
+              CATEGORIES[k].product_site_categories = CATEGORIES[k].product_site_categories.trim()
+
+            }
+            for (const k in CATEGORIES) {
+              let exists = CATEGORIES.filter((x) => x.product_site_categories.includes(CATEGORIES[k].product_site_categories))
+              if (exists && Array.isArray(exists)) {
+                let thisCat = null, thisLength = 0
+                for (const a in exists) {
+                  if (exists[a].product_site_categories.length > thisLength) {
+                    thisCat = exists[a]
+                    thisLength = exists[a].product_site_categories.length
+                  }
+
+                }
+                if (thisCat) {
+                  CAT_CERTAS.push(thisCat)
+                }
+              } else {
+                CAT_CERTAS.push(CATEGORIES[k])
+              }
+
+            }
+          }
+
+
+
+          var myCategories = getCategorias(CAT_CERTAS);
           MY_CATEGORIES = myCategories;
+          console.log("MY_CATEGORIES", MY_CATEGORIES)
 
           for (const k in myCategories) {
             if (k == 8) {
@@ -102,8 +133,8 @@ function continua() {
             }
             $(".listaDeCategorias").append(
               '<li class="itemSortable2">' +
-                getCategorieShow(myCategories[k], Number(k) + 1) +
-                "</li>"
+              getCategorieShow(myCategories[k], Number(k) + 1) +
+              "</li>"
             );
           }
           $(".ATIVA_CATEGORIA").click(function (e) {
@@ -245,7 +276,7 @@ function continua() {
           //console.log("erro de error funcion ajax", err)
         }
       },
-      complete: function () {},
+      complete: function () { },
     });
   } catch (err) {
     //console.log("erro continua 2", err)
@@ -291,7 +322,7 @@ async function criaNovaCategoria() {
     error: function (resultado) {
       ////console.log(resultado);
     },
-    complete: function () {},
+    complete: function () { },
   });
 }
 
@@ -343,16 +374,30 @@ function getCategorias(CATEGORIES) {
         }
       }
     }
-    thisCategorieGroup += "?";
-    thisCategorieGroup = thisCategorieGroup?.replace(",?", "");
-    CATEGORIAS_FULL.push({
-      categoria: listaCategoriasPrimarias[k].categoria,
-      subCategorias: thisCategorieGroup,
-      cat_status: 0,
-      sub_status: "[]",
-    });
+    thisCategorieGroup += "CRIE UMA CATEGORIA";
+    thisCategorieGroup = thisCategorieGroup?.replace(",CRIE UMA CATEGORIA", "");
+
+
+
+    const exists = CATEGORIAS_FULL.find((x) => x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim())
+    if (exists) {
+      if (exists.subCategorias.length < thisCategorieGroup.length) {
+        CATEGORIAS_FULL.map((x) => {
+          if (x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim()) {
+            x.subCategorias = exists.subCategorias
+          }
+        })
+      }
+    } else {
+      CATEGORIAS_FULL.push({
+        categoria: listaCategoriasPrimarias[k].categoria,
+        subCategorias: thisCategorieGroup,
+        cat_status: 0,
+        sub_status: "[]",
+      });
+    }
   }
-  ////console.log(CATEGORIAS_FULL)
+  console.log('CATEGORIAS_FULL', CATEGORIAS_FULL)
 
   if (MINHAS_CATEGORIAS.length == 0) {
     if (CATEGORIAS_FULL.length == 0) {
@@ -361,6 +406,8 @@ function getCategorias(CATEGORIES) {
       setTimeout(() => {
         $("#salvandoAlteracoes").click();
       }, 5000);
+
+
 
       return CATEGORIAS_FULL;
     }
@@ -518,7 +565,7 @@ async function updateSequencia(mostra1) {
           };
         }
       }
-    } catch (e) {}
+    } catch (e) { }
     // console.log("getMYdata", getMyData)
 
     if (getMyData != null) {
@@ -595,7 +642,7 @@ async function updateSequencia(mostra1) {
     var minhasSubs = [];
     try {
       minhasSubs = JSON.parse(ajustStrigfy(lista[k].sub_status));
-    } catch (e) {}
+    } catch (e) { }
     var myCats = "";
     for (const a in minhasSubs) {
       myCats += minhasSubs[a].subCategoria + ",";
@@ -603,7 +650,11 @@ async function updateSequencia(mostra1) {
     lista[k]["subCategorias"] = myCats;
   }
 
-  // console.log('as categorias', lista)
+  console.log('as sequencias', {
+    affiliate_id: AFFILIATE_ID,
+    master_id: MASTER_ID,
+    categorias: lista,
+  })
   $.ajax({
     type: "POST",
     url: "https://www.api-smartcomerci.com.br:6060/updateCategoryList",
@@ -640,7 +691,7 @@ async function updateSequencia(mostra1) {
         ////console.log("Algo saiu errado!<br>"+resultado.responseJSON.message)
       }
     },
-    complete: function () {},
+    complete: function () { },
   });
 }
 
@@ -1073,10 +1124,8 @@ function modalEditCategories(element) {
                 <div class="descBanner8">
                     Banners ativos
                     <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatActive">${
-                          getBannerInnerMain(BANNERS?.banners, true).total
-                        }/${
-      BANNERS?.banners?.length ? BANNERS?.banners?.length : 0
+                        <p class="txtQtdBanner listaBannersCatActive">${getBannerInnerMain(BANNERS?.banners, true).total
+    }/${BANNERS?.banners?.length ? BANNERS?.banners?.length : 0
     }</p>
                     </div>
                 </div>
@@ -1089,10 +1138,8 @@ function modalEditCategories(element) {
                 <div class="descBanner8">
                     Banners desativados
                     <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatInactive">${
-                          getBannerInnerMain(BANNERS?.banners, false).total
-                        }/${
-      BANNERS?.banners?.length ? BANNERS?.banners?.length : 0
+                        <p class="txtQtdBanner listaBannersCatInactive">${getBannerInnerMain(BANNERS?.banners, false).total
+    }/${BANNERS?.banners?.length ? BANNERS?.banners?.length : 0
     }</p>
                     </div>
                 </div>
@@ -1337,7 +1384,7 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     status = JSON.parse(
       ajustStrigfy(dataSubCategoria.affiliate_categorie_status)
     );
-  } catch (e) {}
+  } catch (e) { }
   for (const k in status) {
     if (status[k].subCategoria == subCategoria) {
       essaSubCat = status[k];
@@ -1475,10 +1522,8 @@ function modalEditSubCategories(subCategoria, categoria, element) {
                 <div class="descBanner8">
                     Banners ativos
                     <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatActive">${
-                          getBannerInner(essaSubCat?.banners, true).total
-                        }/${
-      essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
+                        <p class="txtQtdBanner listaBannersCatActive">${getBannerInner(essaSubCat?.banners, true).total
+    }/${essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
     }</p>
                     </div>
                 </div>
@@ -1491,10 +1536,8 @@ function modalEditSubCategories(subCategoria, categoria, element) {
                 <div class="descBanner8">
                     Banners desativados
                     <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatInactive">${
-                          getBannerInner(essaSubCat?.banners, false).total
-                        }/${
-      essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
+                        <p class="txtQtdBanner listaBannersCatInactive">${getBannerInner(essaSubCat?.banners, false).total
+    }/${essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
     }</p>
                     </div>
                 </div>
@@ -1859,7 +1902,7 @@ function iconesSmartCommerci2(categorieName) {
         '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;"   id="' +
         aleatoryID(
           "https://www.api-smartcomerci.com.br:6060/assets/icons/" +
-            LISTA_ICONES[k]
+          LISTA_ICONES[k]
         ) +
         '_icone" onclick="fila($(this), \'' +
         categorieName +
@@ -1932,7 +1975,7 @@ function updateIconSVG(element, categorieName) {
     error: function (myIcons) {
       ////console.log(myIcons);
     },
-    complete: function () {},
+    complete: function () { },
   });
 }
 
@@ -1971,7 +2014,7 @@ function updateCategoriaDetalhe(element, categorieName) {
       error: function (myIcons) {
         ////console.log(myIcons);
       },
-      complete: function () {},
+      complete: function () { },
     });
   } else {
     //console.log("Field Name não pode faltar...")
@@ -1997,7 +2040,7 @@ function mudaDetalhe(fieldName, content, categorieName) {
     error: function (myIcons) {
       //   console.log(myIcons);
     },
-    complete: function () {},
+    complete: function () { },
   });
 }
 
@@ -2008,8 +2051,8 @@ function addWordKey(elemento, e) {
   if (code == 13) {
     $("." + elemento.attr("container")).append(
       '<div class="input-group categoriaLabel categoriasPalavras"><label class="aPalavra">' +
-        elemento.val() +
-        '</label><label onclick="meRemoveX($(this))" class="iconClose"><i class="far fa-times-circle"></i></label></div>'
+      elemento.val() +
+      '</label><label onclick="meRemoveX($(this))" class="iconClose"><i class="far fa-times-circle"></i></label></div>'
     );
     palavrasKey(elemento.val(), "add");
     elemento.val("");
@@ -2023,8 +2066,8 @@ function addWordKey2(elemento, e) {
   if (code == 13) {
     $("." + elemento.attr("container")).append(
       '<div class="input-group categoriaLabel categoriasPalavras"><label class="aPalavra">' +
-        elemento.val() +
-        '</label><label onclick="meRemoveX2($(this))" class="iconClose"><i class="far fa-times-circle"></i></label></div>'
+      elemento.val() +
+      '</label><label onclick="meRemoveX2($(this))" class="iconClose"><i class="far fa-times-circle"></i></label></div>'
     );
     palavrasKey(elemento.val(), "add");
     elemento.val("");
@@ -2502,7 +2545,7 @@ function salvaModalSubCategoria() {
       error: function (myIcons) {
         // console.log(myIcons);
       },
-      complete: function () {},
+      complete: function () { },
     });
   } else {
     alert("Algo saiu errado, tente novamente após o recarregamento da página!");
@@ -2553,7 +2596,7 @@ $.ajax({
   error: function (resultado) {
     ////console.log(resultado)
   },
-  complete: function () {},
+  complete: function () { },
 });
 
 function uploadIcone() {
@@ -2582,7 +2625,7 @@ function sobeIcone(elemento) {
         '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;" id="' +
         aleatoryID(
           "https://www.api-smartcomerci.com.br:6060/assets/icons/cliente_" +
-            elemento[0].files[0].name
+          elemento[0].files[0].name
         ) +
         '_icone" onclick="fila($(this), \'ALIMENTICIOS\',\'updateIconSVG\')" class="boxIconDefault "><svg style="display: none;" class="svg-inline--fa fa-check fa-w-16 iconSelectedCheck" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>' +
         '<!-- <i style="display:none" class="fas fa-check iconSelectedCheck"></i> Font Awesome fontawesome.com --><img class="imgIcone" style="width: 100%;" src="https://www.api-smartcomerci.com.br:6060/assets/icons/cliente_' +
@@ -2600,7 +2643,7 @@ function sobeIcone(elemento) {
           $(".bootbox-accept").css("float", "right");
           $(".bootbox-cancel").css("float", "right");
         },
-        callback: function (e) {},
+        callback: function (e) { },
       });
     },
     error: function (data) {
@@ -2643,16 +2686,13 @@ function getBannerInner(imgURLs, actives) {
                             </div>
                         </div>
                         <br />
-                        <div style="text-align: center" class="switch__container"><input onchange="changeMyActive($(this))" thisUrl="${
-                          imgURLs[k].url
-                        }" ${
-        imgURLs[k].active == true ? 'checked="true"' : ""
-      } id="switch-shadow1778${RANDOM}"
+                        <div style="text-align: center" class="switch__container"><input onchange="changeMyActive($(this))" thisUrl="${imgURLs[k].url
+        }" ${imgURLs[k].active == true ? 'checked="true"' : ""
+        } id="switch-shadow1778${RANDOM}"
                                 class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
                                 for="switch-shadow1778${RANDOM}"></label></div>
-                        <div  onclick="removeBanner('${
-                          imgURLs[k].url
-                        }','banners', $(this))" style="margin-top: 15px" class=" deleteThis">
+                        <div  onclick="removeBanner('${imgURLs[k].url
+        }','banners', $(this))" style="margin-top: 15px" class=" deleteThis">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
                                 style="fill: #f6b504;margin: 9px;">
                                 &gt;
@@ -2664,11 +2704,10 @@ function getBannerInner(imgURLs, actives) {
                         </div>
                     </div>
                    
-                    <div  alvo="update" onclick="alteraBannerCat($(this))" ${
-                      imgURLs[k].url
-                        ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
-                        : ""
-                    }  class="borderRight">
+                    <div  alvo="update" onclick="alteraBannerCat($(this))" ${imgURLs[k].url
+          ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
+          : ""
+        }  class="borderRight">
                     </div>
                 </div>
                  
@@ -2712,16 +2751,13 @@ function getBannerInnerMain(imgURLs, actives) {
                                 </div>
                             </div>
                             <br />
-                            <div style="text-align: center" class="switch__container"><input onchange="changeMyActiveMain($(this))" thisUrl="${
-                              imgURLs[k].url
-                            }" ${
-          imgURLs[k].active == true ? 'checked="true"' : ""
-        } id="switch-shadow1778${RANDOM}"
+                            <div style="text-align: center" class="switch__container"><input onchange="changeMyActiveMain($(this))" thisUrl="${imgURLs[k].url
+          }" ${imgURLs[k].active == true ? 'checked="true"' : ""
+          } id="switch-shadow1778${RANDOM}"
                                     class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
                                     for="switch-shadow1778${RANDOM}"></label></div>
-                            <div  onclick="removeBannerMain('${
-                              imgURLs[k].url
-                            }','banners', $(this))" style="margin-top: 15px" class=" deleteThis">
+                            <div  onclick="removeBannerMain('${imgURLs[k].url
+          }','banners', $(this))" style="margin-top: 15px" class=" deleteThis">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
                                     style="fill: #f6b504;margin: 9px;">
                                     &gt;
@@ -2733,11 +2769,10 @@ function getBannerInnerMain(imgURLs, actives) {
                             </div>
                         </div>
                     
-                        <div  alvo="update" onclick="alteraBannerCatMain($(this))" ${
-                          imgURLs[k].url
-                            ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
-                            : ""
-                        }  class="borderRight">
+                        <div  alvo="update" onclick="alteraBannerCatMain($(this))" ${imgURLs[k].url
+            ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
+            : ""
+          }  class="borderRight">
                         </div>
                     </div>
                     <button  style="margin-top: 50px;" onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
@@ -2784,16 +2819,13 @@ function getBannerVertical(imgURLs, actives) {
                         </div>
                     </div>
                     <br />
-                    <div style="text-align: center" class="switch__container"><input thisUrl="${
-                      imgURLs[k].url
-                    }" onchange="changeMyActiveVertical($(this))" id="switch-shadow1799${RANDOM}" ${
-      imgURLs[k].active == true ? 'checked="true"' : ""
-    }
+                    <div style="text-align: center" class="switch__container"><input thisUrl="${imgURLs[k].url
+      }" onchange="changeMyActiveVertical($(this))" id="switch-shadow1799${RANDOM}" ${imgURLs[k].active == true ? 'checked="true"' : ""
+      }
                             class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
                             for="switch-shadow1799${RANDOM}"></label></div>
-                    <div onclick="removeBanner('${
-                      imgURLs[k].url
-                    }','bannersVertical', $(this))" style="margin-top: 15px" class=" deleteThis">
+                    <div onclick="removeBanner('${imgURLs[k].url
+      }','bannersVertical', $(this))" style="margin-top: 15px" class=" deleteThis">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
                             style="fill: #f6b504;margin: 9px;">
                             &gt;
@@ -2804,11 +2836,10 @@ function getBannerVertical(imgURLs, actives) {
                         </svg>
                     </div>
                 </div>
-                <div alvo="update" onclick="alteraBannerCatVertical($(this))" ${
-                  imgURLs[k].url
-                    ? `style="background-repeat: no-repeat;background-repeat: no-repeat !important; background-position: center; zoom: 80%; min-height: 490px; width: calc(100% - 100px); float: right; background: url(${imgURLs[k].url})"`
-                    : ""
-                }   class="borderRightVertical">
+                <div alvo="update" onclick="alteraBannerCatVertical($(this))" ${imgURLs[k].url
+        ? `style="background-repeat: no-repeat;background-repeat: no-repeat !important; background-position: center; zoom: 80%; min-height: 490px; width: calc(100% - 100px); float: right; background: url(${imgURLs[k].url})"`
+        : ""
+      }   class="borderRightVertical">
                 </div>
                 <button  style="margin-top: 50px;" onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
             </div>`;
@@ -2849,16 +2880,13 @@ function getBannerVerticalMain(imgURLs, actives) {
                             </div>
                         </div>
                         <br />
-                        <div style="text-align: center" class="switch__container"><input thisUrl="${
-                          imgURLs[k].url
-                        }" onchange="changeMyActiveVerticalMain($(this))" id="switch-shadow1799${RANDOM}" ${
-        imgURLs[k].active == true ? 'checked="true"' : ""
-      }
+                        <div style="text-align: center" class="switch__container"><input thisUrl="${imgURLs[k].url
+        }" onchange="changeMyActiveVerticalMain($(this))" id="switch-shadow1799${RANDOM}" ${imgURLs[k].active == true ? 'checked="true"' : ""
+        }
                                 class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
                                 for="switch-shadow1799${RANDOM}"></label></div>
-                        <div onclick="removeBannerMain('${
-                          imgURLs[k].url
-                        }','bannersVertical', $(this))" style="margin-top: 15px" class=" deleteThis">
+                        <div onclick="removeBannerMain('${imgURLs[k].url
+        }','bannersVertical', $(this))" style="margin-top: 15px" class=" deleteThis">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
                                 style="fill: #f6b504;margin: 9px;">
                                 &gt;
@@ -2869,11 +2897,10 @@ function getBannerVerticalMain(imgURLs, actives) {
                             </svg>
                         </div>
                     </div>
-                    <div alvo="update" onclick="alteraBannerCatVerticalMain($(this))" ${
-                      imgURLs[k].url
-                        ? `style="background-repeat: no-repeat;background-repeat: no-repeat !important; background-position: center; zoom: 80%; min-height: 490px; width: calc(100% - 100px); float: right; background: url(${imgURLs[k].url})"`
-                        : ""
-                    }   class="borderRightVertical">
+                    <div alvo="update" onclick="alteraBannerCatVerticalMain($(this))" ${imgURLs[k].url
+          ? `style="background-repeat: no-repeat;background-repeat: no-repeat !important; background-position: center; zoom: 80%; min-height: 490px; width: calc(100% - 100px); float: right; background: url(${imgURLs[k].url})"`
+          : ""
+        }   class="borderRightVertical">
                     </div>
                     <button  style="margin-top: 50px;" onclick="modalAlteraLinks($(this))" class="botaoParaLink">Alterar Link</button>
                 </div>`;
@@ -3388,8 +3415,8 @@ function changeMyActive(element) {
     me.appendTo("#listaBannersCatActive");
     $(".listaBannersCatActive").html(
       $("#listaBannersCatActive").find("li").length +
-        "/" +
-        me.parent().parent().find(".itemSortable2").length
+      "/" +
+      me.parent().parent().find(".itemSortable2").length
     );
     up();
   } else {
@@ -3398,8 +3425,8 @@ function changeMyActive(element) {
 
     $(".listaBannersCatInactive").html(
       $("#listaBannersCatInactive").find("li").length +
-        "/" +
-        me.parent().parent().find(".itemSortable2").length
+      "/" +
+      me.parent().parent().find(".itemSortable2").length
     );
     up();
   }
@@ -3453,8 +3480,8 @@ function changeMyActiveMain(element) {
     me.appendTo("#listaBannersCatActive");
     $(".listaBannersCatActive").html(
       $("#listaBannersCatActive").find("li").length +
-        "/" +
-        me.parent().parent().find(".itemSortable2").length
+      "/" +
+      me.parent().parent().find(".itemSortable2").length
     );
     up();
   } else {
@@ -3463,8 +3490,8 @@ function changeMyActiveMain(element) {
 
     $(".listaBannersCatInactive").html(
       $("#listaBannersCatInactive").find("li").length +
-        "/" +
-        me.parent().parent().find(".itemSortable2").length
+      "/" +
+      me.parent().parent().find(".itemSortable2").length
     );
     up();
   }
