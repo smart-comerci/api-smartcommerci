@@ -252,8 +252,8 @@
                 'x-access-token': localStorage.token,
             },
             success: function (data) {
-                //console.log(data)
-
+                console.log("OS CLIENTES", data)
+                sessionStorage[chaveCache] = JSON.stringify(data)
                 if (cache) {
                     sessionStorage[chaveCache] = JSON.stringify(data)
                 }
@@ -277,7 +277,7 @@
         try {
             lista = JSON.parse(sessionStorage['USERS_CLIENTS_' + localStorage.AFFILIATE_ID])
         } catch (err) {
-            //console.log(err)
+            console.log("ERRO AQUI.......", err)
         }
         let pedidos = 0, assinaturas = 0
 

@@ -1,5 +1,6 @@
 let notFound =
   "https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg";
+var mainHost = 'https://www.smartlima.com.br:7070';
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
@@ -526,7 +527,7 @@ div3.innerHTML = `
       </label> 
     `;
 
-function cutString(str) {}
+function cutString(str) { }
 
 function getProductCard(data) {
   if (data) {
@@ -542,9 +543,8 @@ function getProductCard(data) {
                         </span>
                       </div>
 
-                      <div style="  background: url(${
-                        data.product_thumbnail
-                      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
+                      <div style="  background: url(${data.product_thumbnail
+      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
                       
                       </div>
 
@@ -1276,7 +1276,7 @@ async function uploadAndUpdateFile(element) {
           });
       }
     },
-    error: function (data) {},
+    error: function (data) { },
   });
 }
 
@@ -1698,9 +1698,8 @@ function setLinksFooterElements() {
 function setMidiasSociais() {
   $(`.midiasSociais`).html(``);
 
-  let youtube = `<svg  style="margin: 10px;${
-    homePage.socialMidia.facebook.active === true ? `` : `display: block`
-  } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
+  let youtube = `<svg  style="margin: 10px;${homePage.socialMidia.facebook.active === true ? `` : `display: block`
+    } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
                   viewBox="0 0 22.939 16.129">
                   <path id="facebook"
                     d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
@@ -1815,7 +1814,7 @@ async function getMyObjectHomeMain() {
     error: function (data) {
       console.log(data);
     },
-    complete: function () {},
+    complete: function () { },
   });
 }
 function start() {
@@ -1942,7 +1941,7 @@ async function publishChanges() {
       console.log(data);
       window.parent.informar("alert-danger", "Ocorreu um erro!", 3000);
     },
-    complete: function () {},
+    complete: function () { },
   });
 }
 
@@ -2267,7 +2266,7 @@ $.ajax({
   error: function (data2) {
     console.log(data2);
   },
-  complete: function () {},
+  complete: function () { },
 });
 
 function OrdenaJson(lista, chave, ordem) {
@@ -2282,3 +2281,137 @@ function OrdenaJson(lista, chave, ordem) {
     }
   });
 }
+
+function addContentRevenues(data) {
+  var html = `<li class="nav-menu_item">
+                <a href="" class="nav-menu_link">
+                 ${data.title}
+                </a>
+              </li>
+              `
+  return html
+}
+
+
+function addContentPageI(data) {
+  var html = `<li class="nav-menu_item">
+                <a href="" class="nav-menu_link">
+                 ${data.titulo_page}
+                </a>
+              </li>
+              `
+  return html
+}
+
+
+
+$.ajax({
+  type: "POST",
+  url: mainHost + '/getByTableName',
+  data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues" },
+  headers: {
+    "x-access-token": localStorage.token,
+  },
+  success: function (data2) {
+
+    let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES)
+    console.log('revenuess', data2, paginas)
+    for (const k in data2) {
+      $("#listaReceitas").append(addContentRevenues(data2[k]))
+    }
+
+    for (const k in paginas) {
+      $("#listaPaginas").append(addContentPageI(paginas[k]))
+    }
+
+
+
+
+
+
+  },
+  error: function (data) {
+
+
+    window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
+  },
+  complete: function () { },
+});
+
+function getCategorias(CATEGORIES) {
+  var listaCategoriasPrimarias = [],
+    CATEGORIAS_FULL = [];
+  var currCategorie = null;
+
+  CATEGORIES = OrdenaJson(CATEGORIES, "product_site_categories", "ASC");
+  for (const k in CATEGORIES) {
+    var textou = CATEGORIES[k].product_site_categories;
+    if (textou == null || textou == "null") {
+      textou = "Novo,";
+    }
+    if (textou.split(",")[0] != currCategorie) {
+      listaCategoriasPrimarias.push({ categoria: textou.split(",")[0] });
+    }
+    currCategorie = textou.split(",")[0];
+  }
+
+  var listaSubCategorias = [];
+  for (const k in listaCategoriasPrimarias) {
+    var thisCategorieGroup = "";
+    for (const s in CATEGORIES) {
+      if (CATEGORIES[s].product_site_categories != null) {
+        if (
+          CATEGORIES[s].product_site_categories.split(",")[0] ==
+          listaCategoriasPrimarias[k].categoria
+        ) {
+          var list = CATEGORIES[s].product_site_categories.split(",");
+          for (const l in list) {
+            if (thisCategorieGroup.indexOf(list[l]) < 0 && l > 0) {
+              thisCategorieGroup += list[l] + ",";
+            }
+          }
+        }
+      }
+    }
+    thisCategorieGroup += "CRIE UMA CATEGORIA";
+    thisCategorieGroup = thisCategorieGroup?.replace(",CRIE UMA CATEGORIA", "");
+
+
+
+    const exists = CATEGORIAS_FULL.find((x) => x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim())
+    if (exists) {
+      if (exists.subCategorias.length < thisCategorieGroup.length) {
+        CATEGORIAS_FULL.map((x) => {
+          if (x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim()) {
+            x.subCategorias = exists.subCategorias
+          }
+        })
+      }
+    } else {
+      CATEGORIAS_FULL.push({
+        categoria: listaCategoriasPrimarias[k].categoria,
+        subCategorias: thisCategorieGroup,
+        cat_status: 0,
+        sub_status: "[]",
+      });
+    }
+  }
+  console.log('CATEGORIAS_FULL', CATEGORIAS_FULL)
+
+  if (MINHAS_CATEGORIAS.length == 0) {
+    if (CATEGORIAS_FULL.length == 0) {
+      alert("Não há categorias cadastradas!");
+    } else {
+      setTimeout(() => {
+        $("#salvandoAlteracoes").click();
+      }, 5000);
+
+
+
+      return CATEGORIAS_FULL;
+    }
+  } else {
+    return MINHAS_CATEGORIAS;
+  }
+}
+
