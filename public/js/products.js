@@ -3659,7 +3659,8 @@ function subTagInput(ele, elemento, texto, e) {
 }
 
 function getAffiliateName(AFFILIATES, ID) {
-  ////////console.log(AFFILIATES, ID)
+  AFFILIATES = JSON.parse(localStorage.LOJAS_CADASTRADAS);
+  // console.log("encontre", AFFILIATES, ID);
   for (const k in AFFILIATES) {
     if (AFFILIATES[k].id == Number(ID)) {
       return AFFILIATES[k].affiliates_business_name;
@@ -6656,7 +6657,7 @@ async function buscaPeloFiltro(
           "</div>" +
           '<div  style="min-width: 150px !important; max-width: 150px !important; padding: 10px"  class="col-sm">' +
           '<label style="font-size:10px !important; padding: 10px"  class="infoLabel infoValor">' +
-          getAffiliateName(AFFILIATES, products[k].product_affiliate_id) +
+          getAffiliateName(AFFILIATES, localStorage.AFFILIATE_ID) +
           "</label>" +
           "</div>" +
           '<div class="col-sm">' +
