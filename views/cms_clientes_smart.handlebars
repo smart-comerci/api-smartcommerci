@@ -227,7 +227,7 @@
 
 
 
-        <button username="newUser" onclick="modalEditUser($(this))" whoIm="newUser" class="btn btn-access-invert"
+        <button username="newUser" onclick="modalCreateUser($(this))" whoIm="newUser" class="btn btn-access-invert"
             style="opacity: 1;gap: 15px;">
             <svg xmlns="http://www.w3.org/2000/svg" style="/* margin: -20% auto 0 0; */ fill: white;margin: auto;"
                 width="24" height="24" viewBox="0 0 24 24">
@@ -290,8 +290,77 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+
+
+    let EDIT_OBJ =
+    {
+
+        "master_business_name": "",
+        "master_affiliate_names": "",
+        "master_business_cnpj": "00",
+        "master_business_razao": "",
+        "master_business_telefone": null,
+        "master_business_mail": "",
+        "master_business_horario": null,
+        "master_business_endereco": null,
+        "master_business_numero": null,
+        "master_business_cep": null,
+        "master_business_cidade": null,
+        "master_business_estado": null,
+        "master_custom_segmento": "Outros",
+        "master_custom_logo": "",
+        "master_custom_cor_primeira": "green",
+        "master_custom_cor_segunda": "darkgreen",
+        "master_custom_cor_terceira": "blue",
+        "master_custom_cor_quarta": "red",
+        "master_custom_categorias": "",
+        "master_custom_ferramentas": "",
+        "email_servico": "",
+        "email_remetente": "",
+        "master_estoque_negativo": "on",
+        "master_tag_manager": "XXXXXX",
+        "status": "ativo",
+        "master_banner_revenues": "https://www.smartlima.com.br:7070/images/231/banner-receitas.png",
+        "master_custom_mini_banner04": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
+        "master_custom_mini_banner03": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
+        "master_custom_mini_banner02": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
+        "master_custom_mini_banner01": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
+        "master_custom_banner_aside": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
+        "master_custom_banner_rodape": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+        "master_custom_banner_principal": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+        "master_custom_texto_privacidade": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+        "master_custom_banner_mini_cat": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+        "master_custom_banner_pub4": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+        "master_custom_banner_pub3": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+        "master_custom_banner_pub2": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+        "master_custom_banner_pub1": "https://api-smartcomerci.com.br:9090/images/2/1094_x_269_01.png",
+        "master_custom_banner_widescreen": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+
+        "site_front_domain": "",
+        "masters_namespace_mail": null,
+        "home_main_info": ""
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     var elementum = null
+
     function modalEditUser(element, e) {
+        console.log(element.attr("fieldSet"), element)
+
+        let lista4 = JSON.parse(sessionStorage.ALL_CLIENTS)
+        let mailNew = element.attr("fieldSet")
+        const exists = lista4.find((x) => x.master_business_mail === mailNew)
+
         e = window.event;
         var senderElement = e.target;
         elementum = senderElement
@@ -311,172 +380,112 @@
                 title = 'Criar Usuário'
             }
 
-            var html =
-                '<div style="max-width:100% " class="container">' +
-                '<div class="row" style="max-width: 90%;margin: -11px auto;border-bottom: 2px solid #EDF2F6;margin-bottom: 10px; ">' +
+            var html = `<div style="max-width:100% " class="container">
+                            <div>
+                                <h4 style="text-align: center;">Editar Cliente</h4>
+                            </div>
+                     
 
-                '<div content="funcao" class="col-md-2 tabModal tabModalActive">' +
-                '<label class="labelTab"  style="text-align:center">' + title + '</label>' +
-                "</div>" +
+                            <div class="col-md-12 " style="margin-top: 3% !important; background: white !important">
 
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12"><label style=" font-size: 20px;" class="label">Nome da empresa</label><br> </div>
+                                </div>
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12">
+                                        <div class="group-input2"
+                                            style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
+                                            <input value="${exists.master_business_name}" readonly fieldSet="master_business_name" onchange="setMeObj($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
+                                                placeholder="Nome da empresa"   
+                                                table="users_affiliates" >
+                                        </div><br>
+                                    </div>
+                                </div>
+                             
 
-                '<div style="opacity: 0 !important" content="funcao" class="col-md-2 tabModal tabModalActive">' +
-                '<label class="labelTab"  style="text-align:center">' + title + '</label>' +
-                "</div>" +
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12"><label style=" font-size: 20px;" class="label">Insira o e-mail Master do cliente</label><br> </div>
+                                </div>
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12">
+                                        <div class="group-input2"
+                                            style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
+                                            <input  value="${exists.master_business_mail}"  readonly fieldSet="master_business_mail" onchange="setMeObj($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
+                                                placeholder="meu-email@master.com.br"    
+                                                table="users_affiliates" >
+                                        </div><br>
+                                    </div>
+                                </div><br>
+                              
+                                 <hr>
+                              
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12"><label style=" font-size: 20px;" class="label">Defina o status atual</label><br> </div>
+                                </div>
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12">
+                                        <div class="group-input2"
+                                            style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
+                                            <select  fieldSet="status" onchange="setMeObj($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
+                                                placeholder="Nome de usuário" id="nomeCategoria" fieldname="users_affiliate_slug"
+                                                table="users_affiliates" > 
+                                            <option>Ativo</option>
+                                            <option>Em processamento</option>
+                                            <option>Desativado</option>
+                                            </select>
+                                        </div><br>
+                                    </div>
+                                </div><br>
+                                 <br>
 
-                '<div  style="opacity: 0 !important" content="funcao" class="col-md-2 tabModal tabModalActive">' +
-                '<label class="labelTab"  style="text-align:center">' + title + '</label>' +
-                "</div>" +
-                '<div class="col-md-2" style="opacity: 0"></div>' +
-
-
-                '<div class="col-md-2">' +
-                '<button onclick="$(\'.close\').click()" class="btn btn-access">Cancelar</button>' +
-                "</div>" +
-
-
-
-                '<div class="col-md-2 ">' +
-                '<button whoIm="' + element.attr("whoIm") + '" myToken="' + element.attr("myToken") + '"  username="' + element.attr("username") + '"  onclick="salvandoAlteracoes3($(this))" class="btn btn-access-invert">Salvar</button>' +
-                "</div>" +
-
-                "</div>" +
-                '<hr class="baixoCabecalho" style="position: fixed;top: 115px !important;left: 0px !important;width: 100%;box-shadow: 2px 2px 2px silver;"></hr>' +
-                //=======================================================================================================================================================================
-                '<div id="funcao" style="max-width:90% ; margin-top: 2%;max-height: 80vh"  class="container tabContent verticalScroll">' +
-                '<div  class="col-md-12 " style="margin-top: 3% !important; background: white !important">' +
-
-                '<div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">' +
-                '<div style="margin: 1% 2%;" class="switch__container">' +
-                '<input ' + activeChecked + '    fieldName="status" table="users_affiliates"  id="switch-shadow18" class="switch switch--shadow filaDeMudancas" type="checkbox" />' +
-                '<label for="switch-shadow18"></label>' +
-                "</div>" +
-                '<label style=" font-size: 20px;" class="label">Usuário Ativo</label> ' +
-                "</div>" +
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<label style=" font-size: 20px;" class="label">Nome do usuário</label><br> ' +
-                "</div>" +
-                "</div>" +
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-
-                '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="Nome de usuário" id="nomeCategoria"    fieldName="users_affiliate_slug" table="users_affiliates"  value="' + myName + '"></div><br> ' +
-
-                "</div>" +
-                "</div><br><hr><br>" +
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<h3 style=" font-size: 20px;" class="SEO">Permissões</h3><br> ' +
-                "</div>" +
-                "</div>" +
-
-                "<br><br>" +
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<label style=" font-size: 20px;" class="label">Função do usuário</label><br> ' +
-                "</div>" +
-                "</div>" +
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<div class="col-md-12 grupoCinza" style="background: none;"><div class="row"><div class="col-md-10"><div style="padding:0 2%"  fieldName="users_affiliate_perfil" table="users_affiliates"    class="row minhasFuncoes filaDeMudancas" alvo="label"><p id="funcaoAtual" class="label">' + element.attr("perfil") + '</p></div></div><div class="col-md-2"><div class="input-group ico dropItems iconOpaco" dropou="1"><div onclick="mostraDrop($(this))" class=" deleteThis2 dropCategoriaButton "><svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36"><g transform="translate(36 36) rotate(180)"><g transform="translate(28 28) rotate(180)"><g class="b"><g class="c"><circle class="e" cx="10" cy="10" r="10"></circle><circle class="f" cx="10" cy="10" r="9.5"></circle></g><path class="d" d="M581.273,789.774a.82.82,0,0,1-.081-1.079l.081-.092,3.685-3.593-3.685-3.593a.82.82,0,0,1-.081-1.079l.081-.093a.849.849,0,0,1,1.094-.081l.094.081,4.279,4.179a.82.82,0,0,1,.081,1.079l-.081.093-4.279,4.179A.849.849,0,0,1,581.273,789.774Z" transform="translate(795.009 -573.615) rotate(90)"></path></g></g></g></svg></div></div></div></div><div style="margin-top: 1.2%;background: white 0% 0% no-repeat padding-box;display: none;" class="row grupoCategorias drop"><div class="col-md-12"><div class="input-group"><input id="buscaCategorias" type="text" style="min-width: 300px;font-size: 1rem;" value="" class="form-control" placeholder="Busque por funções"><div class="input-group-append"><div class="input-group-text"><svg style="color: #f6b504; font-weight: bold;" class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg><!-- <i style="color: #f6b504; font-weight: bold;" class="fas fa-search"></i> Font Awesome fontawesome.com --></div></div></div></div><div style="max-height: 30vh" class="col-md-12 verticalScroll"><ul style="    margin-top: 5%;" class="list animate__animated ">' + returnProfiles(element.attr("username")) + '</ul></div></div></div>' +
-
-                "</div>" +
-                "</div><br><br>" +
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<label style=" font-size: 20px;" class="label">Unidades visíveis</label><br> ' +
-                "</div>" +
-                "</div>" +
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<div class="col-md-12 grupoCinza" style="background: none;"><div class="row"><div class="col-md-10"><div style="padding:0 2%; margin-top: 2%; border: none !important" class="row"><div style="margin: 2% 2%;" class="switch__container"><input fieldname="status" ' + saoTodas(element.attr("username")) + ' id="switch-shadow1800" onchange="marcaTodasAffiliadas($(this))" class="switch switch--shadow" type="checkbox"><label for="switch-shadow1800"></label></div><label style=" font-size: 20px;" class="label">Todas as unidades</label> </div></div><div class="col-md-2"><div class="input-group ico dropItems iconOpaco" dropou="1"></div></div></div><div style="margin-top: 1.2%;background: white 0% 0% no-repeat padding-box;/* padding: 10px !important; */border: none;border-top: 1px dashed #edf2f6;max-width: 98%;margin: auto;" class="row grupoCategorias drop"><div class="col-md-12"></div><div style="max-height: 30vh" class="col-md-12 verticalScroll"><ul style="    /* margin-top: 5%; */" class="list animate__animated">' + returnMyUnitys(element.attr("username")) + ' </ul></div></div></div>' +
-
-                "</div>" +
-                "</div><br><br>" +
-
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<h3 style=" font-size: 20px;" class="SEO">Informações do login</h3><br> ' +
-                "</div>" +
-                "</div>" +
-
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<label style=" font-size: 20px;" class="label">E-mail</label><br> ' +
-                "</div>" +
-                "</div>" +
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-
-                '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="E-mail..." id="nomeCategoria"  fieldName="users_affiliate_name" table="users_affiliates"    value="' + element.attr("username") + '"></div><br> ' +
-
-                "</div>" +
-                "</div>" +
-                '<div style="padding:0 2%; border-top: 1px dashed silver" class="row">' +
-
-                '<div class="col-md-3">' +
-
-                '<button  myToken="' + element.attr("myToken") + '"  username="' + element.attr("username") + '"  onclick="alterarEmail4($(this))" class="btn btn-access-invert">Trocar E-mail</button>' +
-                "</div>" +
-                "</div>" +
-
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-12">' +
-                '<label style=" font-size: 20px;" class="label">Senha</label><br> ' +
-                "</div>" +
-                "</div>" +
-
-                '<div style="padding:0 2%" class="row">' +
-                '<div class="col-md-4">' +
-
-                '<button class="btn btn-access">Enviar nova senha por e-mail</button>' +
-
-                "</div>" +
-                '<div class="col-md-3">' +
-
-                '<button  myToken="' + element.attr("myToken") + '"  username="' + element.attr("username") + '" onclick="alterarSenha4($(this))" class="btn btn-access-invert">Alterar senha</button>' +
-                "</div>" +
-                "</div>" +
-
-                '<div style="padding:0 2%; border-top: 1px dashed silver" class="row">' +
-                '<br>' +
-                '<div class="col-md-3">' +
-
-                '<button  myToken="' + element.attr("myToken") + '"  username="' + element.attr("username") + '"  onclick="excluirUsuario4($(this))" class="btn btn-access-invert">Excluir usuário</button>' +
-                "</div>" +
-                "</div>" +
+                                 <hr>
+                                
+                                 
+                                    <a class="close-modal" style="text-decoration: underline;
+font: normal normal bold 14px/21px Roboto;
+letter-spacing: 0px;
+color: #687C97;" href="#" data-bs-dismiss="modal">Cancelar</a>
+                                    <button style="float:right; font-size: 20px; background-color: #f6b504" onclick="atualizaCliente($(this))" type="button" id="password-save-button" tabindex="6" class="btn btn-save rounded-pill">Salvar alterações</button>
+                              
+                              
+                            
 
 
 
 
-
-
-
-                "</div>" +
-
-
-                "</div>" +
-
-
-
-
-
-                "</div>";
+                            </div>
+                        </div>`;
 
             bootbox.alert({
                 message: html,
                 onShow: function () {
+                    console.log($(this))
+                    $(this)[0].id = "modalCentralFiltroInner3";
+                    $(this)[0].height = "60vh";
+                    $("#modalCentralFiltroInner3")
+                        .find(".modal-dialog")
+                        .addClass("modalCentralFiltro");
+
+                    $("#modalCentralFiltroInner3")
+                        .find(".modal-dialog")
+                        .css("max-width", "600px");
+
+
+                    $("#modalCentralFiltroInner3")
+                        .find(".modal-dialog")
+                        .css("height", "50vh !important");
+
+                    $("#modalCentralFiltroInner3")
+                        .find(".modal-body")
+                        .css("height", "60vh !important");
+
+                    $("#modalCentralFiltroInner3")
+                        .find(".modal-body")
+                        .css("max-height", "0vh !important");
+                    $(".modal-body")
+                        .css("max-height", "0vh !important");
+
+
 
                     $(".tabModal").click(function () {
                         $(".tabModal").removeClass("tabModalActive");
@@ -497,6 +506,8 @@
                     sessionStorage.PALAVRAS_KEY = ''
                 }
             })
+            $(".modal-content").css("max-height", "50vh");
+            $(".modal-content").css("border", "none");
             $(".modal-footer").hide()
 
 
@@ -505,6 +516,293 @@
 
 
     }
+
+    function modalCreateUser(element, e) {
+        e = window.event;
+        var senderElement = e.target;
+        elementum = senderElement
+        //console.log("senderElement", senderElement)
+        //////////console.log(senderElement)
+        //////////console.log(senderElement.className)
+        if (senderElement.className == "switch switch--shadow" || senderElement.className == "checka form-control checkControl" || senderElement.className == "naoAbreModal" || senderElement.className == "checkmark") {
+            //console.log("não devia abrir modal")
+        } else {
+            let isActive = element.attr("isActive") ? element.attr("isActive") : 0, activeChecked = ''
+            let myName = element.attr("myName") ? element.attr("myName") : element.attr("username")?.split("@")[0]
+            if (isActive) {
+                activeChecked = 'checked="true"'
+            }
+            let title = 'Editar Usuário'
+            if (element.attr("whoIm") == "newUser") {
+                title = 'Criar Usuário'
+            }
+
+            var html = `<div style="max-width:100% " id="conteudaoo" class="container">
+                            <div>
+                                <h4 style="text-align: center;">Novo Cliente</h4>
+                            </div>
+                     
+
+                            <div class="col-md-12 " style="margin-top: 3% !important; background: white !important">
+
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12"><label style=" font-size: 20px;" class="label">Nome da empresa</label><br> </div>
+                                </div>
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12">
+                                        <div class="group-input2"
+                                            style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
+                                            <input fieldSet="master_business_name" onchange="setMeObj($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
+                                                placeholder="Nome da empresa"   
+                                                table="users_affiliates" >
+                                        </div><br>
+                                    </div>
+                                </div>
+                             
+
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12"><label style=" font-size: 20px;" class="label">Insira o e-mail Master do cliente</label><br> </div>
+                                </div>
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12">
+                                        <div class="group-input2"
+                                            style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
+                                            <input  fieldSet="master_business_mail" onchange="setMeObj($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
+                                                placeholder="meu-email@master.com.br"    
+                                                table="users_affiliates" >
+                                        </div><br>
+                                    </div>
+                                </div><br>
+                              
+                                 <hr>
+                              
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12"><label style=" font-size: 20px;" class="label">Defina o status atual</label><br> </div>
+                                </div>
+                                <div style="padding:0 2%" class="row">
+                                    <div class="col-md-12">
+                                        <div class="group-input2"
+                                            style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
+                                            <select  fieldSet="status" onchange="setMeObj($(this))" style="background: none" class="form-control inputProduct filaDeMudancas"
+                                                placeholder="Nome de usuário" id="nomeCategoria" fieldname="users_affiliate_slug"
+                                                table="users_affiliates" > 
+                                            <option>Ativo</option>
+                                            <option>Em processamento</option>
+                                            <option>Desativado</option>
+                                            </select>
+                                        </div><br>
+                                    </div>
+                                </div><br>
+                                 <br>
+
+                                 <hr>
+                                
+                                 
+                                    <a class="close-modal" style="text-decoration: underline;
+font: normal normal bold 14px/21px Roboto;
+letter-spacing: 0px;
+color: #687C97;" href="#" data-bs-dismiss="modal">Cancelar</a>
+                                    <button style="float:right; font-size: 20px; background-color: #f6b504"  id="criandoNovoCliente" type="button" id="password-save-button" tabindex="6" class="btn btn-save rounded-pill">Criar Novo Cliente</button>
+                              
+                              
+                            
+
+
+
+
+                            </div>
+                        </div>`;
+
+            bootbox.alert({
+                message: html,
+                onShow: function () {
+                    $(this)[0].id = "modalCentralFiltroInner";
+                    $(this)[0].height = "60vh";
+                    $("#modalCentralFiltroInner")
+                        .find(".modal-dialog")
+                        .addClass("modalCentralFiltro");
+                    $("#modalCentralFiltroInner")
+                        .find(".modal-dialog")
+                        .css("height", "50vh !important");
+
+                    $("#modalCentralFiltroInner")
+                        .find(".modal-body")
+                        .css("height", "60vh !important");
+
+                    $("#modalCentralFiltroInner")
+                        .find(".modal-body")
+                        .css("max-height", "0vh !important");
+                    $(".modal-body")
+                        .css("max-height", "0vh !important");
+
+
+
+                    $(".tabModal").click(function () {
+                        $(".tabModal").removeClass("tabModalActive");
+                        $(this).addClass("tabModalActive");
+                        $(".tabContent").hide();
+                        //////connsole.log("#" + $(this).attr("content"));
+                        $("#" + $(this).attr("content")).fadeIn();
+                    });
+                    $("#queSalva").click(function () {
+                        $(".close").click()
+                    })
+                    $(".checkFull").change(function () {
+                        $('.checkControl')[0].checked = $(this)[0].checked
+                    })
+
+                    $("#criandoNovoCliente").click(async function () {
+                        const resto = await criaClienteNovo()
+
+                        var html2 = `  <div style=" margin: auto;background: #FFFBF2 0% 0% no-repeat padding-box;
+                    opacity: 1;width: 83px;
+height: 83px;    padding: 25px;
+    border-radius: 100%;">
+                    <div style="/* UI Properties */
+background: #F6B504 0% 0% no-repeat padding-box;
+opacity: 1;width: 35px;
+height: 35px;  
+    border-radius: 100%; color: white;    text-align: center;
+    font-size: 1.5rem;">
+                    !
+                    </div>
+                
+                </div>
+
+                            <div>
+                                <h4 style="text-align: center;">Novo cliente criado</h4>
+                            </div>
+                     
+
+                            <div class="col-md-12 " style="margin-top: 3% !important; background: white !important">
+                                <div style="padding: 10px;padding: 10px;background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #EDF2F6;
+border-radius: 16px;
+opacity: 1;">
+<h3  style="      padding: 5px;  gap: 30px;
+    display: inline-flex;
+    padding: 5px;"><span style="text-align: left;
+font: normal normal bold 13px/21px Roboto;
+letter-spacing: 0px;
+color: #222B45;
+opacity: 1;text-align: left;
+font: normal normal bold 13px/21px Roboto;
+letter-spacing: 0px;
+color: #222B45;
+opacity: 1;">Empresa</span> <span style="text-align: left;
+font: normal normal normal 16px/14px Roboto;
+letter-spacing: 0px;
+color: #687C97;
+opacity: 1;">${EDIT_OBJ.master_business_name}</span></h3>
+
+                                </div>
+<br>
+                                 
+
+                                
+<br>
+                                            <div style="padding: 10px;background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #EDF2F6;
+border-radius: 16px;
+opacity: 1;">
+<h3  style="     padding: 5px;   gap: 30px;
+    display: inline-flex;
+    padding: 5px;" style="    gap: 30px;
+    display: inline-flex;
+    padding: 5px;"><span style="text-align: left;
+font: normal normal bold 13px/21px Roboto;
+letter-spacing: 0px;
+color: #222B45;
+opacity: 1;">E-mail</span> <span  style="text-align: left;
+font: normal normal normal 16px/14px Roboto;
+letter-spacing: 0px;
+color: #687C97;
+opacity: 1;">${EDIT_OBJ.master_business_mail}</span></h3>
+
+                                </div>
+<br>
+                                            <div style="padding: 15px;background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #EDF2F6;
+border-radius: 16px;
+opacity: 1;">
+<h3  style="      padding: 5px;  gap: 30px;
+    display: inline-flex;
+    padding: 5px;"><span style="text-align: left;
+font: normal normal bold 13px/21px Roboto;
+letter-spacing: 0px;
+color: #222B45;
+opacity: 1;">ID Master</span> <span  style="text-align: left;
+font: normal normal normal 16px/14px Roboto;
+letter-spacing: 0px;
+color: #687C97;
+opacity: 1;">${resto.insertId}</span> <div class="infoClientContent_copiar"  style="  margin-left: 350px;    padding: 5px;  max-width: 130px;"><svg xmlns="http://www.w3.org/2000/svg" style=" fill: #f6b504;  cursor: pointer;  margin:auto;" width="12" height="14" viewBox="0 0 12 14"><path id="duplicate" d="M7.125,14H1.875A1.913,1.913,0,0,1,0,12.055v-7A1.913,1.913,0,0,1,1.875,3.111H3V1.945A1.913,1.913,0,0,1,4.874,0h4.5A.364.364,0,0,1,9.64.114l2.25,2.334a.391.391,0,0,1,.109.3v6.2a1.913,1.913,0,0,1-1.875,1.945H9v1.165A1.913,1.913,0,0,1,7.125,14ZM1.875,3.889A1.148,1.148,0,0,0,.75,5.055v7a1.148,1.148,0,0,0,1.125,1.167h5.25a1.148,1.148,0,0,0,1.124-1.167V10.89H6.374a.389.389,0,0,1,0-.778h3.75a1.148,1.148,0,0,0,1.125-1.167V3.112H9.374A.383.383,0,0,1,9,2.723V.778H4.874A1.148,1.148,0,0,0,3.75,1.945V5.833a.376.376,0,1,1-.751,0V3.889ZM9.749,1.329V2.334h.97ZM3.375,10.112A.365.365,0,0,1,3.109,10a.4.4,0,0,1,0-.55l3.86-4H5.624a.389.389,0,0,1,0-.778h2.25a.382.382,0,0,1,.375.388V7.389a.375.375,0,1,1-.75,0v-1.4L3.64,10A.365.365,0,0,1,3.375,10.112Z" fill="#f6b504"></path></svg><label onclick="copyToClipboard('rounantj@hotmail.com', $(this))" class="infoClientContent_copiarTexto" style="opacity: 1;">Copiar</label></div></h3>
+
+                                </div>
+<br>
+     <div style="padding: 15px;background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #EDF2F6;
+border-radius: 16px;
+opacity: 1;">
+<h3 style="      padding: 5px;  gap: 30px;
+    display: inline-flex;
+    padding: 5px;"><span style="text-align: left;
+font: normal normal bold 13px/21px Roboto;
+letter-spacing: 0px;
+color: #222B45;
+opacity: 1;">ID Afiliado</span> <span  style="text-align: left;
+font: normal normal normal 16px/14px Roboto;
+letter-spacing: 0px;
+color: #687C97;
+opacity: 1;">${resto.insertId}</span>  <div class="infoClientContent_copiar" style="    margin-left: 350px;     padding: 5px;  max-width: 130px;"><svg xmlns="http://www.w3.org/2000/svg" style=" fill: #f6b504;  cursor: pointer;  margin:auto;" width="12" height="14" viewBox="0 0 12 14"><path id="duplicate" d="M7.125,14H1.875A1.913,1.913,0,0,1,0,12.055v-7A1.913,1.913,0,0,1,1.875,3.111H3V1.945A1.913,1.913,0,0,1,4.874,0h4.5A.364.364,0,0,1,9.64.114l2.25,2.334a.391.391,0,0,1,.109.3v6.2a1.913,1.913,0,0,1-1.875,1.945H9v1.165A1.913,1.913,0,0,1,7.125,14ZM1.875,3.889A1.148,1.148,0,0,0,.75,5.055v7a1.148,1.148,0,0,0,1.125,1.167h5.25a1.148,1.148,0,0,0,1.124-1.167V10.89H6.374a.389.389,0,0,1,0-.778h3.75a1.148,1.148,0,0,0,1.125-1.167V3.112H9.374A.383.383,0,0,1,9,2.723V.778H4.874A1.148,1.148,0,0,0,3.75,1.945V5.833a.376.376,0,1,1-.751,0V3.889ZM9.749,1.329V2.334h.97ZM3.375,10.112A.365.365,0,0,1,3.109,10a.4.4,0,0,1,0-.55l3.86-4H5.624a.389.389,0,0,1,0-.778h2.25a.382.382,0,0,1,.375.388V7.389a.375.375,0,1,1-.75,0v-1.4L3.64,10A.365.365,0,0,1,3.375,10.112Z" fill="#f6b504"></path></svg><label onclick="copyToClipboard('rounantj@hotmail.com', $(this))" class="infoClientContent_copiarTexto" style="opacity: 1;">Copiar</label></div></h3>
+
+                                </div>
+
+                               
+                             
+ 
+                               
+                           
+                                 <br>
+
+                                 <hr>
+                                
+                                 
+                               
+                                    <button style="float:right; font-size: 20px; background-color: #f6b504" onclick="location.reload()" type="button" id="password-save-button" tabindex="6" class="btn btn-save rounded-pill">Finalizar</button>
+                              
+                              
+                            
+
+
+
+
+                            </div> `;
+
+
+                        console.log(html2)
+
+
+                        $("#conteudaoo").html(html2)
+                    })
+
+                },
+                callback: function () {
+                    sessionStorage.PALAVRAS_KEY = ''
+                }
+            })
+            $(".modal-content").css("max-height", "50vh");
+            $(".modal-content").css("border", "none");
+            $(".modal-footer").hide()
+
+
+        }
+
+
+
+    }
+
+
+
     function alteraChecked(elemento) {
         $('.checkControl').each(function () {
             $(this)[0].checked = elemento[0].checked
@@ -614,6 +912,7 @@
 
             html += `<div isActive="${fullList[k].status}" whoIm="user" myToken="${fullList[k].id}" myid="${fullList[k].master_business_mail}"
     myName="${name}" isActive="${fullList[k].isActive}" perfil="${fullList[k].perfil}" username="${fullList[k].user}"
+    fieldSet="${fullList[k].master_business_mail}"
     onclick="modalEditUser($(this))" affiliate_id="96" class="row radius20 userCms">
  
     <div class="col-sm" style="opacity: 1; display: inline-flex; gap: 15px; ">
@@ -1229,5 +1528,56 @@ color: #222B45 !important;">${name}</label>
 
         }
     }, 1000)
+
+
+    function setMeObj(elemento) {
+        EDIT_OBJ[elemento.attr("fieldSet")] = elemento.val()
+        console.log(EDIT_OBJ)
+    }
+
+    async function criaClienteNovo(elemento) {
+        let lista4 = JSON.parse(sessionStorage.ALL_CLIENTS)
+        let mailNew = EDIT_OBJ['master_business_mail']
+        var mainHost = "https://www.smartlima.com.br:7070";
+        const exists = lista4.find((x) => x.master_business_mail === mailNew)
+        if (!exists) {
+            let fields = []
+            for (const k in EDIT_OBJ) {
+                fields.push(
+                    { column: k, value: EDIT_OBJ[k] }
+                )
+            }
+            console.log('OS FIELDS', fields)
+
+            return $.ajax({
+                type: "POST",
+                url: mainHost + "/insertNew",
+                headers: {
+                    "x-access-token": localStorage.token,
+                },
+                data: {
+                    table: "masters",
+                    fields,
+                },
+                success: function (data) {
+                    console.log("result ", data);
+
+                },
+                error: function (data) {
+                    informar(
+                        "alert-danger",
+                        "Algo saiu errado, alterações não foram salvas!",
+                        3000
+                    );
+                },
+                complete: function () {
+                    // ao final da requisição...
+                },
+            });
+
+        } else {
+            alert("Ja existe um cliente utilizando o email: '" + mailNew + "'")
+        }
+    }
 
 </script>

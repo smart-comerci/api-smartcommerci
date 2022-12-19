@@ -2282,3 +2282,128 @@ function OrdenaJson(lista, chave, ordem) {
     }
   });
 }
+
+function addContentRevenues(data) {
+  var html = `<li class="nav-menu_item">
+                <a href="" class="nav-menu_link">
+                 ${data.title}
+                </a>
+              </li>
+              `;
+  return html;
+}
+
+function addContentPageI(data) {
+  var html = `<li class="nav-menu_item">
+                <a href="" class="nav-menu_link">
+                 ${data.titulo_page}
+                </a>
+              </li>
+              `;
+  return html;
+}
+
+$.ajax({
+  type: "POST",
+  url: mainHost + "/getByTableName",
+  data: {
+    masterId: localStorage.MASTER_ID,
+    idName: "master_id",
+    tableName: "revenues",
+  },
+  headers: {
+    "x-access-token": localStorage.token,
+  },
+  success: function (data2) {
+    let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
+    console.log("revenuess", data2, paginas);
+    for (const k in data2) {
+      $("#listaReceitas").append(addContentRevenues(data2[k]));
+    }
+
+    for (const k in paginas) {
+      $("#listaPaginas").append(addContentPageI(paginas[k]));
+    }
+  },
+  error: function (data) {
+    window.parent.informar("alert-danger", "Algo saiu errado!", 3000);
+  },
+  complete: function () {},
+});
+
+function getCategorias(CATEGORIES) {
+  var listaCategoriasPrimarias = [],
+    CATEGORIAS_FULL = [];
+  var currCategorie = null;
+
+  CATEGORIES = OrdenaJson(CATEGORIES, "product_site_categories", "ASC");
+  for (const k in CATEGORIES) {
+    var textou = CATEGORIES[k].product_site_categories;
+    if (textou == null || textou == "null") {
+      textou = "Novo,";
+    }
+    if (textou.split(",")[0] != currCategorie) {
+      listaCategoriasPrimarias.push({ categoria: textou.split(",")[0] });
+    }
+    currCategorie = textou.split(",")[0];
+  }
+
+  var listaSubCategorias = [];
+  for (const k in listaCategoriasPrimarias) {
+    var thisCategorieGroup = "";
+    for (const s in CATEGORIES) {
+      if (CATEGORIES[s].product_site_categories != null) {
+        if (
+          CATEGORIES[s].product_site_categories.split(",")[0] ==
+          listaCategoriasPrimarias[k].categoria
+        ) {
+          var list = CATEGORIES[s].product_site_categories.split(",");
+          for (const l in list) {
+            if (thisCategorieGroup.indexOf(list[l]) < 0 && l > 0) {
+              thisCategorieGroup += list[l] + ",";
+            }
+          }
+        }
+      }
+    }
+    thisCategorieGroup += "CRIE UMA CATEGORIA";
+    thisCategorieGroup = thisCategorieGroup?.replace(",CRIE UMA CATEGORIA", "");
+
+    const exists = CATEGORIAS_FULL.find(
+      (x) => x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim()
+    );
+    if (exists) {
+      if (exists.subCategorias.length < thisCategorieGroup.length) {
+        CATEGORIAS_FULL.map((x) => {
+          if (
+            x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim()
+          ) {
+            x.subCategorias = exists.subCategorias;
+          }
+        });
+      }
+    } else {
+      CATEGORIAS_FULL.push({
+        categoria: listaCategoriasPrimarias[k].categoria,
+        subCategorias: thisCategorieGroup,
+        cat_status: 0,
+        sub_status: "[]",
+      });
+    }
+  }
+  console.log("CATEGORIAS_FULL", CATEGORIAS_FULL);
+
+  if (MINHAS_CATEGORIAS.length == 0) {
+    if (CATEGORIAS_FULL.length == 0) {
+      alert("Não há categorias cadastradas!");
+    } else {
+      setTimeout(() => {
+        $("#salvandoAlteracoes").click();
+      }, 5000);
+
+      return CATEGORIAS_FULL;
+    }
+  } else {
+    return MINHAS_CATEGORIAS;
+  }
+}
