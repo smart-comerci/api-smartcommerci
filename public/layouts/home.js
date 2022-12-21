@@ -2097,15 +2097,26 @@ async function addItensToListStantalone(id) {
 function addItensToList(element, code) {
   for (const k in homePage.body) {
     if (homePage.body[k].id === element.attr("currentId")) {
-      if (homePage.body[k].products.length < 6) {
-        console.log(code);
-        let prd = CACHE_SEARCH.find((c) => c.product_code === Number(code));
-        homePage.body[k].products.push(prd.product_code);
-        $("#lista").append(getCardProduct(prd, element.attr("currentId")));
+      const exists = homePage.body[k].products.find(
+        (prdt) => prdt === Number(code)
+      );
+      if (!exists) {
+        if (homePage.body[k].products.length < 6) {
+          console.log(code);
+          let prd = CACHE_SEARCH.find((c) => c.product_code === Number(code));
+          homePage.body[k].products.push(prd.product_code);
+          $("#lista").append(getCardProduct(prd, element.attr("currentId")));
+        } else {
+          window.parent.informar(
+            "alert-danger",
+            "Vitrine só comporta 6 itens!",
+            3000
+          );
+        }
       } else {
         window.parent.informar(
           "alert-danger",
-          "Vitrine só comporta 6 itens!",
+          "Produto ja está na lista!",
           3000
         );
       }
