@@ -47,11 +47,7 @@
 
 
 <script>
-<<<<<<< HEAD
     var mainHost = "https://www.api-smartcomerci.com.br:6060";
-=======
-    var mainHost = "https://www.api-smartcomerci.com.br:7070";
->>>>>>> merge-master
 
     $(window).on("load", function () {
         $("modalLoading").hide()
@@ -1139,11 +1135,7 @@ $(".sidebar").removeClass("newSidebar");
         setTimeout(() => {
             $.ajax({
                 type: 'POST',
-<<<<<<< HEAD
                 url: 'https://www.api-smartcomerci.com.br:6060/getStoreInformation',
-=======
-                url: 'https://www.api-smartcomerci.com.br:7070/getStoreInformation',
->>>>>>> merge-master
                 data: { "master_id": localStorage.MASTER_ID },
                 success: function (data) {
                     //console.log("dataStore")
@@ -1167,11 +1159,7 @@ $(".sidebar").removeClass("newSidebar");
 
             $.ajax({
                 type: 'POST',
-<<<<<<< HEAD
                 url: 'https://www.api-smartcomerci.com.br:6060/informacoesDeClientes',
-=======
-                url: 'https://www.api-smartcomerci.com.br:7070/informacoesDeClientes',
->>>>>>> merge-master
                 data: { "affiliate_id": localStorage.AFFILIATE_ID },
                 headers: {
                     "x-access-token": localStorage.token,

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 var mainHost = "https://www.api-smartcomerci.com.br:6060";
-=======
-var mainHost = "https://www.api-smartcomerci.com.br:7070";
->>>>>>> merge-master
 
 comecando();
 
@@ -183,11 +179,7 @@ async function atualizaCampo(elemento, reload) {
     : localStorage.MASTER_ID;
 
   // if(newValue.indexOf("C:\\fakepath\\")>-1){
-<<<<<<< HEAD
   //   newValue = newValue.replace("C:\\fakepath\\","https://www.api-smartcomerci.com.br:6060/images/"+localStorage.MASTER_ID+"/")
-=======
-  //   newValue = newValue.replace("C:\\fakepath\\","https://www.api-smartcomerci.com.br:7070/images/"+localStorage.MASTER_ID+"/")
->>>>>>> merge-master
   // }
 
   let params = {

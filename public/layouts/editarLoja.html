@@ -1021,11 +1021,7 @@
         $("#pegabann").click()
       }
 
-<<<<<<< HEAD
       var mainHost = 'https://www.api-smartcomerci.com.br:6060';
-=======
-      var mainHost = 'https://www.api-smartcomerci.com.br:7070';
->>>>>>> merge-master
       function uploadBannerLoja(element) {
 
         var data = new FormData();
@@ -1046,19 +1042,11 @@
 
             //console.log('o alvo pricipal -> ',$("#"+element.attr("target"))) 
 
-<<<<<<< HEAD
             $("#input-file").css("background", "url(" + data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060') + ")")
             //console.log(`${data.path?.replace('./public','https://www.api-smartcomerci.com.br:6060')}`)
 
             let dataL = JSON.parse(localStorage.IN_EDIT_LOJA)
             dataL['affiliates_business_photo'] = data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060')
-=======
-            $("#input-file").css("background", "url(" + data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070') + ")")
-            //console.log(`${data.path?.replace('./public','https://www.api-smartcomerci.com.br:7070')}`)
-
-            let dataL = JSON.parse(localStorage.IN_EDIT_LOJA)
-            dataL['affiliates_business_photo'] = data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')
->>>>>>> merge-master
             localStorage.IN_EDIT_LOJA = JSON.stringify(dataL)
 
 

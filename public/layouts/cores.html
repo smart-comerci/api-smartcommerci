@@ -2516,15 +2516,9 @@
               banners[0] = banners[0]
             } else {
               if (banners[0].indexOf("C:") > -1) {
-<<<<<<< HEAD
                 banners[0].replace("C:\\fakepath\\", "https://www.api-smartcomerci.com.br:6060/images/" + localStorage.MASTER_ID + "/")
               } else {
                 banners[0] = "https://www.api-smartcomerci.com.br:6060/images/" + localStorage.MASTER_ID + "/" + banners[0]
-=======
-                banners[0].replace("C:\\fakepath\\", "https://www.api-smartcomerci.com.br:7070/images/" + localStorage.MASTER_ID + "/")
-              } else {
-                banners[0] = "https://www.api-smartcomerci.com.br:7070/images/" + localStorage.MASTER_ID + "/" + banners[0]
->>>>>>> merge-master
               }
 
             }
@@ -2532,15 +2526,9 @@
               banners[1] = banners[1]
             } else {
               if (banners[1].indexOf("C:") > -1) {
-<<<<<<< HEAD
                 banners[1].replace("C:\\fakepath\\", "https://www.api-smartcomerci.com.br:6060/images/" + localStorage.MASTER_ID + "/")
               } else {
                 banners[1] = "https://www.api-smartcomerci.com.br:6060/images/" + localStorage.MASTER_ID + "/" + banners[1]
-=======
-                banners[1].replace("C:\\fakepath\\", "https://www.api-smartcomerci.com.br:7070/images/" + localStorage.MASTER_ID + "/")
-              } else {
-                banners[1] = "https://www.api-smartcomerci.com.br:7070/images/" + localStorage.MASTER_ID + "/" + banners[1]
->>>>>>> merge-master
               }
 
             }
@@ -2619,11 +2607,7 @@
     function hideModal() {
       $("modalProductSelect").hide()
     }
-<<<<<<< HEAD
     var mainHost = 'https://www.api-smartcomerci.com.br:6060';
-=======
-    var mainHost = 'https://www.api-smartcomerci.com.br:7070';
->>>>>>> merge-master
     const dropzones = document.querySelectorAll('.dropzone');
 
     function showModalSearch(elemento) {
@@ -3280,7 +3264,6 @@
           let elemento2 = $("#" + element.attr("dinamicId"))
           //console.log('o elemento 2',elemento2)
 
-<<<<<<< HEAD
           //console.log(`${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060')}`)
 
 
@@ -3290,17 +3273,6 @@
 
           setTimeout(() => {
             elemento2.attr("src", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060')}`)
-=======
-          //console.log(`${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
-
-
-          elemento2.attr("src", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
-          elemento2.attr("newValue", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
-          window.parent.atualizaCampo(elemento2, 0)
-
-          setTimeout(() => {
-            elemento2.attr("src", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
->>>>>>> merge-master
           }, 2000)
 
 
@@ -3334,7 +3306,6 @@
 
           //// //console.log('o alvo pricipal -> ',$("#"+element.attr("target"))) 
 
-<<<<<<< HEAD
           // $("#input-file").css("background","url("+data.path?.replace('./public','https://www.api-smartcomerci.com.br:6060')+")")
           ////console.log(`${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060')}`)
 
@@ -3348,21 +3319,6 @@
           }, 2000)
           // let dataL = JSON.parse(localStorage.IN_EDIT_LOJA)
           // dataL['affiliates_business_photo'] = data.path?.replace('./public','https://www.api-smartcomerci.com.br:6060')
-=======
-          // $("#input-file").css("background","url("+data.path?.replace('./public','https://www.api-smartcomerci.com.br:7070')+")")
-          ////console.log(`${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
-
-
-          $(".LOGO_PRINCIPAL").attr("src", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
-          $(".LOGO_PRINCIPAL").attr("newValue", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
-          window.parent.atualizaCampo($(".LOGO_PRINCIPAL"), 0)
-
-          setTimeout(() => {
-            $(".LOGO_PRINCIPAL").attr("src", `${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')}`)
-          }, 2000)
-          // let dataL = JSON.parse(localStorage.IN_EDIT_LOJA)
-          // dataL['affiliates_business_photo'] = data.path?.replace('./public','https://www.api-smartcomerci.com.br:7070')
->>>>>>> merge-master
           // localStorage.IN_EDIT_LOJA = JSON.stringify(dataL)
 
 

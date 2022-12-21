@@ -1105,11 +1105,7 @@
   </div>
   <!-- <script src="https://www.api-smartcomerci.com.br:6060/js/tinymce.js"></script> -->
   <script>
-<<<<<<< HEAD
     var mainHost = 'https://www.api-smartcomerci.com.br:6060';
-=======
-    var mainHost = 'https://www.api-smartcomerci.com.br:7070';
->>>>>>> merge-master
 
     let url = window.location.href
 
@@ -1337,29 +1333,29 @@
             $("#" + element.attr("target")).css("zoom", "100% !important")
 
 
-    function editRevenue(column, newValue) {
+            function editRevenue(column, newValue) {
 
-            //console.log(element.parent().parent().find('input'))
-            //console.log(`${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060')}`)
+              //console.log(element.parent().parent().find('input'))
+              //console.log(`${data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060')}`)
 
-            editRevenue('banner_topo', data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060'))
+              editRevenue('banner_topo', data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:6060'))
 
 
-          localStorage.SEARCH_REVENUES = JSON.stringify(data)
+              localStorage.SEARCH_REVENUES = JSON.stringify(data)
 
-        },
-        error: function (data) {
-          //console.log("erro busca produto", data)
+            },
+            error: function (data) {
+              //console.log("erro busca produto", data)
+            }
+          });
+        if (dados.length > 0) {
+          $(".btnClose").show()
+        } else {
+          $(".btnClose").hide()
         }
-      });
-      if (dados.length > 0) {
-        $(".btnClose").show()
-      } else {
-        $(".btnClose").hide()
-      }
 
-      for (const k in dados) {
-        let html = `
+        for (const k in dados) {
+          let html = `
             <div class="itemLista itemProd row">
               <div class="col-md-2">
                 <img style="margin: auto;max-width: 50px; max-height: 50px" src="${dados[k].product_thumbnail}" />
@@ -1377,65 +1373,65 @@
               </div>
             </div>
           `;
-        container.append(html)
+          container.append(html)
+        }
       }
-    }
 
-    async function addContent(ID, dados) {
+      async function addContent(ID, dados) {
 
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/listaIds',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "product_list_ids": [ID],
-          "affiliate_id": localStorage.AFFILIATE_ID
-        },
-        success: function (data) {
-          let PRD = data
-          //console.log(PRD)
-          let thisPRD = null
-          for (const k in PRD) {
-            if (PRD[k].product_code == ID) {
-              thisPRD = PRD[k]
+        await $.ajax({
+          type: 'POST',
+          url: mainHost + '/listaIds',
+          headers: {
+            "x-access-token": localStorage.token,
+          },
+          data: {
+            "product_list_ids": [ID],
+            "affiliate_id": localStorage.AFFILIATE_ID
+          },
+          success: function (data) {
+            let PRD = data
+            //console.log(PRD)
+            let thisPRD = null
+            for (const k in PRD) {
+              if (PRD[k].product_code == ID) {
+                thisPRD = PRD[k]
+              }
             }
+
+            if (thisPRD) {
+              getProduct(thisPRD, dados)
+            } else {
+              //console.log("nçao achei produto")
+            }
+          },
+          error: function (data) {
+            //console.log(data)
+            window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+          },
+          complete: function () {
+            // ao final da requisição...
           }
-
-          if (thisPRD) {
-            getProduct(thisPRD, dados)
-          } else {
-            //console.log("nçao achei produto")
-          }
-        },
-        error: function (data) {
-          //console.log(data)
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
-        }
-      });
+        });
 
 
 
 
 
 
-    }
-
-
-    function getProduct(productData, dados) {
-
-      if (!dados) {
-        dados = {
-          quantidade: 0, medida: 0, texto: ""
-        }
       }
-      let ID = $(".itemProduto").length + 1
-      let html =
-        `
+
+
+      function getProduct(productData, dados) {
+
+        if (!dados) {
+          dados = {
+            quantidade: 0, medida: 0, texto: ""
+          }
+        }
+        let ID = $(".itemProduto").length + 1
+        let html =
+          `
       <div class="col-md-12 itemProduto">
                   <div style="border-bottom: 0.949999988079071px solid #EDF2F6;" class="row">
                     <div style="margin: auto;" class="col-md-1">
@@ -1538,168 +1534,168 @@
 
                 </div>
       `
-      $(".conteudo").append(html)
-      let myIngredient = {
-        product_code: productData.product_code,
-        quantidade: "",
-        medida: "",
-        texto: "",
-      }
-      let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
-      let ING = []
-      try {
-        ING = JSON.parse(REVENUE.ingredientes)
-      } catch (e) {
-
-      }
-
-      ING.push(myIngredient)
-      editRevenue('ingredientes', JSON.stringify(ING))
-      $("#ingredientesTotal").text(ING.length)
-    }
-
-    function editaTitulo(element) {
-      editRevenue('title', element.val())
-      $("#titleTop").text(element.val())
-    }
-
-    function editacampo(element, coluna) {
-      editRevenue(coluna, element.val())
-    }
-
-    function editaIngrediente(element, coluna) {
-      //console.log(element, coluna)
-
-      let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
-      let ING = []
-      try {
-        ING = JSON.parse(REVENUE.ingredientes)
-      } catch (e) {
-
-      }
-      for (const k in ING) {
-        if (ING[k].product_code == Number(element.attr("product_code"))) {
-          ING[k][coluna] = element.val()
+        $(".conteudo").append(html)
+        let myIngredient = {
+          product_code: productData.product_code,
+          quantidade: "",
+          medida: "",
+          texto: "",
         }
-      }
-      editRevenue('ingredientes', JSON.stringify(ING))
-    }
+        let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
+        let ING = []
+        try {
+          ING = JSON.parse(REVENUE.ingredientes)
+        } catch (e) {
 
-    function editaMidia(element, active) {
-      let MIDIA = { active: active[0].checked, url: element.val() }
+        }
 
-      $("#previewMidia").css("background", `url(${getThumb(element.val())})`)
-      editRevenue('midia', JSON.stringify(MIDIA))
-    }
-
-    function getThumb(URL) {
-      if (URL.indexOf('youtube') > -1) {
-        URL = URL.split("=")[1]
-        return `https://img.youtube.com/vi/${URL}/0.jpg`
-      } else {
-        return URL
+        ING.push(myIngredient)
+        editRevenue('ingredientes', JSON.stringify(ING))
+        $("#ingredientesTotal").text(ING.length)
       }
 
-    }
-    async function deleteRevenue() {
-      let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
+      function editaTitulo(element) {
+        editRevenue('title', element.val())
+        $("#titleTop").text(element.val())
+      }
 
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/deleteById',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "table": "revenues",
-          "item_id": myRevenue.id
-        },
-        success: function (data) {
-          window.parent.informar("alert-success", "Receita removida com sucesso!", 3000)
-        },
-        error: function (data) {
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
+      function editacampo(element, coluna) {
+        editRevenue(coluna, element.val())
+      }
+
+      function editaIngrediente(element, coluna) {
+        //console.log(element, coluna)
+
+        let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
+        let ING = []
+        try {
+          ING = JSON.parse(REVENUE.ingredientes)
+        } catch (e) {
+
+        }
+        for (const k in ING) {
+          if (ING[k].product_code == Number(element.attr("product_code"))) {
+            ING[k][coluna] = element.val()
+          }
+        }
+        editRevenue('ingredientes', JSON.stringify(ING))
+      }
+
+      function editaMidia(element, active) {
+        let MIDIA = { active: active[0].checked, url: element.val() }
+
+        $("#previewMidia").css("background", `url(${getThumb(element.val())})`)
+        editRevenue('midia', JSON.stringify(MIDIA))
+      }
+
+      function getThumb(URL) {
+        if (URL.indexOf('youtube') > -1) {
+          URL = URL.split("=")[1]
+          return `https://img.youtube.com/vi/${URL}/0.jpg`
+        } else {
+          return URL
+        }
+
+      }
+      async function deleteRevenue() {
+        let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
+
+        await $.ajax({
+          type: 'POST',
+          url: mainHost + '/deleteById',
+          headers: {
+            "x-access-token": localStorage.token,
+          },
+          data: {
+            "table": "revenues",
+            "item_id": myRevenue.id
+          },
+          success: function (data) {
+            window.parent.informar("alert-success", "Receita removida com sucesso!", 3000)
+          },
+          error: function (data) {
+            window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+          },
+          complete: function () {
+            // ao final da requisição...
+          }
+        });
+
+      }
+
+      async function saveRevenue() {
+        let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
+        let columns = []
+        for (const k in myRevenue) {
+          if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
+            columns.push({
+              column: k,
+              value: myRevenue[k]
+            })
+          }
+
+        }
+        // //console.log(
+        //   {
+        //     "table": "revenues",
+        //     "name_id": "id",
+        //     "value_id": myRevenue.id,
+        //     "fields": columns
+        //   }
+        // )
+
+        await $.ajax({
+          type: 'POST',
+          url: mainHost + '/updateById',
+          headers: {
+            "x-access-token": localStorage.token,
+          },
+          data: {
+            "table": "revenues",
+            "name_id": "id",
+            "value_id": myRevenue.id,
+            "fields": columns
+          },
+          success: function (data) {
+            window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
+          },
+          error: function (data) {
+            window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+          },
+          complete: function () {
+            // ao final da requisição...
+          }
+        });
+
+
+      }
+
+      function removeIngrediente(element) {
+        let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
+        let ingredientes = []
+        try {
+          ingredientes = JSON.parse(myRevenue.ingredientes)
+        } catch (e) { }
+        let newIngs = []
+        for (const k in ingredientes) {
+          if (Number(element.attr("product_code") != ingredientes[k].product_code)) {
+            newIngs.push(ingredientes[k])
+          }
+        }
+        myRevenue.ingredientes = JSON.stringify(newIngs)
+        localStorage.THIS_REVENUE = JSON.stringify(myRevenue)
+
+        element.parent().parent().parent().remove()
+      }
+
+      $("#putStep").keyup(function (event) {
+        console.log(event)
+        if (event.keyCode === 13) {
+          addStep(Number($("#tNumero").text()), $("#putStep").val())
+          $("#putStep").val("")
+          document.getElementById("isScroll").scrollIntoView();
         }
       });
-
-    }
-
-    async function saveRevenue() {
-      let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
-      let columns = []
-      for (const k in myRevenue) {
-        if (k != 'id' && k != 'updatedAt' && k != 'createdAt') {
-          columns.push({
-            column: k,
-            value: myRevenue[k]
-          })
-        }
-
-      }
-      // //console.log(
-      //   {
-      //     "table": "revenues",
-      //     "name_id": "id",
-      //     "value_id": myRevenue.id,
-      //     "fields": columns
-      //   }
-      // )
-
-      await $.ajax({
-        type: 'POST',
-        url: mainHost + '/updateById',
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        data: {
-          "table": "revenues",
-          "name_id": "id",
-          "value_id": myRevenue.id,
-          "fields": columns
-        },
-        success: function (data) {
-          window.parent.informar("alert-success", "As alterações foram salvas!", 3000)
-        },
-        error: function (data) {
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () {
-          // ao final da requisição...
-        }
-      });
-
-
-    }
-
-    function removeIngrediente(element) {
-      let myRevenue = JSON.parse(localStorage.THIS_REVENUE)
-      let ingredientes = []
-      try {
-        ingredientes = JSON.parse(myRevenue.ingredientes)
-      } catch (e) { }
-      let newIngs = []
-      for (const k in ingredientes) {
-        if (Number(element.attr("product_code") != ingredientes[k].product_code)) {
-          newIngs.push(ingredientes[k])
-        }
-      }
-      myRevenue.ingredientes = JSON.stringify(newIngs)
-      localStorage.THIS_REVENUE = JSON.stringify(myRevenue)
-
-      element.parent().parent().parent().remove()
-    }
-
-    $("#putStep").keyup(function (event) {
-      console.log(event)
-      if (event.keyCode === 13) {
-        addStep(Number($("#tNumero").text()), $("#putStep").val())
-        $("#putStep").val("")
-        document.getElementById("isScroll").scrollIntoView();
-      }
-    });
 
 
 

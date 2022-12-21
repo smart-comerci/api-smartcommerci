@@ -1,10 +1,5 @@
 let notFound =
-<<<<<<< HEAD
   "https://www.api-smartcomerci.com.br:6060/images/default/produto-sem-imagem.jpg";
-=======
-  "https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg";
-var mainHost = "https://www.api-smartcomerci.com.br:7070";
->>>>>>> merge-master
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
@@ -1201,11 +1196,7 @@ function createElementFromHTML(htmlString) {
 }
 
 //=========================== Área de CRUD =====================
-<<<<<<< HEAD
 let host = `https://www.api-smartcomerci.com.br:6060`;
-=======
-let host = `https://www.api-smartcomerci.com.br:7070`;
->>>>>>> merge-master
 async function uploadAndUpdateFile(element) {
   if (element.attr("url")) {
     element
@@ -2256,11 +2247,7 @@ function removeSection(element) {
 
 $.ajax({
   type: "POST",
-<<<<<<< HEAD
   url: "https://www.api-smartcomerci.com.br:6060/getCategories",
-=======
-  url: "https://www.api-smartcomerci.com.br:7070/getCategories",
->>>>>>> merge-master
   headers: {
     "x-access-token": localStorage.token,
   },

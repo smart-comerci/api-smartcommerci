@@ -331,11 +331,7 @@ function editarProduto(elemento) {
   var imagen = dadosProduto.product_thumbnail;
   if (imagen == null) {
     imagen =
-<<<<<<< HEAD
       "https://www.api-smartcomerci.com.br:6060/images/default/produto-sem-imagem.jpg";
-=======
-      "https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg";
->>>>>>> merge-master
   }
   $(".editarProdutoModal")
     .find(".imagenProduto")
@@ -396,11 +392,7 @@ function modalAdicionarProduto(elemento) {
   var imagen = dadosProduto.product_thumbnail;
   if (imagen == null) {
     imagen =
-<<<<<<< HEAD
       "https://www.api-smartcomerci.com.br:6060/images/default/produto-sem-imagem.jpg";
-=======
-      "https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg";
->>>>>>> merge-master
   }
   $(".adicionarProdutoModal")
     .find(".imagenProduto")
@@ -1060,11 +1052,7 @@ function getOrderInfo(id) {
 async function request(urlEnd, params) {
   return $.ajax({
     type: "POST",
-<<<<<<< HEAD
     url: "https://www.api-smartcomerci.com.br:6060/" + urlEnd,
-=======
-    url: "https://www.api-smartcomerci.com.br:7070/" + urlEnd,
->>>>>>> merge-master
     headers: { "x-access-token": localStorage.token },
     data: params,
     success: function (data) {
@@ -1182,11 +1170,7 @@ async function search(element) {
     var imagen = dados[k].product_thumbnail;
     if (imagen == null) {
       imagen =
-<<<<<<< HEAD
         "https://www.api-smartcomerci.com.br:6060/images/default/produto-sem-imagem.jpg";
-=======
-        "https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg";
->>>>>>> merge-master
     }
     let produtoFinal = FULL_PRICES(dados[k]);
     let valorFinal =

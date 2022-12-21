@@ -322,11 +322,7 @@
 
             $.ajax({
                 type: 'POST',
-<<<<<<< HEAD
                 url: 'https://www.api-smartcomerci.com.br:6060/getProductsFromOrder',
-=======
-                url: 'https://www.api-smartcomerci.com.br:7070/getProductsFromOrder',
->>>>>>> merge-master
                 headers: { "x-access-token": localStorage.token },
                 data: { "listaProdutos": orderContent, "product_affiliate_id": localStorage.AFFILIATE_ID },
                 success: function (data) {
