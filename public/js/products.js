@@ -424,7 +424,7 @@ async function request(
           '<div  class="col-sm imgContainer">' +
           '<div style="background: url(' +
           pictureToShow +
-          '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)" class="image img">' +
+          '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)" class="image img">' +
           //'<img id="'+products[k].product_ean+'" class="firstImage notCrash" style="min-width: 50px; min-height: 50px;" src="'+pictureToShow+'" />' +
           "</div>" +
           "</div>" +
@@ -815,7 +815,7 @@ async function personalRequest(
           '<div  class="col-sm imgContainer">' +
           '<div style="background: url(' +
           pictureToShow +
-          '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)" class="image img">' +
+          '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)" class="image img">' +
           //'<img id="'+products[k].product_ean+'" class="firstImage notCrash" style="min-width: 50px; min-height: 50px;" src="'+pictureToShow+'" />' +
           "</div>" +
           "</div>" +
@@ -1502,7 +1502,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
       product_data[0].product_code,
       URLS
     ) +
-    `<li class="thumbProduct thumbProductUpload"><input id="pegaFoto" style="display:none" type="file"><a data-target="#pic-2" data-toggle="tab"><img class="imageThumb "  src="images/products/upload.svg"   onError="this.onerror=null;this.src='https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg';"></a></li>` +
+    `<li class="thumbProduct thumbProductUpload"><input id="pegaFoto" style="display:none" type="file"><a data-target="#pic-2" data-toggle="tab"><img class="imageThumb "  src="images/products/upload.svg"   onError="this.onerror=null;this.src='https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg';"></a></li>` +
     "</ul>" +
     "</div>" +
     "</div>" +
@@ -2541,7 +2541,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           data.append("fileimagem", elemento[0].files[0]);
           ////////////console.log("partindo..")
           var urlNew =
-            "https://www.smartlima.com.br:7070/images/" +
+            "https://www.api-smartcomerci.com.br:7070/images/" +
             affiliate_id +
             "/" +
             product_code +
@@ -3395,7 +3395,9 @@ async function getProductData(EAN, elementParent, pai) {
     try {
       let picture = {
         thumbnail:
-          "https://www.smartlima.com.br:7070/pictures_ean/" + EAN + ".png",
+          "https://www.api-smartcomerci.com.br:7070/pictures_ean/" +
+          EAN +
+          ".png",
       };
       if (picture.thumbnail != undefined) {
         var novo = true;
@@ -3781,7 +3783,7 @@ function imageShows(affiliate_id, product_code, URLS) {
     del = "";
   }
 
-  html += `<div draggable="true" class="  thumbProduct mainImageThumb" ><figure class="figurefx pushup"><img   id="${affiliate_id}_${product_code}" class="firstImageShow mainImageShow notCrash droptarget" src="${urlCurrent}"  onError="this.onerror=null;this.src='https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg';" ><figcaption  onmouseleave="mLeave($(this))"  onmouseover="mOver($(this))" class="droptarget">${del} <br>${moveButton}<span class="textFig">Imagem Principal</span></figcaption></figure></div>`;
+  html += `<div draggable="true" class="  thumbProduct mainImageThumb" ><figure class="figurefx pushup"><img   id="${affiliate_id}_${product_code}" class="firstImageShow mainImageShow notCrash droptarget" src="${urlCurrent}"  onError="this.onerror=null;this.src='https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg';" ><figcaption  onmouseleave="mLeave($(this))"  onmouseover="mOver($(this))" class="droptarget">${del} <br>${moveButton}<span class="textFig">Imagem Principal</span></figcaption></figure></div>`;
 
   ////////////console.log(html)
   return html;
@@ -4032,7 +4034,7 @@ function getSimilarProducts(product_data, limite) {
           '<li class="list-group-item  noBorder mainPicture listaThumb" style=" background: url(' +
           produtoURL(product_data[k].product_ean, PRODUCTS_IMAGES).DATA
             .thumbnail +
-          '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg);">' +
+          '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg);">' +
           '<img   class="productImageThumb"  /> ' +
           "</li>" +
           '<li style="line-height: 0.2; height: 235px" class="list-group-item noBorder">' +
@@ -5006,7 +5008,7 @@ function cardSelecionadoPromo(product_data, onde) {
     '<div style="margin: auto; border: none" class="input-group  ico dropItems">' +
     '<div class="col-md-2 imgProcuraProduto" style="background: url(' +
     produtoURL(product_data.product_ean, PRODUCTS_IMAGES).DATA.thumbnail +
-    '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)"></div>' +
+    '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)"></div>' +
     "</div>" +
     '<label class="innerLabel">' +
     product_data.product_code +
@@ -5037,7 +5039,7 @@ function cardSelecionadoPromo2(lista, onde) {
         '<div style="margin: auto; border: none" class="input-group  ico dropItems">' +
         '<div class="col-md-2 imgProcuraProduto" style="background: url(' +
         produtoURL(product_data.product_ean, PRODUCTS_IMAGES).DATA.thumbnail +
-        '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)"></div>' +
+        '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)"></div>' +
         "</div>" +
         '<label class="innerLabel">' +
         product_data.product_code +
@@ -5391,7 +5393,7 @@ function addProdutoRelacao(element, limite, dados) {
         '<div  style="max-width: 50px; margin: 10px  auto" class="col">' +
         '<div style="background: url(' +
         produtoURL(data[k].product_ean, PRODUCTS_IMAGES).DATA.thumbnail +
-        '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)" class="bkgImagem"></div>' +
+        '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)" class="bkgImagem"></div>' +
         "</div>" +
         '<div  style="max-width: 50px; margin: auto" class="col">' +
         '<label class="textoCodigo1">' +
@@ -5451,7 +5453,7 @@ function addProdutoRelacao(element, limite, dados) {
             '<div  style="max-width: 50px; margin: 10px  auto" class="col">' +
             '<div style="background: url(' +
             produtoURL(data[k].product_ean, PRODUCTS_IMAGES).DATA.thumbnail +
-            '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)" class="bkgImagem"></div>' +
+            '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)" class="bkgImagem"></div>' +
             "</div>" +
             '<div  style="max-width: 50px; margin: auto" class="col">' +
             '<label class="textoCodigo1">' +
@@ -5510,7 +5512,7 @@ function addProdutoRelacao2(element, limite, dados) {
         '<div  style="max-width: 50px; margin: 10px  auto" class="col">' +
         '<div style="background: url(' +
         produtoURL(data[k].product_ean, PRODUCTS_IMAGES).DATA.thumbnail +
-        '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)" class="bkgImagem"></div>' +
+        '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)" class="bkgImagem"></div>' +
         "</div>" +
         '<div  style="max-width: 50px; margin: auto" class="col">' +
         '<label class="textoCodigo1">' +
@@ -5562,7 +5564,7 @@ function addProdutoRelacao2(element, limite, dados) {
             '<div  style="max-width: 50px; margin: 10px  auto" class="col">' +
             '<div style="background: url(' +
             produtoURL(data[k].product_ean, PRODUCTS_IMAGES).DATA.thumbnail +
-            '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)" class="bkgImagem"></div>' +
+            '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)" class="bkgImagem"></div>' +
             "</div>" +
             '<div  style="max-width: 50px; margin: auto" class="col">' +
             '<label class="textoCodigo1">' +
@@ -6638,7 +6640,7 @@ async function buscaPeloFiltro(
           '<div  class="col-sm imgContainer">' +
           '<div style="background: url(' +
           pictureToShow +
-          '), url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg)" class="image img">' +
+          '), url(https://www.api-smartcomerci.com.br:7070/images/default/produto-sem-imagem.jpg)" class="image img">' +
           //'<img id="'+products[k].product_ean+'" class="firstImage notCrash" style="min-width: 50px; min-height: 50px;" src="'+pictureToShow+'" />' +
           "</div>" +
           "</div>" +

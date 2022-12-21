@@ -1022,7 +1022,7 @@
         $("#pegabann").click()
       }
 
-      var mainHost = 'https://www.smartlima.com.br:7070';
+      var mainHost = 'https://www.api-smartcomerci.com.br:7070';
       function uploadBannerLoja(element) {
 
         var data = new FormData();
@@ -1043,11 +1043,11 @@
 
             //console.log('o alvo pricipal -> ',$("#"+element.attr("target"))) 
 
-            $("#input-file").css("background", "url(" + data.path?.replace('./public', 'https://www.smartlima.com.br:7070') + ")")
-            //console.log(`${data.path?.replace('./public','https://www.smartlima.com.br:7070')}`)
+            $("#input-file").css("background", "url(" + data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070') + ")")
+            //console.log(`${data.path?.replace('./public','https://www.api-smartcomerci.com.br:7070')}`)
 
             let dataL = JSON.parse(localStorage.IN_EDIT_LOJA)
-            dataL['affiliates_business_photo'] = data.path?.replace('./public', 'https://www.smartlima.com.br:7070')
+            dataL['affiliates_business_photo'] = data.path?.replace('./public', 'https://www.api-smartcomerci.com.br:7070')
             localStorage.IN_EDIT_LOJA = JSON.stringify(dataL)
 
 

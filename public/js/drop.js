@@ -18,7 +18,7 @@ function modalDrop() {
     "</svg>" +
     "</div>" +
     "</div>" +
-    '<label style="margin: -1% auto; min-width: 60%; color: #f6b504 !important; cursor:pointer" class="label"><a href="https://www.smartlima.com.br:7070/modelo.xlsx">Download planilha sem produtos</a></label>' +
+    '<label style="margin: -1% auto; min-width: 60%; color: #f6b504 !important; cursor:pointer" class="label"><a href="https://www.api-smartcomerci.com.br:7070/modelo.xlsx">Download planilha sem produtos</a></label>' +
     "</div>" +
     '<div   class="input-group btnDrop">' +
     '<div style="border: none; margin: auto;" class="input-group-append">' +
@@ -59,7 +59,7 @@ function modalDrop() {
           data.append("fileimagem", $(this)[0].files[0]);
 
           $.ajax({
-            url: "https://www.smartlima.com.br:7070/uploadPlanilha",
+            url: "https://www.api-smartcomerci.com.br:7070/uploadPlanilha",
             headers: {
               "x-access-token": localStorage.token,
               master_id: localStorage.MASTER_ID,
@@ -75,7 +75,7 @@ function modalDrop() {
               let fileName4 = data.filename;
 
               $.ajax({
-                url: "https://www.smartlima.com.br:7070/excel2Json",
+                url: "https://www.api-smartcomerci.com.br:7070/excel2Json",
                 headers: {
                   "x-access-token": localStorage.token,
                   master_id: localStorage.MASTER_ID,
@@ -285,7 +285,7 @@ function finalizaAjustes(listOffQuerys) {
   console.log(listOffQuerys);
   $.ajax({
     type: "POST",
-    url: "https://www.smartlima.com.br:7070/multiQuerys",
+    url: "https://www.api-smartcomerci.com.br:7070/multiQuerys",
     data: { listaQuerys: listOffQuerys },
     headers: {
       "x-access-token": localStorage.token,

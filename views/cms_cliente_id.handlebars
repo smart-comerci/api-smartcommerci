@@ -795,7 +795,7 @@
     function clientRequest(params, url, cache, chaveCache) {
         return $.ajax({
             type: 'POST',
-            url: 'https://www.smartlima.com.br:7070' + url,
+            url: 'https://www.api-smartcomerci.com.br:7070' + url,
             data: params,
             headers: {
                 'x-access-token': localStorage.token,
@@ -919,7 +919,7 @@
                     }
                     $.ajax({
                         type: 'POST',
-                        url: 'https://www.smartlima.com.br:7070' + '/autenticateAdmin',
+                        url: 'https://www.api-smartcomerci.com.br:7070' + '/autenticateAdmin',
                         data: params,
                         headers: {
                             'x-access-token': localStorage.token,
