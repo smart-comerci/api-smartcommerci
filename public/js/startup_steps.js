@@ -18,7 +18,11 @@ if (detectar_mobile()) {
   location.replace("/picking-login");
 }
 
+<<<<<<< HEAD
 var mainHost = "https://www.api-smartcomerci.com.br:6060";
+=======
+var mainHost = "https://www.api-smartcomerci.com.br:7070";
+>>>>>>> merge-master
 var urlLocal = window.location.href.split("?");
 if (urlLocal[urlLocal.length - 1] == "login") {
   $(".form").hide();

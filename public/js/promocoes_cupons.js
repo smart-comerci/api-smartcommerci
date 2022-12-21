@@ -1,12 +1,20 @@
 var AFFILIATE_ID = localStorage.AFFILIATE_ID;
 var MASTER_ID = localStorage.MASTER_ID;
+<<<<<<< HEAD
 var mainHost = "https://www.api-smartcomerci.com.br:6060";
+=======
+var mainHost = "https://www.api-smartcomerci.com.br:7070";
+>>>>>>> merge-master
 
 let TAGS = [];
 
 $.ajax({
   type: "POST",
+<<<<<<< HEAD
   url: "https://www.api-smartcomerci.com.br:6060/getCategories",
+=======
+  url: "https://www.api-smartcomerci.com.br:7070/getCategories",
+>>>>>>> merge-master
   headers: {
     "x-access-token": localStorage.token,
   },
@@ -30,7 +38,11 @@ $.ajax({
 
 $.ajax({
   type: "POST",
+<<<<<<< HEAD
   url: "https://www.api-smartcomerci.com.br:6060/getTagsLists",
+=======
+  url: "https://www.api-smartcomerci.com.br:7070/getTagsLists",
+>>>>>>> merge-master
   headers: {
     "x-access-token": localStorage.token,
   },

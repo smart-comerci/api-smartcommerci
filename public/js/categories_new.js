@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const api_host = "https://www.api-smartcomerci.com.br:6060";
+=======
+const api_host = "https://www.api-smartcomerci.com.br:7070";
+>>>>>>> merge-master
 let currentCategoryId = null,
   currentSubcategoryId = null;
 getCategories();
