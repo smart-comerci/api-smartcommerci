@@ -4127,7 +4127,7 @@ textarea {
 }
 
 .produtoSemFoto {
-    background: url(https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg) !important;
+    background: url(https://www.smartlima.com.br:6060/images/default/produto-sem-imagem.jpg) !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;

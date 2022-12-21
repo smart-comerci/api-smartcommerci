@@ -1,10 +1,9 @@
 let notFound =
-  "https://www.smartlima.com.br:7070/images/default/produto-sem-imagem.jpg";
-var mainHost = 'https://www.smartlima.com.br:7070';
+  "https://www.smartlima.com.br:6060/images/default/produto-sem-imagem.jpg";
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
-
+var mainHost = "https://www.smartlima.com.br:6060";
 let homePage = {
   logotipo: {
     url: "",
@@ -527,7 +526,7 @@ div3.innerHTML = `
       </label> 
     `;
 
-function cutString(str) { }
+function cutString(str) {}
 
 function getProductCard(data) {
   if (data) {
@@ -543,8 +542,9 @@ function getProductCard(data) {
                         </span>
                       </div>
 
-                      <div style="  background: url(${data.product_thumbnail
-      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
+                      <div style="  background: url(${
+                        data.product_thumbnail
+                      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
                       
                       </div>
 
@@ -1196,7 +1196,7 @@ function createElementFromHTML(htmlString) {
 }
 
 //=========================== Área de CRUD =====================
-let host = `https://www.smartlima.com.br:7070`;
+let host = `https://www.smartlima.com.br:6060`;
 async function uploadAndUpdateFile(element) {
   if (element.attr("url")) {
     element
@@ -1276,7 +1276,7 @@ async function uploadAndUpdateFile(element) {
           });
       }
     },
-    error: function (data) { },
+    error: function (data) {},
   });
 }
 
@@ -1698,8 +1698,9 @@ function setLinksFooterElements() {
 function setMidiasSociais() {
   $(`.midiasSociais`).html(``);
 
-  let youtube = `<svg  style="margin: 10px;${homePage.socialMidia.facebook.active === true ? `` : `display: block`
-    } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
+  let youtube = `<svg  style="margin: 10px;${
+    homePage.socialMidia.facebook.active === true ? `` : `display: block`
+  } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
                   viewBox="0 0 22.939 16.129">
                   <path id="facebook"
                     d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
@@ -1814,7 +1815,7 @@ async function getMyObjectHomeMain() {
     error: function (data) {
       console.log(data);
     },
-    complete: function () { },
+    complete: function () {},
   });
 }
 function start() {
@@ -1941,7 +1942,7 @@ async function publishChanges() {
       console.log(data);
       window.parent.informar("alert-danger", "Ocorreu um erro!", 3000);
     },
-    complete: function () { },
+    complete: function () {},
   });
 }
 
@@ -2096,15 +2097,26 @@ async function addItensToListStantalone(id) {
 function addItensToList(element, code) {
   for (const k in homePage.body) {
     if (homePage.body[k].id === element.attr("currentId")) {
-      if (homePage.body[k].products.length < 6) {
-        console.log(code);
-        let prd = CACHE_SEARCH.find((c) => c.product_code === Number(code));
-        homePage.body[k].products.push(prd.product_code);
-        $("#lista").append(getCardProduct(prd, element.attr("currentId")));
+      const exists = homePage.body[k].products.find(
+        (prdt) => prdt === Number(code)
+      );
+      if (!exists) {
+        if (homePage.body[k].products.length < 6) {
+          console.log(code);
+          let prd = CACHE_SEARCH.find((c) => c.product_code === Number(code));
+          homePage.body[k].products.push(prd.product_code);
+          $("#lista").append(getCardProduct(prd, element.attr("currentId")));
+        } else {
+          window.parent.informar(
+            "alert-danger",
+            "Vitrine só comporta 6 itens!",
+            3000
+          );
+        }
       } else {
         window.parent.informar(
           "alert-danger",
-          "Vitrine só comporta 6 itens!",
+          "Produto ja está na lista!",
           3000
         );
       }
@@ -2246,7 +2258,7 @@ function removeSection(element) {
 
 $.ajax({
   type: "POST",
-  url: "https://www.smartlima.com.br:7070/getCategories",
+  url: "https://www.smartlima.com.br:6060/getCategories",
   headers: {
     "x-access-token": localStorage.token,
   },
@@ -2266,7 +2278,7 @@ $.ajax({
   error: function (data2) {
     console.log(data2);
   },
-  complete: function () { },
+  complete: function () {},
 });
 
 function OrdenaJson(lista, chave, ordem) {
@@ -2288,10 +2300,9 @@ function addContentRevenues(data) {
                  ${data.title}
                 </a>
               </li>
-              `
-  return html
+              `;
+  return html;
 }
-
 
 function addContentPageI(data) {
   var html = `<li class="nav-menu_item">
@@ -2299,43 +2310,36 @@ function addContentPageI(data) {
                  ${data.titulo_page}
                 </a>
               </li>
-              `
-  return html
+              `;
+  return html;
 }
-
-
 
 $.ajax({
   type: "POST",
-  url: mainHost + '/getByTableName',
-  data: { "masterId": localStorage.MASTER_ID, "idName": "master_id", "tableName": "revenues" },
+  url: mainHost + "/getByTableName",
+  data: {
+    masterId: localStorage.MASTER_ID,
+    idName: "master_id",
+    tableName: "revenues",
+  },
   headers: {
     "x-access-token": localStorage.token,
   },
   success: function (data2) {
-
-    let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES)
-    console.log('revenuess', data2, paginas)
+    let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
+    console.log("revenuess", data2, paginas);
     for (const k in data2) {
-      $("#listaReceitas").append(addContentRevenues(data2[k]))
+      $("#listaReceitas").append(addContentRevenues(data2[k]));
     }
 
     for (const k in paginas) {
-      $("#listaPaginas").append(addContentPageI(paginas[k]))
+      $("#listaPaginas").append(addContentPageI(paginas[k]));
     }
-
-
-
-
-
-
   },
   error: function (data) {
-
-
-    window.parent.informar("alert-danger", "Algo saiu errado!", 3000)
+    window.parent.informar("alert-danger", "Algo saiu errado!", 3000);
   },
-  complete: function () { },
+  complete: function () {},
 });
 
 function getCategorias(CATEGORIES) {
@@ -2376,16 +2380,18 @@ function getCategorias(CATEGORIES) {
     thisCategorieGroup += "CRIE UMA CATEGORIA";
     thisCategorieGroup = thisCategorieGroup?.replace(",CRIE UMA CATEGORIA", "");
 
-
-
-    const exists = CATEGORIAS_FULL.find((x) => x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim())
+    const exists = CATEGORIAS_FULL.find(
+      (x) => x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim()
+    );
     if (exists) {
       if (exists.subCategorias.length < thisCategorieGroup.length) {
         CATEGORIAS_FULL.map((x) => {
-          if (x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim()) {
-            x.subCategorias = exists.subCategorias
+          if (
+            x.categoria.trim() === listaCategoriasPrimarias[k].categoria.trim()
+          ) {
+            x.subCategorias = exists.subCategorias;
           }
-        })
+        });
       }
     } else {
       CATEGORIAS_FULL.push({
@@ -2396,7 +2402,7 @@ function getCategorias(CATEGORIES) {
       });
     }
   }
-  console.log('CATEGORIAS_FULL', CATEGORIAS_FULL)
+  console.log("CATEGORIAS_FULL", CATEGORIAS_FULL);
 
   if (MINHAS_CATEGORIAS.length == 0) {
     if (CATEGORIAS_FULL.length == 0) {
@@ -2406,12 +2412,9 @@ function getCategorias(CATEGORIES) {
         $("#salvandoAlteracoes").click();
       }, 5000);
 
-
-
       return CATEGORIAS_FULL;
     }
   } else {
     return MINHAS_CATEGORIAS;
   }
 }
-

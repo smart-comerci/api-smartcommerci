@@ -12,7 +12,7 @@ function OrdenaJson(lista, chave, ordem) {
 }
 $.ajax({
   type: "POST",
-  url: "https://www.smartlima.com.br:7070/getAllOrdersMaster",
+  url: "https://www.smartlima.com.br:6060/getAllOrdersMaster",
   data: { master_id: localStorage.MASTER_ID },
   headers: {
     "x-access-token": localStorage.token,
