@@ -352,14 +352,14 @@ $("fundoModal").click(function () {
   });
 });
 
-window.onbeforeunload = async function () {
-  if ([].length > 0) {
-    $("#modalNaoSalvou").click();
-    setTimeout(() => {
-      return confirm("Necessário salvar");
-    }, 2000);
-  }
-};
+// window.onbeforeunload = async function () {
+//   if ([].length > 0) {
+//     $("#modalNaoSalvou").click();
+//     setTimeout(() => {
+//       return confirm("Necessário salvar");
+//     }, 2000);
+//   }
+// };
 
 function showMe(element) {
   if (element[0].checked === true) {
