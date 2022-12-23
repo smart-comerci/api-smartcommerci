@@ -53,6 +53,7 @@ var options = {
 const https = require("https");
 
 app.listen(8080);
+console.log("server runnin on " + 8080);
 
 // var server = https.createServer(options, app);
 // server.listen(443, function() {

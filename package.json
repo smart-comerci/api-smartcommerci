@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
+    "start": "pm2 start front.js",
+    "dev": "nodemon local.js",
     "build": "nx build",
     "test": "nx test"
   },
