@@ -12,6 +12,7 @@ let categoriesObject = {
 class Category {
   id = 0;
   title = "";
+  metatitle = "";
   keywords = [];
   description = "";
   icon = "";
@@ -36,7 +37,9 @@ function editCategoryField(
 ) {
   if (cat) {
     if (field !== "banners" && field !== "subcategories") {
-      let currCategory = categoriesObject.categories.find((dt) => dt.id === id);
+      let currCategory = categoriesObject.categories.find(
+        (dt) => Number(dt.id) === Number(id)
+      );
       if (field === "keywors") {
         let exists = currCategory[field].find((a) => a === newValue);
         if (!exists) {
@@ -48,7 +51,7 @@ function editCategoryField(
         currCategory[field] = newValue;
       }
       for (const k in categoriesObject.categories) {
-        if (categoriesObject.categories[k].id === id) {
+        if (Number(categoriesObject.categories[k].id) === Number(id)) {
           categoriesObject.categories[k] = currCategory;
         }
       }
@@ -84,6 +87,7 @@ function editCategoryField(
       console.log("Not changes this from here...");
     }
   }
+  console.log(categoriesObject);
 }
 function setBanners(cat, id, newValue, idSub, newValueSub) {
   if (cat) {
@@ -204,8 +208,8 @@ function addCategory(id) {
 function showCategories() {
   $("#listaCategoriasLoja").html("");
   categoriesObject.categories.forEach((cat) => {
-    console.log(cat);
-    $("#listaCategoriasLoja").append(categoryElementLi(cat));
+    console.log("AS CAT", cat);
+    $("#listaCategoriasLoja").append(categoryElementLiNew(cat, cat.id));
     console.log(cat.id, categoriesObject.limitToShow - 1);
     if (Number(cat.id) === categoriesObject.limitToShow - 1) {
       $("#listaCategoriasLoja").append(
@@ -263,7 +267,7 @@ async function publicarAlteracoes() {
   console.log(resultado);
 }
 
-function subcategoryElementLi(dado, mainId) {
+function subcategoryElementLiNew(dado, mainId) {
   let html = "";
   if (!dado || dado.length === 0) {
     return html;
@@ -310,7 +314,7 @@ function subcategoryElementLi(dado, mainId) {
                                         </div>
                                     </div>
                                     <div class="col-sm" style="opacity: 1;">
-                                        <div  class="input-group catEdit"><label
+                                        <div onclick="modalEditSubCategories(${dado[k].id}, ${mainId}, $(this))" class="input-group catEdit"><label
                                                 style="margin: auto; color: #f6b504">Editar Subcategoria</label></div>
                                     </div>
                                     <div style="max-width: 70px; opacity: 1;" class="col-sm ">
@@ -338,7 +342,8 @@ function subcategoryElementLi(dado, mainId) {
   }
   return html;
 }
-function categoryElementLi(dado) {
+function categoryElementLiNew(dado, id) {
+  console.log("dado", dado);
   return `
  <li idCat="${dado.id}" class="itemSortable2 ui-sortable-handle">
     <div title="'null'" description="'null'" draggable="true" class="categorie vouClonar">
@@ -363,7 +368,11 @@ function categoryElementLi(dado) {
             </div>
             <div style="max-width: 70px; margin: 7px auto; opacity: 1;" class="col-sm">
                 <div style="max-width: 120px;" class="iconCategorie"><img style="    max-width: 30px !important;"
-                        src="https://www.smartlima.com.br:7070/assets/icons/cliente_IconeEmbalagens.png"></div>
+                        src="${
+                          "/assets/icons/" + dado.icon && dado.icon !== ""
+                            ? "/assets/icons/" + dado.icon
+                            : `/assets/icons/cliente_IconeEmbalagens.png`
+                        }"></div>
             </div>
             <div class="col-sm" style="opacity: 1;"><label
                     class="label nomeCategoria CATEGORIA_PRINCIPAL">${
@@ -381,7 +390,7 @@ function categoryElementLi(dado) {
                 </div>
             </div>
             <div class="col-sm" style="opacity: 1;">
-                <div   class="input-group catEdit"><label
+                <div onclick="modalEditCategories($(this), '${id}')"  class="input-group catEdit"><label
                         style="margin: auto; color: #f6b504">Editar Categoria</label></div>
             </div>
             <div style="max-width: 70px; opacity: 1;" class="col-sm ">
@@ -448,7 +457,7 @@ function categoryElementLi(dado) {
                 <div class="col-md-12 verticalScroll"
                     style="max-height: 550px;margin-bottom: 20px;opacity: 1;margin-top: -12px;margin-left: 1px;">
                     <ul id="sortable" class="listInner3 dropCategoria superSortable ui-sortable" style=""> 
-                     ${subcategoryElementLi(dado.subcategories, dado.id)}
+                     ${subcategoryElementLiNew(dado.subcategories, dado.id)}
                     </ul>
                 </div>
             </div>
@@ -620,4 +629,1852 @@ function showContent(element) {
     element.parent().parent().find(".dropCategoria").hide();
     element.parent().parent().find(".seta").removeClass("rotate180");
   }
+}
+
+function modalEditCategories(element, catId) {
+  element = element.parent().parent().parent();
+  console.log("a id", catId, Number(catId), categoriesObject);
+  var categoria = categoriesObject.categories[Number(catId)];
+  console.log("CATEGORIA SELECIONADA", categoria);
+  let BANNERS = categoria?.banners ?? [];
+  console.log("BANNERS", BANNERS);
+  let asWords = WordKeysNew(categoria.keywords ?? [], categoria.id);
+
+  var html =
+    '<div style="max-width:100% " class="container">' +
+    '<div class="row" style="max-width: 90%;margin: -11px auto;border-bottom: 2px solid #EDF2F6;margin-bottom: 10px; ">' +
+    '<div content="caracteristicas" class="col-md tabModal tabModalActive">' +
+    '<label class="labelTab"  style="text-align:center">Características</label>' +
+    "</div>" +
+    '<div content="banners" class="col-md tabModal">' +
+    '<label class="labelTab"  style="text-align:center">Banners</label>' +
+    "</div>" +
+    '<div content="icone" class="col-md tabModal">' +
+    '<label class="labelTab"  style="text-align:center">Ícone</label>' +
+    "</div>" +
+    '<div class="col-md">' +
+    '<div onclick="CANCELA_EDIT()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto" class="input-group">' +
+    '<label  style="cursor:pointer;margin:-5%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
+    "</div>" +
+    "</div>" +
+    '<div class="col-md ">' +
+    '<div onclick="SALVA_EDIT_NEW()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto" class="input-group">' +
+    '<label  style="cursor:pointer;margin: -5% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    '<hr class="baixoCabecalho" style="position: fixed;top: 115px !important;left: 0px !important;width: 100%;box-shadow: 2px 2px 2px silver;"></hr>' +
+    //======================================================ABA DE BANNERS==================================================================================================================
+
+    `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
+        <input alvo="novo" onchange="uploadBannerCatMainNew($(this), ${
+          categoria.id
+        })" type="file" id="pegaBannerCatMain" style="display:none">
+        <input alvo="novo" onchange="uploadBannerCatVerticalMainNew($(this), ${
+          categoria.id
+        })" type="file" id="inputColetor" style="display:none">
+            <section class="areaBanner verticalScroll">
+                <div class="row">
+                    <div style="margin: 1% 2%;" class="switch__container"><input checked="true" id="switch-shadow1777"
+                            class="switch switch--shadow" type="checkbox" /><label style="    margin: 10px 0px 0px 20px;"
+                            for="switch-shadow1777"></label></div>
+                    <label style="font-size: 20px;" class="label">Página de categoria</label>
+                    <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
+                </div>
+                <div alvo="novo" style="cursor:pointer" onclick="coletaBannerMain1($(this), ${
+                  categoria.id
+                })" class="areaDropDot">
+                    <div class="iconeDrop9">
+                        <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
+                            xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
+                            <path id="upload"
+                                d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
+                                fill="#f3b306" />
+                        </svg>
+                    </div>
+                    <p class="descreveDrop">Arraste as imagens aqui</p>
+                    <div style="margin: -90px auto;text-align: center;">
+                        <p class="txtOu9">|<br>ou<br>|</p>
+                    </div>
+                    <div class="btnDrop9">
+                        <p class="txtBtnDrop9">Selecione do seu computador</p>
+                    </div>
+                </div>
+                <div class="descBanner8">
+                    Banners ativos
+                    <div class="btnQtdBanner">
+                        <p class="txtQtdBanner listaBannersCatActive">${
+                          getBannerInnerMainNew(
+                            BANNERS?.default,
+                            true,
+                            categoria.id,
+                            null,
+                            categoria.id
+                          ).total
+                        }/${
+      BANNERS?.default?.length ? BANNERS?.default?.length : 0
+    }</p>
+                    </div>
+                </div>
+                <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
+                ${
+                  getBannerInnerMainNew(
+                    BANNERS?.default,
+                    true,
+                    categoria.id,
+                    null,
+                    categoria.id
+                  ).html
+                }
+                   
+                </ul>
+                
+            
+                <div class="descBanner8">
+                    Banners desativados
+                    <div class="btnQtdBanner">
+                        <p class="txtQtdBanner listaBannersCatInactive">${
+                          getBannerInnerMainNew(
+                            BANNERS?.default,
+                            "false",
+                            categoria.id,
+                            null,
+                            categoria.id
+                          ).total
+                        }/${
+      BANNERS?.default?.length ? BANNERS?.default?.length : 0
+    }</p>
+                    </div>
+                </div>
+                <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
+                ${
+                  getBannerInnerMainNew(
+                    BANNERS?.default,
+                    "false",
+                    categoria.id,
+                    null,
+                    categoria.id
+                  ).html
+                }
+                   
+                </ul>
+                
+            
+                <div  style="display:none" class="descBanner8">
+                    Menu de categorias
+                    <div class="btnQtdBanner">
+                        <p class="txtQtdBanner">1/1</p>
+                    </div>
+                </div>
+                <div class="descBanner8">
+                    Banner de menu                  
+                </div>
+                <hr/>
+                <div alvo="novo"  style="cursor:pointer" onclick="coletaBannerVertical($(this), ${
+                  categoria.id
+                })" class="areaDropDot">
+                    <div class="iconeDrop9">
+                        <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
+                            xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
+                            <path id="upload"
+                                d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
+                                fill="#f3b306" />
+                        </svg>
+                    </div>
+                    <p class="descreveDrop">Arraste as imagens aqui</p>
+                    <div style="margin: -90px auto;text-align: center;">
+                        <p class="txtOu9">|<br>ou<br>|</p>
+                    </div>
+                    <div class="btnDrop9">
+                        <p class="txtBtnDrop9">Selecione do seu computador</p>
+                    </div>
+                </div>
+                <div id="bannersVerticais">
+               ${
+                 getBannerVerticalMainNew(
+                   BANNERS?.asideMenu,
+                   1,
+                   categoria.id,
+                   null,
+                   categoria.id
+                 ).html
+               }
+                 </div>
+            </section>
+        </div>` +
+    //======================================================ABA DE ICONES==================================================================================================================
+    '<div id="icone" style="max-width:90% ; margin-top: 5%; display:none"  class="container tabContent">' +
+    '<div class="row">' +
+    '<div style="    overflow: auto;max-height: 75vh;" class="col-md-8">' +
+    '<h3 class="tituloIcone">Ícones Smartcomerci</h3>' +
+    '<div class="row">' +
+    '<div  sugestao="todos" class="categoriaIcone">' +
+    '<label onclick="labelIcones($(this))" class="labelIcones labelIconesActive">Todos</label>' +
+    "</div>" +
+    '<div sugestao="frutas" class="categoriaIcone">' +
+    '<label onclick="labelIcones($(this))" class="labelIcones" >Frutas</label>' +
+    "</div>" +
+    '<div sugestao="acougue" class="categoriaIcone">' +
+    '<label onclick="labelIcones($(this))" class="labelIcones" >Açougue</label>' +
+    "</div>" +
+    '<div sugestao="padaria" class="categoriaIcone">' +
+    '<label onclick="labelIcones($(this))" class="labelIcones" >Padaria</label>' +
+    "</div>" +
+    '<div sugestao="outros" class="categoriaIcone">' +
+    '<label onclick="labelIcones($(this))" class="labelIcones" >Outros</label>' +
+    "</div>" +
+    "</div>" +
+    '<div  style="margin-top: 3%;" class="row">' +
+    nossosIcones(categoria) +
+    "</div><br><hr>" +
+    '<h3 class="tituloIcone">Todos os ícones disponíveis</h3>' +
+    '<div  style="margin-top: 3%;" class="row iconesClientes">' +
+    nossosIcones2(categoria) +
+    "</div>" +
+    "</div>" +
+    '<div class="col-md-4 areaDropIcon">' +
+    '<h3 class="tituloIcone">Suba seu próprio ícone</h3>' +
+    '<h5 class="subTitleIcons">Formato recomendado:<br> SVG ou PNG 50px X 50px</h5>' +
+    '<div style="margin: auto 0 !important;" class="col-md-8 areaDrop">' +
+    '<img onclick="uploadIcone()" class="imageThumb" src="images/products/upload.svg" />' +
+    '<h3 class="arraste">Arraste o ícone aqui</h3>' +
+    '<h3 class="ou">-ou-</h3>' +
+    '<div  onclick="uploadIcone()" class="input-group btnDropPC2"><label class="label">Selecione do seu computador</label></div>' +
+    '</div><input class="upIcon" id="upIcon" style="display:none" type="file">' +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    //======================================================ABA CARACTERISTICAS==================================================================================================================
+    '<div id="caracteristicas" style="max-width:70% ; height: 75vh; margin-top: 2%"  class="container tabContent verticalScroll notScroll">' +
+    '<div  class="col-md-12 " style="margin-top: 3% !important; background: white !important">' +
+    '<div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">' +
+    '<div style="margin: 18px 2%;" class="switch__container">' +
+    "<input " +
+    (categoria.active && categoria.active !== "false" ? 'checked="true"' : "") +
+    ` id="switch-shadow18" class="switch switch--shadow" type="checkbox" onchange="editCategoryField(true, ${categoria.id},'active',$(this)[0].checked )" />` +
+    '<label for="switch-shadow18"></label>' +
+    "</div>" +
+    '<label style=" font-size: 20px;" class="label">Categoria ativa</label> ' +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<label style=" font-size: 20px;" class="label">Nome da categoria</label><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    `<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
+    onchange="editCategoryField(true, ${
+      categoria.id
+    },'title',$(this).val() )" placeholder="Categoria genial" id="${aleatoryID()}'" value="${
+      categoria.title
+    }"></div><br>` +
+    "</div>" +
+    "</div><br><hr><br>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<h3 style=" font-size: 20px;" class="SEO">SEO</h3><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%;    margin-top: -3%;" class="row">' +
+    '<div class="col-md-12 container">' +
+    '<label style=" font-size: 20px;" class="label labelContent">Você pode preencher os campos relacionados ao SEO e ajudar no resultado das buscas realizadas no Google, Bing, Yahoo, entre outros.</label><br> ' +
+    "</div>" +
+    "</div><br><br>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<label style=" font-size: 20px;" class="label">Título da categoria (meta title)</label><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    `<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input fieldName="categorie_title" 
+    onchange="editCategoryField(true, ${
+      categoria.id
+    },'metatitle',$(this).val() )" value="${categoria.metatitle}"
+    style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas"  
+    id="${aleatoryID()}" ></div><br>` +
+    "</div>" +
+    "</div><br><br>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<label style=" font-size: 20px;" class="label">Descrição completa (meta description)</label><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<div class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><textarea fieldName="categorie_description"  id="' +
+    aleatoryID() +
+    `" onchange="editCategoryField(true, ${categoria.id},'description',$(this).val() )"  
+     value="${categoria.description}" placeholder="Frutas no Kalimera. Compre online, limão, tangerina, kiwi e muitas outras frutas com os melhores preços e fretegratis."  style="background: #EFEFEF; border:none; font-size: 1.3rem; max-height: 100%" rows="3"   
+     class="form-control">${categoria.description}</textarea>" ` +
+    "</div>" +
+    "</div>" +
+    "</div><br><br>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<label style=" font-size: 20px;" class="label">Palavras Chaves (meta keywords)</label><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<div class="listaPalavrasKey  notScroll verticalScroll contentEditable="true" placeholder="digite aqui e aperte enter..." class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px; min-height: 150px !important;">' +
+    '<div><input categorie_name="' +
+    categoria.title +
+    '" type="text" fieldName="categorie_key_words" container="listaPalavrasKey" onkeydown="addWordKeyNew($(this), ' +
+    categoria.id +
+    ', null, this)" class="form-control entraPalavra" placeholder="Digite sua palavra aqui e pressione enter..." style="border: none; font-size: 1.3rem;height: auto; width: 90%;"/></div>' +
+    asWords +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    "</div>";
+
+  bootbox.alert({
+    message: html,
+    onShow: function () {
+      $(".tabModal").click(function () {
+        $(".tabModal").removeClass("tabModalActive");
+        $(this).addClass("tabModalActive");
+        $(".tabContent").hide();
+        //////console.log("#" + $(this).attr("content"));
+        $("#" + $(this).attr("content")).fadeIn();
+      });
+      $(".categoriaIcone").click(function () {
+        var sugestao = $(this).attr("sugestao");
+        $(".boxIconDefault").each(function () {
+          if ($(this).attr("dica") == sugestao) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+        if (sugestao == "todos") {
+          $(".boxIconDefault").show();
+        }
+      });
+      $("#upIcon").change(function () {
+        ////console.log("peguei")
+        sobeIcone($("#upIcon"));
+      });
+
+      $(".fa-times-circle").click(function () {
+        $(this).parent().parent().remove();
+      });
+
+      $(".hiperTitle").each(function () {
+        $(this).removeClass("ui-sortable-handle");
+      });
+    },
+    callback: function () {
+      sessionStorage.PALAVRAS_KEY = "";
+    },
+  });
+  $(".modal-footer").hide();
+}
+function modalEditSubCategories(subCategoria, categoria, element) {
+  console.log("ME ACIONOU");
+  let textElement = element.parent().parent().find(".SUB_CATEGORIA");
+
+  var categoria = categoriesObject.categories[Number(categoria)];
+  var subcategoria = categoria.subcategories.find(
+    (x) => Number(x.id) === Number(subCategoria)
+  );
+  console.log("CATEGORIA SELECIONADA", categoria);
+  console.log("SBCATEGORIA SELECIONADA", subcategoria);
+
+  var dataSubCategoria = [],
+    todasCategorias = [];
+  if (
+    localStorage.MINHAS_CATEGORIAS != undefined &&
+    localStorage.MINHAS_CATEGORIAS != null &&
+    localStorage.MINHAS_CATEGORIAS != "null" &&
+    localStorage.MINHAS_CATEGORIAS != ""
+  ) {
+    todasCategorias = JSON.parse(localStorage.MINHAS_CATEGORIAS);
+    for (const k in todasCategorias) {
+      if (todasCategorias[k].affiliate_categorie_name == categoria) {
+        dataSubCategoria = todasCategorias[k];
+      }
+    }
+  }
+  ////
+  //console.log("data sub",dataSubCategoria)
+
+  var status = [],
+    essaSubCat = [];
+  try {
+    status = JSON.parse(
+      ajustStrigfy(dataSubCategoria.affiliate_categorie_status)
+    );
+  } catch (e) {}
+  for (const k in status) {
+    if (status[k].subCategoria == subCategoria) {
+      essaSubCat = status[k];
+    }
+  }
+
+  if (essaSubCat.length == 0) {
+    essaSubCat = { subCategoria: subCategoria, status: 0 };
+  }
+
+  if (essaSubCat.key_words == undefined) {
+    localStorage.PALAVRAS_KEY = "null";
+  }
+
+  localStorage.SUB_EDIT = JSON.stringify(status);
+
+  var smart = element.attr("smart"),
+    ofertas = element.attr("ofertas"),
+    title = element.attr("title"),
+    description = element.attr("description"),
+    key_words = element.attr("key_words"),
+    maisVendidos = element.attr("maisVendidos"),
+    personalizada = element.attr("personalizada");
+  if (element.attr("title") == "undefined") {
+    title = "";
+  }
+  if (element.attr("smart") == "undefined") {
+    smart = 0;
+  }
+  if (element.attr("description") == "undefined") {
+    description = "";
+  }
+  if (element.attr("key_words") == "undefined") {
+    key_words = "";
+  }
+  if (element.attr("maisVendidos") == "undefined") {
+    maisVendidos = 0;
+  }
+  if (element.attr("ofertas") == "undefined") {
+    ofertas = 0;
+  }
+  if (element.attr("personalizada") == "undefined") {
+    personalizada = 0;
+  }
+
+  if (Number(ofertas) == 1) {
+    ofertas = ' checked="true"';
+  }
+  if (Number(personalizada) == 1) {
+    personalizada = ' checked="true"';
+  }
+  if (Number(smart) == 1) {
+    smart = ' checked="true"';
+  }
+  if (Number(maisVendidos) == 1) {
+    maisVendidos = ' checked="true"';
+  }
+
+  localStorage.SUB_CAT_ATUAL = essaSubCat.subCategoria;
+  localStorage.SUB_CAT_ATUAL_STATUS = essaSubCat.status;
+  var activeOrNot = " ";
+  if (essaSubCat.status == 1) {
+    activeOrNot = ' checked="true" ';
+  }
+  //console.log(key_words)
+  //console.log("essaSubCat")
+  //console.log(essaSubCat)
+
+  if (
+    essaSubCat.key_words == undefined ||
+    essaSubCat.key_words == null ||
+    essaSubCat.key_words == ""
+  ) {
+    key_words = [];
+  } else {
+    key_words = essaSubCat.key_words.split(",");
+  }
+  //console.log("key words")
+  //console.log(key_words)
+  localStorage.PALAVRAS_KEY = essaSubCat.key_words;
+
+  var html =
+    '<div style="max-width:100% " class="container">' +
+    '<div class="row" style="box-shadow: 0px 3px 5px #6A6A6A08; max-width: 90%; margin:auto  ;   border-bottom: 2px solid #EDF2F6; ">' +
+    '<div content="caracteristicas" class="col-md tabModal tabModalActive">' +
+    '<label class="labelTab"  style="text-align:center">Características</label>' +
+    "</div>" +
+    '<div content="banners" class="col-md tabModal">' +
+    '<label class="labelTab"  style="text-align:center">Banners</label>' +
+    "</div>" +
+    '<div content="priorizacao" class="col-md tabModal">' +
+    '<label class="labelTab"  style="text-align:center">Priorização</label>' +
+    "</div>" +
+    '<div class="col-md">' +
+    '<div onclick="CANCELA_EDIT()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:10% auto" class="input-group">' +
+    '<label  style="cursor:pointer;margin:-5%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
+    "</div>" +
+    "</div>" +
+    '<div class="col-md ">' +
+    '<div onclick="salvaModalSubCategoria()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:10% auto" class="input-group">' +
+    '<label  style="cursor:pointer;margin: -5% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    //======================================================ABA DE BANNERS==================================================================================================================
+
+    `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
+        <input onchange="uploadBannerCat($(this))" type="file" id="pegaBannerCat" style="display:none">
+        <input onchange="uploadBannerCatVertical($(this))" type="file" id="pegaBannerCatVertical" style="display:none">
+            <section class="areaBanner verticalScroll">
+                <div class="row">
+                    <div style="margin: 1% 2%;" class="switch__container"><input id="switch-shadow1777"
+                            class="switch switch--shadow" type="checkbox" /><label style="    margin: 10px 0px 0px 20px;"
+                            for="switch-shadow1777"></label></div>
+                    <label style="font-size: 20px;" class="label">Página de categoria</label>
+                    <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
+                </div>
+                <div alvo="novo" style="cursor:pointer" onclick="alteraBannerCat($(this))" class="areaDropDot">
+                    <div class="iconeDrop9">
+                        <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
+                            xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
+                            <path id="upload"
+                                d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
+                                fill="#f3b306" />
+                        </svg>
+                    </div>
+                    <p class="descreveDrop">Arraste as imagens aqui</p>
+                    <div style="margin: -90px auto;text-align: center;">
+                        <p class="txtOu9">|<br>ou<br>|</p>
+                    </div>
+                    <div class="btnDrop9">
+                        <p class="txtBtnDrop9">Selecione do seu computador</p>
+                    </div>
+                </div>
+                <div class="descBanner8">
+                    Banners ativos
+                    <div class="btnQtdBanner">
+                        <p class="txtQtdBanner listaBannersCatActive">${
+                          getBannerInner(essaSubCat?.banners, true).total
+                        }/${
+      essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
+    }</p>
+                    </div>
+                </div>
+                <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
+                ${getBannerInner(essaSubCat?.banners, true).html}
+                   
+                </ul>
+                
+            
+                <div class="descBanner8">
+                    Banners desativados
+                    <div class="btnQtdBanner">
+                        <p class="txtQtdBanner listaBannersCatInactive">${
+                          getBannerInner(essaSubCat?.banners, false).total
+                        }/${
+      essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
+    }</p>
+                    </div>
+                </div>
+                <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
+                ${getBannerInner(essaSubCat?.banners, false).html}
+                   
+                </ul>
+                
+            
+                <div  style="display:none" class="descBanner8">
+                    Menu de categorias
+                    <div class="btnQtdBanner">
+                        <p class="txtQtdBanner">1/1</p>
+                    </div>
+                </div>
+                <div class="descBanner8">
+                    Banner de menu                  
+                </div>
+                <hr/>
+                <div alvo="novo"  style="cursor:pointer" onclick="alteraBannerCatVertical($(this))" class="areaDropDot">
+                    <div class="iconeDrop9">
+                        <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
+                            xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
+                            <path id="upload"
+                                d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
+                                fill="#f3b306" />
+                        </svg>
+                    </div>
+                    <p class="descreveDrop">Arraste as imagens aqui</p>
+                    <div style="margin: -90px auto;text-align: center;">
+                        <p class="txtOu9">|<br>ou<br>|</p>
+                    </div>
+                    <div class="btnDrop9">
+                        <p class="txtBtnDrop9">Selecione do seu computador</p>
+                    </div>
+                </div>
+                <div id="bannersVerticais">
+               ${getBannerVertical(essaSubCat?.bannersVertical, false).html}
+                 </div>
+            </section>
+        </div>` +
+    //======================================================ABA DE CARACTERÍSTICAS==================================================================================================================
+    //======================================================ABA DE PRIORIZACAO==================================================================================================================
+    '<div id="priorizacao" style="max-width:90% ; margin-top: 2%;height: 75vh; display:none"  class="container tabContent  verticalScroll notScroll">' +
+    '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
+    '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
+    '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="smart" subCategorieName="\'' +
+    subCategoria +
+    '\'" onchange="setSubCatAtt($(this))" ' +
+    smart +
+    ' id="switch-shadow1988" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1988"></label></div>' +
+    '<label style="font-size: 20px;" class="label">Smart</label>' +
+    "</div>" +
+    '<div style="padding: 0 2%;" class="row">' +
+    '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos serão priorizados com base no consumidor. A plataforma irá exibir os produtos que mais fazem sentido com os hábitos de cada cliente. Cada página será única.</label><br /></div>' +
+    "</div>" +
+    "</div>" +
+    '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
+    '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
+    '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="maisVendidos"  subCategorieName="\'' +
+    subCategoria +
+    '\'" onchange="setSubCatAtt($(this))" ' +
+    maisVendidos +
+    ' id="switch-shadow1999" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1999"></label></div>' +
+    '<label style="font-size: 20px;" class="label">Produtos mais vendidos da subcategoria</label>' +
+    "</div>" +
+    '<div style="padding: 0 2%;" class="row">' +
+    '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos mais vendidos em estoque serão priorizados na classificação na página de categoria e subcategoria.</label><br /></div>' +
+    "</div>" +
+    "</div>" +
+    '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
+    '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
+    '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="ofertas" subCategorieName="\'' +
+    subCategoria +
+    '\'" onchange="setSubCatAtt($(this))" ' +
+    ofertas +
+    ' id="switch-shadow1900" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1900"></label></div>' +
+    '<label style="font-size: 20px;" class="label">Ofertas da subcategoria</label>' +
+    "</div>" +
+    '<div style="padding: 0 2%;" class="row">' +
+    '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos com desconto ativo serão priorizados. Os produtos mais vendidos em ofertas serão priorizados na página de categoria e subcategoria. Os produtos sem oferta, irão aparecer em seguida.</label><br /></div>' +
+    "</div>" +
+    "</div>" +
+    "<hr>" +
+    '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
+    '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
+    '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="personalizada" subCategorieName="\'' +
+    subCategoria +
+    '\'" onchange="setSubCatAtt($(this))" ' +
+    personalizada +
+    ' id="switch-shadow1944" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1944"></label></div>' +
+    '<label style="font-size: 20px;" class="label">Priorização personalizada</label>' +
+    "</div>" +
+    '<div style="padding: 0 2%;" class="row">' +
+    '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Escolha produtos específicos e a ordem para aparecerem na página de categoria e subcategoria. Após os produtos Selecionados, serão exibidos os produtos pelo tipo de priorização.</label><br /></div>' +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    //======================================================ABA DE PROMOÇÕES==================================================================================================================
+    '<div id="caracteristicas" style="max-width:70% ; height: 75vh; margin-top: 2%"  class="container tabContent verticalScroll notScroll">' +
+    '<div  class="col-md-12 " style="margin-top: 3% !important; background: white !important">' +
+    '<div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">' +
+    '<div style="margin: 1% 2%;" class="switch__container">' +
+    "<input  " +
+    activeOrNot +
+    '   fieldName="status"  subCategorieName="\'' +
+    subCategoria +
+    '\'" onchange="setSubCatAtt($(this))" id="switch-shadow18" class="switch switch--shadow" type="checkbox" />' +
+    '<label for="switch-shadow18"></label>' +
+    "</div>" +
+    '<label style=" font-size: 20px;" class="label">Subcategoria Ativa</label> ' +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<label style=" font-size: 20px;" class="label">Nome da categoria</label><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct" placeholder="Produtos relacionados" id="nomeCategoria" idParent="' +
+    textElement.attr("id") +
+    '"  fieldName="subCategoria" subCategorieName="\'' +
+    subCategoria +
+    '\'" onchange="setSubCatAtt($(this))" value="' +
+    subCategoria +
+    '"></div><br> ' +
+    "</div>" +
+    "</div><br><hr><br>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<h3 style=" font-size: 20px;" class="SEO">SEO</h3><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%;    margin-top: -3%;" class="row">' +
+    '<div class="col-md-12 container">' +
+    '<label style=" font-size: 20px;" class="label labelContent">Você pode preencher os campos relacionados ao SEO e ajudar no resultado das buscas realizadas no Google, Bing, Yahoo, entre outros.</label><br> ' +
+    "</div>" +
+    "</div><br><br>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<label style=" font-size: 20px;" class="label">Título da categoria (meta title)</label><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input value="' +
+    title +
+    '"   fieldName="title" subCategorieName="\'' +
+    subCategoria +
+    '\'" onchange="setSubCatAtt($(this))"  style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas" id="' +
+    aleatoryID() +
+    '" ></div><br> ' +
+    "</div>" +
+    "</div><br><br>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<label style=" font-size: 20px;" class="label">Descrição completa (meta description)</label><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<div class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><textarea  fieldName="description" subCategorieName="\'' +
+    subCategoria +
+    '\'" onchange="setSubCatAtt($(this))" placeholder="Frutas no Kalimera. Compre online, limão, tangerina, kiwi e muitas outras frutas com os melhores preços e fretegratis."  style="background: #EFEFEF; border:none; font-size: 1.3rem; max-height: 100%" rows="3"   class="form-control">' +
+    description +
+    "</textarea>" +
+    "</div>" +
+    "</div>" +
+    "</div><br><br>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<label style=" font-size: 20px;" class="label">Palavras Chaves (meta keywords)</label><br> ' +
+    "</div>" +
+    "</div>" +
+    '<div style="padding:0 2%" class="row">' +
+    '<div class="col-md-12">' +
+    '<div class="listaPalavrasKey  notScroll verticalScroll" contentEditable="true" placeholder="digite aqui e aperte enter..." class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px; min-height: 150px !important;">' +
+    '<div><input categorie_name="' +
+    subCategoria +
+    '" container="listaPalavrasKey"  fieldName="key_words" onkeydown="addWordKeyNew($(this), ' +
+    categoria.id +
+    ", " +
+    subCategoria.id +
+    ', this)" type="text" class="form-control entraPalavra" placeholder="Digite sua palavra aqui e pressione enter..." style="border: none; font-size: 1.3rem;height: auto; width: 90%;"/></div>' +
+    WordKeyNew(key_words) +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    "</div>";
+
+  bootbox.alert({
+    message: html,
+    onShow: function () {
+      localStorage.CAT_SUB_EDIT = categoria;
+      $(".tabModal").click(function () {
+        $(".tabModal").removeClass("tabModalActive");
+        $(this).addClass("tabModalActive");
+        $(".tabContent").hide();
+        //////console.log("#" + $(this).attr("content"));
+        $("#" + $(this).attr("content")).fadeIn();
+      });
+      $(".fa-times-circle").click(function () {
+        $(this).parent().parent().remove();
+      });
+      $(".hiperTitle").each(function () {
+        $(this).removeClass("ui-sortable-handle");
+      });
+      let thisSubCategory = {
+        categoryMain: subCategoria,
+      };
+      function makeMeToSet(element) {
+        let subCategory = element.attr("subCategory");
+        let myValue = element.val();
+        let myNameValue = element.attr("nameValue");
+        if (element.attr("type") == "checkbox") {
+          myValue = element[0].checked;
+        }
+        thisSubCategory[myNameValue] = myValue;
+      }
+    },
+    callback: function () {
+      //////console.log('The styles was removed!');
+
+      localStorage.CAT_SUB_EDIT = "";
+      localStorage.SUB_EDIT = "";
+      localStorage.SUB_CAT_ATUAL = "";
+      localStorage.SUB_CAT_ATUAL_STATUS = "";
+      sessionStorage.PALAVRAS_KEY = "";
+    },
+  });
+  $(".modal-footer").hide();
+}
+
+function addWordKeyNew(elemento, idCat, idSub, e) {
+  e = window.event;
+  var code = e.which || e.keyCode;
+
+  if (code == 13) {
+    $("." + elemento.attr("container")).append(
+      '<div class="input-group categoriaLabel categoriasPalavras"><label class="aPalavra">' +
+        elemento.val() +
+        '</label><label onclick="meRemoveNew($(this), ' +
+        idCat +
+        "," +
+        idSub +
+        ')" class="iconClose"><i class="far fa-times-circle"></i></label></div>'
+    );
+    palavrasKeyNew(elemento.val(), "add", idCat, idSub);
+    elemento.val("");
+  }
+}
+
+function palavrasKeyNew(palavra, regra, idCat, idSub) {
+  console.log(palavra, regra, idCat, idSub);
+  idCat = Number(idCat);
+  idSub = idSub ? Number(idSub) : null;
+  var palavras = null;
+  if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+    palavras =
+      categoriesObject.categories[idCat].subcategories[idSub]?.keywords;
+    if (!palavras) {
+      palavras = [];
+    }
+  } else if (idCat || idCat == 0) {
+    palavras = categoriesObject.categories[idCat]?.keywords;
+    if (!palavras) {
+      palavras = [];
+    }
+  } else {
+    console.log("Não existem os ids ", idCat, idSub);
+    return null;
+  }
+
+  if (palavras) {
+    var novasPalavras = [];
+    if (regra == "add") {
+      var faz = true;
+      for (const k in palavras) {
+        if (palavra == palavras[k]) {
+          faz = false;
+        }
+        if (palavras[k] == "") {
+          palavras.splice(k, 1);
+        }
+      }
+      if (faz) {
+        palavras.push(palavra);
+      }
+    } else {
+      var faz = true;
+      for (const k in palavras) {
+        if (palavra == palavras[k] || palavras[k] == "") {
+          palavras.splice(k, 1);
+        }
+      }
+    }
+
+    var pKey = "";
+    for (const p in palavras) {
+      pKey += palavras[p] + ",";
+    }
+  } else {
+    palavras = [];
+    palavras.push(palavra);
+
+    var pKey = "";
+    for (const p in palavras) {
+      pKey += palavras[p] + ",";
+    }
+  }
+
+  if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+    categoriesObject.categories[idCat].subcategories[idSub]["keywords"] =
+      palavras;
+  } else if (idCat || idCat == 0) {
+    categoriesObject.categories[idCat]["keywords"] = palavras;
+  }
+  console.log(categoriesObject);
+}
+function WordKeysNew(text, idCat, idSub) {
+  var html = "";
+  for (const k in text) {
+    if (text[k] != "") {
+      html +=
+        '<div class="input-group categoriaLabel categoriasPalavras"><label class="aPalavra">' +
+        text[k] +
+        '</label><label onclick="meRemoveNew($(this), ' +
+        idCat +
+        "," +
+        idSub +
+        ')" class="iconClose"><i class="far fa-times-circle"></i></label></div>';
+    }
+  }
+  return html;
+}
+
+function meRemoveNew(elemento, idCat, idSub) {
+  var container = $(".entraPalavra");
+  elemento.parent().remove();
+  palavrasKeyNew(
+    elemento.parent().find(".aPalavra").text(),
+    "remove",
+    idCat,
+    idSub
+  );
+}
+
+function uploadBannerCatMainNew(element, idCat, idSub) {
+  console.log("COMECAND UPLOAD", element, idCat, idSub);
+  var data = new FormData();
+  var contador = 1;
+  data.append("fileimagem", element[0].files[0]);
+  $.ajax({
+    url: mainHost + "/uploadBanners",
+    headers: {
+      "x-access-token": localStorage.token,
+      master_id: localStorage.MASTER_ID,
+    },
+    data: data,
+    processData: false,
+    contentType: false,
+    type: "POST",
+    success: function (data) {
+      let myUrlPath = "";
+      let myId = element.attr("target");
+      console.log(
+        $("#" + element.attr("target")).attr("alvo"),
+        element.attr("target")
+      );
+      if (
+        $("#" + element.attr("target")).attr("alvo") == "novo" ||
+        !element.attr("target")
+      ) {
+        let elementoNew = $("#listaBannersCatInactive");
+        elementoNew.append(
+          getBannerInnerNew(
+            [
+              {
+                active: 1,
+                url: data.path?.replace("./public", api_host),
+              },
+            ],
+            1,
+            idCat,
+            idSub,
+            myId
+          ).html
+        );
+        myUrlPath = data.path?.replace("./public", api_host);
+      } else {
+        console.log("#" + element.attr("target"));
+        let elemento = $("#" + element.attr("target"));
+        elemento.css(
+          "background",
+          `url(${data.path?.replace("./public", api_host)})`
+        );
+        myUrlPath = data.path?.replace("./public", api_host);
+        elemento.css("background-size", "cover !important");
+        elemento.css("background-position", "center !important");
+        elemento.css("zoom", "100% !important");
+      }
+
+      if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+        if (
+          !categoriesObject.categories[idCat].subcategories[idSub]["banners"] ||
+          !categoriesObject.categories[idCat].subcategories[idSub]["banners"][
+            "default"
+          ]
+        ) {
+          categoriesObject.categories[idCat].subcategories[idSub]["banners"] = {
+            default: [],
+            asideMenu: [],
+          };
+        }
+        const exists = categoriesObject.categories[idCat].subcategories[idSub][
+          "banners"
+        ]["default"].find((x) => x.id === myId);
+
+        if (!exists) {
+          categoriesObject.categories[idCat].subcategories[idSub]["banners"][
+            "default"
+          ].push({
+            url: myUrlPath,
+            id: myId,
+            link: "",
+            active: 1,
+          });
+        } else {
+          categoriesObject.categories[idCat].subcategories[idSub]["banners"][
+            "default"
+          ].map((x, index) => {
+            if (x.id === myId) {
+              x.url = myUrlPath;
+            }
+          });
+        }
+
+        console.log("URL CRIADA", data, categoriesObject);
+      } else if (idCat || idCat == 0) {
+        if (
+          !categoriesObject.categories[idCat]["banners"] ||
+          !categoriesObject.categories[idCat]["banners"]["default"]
+        ) {
+          categoriesObject.categories[idCat]["banners"] = {
+            default: [],
+            asideMenu: [],
+          };
+        }
+
+        const exists = categoriesObject.categories[idCat]["banners"][
+          "default"
+        ].find((x) => x.id === myId);
+
+        if (!exists) {
+          categoriesObject.categories[idCat]["banners"]["default"].push({
+            url: myUrlPath,
+            id: myId,
+            link: "",
+            active: 1,
+          });
+        } else {
+          categoriesObject.categories[idCat]["banners"]["default"].map(
+            (x, index) => {
+              if (x.id === myId) {
+                x.url = myUrlPath;
+              }
+            }
+          );
+        }
+        console.log("URL CRIADA", data, categoriesObject);
+      }
+    },
+    error: function (data) {
+      console.log("ERRROOOIU", data);
+    },
+  });
+}
+
+function getBannerInnerNew(imgURLs, actives, idCat, idSub, id) {
+  let html = "",
+    counter = 0;
+  for (const k in imgURLs) {
+    let RANDOM = Math.random();
+    if (imgURLs[k].active == actives) {
+      if (!imgURLs[k].id) {
+        imgURLs[k].id = id;
+        console.log("getBannerInnerNew", imgURLs, actives, idCat, idSub, id);
+      }
+      counter++;
+      html += `
+            <li class="itemSortable2 ui-sortable-handle"> 
+                <div class="areaBannerInner">
+                    <div class="borderLeft">
+                        <div style="margin-top: 10px;">
+                            <div class="col-sm dropCategoriaContent"
+                                style="opacity: 1;max-width: 60px;display: inline-flex;    float: left;" dropado="nao">
+                                <svg class="iconGrid" xmlns="http://www.w3.org/2000/svg"
+                                    style="fill: #687c97;    float: left;    margin: -10px 0px 25px 5px !important;"
+                                    width="13.5" height="23" viewBox="0 0 9 16">
+                                    <defs></defs>
+                                    <path class="a"
+                                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                                    </path>
+                                    <path class="a"
+                                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                                        transform="translate(5)"></path>
+                                </svg>
+                            </div>
+                            <div class="col-sm posicaoCategoria numberCat"
+                                style="opacity: 1;max-width: 30px;display: inline-flex;    float: left;     margin-left: -25px !important;">
+                                1
+                            </div>
+                        </div>
+                        <br />
+                        <div style="text-align: center" class="switch__container"><input onchange="changeMyActive($(this))" thisUrl="${
+                          imgURLs[k].url
+                        }" ${
+        imgURLs[k].active == true ? 'checked="true"' : ""
+      } id="switch-shadow1778${RANDOM}"
+                                class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
+                                for="switch-shadow1778${RANDOM}"></label></div>
+                        <div  onclick="removeBanner('${
+                          imgURLs[k].url
+                        }','banners', $(this))" style="margin-top: 15px" class=" deleteThis">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
+                                style="fill: #f6b504;margin: 9px;">
+                                &gt;
+                                <defs></defs>
+                                <path class="a"
+                                    d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z"
+                                    transform="translate(4 3)"></path>
+                            </svg>
+                        </div>
+                    </div>
+                   
+                    <div  alvo="update" id="${imgURLs[k].id}"
+                    onclick="uploadBannerCatMainNew($(this), ${idCat},${idSub},${id})"  ${
+        imgURLs[k].url
+          ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
+          : ""
+      }  class="borderRight">
+                    </div>
+                </div>
+                 <div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
+    onchange="editLinkFromBanner($(this), ${idCat},${idSub}, 'default','${
+        imgURLs[k].id
+      }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
+        imgURLs[k].link
+      }"></div>
+                 
+               
+            </li>`;
+    }
+  }
+  return { html: html, total: counter };
+}
+
+function uploadBannerCatVerticalMainNew(element, idCat, idSub) {
+  console.log("ALTERANDO BANNERS VERTICAIS", idCat, idSub);
+  var data = new FormData();
+  var contador = 1;
+  data.append("fileimagem", element[0].files[0]);
+  $.ajax({
+    url: mainHost + "/uploadBanners",
+    headers: {
+      "x-access-token": localStorage.token,
+      master_id: localStorage.MASTER_ID,
+    },
+    data: data,
+    processData: false,
+    contentType: false,
+    type: "POST",
+    success: function (data) {
+      let myUrlPath = "";
+      let myId = element.attr("target");
+      if (
+        $("#" + element.attr("target")).attr("alvo") == "novo" ||
+        !element.attr("target")
+      ) {
+        let elementoNew = $("#bannersVerticais");
+
+        elementoNew.append(
+          getBannerVerticalNew(
+            [
+              {
+                active: 1,
+                url: data.path?.replace("./public", api_host),
+              },
+            ],
+            1,
+            idCat,
+            idSub,
+            myId
+          ).html
+        );
+        myUrlPath = data.path?.replace("./public", api_host);
+      } else {
+        $("#" + element.attr("target")).css(
+          "background",
+          `url(${data.path?.replace("./public", api_host)})`
+        );
+        myUrlPath = data.path?.replace("./public", api_host);
+        $("#" + element.attr("target")).css(
+          "background-size",
+          "cover !important"
+        );
+        $("#" + element.attr("target")).css(
+          "background-position",
+          "center !important"
+        );
+        $("#" + element.attr("target")).css("zoom", "100% !important");
+      }
+
+      if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+        if (
+          !categoriesObject.categories[idCat].subcategories[idSub]["banners"]
+        ) {
+          categoriesObject.categories[idCat].subcategories[idSub]["banners"] = {
+            default: [],
+            asideMenu: [],
+          };
+        }
+
+        const exists = categoriesObject.categories[idCat].subcategories[idSub][
+          "banners"
+        ]["asideMenu"].find((x) => x.id === myId);
+        console.log("EXISTO", exists);
+        if (!exists) {
+          categoriesObject.categories[idCat].subcategories[idSub]["banners"][
+            "asideMenu"
+          ].push({
+            url: myUrlPath,
+            id: myId,
+            link: "",
+            active: 1,
+          });
+        } else {
+          categoriesObject.categories[idCat].subcategories[idSub]["banners"][
+            "asideMenu"
+          ].map((x, index) => {
+            if (x.id === myId) {
+              x.url = myUrlPath;
+            }
+          });
+        }
+      } else if (idCat || idCat == 0) {
+        if (
+          !categoriesObject.categories[idCat]["banners"] ||
+          !categoriesObject.categories[idCat]["banners"]["asideMenu"]
+        ) {
+          categoriesObject.categories[idCat]["banners"] = {
+            default: [],
+            asideMenu: [],
+          };
+        }
+        console.log(categoriesObject.categories[idCat]["banners"]);
+
+        const exists = categoriesObject.categories[idCat]["banners"][
+          "asideMenu"
+        ].find((x) => x.id === myId);
+        console.log("EXISTO CAT", exists);
+        if (!exists) {
+          categoriesObject.categories[idCat]["banners"]["asideMenu"].push({
+            url: myUrlPath,
+            id: myId,
+            link: "",
+            active: 1,
+          });
+        } else {
+          categoriesObject.categories[idCat]["banners"]["asideMenu"].map(
+            (x, index) => {
+              if (x.id === myId) {
+                x.url = myUrlPath;
+              }
+            }
+          );
+        }
+      }
+
+      console.log("URL CRIADA VERT", data, categoriesObject);
+    },
+    error: function (data) {
+      console.log(data);
+    },
+  });
+}
+
+function getBannerVerticalNew(imgURLs, actives, idCat, idSub, id) {
+  console.log(imgURLs, actives, idCat, idSub, id);
+  let html = "",
+    counter = 0;
+  for (const k in imgURLs) {
+    if (!imgURLs[k].id) {
+      imgURLs[k].id = id;
+      console.log("getBannerVerticalNew", imgURLs, actives, idCat, idSub, id);
+    }
+    let RANDOM = Math.random();
+    let LENGTH = $(".bnnVertical").length ? $(".bnnVertical").length + 1 : 1;
+
+    counter++;
+    html += `
+            <div class="areaBannerInner bnnVertical" style=" margin-top: 15px;min-height: 490px !important">
+                <div class="borderLeft" style="    min-height: 490px !important">
+                    <div style="margin-top: 10px;">
+                        <div class="col-sm dropCategoriaContent"
+                            style="opacity: 1;max-width: 60px;display: inline-flex;    float: left;" dropado="nao">
+                            <svg class="iconGrid" xmlns="http://www.w3.org/2000/svg"
+                                style="fill: #687c97;    float: left;    margin: -10px 0px 25px 5px !important;"
+                                width="13.5" height="23" viewBox="0 0 9 16">
+                                <defs></defs>
+                                <path class="a"
+                                    d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                                </path>
+                                <path class="a"
+                                    d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                                    transform="translate(5)"></path>
+                            </svg>
+                        </div>
+                        <div class="col-sm posicaoCategoria numberCat"
+                            style="opacity: 1;max-width: 30px;display: inline-flex;    float: left;     margin-left: -25px !important;">
+                            ${LENGTH}
+                        </div>
+                    </div>
+                    <br />
+                    <div style="text-align: center" class="switch__container"><input thisUrl="${
+                      imgURLs[k].url
+                    }" onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub},'asideMenu','${
+      imgURLs[k].id
+    }')" id="switch-shadow1799${RANDOM}" ${
+      imgURLs[k].active == true ? 'checked="true"' : ""
+    }
+                            class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
+                            for="switch-shadow1799${RANDOM}"></label></div>
+                    <div onclick="deleteMyActiveMainNew('${
+                      imgURLs[k].url
+                    }',${idCat}, ${idSub},'asideMenu', $(this),'${
+      imgURLs[k].id
+    }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
+                            style="fill: #f6b504;margin: 9px;">
+                            &gt;
+                            <defs></defs>
+                            <path class="a"
+                                d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z"
+                                transform="translate(4 3)"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div alvo="update" id="${
+                  imgURLs[k].id
+                }" onclick="coletaBannerMain1($(this), ${idCat}, ${idSub}, ${id})" ${
+      imgURLs[k].url
+        ? `style="background-repeat: no-repeat;background-repeat: no-repeat !important; background-position: center; zoom: 80%; min-height: 490px; width: calc(100% - 100px); float: right; background: url(${imgURLs[k].url})"`
+        : ""
+    }   class="borderRightVertical">
+                </div>
+                   <div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
+    onchange="editLinkFromBanner($(this), ${idCat},${idSub},'asideMenu','${
+      imgURLs[k].id
+    }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
+      imgURLs[k].link
+    }"></div>
+            </div>`;
+  }
+  return { html: html, total: counter };
+}
+
+function getBannerInnerMainNew(imgURLs, actives, idCat, idSub, id) {
+  console.log(imgURLs, actives.toString(), idCat, idSub, id);
+  let html = "",
+    counter = 0;
+  if (imgURLs) {
+    for (const k in imgURLs) {
+      if (!imgURLs[k].id) {
+        imgURLs[k].id = id;
+        console.log(
+          "getBannerInnerMainNew",
+          imgURLs,
+          actives,
+          idCat,
+          idSub,
+          id
+        );
+      }
+      let RANDOM = Math.random();
+      if (
+        Number(imgURLs[k].active) == actives ||
+        imgURLs[k].active.toString() == actives ||
+        imgURLs[k].active == actives
+      ) {
+        counter++;
+        html += `
+                <li class="itemSortable2 ui-sortable-handle"> 
+                    <div class="areaBannerInner">
+                        <div class="borderLeft">
+                            <div style="margin-top: 10px;">
+                                <div class="col-sm dropCategoriaContent"
+                                    style="opacity: 1;max-width: 60px;display: inline-flex;    float: left;" dropado="nao">
+                                    <svg class="iconGrid" xmlns="http://www.w3.org/2000/svg"
+                                        style="fill: #687c97;    float: left;    margin: -10px 0px 25px 5px !important;"
+                                        width="13.5" height="23" viewBox="0 0 9 16">
+                                        <defs></defs>
+                                        <path class="a"
+                                            d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                                        </path>
+                                        <path class="a"
+                                            d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                                            transform="translate(5)"></path>
+                                    </svg>
+                                </div>
+                                <div class="col-sm posicaoCategoria numberCat"
+                                    style="opacity: 1;max-width: 30px;display: inline-flex;    float: left;     margin-left: -25px !important;">
+                                    1
+                                </div>
+                            </div>
+                            <br />
+                            <div style="text-align: center" class="switch__container"><input onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub}, 'default', '${
+          imgURLs[k].id
+        }')" thisUrl="${imgURLs[k].url}" ${
+          imgURLs[k].active == true ? 'checked="true"' : ""
+        } id="switch-shadow1778${RANDOM}"
+                                    class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
+                                    for="switch-shadow1778${RANDOM}"></label></div>
+                            <div  onclick="deleteMyActiveMainNew('${
+                              imgURLs[k].url
+                            }',${idCat}, ${idSub},'default', $(this), '${
+          imgURLs[k].id
+        }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
+                                    style="fill: #f6b504;margin: 9px;">
+                                    &gt;
+                                    <defs></defs>
+                                    <path class="a"
+                                        d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z"
+                                        transform="translate(4 3)"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    
+                        <div  alvo="update" id="${
+                          imgURLs[k].id
+                        }" onclick="coletaBannerMain1($(this), ${idCat}, ${idSub}, ${id})" ${
+          imgURLs[k].url
+            ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
+            : ""
+        }  class="borderRight">
+                        </div>
+                    </div>
+                       <div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
+    onchange="editLinkFromBanner($(this), ${idCat},${idSub}, 'default','${
+          imgURLs[k].id
+        }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
+          imgURLs[k].link
+        }"></div>
+                </li>`;
+      }
+    }
+    //console.log('dado ',{html :html, total: counter})
+    return { html: html, total: counter };
+  } else {
+    // console.log('dado ',{html :'', total: counter})
+    return { html: "", total: counter };
+  }
+}
+
+function getBannerVerticalMainNew(imgURLs, actives, idCat, idSub, id) {
+  console.log(imgURLs, actives, idCat, idSub, id);
+  let html = "",
+    counter = 0;
+  if (imgURLs) {
+    for (const k in imgURLs) {
+      if (!imgURLs[k].id) {
+        imgURLs[k].id = id;
+        console.log(
+          "getBannerVerticalMainNew",
+          imgURLs,
+          actives,
+          idCat,
+          idSub,
+          id
+        );
+      }
+      let RANDOM = Math.random();
+      let LENGTH = $(".bnnVertical").length ? $(".bnnVertical").length + 1 : 1;
+
+      counter++;
+      html += `
+                <div class="areaBannerInner bnnVertical" style=" margin-top: 15px;min-height: 490px !important">
+                    <div class="borderLeft" style="    min-height: 490px !important">
+                        <div style="margin-top: 10px;">
+                            <div class="col-sm dropCategoriaContent"
+                                style="opacity: 1;max-width: 60px;display: inline-flex;    float: left;" dropado="nao">
+                                <svg class="iconGrid" xmlns="http://www.w3.org/2000/svg"
+                                    style="fill: #687c97;    float: left;    margin: -10px 0px 25px 5px !important;"
+                                    width="13.5" height="23" viewBox="0 0 9 16">
+                                    <defs></defs>
+                                    <path class="a"
+                                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z">
+                                    </path>
+                                    <path class="a"
+                                        d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
+                                        transform="translate(5)"></path>
+                                </svg>
+                            </div>
+                            <div class="col-sm posicaoCategoria numberCat"
+                                style="opacity: 1;max-width: 30px;display: inline-flex;    float: left;     margin-left: -25px !important;">
+                                ${LENGTH}
+                            </div>
+                        </div>
+                        <br />
+                        <div style="text-align: center" class="switch__container"><input thisUrl="${
+                          imgURLs[k].url
+                        }" onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub},'asideMenu', '${
+        imgURLs[k].id
+      }')" id="switch-shadow1799${RANDOM}" ${
+        imgURLs[k].active == true ? 'checked="true"' : ""
+      }
+                                class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
+                                for="switch-shadow1799${RANDOM}"></label></div>
+                        <div onclick="deleteMyActiveMainNew('${
+                          imgURLs[k].url
+                        }',${idCat}, ${idSub},'asideMenu', $(this), '${
+        imgURLs[k].id
+      }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
+                                style="fill: #f6b504;margin: 9px;">
+                                &gt;
+                                <defs></defs>
+                                <path class="a"
+                                    d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z"
+                                    transform="translate(4 3)"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div alvo="update" id="${
+                      imgURLs[k].id
+                    }" onclick="coletaBannerVertical($(this), ${idCat}, ${idSub}, ${id})" ${
+        imgURLs[k].url
+          ? `style="background-repeat: no-repeat;background-repeat: no-repeat !important; background-position: center; zoom: 80%; min-height: 490px; width: calc(100% - 100px); float: right; background: url(${imgURLs[k].url})"`
+          : ""
+      }   class="borderRightVertical">
+                    </div>
+                      <div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
+    onchange="editLinkFromBanner($(this), ${idCat},${idSub},'asideMenu','${
+        imgURLs[k].id
+      }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
+        imgURLs[k].link
+      }"></div>
+                </div>`;
+    }
+    return { html: html, total: counter };
+  } else {
+    return { html: "", total: counter };
+  }
+}
+function coletaBannerMain1(elemento, idCat, idSub) {
+  console.log("ELEMNTO ID ", elemento.attr("id"));
+  let newID =
+    elemento.attr("id") && elemento.attr("alvo") !== "novo"
+      ? elemento.attr("id")
+      : idCat + "-" + idSub + "-" + Date.now();
+  elemento.attr("id", newID);
+  $("#pegaBannerCatMain").attr("target", newID);
+  $("#pegaBannerCatMain").click();
+}
+function coletaBannerVertical(elemento, idCat, idSub) {
+  console.log("ELEMNTO ID ", elemento.attr("id"));
+  let newID =
+    elemento.attr("id") && elemento.attr("alvo") !== "novo"
+      ? elemento.attr("id")
+      : idCat + "-" + idSub + "-" + Date.now();
+  elemento.attr("id", newID);
+  $("#inputColetor").attr("target", newID);
+  $("#inputColetor").click();
+}
+
+function changeMyActiveMainNew(element, idCat, idSub, type, id) {
+  if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+    const exists = categoriesObject.categories[idCat].subcategories[
+      idSub
+    ].banners[type].find((x) => x.id === id);
+    if (exists) {
+      categoriesObject.categories[idCat].subcategories[idSub].banners[type].map(
+        (x) => {
+          if (x.id === id) {
+            x.active = element[0].checked;
+          }
+        }
+      );
+    }
+  } else if (idCat || idCat == 0) {
+    const exists = categoriesObject.categories[idCat].banners[type].find(
+      (x) => x.id === id
+    );
+    if (exists) {
+      categoriesObject.categories[idCat].banners[type].map((x) => {
+        if (x.id === id) {
+          x.active = element[0].checked;
+        }
+      });
+    }
+  }
+
+  console.log("CHECK URL BANNER", categoriesObject);
+}
+
+function deleteMyActiveMainNew(url, idCat, idSub, type, element, id) {
+  console.log("REMOVE", url, idCat, idSub, type, element, id);
+  if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+    const exists = categoriesObject.categories[idCat].subcategories[
+      idSub
+    ].banners[type].find((x) => x.id === id);
+
+    if (exists) {
+      categoriesObject.categories[idCat].subcategories[idSub].banners[type].map(
+        (x, index) => {
+          if (x.id === id) {
+            categoriesObject.categories[idCat].subcategories[idSub].banners[
+              type
+            ].splice(index, 1);
+          }
+        }
+      );
+    }
+  } else if (idCat || idCat == 0) {
+    const exists = categoriesObject.categories[idCat].banners[type].find(
+      (x) => x.id === id
+    );
+    if (exists) {
+      categoriesObject.categories[idCat].banners[type].map((x, index) => {
+        if (x.id === id) {
+          categoriesObject.categories[idCat].banners[type].splice(index, 1);
+        }
+      });
+    }
+  }
+  element.parent().parent().parent().remove();
+
+  console.log("REMOVING BANNER", categoriesObject);
+}
+function aleatoryIDNew(text) {
+  var randLetter = Math.random().toString().replace(/./g, "");
+  var uniqid = randLetter + Date.now();
+  return uniqid;
+}
+async function SALVA_EDIT_NEW() {
+  $(".close").click();
+  await publicarAlteracoes();
+  location.reload();
+}
+
+function editLinkFromBanner(elemento, idCat, idSub, type, id) {
+  if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+    const exists = categoriesObject.categories[idCat].subcategories[
+      idSub
+    ].banners[type].find((x) => x.id === id);
+    console.log("ESISTIR", exists);
+    if (exists) {
+      categoriesObject.categories[idCat].subcategories[idSub].banners[type].map(
+        (x, index) => {
+          if (x.id === id) {
+            x.link = elemento.val();
+          }
+        }
+      );
+    }
+  } else if (idCat || idCat == 0) {
+    const exists = categoriesObject.categories[idCat].banners[type].find(
+      (x) => x.id === id
+    );
+    console.log("ESISTIR r", type, id, exists);
+    if (exists) {
+      categoriesObject.categories[idCat].banners[type].map((x, index) => {
+        if (x.id === id) {
+          x.link = elemento.val();
+        }
+      });
+    }
+  }
+  console.log("EDITING LINK", categoriesObject);
+  elemento.css("color", "#f6b504");
+}
+
+function nossosIcones(essaCat, essaSubCat) {
+  var html = "";
+
+  function sugestao(n) {
+    switch (n) {
+      case 28:
+        return "acougue";
+      case 3:
+        return "acougue";
+      case 5:
+        return "acougue";
+      case 6:
+        return "acougue";
+      case 10:
+        return "frutas";
+      case 11:
+        return "frutas";
+      case 23:
+        return "frutas";
+      case 9:
+        return "padaria";
+      case 11:
+        return "padaria";
+      default:
+        return "outros";
+    }
+  }
+
+  if (!essaSubCat) {
+    for (let a = 1; a < 29; a++) {
+      if (a < 10) {
+        a = "0" + a;
+      }
+      var ver2 = ("images/icons/Arquivo000" + a + ".svg").split("/");
+      ver2 = ver2[ver2.length - 1]?.replace(/ /g, "");
+      //console.log( ver, ver2)
+      if (essaCat.icon == ver2) {
+        //console.log("Achei..........")
+
+        html +=
+          '<div dica="' +
+          sugestao(Number(a)) +
+          '" id="' +
+          aleatoryID("images/icons/Arquivo000" + a + ".svg") +
+          '_icone" onclick="escolheIcone($(this),\'' +
+          ver2 +
+          "', " +
+          essaCat.id +
+          ')" class="boxIconDefault boxIconeActive">' +
+          '<i class="fas fa-check iconSelectedCheck"></i>' +
+          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' +
+          a +
+          '.svg" />' +
+          "</div>";
+      } else {
+        html +=
+          '<div dica="' +
+          sugestao(Number(a)) +
+          '" id="' +
+          aleatoryID("images/icons/Arquivo000" + a + ".svg") +
+          '_icone"  onclick="escolheIcone($(this),\'' +
+          ver2 +
+          "', " +
+          essaCat.id +
+          ')" class="boxIconDefault boxIcone">' +
+          '<i style="display:none" class="fas fa-check iconSelectedCheck"></i>' +
+          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' +
+          a +
+          '.svg" />' +
+          "</div>";
+      }
+    }
+  } else {
+    for (let a = 1; a < 29; a++) {
+      if (a < 10) {
+        a = "0" + a;
+      }
+      var ver2 = ("images/icons/Arquivo000" + a + ".svg").split("/");
+      ver2 = ver2[ver2.length - 1]?.replace(/ /g, "");
+      //console.log( ver, ver2)
+      if (essaCat.icon == ver2) {
+        //console.log("Achei..........")
+
+        html +=
+          '<div dica="' +
+          sugestao(Number(a)) +
+          '" id="' +
+          aleatoryID("images/icons/Arquivo000" + a + ".svg") +
+          '_icone" onclick="escolheIcone($(this),\'' +
+          ver2 +
+          "', " +
+          essaCat.id +
+          "," +
+          essaSubCat.id +
+          ')" class="boxIconDefault boxIconeActive">' +
+          '<i class="fas fa-check iconSelectedCheck"></i>' +
+          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' +
+          a +
+          '.svg" />' +
+          "</div>";
+      } else {
+        html +=
+          '<div dica="' +
+          sugestao(Number(a)) +
+          '" id="' +
+          aleatoryID("images/icons/Arquivo000" + a + ".svg") +
+          '_icone"  onclick="escolheIcone($(this),\'' +
+          ver2 +
+          "', " +
+          essaCat.id +
+          "," +
+          essaSubCat.id +
+          ')" class="boxIconDefault boxIcone">' +
+          '<i style="display:none" class="fas fa-check iconSelectedCheck"></i>' +
+          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' +
+          a +
+          '.svg" />' +
+          "</div>";
+      }
+    }
+  }
+
+  return html;
+}
+
+function nossosIcones2(essaCat, essaSubCat) {
+  var html = "";
+  var ver = essaCat.categorie_icon?.split("/")
+    ? essaCat.categorie_icon.split("/")
+    : [];
+  ver = ver[ver.length - 1]?.replace(/ /g, "");
+  function sugestao(n) {
+    switch (n) {
+      case 28:
+        return "acougue";
+      case 3:
+        return "acougue";
+      case 5:
+        return "acougue";
+      case 6:
+        return "acougue";
+      case 10:
+        return "frutas";
+      case 11:
+        return "frutas";
+      case 23:
+        return "frutas";
+      case 9:
+        return "padaria";
+      case 11:
+        return "padaria";
+      default:
+        return "outros";
+    }
+  }
+  var list = localStorage.ICONES_SMARTCOMERCI;
+  if (list == null) {
+    list = "[]";
+  }
+  var LISTA_ICONES = JSON.parse(list);
+  ////console.log('LISTA_ICONES',LISTA_ICONES)
+  if (!essaSubCat) {
+    for (const k in LISTA_ICONES) {
+      if (LISTA_ICONES[k].indexOf("cliente_") > -1) {
+        html +=
+          '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;"   id="' +
+          aleatoryID("/assets/icons/" + LISTA_ICONES[k]) +
+          '_icone" onclick="escolheIcone($(this),\'' +
+          LISTA_ICONES[k] +
+          "'," +
+          essaCat.id +
+          `)" class="boxIconDefault ${
+            essaCat.icon !== LISTA_ICONES[k] ? "" : "boxIconeActive"
+          } ">` +
+          `<i  ${
+            essaCat.icon === LISTA_ICONES[k] ? "" : 'style="display:none"'
+          } class="fas fa-check iconSelectedCheck"></i>` +
+          '<img class="imgIcone" style="width: 100%;" src="/assets/icons/' +
+          LISTA_ICONES[k] +
+          '" />' +
+          "</div>";
+      }
+    }
+  } else {
+    for (const k in LISTA_ICONES) {
+      if (LISTA_ICONES[k].indexOf("cliente_") > -1) {
+        html +=
+          '<div style="background: #FFFBF2 0% 0% no-repeat padding-box;"   id="' +
+          aleatoryID("/assets/icons/" + LISTA_ICONES[k]) +
+          '_icone" onclick="escolheIcone($(this),\'' +
+          LISTA_ICONES[k] +
+          "'," +
+          essaCat.id +
+          "," +
+          essaSubCat.id +
+          `)" class="boxIconDefault ${
+            essaCat.icon === LISTA_ICONES[k] ? "boxIconeActive" : ""
+          }">` +
+          `<i  ${
+            essaCat.icon === LISTA_ICONES[k] ? "" : 'style="display:none"'
+          } class="fas fa-check iconSelectedCheck"></i>` +
+          '<img class="imgIcone" style="width: 100%;" src="/assets/icons/' +
+          LISTA_ICONES[k] +
+          '" />' +
+          "</div>";
+      }
+    }
+  }
+
+  return html;
+}
+
+function escolheIcone(elemento, url, idCat, idSub) {
+  console.log("MUDANO O ICONE", elemento, url, idCat, idSub);
+  if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+    categoriesObject.categories[idCat].subcategories[idSub].icon = url;
+  } else if (idCat || idCat == 0) {
+    categoriesObject.categories[idCat].icon = url;
+  }
+  console.log("EDITING ICON", categoriesObject);
+  $(".boxIconDefault").removeClass("boxIconeActive");
+  $(".iconSelectedCheck").hide();
+  elemento.find(".iconSelectedCheck").show();
+
+  elemento.addClass("boxIconeActive");
 }
