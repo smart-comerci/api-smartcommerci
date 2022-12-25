@@ -126,12 +126,13 @@ module.exports.all = function (app) {
 
   app.get("/categorias", async function (req, res) {
     setup(newAPP);
-    res.render("cms_categories", { MY_DOMAIN: myDomain });
+    res.render("cms_categories_new", { MY_DOMAIN: myDomain });
+
   });
 
   app.get("/categorias_new", async function (req, res) {
     setup(newAPP);
-    res.render("cms_categories_new", { MY_DOMAIN: myDomain });
+    res.render("cms_categories", { MY_DOMAIN: myDomain });
   });
 
   app.get("/logistica", async function (req, res) {

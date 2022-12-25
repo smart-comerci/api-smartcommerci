@@ -106,6 +106,32 @@ let homePage = {
   },
 };
 
+function isEquivalent(a, b) {
+  // Create arrays of property names
+  var aProps = Object.getOwnPropertyNames(a);
+  var bProps = Object.getOwnPropertyNames(b);
+
+  // If number of properties is different,
+  // objects are not equivalent
+  if (aProps.length != bProps.length) {
+    return false;
+  }
+
+  for (var i = 0; i < aProps.length; i++) {
+    var propName = aProps[i];
+
+    // If values of same property are not equal,
+    // objects are not equivalent
+    if (a[propName] !== b[propName]) {
+      return false;
+    }
+  }
+
+  // If we made it this far, objects
+  // are considered equivalent
+  return true;
+}
+
 function corrigeHomePage() {
   homePage = {
     logotipo: {
@@ -331,7 +357,9 @@ function showMyPrev(element) {
   // element.parent().parent().find("label").addClass("index9");
   // element.parent().addClass("index9");
   // element.parent().parent().parent().addClass("index9");
-  element.parent().parent().addClass("index9");
+  element.parent().addClass("index9");
+  element.parent().css("position", "relative");
+
   element.parent().addClass("borderSelected index9");
 
   $("fundoModal").show();
@@ -352,6 +380,7 @@ $("fundoModal").click(function () {
   });
 });
 
+/*
 window.onbeforeunload = async function () {
   if ([].length > 0) {
     $("#modalNaoSalvou").click();
@@ -360,7 +389,7 @@ window.onbeforeunload = async function () {
     }, 2000);
   }
 };
-
+*/
 function showMe(element) {
   if (element[0].checked === true) {
     element.parent().parent().parent().find(".contentAfter").show();
@@ -526,7 +555,7 @@ div3.innerHTML = `
       </label> 
     `;
 
-function cutString(str) {}
+function cutString(str) { }
 
 function getProductCard(data) {
   if (data) {
@@ -542,18 +571,17 @@ function getProductCard(data) {
                         </span>
                       </div>
 
-                      <div style="  background: url(${
-                        data.product_thumbnail
-                      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
+                      <div style="  background: url(${data.product_thumbnail
+      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
                       
                       </div>
 
                       <div style="color: var(--color-primary)" class="card-color-preview_mark">
-                       ${data.product_categoria}
+                       ${data.product_categoria.substr(0, 10)}...
                       </div>
 
                       <div style="color: var(--color-primary)" class="card-color-preview_title">
-                        ${data.product_site_name.substr(0, 20)}...
+                        ${data.product_site_name.substr(0, 15)}...
                       </div>
 
                       <div style="color: var(--color-primary)" class="card-color-preview_units ">
@@ -771,8 +799,9 @@ function prepareVitrine(element, position) {
     });
 }
 
-function publicaFecha() {
-  publishChanges();
+async function publicaFecha() {
+  const salva = await publishChanges();
+  console.log("SALVANDO", salva)
   $(".btn-close").click();
   location.reload();
 }
@@ -1276,7 +1305,7 @@ async function uploadAndUpdateFile(element) {
           });
       }
     },
-    error: function (data) {},
+    error: function (data) { },
   });
 }
 
@@ -1698,9 +1727,8 @@ function setLinksFooterElements() {
 function setMidiasSociais() {
   $(`.midiasSociais`).html(``);
 
-  let youtube = `<svg  style="margin: 10px;${
-    homePage.socialMidia.facebook.active === true ? `` : `display: block`
-  } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
+  let youtube = `<svg  style="margin: 10px;${homePage.socialMidia.facebook.active === true ? `` : `display: block`
+    } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
                   viewBox="0 0 22.939 16.129">
                   <path id="facebook"
                     d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
@@ -1715,6 +1743,86 @@ function setMidiasSociais() {
 //====================AREA FOR REQUEST========================
 
 getMyObjectHomeMain();
+async function applyChanges(homePageNew) {
+  if (homePageNew) {
+    homePage = homePageNew
+  }
+  $("#color-badge_label-actions").html(homePage.mainColors.third);
+  $("#color-badge_label-primary").html(homePage.mainColors.first);
+  $("#color-badge_label-secondary").html(homePage.mainColors.second);
+  console.log(`home page`, homePage);
+  $("#contactDataMenu").val(homePage.footerLinks.contactData.text);
+  if (homePage.footerLinks.firstColumn.length > 0) {
+    console.log("homePage.footerLinks", homePage.footerLinks);
+    for (const k in homePage.footerLinks.firstColumn) {
+      $(".firstColumn").append(
+        addLinkObject(
+          homePage.footerLinks.firstColumn[k].text,
+          homePage.footerLinks.firstColumn[k].link,
+          "firstColumn"
+        )
+      );
+    }
+  }
+  if (homePage.footerLinks.secondColumn.length > 0) {
+    for (const k in homePage.footerLinks.secondColumn) {
+      $(".secondColumn").append(
+        addLinkObject(
+          homePage.footerLinks.secondColumn[k].text,
+          homePage.footerLinks.secondColumn[k].link,
+          "secondColumn"
+        )
+      );
+    }
+  }
+  if (homePage.footerLinks.thirdColumn.length > 0) {
+    for (const k in homePage.footerLinks.thirdColumn) {
+      $(".thirdColumn").append(
+        addLinkObject(
+          homePage.footerLinks.thirdColumn[k].text,
+          homePage.footerLinks.thirdColumn[k].link,
+          "thirdColumn"
+        )
+      );
+    }
+  }
+
+  for (const k in homePage.footerLinks) {
+    $(".colunas").each(function () {
+      if ($(this).attr("destiny") === k) {
+        $(this).val(homePage.footerLinks[k].text);
+      }
+    });
+  }
+  for (const u in homePage.body) {
+    const index = Number(u) + 1;
+    console.log("index", index);
+    let obj = homePage.body[u]; //homePage.body[homePage.body.length - index];
+    console.log("O OBJETO", obj);
+    if (obj.type === "vitrine") {
+      if (obj.products.length > 0) {
+        await dynamicContent.produtos(obj.products, obj.title, obj.id);
+      }
+    }
+    if (obj.type === "banners") {
+      await dynamicContent.banners(obj);
+    }
+    if (obj.type === "revenues") {
+    }
+  }
+
+  // for (const l in conteudo) {
+  //   if (conteudo[l].type === "vitrine") {
+  //     dynamicContent.produtos(conteudo[l].products, conteudo[l].title);
+  //   }
+  //   if (conteudo[l].type === "banners") {
+  //     dynamicContent.banners(conteudo[l]);
+  //   }
+  //   if (conteudo[l].type === "revenues") {
+  //   }
+  // }
+  start();
+}
 async function getMyObjectHomeMain() {
   $.ajax({
     type: "POST",
@@ -1815,7 +1923,7 @@ async function getMyObjectHomeMain() {
     error: function (data) {
       console.log(data);
     },
-    complete: function () {},
+    complete: function () { },
   });
 }
 function start() {
@@ -1919,7 +2027,7 @@ async function publishChanges() {
     }
   }
   homePage.body = theBody;
-  await $.ajax({
+  return $.ajax({
     type: "POST",
     url: host + "/updateMastersTable",
     data: {
@@ -1942,7 +2050,7 @@ async function publishChanges() {
       console.log(data);
       window.parent.informar("alert-danger", "Ocorreu um erro!", 3000);
     },
-    complete: function () {},
+    complete: function () { },
   });
 }
 
@@ -2278,7 +2386,7 @@ $.ajax({
   error: function (data2) {
     console.log(data2);
   },
-  complete: function () {},
+  complete: function () { },
 });
 
 function OrdenaJson(lista, chave, ordem) {
@@ -2339,7 +2447,7 @@ $.ajax({
   error: function (data) {
     window.parent.informar("alert-danger", "Algo saiu errado!", 3000);
   },
-  complete: function () {},
+  complete: function () { },
 });
 
 function getCategorias(CATEGORIES) {
@@ -2417,4 +2525,27 @@ function getCategorias(CATEGORIES) {
   } else {
     return MINHAS_CATEGORIAS;
   }
+}
+let proxyList = []
+
+
+
+function monitor(elemento) {
+  if (proxyList.length > 0) {
+    let last = proxyList[proxyList.length - 1]
+    if (!isEquivalent(homePage, last)) {
+      proxyList.push(homePage)
+    }
+  } else {
+    proxyList.push(homePage)
+  }
+  console.log(proxyList)
+}
+
+
+function ir() {
+
+}
+function voltar() {
+
 }
