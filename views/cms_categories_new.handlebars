@@ -59,6 +59,82 @@
         -webkit-animation-duration: 0.3s;
         animation-duration: 0.3s;
     }
+
+    .botaoInstrutorVolta {
+        cursor: pointer;
+        border-radius: 20px;
+        font: bold 1rem Roboto;
+        background-color: rgb(246, 181, 4);
+        max-width: 200px;
+        height: 40px;
+        border: 2px solid rgb(246, 181, 4);
+        float: right;
+        margin-right: 15px;
+        opacity: 1;
+    }
+
+
+
+    .botaoInstrutorProximo {
+        cursor: pointer;
+        border-radius: 20px;
+        font: bold 1rem Roboto;
+        background-color: white;
+        max-width: 200px;
+        height: 40px;
+        border: 2px solid rgb(246, 181, 4);
+        float: right;
+        margin-right: 15px;
+        color: rgb(246, 181, 4) !important;
+        opacity: 1;
+    }
+
+
+    .success {
+        background-color: green;
+        color: white;
+    }
+
+
+
+
+    .shepherd-header {
+        background-color: #f6b504 !important;
+    }
+
+    .shepherd-button:not(:disabled):hover {
+        background: rgb(246, 181, 4) !important;
+        color: white !important;
+    }
+
+    .shepherd-cancel-icon {
+        color: white !important;
+        text-align: left !important;
+        font: normal normal bold 1.414em Roboto !important;
+        letter-spacing: 0px !important;
+        opacity: 1 !important;
+    }
+
+    #creating-label {
+        color: white !important;
+        text-align: left !important;
+        font: normal normal bold 1.414em Roboto !important;
+        letter-spacing: 0px !important;
+        opacity: 1 !important;
+    }
+
+    .shepherd-title {
+        color: white !important;
+        text-align: left !important;
+        font: normal normal bold 1.4714em Roboto !important;
+        letter-spacing: 0px !important;
+        opacity: 1;
+    }
+
+
+    .shepherd-element.shepherd-has-title[data-popper-placement^=bottom]>.shepherd-arrow:before {
+        background-color: #f6b504 !important;
+    }
 </style>
 
 <div class="content">
@@ -72,7 +148,7 @@
         <div class="col-lg-4"></div>
 
         <div style="cursor: pointer; border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin-right: 15px;"
-            class="input-group">
+            class="input-group ">
             <div style="border: none; margin: auto;" class="input-group-append">
                 <div style="border: none; margin: auto; padding: 2%;" class="input-group-text">
                     <svg xmlns="http://www.w3.org/2000/svg" style="margin: -20% auto 0 0; fill: white;" width="24"
@@ -90,7 +166,7 @@
 
         </div>
         <div style="cursor: pointer; border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: white; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin-right: 15px;"
-            class="input-group">
+            class="input-group  destaqueSalvar">
 
             <label id="salvandoAlteracoes" onclick="publicarAlteracoes()"
                 style="margin: -1% auto; min-width: 60%; color: #f6b504 !important; cursor: pointer"
@@ -113,8 +189,9 @@
 
                         <form style="float: right; min-width: 500px; font-size: 1.3rem;">
                             <div class="input-group">
-                                <input type="text" id="buscandoCategorias" style="min-width: 300px;font-size: 0.8rem;"
-                                    value="" class="form-control" placeholder="Busque por categorias" />
+                                <input onkeyup="searchPorCategorias($(this))" type="text" id="buscandoCategorias"
+                                    style="min-width: 300px;font-size: 0.8rem;" value="" class="form-control"
+                                    placeholder="Busque por categorias" />
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i style="color: #f6b504; font-weight: bold;" class="fas fa-search"></i>

@@ -1019,769 +1019,765 @@ function getSubCategorias(categoriasText, sub_status, ID, categoriaName) {
 
   return html;
 }
-function modalEditCategories(element) {
-  element = element.parent().parent().parent();
-  var categoria = element.find(".CATEGORIA_PRINCIPAL");
-  localStorage.CAT_SUB_EDIT = categoria.text();
+// function modalEditCategories(element) {
+//   element = element.parent().parent().parent();
+//   var categoria = element.find(".CATEGORIA_PRINCIPAL");
+//   localStorage.CAT_SUB_EDIT = categoria.text();
 
-  var active = element.find(".CHECK_PRINCIPAL")[0]?.checked;
+//   var active = element.find(".CHECK_PRINCIPAL")[0]?.checked;
 
-  var iconeElemento = element.find("img");
-  var subCategorias = element.parent().find(".nomeSubCategoria");
-  var listaSubCategorias = [];
-  subCategorias.each(function () {
-    listaSubCategorias.push({ subCategoria: $(this).text() });
-  });
-  var dados = {
-    categoria: categoria.text(),
-    subCategorias: listaSubCategorias,
-  };
-  ////console.log(categoria)
-  var dadosCategoria = [];
-  var list = JSON.parse(localStorage.MINHAS_CATEGORIAS);
-  for (const k in list) {
-    if (categoria.text() == list[k].affiliate_categorie_name) {
-      dadosCategoria = list[k];
-    }
-  }
-  ////console.log(dadosCategoria)
-  var asWords = "";
-  if (
-    dadosCategoria.categorie_key_words != "" &&
-    dadosCategoria.categorie_key_words != undefined &&
-    dadosCategoria.categorie_key_words != null
-  ) {
-    if (dadosCategoria.categorie_key_words != "undefined") {
-      asWords = WordKeys(dadosCategoria.categorie_key_words.split(","));
-    } else {
-      asWords = " ";
-    }
-  }
-  //console.log(dadosCategoria.categorie_key_words)
-  localStorage.PALAVRAS_KEY = dadosCategoria.categorie_key_words;
-  let BANNERS;
-  try {
-    BANNERS = JSON.parse(ajustStrigfy(dadosCategoria?.subcategorie_banners));
-  } catch (e) {
-    BANNERS = dadosCategoria?.subcategorie_banners;
-  }
+//   var iconeElemento = element.find("img");
+//   var subCategorias = element.parent().find(".nomeSubCategoria");
+//   var listaSubCategorias = [];
+//   subCategorias.each(function () {
+//     listaSubCategorias.push({ subCategoria: $(this).text() });
+//   });
+//   var dados = {
+//     categoria: categoria.text(),
+//     subCategorias: listaSubCategorias,
+//   };
+//   ////console.log(categoria)
+//   var dadosCategoria = [];
+//   var list = JSON.parse(localStorage.MINHAS_CATEGORIAS);
+//   for (const k in list) {
+//     if (categoria.text() == list[k].affiliate_categorie_name) {
+//       dadosCategoria = list[k];
+//     }
+//   }
+//   ////console.log(dadosCategoria)
+//   var asWords = "";
+//   if (
+//     dadosCategoria.categorie_key_words != "" &&
+//     dadosCategoria.categorie_key_words != undefined &&
+//     dadosCategoria.categorie_key_words != null
+//   ) {
+//     if (dadosCategoria.categorie_key_words != "undefined") {
+//       asWords = WordKeys(dadosCategoria.categorie_key_words.split(","));
+//     } else {
+//       asWords = " ";
+//     }
+//   }
+//   //console.log(dadosCategoria.categorie_key_words)
+//   localStorage.PALAVRAS_KEY = dadosCategoria.categorie_key_words;
+//   let BANNERS;
+//   try {
+//     BANNERS = JSON.parse(ajustStrigfy(dadosCategoria?.subcategorie_banners));
+//   } catch (e) {
+//     BANNERS = dadosCategoria?.subcategorie_banners;
+//   }
 
-  // console.log('BANNERS',BANNERS)
+//   // console.log('BANNERS',BANNERS)
 
-  var html =
-    '<div style="max-width:100% " class="container">' +
-    '<div class="row" style="max-width: 90%;margin: -11px auto;border-bottom: 2px solid #EDF2F6;margin-bottom: 10px; ">' +
-    '<div content="caracteristicas" class="col-md tabModal tabModalActive">' +
-    '<label class="labelTab"  style="text-align:center">Características</label>' +
-    "</div>" +
-    '<div content="banners" class="col-md tabModal">' +
-    '<label class="labelTab"  style="text-align:center">Banners</label>' +
-    "</div>" +
-    '<div content="icone" class="col-md tabModal">' +
-    '<label class="labelTab"  style="text-align:center">Ícone</label>' +
-    "</div>" +
-    '<div class="col-md">' +
-    '<div onclick="CANCELA_EDIT()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto" class="input-group">' +
-    '<label  style="cursor:pointer;margin:-5%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
-    "</div>" +
-    "</div>" +
-    '<div class="col-md ">' +
-    '<div onclick="SALVA_EDIT()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto" class="input-group">' +
-    '<label  style="cursor:pointer;margin: -5% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    '<hr class="baixoCabecalho" style="position: fixed;top: 115px !important;left: 0px !important;width: 100%;box-shadow: 2px 2px 2px silver;"></hr>' +
-    //======================================================ABA DE CARACTERÍSTICAS==================================================================================================================
+//   var html =
+//     '<div style="max-width:100% " class="container">' +
+//     '<div class="row" style="max-width: 90%;margin: -11px auto;border-bottom: 2px solid #EDF2F6;margin-bottom: 10px; ">' +
+//     '<div content="caracteristicas" class="col-md tabModal tabModalActive">' +
+//     '<label class="labelTab"  style="text-align:center">Características</label>' +
+//     "</div>" +
+//     '<div content="banners" class="col-md tabModal">' +
+//     '<label class="labelTab"  style="text-align:center">Banners</label>' +
+//     "</div>" +
+//     '<div content="icone" class="col-md tabModal">' +
+//     '<label class="labelTab"  style="text-align:center">Ícone</label>' +
+//     "</div>" +
+//     '<div class="col-md">' +
+//     '<div onclick="CANCELA_EDIT()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:5% auto" class="input-group">' +
+//     '<label  style="cursor:pointer;margin:-5%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
+//     "</div>" +
+//     "</div>" +
+//     '<div class="col-md ">' +
+//     '<div onclick="SALVA_EDIT()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:5% auto" class="input-group">' +
+//     '<label  style="cursor:pointer;margin: -5% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     '<hr class="baixoCabecalho" style="position: fixed;top: 115px !important;left: 0px !important;width: 100%;box-shadow: 2px 2px 2px silver;"></hr>' +
+//     //======================================================ABA DE CARACTERÍSTICAS==================================================================================================================
 
-    `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
-        <input onchange="uploadBannerCatMain($(this))" type="file" id="pegaBannerCatMain" style="display:none">
-        <input onchange="uploadBannerCatVerticalMain($(this))" type="file" id="pegaBannerCatVerticalMain" style="display:none">
-            <section class="areaBanner verticalScroll">
-                <div class="row">
-                    <div style="margin: 1% 2%;" class="switch__container"><input checked="true" id="switch-shadow1777"
-                            class="switch switch--shadow" type="checkbox" /><label style="    margin: 10px 0px 0px 20px;"
-                            for="switch-shadow1777"></label></div>
-                    <label style="font-size: 20px;" class="label">Página de categoria</label>
-                    <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
-                </div>
-                <div alvo="novo" style="cursor:pointer" onclick="alteraBannerCatMain($(this))" class="areaDropDot">
-                    <div class="iconeDrop9">
-                        <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
-                            xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
-                            <path id="upload"
-                                d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
-                                fill="#f3b306" />
-                        </svg>
-                    </div>
-                    <p class="descreveDrop">Arraste as imagens aqui</p>
-                    <div style="margin: -90px auto;text-align: center;">
-                        <p class="txtOu9">|<br>ou<br>|</p>
-                    </div>
-                    <div class="btnDrop9">
-                        <p class="txtBtnDrop9">Selecione do seu computador</p>
-                    </div>
-                </div>
-                <div class="descBanner8">
-                    Banners ativos
-                    <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatActive">${
-                          getBannerInnerMain(BANNERS?.banners, true).total
-                        }/${
-      BANNERS?.banners?.length ? BANNERS?.banners?.length : 0
-    }</p>
-                    </div>
-                </div>
-                <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${getBannerInnerMain(BANNERS?.banners, true).html}
-                   
-                </ul>
-                
-            
-                <div class="descBanner8">
-                    Banners desativados
-                    <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatInactive">${
-                          getBannerInnerMain(BANNERS?.banners, false).total
-                        }/${
-      BANNERS?.banners?.length ? BANNERS?.banners?.length : 0
-    }</p>
-                    </div>
-                </div>
-                <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${getBannerInnerMain(BANNERS?.banners, false).html}
-                   
-                </ul>
-                
-            
-                <div  style="display:none" class="descBanner8">
-                    Menu de categorias
-                    <div class="btnQtdBanner">
-                        <p class="txtQtdBanner">1/1</p>
-                    </div>
-                </div>
-                <div class="descBanner8">
-                    Banner de menu                  
-                </div>
-                <hr/>
-                <div alvo="novo"  style="cursor:pointer" onclick="alteraBannerCatVerticalMain($(this))" class="areaDropDot">
-                    <div class="iconeDrop9">
-                        <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
-                            xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
-                            <path id="upload"
-                                d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
-                                fill="#f3b306" />
-                        </svg>
-                    </div>
-                    <p class="descreveDrop">Arraste as imagens aqui</p>
-                    <div style="margin: -90px auto;text-align: center;">
-                        <p class="txtOu9">|<br>ou<br>|</p>
-                    </div>
-                    <div class="btnDrop9">
-                        <p class="txtBtnDrop9">Selecione do seu computador</p>
-                    </div>
-                </div>
-                <div id="bannersVerticais">
-               ${getBannerVerticalMain(BANNERS?.bannersVertical, false).html}
-                 </div>
-            </section>
-        </div>` +
-    //======================================================ABA DE CARACTERÍSTICAS==================================================================================================================
-    '<div id="icone" style="max-width:90% ; margin-top: 5%; display:none"  class="container tabContent">' +
-    '<div class="row">' +
-    '<div style="    overflow: auto;max-height: 75vh;" class="col-md-8">' +
-    '<h3 class="tituloIcone">Ícones Smartcomerci</h3>' +
-    '<div class="row">' +
-    '<div  sugestao="todos" class="categoriaIcone">' +
-    '<label onclick="labelIcones($(this))" class="labelIcones labelIconesActive">Todos</label>' +
-    "</div>" +
-    '<div sugestao="frutas" class="categoriaIcone">' +
-    '<label onclick="labelIcones($(this))" class="labelIcones" >Frutas</label>' +
-    "</div>" +
-    '<div sugestao="acougue" class="categoriaIcone">' +
-    '<label onclick="labelIcones($(this))" class="labelIcones" >Açougue</label>' +
-    "</div>" +
-    '<div sugestao="padaria" class="categoriaIcone">' +
-    '<label onclick="labelIcones($(this))" class="labelIcones" >Padaria</label>' +
-    "</div>" +
-    '<div sugestao="outros" class="categoriaIcone">' +
-    '<label onclick="labelIcones($(this))" class="labelIcones" >Outros</label>' +
-    "</div>" +
-    "</div>" +
-    '<div  style="margin-top: 3%;" class="row">' +
-    iconesSmartCommerci(categoria.text()) +
-    "</div><br><hr>" +
-    '<h3 class="tituloIcone">Todos os ícones disponíveis</h3>' +
-    '<div  style="margin-top: 3%;" class="row iconesClientes">' +
-    iconesSmartCommerci2(categoria.text()) +
-    "</div>" +
-    "</div>" +
-    '<div class="col-md-4 areaDropIcon">' +
-    '<h3 class="tituloIcone">Suba seu próprio ícone</h3>' +
-    '<h5 class="subTitleIcons">Formato recomendado:<br> SVG ou PNG 50px X 50px</h5>' +
-    '<div style="margin: auto 0 !important;" class="col-md-8 areaDrop">' +
-    '<img onclick="uploadIcone()" class="imageThumb" src="images/products/upload.svg" />' +
-    '<h3 class="arraste">Arraste o ícone aqui</h3>' +
-    '<h3 class="ou">-ou-</h3>' +
-    '<div  onclick="uploadIcone()" class="input-group btnDropPC2"><label class="label">Selecione do seu computador</label></div>' +
-    '</div><input class="upIcon" id="upIcon" style="display:none" type="file">' +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    //======================================================ABA DE PROMOÇÕES==================================================================================================================
-    '<div id="caracteristicas" style="max-width:70% ; height: 75vh; margin-top: 2%"  class="container tabContent verticalScroll notScroll">' +
-    '<div  class="col-md-12 " style="margin-top: 3% !important; background: white !important">' +
-    '<div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">' +
-    '<div style="margin: 18px 2%;" class="switch__container">' +
-    "<input " +
-    (active ? 'checked="true"' : "") +
-    ' id="switch-shadow18" class="switch switch--shadow" type="checkbox" />' +
-    '<label for="switch-shadow18"></label>' +
-    "</div>" +
-    '<label style=" font-size: 20px;" class="label">Categoria ativa</label> ' +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<label style=" font-size: 20px;" class="label">Nome da categoria</label><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  onchange="fila($(this), \'' +
-    categoria.text() +
-    '\',\'updateCategoriaDetalhe\')" placeholder="Produtos relacionados" id="' +
-    aleatoryID() +
-    '" value="' +
-    categoria.text() +
-    '"></div><br> ' +
-    "</div>" +
-    "</div><br><hr><br>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<h3 style=" font-size: 20px;" class="SEO">SEO</h3><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%;    margin-top: -3%;" class="row">' +
-    '<div class="col-md-12 container">' +
-    '<label style=" font-size: 20px;" class="label labelContent">Você pode preencher os campos relacionados ao SEO e ajudar no resultado das buscas realizadas no Google, Bing, Yahoo, entre outros.</label><br> ' +
-    "</div>" +
-    "</div><br><br>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<label style=" font-size: 20px;" class="label">Título da categoria (meta title)</label><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input fieldName="categorie_title" onchange="fila($(this), \'' +
-    categoria.text() +
-    "', 'updateCategoriaDetalhe')\" value=\"" +
-    dadosCategoria.categorie_title +
-    '" style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas"  id="' +
-    aleatoryID() +
-    '" ></div><br> ' +
-    "</div>" +
-    "</div><br><br>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<label style=" font-size: 20px;" class="label">Descrição completa (meta description)</label><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<div class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><textarea fieldName="categorie_description"  id="' +
-    aleatoryID() +
-    '" onchange="fila($(this), \'' +
-    categoria.text() +
-    "','updateCategoriaDetalhe')\" value=\"" +
-    dadosCategoria.categorie_description +
-    '" placeholder="Frutas no Kalimera. Compre online, limão, tangerina, kiwi e muitas outras frutas com os melhores preços e fretegratis."  style="background: #EFEFEF; border:none; font-size: 1.3rem; max-height: 100%" rows="3"   class="form-control">' +
-    dadosCategoria.categorie_description +
-    "</textarea>" +
-    "</div>" +
-    "</div>" +
-    "</div><br><br>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<label style=" font-size: 20px;" class="label">Palavras Chaves (meta keywords)</label><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<div class="listaPalavrasKey  notScroll verticalScroll contentEditable="true" placeholder="digite aqui e aperte enter..." class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px; min-height: 150px !important;">' +
-    '<div><input categorie_name="' +
-    categoria.text() +
-    '" type="text" fieldName="categorie_key_words" container="listaPalavrasKey" onkeydown="addWordKey($(this), this)" class="form-control entraPalavra" placeholder="Digite sua palavra aqui e pressione enter..." style="border: none; font-size: 1.3rem;height: auto; width: 90%;"/></div>' +
-    asWords +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    "</div>";
+//     `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
+//         <input onchange="uploadBannerCatMain($(this))" type="file" id="pegaBannerCatMain" style="display:none">
+//         <input onchange="uploadBannerCatVerticalMain($(this))" type="file" id="pegaBannerCatVerticalMain" style="display:none">
+//             <section class="areaBanner verticalScroll">
+//                 <div class="row">
+//                     <div style="margin: 1% 2%;" class="switch__container"><input checked="true" id="switch-shadow1777"
+//                             class="switch switch--shadow" type="checkbox" /><label style="    margin: 10px 0px 0px 20px;"
+//                             for="switch-shadow1777"></label></div>
+//                     <label style="font-size: 20px;" class="label">Página de categoria</label>
+//                     <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
+//                 </div>
+//                 <div alvo="novo" style="cursor:pointer" onclick="alteraBannerCatMain($(this))" class="areaDropDot">
+//                     <div class="iconeDrop9">
+//                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
+//                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
+//                             <path id="upload"
+//                                 d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
+//                                 fill="#f3b306" />
+//                         </svg>
+//                     </div>
+//                     <p class="descreveDrop">Arraste as imagens aqui</p>
+//                     <div style="margin: -90px auto;text-align: center;">
+//                         <p class="txtOu9">|<br>ou<br>|</p>
+//                     </div>
+//                     <div class="btnDrop9">
+//                         <p class="txtBtnDrop9">Selecione do seu computador</p>
+//                     </div>
+//                 </div>
+//                 <div class="descBanner8">
+//                     Banners ativos
+//                     <div class="btnQtdBanner">
+//                         <p class="txtQtdBanner listaBannersCatActive">${
+//                           getBannerInnerMain(BANNERS?.banners, true).total
+//                         }/${
+//       BANNERS?.banners?.length ? BANNERS?.banners?.length : 0
+//     }</p>
+//                     </div>
+//                 </div>
+//                 <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
+//                 ${getBannerInnerMain(BANNERS?.banners, true).html}
 
-  bootbox.alert({
-    message: html,
-    onShow: function () {
-      $(".tabModal").click(function () {
-        $(".tabModal").removeClass("tabModalActive");
-        $(this).addClass("tabModalActive");
-        $(".tabContent").hide();
-        //////console.log("#" + $(this).attr("content"));
-        $("#" + $(this).attr("content")).fadeIn();
-      });
-      $(".categoriaIcone").click(function () {
-        var sugestao = $(this).attr("sugestao");
-        $(".boxIconDefault").each(function () {
-          if ($(this).attr("dica") == sugestao) {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-        });
-        if (sugestao == "todos") {
-          $(".boxIconDefault").show();
-        }
-      });
-      $("#upIcon").change(function () {
-        ////console.log("peguei")
-        sobeIcone($("#upIcon"));
-      });
+//                 </ul>
 
-      $(".fa-times-circle").click(function () {
-        $(this).parent().parent().remove();
-      });
+//                 <div class="descBanner8">
+//                     Banners desativados
+//                     <div class="btnQtdBanner">
+//                         <p class="txtQtdBanner listaBannersCatInactive">${
+//                           getBannerInnerMain(BANNERS?.banners, false).total
+//                         }/${
+//       BANNERS?.banners?.length ? BANNERS?.banners?.length : 0
+//     }</p>
+//                     </div>
+//                 </div>
+//                 <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
+//                 ${getBannerInnerMain(BANNERS?.banners, false).html}
 
-      $(".hiperTitle").each(function () {
-        $(this).removeClass("ui-sortable-handle");
-      });
-    },
-    callback: function () {
-      sessionStorage.PALAVRAS_KEY = "";
-    },
-  });
-  $(".modal-footer").hide();
-}
-function modalEditSubCategories(subCategoria, categoria, element) {
-  let textElement = element.parent().parent().find(".SUB_CATEGORIA");
+//                 </ul>
 
-  var dataSubCategoria = [],
-    todasCategorias = [];
-  if (
-    localStorage.MINHAS_CATEGORIAS != undefined &&
-    localStorage.MINHAS_CATEGORIAS != null &&
-    localStorage.MINHAS_CATEGORIAS != "null" &&
-    localStorage.MINHAS_CATEGORIAS != ""
-  ) {
-    todasCategorias = JSON.parse(localStorage.MINHAS_CATEGORIAS);
-    for (const k in todasCategorias) {
-      if (todasCategorias[k].affiliate_categorie_name == categoria) {
-        dataSubCategoria = todasCategorias[k];
-      }
-    }
-  }
-  ////
-  //console.log("data sub",dataSubCategoria)
+//                 <div  style="display:none" class="descBanner8">
+//                     Menu de categorias
+//                     <div class="btnQtdBanner">
+//                         <p class="txtQtdBanner">1/1</p>
+//                     </div>
+//                 </div>
+//                 <div class="descBanner8">
+//                     Banner de menu
+//                 </div>
+//                 <hr/>
+//                 <div alvo="novo"  style="cursor:pointer" onclick="alteraBannerCatVerticalMain($(this))" class="areaDropDot">
+//                     <div class="iconeDrop9">
+//                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
+//                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
+//                             <path id="upload"
+//                                 d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
+//                                 fill="#f3b306" />
+//                         </svg>
+//                     </div>
+//                     <p class="descreveDrop">Arraste as imagens aqui</p>
+//                     <div style="margin: -90px auto;text-align: center;">
+//                         <p class="txtOu9">|<br>ou<br>|</p>
+//                     </div>
+//                     <div class="btnDrop9">
+//                         <p class="txtBtnDrop9">Selecione do seu computador</p>
+//                     </div>
+//                 </div>
+//                 <div id="bannersVerticais">
+//                ${getBannerVerticalMain(BANNERS?.bannersVertical, false).html}
+//                  </div>
+//             </section>
+//         </div>` +
+//     //======================================================ABA DE CARACTERÍSTICAS==================================================================================================================
+//     '<div id="icone" style="max-width:90% ; margin-top: 5%; display:none"  class="container tabContent">' +
+//     '<div class="row">' +
+//     '<div style="    overflow: auto;max-height: 75vh;" class="col-md-8">' +
+//     '<h3 class="tituloIcone">Ícones Smartcomerci</h3>' +
+//     '<div class="row">' +
+//     '<div  sugestao="todos" class="categoriaIcone">' +
+//     '<label onclick="labelIcones($(this))" class="labelIcones labelIconesActive">Todos</label>' +
+//     "</div>" +
+//     '<div sugestao="frutas" class="categoriaIcone">' +
+//     '<label onclick="labelIcones($(this))" class="labelIcones" >Frutas</label>' +
+//     "</div>" +
+//     '<div sugestao="acougue" class="categoriaIcone">' +
+//     '<label onclick="labelIcones($(this))" class="labelIcones" >Açougue</label>' +
+//     "</div>" +
+//     '<div sugestao="padaria" class="categoriaIcone">' +
+//     '<label onclick="labelIcones($(this))" class="labelIcones" >Padaria</label>' +
+//     "</div>" +
+//     '<div sugestao="outros" class="categoriaIcone">' +
+//     '<label onclick="labelIcones($(this))" class="labelIcones" >Outros</label>' +
+//     "</div>" +
+//     "</div>" +
+//     '<div  style="margin-top: 3%;" class="row">' +
+//     iconesSmartCommerci(categoria.text()) +
+//     "</div><br><hr>" +
+//     '<h3 class="tituloIcone">Todos os ícones disponíveis</h3>' +
+//     '<div  style="margin-top: 3%;" class="row iconesClientes">' +
+//     iconesSmartCommerci2(categoria.text()) +
+//     "</div>" +
+//     "</div>" +
+//     '<div class="col-md-4 areaDropIcon">' +
+//     '<h3 class="tituloIcone">Suba seu próprio ícone</h3>' +
+//     '<h5 class="subTitleIcons">Formato recomendado:<br> SVG ou PNG 50px X 50px</h5>' +
+//     '<div style="margin: auto 0 !important;" class="col-md-8 areaDrop">' +
+//     '<img onclick="uploadIcone()" class="imageThumb" src="images/products/upload.svg" />' +
+//     '<h3 class="arraste">Arraste o ícone aqui</h3>' +
+//     '<h3 class="ou">-ou-</h3>' +
+//     '<div  onclick="uploadIcone()" class="input-group btnDropPC2"><label class="label">Selecione do seu computador</label></div>' +
+//     '</div><input class="upIcon" id="upIcon" style="display:none" type="file">' +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     //======================================================ABA DE PROMOÇÕES==================================================================================================================
+//     '<div id="caracteristicas" style="max-width:70% ; height: 75vh; margin-top: 2%"  class="container tabContent verticalScroll notScroll">' +
+//     '<div  class="col-md-12 " style="margin-top: 3% !important; background: white !important">' +
+//     '<div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">' +
+//     '<div style="margin: 18px 2%;" class="switch__container">' +
+//     "<input " +
+//     (active ? 'checked="true"' : "") +
+//     ' id="switch-shadow18" class="switch switch--shadow" type="checkbox" />' +
+//     '<label for="switch-shadow18"></label>' +
+//     "</div>" +
+//     '<label style=" font-size: 20px;" class="label">Categoria ativa</label> ' +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<label style=" font-size: 20px;" class="label">Nome da categoria</label><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  onchange="fila($(this), \'' +
+//     categoria.text() +
+//     '\',\'updateCategoriaDetalhe\')" placeholder="Produtos relacionados" id="' +
+//     aleatoryID() +
+//     '" value="' +
+//     categoria.text() +
+//     '"></div><br> ' +
+//     "</div>" +
+//     "</div><br><hr><br>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<h3 style=" font-size: 20px;" class="SEO">SEO</h3><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%;    margin-top: -3%;" class="row">' +
+//     '<div class="col-md-12 container">' +
+//     '<label style=" font-size: 20px;" class="label labelContent">Você pode preencher os campos relacionados ao SEO e ajudar no resultado das buscas realizadas no Google, Bing, Yahoo, entre outros.</label><br> ' +
+//     "</div>" +
+//     "</div><br><br>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<label style=" font-size: 20px;" class="label">Título da categoria (meta title)</label><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input fieldName="categorie_title" onchange="fila($(this), \'' +
+//     categoria.text() +
+//     "', 'updateCategoriaDetalhe')\" value=\"" +
+//     dadosCategoria.categorie_title +
+//     '" style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas"  id="' +
+//     aleatoryID() +
+//     '" ></div><br> ' +
+//     "</div>" +
+//     "</div><br><br>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<label style=" font-size: 20px;" class="label">Descrição completa (meta description)</label><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<div class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><textarea fieldName="categorie_description"  id="' +
+//     aleatoryID() +
+//     '" onchange="fila($(this), \'' +
+//     categoria.text() +
+//     "','updateCategoriaDetalhe')\" value=\"" +
+//     dadosCategoria.categorie_description +
+//     '" placeholder="Frutas no Kalimera. Compre online, limão, tangerina, kiwi e muitas outras frutas com os melhores preços e fretegratis."  style="background: #EFEFEF; border:none; font-size: 1.3rem; max-height: 100%" rows="3"   class="form-control">' +
+//     dadosCategoria.categorie_description +
+//     "</textarea>" +
+//     "</div>" +
+//     "</div>" +
+//     "</div><br><br>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<label style=" font-size: 20px;" class="label">Palavras Chaves (meta keywords)</label><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<div class="listaPalavrasKey  notScroll verticalScroll contentEditable="true" placeholder="digite aqui e aperte enter..." class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px; min-height: 150px !important;">' +
+//     '<div><input categorie_name="' +
+//     categoria.text() +
+//     '" type="text" fieldName="categorie_key_words" container="listaPalavrasKey" onkeydown="addWordKey($(this), this)" class="form-control entraPalavra" placeholder="Digite sua palavra aqui e pressione enter..." style="border: none; font-size: 1.3rem;height: auto; width: 90%;"/></div>' +
+//     asWords +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     "</div>";
 
-  var status = [],
-    essaSubCat = [];
-  try {
-    status = JSON.parse(
-      ajustStrigfy(dataSubCategoria.affiliate_categorie_status)
-    );
-  } catch (e) {}
-  for (const k in status) {
-    if (status[k].subCategoria == subCategoria) {
-      essaSubCat = status[k];
-    }
-  }
+//   bootbox.alert({
+//     message: html,
+//     onShow: function () {
+//       $(".tabModal").click(function () {
+//         $(".tabModal").removeClass("tabModalActive");
+//         $(this).addClass("tabModalActive");
+//         $(".tabContent").hide();
+//         //////console.log("#" + $(this).attr("content"));
+//         $("#" + $(this).attr("content")).fadeIn();
+//       });
+//       $(".categoriaIcone").click(function () {
+//         var sugestao = $(this).attr("sugestao");
+//         $(".boxIconDefault").each(function () {
+//           if ($(this).attr("dica") == sugestao) {
+//             $(this).show();
+//           } else {
+//             $(this).hide();
+//           }
+//         });
+//         if (sugestao == "todos") {
+//           $(".boxIconDefault").show();
+//         }
+//       });
+//       $("#upIcon").change(function () {
+//         ////console.log("peguei")
+//         sobeIcone($("#upIcon"));
+//       });
 
-  if (essaSubCat.length == 0) {
-    essaSubCat = { subCategoria: subCategoria, status: 0 };
-  }
+//       $(".fa-times-circle").click(function () {
+//         $(this).parent().parent().remove();
+//       });
 
-  if (essaSubCat.key_words == undefined) {
-    localStorage.PALAVRAS_KEY = "null";
-  }
+//       $(".hiperTitle").each(function () {
+//         $(this).removeClass("ui-sortable-handle");
+//       });
+//     },
+//     callback: function () {
+//       sessionStorage.PALAVRAS_KEY = "";
+//     },
+//   });
+//   $(".modal-footer").hide();
+// }
+// function modalEditSubCategories(subCategoria, categoria, element) {
+//   let textElement = element.parent().parent().find(".SUB_CATEGORIA");
 
-  localStorage.SUB_EDIT = JSON.stringify(status);
+//   var dataSubCategoria = [],
+//     todasCategorias = [];
+//   if (
+//     localStorage.MINHAS_CATEGORIAS != undefined &&
+//     localStorage.MINHAS_CATEGORIAS != null &&
+//     localStorage.MINHAS_CATEGORIAS != "null" &&
+//     localStorage.MINHAS_CATEGORIAS != ""
+//   ) {
+//     todasCategorias = JSON.parse(localStorage.MINHAS_CATEGORIAS);
+//     for (const k in todasCategorias) {
+//       if (todasCategorias[k].affiliate_categorie_name == categoria) {
+//         dataSubCategoria = todasCategorias[k];
+//       }
+//     }
+//   }
+//   ////
+//   //console.log("data sub",dataSubCategoria)
 
-  var smart = element.attr("smart"),
-    ofertas = element.attr("ofertas"),
-    title = element.attr("title"),
-    description = element.attr("description"),
-    key_words = element.attr("key_words"),
-    maisVendidos = element.attr("maisVendidos"),
-    personalizada = element.attr("personalizada");
-  if (element.attr("title") == "undefined") {
-    title = "";
-  }
-  if (element.attr("smart") == "undefined") {
-    smart = 0;
-  }
-  if (element.attr("description") == "undefined") {
-    description = "";
-  }
-  if (element.attr("key_words") == "undefined") {
-    key_words = "";
-  }
-  if (element.attr("maisVendidos") == "undefined") {
-    maisVendidos = 0;
-  }
-  if (element.attr("ofertas") == "undefined") {
-    ofertas = 0;
-  }
-  if (element.attr("personalizada") == "undefined") {
-    personalizada = 0;
-  }
+//   var status = [],
+//     essaSubCat = [];
+//   try {
+//     status = JSON.parse(
+//       ajustStrigfy(dataSubCategoria.affiliate_categorie_status)
+//     );
+//   } catch (e) {}
+//   for (const k in status) {
+//     if (status[k].subCategoria == subCategoria) {
+//       essaSubCat = status[k];
+//     }
+//   }
 
-  if (Number(ofertas) == 1) {
-    ofertas = ' checked="true"';
-  }
-  if (Number(personalizada) == 1) {
-    personalizada = ' checked="true"';
-  }
-  if (Number(smart) == 1) {
-    smart = ' checked="true"';
-  }
-  if (Number(maisVendidos) == 1) {
-    maisVendidos = ' checked="true"';
-  }
+//   if (essaSubCat.length == 0) {
+//     essaSubCat = { subCategoria: subCategoria, status: 0 };
+//   }
 
-  localStorage.SUB_CAT_ATUAL = essaSubCat.subCategoria;
-  localStorage.SUB_CAT_ATUAL_STATUS = essaSubCat.status;
-  var activeOrNot = " ";
-  if (essaSubCat.status == 1) {
-    activeOrNot = ' checked="true" ';
-  }
-  //console.log(key_words)
-  //console.log("essaSubCat")
-  //console.log(essaSubCat)
+//   if (essaSubCat.key_words == undefined) {
+//     localStorage.PALAVRAS_KEY = "null";
+//   }
 
-  if (
-    essaSubCat.key_words == undefined ||
-    essaSubCat.key_words == null ||
-    essaSubCat.key_words == ""
-  ) {
-    key_words = [];
-  } else {
-    key_words = essaSubCat.key_words.split(",");
-  }
-  //console.log("key words")
-  //console.log(key_words)
-  localStorage.PALAVRAS_KEY = essaSubCat.key_words;
+//   localStorage.SUB_EDIT = JSON.stringify(status);
 
-  var html =
-    '<div style="max-width:100% " class="container">' +
-    '<div class="row" style="box-shadow: 0px 3px 5px #6A6A6A08; max-width: 90%; margin:auto  ;   border-bottom: 2px solid #EDF2F6; ">' +
-    '<div content="caracteristicas" class="col-md tabModal tabModalActive">' +
-    '<label class="labelTab"  style="text-align:center">Características</label>' +
-    "</div>" +
-    '<div content="banners" class="col-md tabModal">' +
-    '<label class="labelTab"  style="text-align:center">Banners</label>' +
-    "</div>" +
-    '<div content="priorizacao" class="col-md tabModal">' +
-    '<label class="labelTab"  style="text-align:center">Priorização</label>' +
-    "</div>" +
-    '<div class="col-md">' +
-    '<div onclick="CANCELA_EDIT()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:10% auto" class="input-group">' +
-    '<label  style="cursor:pointer;margin:-5%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
-    "</div>" +
-    "</div>" +
-    '<div class="col-md ">' +
-    '<div onclick="salvaModalSubCategoria()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:10% auto" class="input-group">' +
-    '<label  style="cursor:pointer;margin: -5% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    //======================================================ABA DE BANNERS==================================================================================================================
+//   var smart = element.attr("smart"),
+//     ofertas = element.attr("ofertas"),
+//     title = element.attr("title"),
+//     description = element.attr("description"),
+//     key_words = element.attr("key_words"),
+//     maisVendidos = element.attr("maisVendidos"),
+//     personalizada = element.attr("personalizada");
+//   if (element.attr("title") == "undefined") {
+//     title = "";
+//   }
+//   if (element.attr("smart") == "undefined") {
+//     smart = 0;
+//   }
+//   if (element.attr("description") == "undefined") {
+//     description = "";
+//   }
+//   if (element.attr("key_words") == "undefined") {
+//     key_words = "";
+//   }
+//   if (element.attr("maisVendidos") == "undefined") {
+//     maisVendidos = 0;
+//   }
+//   if (element.attr("ofertas") == "undefined") {
+//     ofertas = 0;
+//   }
+//   if (element.attr("personalizada") == "undefined") {
+//     personalizada = 0;
+//   }
 
-    `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
-        <input onchange="uploadBannerCat($(this))" type="file" id="pegaBannerCat" style="display:none">
-        <input onchange="uploadBannerCatVertical($(this))" type="file" id="pegaBannerCatVertical" style="display:none">
-            <section class="areaBanner verticalScroll">
-                <div class="row">
-                    <div style="margin: 1% 2%;" class="switch__container"><input id="switch-shadow1777"
-                            class="switch switch--shadow" type="checkbox" /><label style="    margin: 10px 0px 0px 20px;"
-                            for="switch-shadow1777"></label></div>
-                    <label style="font-size: 20px;" class="label">Página de categoria</label>
-                    <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
-                </div>
-                <div alvo="novo" style="cursor:pointer" onclick="alteraBannerCat($(this))" class="areaDropDot">
-                    <div class="iconeDrop9">
-                        <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
-                            xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
-                            <path id="upload"
-                                d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
-                                fill="#f3b306" />
-                        </svg>
-                    </div>
-                    <p class="descreveDrop">Arraste as imagens aqui</p>
-                    <div style="margin: -90px auto;text-align: center;">
-                        <p class="txtOu9">|<br>ou<br>|</p>
-                    </div>
-                    <div class="btnDrop9">
-                        <p class="txtBtnDrop9">Selecione do seu computador</p>
-                    </div>
-                </div>
-                <div class="descBanner8">
-                    Banners ativos
-                    <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatActive">${
-                          getBannerInner(essaSubCat?.banners, true).total
-                        }/${
-      essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
-    }</p>
-                    </div>
-                </div>
-                <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${getBannerInner(essaSubCat?.banners, true).html}
-                   
-                </ul>
-                
-            
-                <div class="descBanner8">
-                    Banners desativados
-                    <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatInactive">${
-                          getBannerInner(essaSubCat?.banners, false).total
-                        }/${
-      essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
-    }</p>
-                    </div>
-                </div>
-                <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${getBannerInner(essaSubCat?.banners, false).html}
-                   
-                </ul>
-                
-            
-                <div  style="display:none" class="descBanner8">
-                    Menu de categorias
-                    <div class="btnQtdBanner">
-                        <p class="txtQtdBanner">1/1</p>
-                    </div>
-                </div>
-                <div class="descBanner8">
-                    Banner de menu                  
-                </div>
-                <hr/>
-                <div alvo="novo"  style="cursor:pointer" onclick="alteraBannerCatVertical($(this))" class="areaDropDot">
-                    <div class="iconeDrop9">
-                        <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
-                            xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
-                            <path id="upload"
-                                d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
-                                fill="#f3b306" />
-                        </svg>
-                    </div>
-                    <p class="descreveDrop">Arraste as imagens aqui</p>
-                    <div style="margin: -90px auto;text-align: center;">
-                        <p class="txtOu9">|<br>ou<br>|</p>
-                    </div>
-                    <div class="btnDrop9">
-                        <p class="txtBtnDrop9">Selecione do seu computador</p>
-                    </div>
-                </div>
-                <div id="bannersVerticais">
-               ${getBannerVertical(essaSubCat?.bannersVertical, false).html}
-                 </div>
-            </section>
-        </div>` +
-    //======================================================ABA DE CARACTERÍSTICAS==================================================================================================================
-    //======================================================ABA DE PRIORIZACAO==================================================================================================================
-    '<div id="priorizacao" style="max-width:90% ; margin-top: 2%;height: 75vh; display:none"  class="container tabContent  verticalScroll notScroll">' +
-    '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
-    '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
-    '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="smart" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" ' +
-    smart +
-    ' id="switch-shadow1988" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1988"></label></div>' +
-    '<label style="font-size: 20px;" class="label">Smart</label>' +
-    "</div>" +
-    '<div style="padding: 0 2%;" class="row">' +
-    '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos serão priorizados com base no consumidor. A plataforma irá exibir os produtos que mais fazem sentido com os hábitos de cada cliente. Cada página será única.</label><br /></div>' +
-    "</div>" +
-    "</div>" +
-    '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
-    '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
-    '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="maisVendidos"  subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" ' +
-    maisVendidos +
-    ' id="switch-shadow1999" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1999"></label></div>' +
-    '<label style="font-size: 20px;" class="label">Produtos mais vendidos da subcategoria</label>' +
-    "</div>" +
-    '<div style="padding: 0 2%;" class="row">' +
-    '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos mais vendidos em estoque serão priorizados na classificação na página de categoria e subcategoria.</label><br /></div>' +
-    "</div>" +
-    "</div>" +
-    '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
-    '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
-    '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="ofertas" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" ' +
-    ofertas +
-    ' id="switch-shadow1900" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1900"></label></div>' +
-    '<label style="font-size: 20px;" class="label">Ofertas da subcategoria</label>' +
-    "</div>" +
-    '<div style="padding: 0 2%;" class="row">' +
-    '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos com desconto ativo serão priorizados. Os produtos mais vendidos em ofertas serão priorizados na página de categoria e subcategoria. Os produtos sem oferta, irão aparecer em seguida.</label><br /></div>' +
-    "</div>" +
-    "</div>" +
-    "<hr>" +
-    '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
-    '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
-    '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="personalizada" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" ' +
-    personalizada +
-    ' id="switch-shadow1944" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1944"></label></div>' +
-    '<label style="font-size: 20px;" class="label">Priorização personalizada</label>' +
-    "</div>" +
-    '<div style="padding: 0 2%;" class="row">' +
-    '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Escolha produtos específicos e a ordem para aparecerem na página de categoria e subcategoria. Após os produtos Selecionados, serão exibidos os produtos pelo tipo de priorização.</label><br /></div>' +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    //======================================================ABA DE PROMOÇÕES==================================================================================================================
-    '<div id="caracteristicas" style="max-width:70% ; height: 75vh; margin-top: 2%"  class="container tabContent verticalScroll notScroll">' +
-    '<div  class="col-md-12 " style="margin-top: 3% !important; background: white !important">' +
-    '<div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">' +
-    '<div style="margin: 1% 2%;" class="switch__container">' +
-    "<input  " +
-    activeOrNot +
-    '   fieldName="status"  subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" id="switch-shadow18" class="switch switch--shadow" type="checkbox" />' +
-    '<label for="switch-shadow18"></label>' +
-    "</div>" +
-    '<label style=" font-size: 20px;" class="label">Subcategoria Ativa</label> ' +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<label style=" font-size: 20px;" class="label">Nome da categoria</label><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct" placeholder="Produtos relacionados" id="nomeCategoria" idParent="' +
-    textElement.attr("id") +
-    '"  fieldName="subCategoria" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" value="' +
-    subCategoria +
-    '"></div><br> ' +
-    "</div>" +
-    "</div><br><hr><br>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<h3 style=" font-size: 20px;" class="SEO">SEO</h3><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%;    margin-top: -3%;" class="row">' +
-    '<div class="col-md-12 container">' +
-    '<label style=" font-size: 20px;" class="label labelContent">Você pode preencher os campos relacionados ao SEO e ajudar no resultado das buscas realizadas no Google, Bing, Yahoo, entre outros.</label><br> ' +
-    "</div>" +
-    "</div><br><br>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<label style=" font-size: 20px;" class="label">Título da categoria (meta title)</label><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input value="' +
-    title +
-    '"   fieldName="title" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))"  style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas" id="' +
-    aleatoryID() +
-    '" ></div><br> ' +
-    "</div>" +
-    "</div><br><br>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<label style=" font-size: 20px;" class="label">Descrição completa (meta description)</label><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<div class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><textarea  fieldName="description" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" placeholder="Frutas no Kalimera. Compre online, limão, tangerina, kiwi e muitas outras frutas com os melhores preços e fretegratis."  style="background: #EFEFEF; border:none; font-size: 1.3rem; max-height: 100%" rows="3"   class="form-control">' +
-    description +
-    "</textarea>" +
-    "</div>" +
-    "</div>" +
-    "</div><br><br>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<label style=" font-size: 20px;" class="label">Palavras Chaves (meta keywords)</label><br> ' +
-    "</div>" +
-    "</div>" +
-    '<div style="padding:0 2%" class="row">' +
-    '<div class="col-md-12">' +
-    '<div class="listaPalavrasKey  notScroll verticalScroll" contentEditable="true" placeholder="digite aqui e aperte enter..." class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px; min-height: 150px !important;">' +
-    '<div><input categorie_name="' +
-    subCategoria +
-    '" container="listaPalavrasKey"  fieldName="key_words" onkeydown="addWordKey2($(this),this)" type="text" class="form-control entraPalavra" placeholder="Digite sua palavra aqui e pressione enter..." style="border: none; font-size: 1.3rem;height: auto; width: 90%;"/></div>' +
-    WordKeys2(key_words) +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    "</div>" +
-    "</div>";
+//   if (Number(ofertas) == 1) {
+//     ofertas = ' checked="true"';
+//   }
+//   if (Number(personalizada) == 1) {
+//     personalizada = ' checked="true"';
+//   }
+//   if (Number(smart) == 1) {
+//     smart = ' checked="true"';
+//   }
+//   if (Number(maisVendidos) == 1) {
+//     maisVendidos = ' checked="true"';
+//   }
 
-  bootbox.alert({
-    message: html,
-    onShow: function () {
-      updateSequencia("esconder");
-      localStorage.CAT_SUB_EDIT = categoria;
-      $(".tabModal").click(function () {
-        $(".tabModal").removeClass("tabModalActive");
-        $(this).addClass("tabModalActive");
-        $(".tabContent").hide();
-        //////console.log("#" + $(this).attr("content"));
-        $("#" + $(this).attr("content")).fadeIn();
-      });
+//   localStorage.SUB_CAT_ATUAL = essaSubCat.subCategoria;
+//   localStorage.SUB_CAT_ATUAL_STATUS = essaSubCat.status;
+//   var activeOrNot = " ";
+//   if (essaSubCat.status == 1) {
+//     activeOrNot = ' checked="true" ';
+//   }
+//   //console.log(key_words)
+//   //console.log("essaSubCat")
+//   //console.log(essaSubCat)
 
-      $(".fa-times-circle").click(function () {
-        $(this).parent().parent().remove();
-      });
+//   if (
+//     essaSubCat.key_words == undefined ||
+//     essaSubCat.key_words == null ||
+//     essaSubCat.key_words == ""
+//   ) {
+//     key_words = [];
+//   } else {
+//     key_words = essaSubCat.key_words.split(",");
+//   }
+//   //console.log("key words")
+//   //console.log(key_words)
+//   localStorage.PALAVRAS_KEY = essaSubCat.key_words;
 
-      $(".hiperTitle").each(function () {
-        $(this).removeClass("ui-sortable-handle");
-      });
+//   var html =
+//     '<div style="max-width:100% " class="container">' +
+//     '<div class="row" style="box-shadow: 0px 3px 5px #6A6A6A08; max-width: 90%; margin:auto  ;   border-bottom: 2px solid #EDF2F6; ">' +
+//     '<div content="caracteristicas" class="col-md tabModal tabModalActive">' +
+//     '<label class="labelTab"  style="text-align:center">Características</label>' +
+//     "</div>" +
+//     '<div content="banners" class="col-md tabModal">' +
+//     '<label class="labelTab"  style="text-align:center">Banners</label>' +
+//     "</div>" +
+//     '<div content="priorizacao" class="col-md tabModal">' +
+//     '<label class="labelTab"  style="text-align:center">Priorização</label>' +
+//     "</div>" +
+//     '<div class="col-md">' +
+//     '<div onclick="CANCELA_EDIT()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #ffffff; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: right; margin:10% auto" class="input-group">' +
+//     '<label  style="cursor:pointer;margin:-5%  auto;text-align: center;    min-width: 60%;color: #f6b504 !important; font-size: 1.2rem" class="label">Cancelar</label>' +
+//     "</div>" +
+//     "</div>" +
+//     '<div class="col-md ">' +
+//     '<div onclick="salvaModalSubCategoria()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:10% auto" class="input-group">' +
+//     '<label  style="cursor:pointer;margin: -5% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     //======================================================ABA DE BANNERS==================================================================================================================
 
-      let thisSubCategory = {
-        categoryMain: subCategoria,
-      };
+//     `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
+//         <input onchange="uploadBannerCat($(this))" type="file" id="pegaBannerCat" style="display:none">
+//         <input onchange="uploadBannerCatVertical($(this))" type="file" id="pegaBannerCatVertical" style="display:none">
+//             <section class="areaBanner verticalScroll">
+//                 <div class="row">
+//                     <div style="margin: 1% 2%;" class="switch__container"><input id="switch-shadow1777"
+//                             class="switch switch--shadow" type="checkbox" /><label style="    margin: 10px 0px 0px 20px;"
+//                             for="switch-shadow1777"></label></div>
+//                     <label style="font-size: 20px;" class="label">Página de categoria</label>
+//                     <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
+//                 </div>
+//                 <div alvo="novo" style="cursor:pointer" onclick="alteraBannerCat($(this))" class="areaDropDot">
+//                     <div class="iconeDrop9">
+//                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
+//                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
+//                             <path id="upload"
+//                                 d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
+//                                 fill="#f3b306" />
+//                         </svg>
+//                     </div>
+//                     <p class="descreveDrop">Arraste as imagens aqui</p>
+//                     <div style="margin: -90px auto;text-align: center;">
+//                         <p class="txtOu9">|<br>ou<br>|</p>
+//                     </div>
+//                     <div class="btnDrop9">
+//                         <p class="txtBtnDrop9">Selecione do seu computador</p>
+//                     </div>
+//                 </div>
+//                 <div class="descBanner8">
+//                     Banners ativos
+//                     <div class="btnQtdBanner">
+//                         <p class="txtQtdBanner listaBannersCatActive">${
+//                           getBannerInner(essaSubCat?.banners, true).total
+//                         }/${
+//       essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
+//     }</p>
+//                     </div>
+//                 </div>
+//                 <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
+//                 ${getBannerInner(essaSubCat?.banners, true).html}
 
-      function makeMeToSet(element) {
-        let subCategory = element.attr("subCategory");
-        let myValue = element.val();
-        let myNameValue = element.attr("nameValue");
-        if (element.attr("type") == "checkbox") {
-          myValue = element[0].checked;
-        }
-        thisSubCategory[myNameValue] = myValue;
-      }
-    },
-    callback: function () {
-      //////console.log('The styles was removed!');
+//                 </ul>
 
-      localStorage.CAT_SUB_EDIT = "";
-      localStorage.SUB_EDIT = "";
-      localStorage.SUB_CAT_ATUAL = "";
-      localStorage.SUB_CAT_ATUAL_STATUS = "";
-      sessionStorage.PALAVRAS_KEY = "";
-    },
-  });
-  $(".modal-footer").hide();
-}
+//                 <div class="descBanner8">
+//                     Banners desativados
+//                     <div class="btnQtdBanner">
+//                         <p class="txtQtdBanner listaBannersCatInactive">${
+//                           getBannerInner(essaSubCat?.banners, false).total
+//                         }/${
+//       essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
+//     }</p>
+//                     </div>
+//                 </div>
+//                 <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
+//                 ${getBannerInner(essaSubCat?.banners, false).html}
+
+//                 </ul>
+
+//                 <div  style="display:none" class="descBanner8">
+//                     Menu de categorias
+//                     <div class="btnQtdBanner">
+//                         <p class="txtQtdBanner">1/1</p>
+//                     </div>
+//                 </div>
+//                 <div class="descBanner8">
+//                     Banner de menu
+//                 </div>
+//                 <hr/>
+//                 <div alvo="novo"  style="cursor:pointer" onclick="alteraBannerCatVertical($(this))" class="areaDropDot">
+//                     <div class="iconeDrop9">
+//                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
+//                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
+//                             <path id="upload"
+//                                 d="M21.323,27H3.677A3.718,3.718,0,0,1,0,23.25v-4.5A.744.744,0,0,1,.736,18a.744.744,0,0,1,.735.751v4.5A2.231,2.231,0,0,0,3.677,25.5H21.323a2.231,2.231,0,0,0,2.206-2.25v-4.5a.735.735,0,1,1,1.47,0v4.5A3.718,3.718,0,0,1,21.323,27ZM12.5,19.5a.743.743,0,0,1-.735-.749V2.562L7.138,7.282a.729.729,0,0,1-.519.22.719.719,0,0,1-.191-.026.742.742,0,0,1-.52-.531A.758.758,0,0,1,6.1,6.22l5.882-6a.726.726,0,0,1,1.042,0l5.882,6a.758.758,0,0,1,.191.725.742.742,0,0,1-.52.531.72.72,0,0,1-.191.026.729.729,0,0,1-.519-.22L13.235,2.562V18.751A.743.743,0,0,1,12.5,19.5Z"
+//                                 fill="#f3b306" />
+//                         </svg>
+//                     </div>
+//                     <p class="descreveDrop">Arraste as imagens aqui</p>
+//                     <div style="margin: -90px auto;text-align: center;">
+//                         <p class="txtOu9">|<br>ou<br>|</p>
+//                     </div>
+//                     <div class="btnDrop9">
+//                         <p class="txtBtnDrop9">Selecione do seu computador</p>
+//                     </div>
+//                 </div>
+//                 <div id="bannersVerticais">
+//                ${getBannerVertical(essaSubCat?.bannersVertical, false).html}
+//                  </div>
+//             </section>
+//         </div>` +
+//     //======================================================ABA DE CARACTERÍSTICAS==================================================================================================================
+//     //======================================================ABA DE PRIORIZACAO==================================================================================================================
+//     '<div id="priorizacao" style="max-width:90% ; margin-top: 2%;height: 75vh; display:none"  class="container tabContent  verticalScroll notScroll">' +
+//     '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
+//     '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
+//     '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="smart" subCategorieName="\'' +
+//     subCategoria +
+//     '\'" onchange="setSubCatAtt($(this))" ' +
+//     smart +
+//     ' id="switch-shadow1988" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1988"></label></div>' +
+//     '<label style="font-size: 20px;" class="label">Smart</label>' +
+//     "</div>" +
+//     '<div style="padding: 0 2%;" class="row">' +
+//     '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos serão priorizados com base no consumidor. A plataforma irá exibir os produtos que mais fazem sentido com os hábitos de cada cliente. Cada página será única.</label><br /></div>' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
+//     '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
+//     '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="maisVendidos"  subCategorieName="\'' +
+//     subCategoria +
+//     '\'" onchange="setSubCatAtt($(this))" ' +
+//     maisVendidos +
+//     ' id="switch-shadow1999" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1999"></label></div>' +
+//     '<label style="font-size: 20px;" class="label">Produtos mais vendidos da subcategoria</label>' +
+//     "</div>" +
+//     '<div style="padding: 0 2%;" class="row">' +
+//     '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos mais vendidos em estoque serão priorizados na classificação na página de categoria e subcategoria.</label><br /></div>' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
+//     '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
+//     '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="ofertas" subCategorieName="\'' +
+//     subCategoria +
+//     '\'" onchange="setSubCatAtt($(this))" ' +
+//     ofertas +
+//     ' id="switch-shadow1900" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1900"></label></div>' +
+//     '<label style="font-size: 20px;" class="label">Ofertas da subcategoria</label>' +
+//     "</div>" +
+//     '<div style="padding: 0 2%;" class="row">' +
+//     '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Os produtos com desconto ativo serão priorizados. Os produtos mais vendidos em ofertas serão priorizados na página de categoria e subcategoria. Os produtos sem oferta, irão aparecer em seguida.</label><br /></div>' +
+//     "</div>" +
+//     "</div>" +
+//     "<hr>" +
+//     '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
+//     '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
+//     '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="personalizada" subCategorieName="\'' +
+//     subCategoria +
+//     '\'" onchange="setSubCatAtt($(this))" ' +
+//     personalizada +
+//     ' id="switch-shadow1944" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1944"></label></div>' +
+//     '<label style="font-size: 20px;" class="label">Priorização personalizada</label>' +
+//     "</div>" +
+//     '<div style="padding: 0 2%;" class="row">' +
+//     '<div class="col-md-10 container"><label style="font-size: 20px;" class="label labelContent">Escolha produtos específicos e a ordem para aparecerem na página de categoria e subcategoria. Após os produtos Selecionados, serão exibidos os produtos pelo tipo de priorização.</label><br /></div>' +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     //======================================================ABA DE PROMOÇÕES==================================================================================================================
+//     '<div id="caracteristicas" style="max-width:70% ; height: 75vh; margin-top: 2%"  class="container tabContent verticalScroll notScroll">' +
+//     '<div  class="col-md-12 " style="margin-top: 3% !important; background: white !important">' +
+//     '<div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">' +
+//     '<div style="margin: 1% 2%;" class="switch__container">' +
+//     "<input  " +
+//     activeOrNot +
+//     '   fieldName="status"  subCategorieName="\'' +
+//     subCategoria +
+//     '\'" onchange="setSubCatAtt($(this))" id="switch-shadow18" class="switch switch--shadow" type="checkbox" />' +
+//     '<label for="switch-shadow18"></label>' +
+//     "</div>" +
+//     '<label style=" font-size: 20px;" class="label">Subcategoria Ativa</label> ' +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<label style=" font-size: 20px;" class="label">Nome da categoria</label><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct" placeholder="Produtos relacionados" id="nomeCategoria" idParent="' +
+//     textElement.attr("id") +
+//     '"  fieldName="subCategoria" subCategorieName="\'' +
+//     subCategoria +
+//     '\'" onchange="setSubCatAtt($(this))" value="' +
+//     subCategoria +
+//     '"></div><br> ' +
+//     "</div>" +
+//     "</div><br><hr><br>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<h3 style=" font-size: 20px;" class="SEO">SEO</h3><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%;    margin-top: -3%;" class="row">' +
+//     '<div class="col-md-12 container">' +
+//     '<label style=" font-size: 20px;" class="label labelContent">Você pode preencher os campos relacionados ao SEO e ajudar no resultado das buscas realizadas no Google, Bing, Yahoo, entre outros.</label><br> ' +
+//     "</div>" +
+//     "</div><br><br>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<label style=" font-size: 20px;" class="label">Título da categoria (meta title)</label><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input value="' +
+//     title +
+//     '"   fieldName="title" subCategorieName="\'' +
+//     subCategoria +
+//     '\'" onchange="setSubCatAtt($(this))"  style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas" id="' +
+//     aleatoryID() +
+//     '" ></div><br> ' +
+//     "</div>" +
+//     "</div><br><br>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<label style=" font-size: 20px;" class="label">Descrição completa (meta description)</label><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<div class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><textarea  fieldName="description" subCategorieName="\'' +
+//     subCategoria +
+//     '\'" onchange="setSubCatAtt($(this))" placeholder="Frutas no Kalimera. Compre online, limão, tangerina, kiwi e muitas outras frutas com os melhores preços e fretegratis."  style="background: #EFEFEF; border:none; font-size: 1.3rem; max-height: 100%" rows="3"   class="form-control">' +
+//     description +
+//     "</textarea>" +
+//     "</div>" +
+//     "</div>" +
+//     "</div><br><br>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<label style=" font-size: 20px;" class="label">Palavras Chaves (meta keywords)</label><br> ' +
+//     "</div>" +
+//     "</div>" +
+//     '<div style="padding:0 2%" class="row">' +
+//     '<div class="col-md-12">' +
+//     '<div class="listaPalavrasKey  notScroll verticalScroll" contentEditable="true" placeholder="digite aqui e aperte enter..." class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px; min-height: 150px !important;">' +
+//     '<div><input categorie_name="' +
+//     subCategoria +
+//     '" container="listaPalavrasKey"  fieldName="key_words" onkeydown="addWordKey2($(this),this)" type="text" class="form-control entraPalavra" placeholder="Digite sua palavra aqui e pressione enter..." style="border: none; font-size: 1.3rem;height: auto; width: 90%;"/></div>' +
+//     WordKeys2(key_words) +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     "</div>" +
+//     "</div>";
+
+//   bootbox.alert({
+//     message: html,
+//     onShow: function () {
+//       updateSequencia("esconder");
+//       localStorage.CAT_SUB_EDIT = categoria;
+//       $(".tabModal").click(function () {
+//         $(".tabModal").removeClass("tabModalActive");
+//         $(this).addClass("tabModalActive");
+//         $(".tabContent").hide();
+//         //////console.log("#" + $(this).attr("content"));
+//         $("#" + $(this).attr("content")).fadeIn();
+//       });
+
+//       $(".fa-times-circle").click(function () {
+//         $(this).parent().parent().remove();
+//       });
+
+//       $(".hiperTitle").each(function () {
+//         $(this).removeClass("ui-sortable-handle");
+//       });
+
+//       let thisSubCategory = {
+//         categoryMain: subCategoria,
+//       };
+
+//       function makeMeToSet(element) {
+//         let subCategory = element.attr("subCategory");
+//         let myValue = element.val();
+//         let myNameValue = element.attr("nameValue");
+//         if (element.attr("type") == "checkbox") {
+//           myValue = element[0].checked;
+//         }
+//         thisSubCategory[myNameValue] = myValue;
+//       }
+//     },
+//     callback: function () {
+//       //////console.log('The styles was removed!');
+
+//       localStorage.CAT_SUB_EDIT = "";
+//       localStorage.SUB_EDIT = "";
+//       localStorage.SUB_CAT_ATUAL = "";
+//       localStorage.SUB_CAT_ATUAL_STATUS = "";
+//       sessionStorage.PALAVRAS_KEY = "";
+//     },
+//   });
+//   $(".modal-footer").hide();
+// }
 function iconesSmartCommerci(categorieName) {
   var cate = JSON.parse(localStorage.MINHAS_CATEGORIAS),
     essaCat = [];

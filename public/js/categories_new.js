@@ -1,13 +1,125 @@
 const api_host = "https://www.smartlima.com.br:7070";
 let currentCategoryId = null,
   currentSubcategoryId = null;
-getCategories();
+
 let categoriesObject = {
   affiliateId: Number(localStorage.AFFILIATE_ID),
   masterId: Number(localStorage.MASTER_ID),
   limitToShow: 8,
   categories: [],
 };
+
+function deleteCategoryNew(elemento, idCat, idSub) {
+  if (idSub || idSub == 0) {
+    const index = categoriesObject.categories
+      .find((a) => Number(a.id) === Number(idCat))
+      .subcategories.findIndex((x) => Number(x.id) === Number(idSub));
+    console.log("O Index", index);
+    if (index || index == 0) {
+      categoriesObject.categories
+        .find((a) => Number(a.id) === Number(idCat))
+        .subcategories.splice(index, 1);
+    }
+  } else {
+    const index = categoriesObject.categories.findIndex(
+      (x) => Number(x.id) === Number(idCat)
+    );
+    console.log("O Index", index);
+    if (index || index == 0) {
+      categoriesObject.categories.splice(index, 1);
+    }
+  }
+  console.log("removing category", categoriesObject);
+  showCategories();
+}
+function duplicateCategoryNew(elemento, idCat, idSub) {
+  let alertar = false,
+    newId = null;
+  if (idSub || idSub == 0) {
+    const exists = categoriesObject.categories
+      .find((a) => Number(a.id) === Number(idCat))
+      .subcategories.find((x) => Number(x.id) === Number(idSub));
+    console.log("O exists", exists);
+    if (exists) {
+      categoriesObject.categories
+        .find((a) => Number(a.id) === Number(idCat))
+        .subcategories.push({
+          ...exists,
+          id: categoriesObject.categories[
+            Number(idCat)
+          ].subcategories.length.toString(),
+        });
+      newId =
+        categoriesObject.categories[
+          Number(idCat)
+        ].subcategories.length.toString();
+      alertar = true;
+    }
+  } else {
+    const exists = categoriesObject.categories.find(
+      (x) => Number(x.id) === Number(idCat)
+    );
+    console.log("O exists", exists);
+    if (exists) {
+      alertar = true;
+      categoriesObject.categories.push({
+        ...exists,
+        id: categoriesObject.categories.length.toString(),
+      });
+      newId = categoriesObject.categories.length.toString();
+    }
+  }
+  newId = Number(newId) - 1;
+  console.log("duplicate category", categoriesObject);
+  showCategories();
+  if (alertar) {
+    setTimeout(() => {
+      let alvo =
+        idSub || idSub == 0
+          ? ".destaque-" + idCat + "-" + newId
+          : ".destaque-" + newId;
+      destaque(
+        alvo,
+        "Duplicamos a sua categoria!",
+        "Agora pode editá-la com o mesmo conteúdo da original. \nLembre-se de salvar as alterações ao terminar!"
+      );
+    }, 1000);
+  }
+}
+function flagCategoryNew(elemento, idCat, idSub) {
+  if (idSub || idSub == 0) {
+    console.log("sub...");
+    const exists = categoriesObject.categories
+      .find((a) => Number(a.id) === Number(idCat))
+      .subcategories.find((x) => Number(x.id) === Number(idSub));
+    console.log("O exists", exists);
+    if (exists) {
+      categoriesObject.categories
+        .find((a) => Number(a.id) === Number(idCat))
+        .subcategories.map((x) => {
+          if (Number(x.id) === Number(idSub)) {
+            x.active = elemento[0].checked;
+          }
+        });
+    }
+  } else {
+    console.log("cat...");
+    const exists = categoriesObject.categories.find(
+      (x) => Number(x.id) === Number(idCat)
+    );
+    console.log("O exists", exists);
+    if (exists) {
+      categoriesObject.categories.map((x) => {
+        if (Number(x.id) === Number(idCat)) {
+          x.active = elemento[0].checked;
+        }
+      });
+    }
+  }
+  console.log("flaging category", categoriesObject);
+}
+
+getCategories();
 
 class Category {
   id = 0;
@@ -41,6 +153,7 @@ function editCategoryField(
         (dt) => Number(dt.id) === Number(id)
       );
       if (field === "keywors") {
+        console.log("keywords for cats");
         let exists = currCategory[field].find((a) => a === newValue);
         if (!exists) {
           currCategory[field].push(newValue);
@@ -60,11 +173,12 @@ function editCategoryField(
     }
   } else {
     if (subField !== "banners" && subField !== "subcategories") {
-      let currCategory = categoriesObject.categories.find((dt) => dt.id === id);
-      let currSubCategory = currCategory.subcategories.find(
-        (dt) => dt.id === idSub
-      );
+      let currSubCategory = categoriesObject.categories
+        .find((a) => Number(a.id) === Number(id))
+        .subcategories.find((dt) => Number(dt.id) === Number(idSub));
+
       if (subField === "keywors") {
+        console.log("keywords for subs");
         let exists = currSubCategory[subField].find((a) => a === newValueSub);
         if (!exists) {
           currSubCategory[subField].push(newValueSub);
@@ -164,6 +278,9 @@ class Subcategory {
 }
 function addCategory(id) {
   console.log("adicionando sub", id);
+  let newId = null,
+    isSub = false,
+    alertar = true;
   if (id || id === "0" || id === 0) {
     let currCategory = categoriesObject.categories.find(
       (dt) => Number(dt.id) === Number(id)
@@ -174,7 +291,10 @@ function addCategory(id) {
     }
     console.log("currCat", currCategory);
     let subcategoria = new Subcategory(currCategory.subcategories.length);
+    newId = currCategory.subcategories.length.toString();
     currCategory.subcategories.push(subcategoria);
+
+    isSub = true;
     for (const k in categoriesObject.categories) {
       if (categoriesObject.categories[k].id === id) {
         categoriesObject.categories[k] = currCategory;
@@ -196,22 +316,37 @@ function addCategory(id) {
         $(".superSortable").disableSelection();
       });
     }, 200);
+
     showCategories();
   } else {
     let categoria = new Category(categoriesObject.categories.length);
+    newId = categoriesObject.categories.length.toString();
     categoriesObject.categories.push(categoria);
     console.log(categoriesObject);
     showCategories();
+  }
+  if (alertar) {
+    //newId = Number(newId) - 1;
+    setTimeout(() => {
+      let alvo =
+        id || id == 0 ? ".destaque-" + id + "-" + newId : ".destaque-" + newId;
+      destaque(
+        alvo,
+        `Criamos a sua nova ${isSub ? "subcategoria" : "categoria"}`,
+        "Agora pode editá-la como desejar! \nLembre-se de salvar as alterações ao terminar!"
+      );
+    }, 1000);
   }
 }
 
 function showCategories() {
   $("#listaCategoriasLoja").html("");
-  categoriesObject.categories.forEach((cat) => {
+  $(".totalCategorias").text(categoriesObject.categories.length);
+  categoriesObject.categories.forEach((cat, index) => {
     console.log("AS CAT", cat);
     $("#listaCategoriasLoja").append(categoryElementLiNew(cat, cat.id));
     console.log(cat.id, categoriesObject.limitToShow - 1);
-    if (Number(cat.id) === categoriesObject.limitToShow - 1) {
+    if (index === categoriesObject.limitToShow - 1) {
       $("#listaCategoriasLoja").append(
         `<br><br><h1 class="hiperTitle">Outras Categorias <span class="hiperTitleSub">(Exibe em "todas as categorias" no menu)</h1><hr>`
       );
@@ -264,17 +399,22 @@ async function publicarAlteracoes() {
     },
     data: categoriesObject,
   });
+  informar("success", "Alterações salvas com sucesso!", 4000);
   console.log(resultado);
 }
 
 function subcategoryElementLiNew(dado, mainId) {
   let html = "";
+  console.log("as sbu ", dado, mainId);
   if (!dado || dado.length === 0) {
     return html;
   }
+  let dtN = Date.now() + aleatoryIDNew();
   for (const k in dado) {
     html += `
-  <li idCat="${mainId}" idSub="${dado[k].id}" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle" >
+  <li idCat="${mainId}" idSub="${
+      dado[k].id
+    }" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle " >
                             <div class="row"
                                 style="display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
                                 <span class="trilha2" style="opacity: 1;">.....</span>
@@ -295,31 +435,49 @@ function subcategoryElementLiNew(dado, mainId) {
                                                         transform="translate(5)"></path>
                                                 </svg></div>
                                             <div class="col-sm  numberCat" style="opacity: 1;">
-                                                <sp class="posicaoSubCategoriaNew">${dado[k].id}</sp>
+                                                <sp class="posicaoSubCategoriaNew">${
+                                                  dado[k].id
+                                                }</sp>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm" style="opacity: 1;"><label  
-                                            class="label nomeCategoria SUB_CATEGORIA">${dado[k].title}</label></div>
+                                            class="label nomeCategoria SUB_CATEGORIA">${
+                                              dado[k].title
+                                            }</label></div>
                                     <div class="col-sm opacity0" style="opacity: 1;"><label
                                             class="label totalSubCategorias">00 Subcategorias</label></div>
                                     <div class="col-sm" style="opacity: 1;">
                                         <div class="row">
-                                            <div class="switch__container ATIVA_SUB_CATEGORIA"
+                                            <div class="switch__container "
                                                 style="opacity: 1;margin-top: 5%;"><input  
-                                                    checked="checked" id="switch-shadow01234019"
+                                                    onchange="flagCategoryNew($(this),${mainId}, ${
+      dado[k]?.id
+    })" ${
+      dado[k]?.active && dado?.active !== "false" ? 'checked="checked"' : ""
+    }
+                                                    
+                                                    id="switch-shadow01234019${dtN}-${mainId}-${
+      dado[k]?.id
+    }"
                                                     class="switch switch--shadow ativa-me2" type="checkbox"><label
-                                                    for="switch-shadow01234019"></label></div><label
+                                                    for="switch-shadow01234019${dtN}-${mainId}-${
+      dado[k]?.id
+    }"></label></div><label
                                                 class="label catAtiva" style="opacity: 1;">Subcategoria ativa</label>
                                         </div>
                                     </div>
                                     <div class="col-sm" style="opacity: 1;">
-                                        <div onclick="modalEditSubCategories(${dado[k].id}, ${mainId}, $(this))" class="input-group catEdit"><label
+                                        <div   onclick="modalEditSubCategories($(this), ${mainId},${
+      dado[k].id
+    })" class="input-group catEdit destaque-${mainId}-${dado[k].id}"><label
                                                 style="margin: auto; color: #f6b504">Editar Subcategoria</label></div>
                                     </div>
                                     <div style="max-width: 70px; opacity: 1;" class="col-sm ">
-                                        <div class=" duplicate"><svg xmlns="http://www.w3.org/2000/svg"
-                                                style=" fill: #f6b504;   margin: 12px;" width="12" height="14"
+                                        <div onclick="duplicateCategoryNew($(this), ${mainId},${
+      dado[k].id
+    })" class=" duplicate"><svg xmlns="http://www.w3.org/2000/svg"
+                                                style=" fill: #f6b504;   margin: auto;" width="12" height="14"
                                                 viewBox="0 0 12 14">
                                                 <path id="duplicate"
                                                     d="M7.125,14H1.875A1.913,1.913,0,0,1,0,12.055v-7A1.913,1.913,0,0,1,1.875,3.111H3V1.945A1.913,1.913,0,0,1,4.874,0h4.5A.364.364,0,0,1,9.64.114l2.25,2.334a.391.391,0,0,1,.109.3v6.2a1.913,1.913,0,0,1-1.875,1.945H9v1.165A1.913,1.913,0,0,1,7.125,14ZM1.875,3.889A1.148,1.148,0,0,0,.75,5.055v7a1.148,1.148,0,0,0,1.125,1.167h5.25a1.148,1.148,0,0,0,1.124-1.167V10.89H6.374a.389.389,0,0,1,0-.778h3.75a1.148,1.148,0,0,0,1.125-1.167V3.112H9.374A.383.383,0,0,1,9,2.723V.778H4.874A1.148,1.148,0,0,0,3.75,1.945V5.833a.376.376,0,1,1-.751,0V3.889ZM9.749,1.329V2.334h.97ZM3.375,10.112A.365.365,0,0,1,3.109,10a.4.4,0,0,1,0-.55l3.86-4H5.624a.389.389,0,0,1,0-.778h2.25a.382.382,0,0,1,.375.388V7.389a.375.375,0,1,1-.75,0v-1.4L3.64,10A.365.365,0,0,1,3.375,10.112Z"
@@ -327,7 +485,9 @@ function subcategoryElementLiNew(dado, mainId) {
                                             </svg></div>
                                     </div>
                                     <div style="max-width: 70px; opacity: 1;" class="col-sm">
-                                        <div  class=" deleteThis"><svg
+                                        <div onclick="deleteCategoryNew($(this), ${mainId},${
+      dado[k].id
+    })" class=" deleteThis"><svg
                                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19"
                                                 viewBox="0 0 21 21" style="fill: #f6b504;margin: 9px;">&gt;<defs></defs>
                                                 <path class="a"
@@ -345,7 +505,7 @@ function subcategoryElementLiNew(dado, mainId) {
 function categoryElementLiNew(dado, id) {
   console.log("dado", dado);
   return `
- <li idCat="${dado.id}" class="itemSortable2 ui-sortable-handle">
+ <li idCat="${dado.id}" class="itemSortable2 ui-sortable-handle ">
     <div title="'null'" description="'null'" draggable="true" class="categorie vouClonar">
         <div class="row radius20 cabecalho" style="border: 1px solid #efefef; margin-top: 1%; padding-right: 2%">
             <div  onclick="showContent($(this))" style="max-width: 100px; opacity: 1; margin: 1% auto;" class="col-sm dropCategoriaContent2">
@@ -378,23 +538,35 @@ function categoryElementLiNew(dado, id) {
                     class="label nomeCategoria CATEGORIA_PRINCIPAL">${
                       dado.title
                     }</label></div>
-            <div class="col-sm" style="opacity: 1;"><label class="label totalSubCategorias">11 Subcategorias</label>
+            <div class="col-sm" style="opacity: 1;"><label class="label totalSubCategorias">${
+              dado?.subcategories?.length ?? 0
+            } Subcategorias</label>
             </div>
             <div class="col-sm" style="opacity: 1;">
                 <div class="row">
-                    <div class="switch__container ATIVA_CATEGORIA" style="opacity: 1;margin-top: 5%;"><input
-                            checked="checked" id="switch-shadow03101"
-                            class="switch switch--shadow ativa-me CHECK_PRINCIPAL" type="checkbox"><label
-                            for="switch-shadow03101"></label></div><label class="label catAtiva"
+                    <div class="switch__container " style="opacity: 1;margin-top: 5%;">
+                    <input onchange="flagCategoryNew($(this), ${dado?.id})" ${
+    dado?.active && dado?.active !== "false" ? 'checked="checked"' : ""
+  } id="switch-shadow03101${
+    dado?.id
+  }" class="switch switch--shadow ativa-me " type="checkbox" />
+                    <label
+                            for="switch-shadow03101${
+                              dado?.id
+                            }"></label></div><label class="label catAtiva"
                         style="opacity: 1;">Categoria ativa</label>
                 </div>
             </div>
             <div class="col-sm" style="opacity: 1;">
-                <div onclick="modalEditCategories($(this), '${id}')"  class="input-group catEdit"><label
+                <div  onclick="modalEditCategories($(this), '${id}')"  class="input-group catEdit destaque-${
+    dado.id
+  }"><label
                         style="margin: auto; color: #f6b504">Editar Categoria</label></div>
             </div>
             <div style="max-width: 70px; opacity: 1;" class="col-sm ">
-                <div class=" duplicate"><svg xmlns="http://www.w3.org/2000/svg"
+                <div  onclick="duplicateCategoryNew($(this), ${
+                  dado?.id
+                })" class=" duplicate"><svg xmlns="http://www.w3.org/2000/svg"
                         style=" fill: #f6b504;  cursor: pointer;  margin:auto;" width="12" height="14"
                         viewBox="0 0 12 14">
                         <path id="duplicate"
@@ -403,7 +575,9 @@ function categoryElementLiNew(dado, id) {
                     </svg></div>
             </div>
             <div style="max-width: 70px; opacity: 1;" class="col-sm">
-                <div   class=" deleteThis"><svg xmlns="http://www.w3.org/2000/svg"
+                <div  onclick="deleteCategoryNew($(this), ${
+                  dado?.id
+                })"   class=" deleteThis"><svg xmlns="http://www.w3.org/2000/svg"
                         width="19" height="19" viewBox="0 0 21 21" style="fill: #f6b504;margin: 9px;">&gt;<defs></defs>
                         <path class="a"
                             d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z"
@@ -634,11 +808,14 @@ function showContent(element) {
 function modalEditCategories(element, catId) {
   element = element.parent().parent().parent();
   console.log("a id", catId, Number(catId), categoriesObject);
-  var categoria = categoriesObject.categories[Number(catId)];
+
+  var categoria = categoriesObject.categories.find(
+    (x) => Number(x.id) === Number(catId)
+  );
   console.log("CATEGORIA SELECIONADA", categoria);
   let BANNERS = categoria?.banners ?? [];
   console.log("BANNERS", BANNERS);
-  let asWords = WordKeysNew(categoria.keywords ?? [], categoria.id);
+  let asWords = WordKeysNew(categoria?.keywords ?? [], categoria.id);
 
   var html =
     '<div style="max-width:100% " class="container">' +
@@ -974,122 +1151,35 @@ function modalEditCategories(element, catId) {
   });
   $(".modal-footer").hide();
 }
-function modalEditSubCategories(subCategoria, categoria, element) {
+function modalEditSubCategories(element, idCat, idSub) {
   console.log("ME ACIONOU");
   let textElement = element.parent().parent().find(".SUB_CATEGORIA");
 
-  var categoria = categoriesObject.categories[Number(categoria)];
+  var categoria = categoriesObject.categories.find(
+    (x) => Number(x.id) === Number(idCat)
+  );
   var subcategoria = categoria.subcategories.find(
-    (x) => Number(x.id) === Number(subCategoria)
+    (x) => Number(x.id) === Number(idSub)
   );
   console.log("CATEGORIA SELECIONADA", categoria);
   console.log("SBCATEGORIA SELECIONADA", subcategoria);
 
-  var dataSubCategoria = [],
-    todasCategorias = [];
-  if (
-    localStorage.MINHAS_CATEGORIAS != undefined &&
-    localStorage.MINHAS_CATEGORIAS != null &&
-    localStorage.MINHAS_CATEGORIAS != "null" &&
-    localStorage.MINHAS_CATEGORIAS != ""
-  ) {
-    todasCategorias = JSON.parse(localStorage.MINHAS_CATEGORIAS);
-    for (const k in todasCategorias) {
-      if (todasCategorias[k].affiliate_categorie_name == categoria) {
-        dataSubCategoria = todasCategorias[k];
-      }
-    }
-  }
-  ////
-  //console.log("data sub",dataSubCategoria)
-
-  var status = [],
-    essaSubCat = [];
-  try {
-    status = JSON.parse(
-      ajustStrigfy(dataSubCategoria.affiliate_categorie_status)
-    );
-  } catch (e) {}
-  for (const k in status) {
-    if (status[k].subCategoria == subCategoria) {
-      essaSubCat = status[k];
-    }
-  }
-
-  if (essaSubCat.length == 0) {
-    essaSubCat = { subCategoria: subCategoria, status: 0 };
-  }
-
-  if (essaSubCat.key_words == undefined) {
-    localStorage.PALAVRAS_KEY = "null";
-  }
-
-  localStorage.SUB_EDIT = JSON.stringify(status);
-
-  var smart = element.attr("smart"),
-    ofertas = element.attr("ofertas"),
-    title = element.attr("title"),
-    description = element.attr("description"),
-    key_words = element.attr("key_words"),
-    maisVendidos = element.attr("maisVendidos"),
-    personalizada = element.attr("personalizada");
-  if (element.attr("title") == "undefined") {
-    title = "";
-  }
-  if (element.attr("smart") == "undefined") {
-    smart = 0;
-  }
-  if (element.attr("description") == "undefined") {
-    description = "";
-  }
-  if (element.attr("key_words") == "undefined") {
-    key_words = "";
-  }
-  if (element.attr("maisVendidos") == "undefined") {
-    maisVendidos = 0;
-  }
-  if (element.attr("ofertas") == "undefined") {
-    ofertas = 0;
-  }
-  if (element.attr("personalizada") == "undefined") {
-    personalizada = 0;
-  }
-
-  if (Number(ofertas) == 1) {
-    ofertas = ' checked="true"';
-  }
-  if (Number(personalizada) == 1) {
-    personalizada = ' checked="true"';
-  }
-  if (Number(smart) == 1) {
-    smart = ' checked="true"';
-  }
-  if (Number(maisVendidos) == 1) {
-    maisVendidos = ' checked="true"';
-  }
-
-  localStorage.SUB_CAT_ATUAL = essaSubCat.subCategoria;
-  localStorage.SUB_CAT_ATUAL_STATUS = essaSubCat.status;
+  var smart = subcategoria?.priorization?.smart,
+    ofertas = subcategoria?.priorization?.offers,
+    title = subcategoria?.tittle,
+    description = subcategoria?.description,
+    key_words = subcategoria?.keywords ?? [],
+    maisVendidos = subcategoria?.priorization?.bestSellers,
+    personalizada = subcategoria?.priorization?.personal;
+  let asWords = WordKeysNew(key_words ?? [], categoria.id, subcategoria.id);
   var activeOrNot = " ";
-  if (essaSubCat.status == 1) {
+  if (
+    subcategoria?.active === true ||
+    subcategoria?.active == 1 ||
+    subcategoria?.active === "true"
+  ) {
     activeOrNot = ' checked="true" ';
   }
-  //console.log(key_words)
-  //console.log("essaSubCat")
-  //console.log(essaSubCat)
-
-  if (
-    essaSubCat.key_words == undefined ||
-    essaSubCat.key_words == null ||
-    essaSubCat.key_words == ""
-  ) {
-    key_words = [];
-  } else {
-    key_words = essaSubCat.key_words.split(",");
-  }
-  //console.log("key words")
-  //console.log(key_words)
-  localStorage.PALAVRAS_KEY = essaSubCat.key_words;
 
   var html =
     '<div style="max-width:100% " class="container">' +
@@ -1109,7 +1199,7 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     "</div>" +
     "</div>" +
     '<div class="col-md ">' +
-    '<div onclick="salvaModalSubCategoria()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:10% auto" class="input-group">' +
+    '<div onclick="SALVA_EDIT_NEW()" style="cursor:pointer;border-radius: 20px; font: normal normal bold 1rem Roboto; background-color: #f6b504; max-width: 200px; height: 40px; border: 2px solid #f6b504; float: left; margin:10% auto" class="input-group">' +
     '<label  style="cursor:pointer;margin: -5% auto;text-align: center;    min-width: 60%; color: white !important; font-size: 1.2rem" class="label">Salvar</label>' +
     "</div>" +
     "</div>" +
@@ -1117,8 +1207,14 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     //======================================================ABA DE BANNERS==================================================================================================================
 
     `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
-        <input onchange="uploadBannerCat($(this))" type="file" id="pegaBannerCat" style="display:none">
-        <input onchange="uploadBannerCatVertical($(this))" type="file" id="pegaBannerCatVertical" style="display:none">
+        <input onchange="uploadBannerCatMainNew($(this), ${categoria.id},${
+      subcategoria.id
+    })" type="file" id="pegaBannerCatMainSub" style="display:none">
+        <input onchange="uploadBannerCatVerticalMainNew($(this), ${
+          categoria.id
+        },${
+      subcategoria.id
+    })" type="file" id="inputColetorSub" style="display:none">
             <section class="areaBanner verticalScroll">
                 <div class="row">
                     <div style="margin: 1% 2%;" class="switch__container"><input id="switch-shadow1777"
@@ -1127,7 +1223,9 @@ function modalEditSubCategories(subCategoria, categoria, element) {
                     <label style="font-size: 20px;" class="label">Página de categoria</label>
                     <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
                 </div>
-                <div alvo="novo" style="cursor:pointer" onclick="alteraBannerCat($(this))" class="areaDropDot">
+                <div alvo="novo" style="cursor:pointer" onclick="coletaBannerMain1($(this), ${
+                  categoria.id
+                }, ${subcategoria.id})" class="areaDropDot">
                     <div class="iconeDrop9">
                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
@@ -1148,14 +1246,26 @@ function modalEditSubCategories(subCategoria, categoria, element) {
                     Banners ativos
                     <div class="btnQtdBanner">
                         <p class="txtQtdBanner listaBannersCatActive">${
-                          getBannerInner(essaSubCat?.banners, true).total
-                        }/${
-      essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
-    }</p>
+                          getBannerInnerMainNew(
+                            subcategoria?.banners?.default,
+                            true,
+                            categoria.id,
+                            subcategoria.id,
+                            categoria.id
+                          ).total
+                        }/${subcategoria?.banners?.length ?? 0}</p>
                     </div>
                 </div>
                 <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${getBannerInner(essaSubCat?.banners, true).html}
+                ${
+                  getBannerInnerMainNew(
+                    subcategoria?.banners?.default,
+                    true,
+                    categoria.id,
+                    subcategoria.id,
+                    categoria.id
+                  ).html
+                }
                    
                 </ul>
                 
@@ -1164,14 +1274,26 @@ function modalEditSubCategories(subCategoria, categoria, element) {
                     Banners desativados
                     <div class="btnQtdBanner">
                         <p class="txtQtdBanner listaBannersCatInactive">${
-                          getBannerInner(essaSubCat?.banners, false).total
-                        }/${
-      essaSubCat?.banners?.length ? essaSubCat?.banners?.length : 0
-    }</p>
+                          getBannerInnerMainNew(
+                            subcategoria?.banners?.default,
+                            "false",
+                            categoria.id,
+                            subcategoria.id,
+                            categoria.id
+                          ).total
+                        }/${subcategoria?.banners?.length ?? 0}</p>
                     </div>
                 </div>
                 <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${getBannerInner(essaSubCat?.banners, false).html}
+                ${
+                  getBannerInnerMainNew(
+                    subcategoria?.banners?.default,
+                    "false",
+                    categoria.id,
+                    subcategoria.id,
+                    categoria.id
+                  ).html
+                }
                    
                 </ul>
                 
@@ -1186,7 +1308,9 @@ function modalEditSubCategories(subCategoria, categoria, element) {
                     Banner de menu                  
                 </div>
                 <hr/>
-                <div alvo="novo"  style="cursor:pointer" onclick="alteraBannerCatVertical($(this))" class="areaDropDot">
+                <div alvo="novo"  style="cursor:pointer" onclick="coletaBannerVertical($(this), ${
+                  categoria.id
+                }, ${subcategoria.id})" class="areaDropDot">
                     <div class="iconeDrop9">
                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
@@ -1204,7 +1328,15 @@ function modalEditSubCategories(subCategoria, categoria, element) {
                     </div>
                 </div>
                 <div id="bannersVerticais">
-               ${getBannerVertical(essaSubCat?.bannersVertical, false).html}
+               ${
+                 getBannerVerticalMainNew(
+                   subcategoria?.banners?.asideMenu,
+                   1,
+                   categoria.id,
+                   subcategoria.id,
+                   categoria.id
+                 ).html
+               }
                  </div>
             </section>
         </div>` +
@@ -1214,9 +1346,9 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
     '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
     '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="smart" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" ' +
-    smart +
+    subcategoria.title +
+    `\'" onchange="setPriorizationSubCat($(this), ${categoria.id},${subcategoria.id},'smart')" ` +
+    ((smart && smart != "false") || smart == "true" ? 'checked="true"' : "") +
     ' id="switch-shadow1988" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1988"></label></div>' +
     '<label style="font-size: 20px;" class="label">Smart</label>' +
     "</div>" +
@@ -1227,9 +1359,11 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
     '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
     '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="maisVendidos"  subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" ' +
-    maisVendidos +
+    subcategoria.title +
+    `\'" onchange="setPriorizationSubCat($(this), ${categoria.id},${subcategoria.id},'bestSellers')" ` +
+    ((maisVendidos && maisVendidos != "false") || maisVendidos == "true"
+      ? 'checked="true"'
+      : "") +
     ' id="switch-shadow1999" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1999"></label></div>' +
     '<label style="font-size: 20px;" class="label">Produtos mais vendidos da subcategoria</label>' +
     "</div>" +
@@ -1240,9 +1374,11 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
     '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
     '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="ofertas" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" ' +
-    ofertas +
+    subcategoria.title +
+    `\'" onchange="setPriorizationSubCat($(this), ${categoria.id},${subcategoria.id},'offers')" ` +
+    ((ofertas && ofertas != "false") || ofertas == "true"
+      ? 'checked="true"'
+      : "") +
     ' id="switch-shadow1900" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1900"></label></div>' +
     '<label style="font-size: 20px;" class="label">Ofertas da subcategoria</label>' +
     "</div>" +
@@ -1254,9 +1390,11 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     '<div style="margin-top: 3% !important;" class="col-md-12 grupo">' +
     '<div style="padding: 0 2%; margin-top: 2%;" class="row">' +
     '<div style="margin: 1% 2%;" class="switch__container"><input fieldName="personalizada" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" ' +
-    personalizada +
+    subcategoria.title +
+    `\'" onchange="setPriorizationSubCat($(this), ${categoria.id},${subcategoria.id},'personal')" ` +
+    ((personalizada && personalizada != "false") || personalizada == "true"
+      ? 'checked="true"'
+      : "") +
     ' id="switch-shadow1944" class="switch switch--shadow" type="checkbox" /><label for="switch-shadow1944"></label></div>' +
     '<label style="font-size: 20px;" class="label">Priorização personalizada</label>' +
     "</div>" +
@@ -1273,8 +1411,8 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     "<input  " +
     activeOrNot +
     '   fieldName="status"  subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" id="switch-shadow18" class="switch switch--shadow" type="checkbox" />' +
+    subcategoria.title +
+    `'" onchange="editCategoryField(false, ${categoria.id},'active','NONE',${subcategoria.id},'active',$(this)[0].checked )" id="switch-shadow18" class="switch switch--shadow" type="checkbox" />` +
     '<label for="switch-shadow18"></label>' +
     "</div>" +
     '<label style=" font-size: 20px;" class="label">Subcategoria Ativa</label> ' +
@@ -1289,9 +1427,9 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct" placeholder="Produtos relacionados" id="nomeCategoria" idParent="' +
     textElement.attr("id") +
     '"  fieldName="subCategoria" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" value="' +
-    subCategoria +
+    subcategoria.title +
+    `'" onchange="editCategoryField(false, ${categoria.id},'active','NONE',${subcategoria.id},'title',$(this).val())" value="` +
+    subcategoria.title +
     '"></div><br> ' +
     "</div>" +
     "</div><br><hr><br>" +
@@ -1313,10 +1451,10 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     '<div style="padding:0 2%" class="row">' +
     '<div class="col-md-12">' +
     '<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input value="' +
-    title +
+    subcategoria?.metatitle +
     '"   fieldName="title" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))"  style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas" id="' +
+    subcategoria.title +
+    `\'" onchange="editCategoryField(false, ${categoria.id},'active','NONE',${subcategoria.id},'metatitle',$(this).val())"  style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas" id="` +
     aleatoryID() +
     '" ></div><br> ' +
     "</div>" +
@@ -1329,8 +1467,8 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     '<div style="padding:0 2%" class="row">' +
     '<div class="col-md-12">' +
     '<div class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><textarea  fieldName="description" subCategorieName="\'' +
-    subCategoria +
-    '\'" onchange="setSubCatAtt($(this))" placeholder="Frutas no Kalimera. Compre online, limão, tangerina, kiwi e muitas outras frutas com os melhores preços e fretegratis."  style="background: #EFEFEF; border:none; font-size: 1.3rem; max-height: 100%" rows="3"   class="form-control">' +
+    subcategoria.title +
+    `\'" onchange="editCategoryField(false, ${categoria.id},'active','NONE',${subcategoria.id},'description',$(this).val())" placeholder="Frutas no Kalimera. Compre online, limão, tangerina, kiwi e muitas outras frutas com os melhores preços e fretegratis."  style="background: #EFEFEF; border:none; font-size: 1.3rem; max-height: 100%" rows="3"   class="form-control">` +
     description +
     "</textarea>" +
     "</div>" +
@@ -1345,13 +1483,13 @@ function modalEditSubCategories(subCategoria, categoria, element) {
     '<div class="col-md-12">' +
     '<div class="listaPalavrasKey  notScroll verticalScroll" contentEditable="true" placeholder="digite aqui e aperte enter..." class="group-input2"  style="padding: 1%;background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px; min-height: 150px !important;">' +
     '<div><input categorie_name="' +
-    subCategoria +
+    subcategoria.title +
     '" container="listaPalavrasKey"  fieldName="key_words" onkeydown="addWordKeyNew($(this), ' +
     categoria.id +
     ", " +
-    subCategoria.id +
+    subcategoria.id +
     ', this)" type="text" class="form-control entraPalavra" placeholder="Digite sua palavra aqui e pressione enter..." style="border: none; font-size: 1.3rem;height: auto; width: 90%;"/></div>' +
-    WordKeyNew(key_words) +
+    asWords +
     "</div>" +
     "</div>" +
     "</div>" +
@@ -1377,17 +1515,8 @@ function modalEditSubCategories(subCategoria, categoria, element) {
         $(this).removeClass("ui-sortable-handle");
       });
       let thisSubCategory = {
-        categoryMain: subCategoria,
+        categoryMain: subcategoria?.title,
       };
-      function makeMeToSet(element) {
-        let subCategory = element.attr("subCategory");
-        let myValue = element.val();
-        let myNameValue = element.attr("nameValue");
-        if (element.attr("type") == "checkbox") {
-          myValue = element[0].checked;
-        }
-        thisSubCategory[myNameValue] = myValue;
-      }
     },
     callback: function () {
       //////console.log('The styles was removed!');
@@ -1403,6 +1532,7 @@ function modalEditSubCategories(subCategoria, categoria, element) {
 }
 
 function addWordKeyNew(elemento, idCat, idSub, e) {
+  console.log("addWordKeyNew", idCat, idSub);
   e = window.event;
   var code = e.which || e.keyCode;
 
@@ -1422,17 +1552,19 @@ function addWordKeyNew(elemento, idCat, idSub, e) {
 }
 
 function palavrasKeyNew(palavra, regra, idCat, idSub) {
-  console.log(palavra, regra, idCat, idSub);
+  console.log("palavrasKeyNew", palavra, regra, idCat, idSub);
   idCat = Number(idCat);
-  idSub = idSub ? Number(idSub) : null;
   var palavras = null;
-  if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+  console.log(idSub, idSub == 0);
+  if (idSub || idSub == 0) {
+    console.log("opt 1");
     palavras =
       categoriesObject.categories[idCat].subcategories[idSub]?.keywords;
     if (!palavras) {
       palavras = [];
     }
   } else if (idCat || idCat == 0) {
+    console.log("opt 2");
     palavras = categoriesObject.categories[idCat]?.keywords;
     if (!palavras) {
       palavras = [];
@@ -1480,10 +1612,12 @@ function palavrasKeyNew(palavra, regra, idCat, idSub) {
     }
   }
 
-  if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
+  if (idSub || idSub == 0) {
+    console.log("opt f 1");
     categoriesObject.categories[idCat].subcategories[idSub]["keywords"] =
       palavras;
   } else if (idCat || idCat == 0) {
+    console.log("opt f 2");
     categoriesObject.categories[idCat]["keywords"] = palavras;
   }
   console.log(categoriesObject);
@@ -1572,71 +1706,76 @@ function uploadBannerCatMainNew(element, idCat, idSub) {
       }
 
       if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
-        if (
-          !categoriesObject.categories[idCat].subcategories[idSub]["banners"] ||
-          !categoriesObject.categories[idCat].subcategories[idSub]["banners"][
-            "default"
-          ]
-        ) {
-          categoriesObject.categories[idCat].subcategories[idSub]["banners"] = {
+        const busca = categoriesObject.categories
+          .find((a) => Number(a.id) === Number(idCat))
+          .subcategories.find((a) => Number(a.id) === Number(idSub));
+        if (!busca["banners"] || !busca["banners"]["default"]) {
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            .subcategories.find((a) => Number(a.id) === Number(idSub))[
+            "banners"
+          ] = {
+            ...busca["banners"],
             default: [],
-            asideMenu: [],
           };
         }
-        const exists = categoriesObject.categories[idCat].subcategories[idSub][
-          "banners"
-        ]["default"].find((x) => x.id === myId);
+        const exists = busca["banners"]["default"].find((x) => x.id === myId);
 
         if (!exists) {
-          categoriesObject.categories[idCat].subcategories[idSub]["banners"][
-            "default"
-          ].push({
-            url: myUrlPath,
-            id: myId,
-            link: "",
-            active: 1,
-          });
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            .subcategories.find((a) => Number(a.id) === Number(idSub))
+            ["banners"]["default"].push({
+              url: myUrlPath,
+              id: myId,
+              link: "",
+              active: 1,
+            });
         } else {
-          categoriesObject.categories[idCat].subcategories[idSub]["banners"][
-            "default"
-          ].map((x, index) => {
-            if (x.id === myId) {
-              x.url = myUrlPath;
-            }
-          });
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            .subcategories.find((a) => Number(a.id) === Number(idSub))
+            ["banners"]["default"].map((x, index) => {
+              if (x.id === myId) {
+                x.url = myUrlPath;
+              }
+            });
         }
 
         console.log("URL CRIADA", data, categoriesObject);
       } else if (idCat || idCat == 0) {
-        if (
-          !categoriesObject.categories[idCat]["banners"] ||
-          !categoriesObject.categories[idCat]["banners"]["default"]
-        ) {
-          categoriesObject.categories[idCat]["banners"] = {
+        const busca = categoriesObject.categories.find(
+          (a) => Number(a.id) === Number(idCat)
+        );
+
+        if (!busca["banners"] || !busca["banners"]["default"]) {
+          categoriesObject.categories.find(
+            (a) => Number(a.id) === Number(idCat)
+          )["banners"] = {
+            ...busca["banners"],
             default: [],
-            asideMenu: [],
           };
         }
 
-        const exists = categoriesObject.categories[idCat]["banners"][
-          "default"
-        ].find((x) => x.id === myId);
+        const exists = busca["banners"]["default"].find((x) => x.id === myId);
 
         if (!exists) {
-          categoriesObject.categories[idCat]["banners"]["default"].push({
-            url: myUrlPath,
-            id: myId,
-            link: "",
-            active: 1,
-          });
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            ["banners"]["default"].push({
+              url: myUrlPath,
+              id: myId,
+              link: "",
+              active: 1,
+            });
         } else {
-          categoriesObject.categories[idCat]["banners"]["default"].map(
-            (x, index) => {
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            ["banners"]["default"].map((x, index) => {
               if (x.id === myId) {
                 x.url = myUrlPath;
               }
-            }
-          );
+            });
         }
         console.log("URL CRIADA", data, categoriesObject);
       }
@@ -1705,7 +1844,9 @@ function getBannerInnerNew(imgURLs, actives, idCat, idSub, id) {
                     </div>
                    
                     <div  alvo="update" id="${imgURLs[k].id}"
-                    onclick="uploadBannerCatMainNew($(this), ${idCat},${idSub},${id})"  ${
+                    onclick="uploadBannerCatMainNew($(this), ${idCat},${idSub},${
+        imgURLs[k].id
+      })"  ${
         imgURLs[k].url
           ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
           : ""
@@ -1716,7 +1857,7 @@ function getBannerInnerNew(imgURLs, actives, idCat, idSub, id) {
     onchange="editLinkFromBanner($(this), ${idCat},${idSub}, 'default','${
         imgURLs[k].id
       }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
-        imgURLs[k].link
+        imgURLs[k].link ?? ""
       }"></div>
                  
                
@@ -1783,68 +1924,77 @@ function uploadBannerCatVerticalMainNew(element, idCat, idSub) {
       }
 
       if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
-        if (
-          !categoriesObject.categories[idCat].subcategories[idSub]["banners"]
-        ) {
-          categoriesObject.categories[idCat].subcategories[idSub]["banners"] = {
-            default: [],
+        const busca = categoriesObject.categories
+          .find((a) => Number(a.id) === Number(idCat))
+          .subcategories.find((a) => Number(a.id) === Number(idSub));
+        if (!busca["banners"] || !busca["banners"]["asideMenu"]) {
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            .subcategories.find((a) => Number(a.id) === Number(idSub))[
+            "banners"
+          ] = {
+            ...busca["banners"],
             asideMenu: [],
           };
         }
 
-        const exists = categoriesObject.categories[idCat].subcategories[idSub][
-          "banners"
-        ]["asideMenu"].find((x) => x.id === myId);
+        const exists = busca["banners"]["asideMenu"].find((x) => x.id === myId);
         console.log("EXISTO", exists);
         if (!exists) {
-          categoriesObject.categories[idCat].subcategories[idSub]["banners"][
-            "asideMenu"
-          ].push({
-            url: myUrlPath,
-            id: myId,
-            link: "",
-            active: 1,
-          });
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            ["banners"]["asideMenu"].push({
+              url: myUrlPath,
+              id: myId,
+              link: "",
+              active: 1,
+            });
         } else {
-          categoriesObject.categories[idCat].subcategories[idSub]["banners"][
-            "asideMenu"
-          ].map((x, index) => {
-            if (x.id === myId) {
-              x.url = myUrlPath;
-            }
-          });
-        }
-      } else if (idCat || idCat == 0) {
-        if (
-          !categoriesObject.categories[idCat]["banners"] ||
-          !categoriesObject.categories[idCat]["banners"]["asideMenu"]
-        ) {
-          categoriesObject.categories[idCat]["banners"] = {
-            default: [],
-            asideMenu: [],
-          };
-        }
-        console.log(categoriesObject.categories[idCat]["banners"]);
-
-        const exists = categoriesObject.categories[idCat]["banners"][
-          "asideMenu"
-        ].find((x) => x.id === myId);
-        console.log("EXISTO CAT", exists);
-        if (!exists) {
-          categoriesObject.categories[idCat]["banners"]["asideMenu"].push({
-            url: myUrlPath,
-            id: myId,
-            link: "",
-            active: 1,
-          });
-        } else {
-          categoriesObject.categories[idCat]["banners"]["asideMenu"].map(
-            (x, index) => {
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            ["banners"]["asideMenu"].map((x, index) => {
               if (x.id === myId) {
                 x.url = myUrlPath;
               }
-            }
-          );
+            });
+        }
+      } else if (idCat || idCat == 0) {
+        const busca = categoriesObject.categories.find(
+          (a) => Number(a.id) === Number(idCat)
+        );
+        if (!busca["banners"] || !busca["banners"]["asideMenu"]) {
+          categoriesObject.categories.find(
+            (a) => Number(a.id) === Number(idCat)
+          )["banners"] = {
+            ...busca["banners"],
+            asideMenu: [],
+          };
+        }
+        console.log(
+          categoriesObject.categories.find(
+            (a) => Number(a.id) === Number(idCat)
+          )["banners"]
+        );
+
+        const exists = busca["banners"]["asideMenu"].find((x) => x.id === myId);
+        console.log("EXISTO CAT", exists);
+        if (!exists) {
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            ["banners"]["asideMenu"].push({
+              url: myUrlPath,
+              id: myId,
+              link: "",
+              active: 1,
+            });
+        } else {
+          categoriesObject.categories
+            .find((a) => Number(a.id) === Number(idCat))
+            ["banners"]["asideMenu"].map((x, index) => {
+              if (x.id === myId) {
+                x.url = myUrlPath;
+              }
+            });
         }
       }
 
@@ -1929,7 +2079,7 @@ function getBannerVerticalNew(imgURLs, actives, idCat, idSub, id) {
     onchange="editLinkFromBanner($(this), ${idCat},${idSub},'asideMenu','${
       imgURLs[k].id
     }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
-      imgURLs[k].link
+      imgURLs[k].link ?? ""
     }"></div>
             </div>`;
   }
@@ -2021,7 +2171,7 @@ function getBannerInnerMainNew(imgURLs, actives, idCat, idSub, id) {
     onchange="editLinkFromBanner($(this), ${idCat},${idSub}, 'default','${
           imgURLs[k].id
         }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
-          imgURLs[k].link
+          imgURLs[k].link ?? ""
         }"></div>
                 </li>`;
       }
@@ -2115,7 +2265,7 @@ function getBannerVerticalMainNew(imgURLs, actives, idCat, idSub, id) {
     onchange="editLinkFromBanner($(this), ${idCat},${idSub},'asideMenu','${
         imgURLs[k].id
       }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
-        imgURLs[k].link
+        imgURLs[k].link ?? ""
       }"></div>
                 </div>`;
     }
@@ -2131,8 +2281,13 @@ function coletaBannerMain1(elemento, idCat, idSub) {
       ? elemento.attr("id")
       : idCat + "-" + idSub + "-" + Date.now();
   elemento.attr("id", newID);
-  $("#pegaBannerCatMain").attr("target", newID);
-  $("#pegaBannerCatMain").click();
+  if (idSub || idSub == 0) {
+    $("#pegaBannerCatMainSub").attr("target", newID);
+    $("#pegaBannerCatMainSub").click();
+  } else {
+    $("#pegaBannerCatMain").attr("target", newID);
+    $("#pegaBannerCatMain").click();
+  }
 }
 function coletaBannerVertical(elemento, idCat, idSub) {
   console.log("ELEMNTO ID ", elemento.attr("id"));
@@ -2141,8 +2296,13 @@ function coletaBannerVertical(elemento, idCat, idSub) {
       ? elemento.attr("id")
       : idCat + "-" + idSub + "-" + Date.now();
   elemento.attr("id", newID);
-  $("#inputColetor").attr("target", newID);
-  $("#inputColetor").click();
+  if (idSub || idSub == 0) {
+    $("#inputColetorSub").attr("target", newID);
+    $("#inputColetorSub").click();
+  } else {
+    $("#inputColetor").attr("target", newID);
+    $("#inputColetor").click();
+  }
 }
 
 function changeMyActiveMainNew(element, idCat, idSub, type, id) {
@@ -2217,7 +2377,7 @@ function aleatoryIDNew(text) {
 async function SALVA_EDIT_NEW() {
   $(".close").click();
   await publicarAlteracoes();
-  location.reload();
+  getCategories();
 }
 
 function editLinkFromBanner(elemento, idCat, idSub, type, id) {
@@ -2281,7 +2441,7 @@ function nossosIcones(essaCat, essaSubCat) {
   }
 
   if (!essaSubCat) {
-    for (let a = 1; a < 29; a++) {
+    for (let a = 1; a < 26; a++) {
       if (a < 10) {
         a = "0" + a;
       }
@@ -2302,7 +2462,7 @@ function nossosIcones(essaCat, essaSubCat) {
           essaCat.id +
           ')" class="boxIconDefault boxIconeActive">' +
           '<i class="fas fa-check iconSelectedCheck"></i>' +
-          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' +
+          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo000' +
           a +
           '.svg" />' +
           "</div>";
@@ -2318,14 +2478,14 @@ function nossosIcones(essaCat, essaSubCat) {
           essaCat.id +
           ')" class="boxIconDefault boxIcone">' +
           '<i style="display:none" class="fas fa-check iconSelectedCheck"></i>' +
-          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' +
+          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo000' +
           a +
           '.svg" />' +
           "</div>";
       }
     }
   } else {
-    for (let a = 1; a < 29; a++) {
+    for (let a = 1; a < 26; a++) {
       if (a < 10) {
         a = "0" + a;
       }
@@ -2348,7 +2508,7 @@ function nossosIcones(essaCat, essaSubCat) {
           essaSubCat.id +
           ')" class="boxIconDefault boxIconeActive">' +
           '<i class="fas fa-check iconSelectedCheck"></i>' +
-          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' +
+          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo000' +
           a +
           '.svg" />' +
           "</div>";
@@ -2366,7 +2526,7 @@ function nossosIcones(essaCat, essaSubCat) {
           essaSubCat.id +
           ')" class="boxIconDefault boxIcone">' +
           '<i style="display:none" class="fas fa-check iconSelectedCheck"></i>' +
-          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo 000' +
+          '<img class="imgIcone" style="width: 100%;" src="images/icons/Arquivo000' +
           a +
           '.svg" />' +
           "</div>";
@@ -2467,9 +2627,19 @@ function nossosIcones2(essaCat, essaSubCat) {
 function escolheIcone(elemento, url, idCat, idSub) {
   console.log("MUDANO O ICONE", elemento, url, idCat, idSub);
   if ((idCat && idSub) || (idCat == 0 && idSub == 0)) {
-    categoriesObject.categories[idCat].subcategories[idSub].icon = url;
+    categoriesObject.categories
+      .find((a) => Number(a.id) === Number(idCat))
+      .subcategories.map((x) => {
+        if (Number(x.id) === Number(idSub)) {
+          x.icon = url;
+        }
+      });
   } else if (idCat || idCat == 0) {
-    categoriesObject.categories[idCat].icon = url;
+    categoriesObject.categories.map((x) => {
+      if (Number(x.id) === Number(idCat)) {
+        x.icon = url;
+      }
+    });
   }
   console.log("EDITING ICON", categoriesObject);
   $(".boxIconDefault").removeClass("boxIconeActive");
@@ -2477,4 +2647,84 @@ function escolheIcone(elemento, url, idCat, idSub) {
   elemento.find(".iconSelectedCheck").show();
 
   elemento.addClass("boxIconeActive");
+}
+
+function setPriorizationSubCat(elemento, idCat, idSub, type) {
+  categoriesObject.categories[Number(idCat)].subcategories[
+    Number(idSub)
+  ].priorization[type] = elemento[0].checked;
+  console.log("seting priorization", categoriesObject);
+}
+
+function destaque(alvo, titulo, instrucao) {
+  console.log(alvo, titulo, instrucao);
+  const tour = new Shepherd.Tour({
+    defaultStepOptions: {
+      cancelIcon: {
+        enabled: true,
+      },
+      classes: `'${alvo.split(".")[1]}'`,
+      scrollTo: { behavior: "smooth", block: "center" },
+    },
+  });
+
+  tour.addStep({
+    title: titulo,
+    text: instrucao,
+    attachTo: {
+      element: alvo,
+      on: "bottom",
+    },
+    buttons: [
+      {
+        action() {
+          console.log("proximo");
+          return this.next();
+        },
+        classes: "botaoInstrutorVolta",
+        text: "Veja onde salvar!",
+      },
+    ],
+    id: "creating",
+  });
+  tour.addStep({
+    title: "Clique aqui para salvar!",
+    text: "Este campo salva as suas alterações definitivamente!",
+    attachTo: {
+      element: ".destaqueSalvar",
+      on: "bottom",
+    },
+    buttons: [
+      {
+        action() {
+          return this.back();
+        },
+        classes: "botaoInstrutorProximo",
+        text: "Volta",
+      },
+      {
+        action() {
+          console.log("proximo");
+          return this.next();
+        },
+        classes: "botaoInstrutorVolta",
+        text: "Ok, entendido!",
+      },
+    ],
+    id: "creating",
+  });
+
+  tour.start();
+}
+function searchPorCategorias(element) {
+  let valor = element.val();
+  console.log("Buscando por", valor);
+  $(".itemSortable2").each(function () {
+    let conteudo = $(this).text();
+    if (conteudo.indexOf(valor) > -1) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
 }
