@@ -412,9 +412,8 @@ function subcategoryElementLiNew(dado, mainId) {
   let dtN = Date.now() + aleatoryIDNew();
   for (const k in dado) {
     html += `
-  <li idCat="${mainId}" idSub="${
-      dado[k].id
-    }" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle " >
+  <li idCat="${mainId}" idSub="${dado[k].id
+      }" draggable="true" class="list-sub-item nova_sub newSub itemSortable ui-sortable-handle " >
                             <div class="row"
                                 style="display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
                                 <span class="trilha2" style="opacity: 1;">.....</span>
@@ -435,48 +434,40 @@ function subcategoryElementLiNew(dado, mainId) {
                                                         transform="translate(5)"></path>
                                                 </svg></div>
                                             <div class="col-sm  numberCat" style="opacity: 1;">
-                                                <sp class="posicaoSubCategoriaNew">${
-                                                  dado[k].id
-                                                }</sp>
+                                                <sp class="posicaoSubCategoriaNew">${dado[k].id
+      }</sp>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm" style="opacity: 1;"><label  
-                                            class="label nomeCategoria SUB_CATEGORIA">${
-                                              dado[k].title
-                                            }</label></div>
+                                            class="label nomeCategoria SUB_CATEGORIA">${dado[k].title
+      }</label></div>
                                     <div class="col-sm opacity0" style="opacity: 1;"><label
                                             class="label totalSubCategorias">00 Subcategorias</label></div>
                                     <div class="col-sm" style="opacity: 1;">
                                         <div class="row">
                                             <div class="switch__container "
                                                 style="opacity: 1;margin-top: 5%;"><input  
-                                                    onchange="flagCategoryNew($(this),${mainId}, ${
-      dado[k]?.id
-    })" ${
-      dado[k]?.active && dado?.active !== "false" ? 'checked="checked"' : ""
-    }
+                                                    onchange="flagCategoryNew($(this),${mainId}, ${dado[k]?.id
+      })" ${dado[k]?.active && dado?.active !== "false" ? 'checked="checked"' : ""
+      }
                                                     
-                                                    id="switch-shadow01234019${dtN}-${mainId}-${
-      dado[k]?.id
-    }"
+                                                    id="switch-shadow01234019${dtN}-${mainId}-${dado[k]?.id
+      }"
                                                     class="switch switch--shadow ativa-me2" type="checkbox"><label
-                                                    for="switch-shadow01234019${dtN}-${mainId}-${
-      dado[k]?.id
-    }"></label></div><label
+                                                    for="switch-shadow01234019${dtN}-${mainId}-${dado[k]?.id
+      }"></label></div><label
                                                 class="label catAtiva" style="opacity: 1;">Subcategoria ativa</label>
                                         </div>
                                     </div>
                                     <div class="col-sm" style="opacity: 1;">
-                                        <div   onclick="modalEditSubCategories($(this), ${mainId},${
-      dado[k].id
-    })" class="input-group catEdit destaque-${mainId}-${dado[k].id}"><label
+                                        <div   onclick="modalEditSubCategories($(this), ${mainId},${dado[k].id
+      })" class="input-group catEdit destaque-${mainId}-${dado[k].id}"><label
                                                 style="margin: auto; color: #f6b504">Editar Subcategoria</label></div>
                                     </div>
                                     <div style="max-width: 70px; opacity: 1;" class="col-sm ">
-                                        <div onclick="duplicateCategoryNew($(this), ${mainId},${
-      dado[k].id
-    })" class=" duplicate"><svg xmlns="http://www.w3.org/2000/svg"
+                                        <div onclick="duplicateCategoryNew($(this), ${mainId},${dado[k].id
+      })" class=" duplicate"><svg xmlns="http://www.w3.org/2000/svg"
                                                 style=" fill: #f6b504;   margin: auto;" width="12" height="14"
                                                 viewBox="0 0 12 14">
                                                 <path id="duplicate"
@@ -485,9 +476,8 @@ function subcategoryElementLiNew(dado, mainId) {
                                             </svg></div>
                                     </div>
                                     <div style="max-width: 70px; opacity: 1;" class="col-sm">
-                                        <div onclick="deleteCategoryNew($(this), ${mainId},${
-      dado[k].id
-    })" class=" deleteThis"><svg
+                                        <div onclick="deleteCategoryNew($(this), ${mainId},${dado[k].id
+      })" class=" deleteThis"><svg
                                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19"
                                                 viewBox="0 0 21 21" style="fill: #f6b504;margin: 9px;">&gt;<defs></defs>
                                                 <path class="a"
@@ -521,52 +511,43 @@ function categoryElementLiNew(dado, id) {
                                 d="M2.5,16h-1A1.5,1.5,0,0,1,0,14.5v-1A1.5,1.5,0,0,1,1.5,12h1A1.5,1.5,0,0,1,4,13.5v1A1.5,1.5,0,0,1,2.5,16Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1a.5.5,0,0,0,.5-.5v-1a.5.5,0,0,0-.5-.5Zm1-3h-1A1.5,1.5,0,0,1,0,8.5v-1A1.5,1.5,0,0,1,1.5,6h1A1.5,1.5,0,0,1,4,7.5v1A1.5,1.5,0,0,1,2.5,10Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,8.5v-1A.5.5,0,0,0,2.5,7Zm1-3h-1A1.5,1.5,0,0,1,0,2.5v-1A1.5,1.5,0,0,1,1.5,0h1A1.5,1.5,0,0,1,4,1.5v1A1.5,1.5,0,0,1,2.5,4Zm-1-3a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h1A.5.5,0,0,0,3,2.5v-1A.5.5,0,0,0,2.5,1Z"
                                 transform="translate(5)"></path>
                         </svg></div>
-                    <div class="col-sm posicaoCategoriaNew numberCat" style="opacity: 1;">${
-                      dado.id
-                    }</div>
+                    <div class="col-sm posicaoCategoriaNew numberCat" style="opacity: 1;">${dado.id
+    }</div>
                 </div>
             </div>
             <div style="max-width: 70px; margin: 7px auto; opacity: 1;" class="col-sm">
                 <div style="max-width: 120px;" class="iconCategorie"><img style="    max-width: 30px !important;"
-                        src="${
-                          "/assets/icons/" + dado.icon && dado.icon !== ""
-                            ? "/assets/icons/" + dado.icon
-                            : `/assets/icons/cliente_IconeEmbalagens.png`
-                        }"></div>
+                        src="${"/assets/icons/" + dado.icon && dado.icon !== ""
+      ? "/assets/icons/" + dado.icon
+      : `/assets/icons/cliente_IconeEmbalagens.png`
+    }"></div>
             </div>
             <div class="col-sm" style="opacity: 1;"><label
-                    class="label nomeCategoria CATEGORIA_PRINCIPAL">${
-                      dado.title
-                    }</label></div>
-            <div class="col-sm" style="opacity: 1;"><label class="label totalSubCategorias">${
-              dado?.subcategories?.length ?? 0
-            } Subcategorias</label>
+                    class="label nomeCategoria CATEGORIA_PRINCIPAL">${dado.title
+    }</label></div>
+            <div class="col-sm" style="opacity: 1;"><label class="label totalSubCategorias">${dado?.subcategories?.length ?? 0
+    } Subcategorias</label>
             </div>
             <div class="col-sm" style="opacity: 1;">
                 <div class="row">
                     <div class="switch__container " style="opacity: 1;margin-top: 5%;">
-                    <input onchange="flagCategoryNew($(this), ${dado?.id})" ${
-    dado?.active && dado?.active !== "false" ? 'checked="checked"' : ""
-  } id="switch-shadow03101${
-    dado?.id
-  }" class="switch switch--shadow ativa-me " type="checkbox" />
+                    <input onchange="flagCategoryNew($(this), ${dado?.id})" ${dado?.active && dado?.active !== "false" ? 'checked="checked"' : ""
+    } id="switch-shadow03101${dado?.id
+    }" class="switch switch--shadow ativa-me " type="checkbox" />
                     <label
-                            for="switch-shadow03101${
-                              dado?.id
-                            }"></label></div><label class="label catAtiva"
+                            for="switch-shadow03101${dado?.id
+    }"></label></div><label class="label catAtiva"
                         style="opacity: 1;">Categoria ativa</label>
                 </div>
             </div>
             <div class="col-sm" style="opacity: 1;">
-                <div  onclick="modalEditCategories($(this), '${id}')"  class="input-group catEdit destaque-${
-    dado.id
-  }"><label
+                <div  onclick="modalEditCategories($(this), '${id}')"  class="input-group catEdit destaque-${dado.id
+    }"><label
                         style="margin: auto; color: #f6b504">Editar Categoria</label></div>
             </div>
             <div style="max-width: 70px; opacity: 1;" class="col-sm ">
-                <div  onclick="duplicateCategoryNew($(this), ${
-                  dado?.id
-                })" class=" duplicate"><svg xmlns="http://www.w3.org/2000/svg"
+                <div  onclick="duplicateCategoryNew($(this), ${dado?.id
+    })" class=" duplicate"><svg xmlns="http://www.w3.org/2000/svg"
                         style=" fill: #f6b504;  cursor: pointer;  margin:auto;" width="12" height="14"
                         viewBox="0 0 12 14">
                         <path id="duplicate"
@@ -575,9 +556,8 @@ function categoryElementLiNew(dado, id) {
                     </svg></div>
             </div>
             <div style="max-width: 70px; opacity: 1;" class="col-sm">
-                <div  onclick="deleteCategoryNew($(this), ${
-                  dado?.id
-                })"   class=" deleteThis"><svg xmlns="http://www.w3.org/2000/svg"
+                <div  onclick="deleteCategoryNew($(this), ${dado?.id
+    })"   class=" deleteThis"><svg xmlns="http://www.w3.org/2000/svg"
                         width="19" height="19" viewBox="0 0 21 21" style="fill: #f6b504;margin: 9px;">&gt;<defs></defs>
                         <path class="a"
                             d="M10.937,16H3.063A2.208,2.208,0,0,1,.875,13.778V2.666H.438a.444.444,0,0,1,0-.889H4.375V1.334A1.324,1.324,0,0,1,5.687,0H8.313A1.324,1.324,0,0,1,9.625,1.334v.444h3.937a.444.444,0,0,1,0,.889h-.437V13.778A2.208,2.208,0,0,1,10.937,16ZM1.75,2.666V13.778a1.325,1.325,0,0,0,1.313,1.334h7.875a1.325,1.325,0,0,0,1.313-1.334V2.666ZM5.687.889a.441.441,0,0,0-.437.445v.444h3.5V1.334A.441.441,0,0,0,8.313.889Zm3.5,11.556A.442.442,0,0,1,8.75,12V5.778a.437.437,0,1,1,.875,0V12A.441.441,0,0,1,9.188,12.445Zm-4.375,0A.441.441,0,0,1,4.375,12V5.778a.437.437,0,1,1,.875,0V12A.442.442,0,0,1,4.812,12.445Z"
@@ -844,12 +824,10 @@ function modalEditCategories(element, catId) {
     //======================================================ABA DE BANNERS==================================================================================================================
 
     `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
-        <input alvo="novo" onchange="uploadBannerCatMainNew($(this), ${
-          categoria.id
-        })" type="file" id="pegaBannerCatMain" style="display:none">
-        <input alvo="novo" onchange="uploadBannerCatVerticalMainNew($(this), ${
-          categoria.id
-        })" type="file" id="inputColetor" style="display:none">
+        <input alvo="novo" onchange="uploadBannerCatMainNew($(this), ${categoria.id
+    })" type="file" id="pegaBannerCatMain" style="display:none">
+        <input alvo="novo" onchange="uploadBannerCatVerticalMainNew($(this), ${categoria.id
+    })" type="file" id="inputColetor" style="display:none">
             <section class="areaBanner verticalScroll">
                 <div class="row">
                     <div style="margin: 1% 2%;" class="switch__container"><input checked="true" id="switch-shadow1777"
@@ -858,9 +836,8 @@ function modalEditCategories(element, catId) {
                     <label style="font-size: 20px;" class="label">Página de categoria</label>
                     <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
                 </div>
-                <div alvo="novo" style="cursor:pointer" onclick="coletaBannerMain1($(this), ${
-                  categoria.id
-                })" class="areaDropDot">
+                <div alvo="novo" style="cursor:pointer" onclick="coletaBannerMain1($(this), ${categoria.id
+    })" class="areaDropDot">
                     <div class="iconeDrop9">
                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
@@ -880,29 +857,26 @@ function modalEditCategories(element, catId) {
                 <div class="descBanner8">
                     Banners ativos
                     <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatActive">${
-                          getBannerInnerMainNew(
-                            BANNERS?.default,
-                            true,
-                            categoria.id,
-                            null,
-                            categoria.id
-                          ).total
-                        }/${
-      BANNERS?.default?.length ? BANNERS?.default?.length : 0
+                        <p class="txtQtdBanner listaBannersCatActive">${getBannerInnerMainNew(
+      BANNERS?.default,
+      true,
+      categoria.id,
+      null,
+      categoria.id
+    ).total
+    }/${BANNERS?.default?.length ? BANNERS?.default?.length : 0
     }</p>
                     </div>
                 </div>
                 <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${
-                  getBannerInnerMainNew(
-                    BANNERS?.default,
-                    true,
-                    categoria.id,
-                    null,
-                    categoria.id
-                  ).html
-                }
+                ${getBannerInnerMainNew(
+      BANNERS?.default,
+      true,
+      categoria.id,
+      null,
+      categoria.id
+    ).html
+    }
                    
                 </ul>
                 
@@ -910,29 +884,26 @@ function modalEditCategories(element, catId) {
                 <div class="descBanner8">
                     Banners desativados
                     <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatInactive">${
-                          getBannerInnerMainNew(
-                            BANNERS?.default,
-                            "false",
-                            categoria.id,
-                            null,
-                            categoria.id
-                          ).total
-                        }/${
-      BANNERS?.default?.length ? BANNERS?.default?.length : 0
+                        <p class="txtQtdBanner listaBannersCatInactive">${getBannerInnerMainNew(
+      BANNERS?.default,
+      "false",
+      categoria.id,
+      null,
+      categoria.id
+    ).total
+    }/${BANNERS?.default?.length ? BANNERS?.default?.length : 0
     }</p>
                     </div>
                 </div>
                 <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${
-                  getBannerInnerMainNew(
-                    BANNERS?.default,
-                    "false",
-                    categoria.id,
-                    null,
-                    categoria.id
-                  ).html
-                }
+                ${getBannerInnerMainNew(
+      BANNERS?.default,
+      "false",
+      categoria.id,
+      null,
+      categoria.id
+    ).html
+    }
                    
                 </ul>
                 
@@ -947,9 +918,8 @@ function modalEditCategories(element, catId) {
                     Banner de menu                  
                 </div>
                 <hr/>
-                <div alvo="novo"  style="cursor:pointer" onclick="coletaBannerVertical($(this), ${
-                  categoria.id
-                })" class="areaDropDot">
+                <div alvo="novo"  style="cursor:pointer" onclick="coletaBannerVertical($(this), ${categoria.id
+    })" class="areaDropDot">
                     <div class="iconeDrop9">
                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
@@ -967,15 +937,14 @@ function modalEditCategories(element, catId) {
                     </div>
                 </div>
                 <div id="bannersVerticais">
-               ${
-                 getBannerVerticalMainNew(
-                   BANNERS?.asideMenu,
-                   1,
-                   categoria.id,
-                   null,
-                   categoria.id
-                 ).html
-               }
+               ${getBannerVerticalMainNew(
+      BANNERS?.asideMenu,
+      1,
+      categoria.id,
+      null,
+      categoria.id
+    ).html
+    }
                  </div>
             </section>
         </div>` +
@@ -1041,10 +1010,8 @@ function modalEditCategories(element, catId) {
     '<div style="padding:0 2%" class="row">' +
     '<div class="col-md-12">' +
     `<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
-    onchange="editCategoryField(true, ${
-      categoria.id
-    },'title',$(this).val() )" placeholder="Categoria genial" id="${aleatoryID()}'" value="${
-      categoria.title
+    onchange="editCategoryField(true, ${categoria.id
+    },'title',$(this).val() )" placeholder="Categoria genial" id="${aleatoryID()}'" value="${categoria.title
     }"></div><br>` +
     "</div>" +
     "</div><br><hr><br>" +
@@ -1066,8 +1033,7 @@ function modalEditCategories(element, catId) {
     '<div style="padding:0 2%" class="row">' +
     '<div class="col-md-12">' +
     `<div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input fieldName="categorie_title" 
-    onchange="editCategoryField(true, ${
-      categoria.id
+    onchange="editCategoryField(true, ${categoria.id
     },'metatitle',$(this).val() )" value="${categoria.metatitle}"
     style="background: none" class="form-control inputProduct" placeholder="No Kalimera você encontra tudo em frutas"  
     id="${aleatoryID()}" ></div><br>` +
@@ -1207,13 +1173,10 @@ function modalEditSubCategories(element, idCat, idSub) {
     //======================================================ABA DE BANNERS==================================================================================================================
 
     `<div id="banners" style="max-width:90% ; margin-top: 2%; display:none" class="container tabContent">
-        <input onchange="uploadBannerCatMainNew($(this), ${categoria.id},${
-      subcategoria.id
+        <input onchange="uploadBannerCatMainNew($(this), ${categoria.id},${subcategoria.id
     })" type="file" id="pegaBannerCatMainSub" style="display:none">
-        <input onchange="uploadBannerCatVerticalMainNew($(this), ${
-          categoria.id
-        },${
-      subcategoria.id
+        <input onchange="uploadBannerCatVerticalMainNew($(this), ${categoria.id
+    },${subcategoria.id
     })" type="file" id="inputColetorSub" style="display:none">
             <section class="areaBanner verticalScroll">
                 <div class="row">
@@ -1223,9 +1186,8 @@ function modalEditSubCategories(element, idCat, idSub) {
                     <label style="font-size: 20px;" class="label">Página de categoria</label>
                     <p class="txtDescreve">/Formato recomendado: 000px X 000px</p>
                 </div>
-                <div alvo="novo" style="cursor:pointer" onclick="coletaBannerMain1($(this), ${
-                  categoria.id
-                }, ${subcategoria.id})" class="areaDropDot">
+                <div alvo="novo" style="cursor:pointer" onclick="coletaBannerMain1($(this), ${categoria.id
+    }, ${subcategoria.id})" class="areaDropDot">
                     <div class="iconeDrop9">
                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
@@ -1245,27 +1207,25 @@ function modalEditSubCategories(element, idCat, idSub) {
                 <div class="descBanner8">
                     Banners ativos
                     <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatActive">${
-                          getBannerInnerMainNew(
-                            subcategoria?.banners?.default,
-                            true,
-                            categoria.id,
-                            subcategoria.id,
-                            categoria.id
-                          ).total
-                        }/${subcategoria?.banners?.length ?? 0}</p>
+                        <p class="txtQtdBanner listaBannersCatActive">${getBannerInnerMainNew(
+      subcategoria?.banners?.default,
+      true,
+      categoria.id,
+      subcategoria.id,
+      categoria.id
+    ).total
+    }/${subcategoria?.banners?.length ?? 0}</p>
                     </div>
                 </div>
                 <ul id="listaBannersCatActive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${
-                  getBannerInnerMainNew(
-                    subcategoria?.banners?.default,
-                    true,
-                    categoria.id,
-                    subcategoria.id,
-                    categoria.id
-                  ).html
-                }
+                ${getBannerInnerMainNew(
+      subcategoria?.banners?.default,
+      true,
+      categoria.id,
+      subcategoria.id,
+      categoria.id
+    ).html
+    }
                    
                 </ul>
                 
@@ -1273,27 +1233,25 @@ function modalEditSubCategories(element, idCat, idSub) {
                 <div class="descBanner8">
                     Banners desativados
                     <div class="btnQtdBanner">
-                        <p class="txtQtdBanner listaBannersCatInactive">${
-                          getBannerInnerMainNew(
-                            subcategoria?.banners?.default,
-                            "false",
-                            categoria.id,
-                            subcategoria.id,
-                            categoria.id
-                          ).total
-                        }/${subcategoria?.banners?.length ?? 0}</p>
+                        <p class="txtQtdBanner listaBannersCatInactive">${getBannerInnerMainNew(
+      subcategoria?.banners?.default,
+      "false",
+      categoria.id,
+      subcategoria.id,
+      categoria.id
+    ).total
+    }/${subcategoria?.banners?.length ?? 0}</p>
                     </div>
                 </div>
                 <ul id="listaBannersCatInactive" style="list-style: none;" class=" superSortable fullSortable ui-sortable">
-                ${
-                  getBannerInnerMainNew(
-                    subcategoria?.banners?.default,
-                    "false",
-                    categoria.id,
-                    subcategoria.id,
-                    categoria.id
-                  ).html
-                }
+                ${getBannerInnerMainNew(
+      subcategoria?.banners?.default,
+      "false",
+      categoria.id,
+      subcategoria.id,
+      categoria.id
+    ).html
+    }
                    
                 </ul>
                 
@@ -1308,9 +1266,8 @@ function modalEditSubCategories(element, idCat, idSub) {
                     Banner de menu                  
                 </div>
                 <hr/>
-                <div alvo="novo"  style="cursor:pointer" onclick="coletaBannerVertical($(this), ${
-                  categoria.id
-                }, ${subcategoria.id})" class="areaDropDot">
+                <div alvo="novo"  style="cursor:pointer" onclick="coletaBannerVertical($(this), ${categoria.id
+    }, ${subcategoria.id})" class="areaDropDot">
                     <div class="iconeDrop9">
                         <svg id="_01_Icons_Line_upload" data-name="01) Icons / Line /  upload"
                             xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">
@@ -1328,15 +1285,14 @@ function modalEditSubCategories(element, idCat, idSub) {
                     </div>
                 </div>
                 <div id="bannersVerticais">
-               ${
-                 getBannerVerticalMainNew(
-                   subcategoria?.banners?.asideMenu,
-                   1,
-                   categoria.id,
-                   subcategoria.id,
-                   categoria.id
-                 ).html
-               }
+               ${getBannerVerticalMainNew(
+      subcategoria?.banners?.asideMenu,
+      1,
+      categoria.id,
+      subcategoria.id,
+      categoria.id
+    ).html
+    }
                  </div>
             </section>
         </div>` +
@@ -1539,12 +1495,12 @@ function addWordKeyNew(elemento, idCat, idSub, e) {
   if (code == 13) {
     $("." + elemento.attr("container")).append(
       '<div class="input-group categoriaLabel categoriasPalavras"><label class="aPalavra">' +
-        elemento.val() +
-        '</label><label onclick="meRemoveNew($(this), ' +
-        idCat +
-        "," +
-        idSub +
-        ')" class="iconClose"><i class="far fa-times-circle"></i></label></div>'
+      elemento.val() +
+      '</label><label onclick="meRemoveNew($(this), ' +
+      idCat +
+      "," +
+      idSub +
+      ')" class="iconClose"><i class="far fa-times-circle"></i></label></div>'
     );
     palavrasKeyNew(elemento.val(), "add", idCat, idSub);
     elemento.val("");
@@ -1559,13 +1515,20 @@ function palavrasKeyNew(palavra, regra, idCat, idSub) {
   if (idSub || idSub == 0) {
     console.log("opt 1");
     palavras =
-      categoriesObject.categories[idCat].subcategories[idSub]?.keywords;
+      categoriesObject.categories
+        .find((x => Number(x.id) === Number(idCat))).subcategories
+        .find((x) => Number(x.id) === Number(idSub))?.keywords;
+
+
+
     if (!palavras) {
       palavras = [];
     }
   } else if (idCat || idCat == 0) {
     console.log("opt 2");
-    palavras = categoriesObject.categories[idCat]?.keywords;
+    palavras =
+      categoriesObject.categories
+        .find((x) => Number(x.id) === Number(idCat))?.keywords;
     if (!palavras) {
       palavras = [];
     }
@@ -1614,11 +1577,17 @@ function palavrasKeyNew(palavra, regra, idCat, idSub) {
 
   if (idSub || idSub == 0) {
     console.log("opt f 1");
-    categoriesObject.categories[idCat].subcategories[idSub]["keywords"] =
+
+    categoriesObject.categories
+      .find((x => Number(x.id) === Number(idCat))).subcategories
+      .find((x) => Number(x.id) === Number(idSub))["keywords"] =
       palavras;
   } else if (idCat || idCat == 0) {
     console.log("opt f 2");
-    categoriesObject.categories[idCat]["keywords"] = palavras;
+
+    categoriesObject.categories
+      .find((x => Number(x.id) === Number(idCat)))["keywords"] =
+      palavras;
   }
   console.log(categoriesObject);
 }
@@ -1725,21 +1694,21 @@ function uploadBannerCatMainNew(element, idCat, idSub) {
           categoriesObject.categories
             .find((a) => Number(a.id) === Number(idCat))
             .subcategories.find((a) => Number(a.id) === Number(idSub))
-            ["banners"]["default"].push({
-              url: myUrlPath,
-              id: myId,
-              link: "",
-              active: 1,
-            });
+          ["banners"]["default"].push({
+            url: myUrlPath,
+            id: myId,
+            link: "",
+            active: 1,
+          });
         } else {
           categoriesObject.categories
             .find((a) => Number(a.id) === Number(idCat))
             .subcategories.find((a) => Number(a.id) === Number(idSub))
-            ["banners"]["default"].map((x, index) => {
-              if (x.id === myId) {
-                x.url = myUrlPath;
-              }
-            });
+          ["banners"]["default"].map((x, index) => {
+            if (x.id === myId) {
+              x.url = myUrlPath;
+            }
+          });
         }
 
         console.log("URL CRIADA", data, categoriesObject);
@@ -1762,20 +1731,20 @@ function uploadBannerCatMainNew(element, idCat, idSub) {
         if (!exists) {
           categoriesObject.categories
             .find((a) => Number(a.id) === Number(idCat))
-            ["banners"]["default"].push({
-              url: myUrlPath,
-              id: myId,
-              link: "",
-              active: 1,
-            });
+          ["banners"]["default"].push({
+            url: myUrlPath,
+            id: myId,
+            link: "",
+            active: 1,
+          });
         } else {
           categoriesObject.categories
             .find((a) => Number(a.id) === Number(idCat))
-            ["banners"]["default"].map((x, index) => {
-              if (x.id === myId) {
-                x.url = myUrlPath;
-              }
-            });
+          ["banners"]["default"].map((x, index) => {
+            if (x.id === myId) {
+              x.url = myUrlPath;
+            }
+          });
         }
         console.log("URL CRIADA", data, categoriesObject);
       }
@@ -1822,16 +1791,13 @@ function getBannerInnerNew(imgURLs, actives, idCat, idSub, id) {
                             </div>
                         </div>
                         <br />
-                        <div style="text-align: center" class="switch__container"><input onchange="changeMyActive($(this))" thisUrl="${
-                          imgURLs[k].url
-                        }" ${
-        imgURLs[k].active == true ? 'checked="true"' : ""
-      } id="switch-shadow1778${RANDOM}"
+                        <div style="text-align: center" class="switch__container"><input onchange="changeMyActive($(this))" thisUrl="${imgURLs[k].url
+        }" ${imgURLs[k].active == true ? 'checked="true"' : ""
+        } id="switch-shadow1778${RANDOM}"
                                 class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
                                 for="switch-shadow1778${RANDOM}"></label></div>
-                        <div  onclick="removeBanner('${
-                          imgURLs[k].url
-                        }','banners', $(this))" style="margin-top: 15px" class=" deleteThis">
+                        <div  onclick="removeBanner('${imgURLs[k].url
+        }','banners', $(this))" style="margin-top: 15px" class=" deleteThis">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
                                 style="fill: #f6b504;margin: 9px;">
                                 &gt;
@@ -1844,21 +1810,17 @@ function getBannerInnerNew(imgURLs, actives, idCat, idSub, id) {
                     </div>
                    
                     <div  alvo="update" id="${imgURLs[k].id}"
-                    onclick="uploadBannerCatMainNew($(this), ${idCat},${idSub},${
-        imgURLs[k].id
-      })"  ${
-        imgURLs[k].url
+                    onclick="uploadBannerCatMainNew($(this), ${idCat},${idSub},${imgURLs[k].id
+        })"  ${imgURLs[k].url
           ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
           : ""
-      }  class="borderRight">
+        }  class="borderRight">
                     </div>
                 </div>
                  <div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
-    onchange="editLinkFromBanner($(this), ${idCat},${idSub}, 'default','${
-        imgURLs[k].id
-      }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
-        imgURLs[k].link ?? ""
-      }"></div>
+    onchange="editLinkFromBanner($(this), ${idCat},${idSub}, 'default','${imgURLs[k].id
+        }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${imgURLs[k].link ?? ""
+        }"></div>
                  
                
             </li>`;
@@ -1943,20 +1905,20 @@ function uploadBannerCatVerticalMainNew(element, idCat, idSub) {
         if (!exists) {
           categoriesObject.categories
             .find((a) => Number(a.id) === Number(idCat))
-            ["banners"]["asideMenu"].push({
-              url: myUrlPath,
-              id: myId,
-              link: "",
-              active: 1,
-            });
+          ["banners"]["asideMenu"].push({
+            url: myUrlPath,
+            id: myId,
+            link: "",
+            active: 1,
+          });
         } else {
           categoriesObject.categories
             .find((a) => Number(a.id) === Number(idCat))
-            ["banners"]["asideMenu"].map((x, index) => {
-              if (x.id === myId) {
-                x.url = myUrlPath;
-              }
-            });
+          ["banners"]["asideMenu"].map((x, index) => {
+            if (x.id === myId) {
+              x.url = myUrlPath;
+            }
+          });
         }
       } else if (idCat || idCat == 0) {
         const busca = categoriesObject.categories.find(
@@ -1981,20 +1943,20 @@ function uploadBannerCatVerticalMainNew(element, idCat, idSub) {
         if (!exists) {
           categoriesObject.categories
             .find((a) => Number(a.id) === Number(idCat))
-            ["banners"]["asideMenu"].push({
-              url: myUrlPath,
-              id: myId,
-              link: "",
-              active: 1,
-            });
+          ["banners"]["asideMenu"].push({
+            url: myUrlPath,
+            id: myId,
+            link: "",
+            active: 1,
+          });
         } else {
           categoriesObject.categories
             .find((a) => Number(a.id) === Number(idCat))
-            ["banners"]["asideMenu"].map((x, index) => {
-              if (x.id === myId) {
-                x.url = myUrlPath;
-              }
-            });
+          ["banners"]["asideMenu"].map((x, index) => {
+            if (x.id === myId) {
+              x.url = myUrlPath;
+            }
+          });
         }
       }
 
@@ -2043,20 +2005,15 @@ function getBannerVerticalNew(imgURLs, actives, idCat, idSub, id) {
                         </div>
                     </div>
                     <br />
-                    <div style="text-align: center" class="switch__container"><input thisUrl="${
-                      imgURLs[k].url
-                    }" onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub},'asideMenu','${
-      imgURLs[k].id
-    }')" id="switch-shadow1799${RANDOM}" ${
-      imgURLs[k].active == true ? 'checked="true"' : ""
-    }
+                    <div style="text-align: center" class="switch__container"><input thisUrl="${imgURLs[k].url
+      }" onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub},'asideMenu','${imgURLs[k].id
+      }')" id="switch-shadow1799${RANDOM}" ${imgURLs[k].active == true ? 'checked="true"' : ""
+      }
                             class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
                             for="switch-shadow1799${RANDOM}"></label></div>
-                    <div onclick="deleteMyActiveMainNew('${
-                      imgURLs[k].url
-                    }',${idCat}, ${idSub},'asideMenu', $(this),'${
-      imgURLs[k].id
-    }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
+                    <div onclick="deleteMyActiveMainNew('${imgURLs[k].url
+      }',${idCat}, ${idSub},'asideMenu', $(this),'${imgURLs[k].id
+      }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
                             style="fill: #f6b504;margin: 9px;">
                             &gt;
@@ -2067,20 +2024,16 @@ function getBannerVerticalNew(imgURLs, actives, idCat, idSub, id) {
                         </svg>
                     </div>
                 </div>
-                <div alvo="update" id="${
-                  imgURLs[k].id
-                }" onclick="coletaBannerMain1($(this), ${idCat}, ${idSub}, ${id})" ${
-      imgURLs[k].url
+                <div alvo="update" id="${imgURLs[k].id
+      }" onclick="coletaBannerMain1($(this), ${idCat}, ${idSub}, ${id})" ${imgURLs[k].url
         ? `style="background-repeat: no-repeat;background-repeat: no-repeat !important; background-position: center; zoom: 80%; min-height: 490px; width: calc(100% - 100px); float: right; background: url(${imgURLs[k].url})"`
         : ""
-    }   class="borderRightVertical">
+      }   class="borderRightVertical">
                 </div>
                    <div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
-    onchange="editLinkFromBanner($(this), ${idCat},${idSub},'asideMenu','${
-      imgURLs[k].id
-    }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
-      imgURLs[k].link ?? ""
-    }"></div>
+    onchange="editLinkFromBanner($(this), ${idCat},${idSub},'asideMenu','${imgURLs[k].id
+      }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${imgURLs[k].link ?? ""
+      }"></div>
             </div>`;
   }
   return { html: html, total: counter };
@@ -2135,18 +2088,14 @@ function getBannerInnerMainNew(imgURLs, actives, idCat, idSub, id) {
                                 </div>
                             </div>
                             <br />
-                            <div style="text-align: center" class="switch__container"><input onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub}, 'default', '${
-          imgURLs[k].id
-        }')" thisUrl="${imgURLs[k].url}" ${
-          imgURLs[k].active == true ? 'checked="true"' : ""
-        } id="switch-shadow1778${RANDOM}"
+                            <div style="text-align: center" class="switch__container"><input onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub}, 'default', '${imgURLs[k].id
+          }')" thisUrl="${imgURLs[k].url}" ${imgURLs[k].active == true ? 'checked="true"' : ""
+          } id="switch-shadow1778${RANDOM}"
                                     class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
                                     for="switch-shadow1778${RANDOM}"></label></div>
-                            <div  onclick="deleteMyActiveMainNew('${
-                              imgURLs[k].url
-                            }',${idCat}, ${idSub},'default', $(this), '${
-          imgURLs[k].id
-        }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
+                            <div  onclick="deleteMyActiveMainNew('${imgURLs[k].url
+          }',${idCat}, ${idSub},'default', $(this), '${imgURLs[k].id
+          }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
                                     style="fill: #f6b504;margin: 9px;">
                                     &gt;
@@ -2158,21 +2107,17 @@ function getBannerInnerMainNew(imgURLs, actives, idCat, idSub, id) {
                             </div>
                         </div>
                     
-                        <div  alvo="update" id="${
-                          imgURLs[k].id
-                        }" onclick="coletaBannerMain1($(this), ${idCat}, ${idSub}, ${id})" ${
-          imgURLs[k].url
+                        <div  alvo="update" id="${imgURLs[k].id
+          }" onclick="coletaBannerMain1($(this), ${idCat}, ${idSub}, ${id})" ${imgURLs[k].url
             ? `style="background-size: cover !important; background-position: center; zoom: 100%;background: url(${imgURLs[k].url})"`
             : ""
-        }  class="borderRight">
+          }  class="borderRight">
                         </div>
                     </div>
                        <div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
-    onchange="editLinkFromBanner($(this), ${idCat},${idSub}, 'default','${
-          imgURLs[k].id
-        }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
-          imgURLs[k].link ?? ""
-        }"></div>
+    onchange="editLinkFromBanner($(this), ${idCat},${idSub}, 'default','${imgURLs[k].id
+          }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${imgURLs[k].link ?? ""
+          }"></div>
                 </li>`;
       }
     }
@@ -2229,20 +2174,15 @@ function getBannerVerticalMainNew(imgURLs, actives, idCat, idSub, id) {
                             </div>
                         </div>
                         <br />
-                        <div style="text-align: center" class="switch__container"><input thisUrl="${
-                          imgURLs[k].url
-                        }" onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub},'asideMenu', '${
-        imgURLs[k].id
-      }')" id="switch-shadow1799${RANDOM}" ${
-        imgURLs[k].active == true ? 'checked="true"' : ""
-      }
+                        <div style="text-align: center" class="switch__container"><input thisUrl="${imgURLs[k].url
+        }" onchange="changeMyActiveMainNew($(this), ${idCat}, ${idSub},'asideMenu', '${imgURLs[k].id
+        }')" id="switch-shadow1799${RANDOM}" ${imgURLs[k].active == true ? 'checked="true"' : ""
+        }
                                 class="switch switch--shadow" type="checkbox" /><label style="    margin-top: 15px;"
                                 for="switch-shadow1799${RANDOM}"></label></div>
-                        <div onclick="deleteMyActiveMainNew('${
-                          imgURLs[k].url
-                        }',${idCat}, ${idSub},'asideMenu', $(this), '${
-        imgURLs[k].id
-      }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
+                        <div onclick="deleteMyActiveMainNew('${imgURLs[k].url
+        }',${idCat}, ${idSub},'asideMenu', $(this), '${imgURLs[k].id
+        }')" style=" cursor: pointer;margin-top: 15px" class=" deleteThis">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 21 21"
                                 style="fill: #f6b504;margin: 9px;">
                                 &gt;
@@ -2253,20 +2193,16 @@ function getBannerVerticalMainNew(imgURLs, actives, idCat, idSub, id) {
                             </svg>
                         </div>
                     </div>
-                    <div alvo="update" id="${
-                      imgURLs[k].id
-                    }" onclick="coletaBannerVertical($(this), ${idCat}, ${idSub}, ${id})" ${
-        imgURLs[k].url
+                    <div alvo="update" id="${imgURLs[k].id
+        }" onclick="coletaBannerVertical($(this), ${idCat}, ${idSub}, ${id})" ${imgURLs[k].url
           ? `style="background-repeat: no-repeat;background-repeat: no-repeat !important; background-position: center; zoom: 80%; min-height: 490px; width: calc(100% - 100px); float: right; background: url(${imgURLs[k].url})"`
           : ""
-      }   class="borderRightVertical">
+        }   class="borderRightVertical">
                     </div>
                       <div class="group-input2"  style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;"><input  style="background: none" class="form-control inputProduct"  fieldName="affiliate_categorie_name"  
-    onchange="editLinkFromBanner($(this), ${idCat},${idSub},'asideMenu','${
-        imgURLs[k].id
-      }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${
-        imgURLs[k].link ?? ""
-      }"></div>
+    onchange="editLinkFromBanner($(this), ${idCat},${idSub},'asideMenu','${imgURLs[k].id
+        }')" placeholder="Link para o banner acima" id="${aleatoryID()}'" value="${imgURLs[k].link ?? ""
+        }"></div>
                 </div>`;
     }
     return { html: html, total: counter };
@@ -2583,11 +2519,9 @@ function nossosIcones2(essaCat, essaSubCat) {
           LISTA_ICONES[k] +
           "'," +
           essaCat.id +
-          `)" class="boxIconDefault ${
-            essaCat.icon !== LISTA_ICONES[k] ? "" : "boxIconeActive"
+          `)" class="boxIconDefault ${essaCat.icon !== LISTA_ICONES[k] ? "" : "boxIconeActive"
           } ">` +
-          `<i  ${
-            essaCat.icon === LISTA_ICONES[k] ? "" : 'style="display:none"'
+          `<i  ${essaCat.icon === LISTA_ICONES[k] ? "" : 'style="display:none"'
           } class="fas fa-check iconSelectedCheck"></i>` +
           '<img class="imgIcone" style="width: 100%;" src="/assets/icons/' +
           LISTA_ICONES[k] +
@@ -2607,11 +2541,9 @@ function nossosIcones2(essaCat, essaSubCat) {
           essaCat.id +
           "," +
           essaSubCat.id +
-          `)" class="boxIconDefault ${
-            essaCat.icon === LISTA_ICONES[k] ? "boxIconeActive" : ""
+          `)" class="boxIconDefault ${essaCat.icon === LISTA_ICONES[k] ? "boxIconeActive" : ""
           }">` +
-          `<i  ${
-            essaCat.icon === LISTA_ICONES[k] ? "" : 'style="display:none"'
+          `<i  ${essaCat.icon === LISTA_ICONES[k] ? "" : 'style="display:none"'
           } class="fas fa-check iconSelectedCheck"></i>` +
           '<img class="imgIcone" style="width: 100%;" src="/assets/icons/' +
           LISTA_ICONES[k] +
