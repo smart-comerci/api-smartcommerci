@@ -631,7 +631,7 @@
 
 
 
-            <div class="modalPDF" style="display: none;">
+            {{!-- <div class="modalPDF" style="display: none;">
                 <div class="PDFmodal">
                     <button onclick="fechaModalPDF($(this))" type="button" class="bootbox-close-button close"
                         aria-hidden="true">×</button>
@@ -646,10 +646,10 @@
                     <br>
 
                     <hr>
-                    <iframe id="framePDF" style="width: 100%; height: 90vh; padding: 5px;    border: none;"
-                        src="../pdf/myPDF.html"></iframe>
+                    {{!-- <iframe id="framePDF" style="width: 100%; height: 90vh; padding: 5px;    border: none;"
+                        src="../pdf/myPDF.html"></iframe> --}}
                 </div>
-            </div>
+            </div> --}}
 
             <div class="modalAcoes superModal5" style="display: none;">
                 <div class="acoesProdutos">
@@ -1206,13 +1206,14 @@ $(".sidebar").removeClass("newSidebar");
         }, 350)
 
 
-        function fechaModalPDF(elemento) {
-            elemento.parent().parent().hide()
-            $("body").css("overflow", "auto")
-        }
-        function imprimePDF_FRAME() {
-            $("#framePDF")[0].contentWindow.imprime()
-        }
+        /*  function fechaModalPDF(elemento) {
+              elemento.parent().parent().hide()
+              $("body").css("overflow", "auto")
+          }
+          function imprimePDF_FRAME() {
+              $("#framePDF")[0].contentWindow.imprime()
+          }
+          */
 
 
 

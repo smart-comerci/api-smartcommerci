@@ -789,7 +789,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.type.withoutRequires === true ? 'checked="true"' : ''}  area="requires" detalhe="withoutRequires" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808017"
+                                        <input  ${cupomData.requires.withoutRequires === true ? 'checked="true"' : ''}  area="requires" detalhe="withoutRequires" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808017"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808017"></label></div><label style=" font-size: 20px;" class="label">Sem requisitos mínimos
                                     </label>
@@ -805,7 +805,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.type.totalFromCartActive === true ? 'checked="true"' : ''} area="requires" detalhe="totalFromCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808016"
+                                        <input  ${cupomData.requires.totalFromCartActive === true ? 'checked="true"' : ''} area="requires" detalhe="totalFromCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808016"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808016"></label></div><label style=" font-size: 20px;" class="label">Total do carrinho
                                     </label>
@@ -816,7 +816,7 @@
                                 <div class="col-md-12">
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
-                                    <input value="${cupomData.type.totalFromCart}" area="requires" detalhe="totalFromCart" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
+                                    <input value="${cupomData.requires.totalFromCart}" area="requires" detalhe="totalFromCart" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
                                     id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates" />
                                 </div>
                                 <br>
@@ -830,7 +830,7 @@
                                 <div class="col-md-12">
                                 <div style="padding:0 2%; margin-top: 2%; border: none !important" class="row">
                                     <div style="margin: 2% 2%;" class="switch__container">
-                                        <input  ${cupomData.type.totalInCartActive === true ? 'checked="true"' : ''} area="requires" detalhe="totalInCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808015"
+                                        <input  ${cupomData.requires.totalInCartActive === true ? 'checked="true"' : ''} area="requires" detalhe="totalInCartActive" onchange="setObject($(this))" fieldname="status" id="switch-shadow1808015"
                                          class="switch switch--shadow" type="checkbox"><label
                                         for="switch-shadow1808015"></label></div><label style=" font-size: 20px;" class="label">Quantidade de itens no carrinho
                                     </label>
@@ -842,7 +842,7 @@
                                 <div class="group-input2"
                                     style="background: #F0F0F0 0% 0% no-repeat padding-box;border: 1px solid #EFEFEF;border-radius: 5px;">
                                     <input  area="requires" detalhe="totalInCart" onchange="setObject($(this))" type="number" style="background: none" class="form-control inputProduct filaDeMudancas" placeholder="0,00"
-                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  value="${cupomData.type.totalInCart}">
+                                    id="nomeCategoria" fieldname="users_affiliate_slug" table="users_affiliates"  value="${cupomData.requires.totalInCart}">
                                 </div>
                                 <br>
                                 </div>
@@ -915,7 +915,7 @@
                                             </div>
                                             <div style="max-height: 30vh" class="col-md-12 verticalScroll">
                                                 <ul style="    margin-top: 5%;" class="list animate__animated "> 
-                                                ${getCategoriesAndSubPromocoes(MY_CATEGORIES, cupomData.applicability.especificCategoriesValue)}
+                                                ${getCategoriesAndSubPromocoes(newsCATEGORIES, cupomData.applicability.especificCategoriesValue)}
                                                 </ul>
                                             </div>
                                         </div>

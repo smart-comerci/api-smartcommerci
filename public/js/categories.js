@@ -8,6 +8,7 @@ localStorage.SUB_EDIT = "";
 localStorage.SUB_CAT_ATUAL = "";
 localStorage.SUB_CAT_ATUAL_STATUS = "";
 sessionStorage.SAVE_SUCCEFULLY = 0;
+var TODAS_CATS_NEW = [];
 
 //=============Getting all CATEGORIES================
 var CATEGORIES = [],
@@ -345,7 +346,7 @@ function getCategorias(CATEGORIES) {
     CATEGORIAS_FULL = [];
   var currCategorie = null;
 
-  CATEGORIES = OrdenaJson(CATEGORIES, "product_site_categories", "ASC");
+  CATEGORIES = OrdenaJson(CATEGORIES, "title", "ASC");
   for (const k in CATEGORIES) {
     var textou = CATEGORIES[k].product_site_categories;
     if (textou == null || textou == "null") {
@@ -416,6 +417,7 @@ function getCategorias(CATEGORIES) {
     return MINHAS_CATEGORIAS;
   }
 }
+
 function infoCategoria_status(categoria) {
   var lis = JSON.parse(localStorage.MINHAS_CATEGORIAS);
   for (const k in lis) {
