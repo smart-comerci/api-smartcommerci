@@ -2043,7 +2043,7 @@ async function publishChanges() {
     success: function (data) {
       console.log("publish", data);
       window.parent.informar(
-        "alert-primary",
+        "alert-success",
         "As alterações foram aplicadas com sucesso!",
         3000
       );

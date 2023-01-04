@@ -611,8 +611,8 @@
                     z-index: 999999;
                 }
 
-                .alert-primary {
-                    background-color: #50c682;
+                .alert-smart {
+                    background-color: #50c682 !important;
                     color: white
                 }
 
@@ -698,6 +698,9 @@
         }
 
         function informar(className, texto, tempoDeTela) {
+            if (className === "alert-success") {
+                className = 'alert-smart'
+            }
             $(".alert").addClass(className)
             $(".alert").text(texto)
             $(".alert").fadeIn()
