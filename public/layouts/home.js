@@ -555,7 +555,7 @@ div3.innerHTML = `
       </label> 
     `;
 
-function cutString(str) { }
+function cutString(str) {}
 
 function getProductCard(data) {
   if (data) {
@@ -571,8 +571,9 @@ function getProductCard(data) {
                         </span>
                       </div>
 
-                      <div style="  background: url(${data.product_thumbnail
-      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
+                      <div style="  background: url(${
+                        data.product_thumbnail
+                      }); background-size: cover;     width: 80px;    height: 80px;    margin: -5px auto; " class="card-color-preview_icon">
                       
                       </div>
 
@@ -801,7 +802,7 @@ function prepareVitrine(element, position) {
 
 async function publicaFecha() {
   const salva = await publishChanges();
-  console.log("SALVANDO", salva)
+  console.log("SALVANDO", salva);
   $(".btn-close").click();
   location.reload();
 }
@@ -1305,7 +1306,7 @@ async function uploadAndUpdateFile(element) {
           });
       }
     },
-    error: function (data) { },
+    error: function (data) {},
   });
 }
 
@@ -1727,8 +1728,9 @@ function setLinksFooterElements() {
 function setMidiasSociais() {
   $(`.midiasSociais`).html(``);
 
-  let youtube = `<svg  style="margin: 10px;${homePage.socialMidia.facebook.active === true ? `` : `display: block`
-    } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
+  let youtube = `<svg  style="margin: 10px;${
+    homePage.socialMidia.facebook.active === true ? `` : `display: block`
+  } " xmlns="http://www.w3.org/2000/svg" width="22.939" height="16.129"
                   viewBox="0 0 22.939 16.129">
                   <path id="facebook"
                     d="M37.393,66.524a2.882,2.882,0,0,0-2.028-2.041C33.576,64,26.4,64,26.4,64s-7.173,0-8.962.482a2.882,2.882,0,0,0-2.028,2.041,32.453,32.453,0,0,0,0,11.114,2.839,2.839,0,0,0,2.028,2.009c1.789.482,8.962.482,8.962.482s7.173,0,8.962-.482a2.839,2.839,0,0,0,2.028-2.009,32.453,32.453,0,0,0,0-11.114ZM24.057,75.492V68.67l6,3.411Z"
@@ -1745,7 +1747,7 @@ function setMidiasSociais() {
 getMyObjectHomeMain();
 async function applyChanges(homePageNew) {
   if (homePageNew) {
-    homePage = homePageNew
+    homePage = homePageNew;
   }
   $("#color-badge_label-actions").html(homePage.mainColors.third);
   $("#color-badge_label-primary").html(homePage.mainColors.first);
@@ -1923,7 +1925,7 @@ async function getMyObjectHomeMain() {
     error: function (data) {
       console.log(data);
     },
-    complete: function () { },
+    complete: function () {},
   });
 }
 function start() {
@@ -2041,7 +2043,7 @@ async function publishChanges() {
     success: function (data) {
       console.log("publish", data);
       window.parent.informar(
-        "alert-success",
+        "alert-primary",
         "As alterações foram aplicadas com sucesso!",
         3000
       );
@@ -2050,7 +2052,7 @@ async function publishChanges() {
       console.log(data);
       window.parent.informar("alert-danger", "Ocorreu um erro!", 3000);
     },
-    complete: function () { },
+    complete: function () {},
   });
 }
 
@@ -2386,7 +2388,7 @@ $.ajax({
   error: function (data2) {
     console.log(data2);
   },
-  complete: function () { },
+  complete: function () {},
 });
 
 function OrdenaJson(lista, chave, ordem) {
@@ -2447,7 +2449,7 @@ $.ajax({
   error: function (data) {
     window.parent.informar("alert-danger", "Algo saiu errado!", 3000);
   },
-  complete: function () { },
+  complete: function () {},
 });
 
 function getCategorias(CATEGORIES) {
@@ -2526,26 +2528,23 @@ function getCategorias(CATEGORIES) {
     return MINHAS_CATEGORIAS;
   }
 }
-let proxyList = []
-
-
+let proxyList = [];
 
 function monitor(elemento) {
   if (proxyList.length > 0) {
-    let last = proxyList[proxyList.length - 1]
+    let last = proxyList[proxyList.length - 1];
     if (!isEquivalent(homePage, last)) {
-      proxyList.push(homePage)
+      proxyList.push(homePage);
     }
   } else {
-    proxyList.push(homePage)
+    proxyList.push(homePage);
   }
-  console.log(proxyList)
+  console.log(proxyList);
 }
 
+function ir() {}
+function voltar() {}
 
-function ir() {
+//==================PREPARANDO OS DRAG DROP================
 
-}
-function voltar() {
-
-}
+eventPrepare(".picture-drop", "#file-upload", uploadAndUpdateFile);
