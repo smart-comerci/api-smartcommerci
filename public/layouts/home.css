@@ -1643,3 +1643,350 @@
  .noShow {
      display: none !important;
  }
+
+ .list,
+ .listInner {
+     font-size: 14px;
+     list-style: none;
+ }
+
+ .list-item,
+ .list-sub-item {
+     padding: 0 2% 1%;
+ }
+
+ .list-item {
+     margin-bottom: 35px;
+ }
+
+ .list-item>input,
+ .list-sub-item>input {
+     width: 20px;
+     height: 20px;
+     border-radius: 2px;
+     margin-right: 2%;
+
+
+
+ }
+
+
+ .list-sub-item {
+     line-height: 1.2 !important;
+
+ }
+
+ .list-item>input:checked,
+ .list-sub-item>input:checked {
+     background-color: #f6b504;
+ }
+
+
+ .checkSmart {
+     display: block;
+     position: relative;
+     padding-left: 35px;
+     margin: 20% 25% !important;
+     border-radius: 2px;
+     cursor: initial;
+     font-size: 14px;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+ }
+
+
+ .checkSmart input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+     height: 0;
+     width: 0;
+ }
+
+
+
+ .subSmart input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+     height: 0;
+     width: 0;
+ }
+
+ .trilha {
+     border-top: 5px dotted #f6b504;
+     min-width: 50px;
+     min-height: 5px;
+     margin-top: 1.5%;
+     margin-left: -5%;
+     color: white;
+     margin-right: 1%;
+     max-width: 50px;
+ }
+
+
+ .trilha2 {
+     /*
+    border-top: 5px dotted silver;        
+    min-width: 30px;
+    min-height: 5px   ;
+    margin-top: 5%;
+    margin-left: -3.7%;
+    color: white;
+    margin-right: 1%;
+    */
+
+     border-bottom: 5px dotted silver;
+     min-width: 30px;
+     border-left: 5px dotted silver;
+     height: 65px;
+     margin-top: -15px;
+     margin-left: -4.4%;
+     color: white;
+     margin-right: 1%;
+
+ }
+
+
+ .list,
+ .listInner {
+     font-size: 14px;
+     list-style: none;
+ }
+
+ .listInner {
+     font-size: 14px;
+     list-style: none;
+     margin-left: 1%;
+     border-left: 5px dotted #f6b504;
+     display: none;
+ }
+
+ .listInner2 {
+     font-size: 14px;
+     list-style: none;
+     margin-left: 1%;
+     border-left: 5px dotted silver;
+     display: none;
+ }
+
+ .listInner3 {
+     font-size: 14px;
+     list-style: none;
+     margin-left: 35px;
+     /* border-left: 5px dotted silver;*/
+     display: none;
+ }
+
+
+ .novaLI {
+     min-height: 20px;
+ }
+
+ .listInner2 {
+     font-size: 14px;
+     list-style: none;
+ }
+
+ .list-item,
+ .list-sub-item {
+     padding: 0 2% 1%;
+ }
+
+ .newSub {
+     padding: 2.5% 2% 1% !important;
+ }
+
+ .list-item {
+     margin-bottom: 35px;
+ }
+
+ .list-item>input,
+ .list-sub-item>input {
+     width: 20px;
+     height: 20px;
+     border-radius: 2px;
+     margin-right: 2%;
+
+
+
+ }
+
+
+ .list-sub-item {
+     line-height: 1.2 !important;
+
+ }
+
+ .list-item>input:checked,
+ .list-sub-item>input:checked {
+     background-color: #f6b504;
+ }
+
+
+ .checkSmart {
+     display: block;
+     position: relative;
+     padding-left: 35px;
+     margin: 20% 25% !important;
+     border-radius: 2px;
+     cursor: initial;
+     font-size: 14px;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+ }
+
+
+ .checkSmart input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+     height: 0;
+     width: 0;
+ }
+
+
+
+ .subSmart input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+     height: 0;
+     width: 0;
+ }
+
+ .imgContainer {
+     max-width: 70px !important;
+ }
+
+
+ .checkmark {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 25px;
+     width: 25px;
+     background-color: white;
+     border: 1px solid #687C97;
+     border-radius: 30%;
+ }
+
+
+ .checkSmart:hover input~.checkmark {
+     background-color: white;
+ }
+
+
+ .checkSmart input:checked~.checkmark {
+     background-color: #f6b504;
+ }
+
+
+ .checkmark:after {
+     content: "";
+     position: absolute;
+     display: none;
+ }
+
+
+ .checkSmart input:checked~.checkmark:after {
+     display: block;
+ }
+
+
+ .checkSmart .checkmark:after {
+     left: 9px;
+     top: 5px;
+     width: 5px;
+     height: 10px;
+     border: solid white;
+     border-width: 0 3px 3px 0;
+     -webkit-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     transform: rotate(45deg);
+ }
+
+
+
+
+
+
+ .subSmart:hover input~.checkmark {
+     background-color: white;
+ }
+
+
+ .subSmart input:checked~.checkmark {
+     background-color: #f6b504;
+ }
+
+
+ .subSmart:after {
+     content: "";
+     position: absolute;
+     display: none;
+ }
+
+
+ .subSmart input:checked~.checkmark:after {
+     display: block;
+ }
+
+
+ .subSmart .checkmark:after {
+     left: 9px;
+     top: 5px;
+     width: 5px;
+     height: 10px;
+     border: solid white;
+     border-width: 0 3px 3px 0;
+     -webkit-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     transform: rotate(45deg);
+ }
+
+
+
+
+
+
+ .trilha {
+     border-top: 5px dotted #f6b504;
+     min-width: 50px;
+     min-height: 5px;
+     margin-top: 1.5%;
+     margin-left: -5%;
+     color: white;
+     margin-right: 1%;
+     max-width: 50px;
+ }
+
+
+ .notScroll::-webkit-scrollbar {
+     display: none;
+ }
+
+
+ .sub-list-item {
+     margin-bottom: 0 !important;
+     display: inline-flex;
+     width: 700px;
+     width: 700px;
+ }
+
+ .sub-listInner2 {
+     font-size: 14px;
+     list-style: none;
+     margin: 25px -450px;
+     border-left: 5px dotted silver;
+     display: none;
+     max-width: 500px !important;
+ }
+
+ .novaLI {
+     min-height: 20px;
+ }

@@ -3,6 +3,23 @@ let notFound =
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
+var arrowDown4 =
+  '<div onclick="dropaCategoriasInner($(this).parent()) " class=" deleteThis3 dropCategoriaButton ">' +
+  '<svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36">' +
+  '<g transform="translate(36 36) rotate(180)">' +
+  '<g transform="translate(28 28) rotate(180)">' +
+  '<g class="b">' +
+  '<g class="c">' +
+  '<circle class="e" cx="10" cy="10" r="10" />' +
+  '<circle class="f" cx="10" cy="10" r="9.5" />' +
+  "</g>" +
+  '<path class="d" d="M581.273,789.774a.82.82,0,0,1-.081-1.079l.081-.092,3.685-3.593-3.685-3.593a.82.82,0,0,1-.081-1.079l.081-.093a.849.849,0,0,1,1.094-.081l.094.081,4.279,4.179a.82.82,0,0,1,.081,1.079l-.081.093-4.279,4.179A.849.849,0,0,1,581.273,789.774Z"' +
+  ' transform="translate(795.009 -573.615) rotate(90)"/>' +
+  "</g>" +
+  "</g>" +
+  "</g>" +
+  "</svg>" +
+  "</div>";
 var mainHost = "https://www.smartlima.com.br:6060";
 let homePage = {
   logotipo: {
@@ -2366,30 +2383,30 @@ function removeSection(element) {
   console.log(homePage);
 }
 
-$.ajax({
-  type: "POST",
-  url: "https://www.smartlima.com.br:6060/getCategories",
-  headers: {
-    "x-access-token": localStorage.token,
-  },
-  data: {
-    affiliate_id: localStorage.AFFILIATE_ID,
-    master_id: localStorage.MASTER_ID,
-  },
-  success: function (categories) {
-    console.log("Categories", categories.results);
-    CATEGORIES = categories.results;
-    var CATEGORIES_SHOW = [];
-    var myCategories = getCategorias(CATEGORIES);
-    MY_CATEGORIES = myCategories;
-    console.log("AS CATEGORIAS", MY_CATEGORIES);
-    // $(".showCategorias").html(getCategoriesAndSubToFilter(MY_CATEGORIES));
-  },
-  error: function (data2) {
-    console.log(data2);
-  },
-  complete: function () {},
-});
+// $.ajax({
+//   type: "POST",
+//   url: "https://www.smartlima.com.br:6060/getCategories",
+//   headers: {
+//     "x-access-token": localStorage.token,
+//   },
+//   data: {
+//     affiliate_id: localStorage.AFFILIATE_ID,
+//     master_id: localStorage.MASTER_ID,
+//   },
+//   success: function (categories) {
+//     console.log("Categories", categories.results);
+//     CATEGORIES = categories.results;
+//     var CATEGORIES_SHOW = [];
+//     var myCategories = getCategorias(CATEGORIES);
+//     MY_CATEGORIES = myCategories;
+//     console.log("AS CATEGORIAS", MY_CATEGORIES);
+//     // $(".showCategorias").html(getCategoriesAndSubToFilter(MY_CATEGORIES));
+//   },
+//   error: function (data2) {
+//     console.log(data2);
+//   },
+//   complete: function () {},
+// });
 
 function OrdenaJson(lista, chave, ordem) {
   return lista.sort(function (a, b) {
@@ -2437,6 +2454,7 @@ $.ajax({
   },
   success: function (data2) {
     let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
+
     console.log("revenuess", data2, paginas);
     for (const k in data2) {
       $("#listaReceitas").append(addContentRevenues(data2[k]));
@@ -2548,3 +2566,191 @@ function voltar() {}
 //==================PREPARANDO OS DRAG DROP================
 
 eventPrepare(".picture-drop", "#file-upload", uploadAndUpdateFile);
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+async function getCategoriesHome() {
+  const resultado = await $.ajax({
+    type: "GET",
+    url: mainHost + "/categorie_find/" + localStorage.AFFILIATE_ID,
+    headers: {
+      "x-access-token": localStorage.token,
+    },
+    data: "",
+  });
+  console.log("O RESULTADO", resultado);
+  if (!resultado || resultado.data.length === 0) {
+    const criaPrimeiroAcesso = await criarPrimeiroAcesso();
+    console.log("Primeiro acesso", criaPrimeiroAcesso);
+  } else {
+    if (Array.isArray(resultado.data)) {
+      categoriesObject = resultado.data.find(
+        (dt) => dt.affiliateId === Number(localStorage.AFFILIATE_ID)
+      );
+    } else {
+      categoriesObject = resultado.data;
+    }
+  }
+  MINHAS_CATEGORIAS = resultado.data[0].categories;
+  sessionStorage.MINHAS_CATEGORIAS = JSON.stringify(MINHAS_CATEGORIAS);
+}
+
+$(".showCategorias").each(async function () {
+  let HTML = await getCategoriesAndSubHome(
+    $(".showCategorias").attr("categorie_list")?.split(",") ?? []
+  );
+  console.log("HTML", HTML);
+  $(this).html(HTML);
+});
+
+$(".showPagesInst").each(async function () {
+  let HTML = await getInstitucionalPagesHome(
+    $(this).attr("categorie_list")?.split(",") ?? []
+  );
+  console.log("HTML", HTML);
+  $(this).html(HTML);
+});
+
+async function getCategoriesAndSubHome(listaSelecionada = []) {
+  await getCategoriesHome();
+  let newsCATEGORIES = MINHAS_CATEGORIAS;
+  console.log("IN HOMEE", newsCATEGORIES, listaSelecionada);
+  var html3 = "",
+    nova = '<li class="novaLI"></li>';
+
+  if (!Array.isArray(listaSelecionada)) {
+    listaSelecionada = listaSelecionada.split(",");
+  }
+
+  function getActive(text, listaSelecionada = []) {
+    console.log(text, listaSelecionada);
+
+    let eu = listaSelecionada.find((l) => l === text);
+    if (eu) {
+      return 'checked="true"';
+    } else {
+      ("");
+    }
+  }
+
+  for (const k in newsCATEGORIES) {
+    console.log("TRATANDO", newsCATEGORIES[k]);
+    var content =
+      '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
+    html3 +=
+      '<li    class="list-item sub-list-item animate__animated ">' +
+      arrowDown4 +
+      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="/assets/icons/' +
+      newsCATEGORIES[k].icon +
+      '" style="width: 30px; height: 30px; margin-top -10%"/> ';
+    content += nova;
+    if (newsCATEGORIES[k]?.subcategories?.length > 0) {
+      var txtCategories = newsCATEGORIES[k].subcategories;
+      for (const u in txtCategories) {
+        content +=
+          '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input ' +
+          getActive(txtCategories[u].title, listaSelecionada) +
+          ' class="marcar catPromocao"  myValue="' +
+          txtCategories[u].title +
+          "\"  onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+          txtCategories[u].title +
+          '\')" type="checkbox"><span class="checkmark"></span>' +
+          txtCategories[u].title +
+          "</label></div></li> ";
+
+        ////////////console.log(content)
+      }
+    }
+    content += "</ul>";
+    html3 +=
+      newsCATEGORIES[k].title +
+      " <input " +
+      getActive(newsCATEGORIES[k].title, listaSelecionada) +
+      ' class="marcar catPromocao"  myValue="' +
+      newsCATEGORIES[k].title +
+      "\" onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+      newsCATEGORIES[k].title +
+      '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+    html3 += content + "</li> ";
+  }
+  console.log(html3);
+
+  return html3;
+}
+
+$(".dropCategoriaContent").click(function () {
+  if (
+    $(this).attr("dropado") == "nao" ||
+    $(this).attr("dropado") == undefined
+  ) {
+    $(this).parent().parent().find(".cabecalho").removeClass("radius20");
+    $(this).parent().parent().find(".cabecalho").addClass("radius20Top");
+    $(this).parent().parent().find(".cabecalho").addClass("bordaDourada");
+    $(".seta").removeClass("rotate180");
+    $(this).parent().parent().find(".seta").addClass("rotate180");
+
+    $(this).attr("dropado", "sim");
+    $(this).parent().parent().find(".dropCategoria").show();
+  } else {
+    $(this).parent().parent().find(".cabecalho").removeClass("radius20Top");
+    $(this).parent().parent().find(".cabecalho").addClass("radius20");
+    $(this).parent().parent().find(".cabecalho").removeClass("bordaDourada");
+    $(this).attr("dropado", "nao");
+    $(this).parent().parent().find(".dropCategoria").hide();
+
+    $(this).parent().parent().find(".seta").removeClass("rotate180");
+  }
+});
+function dropaCategoriasInner(element) {
+  console.log("Dropando");
+  if (element.find(".listInner2 ").attr("dropei") === "1") {
+    element.find(".listInner2 ").attr("dropei", "0");
+    element.find(".listInner2 ").hide();
+  } else {
+    element.find(".listInner2 ").attr("dropei", "1");
+    element.find(".listInner2 ").show();
+  }
+}
+
+function getInstitucionalPagesHome(listaSelecionada = []) {
+  let newsCATEGORIES = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
+  console.log("IN PAGESS", newsCATEGORIES, listaSelecionada);
+  var html3 = "",
+    nova = '<li class="novaLI"></li>';
+
+  if (!Array.isArray(listaSelecionada)) {
+    listaSelecionada = listaSelecionada.split(",");
+  }
+
+  function getActive(text, listaSelecionada = []) {
+    console.log(text, listaSelecionada);
+
+    let eu = listaSelecionada.find((l) => l === text);
+    if (eu) {
+      return 'checked="true"';
+    } else {
+      ("");
+    }
+  }
+
+  for (const k in newsCATEGORIES) {
+    console.log("TRATANDO", newsCATEGORIES[k]);
+    html3 +=
+      '<li    class="list-item sub-list-item animate__animated ">' +
+      arrowDown4 +
+      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> ';
+    html3 +=
+      newsCATEGORIES[k].titulo_page +
+      " <input " +
+      getActive(newsCATEGORIES[k].titulo_page, listaSelecionada) +
+      ' class="marcar catPromocao"  myValue="' +
+      newsCATEGORIES[k].titulo_page +
+      "\" onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+      newsCATEGORIES[k].titulo_page +
+      '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+    html3 += "</li> ";
+  }
+  console.log(html3);
+
+  return html3;
+}

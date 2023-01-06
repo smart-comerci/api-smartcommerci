@@ -376,6 +376,7 @@ async function getCategories() {
     }
   }
   TODAS_CATS_NEW = resultado.data[0].categories;
+  sessionStorage.TODAS_CATS_NEW = JSON.stringify(TODAS_CATS_NEW);
   console.log(resultado, categoriesObject);
   showCategories();
 }
