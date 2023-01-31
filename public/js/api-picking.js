@@ -331,7 +331,7 @@ function editarProduto(elemento) {
   var imagen = dadosProduto.product_thumbnail;
   if (imagen == null) {
     imagen =
-      "https://www.api-smartcomerci.com.br:6060/images/default/produto-sem-imagem.jpg";
+      "https://cms.api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
   }
   $(".editarProdutoModal")
     .find(".imagenProduto")
@@ -392,7 +392,7 @@ function modalAdicionarProduto(elemento) {
   var imagen = dadosProduto.product_thumbnail;
   if (imagen == null) {
     imagen =
-      "https://www.api-smartcomerci.com.br:6060/images/default/produto-sem-imagem.jpg";
+      "https://cms.api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
   }
   $(".adicionarProdutoModal")
     .find(".imagenProduto")
@@ -1052,7 +1052,7 @@ function getOrderInfo(id) {
 async function request(urlEnd, params) {
   return $.ajax({
     type: "POST",
-    url: "https://www.api-smartcomerci.com.br:6060/" + urlEnd,
+    url: "https://cms.api-smartcomerci.com.br/" + urlEnd,
     headers: { "x-access-token": localStorage.token },
     data: params,
     success: function (data) {
@@ -1170,7 +1170,7 @@ async function search(element) {
     var imagen = dados[k].product_thumbnail;
     if (imagen == null) {
       imagen =
-        "https://www.api-smartcomerci.com.br:6060/images/default/produto-sem-imagem.jpg";
+        "https://cms.api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
     }
     let produtoFinal = FULL_PRICES(dados[k]);
     let valorFinal =

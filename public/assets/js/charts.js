@@ -13,9 +13,9 @@ function OrdenaJson(lista, chave, ordem) {
 $.ajax({
   type: "POST",
 <<<<<<< HEAD
-  url: "https://www.api-smartcomerci.com.br:6060/getAllOrdersMaster",
+  url: "https://cms.api-smartcomerci.com.br/getAllOrdersMaster",
 =======
-  url: "https://www.api-smartcomerci.com.br:7070/getAllOrdersMaster",
+  url: "https://cms.api-smartcomerci.com.br/getAllOrdersMaster",
 >>>>>>> merge-master
   data: { master_id: localStorage.MASTER_ID },
   headers: {

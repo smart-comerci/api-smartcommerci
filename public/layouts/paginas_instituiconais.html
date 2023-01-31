@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="https://www.api-smartcomerci.com.br:6060/images/logo/favicon.ico" />
+  <link rel="icon" type="image/png" href="https://cms.api-smartcomerci.com.br/images/logo/favicon.ico" />
   <title>Document</title>
   <link rel="icon" type="image/png" href="../assets/img/lima-04.svg" />
 </head>
@@ -1073,7 +1073,7 @@
       </div>
     </div>
   </div>
-  <script src="https://www.api-smartcomerci.com.br:6060/js/tinymce.js"></script>
+  <script src="https://cms.api-smartcomerci.com.br/js/tinymce.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     let url = window.location.href
@@ -1093,7 +1093,7 @@
     iniciaEditorHtml("#editorFullCode")
 
 
-    var mainHost = 'https://www.api-smartcomerci.com.br:7070';
+    var mainHost = 'https://cms.api-smartcomerci.com.br';
     var NAME_PAGE = window.location.href.split("?")[1]
     var NEW = true
 
@@ -1175,40 +1175,40 @@
       }
     }, 1000)
 
-      //chamada teste
-      iniciaEditorHtml("#editorFullCode")
+    //chamada teste
+    iniciaEditorHtml("#editorFullCode")
 
 
-      var mainHost = 'https://www.api-smartcomerci.com.br:6060';
-      var NAME_PAGE = window.location.href.split("?")[1]
-      var NEW = true
+    var mainHost = 'https://cms.api-smartcomerci.com.br';
+    var NAME_PAGE = window.location.href.split("?")[1]
+    var NEW = true
 
-      $("#tituloPage").val(NAME_PAGE)
+    $("#tituloPage").val(NAME_PAGE)
 
-      var myContent = tinymce.get("editorFullCode").getContent();
-      let ATIVO = 0
-      if ($("#ativar-pagina")[0].checked) { ATIVO = 1 }
-      //console.log('ATIVO?', ATIVO)
-      $.ajax({
-        type: "POST",
-        url: mainHost + '/setContentPage',
-        data: { "master_id": localStorage.MASTER_ID, "titulo_page": $("#tituloPage").val(), "status": ATIVO, "name_page": NAME_PAGE, "content_page": myContent, "new": NEW },
-        headers: {
-          "x-access-token": localStorage.token,
-        },
-        success: function (data) {
-          //console.log(data)
+    var myContent = tinymce.get("editorFullCode").getContent();
+    let ATIVO = 0
+    if ($("#ativar-pagina")[0].checked) { ATIVO = 1 }
+    //console.log('ATIVO?', ATIVO)
+    $.ajax({
+      type: "POST",
+      url: mainHost + '/setContentPage',
+      data: { "master_id": localStorage.MASTER_ID, "titulo_page": $("#tituloPage").val(), "status": ATIVO, "name_page": NAME_PAGE, "content_page": myContent, "new": NEW },
+      headers: {
+        "x-access-token": localStorage.token,
+      },
+      success: function (data) {
+        //console.log(data)
 
 
-          window.parent.informar("alert-success", "As alterações foram aplicadas com sucesso!", 3000)
-        },
-        error: function (data) {
-          //console.log("erro publish", data)
+        window.parent.informar("alert-success", "As alterações foram aplicadas com sucesso!", 3000)
+      },
+      error: function (data) {
+        //console.log("erro publish", data)
 
-          window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
-        },
-        complete: function () { },
-      });
+        window.parent.informar("alert-danger", "Algo saiu errado, alterações não foram salvas!", 3000)
+      },
+      complete: function () { },
+    });
 
     }
 
