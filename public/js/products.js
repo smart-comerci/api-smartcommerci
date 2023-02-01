@@ -1667,7 +1667,7 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
     '<div style="max-height: 30vh" class="col-md-12 verticalScroll">' +
     '<ul style="    margin-top: 5%;" class="list animate__animated ">' +
     getCategoriesAndSub(
-      MY_CATEGORIES,
+      TODAS_CATS_NEW,
       product_data[0].product_site_categories
     ) +
     "</ul>" +
@@ -3485,60 +3485,125 @@ function getCatIconFromStorage(catName) {
   }
 }
 
-function getCategoriesAndSub(MY_CATEGORIES, escolhidas) {
-  //console.log(MY_CATEGORIES, escolhidas);
+// function getCategoriesAndSub(MY_CATEGORIES, escolhidas) {
+//   //console.log(MY_CATEGORIES, escolhidas);
+//   var html3 = "",
+//     nova = '<li class="novaLI"></li>';
+
+//   function ativoOuNao(texto) {
+//     var l = escolhidas.split(",");
+//     for (const a in l) {
+//       if (l[a] == texto) {
+//         return 'checked="true"';
+//       }
+//     }
+//     return "";
+//   }
+//   for (const k in MY_CATEGORIES) {
+//     var content =
+//       '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
+//     html3 +=
+//       '<li    class="list-item sub-list-item animate__animated targetBusca">' +
+//       arrowDown3 +
+//       '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img src="../' +
+//       MY_CATEGORIES[k].categorie_icon +
+//       '"   style="width: 30px; height: 30px; margin-top -10%"/> ';
+//     content += nova;
+//     if (MY_CATEGORIES[k].subCategorias != "?") {
+//       var txtCategories = MY_CATEGORIES[k].subCategorias.split(",");
+//       for (let a = 0; a < txtCategories.length; a++) {
+//         if (
+//           txtCategories[a].length > 0 &&
+//           txtCategories[a] != "" &&
+//           txtCategories[a] != "null" &&
+//           txtCategories[a] != "undefined" &&
+//           txtCategories[a] != null &&
+//           txtCategories[a] != undefined
+//         ) {
+//           content +=
+//             '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar" onchange="changeMarcar($(this),this)" ' +
+//             ativoOuNao(txtCategories[a]) +
+//             '  ele="miseravi" type="checkbox"><span class="checkmark"></span>' +
+//             txtCategories[a] +
+//             "</label></div></li> ";
+//         }
+
+//         //////////////console.log(content)
+//       }
+//     }
+//     content += "</ul>";
+//     html3 +=
+//       MY_CATEGORIES[k].categoria +
+//       " <input " +
+//       ativoOuNao(MY_CATEGORIES[k].categoria) +
+//       '  class="marcar"  onchange="changeMarcar($(this),this)" type="checkbox"><span class="checkmark subCheck"></span></label>';
+//     html3 += content + "</li> ";
+//   }
+
+//   return html3;
+// }
+
+function getCategoriesAndSub(newsCATEGORIES, listaSelecionada = []) {
+  console.log("SADASD", newsCATEGORIES, listaSelecionada);
   var html3 = "",
     nova = '<li class="novaLI"></li>';
 
-  function ativoOuNao(texto) {
-    var l = escolhidas.split(",");
-    for (const a in l) {
-      if (l[a] == texto) {
-        return 'checked="true"';
-      }
-    }
-    return "";
+  if (!Array.isArray(listaSelecionada)) {
+    listaSelecionada = listaSelecionada.split(",");
   }
-  for (const k in MY_CATEGORIES) {
+
+  function getActive(text, listaSelecionada = []) {
+    console.log(text, listaSelecionada);
+
+    let eu = listaSelecionada.find((l) => l === text);
+    if (eu) {
+      return 'checked="true"';
+    } else {
+      ("");
+    }
+  }
+
+  for (const k in newsCATEGORIES) {
+    console.log("TRATANDO", newsCATEGORIES[k]);
     var content =
       '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
     html3 +=
-      '<li    class="list-item sub-list-item animate__animated targetBusca">' +
-      arrowDown3 +
-      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img src="../' +
-      MY_CATEGORIES[k].categorie_icon +
-      '"   style="width: 30px; height: 30px; margin-top -10%"/> ';
+      '<li    class="list-item sub-list-item animate__animated ">' +
+      arrowDown4 +
+      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="/assets/icons/' +
+      newsCATEGORIES[k].icon +
+      '" style="width: 30px; height: 30px; margin-top -10%"/> ';
     content += nova;
-    if (MY_CATEGORIES[k].subCategorias != "?") {
-      var txtCategories = MY_CATEGORIES[k].subCategorias.split(",");
-      for (let a = 0; a < txtCategories.length; a++) {
-        if (
-          txtCategories[a].length > 0 &&
-          txtCategories[a] != "" &&
-          txtCategories[a] != "null" &&
-          txtCategories[a] != "undefined" &&
-          txtCategories[a] != null &&
-          txtCategories[a] != undefined
-        ) {
-          content +=
-            '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar" onchange="changeMarcar($(this),this)" ' +
-            ativoOuNao(txtCategories[a]) +
-            '  ele="miseravi" type="checkbox"><span class="checkmark"></span>' +
-            txtCategories[a] +
-            "</label></div></li> ";
-        }
+    if (newsCATEGORIES[k]?.subcategories?.length > 0) {
+      var txtCategories = newsCATEGORIES[k].subcategories;
+      for (const u in txtCategories) {
+        content +=
+          '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input ' +
+          getActive(txtCategories[u].title, listaSelecionada) +
+          ' class="marcar catPromocao"  myValue="' +
+          txtCategories[u].title +
+          "\"  onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+          txtCategories[u].title +
+          '\')" type="checkbox"><span class="checkmark"></span>' +
+          txtCategories[u].title +
+          "</label></div></li> ";
 
-        //////////////console.log(content)
+        ////////////console.log(content)
       }
     }
     content += "</ul>";
     html3 +=
-      MY_CATEGORIES[k].categoria +
+      newsCATEGORIES[k].title +
       " <input " +
-      ativoOuNao(MY_CATEGORIES[k].categoria) +
-      '  class="marcar"  onchange="changeMarcar($(this),this)" type="checkbox"><span class="checkmark subCheck"></span></label>';
+      getActive(newsCATEGORIES[k].title, listaSelecionada) +
+      ' class="marcar catPromocao"  myValue="' +
+      newsCATEGORIES[k].title +
+      "\" onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+      newsCATEGORIES[k].title +
+      '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
     html3 += content + "</li> ";
   }
+  console.log(html3);
 
   return html3;
 }
@@ -3553,41 +3618,30 @@ function getCategoriesAndSubToFilter(MY_CATEGORIES) {
     html3 +=
       '<li    class="list-item sub-list-item animate__animated targetBusca">' +
       arrowDown3 +
-      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="' +
-      MY_CATEGORIES[k].categorie_icon +
+      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="/assets/icons/' +
+      MY_CATEGORIES[k].icon +
       '" style="width: 30px; height: 30px; margin-top -10%"/> ';
     content += nova;
-    if (MY_CATEGORIES[k].subCategorias != "?") {
-      var txtCategories = MY_CATEGORIES[k].subCategorias.split(",");
-      for (let a = 0; a < txtCategories.length; a++) {
-        if (
-          txtCategories[a].length > 0 &&
-          txtCategories[a] != "" &&
-          txtCategories[a] != "null" &&
-          txtCategories[a] != "undefined" &&
-          txtCategories[a] != null &&
-          txtCategories[a] != undefined
-        ) {
-          content +=
-            '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar" meEncontre="' +
-            txtCategories[a] +
-            "\"  onchange=\"subTagInput($(this),'listaCategoriasFilter','" +
-            txtCategories[a] +
-            '\')" type="checkbox"><span class="checkmark"></span>' +
-            txtCategories[a] +
-            "</label></div></li> ";
-        }
-
-        //////////////console.log(content)
+    if (MY_CATEGORIES[k]?.subcategories?.length > 0) {
+      var txtCategories = MY_CATEGORIES[k]?.subcategories;
+      for (const u in txtCategories) {
+        content +=
+          '<li   class="list-sub-item targetBusca"><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input class="marcar" meEncontre="' +
+          txtCategories[u].title +
+          "\"  onchange=\"subTagInput($(this),'listaCategoriasFilter','" +
+          txtCategories[u].title +
+          '\')" type="checkbox"><span class="checkmark"></span>' +
+          txtCategories[u].title +
+          "</label></div></li> ";
       }
     }
     content += "</ul>";
     html3 +=
-      MY_CATEGORIES[k].categoria +
+      MY_CATEGORIES[k].title +
       ' <input class="marcar" meEncontre=\'' +
-      MY_CATEGORIES[k].categoria +
+      MY_CATEGORIES[k].title +
       "'  onchange=\"subTagInput($(this),'listaCategoriasFilter','" +
-      MY_CATEGORIES[k].categoria +
+      MY_CATEGORIES[k].title +
       '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
     html3 += content + "</li> ";
   }
@@ -6087,7 +6141,7 @@ function filter() {
     "</div>" +
     '<div style="max-height: 30vh" class="col-md-12 verticalScroll">' +
     '<ul style="    margin-top: 5%;" class="list animate__animated ">' +
-    getCategoriesAndSubToFilter(MY_CATEGORIES) +
+    getCategoriesAndSubToFilter(newsCATEGORIES) +
     "</ul>" +
     "</div>" +
     "</div>" +

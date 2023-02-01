@@ -1030,8 +1030,13 @@
   <script>
 
 
+<<<<<<< HEAD
     var mainHost = 'https://cms.api-smartcomerci.com.br';
     let url = window.location.href
+=======
+  var mainHost = 'https://cms.api-smartcomerci.com.br';
+  let url = window.location.href
+>>>>>>> merge-staging
 
     function iniciaEditorHtml(idElemento) {
       tinymce.init({
@@ -1804,6 +1809,7 @@
       "x-access-token": localStorage.token,
     "master_id": localStorage.MASTER_ID
       },
+<<<<<<< HEAD
     data: data,
     processData: false,
     contentType: false,
@@ -1815,6 +1821,19 @@
     $("#" + element.attr("target")).css("background-size", "cover !important")
     $("#" + element.attr("target")).css("background-position", "center !important")
     $("#" + element.attr("target")).css("zoom", "100% !important")
+=======
+      data: data,
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: function (data) {
+        //console.log(data)
+        $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')})`)
+        $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')}`)
+        $("#" + element.attr("target")).css("background-size", "cover !important")
+        $("#" + element.attr("target")).css("background-position", "center !important")
+        $("#" + element.attr("target")).css("zoom", "100% !important")
+>>>>>>> merge-staging
 
 
 

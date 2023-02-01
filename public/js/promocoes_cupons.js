@@ -2,31 +2,32 @@ var AFFILIATE_ID = localStorage.AFFILIATE_ID;
 var MASTER_ID = localStorage.MASTER_ID;
 var mainHost = "https://cms.api-smartcomerci.com.br";
 
+var newsCATEGORIES = [];
 let TAGS = [];
 
-$.ajax({
-  type: "POST",
-  url: "https://cms.api-smartcomerci.com.br/getCategories",
-  headers: {
-    "x-access-token": localStorage.token,
-  },
-  data: {
-    affiliate_id: localStorage.AFFILIATE_ID,
-    master_id: localStorage.MASTER_ID,
-  },
-  success: function (categories) {
-    CATEGORIES = categories.results;
-    var CATEGORIES_SHOW = [];
-    var breakPoint = 100,
-      count = 0;
-    var myCategories = getCategorias(CATEGORIES);
-    MY_CATEGORIES = myCategories;
-  },
-  error: function (data2) {
-    console.log("data2 catgosss");
-  },
-  complete: function () {},
-});
+// $.ajax({
+//   type: "POST",
+//   url: "https://cms.api-smartcomerci.com.br/getCategories",
+//   headers: {
+//     "x-access-token": localStorage.token,
+//   },
+//   data: {
+//     affiliate_id: localStorage.AFFILIATE_ID,
+//     master_id: localStorage.MASTER_ID,
+//   },
+//   success: function (categories) {
+//     CATEGORIES = categories.results;
+//     var CATEGORIES_SHOW = [];
+//     var breakPoint = 100,
+//       count = 0;
+//     var myCategories = getCategorias(CATEGORIES);
+//     newsCATEGORIES = myCategories;
+//   },
+//   error: function (data2) {
+//     console.log("data2 catgosss");
+//   },
+//   complete: function () {},
+// });
 
 $.ajax({
   type: "POST",
@@ -408,10 +409,25 @@ async function CLOSE_AND_CANCEL(type, ID) {
 }
 
 getObjects();
+getCategoriesNOVA();
+async function getCategoriesNOVA() {
+  const resultado = await $.ajax({
+    type: "GET",
+    url: api_host + "/categorie_find/" + localStorage.AFFILIATE_ID,
+    headers: {
+      "x-access-token": localStorage.token,
+    },
+    data: "",
+  });
+
+  newsCATEGORIES = resultado.data[0].categories;
+  console.log("O RESULTADO", { newsCATEGORIES });
+}
 
 //===================================
 
-function getCategoriesAndSubPromocoes(MY_CATEGORIES, listaSelecionada) {
+function getCategoriesAndSubPromocoes(newsCATEGORIES, listaSelecionada) {
+  console.log(newsCATEGORIES, listaSelecionada);
   var html3 = "",
     nova = '<li class="novaLI"></li>';
 
@@ -426,54 +442,47 @@ function getCategoriesAndSubPromocoes(MY_CATEGORIES, listaSelecionada) {
     }
   }
 
-  for (const k in MY_CATEGORIES) {
+  for (const k in newsCATEGORIES) {
+    console.log("TRATANDO", newsCATEGORIES[k]);
     var content =
       '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
     html3 +=
       '<li    class="list-item sub-list-item animate__animated ">' +
       arrowDown4 +
-      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="' +
-      MY_CATEGORIES[k].categorie_icon +
+      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="/assets/icons/' +
+      newsCATEGORIES[k].icon +
       '" style="width: 30px; height: 30px; margin-top -10%"/> ';
     content += nova;
-    if (MY_CATEGORIES[k].subCategorias != "?") {
-      var txtCategories = MY_CATEGORIES[k].subCategorias.split(",");
-      for (let a = 0; a < txtCategories.length; a++) {
-        if (
-          txtCategories[a].length > 0 &&
-          txtCategories[a] != "" &&
-          txtCategories[a] != "null" &&
-          txtCategories[a] != "undefined" &&
-          txtCategories[a] != null &&
-          txtCategories[a] != undefined
-        ) {
-          content +=
-            '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input ' +
-            getActive(txtCategories[a], listaSelecionada) +
-            ' class="marcar catPromocao"  myValue="' +
-            txtCategories[a] +
-            "\"  onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
-            txtCategories[a] +
-            '\')" type="checkbox"><span class="checkmark"></span>' +
-            txtCategories[a] +
-            "</label></div></li> ";
-        }
+    if (newsCATEGORIES[k]?.subcategories?.length > 0) {
+      var txtCategories = newsCATEGORIES[k].subcategories;
+      for (const u in txtCategories) {
+        content +=
+          '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input ' +
+          getActive(txtCategories[u].title, listaSelecionada) +
+          ' class="marcar catPromocao"  myValue="' +
+          txtCategories[u].title +
+          "\"  onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+          txtCategories[u].title +
+          '\')" type="checkbox"><span class="checkmark"></span>' +
+          txtCategories[u].title +
+          "</label></div></li> ";
 
         ////////////console.log(content)
       }
     }
     content += "</ul>";
     html3 +=
-      MY_CATEGORIES[k].categoria +
+      newsCATEGORIES[k].title +
       " <input " +
-      getActive(MY_CATEGORIES[k].categoria, listaSelecionada) +
+      getActive(newsCATEGORIES[k].title, listaSelecionada) +
       ' class="marcar catPromocao"  myValue="' +
-      MY_CATEGORIES[k].categoria +
+      newsCATEGORIES[k].title +
       "\" onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
-      MY_CATEGORIES[k].categoria +
+      newsCATEGORIES[k].title +
       '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
     html3 += content + "</li> ";
   }
+  console.log(html3);
 
   return html3;
 }

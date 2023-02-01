@@ -11,12 +11,8 @@ function OrdenaJson(lista, chave, ordem) {
   });
 }
 $.ajax({
-  type: "POST",
-<<<<<<< HEAD
-  url: "https://cms.api-smartcomerci.com.br/getAllOrdersMaster",
-=======
-  url: "https://cms.api-smartcomerci.com.br/getAllOrdersMaster",
->>>>>>> merge-master
+  type: "POST", 
+  url: "https://cms.api-smartcomerci.com.br/getAllOrdersMaster", 
   data: { master_id: localStorage.MASTER_ID },
   headers: {
     "x-access-token": localStorage.token,

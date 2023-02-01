@@ -54,6 +54,8 @@
 
     })
 </script>
+<script src="https://cdn.jsdelivr.net/npm/shepherd.js@10.0.1/dist/js/shepherd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@10.0.1/dist/css/shepherd.css" />
 
 <modalLoading
     style="display: none; z-index: 9999;;background: rgb(0, 0, 0, 0.8); position: absolute; width: 100vw; height: 105vh; left: 0; top: 0">
@@ -609,6 +611,11 @@
                     z-index: 999999;
                 }
 
+                .alert-smart {
+                    background-color: #50c682 !important;
+                    color: white
+                }
+
                 #confGerais {
                     position: fixed;
                     bottom: 2vh;
@@ -629,7 +636,7 @@
 
 
 
-            <div class="modalPDF" style="display: none;">
+            {{!-- <div class="modalPDF" style="display: none;">
                 <div class="PDFmodal">
                     <button onclick="fechaModalPDF($(this))" type="button" class="bootbox-close-button close"
                         aria-hidden="true">×</button>
@@ -644,10 +651,10 @@
                     <br>
 
                     <hr>
-                    <iframe id="framePDF" style="width: 100%; height: 90vh; padding: 5px;    border: none;"
-                        src="../pdf/myPDF.html"></iframe>
+                    {{!-- <iframe id="framePDF" style="width: 100%; height: 90vh; padding: 5px;    border: none;"
+                        src="../pdf/myPDF.html"></iframe> --}}
                 </div>
-            </div>
+            </div> --}}
 
             <div class="modalAcoes superModal5" style="display: none;">
                 <div class="acoesProdutos">
@@ -691,6 +698,9 @@
         }
 
         function informar(className, texto, tempoDeTela) {
+            if (className === "alert-success") {
+                className = 'alert-smart'
+            }
             $(".alert").addClass(className)
             $(".alert").text(texto)
             $(".alert").fadeIn()
@@ -857,6 +867,7 @@ $(".sidebar").removeClass("newSidebar");
     <script src="../js/logistics.js"></script> --}}
 
     <script src="../js/categories.js"></script>
+    <script src="../js/categories_new.js"></script>
     <script src="../js/products.js"></script>
     <script src="../js/logistics.js"></script>
 
@@ -1203,13 +1214,14 @@ $(".sidebar").removeClass("newSidebar");
         }, 350)
 
 
-        function fechaModalPDF(elemento) {
-            elemento.parent().parent().hide()
-            $("body").css("overflow", "auto")
-        }
-        function imprimePDF_FRAME() {
-            $("#framePDF")[0].contentWindow.imprime()
-        }
+        /*  function fechaModalPDF(elemento) {
+              elemento.parent().parent().hide()
+              $("body").css("overflow", "auto")
+          }
+          function imprimePDF_FRAME() {
+              $("#framePDF")[0].contentWindow.imprime()
+          }
+          */
 
 
 

@@ -3,7 +3,24 @@ let notFound =
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
-
+var arrowDown4 =
+  '<div onclick="dropaCategoriasInner($(this).parent()) " class=" deleteThis3 dropCategoriaButton ">' +
+  '<svg xmlns="http://www.w3.org/2000/svg" style="fill: #fcfcfd; stroke: silver;" width="36" height="36" viewBox="0 0 36 36">' +
+  '<g transform="translate(36 36) rotate(180)">' +
+  '<g transform="translate(28 28) rotate(180)">' +
+  '<g class="b">' +
+  '<g class="c">' +
+  '<circle class="e" cx="10" cy="10" r="10" />' +
+  '<circle class="f" cx="10" cy="10" r="9.5" />' +
+  "</g>" +
+  '<path class="d" d="M581.273,789.774a.82.82,0,0,1-.081-1.079l.081-.092,3.685-3.593-3.685-3.593a.82.82,0,0,1-.081-1.079l.081-.093a.849.849,0,0,1,1.094-.081l.094.081,4.279,4.179a.82.82,0,0,1,.081,1.079l-.081.093-4.279,4.179A.849.849,0,0,1,581.273,789.774Z"' +
+  ' transform="translate(795.009 -573.615) rotate(90)"/>' +
+  "</g>" +
+  "</g>" +
+  "</g>" +
+  "</svg>" +
+  "</div>";
+var mainHost = "https://cms.api-smartcomerci.com.br";
 let homePage = {
   logotipo: {
     url: "",
@@ -105,6 +122,32 @@ let homePage = {
     link: "",
   },
 };
+
+function isEquivalent(a, b) {
+  // Create arrays of property names
+  var aProps = Object.getOwnPropertyNames(a);
+  var bProps = Object.getOwnPropertyNames(b);
+
+  // If number of properties is different,
+  // objects are not equivalent
+  if (aProps.length != bProps.length) {
+    return false;
+  }
+
+  for (var i = 0; i < aProps.length; i++) {
+    var propName = aProps[i];
+
+    // If values of same property are not equal,
+    // objects are not equivalent
+    if (a[propName] !== b[propName]) {
+      return false;
+    }
+  }
+
+  // If we made it this far, objects
+  // are considered equivalent
+  return true;
+}
 
 function corrigeHomePage() {
   homePage = {
@@ -331,7 +374,9 @@ function showMyPrev(element) {
   // element.parent().parent().find("label").addClass("index9");
   // element.parent().addClass("index9");
   // element.parent().parent().parent().addClass("index9");
-  element.parent().parent().addClass("index9");
+  element.parent().addClass("index9");
+  element.parent().css("position", "relative");
+
   element.parent().addClass("borderSelected index9");
 
   $("fundoModal").show();
@@ -352,6 +397,7 @@ $("fundoModal").click(function () {
   });
 });
 
+<<<<<<< HEAD
 // window.onbeforeunload = async function () {
 //   if ([].length > 0) {
 //     $("#modalNaoSalvou").click();
@@ -361,6 +407,18 @@ $("fundoModal").click(function () {
 //   }
 // };
 
+=======
+/*
+window.onbeforeunload = async function () {
+  if ([].length > 0) {
+    $("#modalNaoSalvou").click();
+    setTimeout(() => {
+      return confirm("Necessário salvar");
+    }, 2000);
+  }
+};
+*/
+>>>>>>> merge-staging
 function showMe(element) {
   if (element[0].checked === true) {
     element.parent().parent().parent().find(".contentAfter").show();
@@ -549,11 +607,11 @@ function getProductCard(data) {
                       </div>
 
                       <div style="color: var(--color-primary)" class="card-color-preview_mark">
-                       ${data.product_categoria}
+                       ${data.product_categoria.substr(0, 10)}...
                       </div>
 
                       <div style="color: var(--color-primary)" class="card-color-preview_title">
-                        ${data.product_site_name.substr(0, 20)}...
+                        ${data.product_site_name.substr(0, 15)}...
                       </div>
 
                       <div style="color: var(--color-primary)" class="card-color-preview_units ">
@@ -771,8 +829,9 @@ function prepareVitrine(element, position) {
     });
 }
 
-function publicaFecha() {
-  publishChanges();
+async function publicaFecha() {
+  const salva = await publishChanges();
+  console.log("SALVANDO", salva);
   $(".btn-close").click();
   location.reload();
 }
@@ -1715,6 +1774,86 @@ function setMidiasSociais() {
 //====================AREA FOR REQUEST========================
 
 getMyObjectHomeMain();
+async function applyChanges(homePageNew) {
+  if (homePageNew) {
+    homePage = homePageNew;
+  }
+  $("#color-badge_label-actions").html(homePage.mainColors.third);
+  $("#color-badge_label-primary").html(homePage.mainColors.first);
+  $("#color-badge_label-secondary").html(homePage.mainColors.second);
+  console.log(`home page`, homePage);
+  $("#contactDataMenu").val(homePage.footerLinks.contactData.text);
+  if (homePage.footerLinks.firstColumn.length > 0) {
+    console.log("homePage.footerLinks", homePage.footerLinks);
+    for (const k in homePage.footerLinks.firstColumn) {
+      $(".firstColumn").append(
+        addLinkObject(
+          homePage.footerLinks.firstColumn[k].text,
+          homePage.footerLinks.firstColumn[k].link,
+          "firstColumn"
+        )
+      );
+    }
+  }
+  if (homePage.footerLinks.secondColumn.length > 0) {
+    for (const k in homePage.footerLinks.secondColumn) {
+      $(".secondColumn").append(
+        addLinkObject(
+          homePage.footerLinks.secondColumn[k].text,
+          homePage.footerLinks.secondColumn[k].link,
+          "secondColumn"
+        )
+      );
+    }
+  }
+  if (homePage.footerLinks.thirdColumn.length > 0) {
+    for (const k in homePage.footerLinks.thirdColumn) {
+      $(".thirdColumn").append(
+        addLinkObject(
+          homePage.footerLinks.thirdColumn[k].text,
+          homePage.footerLinks.thirdColumn[k].link,
+          "thirdColumn"
+        )
+      );
+    }
+  }
+
+  for (const k in homePage.footerLinks) {
+    $(".colunas").each(function () {
+      if ($(this).attr("destiny") === k) {
+        $(this).val(homePage.footerLinks[k].text);
+      }
+    });
+  }
+  for (const u in homePage.body) {
+    const index = Number(u) + 1;
+    console.log("index", index);
+    let obj = homePage.body[u]; //homePage.body[homePage.body.length - index];
+    console.log("O OBJETO", obj);
+    if (obj.type === "vitrine") {
+      if (obj.products.length > 0) {
+        await dynamicContent.produtos(obj.products, obj.title, obj.id);
+      }
+    }
+    if (obj.type === "banners") {
+      await dynamicContent.banners(obj);
+    }
+    if (obj.type === "revenues") {
+    }
+  }
+
+  // for (const l in conteudo) {
+  //   if (conteudo[l].type === "vitrine") {
+  //     dynamicContent.produtos(conteudo[l].products, conteudo[l].title);
+  //   }
+  //   if (conteudo[l].type === "banners") {
+  //     dynamicContent.banners(conteudo[l]);
+  //   }
+  //   if (conteudo[l].type === "revenues") {
+  //   }
+  // }
+  start();
+}
 async function getMyObjectHomeMain() {
   $.ajax({
     type: "POST",
@@ -1919,7 +2058,7 @@ async function publishChanges() {
     }
   }
   homePage.body = theBody;
-  await $.ajax({
+  return $.ajax({
     type: "POST",
     url: host + "/updateMastersTable",
     data: {
@@ -2256,6 +2395,7 @@ function removeSection(element) {
   console.log(homePage);
 }
 
+<<<<<<< HEAD
 $.ajax({
   type: "POST",
   url: "https://cms.api-smartcomerci.com.br/getCategories",
@@ -2280,6 +2420,32 @@ $.ajax({
   },
   complete: function () {},
 });
+=======
+// $.ajax({
+//   type: "POST",
+//   url: "https://cms.api-smartcomerci.com.br/getCategories",
+//   headers: {
+//     "x-access-token": localStorage.token,
+//   },
+//   data: {
+//     affiliate_id: localStorage.AFFILIATE_ID,
+//     master_id: localStorage.MASTER_ID,
+//   },
+//   success: function (categories) {
+//     console.log("Categories", categories.results);
+//     CATEGORIES = categories.results;
+//     var CATEGORIES_SHOW = [];
+//     var myCategories = getCategorias(CATEGORIES);
+//     MY_CATEGORIES = myCategories;
+//     console.log("AS CATEGORIAS", MY_CATEGORIES);
+//     // $(".showCategorias").html(getCategoriesAndSubToFilter(MY_CATEGORIES));
+//   },
+//   error: function (data2) {
+//     console.log(data2);
+//   },
+//   complete: function () {},
+// });
+>>>>>>> merge-staging
 
 function OrdenaJson(lista, chave, ordem) {
   return lista.sort(function (a, b) {
@@ -2327,6 +2493,10 @@ $.ajax({
   },
   success: function (data2) {
     let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
+<<<<<<< HEAD
+=======
+
+>>>>>>> merge-staging
     console.log("revenuess", data2, paginas);
     for (const k in data2) {
       $("#listaReceitas").append(addContentRevenues(data2[k]));
@@ -2418,3 +2588,214 @@ function getCategorias(CATEGORIES) {
     return MINHAS_CATEGORIAS;
   }
 }
+<<<<<<< HEAD
+=======
+let proxyList = [];
+
+function monitor(elemento) {
+  if (proxyList.length > 0) {
+    let last = proxyList[proxyList.length - 1];
+    if (!isEquivalent(homePage, last)) {
+      proxyList.push(homePage);
+    }
+  } else {
+    proxyList.push(homePage);
+  }
+  console.log(proxyList);
+}
+
+function ir() {}
+function voltar() {}
+
+//==================PREPARANDO OS DRAG DROP================
+
+eventPrepare(".picture-drop", "#file-upload", uploadAndUpdateFile);
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+async function getCategoriesHome() {
+  const resultado = await $.ajax({
+    type: "GET",
+    url: mainHost + "/categorie_find/" + localStorage.AFFILIATE_ID,
+    headers: {
+      "x-access-token": localStorage.token,
+    },
+    data: "",
+  });
+  console.log("O RESULTADO", resultado);
+  if (!resultado || resultado.data.length === 0) {
+    const criaPrimeiroAcesso = await criarPrimeiroAcesso();
+    console.log("Primeiro acesso", criaPrimeiroAcesso);
+  } else {
+    if (Array.isArray(resultado.data)) {
+      categoriesObject = resultado.data.find(
+        (dt) => dt.affiliateId === Number(localStorage.AFFILIATE_ID)
+      );
+    } else {
+      categoriesObject = resultado.data;
+    }
+  }
+  MINHAS_CATEGORIAS = resultado.data[0].categories;
+  sessionStorage.MINHAS_CATEGORIAS = JSON.stringify(MINHAS_CATEGORIAS);
+}
+
+$(".showCategorias").each(async function () {
+  let HTML = await getCategoriesAndSubHome(
+    $(".showCategorias").attr("categorie_list")?.split(",") ?? []
+  );
+  console.log("HTML", HTML);
+  $(this).html(HTML);
+});
+
+$(".showPagesInst").each(async function () {
+  let HTML = await getInstitucionalPagesHome(
+    $(this).attr("categorie_list")?.split(",") ?? []
+  );
+  console.log("HTML", HTML);
+  $(this).html(HTML);
+});
+
+async function getCategoriesAndSubHome(listaSelecionada = []) {
+  await getCategoriesHome();
+  let newsCATEGORIES = MINHAS_CATEGORIAS;
+  console.log("IN HOMEE", newsCATEGORIES, listaSelecionada);
+  var html3 = "",
+    nova = '<li class="novaLI"></li>';
+
+  if (!Array.isArray(listaSelecionada)) {
+    listaSelecionada = listaSelecionada.split(",");
+  }
+
+  function getActive(text, listaSelecionada = []) {
+    console.log(text, listaSelecionada);
+
+    let eu = listaSelecionada.find((l) => l === text);
+    if (eu) {
+      return 'checked="true"';
+    } else {
+      ("");
+    }
+  }
+
+  for (const k in newsCATEGORIES) {
+    console.log("TRATANDO", newsCATEGORIES[k]);
+    var content =
+      '<ul class="listInner listInner2 sub-listInner2 animate__animated ">';
+    html3 +=
+      '<li    class="list-item sub-list-item animate__animated ">' +
+      arrowDown4 +
+      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> <img   src="/assets/icons/' +
+      newsCATEGORIES[k].icon +
+      '" style="width: 30px; height: 30px; margin-top -10%"/> ';
+    content += nova;
+    if (newsCATEGORIES[k]?.subcategories?.length > 0) {
+      var txtCategories = newsCATEGORIES[k].subcategories;
+      for (const u in txtCategories) {
+        content +=
+          '<li   class="list-sub-item "><div class="row"><span style="border-top: 5px dotted silver !important;" class="trilha">..........</span><label class="subSmart  animate__animated animate__"><input ' +
+          getActive(txtCategories[u].title, listaSelecionada) +
+          ' class="marcar catPromocao"  myValue="' +
+          txtCategories[u].title +
+          "\"  onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+          txtCategories[u].title +
+          '\')" type="checkbox"><span class="checkmark"></span>' +
+          txtCategories[u].title +
+          "</label></div></li> ";
+
+        ////////////console.log(content)
+      }
+    }
+    content += "</ul>";
+    html3 +=
+      newsCATEGORIES[k].title +
+      " <input " +
+      getActive(newsCATEGORIES[k].title, listaSelecionada) +
+      ' class="marcar catPromocao"  myValue="' +
+      newsCATEGORIES[k].title +
+      "\" onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+      newsCATEGORIES[k].title +
+      '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+    html3 += content + "</li> ";
+  }
+  console.log(html3);
+
+  return html3;
+}
+
+$(".dropCategoriaContent").click(function () {
+  if (
+    $(this).attr("dropado") == "nao" ||
+    $(this).attr("dropado") == undefined
+  ) {
+    $(this).parent().parent().find(".cabecalho").removeClass("radius20");
+    $(this).parent().parent().find(".cabecalho").addClass("radius20Top");
+    $(this).parent().parent().find(".cabecalho").addClass("bordaDourada");
+    $(".seta").removeClass("rotate180");
+    $(this).parent().parent().find(".seta").addClass("rotate180");
+
+    $(this).attr("dropado", "sim");
+    $(this).parent().parent().find(".dropCategoria").show();
+  } else {
+    $(this).parent().parent().find(".cabecalho").removeClass("radius20Top");
+    $(this).parent().parent().find(".cabecalho").addClass("radius20");
+    $(this).parent().parent().find(".cabecalho").removeClass("bordaDourada");
+    $(this).attr("dropado", "nao");
+    $(this).parent().parent().find(".dropCategoria").hide();
+
+    $(this).parent().parent().find(".seta").removeClass("rotate180");
+  }
+});
+function dropaCategoriasInner(element) {
+  console.log("Dropando");
+  if (element.find(".listInner2 ").attr("dropei") === "1") {
+    element.find(".listInner2 ").attr("dropei", "0");
+    element.find(".listInner2 ").hide();
+  } else {
+    element.find(".listInner2 ").attr("dropei", "1");
+    element.find(".listInner2 ").show();
+  }
+}
+
+function getInstitucionalPagesHome(listaSelecionada = []) {
+  let newsCATEGORIES = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
+  console.log("IN PAGESS", newsCATEGORIES, listaSelecionada);
+  var html3 = "",
+    nova = '<li class="novaLI"></li>';
+
+  if (!Array.isArray(listaSelecionada)) {
+    listaSelecionada = listaSelecionada.split(",");
+  }
+
+  function getActive(text, listaSelecionada = []) {
+    console.log(text, listaSelecionada);
+
+    let eu = listaSelecionada.find((l) => l === text);
+    if (eu) {
+      return 'checked="true"';
+    } else {
+      ("");
+    }
+  }
+
+  for (const k in newsCATEGORIES) {
+    console.log("TRATANDO", newsCATEGORIES[k]);
+    html3 +=
+      '<li    class="list-item sub-list-item animate__animated ">' +
+      arrowDown4 +
+      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> ';
+    html3 +=
+      newsCATEGORIES[k].titulo_page +
+      " <input " +
+      getActive(newsCATEGORIES[k].titulo_page, listaSelecionada) +
+      ' class="marcar catPromocao"  myValue="' +
+      newsCATEGORIES[k].titulo_page +
+      "\" onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+      newsCATEGORIES[k].titulo_page +
+      '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+    html3 += "</li> ";
+  }
+  console.log(html3);
+
+  return html3;
+}
+>>>>>>> merge-staging
