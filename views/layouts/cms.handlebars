@@ -47,7 +47,7 @@
 
 
 <script>
-    var mainHost = "https://www.smartlima.com.br:7070";
+    var mainHost = "https://cms.api-smartcomerci.com.br";
 
     $(window).on("load", function () {
         $("modalLoading").hide()
@@ -1146,7 +1146,7 @@ $(".sidebar").removeClass("newSidebar");
         setTimeout(() => {
             $.ajax({
                 type: 'POST',
-                url: 'https://www.smartlima.com.br:7070/getStoreInformation',
+                url: 'https://cms.api-smartcomerci.com.br/getStoreInformation',
                 data: { "master_id": localStorage.MASTER_ID },
                 success: function (data) {
                     //console.log("dataStore")
@@ -1170,7 +1170,7 @@ $(".sidebar").removeClass("newSidebar");
 
             $.ajax({
                 type: 'POST',
-                url: 'https://www.smartlima.com.br:7070/informacoesDeClientes',
+                url: 'https://cms.api-smartcomerci.com.br/informacoesDeClientes',
                 data: { "affiliate_id": localStorage.AFFILIATE_ID },
                 headers: {
                     "x-access-token": localStorage.token,

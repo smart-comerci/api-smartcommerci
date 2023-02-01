@@ -1105,7 +1105,7 @@
   </div>
   <!-- <script src="/tinymce.js"></script> -->
   <script>
-    var mainHost = 'https://www.smartlima.com.br:7070';
+    var mainHost = 'https://cms.api-smartcomerci.com.br';
 
     let url = window.location.href
 
@@ -1288,8 +1288,8 @@
         type: 'POST',
         success: function (data) {
           //console.log(data)
-          $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://www.smartlima.com.br:7070')})`)
-          $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://www.smartlima.com.br:7070')}`)
+          $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')})`)
+          $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')}`)
           $("#" + element.attr("target")).css("background-size", "cover !important")
           $("#" + element.attr("target")).css("background-position", "center !important")
           $("#" + element.attr("target")).css("zoom", "100% !important")
@@ -1297,9 +1297,9 @@
 
 
           //console.log(element.parent().parent().find('input'))
-          //console.log(`${data.path?.replace('./public', 'https://www.smartlima.com.br:7070')}`)
+          //console.log(`${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')}`)
 
-          editRevenue('banner_topo', data.path?.replace('./public', 'https://www.smartlima.com.br:7070'))
+          editRevenue('banner_topo', data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br'))
 
 
 

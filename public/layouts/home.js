@@ -1,5 +1,5 @@
 let notFound =
-  "https://www.smartlima.com.br:6060/images/default/produto-sem-imagem.jpg";
+  "https://cms.api-smartcomerci.com.br/images/default/produto-sem-imagem.jpg";
 var CATEGORIES = [],
   MY_CATEGORIES = [],
   MINHAS_CATEGORIAS = [];
@@ -20,7 +20,7 @@ var arrowDown4 =
   "</g>" +
   "</svg>" +
   "</div>";
-var mainHost = "https://www.smartlima.com.br:6060";
+var mainHost = "https://cms.api-smartcomerci.com.br";
 let homePage = {
   logotipo: {
     url: "",
@@ -1243,7 +1243,7 @@ function createElementFromHTML(htmlString) {
 }
 
 //=========================== Área de CRUD =====================
-let host = `https://www.smartlima.com.br:6060`;
+let host = `https://cms.api-smartcomerci.com.br`;
 async function uploadAndUpdateFile(element) {
   if (element.attr("url")) {
     element
@@ -2385,7 +2385,7 @@ function removeSection(element) {
 
 // $.ajax({
 //   type: "POST",
-//   url: "https://www.smartlima.com.br:6060/getCategories",
+//   url: "https://cms.api-smartcomerci.com.br/getCategories",
 //   headers: {
 //     "x-access-token": localStorage.token,
 //   },

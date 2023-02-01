@@ -1,13 +1,13 @@
 var AFFILIATE_ID = localStorage.AFFILIATE_ID;
 var MASTER_ID = localStorage.MASTER_ID;
-var mainHost = "https://www.smartlima.com.br:7070";
+var mainHost = "https://cms.api-smartcomerci.com.br";
 
 var newsCATEGORIES = [];
 let TAGS = [];
 
 // $.ajax({
 //   type: "POST",
-//   url: "https://www.smartlima.com.br:7070/getCategories",
+//   url: "https://cms.api-smartcomerci.com.br/getCategories",
 //   headers: {
 //     "x-access-token": localStorage.token,
 //   },
@@ -31,7 +31,7 @@ let TAGS = [];
 
 $.ajax({
   type: "POST",
-  url: "https://www.smartlima.com.br:7070/getTagsLists",
+  url: "https://cms.api-smartcomerci.com.br/getTagsLists",
   headers: {
     "x-access-token": localStorage.token,
   },

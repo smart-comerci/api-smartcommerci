@@ -19,7 +19,7 @@ function mostra() {
   $(".listaDeCategorias").html("");
   $.ajax({
     type: "POST",
-    url: "https://www.smartlima.com.br:7070/getCatList",
+    url: "https://cms.api-smartcomerci.com.br/getCatList",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -74,7 +74,7 @@ function continua() {
   try {
     $.ajax({
       type: "POST",
-      url: "https://www.smartlima.com.br:7070/getCategories",
+      url: "https://cms.api-smartcomerci.com.br/getCategories",
       headers: {
         "x-access-token": localStorage.token,
       },
@@ -288,7 +288,7 @@ function continua() {
 async function criaNovaCategoria() {
   $.ajax({
     type: "POST",
-    url: "https://www.smartlima.com.br:7070/maisUmaCategoria",
+    url: "https://cms.api-smartcomerci.com.br/maisUmaCategoria",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -492,7 +492,7 @@ function infoCategoria_keyWord(categoria) {
 
 //     $.ajax({
 //         type: "POST",
-//         url: "https://www.smartlima.com.br:7070/updateCategoryList",
+//         url: "https://cms.api-smartcomerci.com.br/updateCategoryList",
 //         headers: {
 //             "x-access-token": localStorage.token,
 //         },
@@ -660,7 +660,7 @@ async function updateSequencia(mostra1) {
   });
   $.ajax({
     type: "POST",
-    url: "https://www.smartlima.com.br:7070/updateCategoryList",
+    url: "https://cms.api-smartcomerci.com.br/updateCategoryList",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -1955,7 +1955,7 @@ function updateIconSVG(element, categorieName) {
 
   $.ajax({
     type: "POST",
-    url: "https://www.smartlima.com.br:7070/updateCategorieDetail",
+    url: "https://cms.api-smartcomerci.com.br/updateCategorieDetail",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -1997,7 +1997,7 @@ function updateCategoriaDetalhe(element, categorieName) {
 
     $.ajax({
       type: "POST",
-      url: "https://www.smartlima.com.br:7070/updateCategorieDetail",
+      url: "https://cms.api-smartcomerci.com.br/updateCategorieDetail",
       headers: {
         "x-access-token": localStorage.token,
       },
@@ -2028,7 +2028,7 @@ function updateCategoriaDetalhe(element, categorieName) {
 function mudaDetalhe(fieldName, content, categorieName) {
   $.ajax({
     type: "POST",
-    url: "https://www.smartlima.com.br:7070/updateCategorieDetail",
+    url: "https://cms.api-smartcomerci.com.br/updateCategorieDetail",
     headers: {
       "x-access-token": localStorage.token,
     },
@@ -2531,7 +2531,7 @@ function salvaModalSubCategoria() {
     //  console.log(editados)
     $.ajax({
       type: "POST",
-      url: "https://www.smartlima.com.br:7070/updateCategorieDetail",
+      url: "https://cms.api-smartcomerci.com.br/updateCategorieDetail",
       headers: {
         "x-access-token": localStorage.token,
       },
@@ -2982,7 +2982,7 @@ function uploadBannerCat(element) {
                 active: false,
                 url: data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 ),
               },
             ],
@@ -2994,7 +2994,7 @@ function uploadBannerCat(element) {
           "background",
           `url(${data.path?.replace(
             "./public",
-            "https://www.smartlima.com.br:7070"
+            "https://cms.api-smartcomerci.com.br"
           )})`
         );
         $("#" + element.attr("target")).css(
@@ -3009,7 +3009,7 @@ function uploadBannerCat(element) {
       }
 
       // console.log(element.parent().parent().find('input'))
-      // console.log(`${data.path?.replace('./public','https://www.smartlima.com.br:7070')}`)
+      // console.log(`${data.path?.replace('./public','https://cms.api-smartcomerci.com.br')}`)
 
       let thisCategory = localStorage.SUB_CAT_ATUAL;
       let subs = JSON.parse(localStorage.SUB_EDIT);
@@ -3023,7 +3023,7 @@ function uploadBannerCat(element) {
                   active: element.parent().parent().find("input")[0].checked,
                   url: `${data.path?.replace(
                     "./public",
-                    "https://www.smartlima.com.br:7070"
+                    "https://cms.api-smartcomerci.com.br"
                   )}`,
                 },
               ];
@@ -3032,7 +3032,7 @@ function uploadBannerCat(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 )}`,
               });
               subs[k]["banners"] = bnn;
@@ -3043,7 +3043,7 @@ function uploadBannerCat(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 )}`,
               },
             ];
@@ -3085,7 +3085,7 @@ function uploadBannerCatMain(element) {
                 active: false,
                 url: data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 ),
               },
             ],
@@ -3097,7 +3097,7 @@ function uploadBannerCatMain(element) {
           "background",
           `url(${data.path?.replace(
             "./public",
-            "https://www.smartlima.com.br:7070"
+            "https://cms.api-smartcomerci.com.br"
           )})`
         );
         $("#" + element.attr("target")).css(
@@ -3112,7 +3112,7 @@ function uploadBannerCatMain(element) {
       }
 
       //    console.log(element.parent().parent().find('input'))
-      //    console.log(`${data.path?.replace('./public','https://www.smartlima.com.br:7070')}`)
+      //    console.log(`${data.path?.replace('./public','https://cms.api-smartcomerci.com.br')}`)
 
       let thisCategory = localStorage.CAT_SUB_EDIT;
       let subs = JSON.parse(localStorage.MINHAS_CATEGORIAS);
@@ -3143,7 +3143,7 @@ function uploadBannerCatMain(element) {
                   active: element.parent().parent().find("input")[0].checked,
                   url: `${data.path?.replace(
                     "./public",
-                    "https://www.smartlima.com.br:7070"
+                    "https://cms.api-smartcomerci.com.br"
                   )}`,
                 },
               ];
@@ -3156,7 +3156,7 @@ function uploadBannerCatMain(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 )}`,
               });
               subs[k]["subcategorie_banners"]["banners"] = bnn;
@@ -3173,7 +3173,7 @@ function uploadBannerCatMain(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 )}`,
               },
             ];
@@ -3218,7 +3218,7 @@ function uploadBannerCatVertical(element) {
                 active: false,
                 url: data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 ),
               },
             ],
@@ -3230,7 +3230,7 @@ function uploadBannerCatVertical(element) {
           "background",
           `url(${data.path?.replace(
             "./public",
-            "https://www.smartlima.com.br:7070"
+            "https://cms.api-smartcomerci.com.br"
           )})`
         );
         $("#" + element.attr("target")).css(
@@ -3245,7 +3245,7 @@ function uploadBannerCatVertical(element) {
       }
 
       //  console.log(element.parent().parent().find('input'))
-      //  console.log(`${data.path?.replace('./public','https://www.smartlima.com.br:7070')}`)
+      //  console.log(`${data.path?.replace('./public','https://cms.api-smartcomerci.com.br')}`)
 
       let thisCategory = localStorage.SUB_CAT_ATUAL;
       let subs = JSON.parse(localStorage.SUB_EDIT);
@@ -3259,7 +3259,7 @@ function uploadBannerCatVertical(element) {
                   active: element.parent().parent().find("input")[0].checked,
                   url: `${data.path?.replace(
                     "./public",
-                    "https://www.smartlima.com.br:7070"
+                    "https://cms.api-smartcomerci.com.br"
                   )}`,
                 },
               ];
@@ -3268,7 +3268,7 @@ function uploadBannerCatVertical(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 )}`,
               });
               subs[k]["bannersVertical"] = bnn;
@@ -3279,7 +3279,7 @@ function uploadBannerCatVertical(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 )}`,
               },
             ];
@@ -3321,7 +3321,7 @@ function uploadBannerCatVerticalMain(element) {
                 active: false,
                 url: data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 ),
               },
             ],
@@ -3333,7 +3333,7 @@ function uploadBannerCatVerticalMain(element) {
           "background",
           `url(${data.path?.replace(
             "./public",
-            "https://www.smartlima.com.br:7070"
+            "https://cms.api-smartcomerci.com.br"
           )})`
         );
         $("#" + element.attr("target")).css(
@@ -3348,7 +3348,7 @@ function uploadBannerCatVerticalMain(element) {
       }
 
       // console.log(element.parent().parent().find('input'))
-      // console.log(`${data.path?.replace('./public','https://www.smartlima.com.br:7070')}`)
+      // console.log(`${data.path?.replace('./public','https://cms.api-smartcomerci.com.br')}`)
 
       let thisCategory = localStorage.CAT_SUB_EDIT;
       let subs = JSON.parse(localStorage.MINHAS_CATEGORIAS);
@@ -3382,7 +3382,7 @@ function uploadBannerCatVerticalMain(element) {
                   active: element.parent().parent().find("input")[0].checked,
                   url: `${data.path?.replace(
                     "./public",
-                    "https://www.smartlima.com.br:7070"
+                    "https://cms.api-smartcomerci.com.br"
                   )}`,
                 },
               ];
@@ -3394,7 +3394,7 @@ function uploadBannerCatVerticalMain(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 )}`,
               });
               subs[k]["subcategorie_banners"]["bannersVertical"] = bnn;
@@ -3409,7 +3409,7 @@ function uploadBannerCatVerticalMain(element) {
                 active: element.parent().parent().find("input")[0].checked,
                 url: `${data.path?.replace(
                   "./public",
-                  "https://www.smartlima.com.br:7070"
+                  "https://cms.api-smartcomerci.com.br"
                 )}`,
               },
             ];

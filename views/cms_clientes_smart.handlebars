@@ -320,21 +320,21 @@
         "master_estoque_negativo": "on",
         "master_tag_manager": "XXXXXX",
         "status": "ativo",
-        "master_banner_revenues": "https://www.smartlima.com.br:7070/images/231/banner-receitas.png",
-        "master_custom_mini_banner04": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
-        "master_custom_mini_banner03": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
-        "master_custom_mini_banner02": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
-        "master_custom_mini_banner01": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
-        "master_custom_banner_aside": "https://api-smartcomerci.com.br:9090/images/200/comofunciona.png",
-        "master_custom_banner_rodape": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
-        "master_custom_banner_principal": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
-        "master_custom_texto_privacidade": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
-        "master_custom_banner_mini_cat": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
-        "master_custom_banner_pub4": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
-        "master_custom_banner_pub3": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
-        "master_custom_banner_pub2": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
-        "master_custom_banner_pub1": "https://api-smartcomerci.com.br:9090/images/2/1094_x_269_01.png",
-        "master_custom_banner_widescreen": "https://api-smartcomerci.com.br:9090/images/2/1366_x_140_01.png",
+        "master_banner_revenues": "https://cms.api-smartcomerci.com.br/images/231/banner-receitas.png",
+        "master_custom_mini_banner04": "https://cms.api-smartcomerci.com.br/images/200/comofunciona.png",
+        "master_custom_mini_banner03": "https://cms.api-smartcomerci.com.br/images/200/comofunciona.png",
+        "master_custom_mini_banner02": "https://cms.api-smartcomerci.com.br/images/200/comofunciona.png",
+        "master_custom_mini_banner01": "https://cms.api-smartcomerci.com.br/images/200/comofunciona.png",
+        "master_custom_banner_aside": "https://cms.api-smartcomerci.com.br/images/200/comofunciona.png",
+        "master_custom_banner_rodape": "https://cms.api-smartcomerci.com.br/images/2/1366_x_140_01.png",
+        "master_custom_banner_principal": "https://cms.api-smartcomerci.com.br/images/2/1366_x_140_01.png",
+        "master_custom_texto_privacidade": "https://cms.api-smartcomerci.com.br/images/2/1366_x_140_01.png",
+        "master_custom_banner_mini_cat": "https://cms.api-smartcomerci.com.br/images/2/1366_x_140_01.png",
+        "master_custom_banner_pub4": "https://cms.api-smartcomerci.com.br/images/2/1366_x_140_01.png",
+        "master_custom_banner_pub3": "https://cms.api-smartcomerci.com.br/images/2/1366_x_140_01.png",
+        "master_custom_banner_pub2": "https://cms.api-smartcomerci.com.br/images/2/1366_x_140_01.png",
+        "master_custom_banner_pub1": "https://cms.api-smartcomerci.com.br/images/2/1094_x_269_01.png",
+        "master_custom_banner_widescreen": "https://cms.api-smartcomerci.com.br/images/2/1366_x_140_01.png",
 
         "site_front_domain": "",
         "masters_namespace_mail": null,
@@ -1184,7 +1184,7 @@ color: #222B45 !important;">${name}</label>
                         }
                         $.ajax({
                             type: 'POST',
-                            url: 'https://www.smartlima.com.br:7070' + '/autenticateAdmin',
+                            url: 'https://cms.api-smartcomerci.com.br' + '/autenticateAdmin',
                             data: params,
                             headers: {
                                 'x-access-token': localStorage.token,
@@ -1302,7 +1302,7 @@ color: #222B45 !important;">${name}</label>
                     }
                     $.ajax({
                         type: 'POST',
-                        url: 'https://www.smartlima.com.br:7070' + '/autenticateAdmin',
+                        url: 'https://cms.api-smartcomerci.com.br' + '/autenticateAdmin',
                         data: params,
                         headers: {
                             'x-access-token': localStorage.token,
@@ -1454,7 +1454,7 @@ color: #222B45 !important;">${name}</label>
                         }
                         $.ajax({
                             type: 'POST',
-                            url: 'https://www.smartlima.com.br:7070' + '/autenticateAdmin',
+                            url: 'https://cms.api-smartcomerci.com.br' + '/autenticateAdmin',
                             data: params,
                             headers: {
                                 'x-access-token': localStorage.token,
@@ -1502,7 +1502,7 @@ color: #222B45 !important;">${name}</label>
         //console.log("requeste para ", url, params)
         return $.ajax({
             type: type,
-            url: 'https://www.smartlima.com.br:7070' + url,
+            url: 'https://cms.api-smartcomerci.com.br' + url,
             data: params,
             headers: {
                 'x-access-token': localStorage.token,
@@ -1538,7 +1538,7 @@ color: #222B45 !important;">${name}</label>
     async function criaClienteNovo(elemento) {
         let lista4 = JSON.parse(sessionStorage.ALL_CLIENTS)
         let mailNew = EDIT_OBJ['master_business_mail']
-        var mainHost = "https://www.smartlima.com.br:7070";
+        var mainHost = "https://cms.api-smartcomerci.com.br";
         const exists = lista4.find((x) => x.master_business_mail === mailNew)
         if (!exists) {
             let fields = []

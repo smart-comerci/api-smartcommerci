@@ -1,4 +1,4 @@
-var mainHost = "https://www.smartlima.com.br:7070";
+var mainHost = "https://cms.api-smartcomerci.com.br";
 
 comecando();
 
@@ -179,7 +179,7 @@ async function atualizaCampo(elemento, reload) {
     : localStorage.MASTER_ID;
 
   // if(newValue.indexOf("C:\\fakepath\\")>-1){
-  //   newValue = newValue.replace("C:\\fakepath\\","https://www.smartlima.com.br:7070/images/"+localStorage.MASTER_ID+"/")
+  //   newValue = newValue.replace("C:\\fakepath\\","https://cms.api-smartcomerci.com.br/images/"+localStorage.MASTER_ID+"/")
   // }
 
   let params = {

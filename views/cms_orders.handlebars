@@ -298,7 +298,7 @@
 </div>
 <script src="../assets/js/core/jquery.min.js"></script>
 <script>
-    var mainHost = 'https://www.smartlima.com.br:7070';
+    var mainHost = 'https://cms.api-smartcomerci.com.br';
 
     localStorage.TODOS_OS_PEDIDOS = ''
     localStorage.PEDIDO_SENDO_EDITADO = ''
@@ -316,7 +316,7 @@
         updateTotalPedidos()
         $.ajax({
             type: "POST",
-            url: "https://www.smartlima.com.br:7070/getOrdersTemplate",
+            url: "https://cms.api-smartcomerci.com.br/getOrdersTemplate",
             headers: {
                 "x-access-token": localStorage.token,
             },
@@ -429,7 +429,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "https://www.smartlima.com.br:7070/getOrdersTemplate",
+                    url: "https://cms.api-smartcomerci.com.br/getOrdersTemplate",
                     headers: {
                         "x-access-token": localStorage.token,
                     },
@@ -1402,7 +1402,7 @@
 
                                     $.ajax({
                                         type: "POST",
-                                        url: 'https://www.smartlima.com.br:7070/updateOrderDetails',
+                                        url: 'https://cms.api-smartcomerci.com.br/updateOrderDetails',
                                         headers: {
                                             "x-access-token": localStorage.token,
                                         },
@@ -2201,7 +2201,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "https://www.smartlima.com.br:7070/productsOrderByListOrder",
+                url: "https://cms.api-smartcomerci.com.br/productsOrderByListOrder",
                 headers: {
                     "x-access-token": localStorage.token,
                 },

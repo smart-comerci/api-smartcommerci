@@ -1,4 +1,4 @@
-const api_host = "https://www.smartlima.com.br:7070";
+const api_host = "https://cms.api-smartcomerci.com.br";
 let currentCategoryId = null,
   currentSubcategoryId = null;
 
