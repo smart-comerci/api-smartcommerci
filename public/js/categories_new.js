@@ -1667,6 +1667,17 @@ function uploadBannerCatMainNew(element, idCat, idSub) {
   var data = new FormData();
   var contador = 1;
   data.append("fileimagem", element[0].files[0]);
+  console.log({
+    url: mainHost + "/uploadBanners",
+    headers: {
+      "x-access-token": localStorage.token,
+      master_id: localStorage.MASTER_ID,
+    },
+    data: data,
+    processData: false,
+    contentType: false,
+    type: "POST",
+  });
   $.ajax({
     url: mainHost + "/uploadBanners",
     headers: {
