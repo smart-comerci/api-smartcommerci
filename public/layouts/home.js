@@ -397,17 +397,6 @@ $("fundoModal").click(function () {
   });
 });
 
-<<<<<<< HEAD
-// window.onbeforeunload = async function () {
-//   if ([].length > 0) {
-//     $("#modalNaoSalvou").click();
-//     setTimeout(() => {
-//       return confirm("Necessário salvar");
-//     }, 2000);
-//   }
-// };
-
-=======
 /*
 window.onbeforeunload = async function () {
   if ([].length > 0) {
@@ -418,7 +407,6 @@ window.onbeforeunload = async function () {
   }
 };
 */
->>>>>>> merge-staging
 function showMe(element) {
   if (element[0].checked === true) {
     element.parent().parent().parent().find(".contentAfter").show();
@@ -1291,7 +1279,7 @@ async function uploadAndUpdateFile(element) {
   var data = new FormData();
   data.append("fileimagem", files[0]);
   await $.ajax({
-    url: host + "/uploadBanners",
+    url: host + "/uploadBanners/" + localStorage.MASTER_ID,
     headers: {
       "x-access-token": localStorage.token,
       master_id: localStorage.MASTER_ID,
@@ -2395,32 +2383,6 @@ function removeSection(element) {
   console.log(homePage);
 }
 
-<<<<<<< HEAD
-$.ajax({
-  type: "POST",
-  url: "https://cms.api-smartcomerci.com.br/getCategories",
-  headers: {
-    "x-access-token": localStorage.token,
-  },
-  data: {
-    affiliate_id: localStorage.AFFILIATE_ID,
-    master_id: localStorage.MASTER_ID,
-  },
-  success: function (categories) {
-    console.log("Categories", categories.results);
-    CATEGORIES = categories.results;
-    var CATEGORIES_SHOW = [];
-    var myCategories = getCategorias(CATEGORIES);
-    MY_CATEGORIES = myCategories;
-    console.log("AS CATEGORIAS", MY_CATEGORIES);
-    // $(".showCategorias").html(getCategoriesAndSubToFilter(MY_CATEGORIES));
-  },
-  error: function (data2) {
-    console.log(data2);
-  },
-  complete: function () {},
-});
-=======
 // $.ajax({
 //   type: "POST",
 //   url: "https://cms.api-smartcomerci.com.br/getCategories",
@@ -2445,7 +2407,6 @@ $.ajax({
 //   },
 //   complete: function () {},
 // });
->>>>>>> merge-staging
 
 function OrdenaJson(lista, chave, ordem) {
   return lista.sort(function (a, b) {
@@ -2461,13 +2422,17 @@ function OrdenaJson(lista, chave, ordem) {
 }
 
 function addContentRevenues(data) {
-  var html = `<li class="nav-menu_item">
-                <a href="" class="nav-menu_link">
-                 ${data.title}
-                </a>
-              </li>
-              `;
-  return html;
+  if (data && data.title && data.title != null && data.title != "null") {
+    var html = `<li class="nav-menu_item">
+    <a href="" class="nav-menu_link">
+     ${data.title}
+    </a>
+  </li>
+  `;
+    return html;
+  } else {
+    return "";
+  }
 }
 
 function addContentPageI(data) {
@@ -2492,19 +2457,17 @@ $.ajax({
     "x-access-token": localStorage.token,
   },
   success: function (data2) {
-    let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
-<<<<<<< HEAD
-=======
+    try {
+      let paginas = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
+      console.log("revenuess", data2, paginas);
+      for (const k in data2) {
+        $("#listaReceitas").append(addContentRevenues(data2[k]));
+      }
 
->>>>>>> merge-staging
-    console.log("revenuess", data2, paginas);
-    for (const k in data2) {
-      $("#listaReceitas").append(addContentRevenues(data2[k]));
-    }
-
-    for (const k in paginas) {
-      $("#listaPaginas").append(addContentPageI(paginas[k]));
-    }
+      for (const k in paginas) {
+        $("#listaPaginas").append(addContentPageI(paginas[k]));
+      }
+    } catch (error) {}
   },
   error: function (data) {
     window.parent.informar("alert-danger", "Algo saiu errado!", 3000);
@@ -2588,8 +2551,6 @@ function getCategorias(CATEGORIES) {
     return MINHAS_CATEGORIAS;
   }
 }
-<<<<<<< HEAD
-=======
 let proxyList = [];
 
 function monitor(elemento) {
@@ -2757,45 +2718,48 @@ function dropaCategoriasInner(element) {
 }
 
 function getInstitucionalPagesHome(listaSelecionada = []) {
-  let newsCATEGORIES = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
-  console.log("IN PAGESS", newsCATEGORIES, listaSelecionada);
-  var html3 = "",
-    nova = '<li class="novaLI"></li>';
+  try {
+    let newsCATEGORIES = JSON.parse(localStorage.INSTITUCIONAL_PAGES);
+    console.log("IN PAGESS", newsCATEGORIES, listaSelecionada);
+    var html3 = "",
+      nova = '<li class="novaLI"></li>';
 
-  if (!Array.isArray(listaSelecionada)) {
-    listaSelecionada = listaSelecionada.split(",");
-  }
-
-  function getActive(text, listaSelecionada = []) {
-    console.log(text, listaSelecionada);
-
-    let eu = listaSelecionada.find((l) => l === text);
-    if (eu) {
-      return 'checked="true"';
-    } else {
-      ("");
+    if (!Array.isArray(listaSelecionada)) {
+      listaSelecionada = listaSelecionada.split(",");
     }
-  }
 
-  for (const k in newsCATEGORIES) {
-    console.log("TRATANDO", newsCATEGORIES[k]);
-    html3 +=
-      '<li    class="list-item sub-list-item animate__animated ">' +
-      arrowDown4 +
-      '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> ';
-    html3 +=
-      newsCATEGORIES[k].titulo_page +
-      " <input " +
-      getActive(newsCATEGORIES[k].titulo_page, listaSelecionada) +
-      ' class="marcar catPromocao"  myValue="' +
-      newsCATEGORIES[k].titulo_page +
-      "\" onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
-      newsCATEGORIES[k].titulo_page +
-      '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
-    html3 += "</li> ";
-  }
-  console.log(html3);
+    function getActive(text, listaSelecionada = []) {
+      console.log(text, listaSelecionada);
 
-  return html3;
+      let eu = listaSelecionada.find((l) => l === text);
+      if (eu) {
+        return 'checked="true"';
+      } else {
+        ("");
+      }
+    }
+
+    for (const k in newsCATEGORIES) {
+      console.log("TRATANDO", newsCATEGORIES[k]);
+      html3 +=
+        '<li    class="list-item sub-list-item animate__animated ">' +
+        arrowDown4 +
+        '<label style="max-width: 70%; float: left;    margin: 5px 15px ;" class=" subSmart subCheck animate__animated animate__"> ';
+      html3 +=
+        newsCATEGORIES[k].titulo_page +
+        " <input " +
+        getActive(newsCATEGORIES[k].titulo_page, listaSelecionada) +
+        ' class="marcar catPromocao"  myValue="' +
+        newsCATEGORIES[k].titulo_page +
+        "\" onchange=\"subTagInputPromo($(this),'listaCategoriasFilter','" +
+        newsCATEGORIES[k].titulo_page +
+        '\')" type="checkbox"><span class="checkmark subCheck"></span></label>';
+      html3 += "</li> ";
+    }
+    console.log(html3);
+
+    return html3;
+  } catch (err) {
+    return "";
+  }
 }
->>>>>>> merge-staging

@@ -1667,8 +1667,8 @@ function uploadBannerCatMainNew(element, idCat, idSub) {
   var data = new FormData();
   var contador = 1;
   data.append("fileimagem", element[0].files[0]);
-  console.log({
-    url: mainHost + "/uploadBanners",
+  console.log("ENVIANDO FOTOOOO", {
+    url: mainHost + "/uploadBanners/" + localStorage.MASTER_ID,
     headers: {
       "x-access-token": localStorage.token,
       master_id: localStorage.MASTER_ID,
@@ -1679,7 +1679,7 @@ function uploadBannerCatMainNew(element, idCat, idSub) {
     type: "POST",
   });
   $.ajax({
-    url: mainHost + "/uploadBanners",
+    url: mainHost + "/uploadBanners/" + localStorage.MASTER_ID,
     headers: {
       "x-access-token": localStorage.token,
       master_id: localStorage.MASTER_ID,
@@ -1895,8 +1895,21 @@ function uploadBannerCatVerticalMainNew(element, idCat, idSub) {
   var data = new FormData();
   var contador = 1;
   data.append("fileimagem", element[0].files[0]);
+
+  console.log("ENVIANDO ver", {
+    url: mainHost + "/uploadBanners/" + localStorage.MASTER_ID,
+    headers: {
+      "x-access-token": localStorage.token,
+      master_id: localStorage.MASTER_ID,
+    },
+    data: data,
+    processData: false,
+    contentType: false,
+    type: "POST",
+  });
+
   $.ajax({
-    url: mainHost + "/uploadBanners",
+    url: mainHost + "/uploadBanners/" + localStorage.MASTER_ID,
     headers: {
       "x-access-token": localStorage.token,
       master_id: localStorage.MASTER_ID,

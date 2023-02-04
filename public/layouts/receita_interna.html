@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="https://cms.api-smartcomerci.com.br/images/logo/favicon.ico" />
+  <link rel="icon" type="image/png" href="https://admin.api-smartcomerci.com.br/assets/img/lima-04.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="icon" type="image/png" href="../assets/img/lima-04.svg" />
@@ -1103,7 +1103,7 @@
       </div>
     </div>
   </div>
-  <!-- <script src="https://cms.api-smartcomerci.com.br/js/tinymce.js"></script> -->
+  <!-- <script src="https://admin.api-smartcomerci.com.br/js/tinymce.js"></script> -->
   <script>
     var mainHost = 'https://cms.api-smartcomerci.com.br';
 
@@ -1277,7 +1277,7 @@
       var contador = 1;
       data.append('fileimagem', element[0].files[0]);
       $.ajax({
-        url: mainHost + '/uploadBanners',
+        url: mainHost + '/uploadBanners/'+localStorage.MASTER_ID,
         headers: {
           "x-access-token": localStorage.token,
           "master_id": localStorage.MASTER_ID
@@ -1292,30 +1292,20 @@
           $("#" + element.attr("target")).attr("value", `${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')}`)
           $("#" + element.attr("target")).css("background-size", "cover !important")
           $("#" + element.attr("target")).css("background-position", "center !important")
-          $("#" + element.attr("target")).css("zoom", "100% !important")
-
-
-
-          //console.log(element.parent().parent().find('input'))
-          //console.log(`${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')}`)
-
-          editRevenue('banner_topo', data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br'))
-
-
-
-
+          $("#" + element.attr("target")).css("zoom", "100% !important")  
+          editRevenue('banner_topo', data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br'))  
         },
-        error: function (data) {
-          //console.log(data)
-        }
+        error: function (data) { },
+        complete: function () { },
       });
+    }
 
       function getImageFromSite(element) {
         var data = new FormData();
         var contador = 1;
         data.append('fileimagem', element[0].files[0]);
         $.ajax({
-          url: mainHost + '/uploadBanners',
+          url: mainHost + '/uploadBanners/'+localStorage.MASTER_ID,
           headers: {
             "x-access-token": localStorage.token,
             "master_id": localStorage.MASTER_ID
@@ -1342,6 +1332,7 @@
 
 
               localStorage.SEARCH_REVENUES = JSON.stringify(data)
+            }
 
             },
             error: function (data) {
@@ -1412,13 +1403,7 @@
           complete: function () {
             // ao final da requisição...
           }
-        });
-
-
-
-
-
-
+        }); 
       }
 
 
@@ -1432,7 +1417,7 @@
         let ID = $(".itemProduto").length + 1
         let html =
           `
-      <div class="col-md-12 itemProduto">
+         <div class="col-md-12 itemProduto">
                   <div style="border-bottom: 0.949999988079071px solid #EDF2F6;" class="row">
                     <div style="margin: auto;" class="col-md-1">
                       <div class="row">
@@ -1563,8 +1548,7 @@
         editRevenue(coluna, element.val())
       }
 
-      function editaIngrediente(element, coluna) {
-        //console.log(element, coluna)
+      function editaIngrediente(element, coluna) { 
 
         let REVENUE = JSON.parse(localStorage.THIS_REVENUE)
         let ING = []
@@ -1634,16 +1618,7 @@
             })
           }
 
-        }
-        // //console.log(
-        //   {
-        //     "table": "revenues",
-        //     "name_id": "id",
-        //     "value_id": myRevenue.id,
-        //     "fields": columns
-        //   }
-        // )
-
+        } 
         await $.ajax({
           type: 'POST',
           url: mainHost + '/updateById',
@@ -1666,8 +1641,6 @@
             // ao final da requisição...
           }
         });
-
-
       }
 
       function removeIngrediente(element) {
