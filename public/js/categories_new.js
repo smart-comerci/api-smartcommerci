@@ -1676,7 +1676,7 @@ function uploadBannerCatMainNew(element, idCat, idSub) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
   });
   $.ajax({
     url: mainHost + "/uploadBanners/" + localStorage.MASTER_ID,
@@ -1687,7 +1687,7 @@ function uploadBannerCatMainNew(element, idCat, idSub) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
     success: function (data) {
       let myUrlPath = "";
       let myId = element.attr("target");
@@ -1905,7 +1905,7 @@ function uploadBannerCatVerticalMainNew(element, idCat, idSub) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
   });
 
   $.ajax({
@@ -1917,7 +1917,7 @@ function uploadBannerCatVerticalMainNew(element, idCat, idSub) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
     success: function (data) {
       let myUrlPath = "";
       let myId = element.attr("target");

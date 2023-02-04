@@ -1285,7 +1285,7 @@
         data: data,
         processData: false,
         contentType: false,
-        type: 'POST',
+        type: 'PUT',
         success: function (data) {
           //console.log(data)
           $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')})`)
@@ -1313,7 +1313,7 @@
           data: data,
           processData: false,
           contentType: false,
-          type: 'POST',
+          type: 'PUT',
           success: function (data) {
             //console.log(data)
             $("#" + element.attr("target")).css("background", `url(${data.path?.replace('./public', 'https://cms.api-smartcomerci.com.br')})`)

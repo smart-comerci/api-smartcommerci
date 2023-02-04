@@ -2968,7 +2968,7 @@ function uploadBannerCat(element) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
     success: function (data) {
       //  console.log(data)
       // console.log('o alvo -> ',$("#"+element.attr("target")).attr("alvo"))
@@ -3071,7 +3071,7 @@ function uploadBannerCatMain(element) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
     success: function (data) {
       //   console.log(data)
       //  console.log('o alvo principal -> ',$("#"+element.attr("target")).attr("alvo"))
@@ -3204,7 +3204,7 @@ function uploadBannerCatVertical(element) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
     success: function (data) {
       //console.log(data)
       // console.log('o alvo -> ',$("#"+element.attr("target")).attr("alvo"))
@@ -3307,7 +3307,7 @@ function uploadBannerCatVerticalMain(element) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
     success: function (data) {
       // console.log(data)
       // console.log('o alvo pricipal -> ',$("#"+element.attr("target")).attr("alvo"))

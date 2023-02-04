@@ -1287,7 +1287,7 @@ async function uploadAndUpdateFile(element) {
     data: data,
     processData: false,
     contentType: false,
-    type: "POST",
+    type: "PUT",
     success: function (data) {
       console.log(data);
       let URL = data.path.replace(`./public`, host);
