@@ -1544,7 +1544,8 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
     '" onChange="updateField($(this))" class="form-control inputProduct" placeholder="R$ 0.00" value="' +
     product_data[0].product_valor +
     '" id="valorProduto"></div></div> ' +
-    '<div class="col-md-4"> <div class="group-input2" style="display: inline-flex;"><input     product_code="' +
+    '<div class="col-md-4">' +
+    '<div class="group-input2" style="display: inline-flex;"><input     product_code="' +
     product_data[0].product_code +
     '"  acao="product_site_estoque"  onChange="updateField($(this))"  value="' +
     product_data[0].product_valor +
@@ -1554,7 +1555,26 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
     product_data[0].product_average_weight_type +
     '" id="medidaProduto"></div></div> ' +
     "</div>" +
-    '<hr style="opacity:0">' +
+    '<hr style="opacity:1">' +
+    '<div style=" padding:0 1%;   margin-top: -2%; " class="row">' +
+    '<div class="col-md-8"><label style=" font-size: 20px;" class="label">Valor Atacado</label></div> ' +
+    '<div class="col-md-4"><label style=" font-size: 20px;" class="label">Quantidade Mínima</label></div> ' +
+    "</div>" +
+    '<div style="padding:0 1%;     margin-top: -2%;" class="row">' +
+    '<div class="col-md-8"> <div class="group-input2" style="display: inline-flex;"><div class="iconLogistica"  style=" height: 45px;width: 50px; margin: auto 2%!important;    background: #F9FAFB 0% 0% no-repeat padding-box !important;">' +
+    money +
+    '</div><input acao="product_valor" product_code="' +
+    product_data[0].product_code +
+    '" class="form-control inputProduct" placeholder="R$ 0.00" readonly value="' +
+    product_data[0].product_valor_atacado +
+    '" id="valorProduto"></div></div> ' +
+    '<div class="col-md-4">' +
+    '<div class="group-input2" style="display: inline-flex;"><input     product_code="' +
+    product_data[0].product_code +
+    '"  acao="product_quantidade_atacado"  readonly  value="' +
+    product_data[0].product_quantidade_atacado +
+    '" class="form-control inputProduct" placeholder="0.00" id="qtdProduto"> </div></div> ' +
+    "</div>" +
     '<div style="padding:0 2%" class="row">' +
     '<label style=" font-size: 20px;" class="label">EAN</label><br> ' +
     "</div>" +
