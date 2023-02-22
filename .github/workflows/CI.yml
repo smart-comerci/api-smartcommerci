@@ -27,10 +27,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             whoami
-            cd /var/www/api-smartcommerci
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
-            nvm use 16
+            cd /var/www/api-smartcommerci  
             git stash
             git pull
             npm install
