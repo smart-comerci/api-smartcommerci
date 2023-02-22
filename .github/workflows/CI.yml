@@ -4,10 +4,10 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - main
+      - master
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deployment:
