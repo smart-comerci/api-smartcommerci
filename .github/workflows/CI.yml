@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: SSH Deploy MACKBARBEARIA
+      - name: SSH Deploy SMARTCOMERCI
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
