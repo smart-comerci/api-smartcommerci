@@ -2571,7 +2571,10 @@ function modalProduct(PRODUCTS, product_code, affiliate_id, URLS) {
           ////////console.log(elemento[0].files[0])
 
           $.ajax({
-            url: "" + mainHost + "/uploadLogo",
+            url:
+              "" +
+              mainHost +
+              `/uploadLogo/${affiliate_id}/${product_code}/true`,
             headers: {
               "x-access-token": localStorage.token,
               affiliate_id: affiliate_id,
